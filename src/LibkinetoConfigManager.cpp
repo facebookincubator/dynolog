@@ -241,13 +241,21 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   res.activityProfilersBusy = 0;
   res.eventProfilersBusy = 0;
 
+  size_t nPids = pids.size();
+  // For backwards compatibility with older versions of the dyno CLI,
+  // there are two conditions under which all processes should be traced:
+  // 1. target PIDs are empty
+  // 2. target PIDs contain a single PID, 0.
+  // As older versions of the CLI are phased out, 2) will no longer need to be
+  // accounted for.
+  bool traceAllPids = nPids == 0 || (nPids == 1 && *pids.begin() == 0);
   {
     std::lock_guard<std::mutex> guard(mutex_);
     auto& processes = jobs_[jobId];
     for (auto& pair : processes) {
       for (const auto& pid : pair.first) {
         // Trace the process if we find a match or target pids is empty.
-        if (pid == 0 || pids.find(pid) != pids.end()) {
+        if (traceAllPids || pids.find(pid) != pids.end()) {
           auto& process = pair.second;
           setOnDemandConfigForProcess(res, process, config, configType, limit);
           // the user could provide multiple pids that belong to the same the
