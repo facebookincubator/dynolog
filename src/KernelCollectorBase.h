@@ -28,13 +28,17 @@ class KernelCollectorBase {
   time_t uptime_;
   // proc fs parser
   pfs::procfs pfs_;
-  int numCpuSockets_{1};
-  int cpuCoresTotal_;
+  size_t numCpuSockets_;
+  const size_t cpuCoresTotal_;
 
   // Save most recent CPU stats and delta from most recent
   struct CpuTime cpuTime_, cpuDelta_;
   std::array<CpuTime, MAX_CPU_SOCKETS> nodeCpuTime_;
   std::vector<CpuTime> perCoreCpuTime_;
+
+  // Should match googletest/include/gtest/gtest_prod.h
+  // friend class test_case_name##_##test_name##_Test
+  friend class KernelCollecterTest_CpuStatsTest_Test;
 };
 
 } // namespace dynolog
