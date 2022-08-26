@@ -1,10 +1,9 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
+#include <glog/logging.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/prctl.h>
-#include <unistd.h>
 
 // @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
 #include "KernelCollectorBase.h"
@@ -23,9 +22,10 @@ namespace dynolog {
 KernelCollectorBase::KernelCollectorBase(const std::string& root)
     : uptime_(readUptime()),
       pfs_(root),
-      cpuCoresTotal_(sysconf(_SC_NPROCESSORS_ONLN)) {
+      numCpuSockets_(1), // TODO discover sockets from /proc/cpuinfo
+      cpuCoresTotal_(pfs_.get_stat().cpus.per_item.size()) {
   perCoreCpuTime_.resize(cpuCoresTotal_);
-};
+}
 
 time_t KernelCollectorBase::readUptime() {
   time_t t = 0;
@@ -40,6 +40,11 @@ time_t KernelCollectorBase::readUptime() {
 
 void KernelCollectorBase::readCpuStats() {
   auto stats = pfs_.get_stat();
+  if (stats.cpus.per_item.size() != cpuCoresTotal_) {
+    LOG_EVERY_N(WARNING, 100)
+        << "Number of cores changed, previously " << cpuCoresTotal_
+        << " and now " << stats.cpus.per_item.size();
+  }
 
   CpuTime newCpuTime{
       .u = stats.cpus.total.user,
@@ -63,6 +68,9 @@ void KernelCollectorBase::readCpuStats() {
 
   int core = 0;
   for (const auto& cpu : stats.cpus.per_item) {
+    if (core >= cpuCoresTotal_) {
+      break;
+    }
     auto& coreCpu = perCoreCpuTime_[core];
     coreCpu.u = cpu.user;
     coreCpu.n = cpu.nice;

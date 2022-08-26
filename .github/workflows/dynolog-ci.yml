@@ -48,3 +48,8 @@ jobs:
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja ..
         cmake --build .
+    - name: Run Unit Tests
+      run: |
+        set -e
+        cd $GITHUB_WORKSPACE/build
+        ctest --output-on-failure
