@@ -5,6 +5,7 @@
 #include "hbt/src/perf_event/PerCpuTraceAuxGenerator.h"
 #include "hbt/src/perf_event/PmuDevices.h"
 
+#include <filesystem>
 #include <mutex>
 #include <unordered_map>
 
@@ -17,7 +18,7 @@ class IntelPTGenCtxt {
   static std::optional<IntelPTGenCtxt> create(
       const hbt::perf_event::PmuDeviceManager& pmuDeviceManager,
       const CpuSet& mon_cpus,
-      const std::optional<std::string>& cgroup_name,
+      const std::optional<std::filesystem::path>& cgroup_name,
       size_t trace_buffer_size_pages,
       perf_event::EventExtraAttr extra_attr);
 

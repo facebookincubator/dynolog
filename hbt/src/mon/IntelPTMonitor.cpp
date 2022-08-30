@@ -1,13 +1,16 @@
 #include "hbt/src/mon/IntelPTMonitor.h"
 
+#include <hbt/src/common/Defs.h>
 #include "hbt/src/intel_pt/IptEventBuilder.h"
+
+#include <filesystem>
 
 namespace facebook::hbt::mon {
 
 std::optional<IntelPTGenCtxt> IntelPTGenCtxt::create(
     const hbt::perf_event::PmuDeviceManager& pmuDeviceManager,
     const CpuSet& mon_cpus,
-    const std::optional<std::string>& cgroup_name,
+    const std::optional<std::filesystem::path>& cgroup_name,
     size_t trace_buffer_size_pages,
     perf_event::EventExtraAttr extra_attr) {
   if (auto ipt_builder_up =
@@ -19,8 +22,7 @@ std::optional<IntelPTGenCtxt> IntelPTGenCtxt::create(
             "ipt_branch_tsc", extra_attr);
     std::shared_ptr<FdWrapper> cgroup_fd_wrapper;
     if (cgroup_name.has_value()) {
-      cgroup_fd_wrapper = std::make_shared<FdWrapper>(
-          fmt::format("/sys/fs/cgroup/{}", *cgroup_name));
+      cgroup_fd_wrapper = std::make_shared<FdWrapper>(cgroup_name->string());
     }
     auto trace_aux_gen =
         std::make_unique<hbt::perf_event::PerCpuTraceAuxGenerator>(
