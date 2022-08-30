@@ -251,8 +251,16 @@ TEST_F(BuiltinMetricsTest, PerfEventAttrPrecise) {
 }
 
 TEST_F(BuiltinMetricsTest, PerfEventAttrPreciseJson) {
+  if (facebook::hbt::CpuInfo::load().cpu_family == CpuFamily::INTEL) {
+    GTEST_SKIP() << "Unsupported cpu_family (run this test on Intel)";
+  }
+
   auto ev_def = pmu_manager->findEventDef("UOPS_RETIRED.ALL");
-  EXPECT_TRUE(ev_def != nullptr);
+  if (!ev_def) {
+    ev_def = pmu_manager->findEventDef("UOPS_RETIRED.RETIRE_SLOTS");
+  }
+
+  ASSERT_TRUE(ev_def != nullptr);
   EXPECT_EQ(ev_def->id, "UOPS_RETIRED.ALL");
   EXPECT_EQ(ev_def->isPrecise(), true);
 

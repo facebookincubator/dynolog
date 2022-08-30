@@ -570,6 +570,83 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       System::Permissions{},
       std::vector<std::string>{}));
 
+  // fp_instrs_single_precision replaces DynoPerfCounterType::FLOPS_SP
+  metrics->add(std::make_shared<MetricDesc>(
+      "fp_instrs_single_precision",
+      "Single Precision AVX Vector floating point operation count",
+      "Counts number of floating points instructions of single precision type"
+      " executed by AVX vector instruction set."
+      "Each instruction can be converted to operations by multipying the count"
+      " with 1, 4, 8, 16 respectively.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{
+               EventRef{
+                   "instr_sp_scalar",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_128b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_256b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_512b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}}}}},
+      0,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "fp_instrs_double_precision",
+      "Double Precision AVX Vector floating point operation count",
+      "Counts number of floating points instructions of double precision type"
+      " executed by AVX vector instruction set."
+      "Each instruction can be converted to operations by multipying the count"
+      " with 1, 2, 4, 8 respectively.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{
+               EventRef{
+                   "instr_dp_scalar",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_128b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_256b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_512b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}}}}},
+      0,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
   metrics->add(std::make_shared<MetricDesc>(
       "cpu_clock",
       "High-resolution sys and user CPU clock",
