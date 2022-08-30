@@ -26,6 +26,9 @@ std::optional<IntelPTGenCtxt> IntelPTGenCtxt::create(
         std::make_unique<hbt::perf_event::PerCpuTraceAuxGenerator>(
             mon_cpus, /*pid*/ -1, cgroup_fd_wrapper, eventConf);
 
+    HBT_LOG_INFO() << "Intel PT buffer size (bytes): "
+                   << trace_buffer_size_pages * (size_t)getpagesize();
+
     return IntelPTGenCtxt{
         std::move(trace_aux_gen), mon_cpus, trace_buffer_size_pages};
   } else {
