@@ -1,0 +1,29 @@
+00200000-01eaf000 r--p 00000000 00:1c 268353812                          /tmp/module_collection_test/lib0
+01eaf000-09e97000 r-xp 01caf000 00:1c 268353812                          /tmp/module_collection_test/lib0
+09e97000-09ea0000 r--p 09c97000 00:1c 268353812                          /tmp/module_collection_test/lib0
+09ea0000-09ea1000 r--p 00000000 00:00 0 
+09ea1000-09ef7000 rw-p 09ca0000 00:1c 268353812                          /tmp/module_collection_test/lib0
+09ef7000-0a368000 rw-p 00000000 00:00 0                                  [heap]
+7fe7d48c8000-7fe7d48c9000 ---p 00000000 00:00 0 
+7fe7d48c9000-7fe7d50c9000 rwxp 00000000 00:00 0 
+7fe7ee291000-7fe7ee2b2000 rw-s 00000000 00:0c 14368                      anon_inode:[perf_event]
+7fe828c1a000-7fe828c1b000 r--s 00000000 00:0c 14368                      anon_inode:bpf-map
+7fe828f6a000-7fe828f6c000 rw-p 00000000 00:00 0 
+7fe828f6c000-7fe829002000 r--p 00000000 00:1c 240656293                  /tmp/module_collection_test/lib1
+7fe829002000-7fe829110000 r-xp 00096000 00:1c 240656293                  /tmp/module_collection_test/lib1
+7fe829110000-7fe829150000 r--p 001a4000 00:1c 240656293                  /tmp/module_collection_test/lib1
+7fe829150000-7fe82915b000 r--p 001e3000 00:1c 240656293                  /tmp/module_collection_test/lib1
+7fe82915b000-7fe82915e000 rw-p 001ee000 00:1c 240656293                  /tmp/module_collection_test/lib1
+7fe829bfb000-7fe829bfd000 rw-p 00000000 00:00 0 
+7fe829bfd000-7fe829bfe000 r--p 00000000 00:1c 240656152                  /tmp/module_collection_test/lib2
+7fe829bfe000-7fe829c1f000 r-xp 00001000 00:1c 240656152                  /tmp/module_collection_test/lib2
+7fe829c1f000-7fe829c26000 r--p 00022000 00:1c 240656152                  /tmp/module_collection_test/lib2
+7fe829c26000-7fe829c27000 r--p 00000000 00:00 0 
+7fe829c27000-7fe829c28000 r--p 00029000 00:1c 240656152                  /tmp/module_collection_test/lib2
+7fe829c28000-7fe829c29000 rw-p 0002a000 00:1c 240656152                  /tmp/module_collection_test/lib2
+7fe829c29000-7fe829c2a000 rw-p 00000000 00:00 0 
+7ffccb80f000-7ffccb872000 rwxp 00000000 00:00 0                          [stack]
+7ffccb872000-7ffccb873000 rw-p 00000000 00:00 0 
+7ffccb8ae000-7ffccb8b2000 r--p 00000000 00:00 0                          [vvar]
+7ffccb8b2000-7ffccb8b4000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
