@@ -1,0 +1,81 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
+use std::net::TcpStream;
+use std::net::ToSocketAddrs;
+
+use anyhow::bail;
+use anyhow::Result;
+use clap::Parser;
+
+// Make all the command modules accessible to this file.
+mod commands;
+use commands::*;
+
+/// Instructions on adding a new Dyno CLI command:
+///
+/// 1. Add a new variant to the `Command` enum.
+///    Please include a description of the command and, if applicable, its flags/subcommands.
+///
+/// 2. Create a new file for the command's implementation in the commands/ directory (ie
+///    commands/status.rs). This new file is where the command should be implemented.
+///    Make the new command's module accessible from this file by adding
+///    a new line with `pub mod <newfile>;` to commands/mod.rs.
+///
+///
+/// 3. Add a branch to the match statement in main() to handle the new enum variant (from step 1).
+///    From here, invoke the handling logic defined in the new file (from step 2). In an effort to keep
+///    the command dispatching logic clear and concise, please keep the code in the match branch to a minimum.
+
+const DYNO_PORT: u16 = 1778;
+
+#[derive(Debug, Parser)]
+struct Opts {
+    #[clap(long, default_value = "localhost")]
+    hostname: String,
+    #[clap(long, default_value_t = DYNO_PORT)]
+    port: u16,
+    #[clap(subcommand)]
+    cmd: Command,
+}
+
+#[derive(Debug, Parser)]
+enum Command {
+    /// Check the status of dynolog process
+    Status,
+    /// Capture gputrace
+    Gputrace {
+        /// Job id of the application to trace
+        #[clap(long, default_value = "0")]
+        job_id: String,
+        /// List of pids to capture trace for (comma separated).
+        #[clap(long, default_value = "0")]
+        pids: String,
+    },
+}
+
+/// Create a socket connection to dynolog
+fn create_dyno_client(host: &str, port: u16) -> Result<TcpStream> {
+    let addr = (host, port)
+        .to_socket_addrs()?
+        .next()
+        .expect("Failed to connect to the server");
+
+    TcpStream::connect(addr).map_err(|err| err.into())
+}
+
+fn main() -> Result<()> {
+    let Opts {
+        hostname,
+        port,
+        cmd,
+    } = Opts::parse();
+
+    let dyno_client =
+        create_dyno_client(&hostname, port).expect("Couldn't connect to the server...");
+
+    match cmd {
+        Command::Status => status::run_status(dyno_client),
+        Command::Gputrace { .. } => bail!("'gputrace' command not yet implemented"),
+        // ... add new commands here
+    }
+}
