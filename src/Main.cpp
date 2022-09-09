@@ -12,12 +12,15 @@
 #include "FBRelayLogger.h"
 #include "KernelCollector.h"
 #include "Logger.h"
+#include "ServiceHandler.h"
+#include "SimpleJsonServer.h"
+#include "SimpleJsonServerInl.h"
 
 using namespace dynolog;
 
 constexpr const char* VERSION = "0.0.1";
 
-DEFINE_int32(port, 1111, "Port for listening RPC requests : FUTURE");
+DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
     reporting_interval_s,
     60,
@@ -52,15 +55,29 @@ void kernel_monitor_loop() {
   }
 }
 
+auto setup_server(std::shared_ptr<ServiceHandler> handler) {
+  return std::make_unique<SimpleJsonServer<ServiceHandler>>(
+      handler, FLAGS_port);
+}
+
 int main(int argc, char** argv) {
-  google::InitGoogleLogging(argv[0]);
   gflags::ParseCommandLineFlags(&argc, &argv, true);
+  FLAGS_logtostderr = 1;
+  google::InitGoogleLogging(argv[0]);
 
   LOG(INFO) << "Starting dynolog min, version " << VERSION;
+
+  // setup service
+  auto handler = std::make_shared<ServiceHandler>();
+
+  // use simple json RPC server for now
+  auto server = setup_server(handler);
+  server->run();
 
   std::thread km_thread{kernel_monitor_loop};
 
   km_thread.join();
+  server->stop();
 
   return 0;
 }

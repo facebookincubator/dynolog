@@ -1,0 +1,10 @@
+# (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+add_executable(json_client SimpleJsonClientTestCLI.cpp SimpleJsonClientTest.h)
+
+target_link_libraries(json_client PUBLIC gflags::gflags)
+target_link_libraries(json_client PUBLIC glog::glog)
+
+dynolog_add_test(SimpleJsonClientTest
+  SimpleJsonClientTest.cpp SimpleJsonClientTest.h)
+
+target_link_libraries(SimpleJsonClientTest dynolog_rpc_lib)
