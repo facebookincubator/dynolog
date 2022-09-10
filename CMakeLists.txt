@@ -20,6 +20,8 @@ add_library(dynolog_lib ${dynomin_src})
 add_subdirectory(src/rpc)
 include_directories("${PROJECT_SOURCE_DIR}/src/rpc")
 
+add_subdirectory(src/ipcfabric)
+target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
 # cli is written in Rust and uses cargo for build
 add_subdirectory(src/cli)
 add_dependencies(dynolog_lib dyno2)
@@ -50,8 +52,13 @@ target_link_libraries(dynolog_lib PUBLIC pfs)
 add_subdirectory(third_party/fmt)
 target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 
+add_subdirectory(third_party/range-v3)
+#target_link_libraries(dynolog_lib PUBLIC range-v3)
+
 add_executable(dynomin src/Main.cpp)
 target_link_libraries(dynomin PRIVATE dynolog_lib dynolog_rpc_lib)
+
+add_subdirectory(hbt/src/common)
 
 # ------------------------------------------------------------
 # Unit testing
