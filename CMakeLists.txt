@@ -64,6 +64,5 @@ add_subdirectory(hbt/src/common)
 # Unit testing
 if(BUILD_TESTS)
     enable_testing()
-    include(GoogleTest)
-    add_subdirectory(tests)
+    add_subdirectory(third_party/googletest)
 endif()
