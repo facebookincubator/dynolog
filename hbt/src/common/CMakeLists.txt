@@ -17,3 +17,5 @@ target_link_libraries(System PUBLIC Defs)
 add_library(Defaults Defaults.h)
 set_target_properties(Defaults PROPERTIES LINKER_LANGUAGE CXX)
 target_compile_options(Defaults PUBLIC ${HBT_COMMON_COMPILE_OPTIONS})
+
+add_subdirectory(tests)
