@@ -123,9 +123,12 @@ class Monitor {
     pfs::procfs pfs;
 
     for (auto pid : pids) {
+      auto root_path =
+          std::filesystem::path("/proc") / std::to_string(pid) / "root";
       try {
         auto maps = pfs.get_task(pid).get_maps();
-        module_info.emplace(pid, detail::getFileBackedExecutableModules(maps));
+        module_info.emplace(
+            pid, detail::getFileBackedExecutableModules(root_path, maps));
       } catch (const pfs::parser_error& ex) {
         HBT_LOG_ERROR() << "Exception parsing the memory maps file for PID "
                         << pid << ". Message " << ex.what();
@@ -145,7 +148,9 @@ class Monitor {
 
     for (auto pid : pids) {
       auto maps = pfs.get_task(pid).get_maps();
-      auto modules = detail::getFileBackedExecutableModules(maps);
+      auto root_path =
+          std::filesystem::path("/proc") / std::to_string(pid) / "root";
+      auto modules = detail::getFileBackedExecutableModules(root_path, maps);
       func(pid, modules);
     }
   }

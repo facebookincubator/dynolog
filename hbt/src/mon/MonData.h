@@ -652,6 +652,7 @@ namespace detail {
 // this filtering is a bottleneck. For now we take simple, readable approach to
 // filtering.
 std::vector<ModuleInfo> getFileBackedExecutableModules(
+    const std::filesystem::path& root_path,
     std::vector<pfs::mem_region>& mem_regions);
 } // namespace detail
 
