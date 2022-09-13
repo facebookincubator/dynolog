@@ -1,8 +1,11 @@
 #include "hbt/src/mon/MonData.h"
+#include <hbt/src/common/Defs.h>
+#include <string>
 
 using namespace facebook::hbt::mon;
 
 std::vector<ModuleInfo> detail::getFileBackedExecutableModules(
+    const std::filesystem::path& rootPath,
     std::vector<pfs::mem_region>& mem_regions) {
   // Sort mem_regions by start_address (ascending) so we can easily set each
   // module's load address to the lowest start address of its sections.
@@ -20,22 +23,31 @@ std::vector<ModuleInfo> detail::getFileBackedExecutableModules(
   // The inodes that are backed by a file and have an executable section.
   std::unordered_set<ino_t> executable_inodes;
 
+  // rootPath is used here to handle chroot.
+  // Path in the mem_region is relative to the root directory seen by the
+  // process.
+  // /proc/<pid>/root will always point to the real root directory.
+
   // First pass to populate exectuable_inodes
   for (const auto& region : mem_regions) {
     ino_t inode = region.inode;
-    if (region.perm.can_execute && std::filesystem::exists(region.pathname)) {
+    if (inode > 0 && region.perm.can_execute &&
+        std::filesystem::exists(
+            rootPath /
+            std::filesystem::path(region.pathname).relative_path())) {
       executable_inodes.insert(inode);
     }
   }
 
   std::vector<ModuleInfo> modules;
-
   // Second pass to only populate the modules based on the set of executable
   // inodes.
   for (const auto& region : mem_regions) {
     ino_t inode = region.inode;
     if (executable_inodes.find(inode) != executable_inodes.end()) {
-      modules.emplace_back(region.pathname, region.start_address);
+      modules.emplace_back(
+          rootPath / std::filesystem::path(region.pathname).relative_path(),
+          region.start_address);
       // remove from set so we don't store duplicate modules.
       executable_inodes.erase(inode);
     }
