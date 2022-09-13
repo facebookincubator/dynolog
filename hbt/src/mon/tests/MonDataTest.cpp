@@ -53,7 +53,7 @@ TEST_F(ModuleCollectionTest, Collect) {
   pfs::procfs pfs(path.string());
 
   auto maps = pfs.get_task(1234).get_maps();
-  auto modules = detail::getFileBackedExecutableModules(maps);
+  auto modules = detail::getFileBackedExecutableModules("/", maps);
   ASSERT_EQ(modules.size(), EXPECTED_NUM_MODULES);
 
   for (size_t i = 0; i < EXPECTED_NUM_MODULES; i++) {
