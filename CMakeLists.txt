@@ -52,7 +52,7 @@ target_link_libraries(dynolog_lib PUBLIC pfs)
 add_subdirectory(third_party/fmt)
 target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 
-set(RANGES_CXX_STD OFF CACHE STRING "17")
+# set(RANGES_RELEASE_BUILD ON CACHE BOOL ON)
 add_subdirectory(third_party/range-v3)
 #target_link_libraries(dynolog_lib PUBLIC range-v3)
 
