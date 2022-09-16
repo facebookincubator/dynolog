@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_POSITION_INDEPENDENT_CODE True)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 file (GLOB dynomin_src "src/*.h" "src/*.cpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/")
@@ -20,8 +21,9 @@ add_library(dynolog_lib ${dynomin_src})
 add_subdirectory(src/rpc)
 include_directories("${PROJECT_SOURCE_DIR}/src/rpc")
 
-add_subdirectory(src/ipcfabric)
-target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
+#add_subdirectory(src/ipcfabric)
+#target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
+
 # cli is written in Rust and uses cargo for build
 add_subdirectory(src/cli)
 add_dependencies(dynolog_lib dyno2)
@@ -52,6 +54,7 @@ target_link_libraries(dynolog_lib PUBLIC pfs)
 add_subdirectory(third_party/fmt)
 target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 
+set(BUILD_SAMPLES OFF CACHE BOOL "")
 add_subdirectory(third_party/range-v3)
 #target_link_libraries(dynolog_lib PUBLIC range-v3)
 
@@ -64,5 +67,5 @@ add_subdirectory(hbt/src/common)
 # Unit testing
 if(BUILD_TESTS)
     enable_testing()
-    add_subdirectory(third_party/googletest)
+    add_subdirectory(tests)
 endif()

@@ -1,5 +1,6 @@
 # (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 add_subdirectory("${PROJECT_SOURCE_DIR}/third_party/googletest" "third_party/googletest")
+include(GoogleTest)
 
 # Follow recipe here: https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
 
