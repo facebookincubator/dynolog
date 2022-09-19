@@ -18,4 +18,7 @@ add_library(Defaults Defaults.h)
 set_target_properties(Defaults PROPERTIES LINKER_LANGUAGE CXX)
 target_compile_options(Defaults PUBLIC ${HBT_COMMON_COMPILE_OPTIONS})
 
-add_subdirectory(tests)
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()

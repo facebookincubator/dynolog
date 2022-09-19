@@ -11,6 +11,12 @@ set(CMAKE_POSITION_INDEPENDENT_CODE True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
+if(BUILD_TESTS)
+  add_subdirectory("${PROJECT_SOURCE_DIR}/third_party/googletest"
+  "third_party/googletest")
+endif()
+
+# our build script will first create a src/ dir where all source code will exist
 file (GLOB dynomin_src "src/*.h" "src/*.cpp")
 include_directories("${PROJECT_SOURCE_DIR}/src/")
 
@@ -21,8 +27,8 @@ add_library(dynolog_lib ${dynomin_src})
 add_subdirectory(src/rpc)
 include_directories("${PROJECT_SOURCE_DIR}/src/rpc")
 
-#add_subdirectory(src/ipcfabric)
-#target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
+add_subdirectory(src/ipcfabric)
+target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
 
 # cli is written in Rust and uses cargo for build
 add_subdirectory(src/cli)
