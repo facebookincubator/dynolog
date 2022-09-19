@@ -4,6 +4,12 @@
 using namespace facebook::hbt;
 
 TEST(Defs, CpuSet) {
+  // Skip on CI due to offline CPUs
+  // Error = <CpuSet max_cpu_id: 1 max_cpu_id_online: 1 cpus: 1 > unknown file:
+  // Failure
+  if (std::getenv("GITHUB_WORKFLOW") != nullptr) {
+    GTEST_SKIP() << "Skipping CPU set test on CI.";
+  }
   {
     auto c = CpuSet::makeAllOnline();
     EXPECT_TRUE(c.hasCpu(0));
