@@ -28,12 +28,17 @@ class Logger {
   // Logs a floating point value
   virtual void logFloat(const std::string& key, float val) = 0;
 
+  // Logs an unsigned integer value
+  virtual void logUint(const std::string& key, uint64_t val) = 0;
+
   virtual void finalize() = 0;
 
   template <typename T>
   void log(const std::string& key, T val) {
     if (std::is_same<T, int64_t>::value) {
       logInt(key, val);
+    } else if (std::is_same<T, uint64_t>::value) {
+      logUint(key, val);
     } else if (std::is_same<T, float>::value) {
       logFloat(key, val);
     } else {
@@ -51,6 +56,8 @@ class JsonLogger : public Logger {
   void logInt(const std::string& key, int64_t val) override;
 
   void logFloat(const std::string& key, float val) override;
+
+  void logUint(const std::string& key, uint64_t val) override;
 
   void finalize() override;
 

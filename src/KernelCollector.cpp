@@ -9,6 +9,8 @@
 #include <string.h>
 #include <sys/prctl.h>
 
+#include <iostream>
+
 namespace dynolog {
 
 inline int64_t ticksToMs(int64_t ticks) {
@@ -19,6 +21,7 @@ KernelCollector::KernelCollector() : KernelCollectorBase() {}
 void KernelCollector::step() {
   uptime_ = readUptime();
   readCpuStats();
+  readNetworkStats();
 }
 
 void KernelCollector::log(Logger& log) {
@@ -62,6 +65,17 @@ void KernelCollector::log(Logger& log) {
           fmt::format("cpu_i_node{}", i),
           nodeCpuTime_[i].i / node_ticks * 100.0);
     }
+  }
+
+  for (const auto& [devName, devRxtx] : rxtxDelta_) {
+    log.log(fmt::format("rx_bytes_{}", devName), devRxtx.rxBytes);
+    log.log(fmt::format("rx_packets_{}", devName), devRxtx.rxPackets);
+    log.log(fmt::format("rx_errors_{}", devName), devRxtx.rxErrors);
+    log.log(fmt::format("rx_drops_{}", devName), devRxtx.rxDrops);
+    log.log(fmt::format("tx_bytes_{}", devName), devRxtx.txBytes);
+    log.log(fmt::format("tx_packets_{}", devName), devRxtx.txPackets);
+    log.log(fmt::format("tx_errors_{}", devName), devRxtx.txErrors);
+    log.log(fmt::format("tx_drops_{}", devName), devRxtx.txDrops);
   }
 
   log.setTimestamp();

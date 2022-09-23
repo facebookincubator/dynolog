@@ -20,9 +20,6 @@ class KernelCollector : public KernelCollectorBase {
   void step();
 
   void log(Logger& logger);
-
- private:
-  bool first_ = true;
 };
 
 } // namespace dynolog
