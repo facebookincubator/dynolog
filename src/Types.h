@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <net/if.h>
 #include <time.h>
 
 #define MAX_CPU_SOCKETS 8
@@ -54,6 +55,37 @@ struct CpuTime {
 
   TIC_t total() const {
     return u + n + s + i + w + x + y + z;
+  }
+};
+
+struct RxTx {
+  uint64_t rxBytes, rxPackets;
+  uint64_t rxErrors, rxDrops;
+  uint64_t txBytes, txPackets;
+  uint64_t txErrors, txDrops;
+
+  RxTx operator-(const RxTx& prev) const {
+    return RxTx{
+        .rxBytes = rxBytes - prev.rxBytes,
+        .rxPackets = rxPackets - prev.rxPackets,
+        .rxErrors = rxErrors - prev.rxErrors,
+        .rxDrops = rxDrops - prev.rxDrops,
+        .txBytes = txBytes - prev.txBytes,
+        .txPackets = txPackets - prev.txPackets,
+        .txErrors = txErrors - prev.txErrors,
+        .txDrops = txDrops - prev.txDrops,
+    };
+  }
+
+  void operator+=(const RxTx& other) {
+    rxBytes += other.rxBytes;
+    rxPackets += other.rxPackets;
+    rxErrors += other.rxErrors;
+    rxDrops += other.rxDrops;
+    txBytes += other.txBytes;
+    txPackets += other.txPackets;
+    txErrors += other.txErrors;
+    txDrops += other.txDrops;
   }
 };
 

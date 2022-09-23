@@ -42,7 +42,7 @@ TEST(KernelCollecterTest, CpuStatsTest) {
   ASSERT_EQ(is_directory(test_root.c_str()), 1)
       << "Path for test root is invalid" << test_root;
 
-  KernelCollectorBase kb{get_test_root() + "/proc/"};
+  KernelCollectorBase kb{get_test_root()};
   kb.readCpuStats();
 
   EXPECT_EQ(kb.perCoreCpuTime_.size(), 32);
@@ -67,4 +67,102 @@ TEST(KernelCollecterTest, CpuStatsTest) {
   EXPECT_EQ(kb.perCoreCpuTime_[31].y, 25283);
   EXPECT_EQ(kb.perCoreCpuTime_[31].z, 0);
 }
+
+TEST(KernelCollecterTest, NetworkStatsTest) {
+  auto test_root = get_test_root();
+  // ensure path
+  ASSERT_NE(test_root, "");
+  ASSERT_EQ(is_directory(test_root.c_str()), 1)
+      << "Path for test root is invalid" << test_root;
+
+  int numDev = 0;
+  KernelCollectorBase kb{get_test_root()};
+
+  kb.readNetworkStats();
+
+  for (const auto& [devName, devRxtx] : kb.rxtx_) {
+    if (devName.compare("eth0") == 0) {
+      numDev++;
+      EXPECT_EQ(devRxtx.rxBytes, 17566262828804);
+      EXPECT_EQ(devRxtx.rxPackets, 18353492234);
+      EXPECT_EQ(devRxtx.rxErrors, 0);
+      EXPECT_EQ(devRxtx.rxDrops, 6734908);
+      EXPECT_EQ(devRxtx.txBytes, 4485442728479);
+      EXPECT_EQ(devRxtx.txPackets, 11129776879);
+      EXPECT_EQ(devRxtx.txErrors, 0);
+      EXPECT_EQ(devRxtx.txDrops, 0);
+    } else if (devName.compare("eth1") == 0) {
+      numDev++;
+      EXPECT_EQ(devRxtx.rxBytes, 5651376349);
+      EXPECT_EQ(devRxtx.rxPackets, 3826963);
+      EXPECT_EQ(devRxtx.rxErrors, 0);
+      EXPECT_EQ(devRxtx.rxDrops, 0);
+      EXPECT_EQ(devRxtx.txBytes, 8626730);
+      EXPECT_EQ(devRxtx.txPackets, 100254);
+      EXPECT_EQ(devRxtx.txErrors, 0);
+      EXPECT_EQ(devRxtx.txDrops, 0);
+    }
+  }
+  EXPECT_EQ(numDev, 2);
+}
+
+TEST(KernelCollecterTest, UpdateNetworkStatsDeltaTest) {
+  std::map<std::string, struct RxTx> oneDevice;
+  std::map<std::string, struct RxTx> twoDevices;
+
+  KernelCollectorBase kb{get_test_root()};
+
+  oneDevice["eth0"] = RxTx{.rxBytes = 10};
+  twoDevices["eth0"] = RxTx{.rxBytes = 100};
+  twoDevices["eth1"] = RxTx{.rxBytes = 100};
+  kb.rxtx_ = oneDevice;
+  kb.updateNetworkStatsDelta(twoDevices);
+
+  EXPECT_EQ(kb.rxtxDelta_.size(), 2);
+  EXPECT_EQ(kb.rxtxDelta_["eth0"].rxBytes, 90);
+  EXPECT_EQ(kb.rxtxDelta_["eth1"].rxBytes, 0);
+
+  oneDevice["eth0"] = RxTx{.rxBytes = 50};
+  twoDevices["eth0"] = RxTx{.rxBytes = 10};
+  twoDevices["eth1"] = RxTx{.rxBytes = 100};
+  kb.rxtx_ = twoDevices;
+  kb.updateNetworkStatsDelta(oneDevice);
+
+  EXPECT_EQ(kb.rxtxDelta_.size(), 1);
+  EXPECT_EQ(kb.rxtxDelta_["eth0"].rxBytes, 40);
+  EXPECT_EQ(kb.rxtxDelta_.find("eth1"), kb.rxtxDelta_.end());
+
+  kb.rxtx_ = twoDevices;
+  kb.updateNetworkStatsDelta(twoDevices);
+
+  EXPECT_EQ(kb.rxtxDelta_.size(), 2);
+  EXPECT_EQ(kb.rxtxDelta_["eth0"].rxBytes, 0);
+  EXPECT_EQ(kb.rxtxDelta_["eth1"].rxBytes, 0);
+}
+
+TEST(KernelCollecterTest, MonitorInterfaceTest) {
+  KernelCollectorBase kb{get_test_root()};
+
+  kb.filterInteraces_ = false;
+  EXPECT_FALSE(kb.isMonitoringInterfaceActive("enp0s0u1u2u3c2i3"));
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("lo"));
+
+  kb.filterInteraces_ = true;
+  kb.nicInterfacePrefixes_ = {"eno", "ens", "enp", "enx", "eth"};
+  EXPECT_FALSE(kb.isMonitoringInterfaceActive("lo"));
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("enp8s0f1n2"));
+
+  kb.filterInteraces_ = true;
+  kb.nicInterfacePrefixes_ = {"lo", "vpn", "wlp"};
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("lo"));
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("wlp0s20f1"));
+  EXPECT_FALSE(kb.isMonitoringInterfaceActive("enp8s0f1n2"));
+
+  kb.filterInteraces_ = true;
+  kb.nicInterfacePrefixes_ = {"br"};
+  EXPECT_FALSE(kb.isMonitoringInterfaceActive("virbr0"));
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("br0"));
+  EXPECT_TRUE(kb.isMonitoringInterfaceActive("bridge0"));
+}
+
 } // namespace dynolog

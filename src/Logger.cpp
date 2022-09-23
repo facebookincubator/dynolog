@@ -33,6 +33,10 @@ void JsonLogger::logFloat(const std::string& key, float val) {
   json_[key] = fmt::format("{:.3f}", val);
 }
 
+void JsonLogger::logUint(const std::string& key, uint64_t val) {
+  json_[key] = val;
+}
+
 void JsonLogger::finalize() {
   LOG(INFO) << "Logging : " << json_.size() << " values";
   LOG(INFO) << "time = " << timestampStr() << " data = " << sampleJson().dump();

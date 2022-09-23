@@ -4,9 +4,10 @@
 
 #include <time.h>
 #include <array>
+#include <map>
 #include <vector>
 
-#include <pfs/procfs.hpp>
+#include "pfs/procfs.hpp"
 
 // @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
 #include "Types.h"
@@ -18,27 +19,46 @@ namespace dynolog {
  */
 class KernelCollectorBase {
  public:
-  explicit KernelCollectorBase(const std::string& root = "/proc");
+  explicit KernelCollectorBase(const std::string& rootDir = "");
 
   time_t readUptime();
 
   void readCpuStats();
+  void readNetworkStats();
 
  protected:
   time_t uptime_;
+  bool first_ = true;
+
+  // Root directory containing procfs for manual parsing
+  std::string rootDir_;
   // proc fs parser
   pfs::procfs pfs_;
+
   size_t numCpuSockets_;
   const size_t cpuCoresTotal_;
+  size_t nicDevCount_;
+  bool filterInteraces_;
+  std::vector<std::string> nicInterfacePrefixes_;
 
   // Save most recent CPU stats and delta from most recent
   struct CpuTime cpuTime_, cpuDelta_;
   std::array<CpuTime, MAX_CPU_SOCKETS> nodeCpuTime_;
   std::vector<CpuTime> perCoreCpuTime_;
 
+  // Save more recent net device stats
+  std::map<std::string, struct RxTx> rxtx_, rxtxDelta_;
+
+  void updateNetworkStatsDelta(
+      const std::map<std::string, struct RxTx>& rxtxNew);
+  bool isMonitoringInterfaceActive(std::string interface);
+
   // Should match googletest/include/gtest/gtest_prod.h
   // friend class test_case_name##_##test_name##_Test
   friend class KernelCollecterTest_CpuStatsTest_Test;
+  friend class KernelCollecterTest_NetworkStatsTest_Test;
+  friend class KernelCollecterTest_UpdateNetworkStatsDeltaTest_Test;
+  friend class KernelCollecterTest_MonitorInterfaceTest_Test;
 };
 
 } // namespace dynolog
