@@ -2,7 +2,10 @@
 
 #pragma once
 
+#include <set>
 #include <string>
+
+#include "LibkinetoConfigManager.h"
 
 namespace dynolog {
 
@@ -15,6 +18,11 @@ class ServiceHandler {
   // returns the state of the service
   int getStatus();
 
+  GpuProfilerResult setKinetOnDemandRequest(
+      int job_id,
+      const std::set<int>& pids,
+      const std::string& config,
+      int limit);
   // ... more to come
 };
 

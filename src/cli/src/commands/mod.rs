@@ -6,5 +6,6 @@
 // handling code. Additionally, explicitly "exporting" all the command modules here allows
 // us to avoid having to explicitly list all the command modules in main.rs.
 
+pub mod gputrace;
 pub mod status;
 // ... add new command modules here

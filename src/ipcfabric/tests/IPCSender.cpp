@@ -1,7 +1,7 @@
 // Copyright 2004-present Facebook. All Rights Reserved.
 
 // @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FabricManager.h"
+#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
 
 int main() {
   int data = 1000;

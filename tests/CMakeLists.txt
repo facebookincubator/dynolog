@@ -4,3 +4,4 @@ include(BuildTests.cmake)
 dynolog_add_test(KernelCollecterTest KernelCollecterTest.cpp)
 
 add_subdirectory(rpc)
+add_subdirectory(tracing)

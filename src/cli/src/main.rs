@@ -3,7 +3,6 @@
 use std::net::TcpStream;
 use std::net::ToSocketAddrs;
 
-use anyhow::bail;
 use anyhow::Result;
 use clap::Parser;
 
@@ -45,11 +44,23 @@ enum Command {
     /// Capture gputrace
     Gputrace {
         /// Job id of the application to trace
-        #[clap(long, default_value = "0")]
-        job_id: String,
+        #[clap(long, default_value_t = 0)]
+        job_id: u64,
         /// List of pids to capture trace for (comma separated).
         #[clap(long, default_value = "0")]
         pids: String,
+        /// Duration of trace to collect in ms.
+        #[clap(long, default_value_t = 500)]
+        duration_ms: u64,
+        /// Log file for trace.
+        #[clap(long)]
+        log_file: String,
+        /// Unix timestamp used for synchronized collection (milliseconds since epoch)
+        #[clap(long, default_value_t = 0)]
+        profile_start_time: u64,
+        /// Max number of processes to profile
+        #[clap(long, default_value_t = 3)]
+        process_limit: u32,
     },
 }
 
@@ -75,7 +86,22 @@ fn main() -> Result<()> {
 
     match cmd {
         Command::Status => status::run_status(dyno_client),
-        Command::Gputrace { .. } => bail!("'gputrace' command not yet implemented"),
+        Command::Gputrace {
+            job_id,
+            pids,
+            log_file,
+            duration_ms,
+            profile_start_time,
+            process_limit,
+        } => gputrace::run_gputrace(
+            dyno_client,
+            job_id,
+            &pids,
+            duration_ms,
+            &log_file,
+            profile_start_time,
+            process_limit,
+        ),
         // ... add new commands here
     }
 }
