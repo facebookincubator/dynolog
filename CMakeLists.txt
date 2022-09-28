@@ -30,6 +30,10 @@ include_directories("${PROJECT_SOURCE_DIR}/src/rpc")
 add_subdirectory(src/ipcfabric)
 target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
 
+# depends on ipcfabric
+add_subdirectory(src/tracing)
+target_link_libraries(dynolog_lib PUBLIC dynolog_ipcmonitor_lib)
+
 # cli is written in Rust and uses cargo for build
 add_subdirectory(src/cli)
 add_dependencies(dynolog_lib dyno2)

@@ -72,6 +72,33 @@ std::string SimpleJsonServer<TServiceHandler>::processOneImpl(
   if (request["fn"] == "getStatus") {
     int status = handler_->getStatus();
     response["status"] = status;
+  } else if (request["fn"] == "setKinetOnDemandRequest") {
+    if (!request.contains("config") || !request.contains("pids")) {
+      response["status"] = "failed";
+    } else {
+      try {
+        std::string config = request.value("config", "");
+        std::vector<int> pids = request.at("pids").get<std::vector<int>>();
+        std::set<int> pids_set{
+            pids.begin(), pids.end()}; // TODO directly convert?
+
+        int job_id = request.value("job_id", 0);
+        int process_limit = request.value("process_limit", 1000);
+        auto result = handler_->setKinetOnDemandRequest(
+            job_id, pids_set, config, process_limit);
+        response["processesMatched"] = result.processesMatched;
+        response["eventProfilersTriggered"] = result.eventProfilersTriggered;
+        response["activityProfilersTriggered"] =
+            result.activityProfilersTriggered;
+        response["eventProfilersBusy"] = result.eventProfilersBusy;
+        response["activityProfilersBusy"] = result.activityProfilersBusy;
+      } catch (const std::exception& ex) {
+        LOG(ERROR) << "setKinetOnDemandRequest: parsing exception = "
+                   << ex.what();
+        response["status"] =
+            fmt::format("failed with exception = {}", ex.what());
+      }
+    }
   } else {
     LOG(ERROR) << "Unknown RPC call = " << request["fn"];
     return "";

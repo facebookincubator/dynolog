@@ -11,7 +11,7 @@ mod utils;
 
 /// Get system info
 pub fn run_status(client: TcpStream) -> Result<()> {
-    utils::send_msg(&client, "{\"fn\":\"getStatus\"}").expect("Error sending message to service");
+    utils::send_msg(&client, r#"{"fn":"getStatus"}"#).expect("Error sending message to service");
 
     let resp_str = utils::get_resp(&client).expect("Unable to decode output bytes");
 

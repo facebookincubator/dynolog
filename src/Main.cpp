@@ -10,6 +10,7 @@
 
 // @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
 #include "FBRelayLogger.h"
+#include "IPCMonitor.h"
 #include "KernelCollector.h"
 #include "Logger.h"
 #include "ServiceHandler.h"
@@ -26,6 +27,10 @@ DEFINE_int32(
     60,
     "Duration in seconds to read and report metrics");
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
+DEFINE_bool(
+    enable_ipcmonitor,
+    false,
+    "Enabled IPC monitor for on system tracing requests.");
 
 std::unique_ptr<Logger> makeLogger() {
   return FLAGS_use_fbrelay ? std::make_unique<FBRelayLogger>()
@@ -73,6 +78,17 @@ int main(int argc, char** argv) {
   // use simple json RPC server for now
   auto server = setup_server(handler);
   server->run();
+
+  std::unique_ptr<tracing::IPCMonitor> ipcmon;
+  std::unique_ptr<std::thread> ipcmon_thread;
+
+  if (FLAGS_enable_ipcmonitor) {
+    LOG(INFO) << "Starting IPC Monitor";
+    ipcmon = std::make_unique<tracing::IPCMonitor>();
+    ipcmon_thread =
+        std::make_unique<std::thread>([&ipcmon]() { ipcmon->loop(); });
+  }
+  // std::bind(&IPCMonitor::loop, ipcmon));
 
   std::thread km_thread{kernel_monitor_loop};
 

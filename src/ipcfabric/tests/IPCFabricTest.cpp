@@ -1,7 +1,7 @@
 #include <iostream>
 
 // @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FabricManager.h"
+#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
 
 #include <gtest/gtest.h>
 

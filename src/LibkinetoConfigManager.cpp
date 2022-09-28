@@ -132,6 +132,7 @@ int32_t LibkinetoConfigManager::registerLibkinetoContext(
   std::lock_guard<std::mutex> guard(mutex_);
   auto& instances = jobInstancesPerGpu_[jobId][gpu];
   instances.insert(pid);
+  LOG(INFO) << fmt::format("Registered process ({}) for job {}.", pid, jobId);
   return instances.size();
 }
 
