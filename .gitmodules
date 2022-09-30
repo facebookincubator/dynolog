@@ -19,3 +19,9 @@
 [submodule "third_party/range-v3"]
 	path = third_party/range-v3
 	url = https://github.com/ericniebler/range-v3.git
+[submodule "third_party/cpr"]
+	path = third_party/cpr
+	url = https://github.com/libcpr/cpr.git
+[submodule "third_party/DCGM"]
+	path = third_party/DCGM
+	url = https://github.com/NVIDIA/DCGM.git
