@@ -229,7 +229,9 @@ class Monitor {
 
     for (auto& [k, cr] : bperf_count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
-      rvs.emplace(k, cr->read(skip_offset));
+      if (cr->isEnabled()) {
+        rvs.emplace(k, cr->read(skip_offset));
+      }
     }
     return rvs;
   }
