@@ -357,6 +357,7 @@ void populatePredefinedEventsOffcore(
       break;
     case CpuArch::SKL:
     case CpuArch::SKX:
+    case CpuArch::CLX:
       pmu_manager->addEvent(std::make_shared<EventDef>(
           offcoreEventDef->pmu_type,
           "DynoPerfCounter::DRAM_ACCESS_READS",
