@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# (c) Meta Platforms, Inc. and affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
 
 import collections.abc
 import csv
@@ -290,6 +294,10 @@ def create_cpp_jevents_file(base_path, event_group, ev_g_skus):
         errors="backslashreplace",
     ) as h:
         h.write(
+            f"// Copyright (c) Meta Platforms, Inc. and affiliates.\n"
+            f"//\n"
+            f"// This source code is licensed under the MIT license found in the\n"
+            f"// LICENSE file in the root directory of this source tree.\n\n"
             f"// Generated file. Do not modify.\n\n"
             f"#include <stdexcept>\n"
             f'#include "{kJsonEventsHeader}"\n\n'
@@ -337,7 +345,10 @@ def create_cpu_arch_file(base_path, basename, skus, event_groups):
         errors="backslashreplace",
     ) as h:
         h.write(
-            "// Copyright 2004-present Facebook. All Rights Reserved.\n\n"
+            "// Copyright (c) Meta Platforms, Inc. and affiliates.\n"
+            "//\n"
+            "// This source code is licensed under the MIT license found in the\n"
+            "// LICENSE file in the root directory of this source tree.\n\n"
             "// Generated file. Do not modify.\n\n"
             "#pragma once\n\n"
             "namespace facebook::hbt::perf_event {\n\n"
@@ -516,7 +527,11 @@ def create_headers(skus, event_groups):
 def create_target(event_groups):
     """Create TARGETS file for generated files."""
     with open(kGeneratedBase + "/TARGETS", "w") as h:
-        h.write('load("@fbcode_macros//build_defs:cpp_library.bzl", "cpp_library")\n\n')
+        h.write(
+            "# @noautodeps\n\n"
+            'load("@fbcode_macros//build_defs:cpp_library.bzl", "cpp_library")\n\n'
+            'oncall("heartbeat")\n\n'
+        )
 
         names = ",\n".join(
             [f'        "intel/{c.namespace}.cpp"' for c in event_groups.values()]
@@ -527,8 +542,9 @@ def create_target(event_groups):
             f'    headers = ["intel/JsonEvents.h"],\n'
             f"    srcs = [\n{names}\n"
             f"    ],\n"
-            f"    deps= [\n"
-            f'        "//hbt/src/perf_event:Metrics"\n'
+            f"    exported_deps = [\n"
+            f'        "//hbt/src/perf_event:PmuDevices",\n'
+            f'        "//hbt/src/perf_event:PmuEvent",\n'
             f"    ]\n"
             f")"
         )
