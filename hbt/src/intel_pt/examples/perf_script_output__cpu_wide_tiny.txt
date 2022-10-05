@@ -1,0 +1,5 @@
+        :1686527 1686527/1686527 [010] 25738.668928:   call                    do_syscall_64                                                ffffffff81a0006c entry_SYSCALL_64+0x5c ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                        __fentry__                                               ffffffff81001bf0 do_syscall_64+0x0 ([kernel.kallsyms])
+ instruction trace error type 1 time 25738.668928432 cpu 10 pid 1686527 tid 1686527 ip 0xffffffff81a01610 code 6: Trace doesn't match instruction
+        :1686527 1686527/1686527 [010] 25738.668928:   return                          __audit_syscall_entry                                ffffffff81121d7e __audit_syscall_entry+0xce ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668932:   return                  syscall_trace_enter                                  ffffffff8100151f syscall_trace_enter+0x10f ([kernel.kallsyms])

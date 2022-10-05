@@ -1,0 +1,24 @@
+ instruction trace error type 1 time 25738.668927182 cpu 10 pid 1686527 tid 1686527 ip 0xffffffff81a00148 code 6: Trace doesn't match instruction
+        :1686527 1686527/1686527 [010] 25738.668927:   sysret                  syscall_return_via_sysret                                    ffffffff81a00148 syscall_return_via_sysret+0x72 ([kernel.kallsyms])
+ instruction trace error type 1 time 25738.668927720 cpu 10 pid 1686527 tid 1686527 ip 0x7f8796e6c71e code 5: Failed to get instruction
+        :1686527 1686527/1686527 [010] 25738.668927:   tr strt                 7f8796e6c730                                                                0 [unknown] ([unknown])
+ instruction trace error type 1 time 25738.668927720 cpu 10 pid 1686527 tid 1686527 ip 0x7f8796e6c730 code 5: Failed to get instruction
+        :1686527 1686527/1686527 [010] 25738.668927:   tr strt                 7f8796e6c6e0                                                                0 [unknown] ([unknown])
+ instruction trace error type 1 time 25738.668927720 cpu 10 pid 1686527 tid 1686527 ip 0x7f8796e6c6e0 code 5: Failed to get instruction
+        :1686527 1686527/1686527 [010] 25738.668927:   tr strt             entry_SYSCALL_64_trampoline                                                     0 [unknown] ([unknown])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                    do_syscall_64                                                ffffffff81a0006c entry_SYSCALL_64+0x5c ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                        __fentry__                                               ffffffff81001bf0 do_syscall_64+0x0 ([kernel.kallsyms])
+ instruction trace error type 1 time 25738.668928432 cpu 10 pid 1686527 tid 1686527 ip 0xffffffff81a01610 code 6: Trace doesn't match instruction
+        :1686527 1686527/1686527 [010] 25738.668928:   tr strt                     __audit_syscall_entry                                                   0 [unknown] ([unknown])
+        :1686527 1686527/1686527 [010] 25738.668928:   return                          __audit_syscall_entry                                ffffffff81121d7e __audit_syscall_entry+0xce ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   return                          syscall_trace_enter                                  ffffffff8100151f syscall_trace_enter+0x10f ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                            __x86_indirect_thunk_rax                             ffffffff81001c4b do_syscall_64+0x5b ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                                __fentry__                                       ffffffff81222da0 sys_close+0x0 ([kernel.kallsyms])
+ instruction trace error type 1 time 25738.668928432 cpu 10 pid 1686527 tid 1686527 ip 0xffffffff81a01610 code 6: Trace doesn't match instruction
+        :1686527 1686527/1686527 [010] 25738.668928:   tr strt                             __close_fd                                                      0 [unknown] ([unknown])
+        :1686527 1686527/1686527 [010] 25738.668928:   return                                  __close_fd                                   ffffffff8124613c __close_fd+0x7c ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   return                          sys_close                                            ffffffff81222de3 sys_close+0x43 ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                            syscall_slow_exit_work                               ffffffff81001cc8 do_syscall_64+0xd8 ([kernel.kallsyms])
+        :1686527 1686527/1686527 [010] 25738.668928:   call                                __fentry__                                       ffffffff810018d0 syscall_slow_exit_work+0x0 ([kernel.kallsyms])
+ instruction trace error type 1 time 25738.668928432 cpu 10 pid 1686527 tid 1686527 ip 0xffffffff81a01610 code 6: Trace doesn't match instruction
+        :1686527 1686527/1686527 [010] 25738.7:   return                                __fentry__                                       ffffffff810018d0 syscall_slow_exit_work+0x0 ([kernel.kallsyms])
