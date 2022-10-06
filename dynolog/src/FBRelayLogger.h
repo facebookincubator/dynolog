@@ -8,9 +8,7 @@
 #include <map>
 #include <memory>
 #include <string>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "Logger.h"
+#include "dynolog/src/Logger.h"
 
 namespace dynolog {
 

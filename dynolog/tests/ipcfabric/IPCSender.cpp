@@ -3,8 +3,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
+#include "dynolog/src/ipcfabric/FabricManager.h"
 
 int main() {
   int data = 1000;

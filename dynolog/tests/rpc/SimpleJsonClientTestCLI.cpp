@@ -5,8 +5,7 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-
-#include "SimpleJsonClientTest.h"
+#include "dynolog/tests/rpc/SimpleJsonClientTest.h"
 
 DEFINE_int32(port, 1778, "Port for sending RPC requests");
 DEFINE_string(

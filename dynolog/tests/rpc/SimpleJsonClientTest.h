@@ -3,14 +3,13 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include <glog/logging.h>
-#include <optional>
-
 #include <arpa/inet.h>
+#include <glog/logging.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cerrno>
+#include <optional>
 
 namespace dynolog {
 

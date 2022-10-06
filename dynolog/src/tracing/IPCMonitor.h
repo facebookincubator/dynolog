@@ -6,10 +6,7 @@
 #pragma once
 
 #include <memory>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-// included from ipcfabric/
-#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
+#include "dynolog/src/ipcfabric/FabricManager.h"
 
 namespace dynolog {
 namespace tracing {

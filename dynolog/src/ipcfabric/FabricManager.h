@@ -5,16 +5,13 @@
 
 #pragma once
 
+#include <glog/logging.h>
 #include <cstddef>
 #include <deque>
 #include <exception>
 #include <mutex>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "Endpoint.h"
-#include "Utils.h"
-
-#include <glog/logging.h>
+#include "dynolog/src/ipcfabric/Endpoint.h"
+#include "dynolog/src/ipcfabric/Utils.h"
 
 namespace dynolog {
 namespace ipcfabric {

@@ -3,18 +3,16 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+#include "dynolog/tests/rpc/SimpleJsonClientTest.h"
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
 #include <condition_variable>
 #include <mutex>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "LibkinetoConfigManager.h" // @manual=//dynolog/src:libkinetomanagerbase
-#include "SimpleJsonClientTest.h"
-#include "SimpleJsonServer.h" // @manual=//dynolog/src/rpc:libsimplejsonserver
-#include "SimpleJsonServerInl.h" // @manual=//dynolog/src/rpc:libsimplejsonserver
+#include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/rpc/SimpleJsonServer.h"
+#include "dynolog/src/rpc/SimpleJsonServerInl.h"
 
 namespace dynolog {
 

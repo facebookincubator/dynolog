@@ -3,19 +3,16 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+#include "dynolog/src/FBRelayLogger.h"
+#include <arpa/inet.h>
 #include <fmt/format.h>
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
-
-#include <arpa/inet.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cerrno>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FBRelayLogger.h"
 
 using json = nlohmann::json;
 

@@ -3,17 +3,14 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+#include "dynolog/src/rpc/SimpleJsonServer.h"
+#include <arpa/inet.h>
 #include <fmt/format.h>
 #include <glog/logging.h>
-
-#include <arpa/inet.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cerrno>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "SimpleJsonServer.h"
 
 constexpr int CLIENT_QUEUE_LEN = 50;
 

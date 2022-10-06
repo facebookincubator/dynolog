@@ -5,9 +5,8 @@
 
 #pragma once
 
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "KernelCollectorBase.h"
-#include "Logger.h"
+#include "dynolog/src/KernelCollectorBase.h"
+#include "dynolog/src/Logger.h"
 
 namespace dynolog {
 

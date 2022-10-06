@@ -1,6 +1,6 @@
 # (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-include(${PROJECT_SOURCE_DIR}/tests/BuildTests.cmake)
+include(${PROJECT_SOURCE_DIR}/testing/BuildTests.cmake)
 macro(hbt_common_add_test TESTNAME)
   dynolog_add_test_base(${TESTNAME} ${ARGN})
   target_compile_options(${TESTNAME} PRIVATE ${HBT_COMMON_COMPILE_OPTIONS})
