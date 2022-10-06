@@ -7,8 +7,7 @@
 
 #include <set>
 #include <string>
-
-#include "LibkinetoConfigManager.h"
+#include "dynolog/src/LibkinetoConfigManager.h"
 
 namespace dynolog {
 

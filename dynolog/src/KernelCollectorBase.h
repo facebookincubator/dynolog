@@ -9,11 +9,8 @@
 #include <array>
 #include <map>
 #include <vector>
-
+#include "dynolog/src/Types.h"
 #include "pfs/procfs.hpp"
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "Types.h"
 
 namespace dynolog {
 

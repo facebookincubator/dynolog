@@ -3,8 +3,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include "IPCMonitor.h"
-
+#include "dynolog/src/tracing/IPCMonitor.h"
 #include <glog/logging.h>
 #include <string.h>
 #include <unistd.h>
@@ -14,11 +13,8 @@
 #include <string>
 #include <utility>
 #include <vector>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "LibkinetoConfigManager.h" // @manual=//dynolog/src:libkinetomanagerbase
-// included from ipcfabric/
-#include "Utils.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
+#include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/ipcfabric/Utils.h"
 
 namespace dynolog {
 namespace tracing {

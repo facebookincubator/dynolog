@@ -7,6 +7,7 @@
 
 #include <net/if.h>
 #include <time.h>
+#include <cstdint>
 
 #define MAX_CPU_SOCKETS 8
 

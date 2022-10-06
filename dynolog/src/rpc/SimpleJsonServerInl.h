@@ -6,9 +6,7 @@
 #include <fmt/format.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "SimpleJsonServer.h"
+#include "dynolog/src/rpc/SimpleJsonServer.h"
 
 namespace dynolog {
 

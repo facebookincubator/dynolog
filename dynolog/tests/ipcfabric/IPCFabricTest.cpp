@@ -3,17 +3,13 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include <iostream>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
-
 #include <gtest/gtest.h>
-
 #include <linux/perf_event.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <iostream>
+#include "dynolog/src/ipcfabric/FabricManager.h"
 
 using namespace dynolog::ipcfabric;
 

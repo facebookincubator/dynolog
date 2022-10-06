@@ -16,8 +16,7 @@
 #include <string>
 #include <thread>
 #include <vector>
-
-#include "LibkinetoTypes.h"
+#include "dynolog/src/LibkinetoTypes.h"
 
 namespace dynolog {
 

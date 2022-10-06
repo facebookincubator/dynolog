@@ -3,21 +3,15 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include <chrono>
-#include <iostream>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-// ipcfabric
-#include "FabricManager.h" // @manual=//dynolog/src/ipcfabric:ipcfabric
-// tracing
-#include "IPCMonitor.h" // @manual=//dynolog/src/tracing:libipcmonitor
-#include "LibkinetoConfigManager.h" // @manual=//dynolog/src:libkinetomanagerbase
-
+#include "dynolog/src/tracing/IPCMonitor.h"
 #include <gtest/gtest.h>
-
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <chrono>
+#include <iostream>
+#include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/ipcfabric/FabricManager.h"
 
 using namespace dynolog;
 using namespace dynolog::tracing;

@@ -3,6 +3,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+#include "dynolog/src/LibkinetoConfigManager.h"
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <glog/logging.h>
@@ -15,9 +16,6 @@
 #ifdef __linux__
 #include <sys/prctl.h>
 #endif
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "LibkinetoConfigManager.h"
 
 namespace dynolog {
 

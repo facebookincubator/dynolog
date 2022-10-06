@@ -10,9 +10,7 @@
 #include <memory>
 #include <string>
 #include <thread>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "ServiceHandler.h" // @manual=//dynolog/src:common
+#include "dynolog/src/ServiceHandler.h"
 
 namespace dynolog {
 

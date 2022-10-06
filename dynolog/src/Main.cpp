@@ -7,18 +7,15 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-
 #include <chrono>
 #include <thread>
-
-// @lint-ignore-every CLANGTIDY facebook-hte-RelativeInclude
-#include "FBRelayLogger.h"
-#include "IPCMonitor.h"
-#include "KernelCollector.h"
-#include "Logger.h"
-#include "ServiceHandler.h"
-#include "SimpleJsonServer.h"
-#include "SimpleJsonServerInl.h"
+#include "dynolog/src/FBRelayLogger.h"
+#include "dynolog/src/KernelCollector.h"
+#include "dynolog/src/Logger.h"
+#include "dynolog/src/ServiceHandler.h"
+#include "dynolog/src/rpc/SimpleJsonServer.h"
+#include "dynolog/src/rpc/SimpleJsonServerInl.h"
+#include "dynolog/src/tracing/IPCMonitor.h"
 
 using namespace dynolog;
 
