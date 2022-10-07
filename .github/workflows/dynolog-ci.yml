@@ -44,10 +44,7 @@ jobs:
     - name: Build dynolog binary
       run: |
         set -e
-        mkdir build
-        cd build
-        cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja ..
-        cmake --build .
+        ./scripts/build.sh
     - name: Run Unit Tests
       run: |
         set -e
