@@ -7,10 +7,8 @@
 
 #include <hbt/src/perf_event/PmuEvent.h>
 #include <string>
-/// XXX: Replace by std's filesystem for platform009
-#include <boost/filesystem.hpp>
 
-namespace fs = ::boost::filesystem;
+namespace fs = std::filesystem;
 
 namespace facebook::hbt::perf_event {
 
@@ -170,7 +168,7 @@ void parseSysFsPmuFormat_(fs::directory_entry dentry, PmuDevice& pmu_device) {
       continue;
     }
     PmuDevice::FormatAttr format_attr = {
-        .name = format_entry.path().leaf().string()};
+        .name = format_entry.path().filename().string()};
     try {
       format_attr.type = ConfigTypeFromStr(format_str.substr(0, sep_pos));
     } catch (std::invalid_argument& e) {
@@ -236,7 +234,7 @@ void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
       continue;
     }
     // Insert cap into pmu devices
-    pmu_device.caps[cap_entry.path().leaf().string()] = cap;
+    pmu_device.caps[cap_entry.path().filename().string()] = cap;
   }
 }
 
@@ -320,8 +318,8 @@ std::vector<std::string> PmuDeviceManager::listTracepointCategories() {
       }
       categories.emplace_back(dentry.path().filename().string());
     }
-  } catch (const boost::filesystem::filesystem_error& ex) {
-    if (ex.code() == boost::system::errc::permission_denied) {
+  } catch (const fs::filesystem_error& ex) {
+    if (ex.code().value() == EACCES) {
       HBT_LOG_INFO()
           << "User has no permissions to open tracepoint events. "
           << "Do you want to run as root or add CAP_PERFMON to your user?";
@@ -354,8 +352,8 @@ PmuDeviceManager::listTracepointEvents(const std::string& category) {
         continue;
       }
     }
-  } catch (const boost::filesystem::filesystem_error& ex) {
-    if (ex.code() == boost::system::errc::permission_denied) {
+  } catch (const fs::filesystem_error& ex) {
+    if (ex.code().value() == EACCES) {
       HBT_LOG_INFO()
           << "User has no permissions to open tracepoint events. "
           << "Do you want to run as root or add CAP_PERFMON to your user?";
