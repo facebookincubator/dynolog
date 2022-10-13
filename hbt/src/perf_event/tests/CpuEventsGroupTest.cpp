@@ -5,7 +5,6 @@
 
 #include "hbt/src/perf_event/CpuEventsGroup.h"
 
-
 #include <gtest/gtest.h>
 #include <filesystem>
 
