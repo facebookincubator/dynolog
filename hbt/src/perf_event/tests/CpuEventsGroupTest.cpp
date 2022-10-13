@@ -5,13 +5,14 @@
 
 #include "hbt/src/perf_event/CpuEventsGroup.h"
 
-#include <boost/filesystem.hpp>
+
 #include <gtest/gtest.h>
+#include <filesystem>
 
 using namespace facebook::hbt;
 using namespace facebook::hbt::perf_event;
 
-namespace fs = ::boost::filesystem;
+namespace fs = std::filesystem;
 
 const static std::string kConsumeErrorString =
     "Expected to either get all samples"
