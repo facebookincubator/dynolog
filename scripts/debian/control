@@ -1,0 +1,8 @@
+Package: dynolog
+Version: __VERSION__
+Architecture: amd64
+Homepage: https://github.com/facebookincubator/dynolog
+Maintainer: bcoutinho@meta.com
+Description: Dynolog is an observability daemon for system monitoring and profiling.
+ * Dynolog support monitoring for heterogenous CPU/GPU platforms.
+ * Integrates with pytorch and can trigger traces for distributed training applications.

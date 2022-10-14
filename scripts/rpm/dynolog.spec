@@ -13,9 +13,9 @@ BuildRequires: systemd-rpm-macros
 %define _mybindir /usr/local/bin
 
 %description
-An observability daemon for system monitoring and profiling.
-Dynolog monitors heterogenous CPU/GPU platforms and supports
-instrumenting applications (pytorch) for deep dive profiling.
+Dynolog is an observability daemon for system monitoring and profiling.
+* It support telemetry on heterogenous CPU/GPU platforms.
+* Integrates with pytorch and can trigger traces for distributed training applications.
 
 %prep
 %autosetup
