@@ -30,13 +30,14 @@ set(BUILD_SAMPLES OFF CACHE BOOL "")
 set(BUILD_TEST OFF CACHE BOOL "")
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
 
+set(BUILD_TESTING OFF CACHE BOOL "")
+set(WITH_GFLAGS OFF CACHE BOOL "")
+add_subdirectory(third_party/glog)
+target_link_libraries(dynolog_lib PUBLIC glog::glog)
+
 set(GFLAGS_BUILD_TESTING OFF CACHE BOOL "")
 add_subdirectory(third_party/gflags)
 target_link_libraries(dynolog_lib PUBLIC gflags::gflags)
-
-set(BUILD_TESTING OFF CACHE BOOL "")
-add_subdirectory(third_party/glog)
-target_link_libraries(dynolog_lib PUBLIC glog::glog)
 
 # https://github.com/nlohmann/json#cmake
 set(JSON_BuildTests OFF CACHE INTERNAL "")
