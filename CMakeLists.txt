@@ -52,3 +52,6 @@ target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 
 set(BUILD_SAMPLES OFF CACHE BOOL "")
 add_subdirectory(third_party/range-v3)
+
+add_subdirectory(third_party/cpr)
+target_link_libraries(dynolog_lib PUBLIC cpr::cpr)

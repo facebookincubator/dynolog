@@ -16,7 +16,7 @@ namespace dynolog {
 // An abstract class for logging metrics
 //  1. Create a class with this interface for each log entry
 //  2. Add data to it using log* methods
-//  3. Publish the data data with finalize()
+//  3. Publish the data with finalize()
 class Logger {
  public:
   using Timestamp = std::chrono::time_point<std::chrono::system_clock>;

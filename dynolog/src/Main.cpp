@@ -8,49 +8,67 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <chrono>
+#include <cstdlib>
 #include <thread>
 #include "dynolog/src/FBRelayLogger.h"
 #include "dynolog/src/KernelCollector.h"
 #include "dynolog/src/Logger.h"
+#include "dynolog/src/ODSJsonLogger.h"
 #include "dynolog/src/ServiceHandler.h"
+#include "dynolog/src/gpumon/DcgmGroupInfo.h"
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 #include "dynolog/src/tracing/IPCMonitor.h"
 
 using namespace dynolog;
+using json = nlohmann::json;
 
 constexpr const char* VERSION = "0.0.1";
 
 DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
-    reporting_interval_s,
+    kernel_monitor_reporting_interval_s,
     60,
-    "Duration in seconds to read and report metrics");
+    "Duration in seconds to read and report metrics for kernel monitor");
+DEFINE_int32(
+    dcgm_reporting_interval_s,
+    10,
+    "Duration in seconds to read and report metrics for DCGM");
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
 DEFINE_bool(
     enable_ipcmonitor,
     false,
     "Enabled IPC monitor for on system tracing requests.");
+DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
+DEFINE_string(
+    dcgm_fields,
+    gpumon::kDcgmDefaultFieldIds,
+    "The field ids for DCGM to monitor, comma separated");
 
-std::unique_ptr<Logger> makeLogger() {
-  return FLAGS_use_fbrelay ? std::make_unique<FBRelayLogger>()
-                           : std::make_unique<JsonLogger>();
+std::unique_ptr<Logger> getLogger() {
+  if (FLAGS_use_fbrelay) {
+    return std::make_unique<FBRelayLogger>();
+  }
+  if (FLAGS_use_ODS) {
+    return std::make_unique<ODSJsonLogger>();
+  }
+  return std::make_unique<JsonLogger>();
 }
 
-auto next_wakeup() {
-  return std::chrono::steady_clock::now() +
-      std::chrono::seconds(FLAGS_reporting_interval_s);
+auto next_wakeup(int sec) {
+  return std::chrono::steady_clock::now() + std::chrono::seconds(sec);
 }
 
 void kernel_monitor_loop() {
   KernelCollector kc;
 
   while (1) {
-    auto logger = makeLogger();
-    auto wakeup_timepoint = next_wakeup();
+    auto logger = getLogger();
+    auto wakeup_timepoint =
+        next_wakeup(FLAGS_kernel_monitor_reporting_interval_s);
 
     LOG(INFO) << "Running kernel monitor loop : interval = "
-              << FLAGS_reporting_interval_s << " s.";
+              << FLAGS_kernel_monitor_reporting_interval_s << " s.";
     kc.step();
     kc.log(*logger);
 
@@ -63,6 +81,27 @@ void kernel_monitor_loop() {
 auto setup_server(std::shared_ptr<ServiceHandler> handler) {
   return std::make_unique<SimpleJsonServer<ServiceHandler>>(
       handler, FLAGS_port);
+}
+
+void gpu_monitor_loop() {
+  LOG(INFO) << "Construct the dcgm monitoring";
+  std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
+      FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
+
+  auto logger = getLogger();
+
+  while (1) {
+    auto wakeup_timepoint = next_wakeup(FLAGS_dcgm_reporting_interval_s);
+    LOG(INFO) << "FLAGS dcgm fields: " << FLAGS_dcgm_fields;
+    LOG(INFO) << "Running DCGM loop : interval = "
+              << FLAGS_dcgm_reporting_interval_s << " s.";
+
+    dcgm->update();
+    dcgm->log(*logger);
+
+    /* sleep override */
+    std::this_thread::sleep_until(wakeup_timepoint);
+  }
 }
 
 int main(int argc, char** argv) {
@@ -91,8 +130,10 @@ int main(int argc, char** argv) {
   // std::bind(&IPCMonitor::loop, ipcmon));
 
   std::thread km_thread{kernel_monitor_loop};
+  std::thread gpu_thread{gpu_monitor_loop};
 
   km_thread.join();
+  gpu_thread.join();
   server->stop();
 
   return 0;

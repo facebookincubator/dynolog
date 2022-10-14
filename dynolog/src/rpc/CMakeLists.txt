@@ -1,10 +1,10 @@
-add_library (dynolog_rpc_lib STATIC
+add_library(dynolog_rpc_lib STATIC
     SimpleJsonServer.cpp SimpleJsonServer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/../ServiceHandler.h
 )
 target_include_directories(dynolog_rpc_lib
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
-  )
+)
 
 target_include_directories(dynolog_rpc_lib
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..
