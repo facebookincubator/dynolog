@@ -39,6 +39,10 @@ DEFINE_bool(
     enable_ipcmonitor,
     false,
     "Enabled IPC monitor for on system tracing requests.");
+DEFINE_bool(
+    enable_gpu_monitor,
+    false,
+    "Enable GPU monitoring and profiling metrics from DCGM.");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
 DEFINE_string(
     dcgm_fields,
@@ -84,7 +88,10 @@ auto setup_server(std::shared_ptr<ServiceHandler> handler) {
 }
 
 void gpu_monitor_loop() {
-  LOG(INFO) << "Construct the dcgm monitoring";
+  if (!FLAGS_enable_gpu_monitor) {
+    return;
+  }
+  LOG(INFO) << "GPU Monitoring enabled, construct the dcgm monitoring";
   std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
       FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
 
