@@ -11,7 +11,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 add_custom_target(
-    dyno2
+    dyno
     COMMAND ${CARGO} build ${ARGS}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
