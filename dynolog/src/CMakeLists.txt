@@ -7,7 +7,10 @@ file (GLOB dynolog_src "*.h" "*.cpp")
 # Remove main from library, only needed for exec.
 list(REMOVE_ITEM dynolog_src "dynolog/src/Main.cc")
 add_library(dynolog_lib ${dynolog_src})
-target_compile_options(dynolog_lib PUBLIC "-DUSE_GRAPH_ENDPOINT")
+
+if(USE_ODS_GRAPH_API)
+  target_compile_options(dynolog_lib PUBLIC "-DUSE_GRAPH_ENDPOINT")
+endif()
 
 add_subdirectory(rpc)
 
@@ -19,7 +22,7 @@ add_subdirectory(tracing)
 target_link_libraries(dynolog_lib PUBLIC dynolog_ipcmonitor_lib)
 
 add_subdirectory(gpumon)
-target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib)
+target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib "-ldl")
 
 add_executable(dynolog Main.cpp)
 target_link_libraries(dynolog PRIVATE dynolog_lib dynolog_rpc_lib)

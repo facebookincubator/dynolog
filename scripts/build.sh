@@ -5,7 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Please run this script from the root level of the project.
-#  ./scripts/build.sh
+#  ./scripts/build.sh <optional cmake args>
 
 set -eux -o pipefail
 
@@ -20,7 +20,7 @@ echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
-cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja ..
+cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja "$@" ..
 cmake --build .
 
 echo "Binary files ="
