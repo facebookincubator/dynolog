@@ -5,7 +5,7 @@ Documentation=Dynolog provides system observability for heterogenous platforms. 
 [Service]
 ExecStartPre=/usr/bin/touch /etc/dynolog.gflags
 ExecStartPre=/usr/bin/touch /var/log/dynolog.log
-ExecStart=/usr/local/bin/dynomin --flagfile=/etc/dynolog.gflags
+ExecStart=/usr/local/bin/dynolog --flagfile=/etc/dynolog.gflags
 
 StandardOutput=file:/var/log/dynolog.log
 StandardError=file:/var/log/dynolog.log
