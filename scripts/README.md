@@ -20,7 +20,7 @@ To run the build use -
 ```
 This should setup a build/ directory, run cmake and build steps. The last line
 of the output will point to generated binaries for the server (dynolog) and the
-command line tool (dyno2).
+command line tool (dyno).
 
 # Packaging and deployment
 

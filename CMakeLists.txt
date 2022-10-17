@@ -21,7 +21,7 @@ include_directories(".")
 add_subdirectory(dynolog)
 add_subdirectory(cli)
 # The following dummy depdendency ensures the cli is built
-add_dependencies(dynolog_lib dyno2)
+add_dependencies(dynolog_lib dyno)
 add_subdirectory(hbt)
 
 # Third party deps

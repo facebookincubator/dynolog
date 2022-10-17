@@ -24,4 +24,4 @@ cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja ..
 cmake --build .
 
 echo "Binary files ="
-echo "$PWD/dynolog/src/dynomin" "$PWD/release/dyno2"
+echo "$PWD/dynolog/src/dynolog" "$PWD/release/dyno"

@@ -37,15 +37,15 @@ Dynolog is an observability daemon for system monitoring and profiling.
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_mybindir}
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
-cp dynomin $RPM_BUILD_ROOT/%{_mybindir}
-cp dyno2 $RPM_BUILD_ROOT/%{_mybindir}
+cp dynolog $RPM_BUILD_ROOT/%{_mybindir}
+cp dyno $RPM_BUILD_ROOT/%{_mybindir}
 cp dynolog.service $RPM_BUILD_ROOT/%{_unitdir}
 
 %files
 # perc license add-license-file-here
 # perc doc add-docs-here
-%{_mybindir}/dynomin
-%{_mybindir}/dyno2
+%{_mybindir}/dynolog
+%{_mybindir}/dyno
 %{_unitdir}/dynolog.service
 
 %changelog
