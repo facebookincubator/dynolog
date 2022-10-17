@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Dynolog VERSION 1.0)
 option(BUILD_TESTS "Build the unit tests" ON)
+option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
+ON)
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -54,5 +57,7 @@ target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 set(BUILD_SAMPLES OFF CACHE BOOL "")
 add_subdirectory(third_party/range-v3)
 
-add_subdirectory(third_party/cpr)
-target_link_libraries(dynolog_lib PUBLIC cpr::cpr)
+if(USE_ODS_GRAPH_API)
+  add_subdirectory(third_party/cpr)
+  target_link_libraries(dynolog_lib PUBLIC cpr::cpr)
+endif()
