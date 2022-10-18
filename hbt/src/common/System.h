@@ -403,27 +403,30 @@ struct Kernel {
   // "/boot/vmlinux-`uname`" by default. If the kernel image doesn't exist on
   // the default path, user need to modify "trace.json" file before loading it
   // into lldb.
-  std::string image_expected_path;
+  std::string release;
 
  public:
   static Kernel create() {
     struct utsname buffer;
     int err = uname(&buffer);
-    std::string image_expected_path;
+    std::string release;
 
     HBT_THROW_SYSTEM_IF(err != 0, errno)
         << "uname threw an error when trying to identify the kernel image";
-    image_expected_path = fmt::format("/boot/vmlinux-{}", buffer.release);
+    return Kernel(buffer.release);
+  }
 
+  std::optional<std::string> image_expected_path() const {
+    std::string image_expected_path = fmt::format("/boot/vmlinux-{}", release);
     if (!std::filesystem::exists(image_expected_path)) {
       HBT_LOG_WARNING() << image_expected_path << " not exist";
-      image_expected_path = "/path-to-kernel-image";
+      return std::nullopt;
     }
-    return Kernel(image_expected_path);
+    return image_expected_path;
   }
 
  private:
-  explicit Kernel(std::string path) : image_expected_path(path) {}
+  explicit Kernel(std::string release) : release(release) {}
 };
 
 #if defined(__i386__) || defined(__x86_64__)
