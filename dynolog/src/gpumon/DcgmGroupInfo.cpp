@@ -325,12 +325,19 @@ void DcgmGroupInfo::update() {
 
             // Store value
             if (v.fieldType == 'd') {
+              if (v.value.dbl == DCGM_FP64_BLANK) {
+                blank_value_field = true;
+              }
               metricsDouble[FieldIdToName[v.fieldId]] = v.value.dbl;
             } else if (v.fieldType == 'i') {
+              if (v.value.i64 == DCGM_INT64_BLANK) {
+                blank_value_field = true;
+              }
               metricsInt[FieldIdToName[v.fieldId]] = v.value.i64;
             }
           }
         }
+        metricsInt["dcgm_error"] = blank_value_field ? 1 : 0;
         metricsMapDouble_[entity.m_entityId] = metricsDouble;
         metricsMapInt_[entity.m_entityId] = metricsInt;
       }
