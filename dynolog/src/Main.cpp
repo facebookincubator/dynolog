@@ -23,7 +23,7 @@
 using namespace dynolog;
 using json = nlohmann::json;
 
-constexpr const char* VERSION = "0.0.1";
+constexpr const char* VERSION = "0.0.2";
 
 DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
@@ -36,7 +36,7 @@ DEFINE_int32(
     "Duration in seconds to read and report metrics for DCGM");
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
 DEFINE_bool(
-    enable_ipcmonitor,
+    enable_ipc_monitor,
     false,
     "Enabled IPC monitor for on system tracing requests.");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
   std::unique_ptr<std::thread> ipcmon_thread;
 
-  if (FLAGS_enable_ipcmonitor) {
+  if (FLAGS_enable_ipc_monitor) {
     LOG(INFO) << "Starting IPC Monitor";
     ipcmon = std::make_unique<tracing::IPCMonitor>();
     ipcmon_thread =
