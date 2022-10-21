@@ -16,7 +16,7 @@ may refer to other scripts using a relative path.
 Please refer to the top level README file for requirements for building from source.
 To run the build use -
 ```
-  ./scripts/build.sh
+./scripts/build.sh
 ```
 This should setup a build/ directory, run cmake and build steps. The last line
 of the output will point to generated binaries for the server (dynolog) and the
@@ -37,15 +37,15 @@ Before beginning please ensure you have [dpkg-deb](https://manpages.ubuntu.com/m
 You will also need all prequisites for building dynolog mentioned in top-level README file.
 
 Run the script to build dynolog/cli and package them.
-```
-  ./scripts/debian/make_deb.sh
+```bash
+./scripts/debian/make_deb.sh
 ```
 Your package will be generated in the dynolog root directory at
 `dynolog_<version>-<arch>.deb` such as `dynolog_0.0.1-0-amd64.deb`.
 
 To install the package use the dpkg command
-```
-  sudo dpkg -i <path/package.deb>
+```bash
+sudo dpkg -i <path/package.deb>
 ```
 
 ## Packaging using RPM
@@ -56,17 +56,18 @@ packages at the moment.
 
 Before beginning please ensure you have `rpmbuild` and `rpmlint` tools intalled.
 You will also need all prequisites for building dynolog mentioned in top-level README file.
+```bash
+sudo dnf install -y rpmdevtools rpmlint
 ```
-  sudo dnf install -y rpmdevtools rpmlint
 
 Run the script to build dynolog/cli and package them.
-```
-  ./scripts/rpm/make_rpm.sh
+```bash
+./scripts/rpm/make_rpm.sh
 ```
 Your package will be generated in your home directory at `~/rpmbuild/`, The script generates
 the output path for the package.
 
 To install the RPM use the following command
-```
-  sudo rpm -i <path/package.rpm>
+```bash
+sudo rpm -i <path/package.rpm>
 ```
