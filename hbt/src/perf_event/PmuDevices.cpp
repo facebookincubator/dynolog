@@ -8,6 +8,8 @@
 #include <hbt/src/perf_event/PmuEvent.h>
 #include <string>
 
+#include <filesystem>
+
 namespace fs = std::filesystem;
 
 namespace facebook::hbt::perf_event {

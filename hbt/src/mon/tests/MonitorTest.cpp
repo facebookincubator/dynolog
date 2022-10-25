@@ -14,9 +14,13 @@
 using namespace facebook::hbt;
 using namespace facebook::hbt::mon;
 using namespace facebook::hbt::perf_event;
+
+#ifdef HBT_ENABLE_TRACING
 using namespace facebook::hbt::phase;
 using namespace facebook::hbt::tagstack;
+#endif // HBT_ENABLE_TRACING
 
+#ifdef HBT_ENABLE_TRACING
 void runSlices(std::vector<CpuId> cpus) {
   EXPECT_GE(cpus.size(), 1);
 
@@ -242,6 +246,7 @@ TEST(PerCpuSlicer, TwoCpusNoZeroCpu) {
   // may not have those CPU ids enabled/online.
   runSlices({10, 8});
 };
+#endif // HBT_ENABLE_TRACING
 
 TEST(IntelPTMonitor, SystemWideTraceCollection) {
   auto cpus = CpuSet::makeAllOnline();
@@ -364,6 +369,7 @@ TEST(IntelPTMonitor, SystemWideTraceCopy) {
   mon.close();
 }
 
+#ifdef HBT_ENABLE_TRACING
 TEST(ContextSwitch, CopyToSink) {
   Monitor mon;
 
@@ -391,3 +397,4 @@ TEST(ContextSwitch, CopyToSink) {
   // Ensure that the copy lambda was called for each CPU.
   ASSERT_EQ(seenCpus, cpu_set.asSet());
 }
+#endif // HBT_ENABLE_TRACING

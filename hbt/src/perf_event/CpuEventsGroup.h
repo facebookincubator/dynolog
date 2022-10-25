@@ -391,13 +391,13 @@ struct GroupReadValues {
 
   explicit GroupReadValues(const GroupReadValues& other)
       : GroupReadValues(other.getNumEvents()) {
-    HBT_DCHECK_NE(other.t, nullptr);
-    HBT_DCHECK_NE(t, nullptr);
+    HBT_DCHECK_NOT_NULLPTR(other.t);
+    HBT_DCHECK_NOT_NULLPTR(t);
     ::memcpy(t, other.t, other.getNumReadBytes());
   }
 
   GroupReadValues& operator=(const GroupReadValues& other) {
-    HBT_DCHECK_NE(other.t, nullptr);
+    HBT_DCHECK_NOT_NULLPTR(other.t);
     release_();
     new (this) GroupReadValues(other);
     return *this;
@@ -405,7 +405,7 @@ struct GroupReadValues {
 
   GroupReadValues(GroupReadValues&& other) noexcept
       : t(std::exchange(other.t, nullptr)) {
-    HBT_DCHECK_NE(t, nullptr);
+    HBT_DCHECK_NOT_NULLPTR(t);
   }
 
   GroupReadValues& operator=(GroupReadValues&& other) {
