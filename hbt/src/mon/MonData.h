@@ -6,9 +6,12 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
+
+#ifdef HBT_ENABLE_TRACING
 #include "hbt/src/phase/PerCpuMetaDataConsumer.h"
 #include "hbt/src/tagstack/IntervalSlicer.h"
 #include "hbt/src/tagstack/Slicer.h"
+#endif // HBT_ENABLE_TRACING
 
 #include <fmt/core.h>
 #include <fmt/ostream.h>
@@ -23,6 +26,7 @@
 
 namespace facebook::hbt::mon {
 
+#ifdef HBT_ENABLE_TRACING
 struct SliceFreq {
   // Total duration
   TimeStamp duration = 0;
@@ -632,6 +636,7 @@ struct TagStackIdBinner {
 };
 
 } // namespace binmap
+#endif // HBT_ENABLE_TRACING
 
 struct ModuleInfo {
   ModuleInfo(const std::string& systemPath, size_t loadAddress)

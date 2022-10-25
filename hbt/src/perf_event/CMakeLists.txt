@@ -17,6 +17,7 @@ target_link_libraries(CpuEventsGroup PUBLIC PmuEvent)
 
 add_library(PmuDevices PmuDevices.h PmuDevices.cpp)
 target_link_libraries(PmuDevices PUBLIC CpuEventsGroup)
+target_link_libraries(PmuDevices PUBLIC stdc++fs)
 target_link_libraries(PmuDevices PUBLIC PmuEvent)
 target_link_libraries(PmuDevices PUBLIC CpuArch)
 

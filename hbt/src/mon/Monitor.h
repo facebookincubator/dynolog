@@ -10,13 +10,18 @@
 #include "hbt/src/common/System.h"
 #include "hbt/src/mon/IntelPTMonitor.h"
 #include "hbt/src/mon/MonData.h"
-#include "hbt/src/mon/TraceMonitor.h"
-#include "hbt/src/perf_event/BPerfCountReader.h"
 #include "hbt/src/perf_event/PerCpuCountReader.h"
 
 #include <pfs/procfs.hpp>
-
 #include <mutex>
+
+#ifdef HBT_ENABLE_TRACING
+#include "hbt/src/mon/TraceMonitor.h"
+#endif // HBT_ENABLE_TRACING
+
+#ifdef HBT_ENABLE_BPERF
+#include "hbt/src/perf_event/BPerfCountReader.h"
+#endif // HBT_ENABLE_BPERF
 
 namespace facebook::hbt::mon {
 
@@ -43,7 +48,9 @@ class Monitor {
 
  public:
   using TCountReader = perf_event::PerCpuCountReader;
+#ifdef HBT_ENABLE_BPERF
   using TBPerfCountReader = perf_event::BPerfCountReader;
+#endif // HBT_ENABLE_BPERF
 
   using ElemId = ElemIdType;
   using MuxGroupId = MuxGroupIdType;
@@ -91,6 +98,7 @@ class Monitor {
     return toState_(State::Open);
   }
 
+#ifdef HBT_ENABLE_TRACING
   /// Process until <stop_ts_opt> (or now() if stop_ts_opt is nullopt.
   /// If <pipeline_max_lat_secs> is provided, then stop that many seconds
   /// before stop_ts. This is useful to allow data to propagate through
@@ -120,6 +128,7 @@ class Monitor {
     return it->second->releaseMonData(
         count_gen_key, stop_ts_opt, short_desc, long_desc);
   }
+#endif // HBT_ENABLE_TRACING
 
   // Get the executable, file-backed modules per process.
   std::unordered_map<pid_t, std::vector<ModuleInfo>>
@@ -160,6 +169,7 @@ class Monitor {
     }
   }
 
+#ifdef HBT_ENABLE_TRACING
   template <class TFunc>
   bool applyToCountSamplesAndConsume(
       const ElemId& trace_mon_id,
@@ -196,6 +206,7 @@ class Monitor {
     }
     return rvs;
   }
+#endif // HBT_ENABLE_TRACING
 
   /// Read counts for all events opened in counting mode
   /// in all PerCpuCountReaders.
@@ -225,38 +236,7 @@ class Monitor {
     return std::nullopt;
   }
 
-  /// Read counts for all events opened in counting mode
-  /// in all BPerfCountReaders.
-  std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>>
-  readAllBPerfCounts(bool skip_offset = false) const {
-    std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>> rvs;
-
-    for (auto& [k, cr] : bperf_count_readers_) {
-      HBT_THROW_ASSERT_IF(cr == nullptr);
-      if (cr->isEnabled()) {
-        rvs.emplace(k, cr->read(skip_offset));
-      }
-    }
-    return rvs;
-  }
-
-  /// Read counts for all events opened in counting mode
-  /// in BPerfCountReader given by elem_id (independent from the mux group).
-  std::optional<TBPerfCountReader::ReadValues> readBPerfCounts(
-      const ElemId& elem_id,
-      bool skip_offset = false) const {
-    std::lock_guard<std::mutex> lock{mutex_};
-
-    if (auto it = bperf_count_readers_.find(elem_id);
-        it != bperf_count_readers_.end()) {
-      HBT_THROW_ASSERT_IF(it->second == nullptr);
-      return it->second->read(skip_offset);
-    }
-    HBT_LOG_WARNING() << fmt::format("No BPerfCountReader with id {}", elem_id);
-    return std::nullopt;
-  }
-
+#ifdef HBT_ENABLE_TRACING
   std::shared_ptr<TraceMonitor> getTraceMonitor(const ElemId& mon_id) {
     std::lock_guard<std::mutex> lock{mutex_};
     auto it = trace_monitors_.find(mon_id);
@@ -292,6 +272,7 @@ class Monitor {
 
     return it->second;
   }
+#endif // HBT_ENABLE_TRACING
 
   /// Create and register a new CountReader, it returns a shared ptr to
   /// newly created TraceMonitor, but it can also be retrieved later using
@@ -320,6 +301,39 @@ class Monitor {
     // Transition newly emplaced PerCpuCountReader to Monitor's state.
     sync_();
     return it->second;
+  }
+
+#ifdef HBT_ENABLE_BPERF
+  /// Read counts for all events opened in counting mode
+  /// in all BPerfCountReaders.
+  std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>>
+  readAllBPerfCounts(bool skip_offset = false) const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>> rvs;
+
+    for (auto& [k, cr] : bperf_count_readers_) {
+      HBT_THROW_ASSERT_IF(cr == nullptr);
+      if (cr->isEnabled()) {
+        rvs.emplace(k, cr->read(skip_offset));
+      }
+    }
+    return rvs;
+  }
+
+  /// Read counts for all events opened in counting mode
+  /// in BPerfCountReader given by elem_id (independent from the mux group).
+  std::optional<TBPerfCountReader::ReadValues> readBPerfCounts(
+      const ElemId& elem_id,
+      bool skip_offset = false) const {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    if (auto it = bperf_count_readers_.find(elem_id);
+        it != bperf_count_readers_.end()) {
+      HBT_THROW_ASSERT_IF(it->second == nullptr);
+      return it->second->read(skip_offset);
+    }
+    HBT_LOG_WARNING() << fmt::format("No BPerfCountReader with id {}", elem_id);
+    return std::nullopt;
   }
 
   /// Create and register a new BPerfCountReader, it returns a shared ptr to
@@ -366,6 +380,7 @@ class Monitor {
     sync_();
     return true;
   }
+#endif // HBT_ENABLE_BPERF
 
   std::shared_ptr<IntelPTMonitor> getIptMonitor(const ElemId& mon_id) {
     std::lock_guard<std::mutex> lock{mutex_};
@@ -423,30 +438,38 @@ class Monitor {
     return os.str();
   }
 
+#ifdef HBT_ENABLE_TRACING
   size_t numTraceMonitors() const {
     std::lock_guard<std::mutex> lock{mutex_};
     return trace_monitors_.size();
   }
+#endif // HBT_ENABLE_TRACING
 
   size_t numCountReaders() const {
     std::lock_guard<std::mutex> lock{mutex_};
     return count_readers_.size();
   }
 
+#ifdef HBT_ENABLE_BPERF
   size_t numBPerfCountReaders() const {
     std::lock_guard<std::mutex> lock{mutex_};
     return bperf_count_readers_.size();
   }
+#endif // HBT_ENABLE_BPERF
 
  protected:
   State state_ = State::Closed;
 
+#ifdef HBT_ENABLE_TRACING
   std::unordered_map<ElemId, std::shared_ptr<TraceMonitor>> trace_monitors_;
+#endif // HBT_ENABLE_TRACING
 
   std::unordered_map<ElemId, std::shared_ptr<TCountReader>> count_readers_;
 
+#ifdef HBT_ENABLE_BPERF
   std::unordered_map<ElemId, std::shared_ptr<TBPerfCountReader>>
       bperf_count_readers_;
+#endif // HBT_ENABLE_BPERF
 
   /// Mapping from MuxGroupId to MuxGroup. Each MuxGroup contains
   /// ElemIds of the TraceMonitors, CountReaders, BPerfCountReaders
@@ -513,6 +536,7 @@ class Monitor {
   }
 };
 
+#ifdef HBT_ENABLE_TRACING
 template <class MuxGroupId, class ElemId>
 std::ostream& Monitor<MuxGroupId, ElemId>::printTraceMonitorsStatus(
     std::ostream& os,
@@ -527,6 +551,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printTraceMonitorsStatus(
   }
   return os;
 }
+#endif // HBT_ENABLE_TRACING
 
 template <class MuxGroupId, class ElemId>
 std::ostream& Monitor<MuxGroupId, ElemId>::printCountReadersStatus(
@@ -551,6 +576,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printCountReadersStatus(
   return os;
 }
 
+#ifdef HBT_ENABLE_BPERF
 template <class MuxGroupId, class ElemId>
 std::ostream& Monitor<MuxGroupId, ElemId>::printBPerfCountReadersStatus(
     std::ostream& os) const {
@@ -571,6 +597,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printBPerfCountReadersStatus(
   os << "<End of BPerfCountReaders>\n";
   return os;
 }
+#endif // HBT_ENABLE_BPERF
 
 template <class MuxGroupId, class ElemId>
 std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
@@ -609,11 +636,13 @@ template <class TMonitor, class TGen, class... Args>
 void tryOpen_(TGen& gen, Args&&... args) {
   // BPerfCountReader does not define open method.
   // It's only enable and disable.
+#ifdef HBT_ENABLE_BPERF
   if constexpr (!std::is_same_v<TGen, typename TMonitor::TBPerfCountReader>) {
     if (!gen.isOpen()) {
       gen.open(std::forward<Args>(args)...);
     }
   }
+#endif // HBT_ENABLE_BPERF
 }
 
 template <class TGen>
@@ -627,11 +656,13 @@ template <class TMonitor, class TGen>
 void tryClose_(TGen& gen) {
   // BPerfCountReader does not define open method.
   // It's only enable and disable.
+#ifdef HBT_ENABLE_BPERF
   if constexpr (!std::is_same_v<TGen, typename TMonitor::TBPerfCountReader>) {
     if (gen.isOpen()) {
       gen.close();
     }
   }
+#endif // HBT_ENABLE_BPERF
 }
 
 template <class TGen>
@@ -684,9 +715,13 @@ void Monitor<MuxGroupId, ElemId>::sync_() {
     // Empty queues have no elements to sync.
     return;
   }
+#ifdef HBT_ENABLE_TRACING
   syncElems_(trace_monitors_);
+#endif // HBT_ENABLE_TRACING
   syncElems_(count_readers_);
+#ifdef HBT_ENABLE_BPERF
   syncElems_(bperf_count_readers_);
+#endif // HBT_ENABLE_BPERF
   syncElems_(ipt_monitors_);
 }
 

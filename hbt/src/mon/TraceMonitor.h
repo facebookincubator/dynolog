@@ -87,7 +87,7 @@ class TraceMonitor : public TraceCollector {
               kWriteByteSize,
               nread);
           auto p = reinterpret_cast<const uint64_t*>(d);
-          HBT_DCHECK_NE(p, nullptr)
+          HBT_DCHECK_NOT_NULLPTR(p)
               << fmt::format("Timestamp cannot be null pointer");
           TimeStamp tstamp = *p, duration = *(p + 1);
           // All fields after first two are counts.

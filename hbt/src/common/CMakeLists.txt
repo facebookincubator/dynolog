@@ -4,7 +4,6 @@ add_library(Defs Defs.h)
 set_target_properties(Defs PROPERTIES LINKER_LANGUAGE CXX)
 
 add_library(System System.h System.cpp)
-target_include_directories(System PUBLIC ${PROJECT_SOURCE_DIR}/third_party/pfs/include)
 target_include_directories(System PUBLIC ${PROJECT_SOURCE_DIR})
 target_link_libraries(System PUBLIC fmt::fmt)
 target_link_libraries(System PUBLIC pfs)
