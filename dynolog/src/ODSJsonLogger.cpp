@@ -43,22 +43,23 @@ void ODSJsonLogger::logFloat(const std::string& key, float val) {
 }
 
 void ODSJsonLogger::finalize() {
-  if (metrics_json_.find("device") == metrics_json_.end()) {
-    LOG(WARNING) << "Cannot identify device id, ignoring sample";
-    return;
-  }
   std::string entity = FLAGS_ods_entity_prefix + hostname_;
-  entity += ".gpu." + std::to_string(metrics_json_["device"].get<int>());
+
+  if (metrics_json_.find("device") != metrics_json_.end()) {
+    entity += ".gpu." + std::to_string(metrics_json_["device"].get<int>());
+  }
+
   nlohmann::json out_array;
   for (auto it = metrics_json_.begin(); it != metrics_json_.end(); ++it) {
-    if (it.key() != "device") {
-      nlohmann::json datapoint = {
-          {"entity", entity},
-          {"key", "dynolog." + it.key()},
-          {"value", it.value()},
-      };
-      out_array.push_back(datapoint);
+    if (it.key() == "device") {
+      continue;
     }
+    nlohmann::json datapoint = {
+        {"entity", entity},
+        {"key", "dynolog." + it.key()},
+        {"value", it.value()},
+    };
+    out_array.push_back(datapoint);
   }
 
   std::string s = out_array.dump();
