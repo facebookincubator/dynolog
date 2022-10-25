@@ -40,10 +40,14 @@ DEFINE_bool(
     false,
     "Enabled IPC monitor for on system tracing requests.");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
+DEFINE_bool(
+    enable_gpu_monitor,
+    false,
+    "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
 DEFINE_string(
     dcgm_fields,
     gpumon::kDcgmDefaultFieldIds,
-    "The field ids for DCGM to monitor, comma separated");
+    "The field ids to monitor on DCGM (GPUs), comma separated");
 
 std::unique_ptr<Logger> getLogger() {
   if (FLAGS_use_fbrelay) {
@@ -84,17 +88,17 @@ auto setup_server(std::shared_ptr<ServiceHandler> handler) {
 }
 
 void gpu_monitor_loop() {
-  LOG(INFO) << "Construct the dcgm monitoring";
+  LOG(INFO) << "Setting up DCGM (GPU)  monitoring.";
   std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
       FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
 
   auto logger = getLogger();
+  LOG(INFO) << "Running DCGM loop : interval = "
+            << FLAGS_dcgm_reporting_interval_s << " s.";
+  LOG(INFO) << "DCGM fields: " << FLAGS_dcgm_fields;
 
   while (1) {
     auto wakeup_timepoint = next_wakeup(FLAGS_dcgm_reporting_interval_s);
-    LOG(INFO) << "FLAGS dcgm fields: " << FLAGS_dcgm_fields;
-    LOG(INFO) << "Running DCGM loop : interval = "
-              << FLAGS_dcgm_reporting_interval_s << " s.";
 
     dcgm->update();
     dcgm->log(*logger);
@@ -119,7 +123,7 @@ int main(int argc, char** argv) {
   server->run();
 
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
-  std::unique_ptr<std::thread> ipcmon_thread;
+  std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread;
 
   if (FLAGS_enable_ipc_monitor) {
     LOG(INFO) << "Starting IPC Monitor";
@@ -127,13 +131,18 @@ int main(int argc, char** argv) {
     ipcmon_thread =
         std::make_unique<std::thread>([&ipcmon]() { ipcmon->loop(); });
   }
-  // std::bind(&IPCMonitor::loop, ipcmon));
+
+  if (FLAGS_enable_gpu_monitor) {
+    gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop);
+  }
 
   std::thread km_thread{kernel_monitor_loop};
-  std::thread gpu_thread{gpu_monitor_loop};
 
   km_thread.join();
-  gpu_thread.join();
+  if (gpumon_thread) {
+    gpumon_thread->join();
+  }
+
   server->stop();
 
   return 0;
