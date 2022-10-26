@@ -28,7 +28,7 @@ Before building, also pull in latest changes from Kineto dependency using:
 ```
 The minimum version needed is one containing [PR#653](https://github.com/pytorch/kineto/pull/653/), commit a36e47e6d080abd62ca26dd2a007c8f4cd0bd600
 
-You all set to build and install PyTorch
+You are all set to build and install PyTorch.
 ```bash
 python setup.py install
 ```
@@ -36,8 +36,8 @@ python setup.py install
 ## On-demand tracing locally
 
 ### Spin up dynolog
-On a local machine you can run dynolog and use the cmd line tool to trace your application.
-To run dynolog run the following in a new terminal window or [use a package manager](../scripts/README.md).
+On a local machine you can run dynolog and use the command line tool to trace your application.
+To run dynolog execute the following in a new terminal window or [use a package manager](../scripts/README.md).
 ```bash
 ./build/dynolog/src/dynolog --enable_ipc_monitor
 ```
@@ -54,7 +54,7 @@ Now you can run the pytorch program. We included a simple example pytorch script
 ```bash
 python3 scripts/pytorch/linear_model_example.py
 ```
-Alternatively, you can set the env variables on the cmd line like:
+Alternatively, you can set the environment variables on the command line.
 ```bash
 KINETO_CONFIG=~/libkineto.conf KINETO_USE_DAEMON=1 python3 scripts/pytorch/linear_model_example.py
 ```
@@ -96,7 +96,7 @@ In case dynolog is not deployed on your cloud/cluster you can launch the dynolog
 with your job. The script `run_with_dyno_wrapper.sh` can be used for this purpose.
 
 This script will spin up a dynolog process first and then run your job's command. It will also
-setup the required env variables. An example is shown below:
+setup the required environment variables. An example is shown below:
 ```bash
 srun ./scripts/slurm/run_with_dyno_wrapper.sh <desired launch cmd>
 # example
