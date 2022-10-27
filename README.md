@@ -1,5 +1,6 @@
-![Dynolog logo](./docs/dyno_logo.svg)
-
+<p align="center">
+  <img src="https://github.com/facebookincubator/dynolog/blob/main/docs/dyno_logo.svg" />
+</p>
 # Dynolog: a performance monitoring daemon for heterogeneous CPU-GPU systems
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/facebookincubator/dynolog/blob/main/LICENSE)
@@ -12,7 +13,7 @@
 Dynolog is a lightweight monitoring daemon for heterogeneous CPU-GPU systems. It supports both **always-on performance monitoring**, as well as **deep-dive profiling** modes. The latter can be activated by making a remote procedure call to the daemon.
 
 Below are some of the key features, which we will explore in more detail later in this Readme.
-* Dynolog integrates with the [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) and provides **on-demand remote tracing features.** One can use a single command line tool (dyno CLI) to **simultaneously trace hundreds of GPUs** and examine the collected traces (available from PyTorch v1.13 onwards).
+* Dynolog integrates with the [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) and provides **[on-demand remote tracing features](https://pytorch.org/blog/performance-debugging-of-production-pytorch-models-at-meta/).** One can use a single command line tool (dyno CLI) to **simultaneously trace hundreds of GPUs** and examine the collected traces (available from PyTorch v1.13.0 onwards).
 * It incorporates **[GPU performance monitoring](#gpu-monitoring)** for NVIDIA GPUs using [DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html#).
 * Dynolog manages counters for **micro-architecture specific performance events** related to CPU Cache, TLBs etc on **Intel** and **AMD** CPUs. Additionally, it instruments telemetry from the Linux kernel including **CPU, network and IO** resource usage.
 * We are actively implementing new features, including support for **[Intel Processor Trace](https://engineering.fb.com/2021/04/27/developer-tools/reverse-debugging/)** as well as **memory latency and bandwidth monitoring**.
@@ -36,7 +37,7 @@ Dynolog’s always-on or continuous monitoring supports the following class of m
 2. CPU Performance Monitoring Unit (PMU) metrics using linux perf_event.
 3. NVIDIA GPU metrics from DCGM if enabled.
 
-Detailed list of covered metrics are provided in [docs/Metrics.md](docs/metrics.md).
+Detailed list of covered metrics are provided in [docs/Metrics.md](docs/Metrics.md).
 
 ## Building dynolog<!-- {#building-dynolog} -->
 
@@ -177,7 +178,7 @@ To enable pytorch profiling we need to configure dynolog to enable IPC aka inter
 echo "--enable_ipc_monitor" | sudo tee -a /etc/dynolog.gflags
 sudo systemctl restart dynolog
 ```
-You need to use a compatible version of **pytorch v1.13.1**. Run the pytorch application and call dyno cli tool
+You need to use a compatible version of **pytorch v1.13.0**. Run the pytorch application and call dyno cli tool
 
 ```bash
 dyno gputrace --pids <pid of process> --log_file <output file path>
@@ -216,7 +217,7 @@ By default dynolog will save monitoring metrics to the std output -
 I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" ...
 ```
 
-Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md.). Dynolog team is happy to support new loggers.
+Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md). Dynolog team is happy to support new loggers.
 
 ## Releases<!-- {#release} -->
 The current 0.0.2 release supports the following-
@@ -237,7 +238,7 @@ At some future point we would also like to add -
 
 ## Contact Us
 
-Dynolog is actively maintained by Meta engineers: [Brian Coutinho](https://github.com/briancoutinho/), [Zachary Jones](https://github.com/bigzachattack/), [Hao Wang](https://github.com/haowangludx/), [William Sumendap](https://github.com/williamsumendap/), [Jakob Johnson](https://github.com/jj10306/),[Alston Tang](https://github.com/Alston-Tang/), [Walter Erquinigo](https://github.com/a20012251/),[David Carrillo Cisneros](https://github.com/ccdavid/). We would also like to thank various contributors to the dynolog project internally- Sam Crossleyi, Jayesh Lahori,Matt Skach, Darshan Sanghani, Lucas Molander, Parth Malani, Jason Taylor - this is by no means an exhaustive list. Special thanks to Herman Chin, Victor Henriquez, Anupam Bhatnagar, Caleb Ho, Susan Zhang, Geeta Chauhan, Aaron Shi, Jay Chae, Gisle Dankel for supporting this initiative
+Dynolog is actively maintained by Meta engineers: [Brian Coutinho](https://github.com/briancoutinho/), [Zachary Jones](https://github.com/bigzachattack/), [Hao Wang](https://github.com/haowangludx/), [William Sumendap](https://github.com/williamsumendap/), [Jakob Johnson](https://github.com/jj10306/),[Alston Tang](https://github.com/Alston-Tang/), [Walter Erquinigo](https://github.com/a20012251/),[David Carrillo Cisneros](https://github.com/ccdavid/). We would also like to thank various contributors to the dynolog project internally- Sam Crossley, Jayesh Lahori, Matt Skach, Darshan Sanghani, Lucas Molander, Parth Malani, Jason Taylor - this is by no means an exhaustive list. Special thanks to Herman Chin, Victor Henriquez, Anupam Bhatnagar, Caleb Ho, Aaron Shi, Jay Chae, Song Liu, Susan Zhang, Geeta Chauhan and Gisle Dankel for supporting this initiative
 
 ## Join the dynolog community
 See the [CONTRIBUTING](CONTRIBUTING.md) file for how to help out.
