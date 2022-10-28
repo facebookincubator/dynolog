@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 Name:           dynolog
 Version:        __VERSION__
 Release:        1%{?dist}
@@ -50,4 +52,4 @@ cp dynolog.service $RPM_BUILD_ROOT/%{_unitdir}
 
 %changelog
 * Wed Jun 15 2022 briancoutinho <bcoutinho@meta.com> added v0.0.1 with system perf monitoring capabilities.
-- 
+-

@@ -1,4 +1,5 @@
-# (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 dynolog_add_test(IPCMonitorTest IPCMonitorTest.cpp)
 
 target_link_libraries(IPCMonitorTest PRIVATE glog::glog)

@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 include_directories(${PROJECT_SOURCE_DIR})
 
 add_library(IptEventBuilder IptEventBuilder.h IptEventBuilder.cpp)

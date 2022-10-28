@@ -1,4 +1,4 @@
-# (c) Meta Platforms, Inc. and affiliates.
+# Copyright (c) Meta Platforms, Inc. and affiliates.
 cmake_minimum_required(VERSION 3.20)
 
 include_directories(${PROJECT_SOURCE_DIR}/third_party/pfs/include)

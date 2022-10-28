@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_compile_options("-Wconversion")
 
 add_library(Defs Defs.h)

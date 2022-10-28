@@ -1,4 +1,4 @@
-# (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+# Copyright (c) Meta Platforms, Inc. and affiliates.
 
 include(${PROJECT_SOURCE_DIR}/testing/BuildTests.cmake)
 

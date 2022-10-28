@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 include(${PROJECT_SOURCE_DIR}/tests/BuildTests.cmake)
 
 macro(ipcfabric_add_test TESTNAME)
