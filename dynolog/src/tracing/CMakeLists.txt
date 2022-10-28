@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_library (dynolog_ipcmonitor_lib IPCMonitor.cpp IPCMonitor.h
   ${CMAKE_CURRENT_SOURCE_DIR}/../LibkinetoConfigManager.h
 )

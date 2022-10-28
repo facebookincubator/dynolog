@@ -1,4 +1,4 @@
-# (c) Meta Platforms, Inc. and affiliates.
+# Copyright (c) Meta Platforms, Inc. and affiliates.
 cmake_minimum_required(VERSION 3.20)
 
 project(Dynolog VERSION 1.0)

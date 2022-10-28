@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_compile_options("-Wconversion")
 
 include_directories(${PROJECT_SOURCE_DIR}/third_party/googletest/googletest/include)

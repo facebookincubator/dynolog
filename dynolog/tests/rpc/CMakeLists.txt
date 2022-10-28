@@ -1,4 +1,5 @@
-# (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_executable(json_client SimpleJsonClientTestCLI.cpp SimpleJsonClientTest.h)
 
 target_link_libraries(json_client PUBLIC gflags::gflags)

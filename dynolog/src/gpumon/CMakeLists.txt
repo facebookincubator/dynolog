@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_library(dynolog_dcgm_lib
     DcgmApiStub.cpp DcgmApiStub.h
     DcgmGroupInfo.cpp DcgmGroupInfo.h

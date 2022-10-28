@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 # Follow recipe here: https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
 
 # Add this to top level CMake

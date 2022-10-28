@@ -1,3 +1,5 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
 add_library(dynolog_rpc_lib STATIC
     SimpleJsonServer.cpp SimpleJsonServer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/../ServiceHandler.h
