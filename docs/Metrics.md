@@ -15,8 +15,15 @@ A metric is generally associated with a scope that describes the space/dimension
 ## CPU/System Metrics
 | Metric | Description | What does it tell? | Type | Unit | Collection Interval |
 | ----------- | ----------- |----------- |----------- |----------- |----------- |
-| m | desc | desc | Ratio | - | 60s |
-| m | desc | desc | Ratio | - | 60s |
+| uptime | System uptime | How long the system has been running. | Instant | s | 60s |
+| cpu_util | Fraction of total CPU time spend on user or system mode.| Overall amount of time the CPU was busy. | Ratio | - | 60s |
+| cpu_u, cpu_s | Fraction of total CPU time spent in user and system mode respectively| Activity of the system CPU in user/system mode. | Ratio | - | 60s |
+| cpu_i| Fraction of total CPU time that the CPU was in idle mode.| Overall inactivity of the system CPU. | Ratio | - | 60s |
+| cpu_u/s/n/w/x/y_ms| Total CPU time in milliseconds spent in various modes: user, system, nice, iowait etc. For more details please see man page for [/proc/stat](https://man7.org/linux/man-pages/man5/proc.5.html) | Activity of the system CPU in various modes. | Delta | ms | 60s |
+| rx/tx_bytes_`<devname>` | Total bytes transmitted/received over the specific network device.| Network transfer statistics. | Delta | Bytes | 60s |
+| rx/tx_packets_`<devname>` | Total packets transmitted/received over the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
+| rx/tx_errors_`<devname>` | Total transmit/receive errors on the specific network device.| Network transfer statistics. | Delta | Errors | 60s |
+| rx/tx_drops_`<devname>` | Total transmit/receive packet drops on the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
 
 ## GPU Metrics
 | Metric | Description | What does it tell? | Type | Unit | Collection Interval |
