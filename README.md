@@ -1,6 +1,7 @@
 <p align="center">
   <img src="https://github.com/facebookincubator/dynolog/blob/main/docs/dyno_logo.svg" />
 </p>
+
 # Dynolog: a performance monitoring daemon for heterogeneous CPU-GPU systems
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/facebookincubator/dynolog/blob/main/LICENSE)
