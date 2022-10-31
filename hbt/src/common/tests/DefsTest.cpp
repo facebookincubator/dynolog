@@ -6,6 +6,7 @@
 #include "hbt/src/common/Defs.h"
 
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 TEST(Defs, Exception) {
   EXPECT_THROW(HBT_THROW_EINVAL(), std::invalid_argument);
@@ -14,4 +15,6 @@ TEST(Defs, Exception) {
   EXPECT_THROW(HBT_THROW_SYSTEM(ENODATA) << "adioshola", std::system_error);
   EXPECT_THROW(HBT_THROW_SYSTEM(EBUSY), std::system_error);
   EXPECT_THROW(HBT_THROW_SYSTEM(EBUSY) << "my message", std::system_error);
+  EXPECT_THROW(HBT_DCHECK_NOT_NULLPTR(nullptr), std::runtime_error);
+  EXPECT_NO_THROW(HBT_DCHECK_NOT_NULLPTR((void*)1));
 }

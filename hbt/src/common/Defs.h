@@ -215,8 +215,8 @@ class LogEntry final {
   if (unlikely(cond))          \
   HBT_LOG_ERROR()
 
-#define HBT_DCHECK_NOT_NULLPTR(t)             \
-  if (unlikely(typeid(t) != typeid(nullptr))) \
+#define HBT_DCHECK_NOT_NULLPTR(t) \
+  if (unlikely((t) == nullptr))   \
   HBT_THROW_ASSERT() << "\n\tExpected argument to be not null."
 
 #define __HBT_EXPAND_OPD(opd) HBT_STRINGIFY(opd) << " (" << (opd) << ")"
