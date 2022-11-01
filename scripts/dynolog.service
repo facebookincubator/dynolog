@@ -1,0 +1,24 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+[Unit]
+Description=Dynolog performance monitoring daemon
+Documentation=Dynolog provides system observability for heterogenous platforms. Please find the output logs in /var/logs/dynolog.log
+
+[Service]
+ExecStartPre=/usr/bin/touch /etc/dynolog.gflags
+ExecStartPre=/usr/bin/touch /var/log/dynolog.log
+ExecStart=/usr/local/bin/dynolog --flagfile=/etc/dynolog.gflags
+
+StandardOutput=file:/var/log/dynolog.log
+StandardError=file:/var/log/dynolog.log
+
+# Syslog for versions of systemd pre 236
+# SyslogIdentifier=dynolog
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

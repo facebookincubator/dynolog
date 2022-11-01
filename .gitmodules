@@ -1,0 +1,27 @@
+[submodule "third_party/glog"]
+	path = third_party/glog
+	url = https://github.com/google/glog.git
+[submodule "third_party/gflags"]
+	path = third_party/gflags
+	url = https://github.com/gflags/gflags.git
+[submodule "third_party/fmt"]
+	path = third_party/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "third_party/json"]
+	path = third_party/json
+	url = https://github.com/nlohmann/json.git
+[submodule "third_party/pfs"]
+	path = third_party/pfs
+	url = https://github.com/dtrugman/pfs.git
+[submodule "third_party/googletest"]
+	path = third_party/googletest
+	url = https://github.com/google/googletest.git
+[submodule "third_party/range-v3"]
+	path = third_party/range-v3
+	url = https://github.com/ericniebler/range-v3.git
+[submodule "third_party/cpr"]
+	path = third_party/cpr
+	url = https://github.com/libcpr/cpr.git
+[submodule "third_party/DCGM"]
+	path = third_party/DCGM
+	url = https://github.com/NVIDIA/DCGM.git

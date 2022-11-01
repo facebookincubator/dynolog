@@ -1,0 +1,14 @@
+[package]
+name = "dyno"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.57"
+clap = { version = "3.1.0", features = ["derive"]}
+serde_json = "1.0"
+
+# Make it work with conda
+# See https://github.com/rust-lang/cargo/issues/6652
+[net]
+git-fetch-with-cli = true
