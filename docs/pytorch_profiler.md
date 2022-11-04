@@ -18,7 +18,7 @@ The following instructions walk through:
 > Note that these instructions will likely change. We need recent commits in PyTorch to enable this feature. As a new PyTorch release takes place users will not need to build PyTorch from source.
 
 Currently, we need to build PyTorch from source to obtain the latest changes that make it compatible with dynolog.
-Please follow instructions in PyTorch Readme on obtaining the setup. Ensure that your checkout has the [PR#87226](https://github.com/pytorch/pytorch/pull/87226/) (use `git log` to check).
+Please follow the instructions in [PyTorch README](https://github.com/pytorch/pytorch/blob/master/README.md) on obtaining the setup. Ensure that your checkout has the [PR#88020](https://github.com/pytorch/pytorch/pull/88020/) (use `git log` to check).
 
 Before building, also pull in latest changes from Kineto dependency using:
 ```bash
@@ -28,6 +28,13 @@ Before building, also pull in latest changes from Kineto dependency using:
 ```
 The minimum version needed is one containing [PR#653](https://github.com/pytorch/kineto/pull/653/), commit a36e47e6d080abd62ca26dd2a007c8f4cd0bd600
 
+Lastly, disable the `USE_LITE_INTERPRETER_PROFILER` setting. One way to do this is change the option in `pytorch/CMakeLists.txt`.
+```
+if(USE_LITE_INTERPRETER_PROFILER)
+- string(APPEND CMAKE_CXX_FLAGS " -DEDGE_PROFILER_USE_KINETO")
++ # string(APPEND CMAKE_CXX_FLAGS " -DEDGE_PROFILER_USE_KINETO")
+endif()
+```
 You are all set to build and install PyTorch.
 ```bash
 python setup.py install
