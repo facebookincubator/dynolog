@@ -11,7 +11,7 @@ set -eux -o pipefail
 
 # Check dependencies
 cmake --version || echo "Please install cmake for your platform using dnf/apt-get etc."
-ninja-build --version || echo "Please install ninja for your platform using dnf/apt-get etc."
+ninja --version || echo "Please install ninja for your platform using dnf/apt-get etc."
 rustc --version || echo "Please install Rust and Cargo - see https://www.rust-lang.org/tools/install"
 cargo --version || echo "Please install Rust and Cargo - see https://www.rust-lang.org/tools/install"
 
@@ -20,7 +20,7 @@ echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
-cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja "$@" ..
+cmake -DCMAKE_BUILD_TYPE=Release -GNinja "$@" ..
 cmake --build .
 
 echo "Binary files ="
