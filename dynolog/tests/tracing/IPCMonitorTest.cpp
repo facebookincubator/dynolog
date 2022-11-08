@@ -46,7 +46,7 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
     std::unique_ptr<Message> msg =
         Message::constructMessage<decltype(ctx)>(ctx, "ctxt");
     LOG(INFO) << "Client sending ctx message";
-    client->sync_send(*msg, "dynolog");
+    client->sync_send(*msg, "dynolog_unittest");
 
     LOG(INFO) << "Client waiting for response";
     auto resp_msg = client->poll_recv(100 /*retries*/, 1000000 /*sleep us*/);
@@ -68,7 +68,7 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
     msg =
         Message::constructMessage<LibkinetoRequest, int32_t>(*req, "req", size);
     LOG(INFO) << "Client sending req message";
-    client->sync_send(*msg, "dynolog");
+    client->sync_send(*msg, "dynolog_unittest");
 
     LOG(INFO) << "Client waiting for response";
     resp_msg = client->poll_recv(100 /*retries*/, 1000000 /*sleep us*/);
@@ -79,7 +79,7 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
 
   } else {
     // Receiver side - IPC Monitor
-    auto monitor = std::make_unique<IPCMonitor>();
+    auto monitor = std::make_unique<IPCMonitor>("dynolog_unittest");
     EXPECT_EQ(LibkinetoConfigManager::getInstance()->processCount(0), 0);
 
     /* sleep override */
