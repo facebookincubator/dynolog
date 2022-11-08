@@ -14,7 +14,7 @@ namespace tracing {
 class IPCMonitor {
  public:
   using FabricManager = dynolog::ipcfabric::FabricManager;
-  IPCMonitor();
+  IPCMonitor(const std::string& ipc_fabric_name = "dynolog");
 
   void loop();
 

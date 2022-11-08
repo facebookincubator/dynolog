@@ -23,8 +23,8 @@ constexpr int kSleepUs = 10000;
 const std::string kLibkinetoRequest = "req";
 const std::string kLibkinetoContext = "ctxt";
 
-IPCMonitor::IPCMonitor() {
-  ipc_manager_ = FabricManager::factory("dynolog");
+IPCMonitor::IPCMonitor(const std::string& ipc_fabric_name) {
+  ipc_manager_ = FabricManager::factory(ipc_fabric_name);
   // below ensures singleton exists
   LOG(INFO) << "Kineto config manager : active processes = "
             << LibkinetoConfigManager::getInstance()->processCount(0);
