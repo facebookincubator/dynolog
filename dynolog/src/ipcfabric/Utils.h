@@ -34,11 +34,7 @@ struct LibkinetoRequest {
 };
 
 constexpr char dynolog_endpoint[] = "dynolog";
-constexpr char type_model_state[] = "model_status";
-constexpr char type_model_id[] = "model_entity_id";
-constexpr char type_tw_task[] = "tw_task";
 constexpr char kLibkinetoRequest[] = "req";
 constexpr char kLibkinetoContext[] = "ctxt";
-
 } // namespace ipcfabric
 } // namespace dynolog
