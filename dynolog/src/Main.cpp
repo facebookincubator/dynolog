@@ -14,20 +14,27 @@
 #include "dynolog/src/KernelCollector.h"
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/ODSJsonLogger.h"
+#include "dynolog/src/PerfMonitor.h"
 #include "dynolog/src/ServiceHandler.h"
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 #include "dynolog/src/tracing/IPCMonitor.h"
+#include "hbt/src/perf_event/BuiltinMetrics.h"
 
 using namespace dynolog;
 using json = nlohmann::json;
+namespace hbt = facebook::hbt;
 
 constexpr const char* VERSION = "0.0.2";
 
 DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
     kernel_monitor_reporting_interval_s,
+    60,
+    "Duration in seconds to read and report metrics for kernel monitor");
+DEFINE_int32(
+    perf_monitor_reporting_interval_s,
     60,
     "Duration in seconds to read and report metrics for kernel monitor");
 DEFINE_int32(
@@ -66,15 +73,40 @@ auto next_wakeup(int sec) {
 void kernel_monitor_loop() {
   KernelCollector kc;
 
+  LOG(INFO) << "Running kernel monitor loop : interval = "
+            << FLAGS_kernel_monitor_reporting_interval_s << " s.";
+
   while (1) {
     auto logger = getLogger();
     auto wakeup_timepoint =
         next_wakeup(FLAGS_kernel_monitor_reporting_interval_s);
 
-    LOG(INFO) << "Running kernel monitor loop : interval = "
-              << FLAGS_kernel_monitor_reporting_interval_s << " s.";
     kc.step();
     kc.log(*logger);
+
+    logger->finalize();
+    /* sleep override */
+    std::this_thread::sleep_until(wakeup_timepoint);
+  }
+}
+
+void perf_monitor_loop() {
+  PerfMonitor pm(
+      hbt::CpuSet::makeAllOnline(),
+      std::vector<ElemId>{"instructions", "cycles"},
+      getDefaultPmuDeviceManager(),
+      getDefaultMetrics());
+
+  LOG(INFO) << "Running perf monitor loop : interval = "
+            << FLAGS_perf_monitor_reporting_interval_s << " s.";
+
+  while (1) {
+    auto logger = getLogger();
+    auto wakeup_timepoint =
+        next_wakeup(FLAGS_perf_monitor_reporting_interval_s);
+
+    pm.step();
+    pm.log(*logger);
 
     logger->finalize();
     /* sleep override */
@@ -137,8 +169,10 @@ int main(int argc, char** argv) {
   }
 
   std::thread km_thread{kernel_monitor_loop};
+  std::thread pm_thread{perf_monitor_loop};
 
   km_thread.join();
+  pm_thread.join();
   if (gpumon_thread) {
     gpumon_thread->join();
   }
