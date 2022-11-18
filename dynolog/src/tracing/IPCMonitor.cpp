@@ -65,7 +65,8 @@ void IPCMonitor::getLibkinetoOnDemandRequest(
   ipcfabric::LibkinetoRequest* req =
       (ipcfabric::LibkinetoRequest*)msg->buf.get();
   if (req->n == 0) {
-    LOG(ERROR) << "Missing pids parameter";
+    LOG(ERROR) << "Missing pids parameter for type " << req->type;
+    return;
   }
   std::vector<int32_t> pids(req->pids, req->pids + req->n);
   try {
