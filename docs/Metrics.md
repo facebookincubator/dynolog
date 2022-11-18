@@ -24,6 +24,8 @@ A metric is generally associated with a scope that describes the space/dimension
 | rx/tx_packets_`<devname>` | Total packets transmitted/received over the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
 | rx/tx_errors_`<devname>` | Total transmit/receive errors on the specific network device.| Network transfer statistics. | Delta | Errors | 60s |
 | rx/tx_drops_`<devname>` | Total transmit/receive packet drops on the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
+| mips | Number of million instructions executed per second. | Overall rate of instructions per second the CPU executed. | Rate | Million / sec | 60s |
+| mega_cycles_per_second | Number of active CPU clock cycles per second. | Overall rate of the CPU clock cycle. | Rate | MHz | 60s |
 
 ## GPU Metrics
 | Metric | Description | What does it tell? | Type | Unit | Collection Interval |

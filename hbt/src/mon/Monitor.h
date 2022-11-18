@@ -642,6 +642,10 @@ void tryOpen_(TGen& gen, Args&&... args) {
       gen.open(std::forward<Args>(args)...);
     }
   }
+#else
+  if (!gen.isOpen()) {
+    gen.open(std::forward<Args>(args)...);
+  }
 #endif // HBT_ENABLE_BPERF
 }
 
