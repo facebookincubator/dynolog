@@ -51,6 +51,7 @@ DEFINE_bool(
     enable_gpu_monitor,
     false,
     "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
+DEFINE_bool(enable_perf_monitor, false, "Enabled hearbeat perf monitorng.");
 DEFINE_string(
     dcgm_fields,
     gpumon::kDcgmDefaultFieldIds,
@@ -155,7 +156,7 @@ int main(int argc, char** argv) {
   server->run();
 
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
-  std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread;
+  std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread, pm_thread;
 
   if (FLAGS_enable_ipc_monitor) {
     LOG(INFO) << "Starting IPC Monitor";
@@ -167,12 +168,15 @@ int main(int argc, char** argv) {
   if (FLAGS_enable_gpu_monitor) {
     gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop);
   }
-
   std::thread km_thread{kernel_monitor_loop};
-  std::thread pm_thread{perf_monitor_loop};
+  if (FLAGS_enable_perf_monitor) {
+    pm_thread = std::make_unique<std::thread>(perf_monitor_loop);
+  }
 
   km_thread.join();
-  pm_thread.join();
+  if (pm_thread) {
+    pm_thread->join();
+  }
   if (gpumon_thread) {
     gpumon_thread->join();
   }
