@@ -6,6 +6,7 @@
 #include <asm/unistd.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/un.h>
 #include <unistd.h>
 #include <stdexcept>
@@ -15,8 +16,10 @@
 #include <string>
 #include <vector>
 
+// @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror
+
 /*
- * Design choices:
+ * Design: We are using the following components:
  * 1) Use UNIX sockets and sendmsg/rcvmsg to pass ancillary control message and
  * payloads. see https://sarata.com/manpages/CMSG_ALIGN.3.html 2) Use abstract
  * sockets (https://man7.org/linux/man-pages/man7/unix.7.html) to avoid choosing
@@ -32,6 +35,9 @@
  * class that are trivially copyable (i.e. std::is_trivially_copyable), like
  * Plain Old Data (POD) classes.
  *    (https://en.cppreference.com/w/cpp/types/is_trivially_copyable)
+ *
+ *  You can list local domain sockets using-
+ *    netstat -a -p --unix on Linux
  */
 
 namespace dynolog {
@@ -48,7 +54,7 @@ struct Payload {
 
 template <size_t kMaxNumFds = 0>
 struct EndPointCtxt {
-  EndPointCtxt(size_t n) : iov{std::vector<struct iovec>(n)} {}
+  explicit EndPointCtxt(size_t n) : iov{std::vector<struct iovec>(n)} {}
   struct sockaddr_un msg_name;
   size_t msg_namelen;
   struct msghdr msghdr;
@@ -68,17 +74,28 @@ class EndPoint final {
   using TCtxt = EndPointCtxt<kMaxNumFds>;
 
  public:
-  EndPoint(const std::string& address) {
+  explicit EndPoint(const std::string& address) {
     socket_fd_ = socket(AF_UNIX, SOCK_DGRAM, 0);
     if (socket_fd_ == -1) {
       throw std::runtime_error(std::strerror(errno));
     }
     struct sockaddr_un addr;
     size_t addrlen = setAddress_(address, addr);
+    if (addr.sun_path[0] != '\0') {
+      // delete domain socket file just in case before binding
+      unlink(addr.sun_path);
+    }
 
     int ret = bind(socket_fd_, (const struct sockaddr*)&addr, addrlen);
-    if (ret == -1)
+    if (ret == -1) {
       throw std::runtime_error(std::strerror(errno));
+    }
+    if (addr.sun_path[0] != '\0') {
+      // set correct permissions for the socket. We avoid using umask because
+      // of multithreaded nature. A short window exists between bind and chmod
+      // where the permissions are wrong but it's ok for our use case.
+      chmod(addr.sun_path, 0666);
+    }
   }
 
   ~EndPoint() {
@@ -89,15 +106,18 @@ class EndPoint final {
       const std::string& dest_name,
       const std::vector<Payload>& payload,
       const std::vector<fd_t>& fds) {
-    if (fds.size() > kMaxNumFds)
+    if (fds.size() > kMaxNumFds) {
       throw std::invalid_argument("Requested to fill more than kMaxNumFds");
-    if (dest_name.size() == 0)
+    }
+    if (dest_name.size() == 0) {
       throw std::invalid_argument("Cannot send to empty socket name");
+    }
 
     auto ctxt = buildCtxt_(payload, fds.size());
     ctxt->msghdr.msg_namelen = setAddress_(dest_name, ctxt->msg_name);
-    if (fds.size())
+    if (fds.size()) {
       memcpy(ctxt->ctrl_fd_ptr, fds.data(), fds.size() * sizeof(int));
+    }
     return ctxt;
   }
 
@@ -110,10 +130,12 @@ class EndPoint final {
     if (ret > 0) { // XXX: Enforce correct number of bytes sent.
       return true;
     }
-    if (ret == -1 && (errno == EAGAIN || errno == EWOULDBLOCK))
+    if (ret == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
       return false;
-    if (ret == -1 && retryOnConnRefused && errno == ECONNREFUSED)
+    }
+    if (ret == -1 && retryOnConnRefused && errno == ECONNREFUSED) {
       return false;
+    }
     throw std::runtime_error(std::strerror(errno));
   }
 
@@ -128,27 +150,51 @@ class EndPoint final {
     if (ret > 0) { // XXX: Enforce correct number of bytes sent.
       return true;
     }
-    if (ret == 0)
+    if (ret == 0) {
       return false; // Receiver is down.
-    if (errno == EAGAIN || errno == EWOULDBLOCK)
+    }
+    if (errno == EAGAIN || errno == EWOULDBLOCK) {
       return false;
+    }
 
     throw std::runtime_error(std::strerror(errno));
   }
 
   [[nodiscard]] bool tryPeekMsg(TCtxt& ctxt) noexcept {
     ssize_t ret = recvmsg(socket_fd_, &ctxt.msghdr, MSG_DONTWAIT | MSG_PEEK);
-    if (ret > 0) // XXX: Enforce correct number of bytes sent.
+    if (ret > 0) { // XXX: Enforce correct number of bytes sent.
       return true;
-    if (ret == 0)
+    }
+    if (ret == 0) {
       return false; // Receiver is down.
-    if (errno == EAGAIN || errno == EWOULDBLOCK)
+    }
+    if (errno == EAGAIN || errno == EWOULDBLOCK) {
       return false;
+    }
     throw std::runtime_error(std::strerror(errno));
   }
 
   const char* getName(TCtxt const& ctxt) const noexcept {
-    return ctxt.msg_name.sun_path + 1;
+    const char* socket_dir = getenv("KINETO_IPC_SOCKET_DIR");
+    bool is_domain_socket = socket_dir && socket_dir[0];
+    if (is_domain_socket) {
+      int socket_dirname_len = strlen(socket_dir);
+      if (strncmp(socket_dir, ctxt.msg_name.sun_path, socket_dirname_len) !=
+              0 ||
+          ctxt.msg_name.sun_path[socket_dirname_len] != '/') {
+        throw std::invalid_argument(
+            "Unexpected socket name: " + std::string(ctxt.msg_name.sun_path) +
+            ". Expected to start with " + std::string(socket_dir));
+      }
+      return ctxt.msg_name.sun_path + socket_dirname_len + 1;
+    } else {
+      if (ctxt.msg_name.sun_path[0] != '\0') {
+        throw std::invalid_argument(
+            "Expected abstract socket, got " +
+            std::string(ctxt.msg_name.sun_path));
+      }
+      return ctxt.msg_name.sun_path + 1;
+    }
   }
 
   std::vector<fd_t> getFds(const TCtxt& ctxt) const {
@@ -163,17 +209,27 @@ class EndPoint final {
   // Initialize <dest> with address provided in <src>.
   size_t setAddress_(const std::string& src, struct sockaddr_un& dest) {
     if (src.size() >
-        kMaxNameLen) // First and last bytes are used for '/0' characters.
+        kMaxNameLen) { // First and last bytes are used for '/0' characters.
       throw std::invalid_argument(
           "Abstract UNIX Socket path cannot be larger than kMaxNameLen - 2");
+    }
     dest.sun_family = AF_UNIX;
-    dest.sun_path[0] = '\0';
-    if (src.size() == 0)
-      return sizeof(sa_family_t); // autobind socket.
-
-    src.copy(dest.sun_path + 1, src.size());
-    dest.sun_path[src.size() + 1] = '\0';
-    return sizeof(sa_family_t) + src.size() + 2;
+    const char* socket_dir = getenv("KINETO_IPC_SOCKET_DIR");
+    bool is_domain_socket = socket_dir && socket_dir[0];
+    if (is_domain_socket) {
+      std::string full_path = std::string(socket_dir) + "/" + src;
+      full_path.copy(dest.sun_path, full_path.size());
+      dest.sun_path[full_path.size()] = '\0';
+      return sizeof(sa_family_t) + full_path.size() + 1;
+    } else {
+      dest.sun_path[0] = '\0';
+      if (src.size() == 0) {
+        return sizeof(sa_family_t); // autobind socket.
+      }
+      src.copy(dest.sun_path + 1, src.size());
+      dest.sun_path[src.size() + 1] = '\0';
+      return sizeof(sa_family_t) + src.size() + 2;
+    }
   }
 
   auto buildCtxt_(const std::vector<Payload>& payload, unsigned num_fds) {
@@ -188,8 +244,9 @@ class EndPoint final {
     ctxt->msghdr.msg_iovlen = payload.size();
     ctxt->ctrl_fd_ptr = nullptr;
 
-    if (num_fds == 0)
+    if (num_fds == 0) {
       return ctxt;
+    }
 
     const size_t fds_size = sizeof(fd_t) * num_fds;
     ctxt->msghdr.msg_control = ctxt->ancillary_buf;
