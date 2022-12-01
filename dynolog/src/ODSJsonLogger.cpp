@@ -13,15 +13,7 @@
 #include <glog/logging.h>
 #include <unistd.h>
 
-DEFINE_string(
-    access_token,
-    "",
-    "The ODS access token to publish through Graph API");
 DEFINE_string(category_id, "", "The category id of the ODS endpoint");
-DEFINE_string(
-    certificate_path,
-    "/etc/ssl/certs/ca-certificates.crt",
-    "The path for SSL certificate");
 DEFINE_string(ods_entity_prefix, "", "The prefix for ODS entity name");
 
 namespace dynolog {

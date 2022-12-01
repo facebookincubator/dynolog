@@ -9,9 +9,11 @@
 
 namespace dynolog {
 
-class ODSJsonLogger : public JsonLogger {
+DECLARE_string(fair_scribe_category);
+
+class ScubaLogger final : public Logger {
  public:
-  ODSJsonLogger();
+  explicit ScubaLogger(const std::string& scribe_category);
   void setTimestamp(Timestamp ts) override {
     ts_ = ts;
   }
@@ -20,14 +22,21 @@ class ODSJsonLogger : public JsonLogger {
 
   void logFloat(const std::string& key, float val) override;
 
-  void logStr(const std::string& /* key */, const std::string& /* val */)
-      override {}
+  void logUint(const std::string& key, uint64_t val) override;
+
+  void logStr(const std::string& key, const std::string& val) override;
 
   void finalize() override;
 
  private:
+  void clearMetrics();
+
+  Timestamp ts_;
+  std::string scribe_category_;
   std::string hostname_;
-  nlohmann::json metrics_json_;
+  nlohmann::json metrics_int_;
+  nlohmann::json metrics_double_;
+  nlohmann::json metrics_str_;
 };
 
 } // namespace dynolog

@@ -12,6 +12,15 @@ using json = nlohmann::json;
 
 namespace dynolog {
 
+DEFINE_string(
+    access_token,
+    "",
+    "The ODS access token to publish through Graph API");
+DEFINE_string(
+    certificate_path,
+    "/etc/ssl/certs/ca-certificates.crt",
+    "The path for SSL certificate");
+
 std::string JsonLogger::timestampStr() const {
   std::time_t ts_time_t = std::chrono::system_clock::to_time_t(ts_);
   std::tm ts_tm = *std::localtime(&ts_time_t);
@@ -35,6 +44,10 @@ void JsonLogger::logFloat(const std::string& key, float val) {
 }
 
 void JsonLogger::logUint(const std::string& key, uint64_t val) {
+  json_[key] = val;
+}
+
+void JsonLogger::logStr(const std::string& key, const std::string& val) {
   json_[key] = val;
 }
 

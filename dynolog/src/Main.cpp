@@ -10,11 +10,13 @@
 #include <chrono>
 #include <cstdlib>
 #include <thread>
+#include "dynolog/src/CompositeLogger.h"
 #include "dynolog/src/FBRelayLogger.h"
 #include "dynolog/src/KernelCollector.h"
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/ODSJsonLogger.h"
 #include "dynolog/src/PerfMonitor.h"
+#include "dynolog/src/ScubaLogger.h"
 #include "dynolog/src/ServiceHandler.h"
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 #include "dynolog/src/rpc/SimpleJsonServer.h"
@@ -47,24 +49,29 @@ DEFINE_bool(
     false,
     "Enabled IPC monitor for on system tracing requests.");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
+DEFINE_bool(use_JSON, false, "Emit metrics to JSON file through JSON logger");
+DEFINE_bool(use_scuba, false, "Emit metrics to Scuba through Scuba logger");
 DEFINE_bool(
     enable_gpu_monitor,
     false,
     "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
 DEFINE_bool(enable_perf_monitor, false, "Enabled hearbeat perf monitorng.");
-DEFINE_string(
-    dcgm_fields,
-    gpumon::kDcgmDefaultFieldIds,
-    "The field ids to monitor on DCGM (GPUs), comma separated");
 
-std::unique_ptr<Logger> getLogger() {
+std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
+  std::vector<std::unique_ptr<Logger>> loggers;
   if (FLAGS_use_fbrelay) {
-    return std::make_unique<FBRelayLogger>();
+    loggers.push_back(std::make_unique<FBRelayLogger>());
   }
   if (FLAGS_use_ODS) {
-    return std::make_unique<ODSJsonLogger>();
+    loggers.push_back(std::make_unique<ODSJsonLogger>());
   }
-  return std::make_unique<JsonLogger>();
+  if (FLAGS_use_JSON) {
+    loggers.push_back(std::make_unique<JsonLogger>());
+  }
+  if (FLAGS_use_scuba && !scribe_category.empty()) {
+    loggers.push_back(std::make_unique<ScubaLogger>(scribe_category));
+  }
+  return std::make_unique<CompositeLogger>(std::move(loggers));
 }
 
 auto next_wakeup(int sec) {
@@ -84,8 +91,8 @@ void kernel_monitor_loop() {
 
     kc.step();
     kc.log(*logger);
-
     logger->finalize();
+
     /* sleep override */
     std::this_thread::sleep_until(wakeup_timepoint);
   }
@@ -123,12 +130,13 @@ auto setup_server(std::shared_ptr<ServiceHandler> handler) {
 void gpu_monitor_loop() {
   LOG(INFO) << "Setting up DCGM (GPU)  monitoring.";
   std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
-      FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
+      gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
 
-  auto logger = getLogger();
+  auto logger = getLogger(FLAGS_fair_scribe_category);
+
   LOG(INFO) << "Running DCGM loop : interval = "
             << FLAGS_dcgm_reporting_interval_s << " s.";
-  LOG(INFO) << "DCGM fields: " << FLAGS_dcgm_fields;
+  LOG(INFO) << "DCGM fields: " << gpumon::FLAGS_dcgm_fields;
 
   while (1) {
     auto wakeup_timepoint = next_wakeup(FLAGS_dcgm_reporting_interval_s);
