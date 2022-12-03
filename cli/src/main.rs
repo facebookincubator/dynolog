@@ -55,12 +55,19 @@ enum Command {
         /// Duration of trace to collect in ms.
         #[clap(long, default_value_t = 500)]
         duration_ms: u64,
+        /// Training iterations to collect, this takes precedence over duration.
+        #[clap(long, default_value_t = -1)]
+        iterations: i64,
         /// Log file for trace.
         #[clap(long)]
         log_file: String,
         /// Unix timestamp used for synchronized collection (milliseconds since epoch)
         #[clap(long, default_value_t = 0)]
         profile_start_time: u64,
+        /// Start iteration roundup, starts an iteration based trace at a multiple
+        /// of this value.
+        #[clap(long, default_value_t = 1)]
+        profile_start_iteration_roundup: u64,
         /// Max number of processes to profile
         #[clap(long, default_value_t = 3)]
         process_limit: u32,
@@ -94,15 +101,19 @@ fn main() -> Result<()> {
             pids,
             log_file,
             duration_ms,
+            iterations,
             profile_start_time,
+            profile_start_iteration_roundup,
             process_limit,
         } => gputrace::run_gputrace(
             dyno_client,
             job_id,
             &pids,
             duration_ms,
+            iterations,
             &log_file,
             profile_start_time,
+            profile_start_iteration_roundup,
             process_limit,
         ),
         // ... add new commands here

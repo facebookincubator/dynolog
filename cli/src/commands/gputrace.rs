@@ -19,14 +19,27 @@ pub fn run_gputrace(
     job_id: u64,
     pids: &str,
     duration_ms: u64,
+    iterations: i64,
     log_file: &str,
     profile_start_time: u64,
+    profile_start_iteration_roundup: u64,
     process_limit: u32,
 ) -> Result<()> {
+    let trigger_config = if iterations > 0 {
+        format!(
+            r#"PROFILE_START_ITERATION_ROUNDUP={}\nACTIVITIES_ITERATIONS={}"#,
+            profile_start_iteration_roundup, iterations
+        )
+    } else {
+        format!(r#"ACTIVITIES_DURATION_MSECS={}"#, duration_ms)
+    };
+
     let kineto_config = format!(
-        r#"PROFILE_START_TIME={}\n ACTIVITIES_DURATION_MSECS={}\nACTIVITIES_LOG_FILE={}"#,
-        profile_start_time, duration_ms, log_file
+        r#"PROFILE_START_TIME={}\nACTIVITIES_LOG_FILE={}\n{}"#,
+        profile_start_time, log_file, trigger_config
     );
+
+    println!("Kineto config = \n{}", kineto_config);
 
     let request_json = format!(
         r#"
