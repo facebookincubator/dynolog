@@ -26,23 +26,16 @@ ODSJsonLogger::ODSJsonLogger() {
   hostname_ = std::string(hostname);
 }
 
-void ODSJsonLogger::logInt(const std::string& key, int64_t val) {
-  metrics_json_[key] = val;
-}
-
-void ODSJsonLogger::logFloat(const std::string& key, float val) {
-  metrics_json_[key] = fmt::format("{:.3f}", val);
-}
-
 void ODSJsonLogger::finalize() {
   std::string entity = FLAGS_ods_entity_prefix + hostname_;
+  nlohmann::json metrics = sampleJson();
 
-  if (metrics_json_.find("device") != metrics_json_.end()) {
-    entity += ".gpu." + std::to_string(metrics_json_["device"].get<int>());
+  if (metrics.find("device") != metrics.end()) {
+    entity += ".gpu." + std::to_string(metrics["device"].get<int>());
   }
 
   nlohmann::json out_array;
-  for (auto it = metrics_json_.begin(); it != metrics_json_.end(); ++it) {
+  for (auto it = metrics.begin(); it != metrics.end(); ++it) {
     if (it.key() == "device") {
       continue;
     }
@@ -52,13 +45,6 @@ void ODSJsonLogger::finalize() {
         {"value", it.value()},
     };
     out_array.push_back(datapoint);
-  }
-
-  std::string s = out_array.dump();
-  for (int i = 0; i < s.size(); i++) {
-    if (s[i] == '\"') {
-      s[i] = '\'';
-    }
   }
 
 #ifdef USE_GRAPH_ENDPOINT
@@ -81,8 +67,7 @@ void ODSJsonLogger::finalize() {
   LOG_FIRST_N(WARNING, 1) << "ODS logger was not included in the build";
 #endif
 
-  LOG(INFO) << out_array.dump();
-  metrics_json_.clear();
+  JsonLogger::finalize();
 }
 
 } // namespace dynolog

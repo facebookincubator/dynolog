@@ -12,13 +12,6 @@ namespace dynolog {
 class ODSJsonLogger : public JsonLogger {
  public:
   ODSJsonLogger();
-  void setTimestamp(Timestamp ts) override {
-    ts_ = ts;
-  }
-
-  void logInt(const std::string& key, int64_t val) override;
-
-  void logFloat(const std::string& key, float val) override;
 
   void logStr(const std::string& /* key */, const std::string& /* val */)
       override {}
@@ -27,7 +20,6 @@ class ODSJsonLogger : public JsonLogger {
 
  private:
   std::string hostname_;
-  nlohmann::json metrics_json_;
 };
 
 } // namespace dynolog

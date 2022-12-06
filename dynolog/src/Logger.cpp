@@ -54,6 +54,7 @@ void JsonLogger::logStr(const std::string& key, const std::string& val) {
 void JsonLogger::finalize() {
   LOG(INFO) << "Logging : " << json_.size() << " values";
   LOG(INFO) << "time = " << timestampStr() << " data = " << sampleJson().dump();
+  json_.clear();
 }
 
 } // namespace dynolog
