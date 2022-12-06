@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <gflags/gflags.h>
 #include <nlohmann/json.hpp>
 #include <chrono>
 #include <map>
@@ -12,6 +13,9 @@
 #include <type_traits>
 
 namespace dynolog {
+
+DECLARE_string(access_token);
+DECLARE_string(certificate_path);
 
 // An abstract class for logging metrics
 //  1. Create a class with this interface for each log entry
@@ -34,20 +38,9 @@ class Logger {
   // Logs an unsigned integer value
   virtual void logUint(const std::string& key, uint64_t val) = 0;
 
-  virtual void finalize() = 0;
+  virtual void logStr(const std::string& key, const std::string& val) = 0;
 
-  template <typename T>
-  void log(const std::string& key, T val) {
-    if (std::is_same<T, int64_t>::value) {
-      logInt(key, val);
-    } else if (std::is_same<T, uint64_t>::value) {
-      logUint(key, val);
-    } else if (std::is_same<T, float>::value) {
-      logFloat(key, val);
-    } else {
-      static_assert("unsupported type in log()");
-    }
-  }
+  virtual void finalize() = 0;
 };
 
 class JsonLogger : public Logger {
@@ -61,6 +54,8 @@ class JsonLogger : public Logger {
   void logFloat(const std::string& key, float val) override;
 
   void logUint(const std::string& key, uint64_t val) override;
+
+  void logStr(const std::string& key, const std::string& val) override;
 
   void finalize() override;
 

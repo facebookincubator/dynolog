@@ -25,7 +25,7 @@ void KernelCollector::step() {
 }
 
 void KernelCollector::log(Logger& log) {
-  log.log("uptime", uptime_);
+  log.logInt("uptime", uptime_);
 
   // Avoid logging first sample of metrics requiring delta computation
   if (first_) {
@@ -42,15 +42,15 @@ void KernelCollector::log(Logger& log) {
   log.logFloat("cpu_s", cpuDelta_.s / total_ticks * 100.0);
 
   // CPU utilization is 1 - idle/total
-  log.log("cpu_util", 100 * (1 - cpuDelta_.i / total_ticks));
+  log.logFloat("cpu_util", 100 * (1 - cpuDelta_.i / total_ticks));
 
-  log.log("cpu_u_ms", ticksToMs(cpuDelta_.u));
-  log.log("cpu_s_ms", ticksToMs(cpuDelta_.s));
-  log.log("cpu_w_ms", ticksToMs(cpuDelta_.w));
-  log.log("cpu_n_ms", ticksToMs(cpuDelta_.n));
-  log.log("cpu_x_ms", ticksToMs(cpuDelta_.x));
-  log.log("cpu_y_ms", ticksToMs(cpuDelta_.y));
-  log.log("cpu_z_ms", ticksToMs(cpuDelta_.z));
+  log.logInt("cpu_u_ms", ticksToMs(cpuDelta_.u));
+  log.logInt("cpu_s_ms", ticksToMs(cpuDelta_.s));
+  log.logInt("cpu_w_ms", ticksToMs(cpuDelta_.w));
+  log.logInt("cpu_n_ms", ticksToMs(cpuDelta_.n));
+  log.logInt("cpu_x_ms", ticksToMs(cpuDelta_.x));
+  log.logInt("cpu_y_ms", ticksToMs(cpuDelta_.y));
+  log.logInt("cpu_z_ms", ticksToMs(cpuDelta_.z));
 
   if (numCpuSockets_ > 1) {
     for (int i = 0; i < numCpuSockets_; i++) {
@@ -68,14 +68,14 @@ void KernelCollector::log(Logger& log) {
   }
 
   for (const auto& [devName, devRxtx] : rxtxDelta_) {
-    log.log(fmt::format("rx_bytes_{}", devName), devRxtx.rxBytes);
-    log.log(fmt::format("rx_packets_{}", devName), devRxtx.rxPackets);
-    log.log(fmt::format("rx_errors_{}", devName), devRxtx.rxErrors);
-    log.log(fmt::format("rx_drops_{}", devName), devRxtx.rxDrops);
-    log.log(fmt::format("tx_bytes_{}", devName), devRxtx.txBytes);
-    log.log(fmt::format("tx_packets_{}", devName), devRxtx.txPackets);
-    log.log(fmt::format("tx_errors_{}", devName), devRxtx.txErrors);
-    log.log(fmt::format("tx_drops_{}", devName), devRxtx.txDrops);
+    log.logUint(fmt::format("rx_bytes_{}", devName), devRxtx.rxBytes);
+    log.logUint(fmt::format("rx_packets_{}", devName), devRxtx.rxPackets);
+    log.logUint(fmt::format("rx_errors_{}", devName), devRxtx.rxErrors);
+    log.logUint(fmt::format("rx_drops_{}", devName), devRxtx.rxDrops);
+    log.logUint(fmt::format("tx_bytes_{}", devName), devRxtx.txBytes);
+    log.logUint(fmt::format("tx_packets_{}", devName), devRxtx.txPackets);
+    log.logUint(fmt::format("tx_errors_{}", devName), devRxtx.txErrors);
+    log.logUint(fmt::format("tx_drops_{}", devName), devRxtx.txDrops);
   }
 
   log.setTimestamp();

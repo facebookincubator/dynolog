@@ -58,15 +58,15 @@ void PerfMonitor::log(Logger& logger) {
         float countPerSec = static_cast<float>(
             static_cast<double>(count) * 1e3 / static_cast<double>(time));
         std::string key = "mips";
-        logger.log(key, countPerSec);
+        logger.logFloat(key, countPerSec);
       } else if (id == "cycles" && nickname == "cycles") {
         // * 10^9 (nanoseconds) / 10^6 (millions of instructions)
         float countPerSec = static_cast<float>(
             static_cast<double>(count) * 1e3 / static_cast<double>(time));
         std::string key = "mega_cycles_per_second";
-        logger.log(key, countPerSec);
+        logger.logFloat(key, countPerSec);
       } else {
-        logger.log(nickname, count);
+        logger.logUint(nickname, count);
       }
     }
   }

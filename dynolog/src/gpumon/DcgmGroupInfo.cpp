@@ -19,6 +19,11 @@
 namespace dynolog {
 namespace gpumon {
 
+DEFINE_string(
+    dcgm_fields,
+    kDcgmDefaultFieldIds,
+    "The field ids to monitor on DCGM (GPUs), comma separated");
+
 constexpr double maxKeepAgeSec = 2;
 constexpr int maxKeepSamples = 2;
 const std::string groupName = "DcgmGroupInfo";
@@ -346,6 +351,8 @@ void DcgmGroupInfo::update() {
 }
 
 void DcgmGroupInfo::log(Logger& logger) {
+  const auto t = std::chrono::system_clock::now();
+  logger.setTimestamp(t);
   for (const auto& [index, metric_map] : metricsMapDouble_) {
     for (const auto& [key, val] : metric_map) {
       logger.logFloat(key, val);
