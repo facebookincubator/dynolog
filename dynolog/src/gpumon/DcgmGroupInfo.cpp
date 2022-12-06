@@ -4,6 +4,7 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
+#include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <cstdint>
 #include <map>
@@ -14,6 +15,7 @@
 #include <utility>
 #include "dynolog/src/gpumon/DcgmApiStub.h"
 #include "dynolog/src/gpumon/Entity.h"
+#include "dynolog/src/gpumon/Utils.h"
 #include "dynolog/src/gpumon/dcgm_fields.h"
 
 namespace dynolog {
@@ -49,6 +51,19 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_DEV_GPU_UTIL, "gpu_device_utilization"},
     {DCGM_FI_DEV_MEM_COPY_UTIL, "gpu_memory_utilization"},
     {DCGM_FI_DEV_POWER_USAGE, "gpu_power_draw"}};
+
+// Mapping of attribution environment variable name to scuba column name
+std::unordered_map<std::string, std::string> attributionEnvVarsToScubaColumns{
+    {"SLURM_JOB_ID", "job_id"},
+    {"USER", "username"},
+    {"SLURM_JOB_ACCOUNT", "slurm_account"},
+    {"SLURM_JOB_PARTITION", "slurm_partition"}};
+
+DEFINE_bool(
+    enable_env_var_attribution,
+    true,
+    "Enable environment variable attribution for GPUs."
+    "Currently this support SLURM job scheduler environment variables.");
 
 static inline void printValue(dcgmFieldValue_v1 v) {
   VLOG(1) << "====================================";
@@ -346,6 +361,14 @@ void DcgmGroupInfo::update() {
         metricsMapDouble_[entity.m_entityId] = metricsDouble;
         metricsMapInt_[entity.m_entityId] = metricsInt;
       }
+
+      if (FLAGS_enable_env_var_attribution) {
+        std::vector<pid_t> pids = getPidsOnGpu();
+        for (int device_id = 0; device_id < pids.size(); device_id++) {
+          envMetadataMapString_[device_id] = getMetadataForPid(
+              pids[device_id], attributionEnvVarsToScubaColumns);
+        }
+      }
     }
   }
 }
@@ -360,6 +383,11 @@ void DcgmGroupInfo::log(Logger& logger) {
     if (metricsMapInt_.find(index) != metricsMapInt_.end()) {
       for (const auto& [key, val] : metricsMapInt_[index]) {
         logger.logInt(key, val);
+      }
+    }
+    if (envMetadataMapString_.find(index) != envMetadataMapString_.end()) {
+      for (const auto& [key, val] : envMetadataMapString_[index]) {
+        logger.logStr(key, val);
       }
     }
     logger.logInt("device", index);

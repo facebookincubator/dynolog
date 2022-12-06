@@ -38,6 +38,7 @@ class Logger {
   // Logs an unsigned integer value
   virtual void logUint(const std::string& key, uint64_t val) = 0;
 
+  // Logs a string value
   virtual void logStr(const std::string& key, const std::string& val) = 0;
 
   virtual void finalize() = 0;

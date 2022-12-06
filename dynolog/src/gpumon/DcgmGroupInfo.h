@@ -20,7 +20,6 @@ DECLARE_string(dcgm_fields);
 
 constexpr char kDcgmDefaultFieldIds[] =
     "100,155,204,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012";
-
 class DcgmGroupInfo {
  public:
   ~DcgmGroupInfo();
@@ -60,6 +59,11 @@ class DcgmGroupInfo {
       metricsMapDouble_;
   std::unordered_map<int, std::unordered_map<std::string, int64_t>>
       metricsMapInt_;
+  // We currently assume at most one pid running on each GPU entity
+  // This maps from gpu device_id to a map containing environment variables
+  // and their values for the pid running on that gpu (if it exists).
+  std::unordered_map<int, std::unordered_map<std::string, std::string>>
+      envMetadataMapString_;
   std::vector<dcgmFieldGrp_t> fieldGroupIds_;
 };
 
