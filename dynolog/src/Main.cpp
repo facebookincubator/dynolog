@@ -38,7 +38,7 @@ DEFINE_int32(
 DEFINE_int32(
     perf_monitor_reporting_interval_s,
     60,
-    "Duration in seconds to read and report metrics for kernel monitor");
+    "Duration in seconds to read and report metrics for performance monitor");
 DEFINE_int32(
     dcgm_reporting_interval_s,
     10,
@@ -55,7 +55,7 @@ DEFINE_bool(
     enable_gpu_monitor,
     false,
     "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
-DEFINE_bool(enable_perf_monitor, false, "Enabled hearbeat perf monitorng.");
+DEFINE_bool(enable_perf_monitor, false, "Enable heartbeat perf monitoring.");
 
 std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
   std::vector<std::unique_ptr<Logger>> loggers;
