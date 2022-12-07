@@ -28,7 +28,7 @@ using namespace dynolog;
 using json = nlohmann::json;
 namespace hbt = facebook::hbt;
 
-constexpr const char* VERSION = "0.0.2";
+constexpr const char* VERSION = "0.1.0";
 
 DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
