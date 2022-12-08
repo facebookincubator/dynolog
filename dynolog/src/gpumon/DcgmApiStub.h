@@ -5,8 +5,11 @@
 
 #pragma once
 
+#include <gflags/gflags.h>
 #include "dynolog/src/gpumon/dcgm_fields.h"
 #include "dynolog/src/gpumon/dcgm_structs.h"
+
+DECLARE_int32(dcgm_major_version);
 
 extern "C" {
 /**

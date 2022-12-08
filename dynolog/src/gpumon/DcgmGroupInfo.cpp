@@ -97,6 +97,11 @@ static inline bool isProfField(unsigned short field_id) {
 std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
     const std::string& fields_str,
     int updateIntervalMs) {
+  if (FLAGS_dcgm_major_version != 2 && FLAGS_dcgm_major_version != 3) {
+    LOG(INFO) << "Unsupported dcgm version " << FLAGS_dcgm_major_version;
+    return nullptr;
+  }
+
   std::stringstream field_ss(fields_str);
   std::string field;
   std::vector<unsigned short> fields;
@@ -133,15 +138,21 @@ std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
 }
 
 DcgmGroupInfo::DcgmGroupInfo(
-    const std::vector<unsigned short>& fields,
+    std::vector<unsigned short> fields,
     const std::vector<unsigned short>& prof_fields,
     int updateIntervalMs)
     : updateIntervalMs_(updateIntervalMs) {
   init();
   createGroups();
-  createFieldGroups(fields);
-  watchFields();
-  watchProfFields(prof_fields);
+  if (FLAGS_dcgm_major_version == 2) {
+    createFieldGroups(fields);
+    watchFields();
+    watchProfFields(prof_fields);
+  } else {
+    fields.insert(fields.end(), prof_fields.begin(), prof_fields.end());
+    createFieldGroups(fields);
+    watchFields();
+  }
 }
 
 void DcgmGroupInfo::init() {
@@ -244,35 +255,6 @@ void DcgmGroupInfo::watchFields() {
                  << " with group " << groupId_ << ", field group "
                  << fieldGroupId;
     }
-  }
-}
-
-// Print the supported prof metric groups of the GPU group
-void DcgmGroupInfo::printSupportedProfMetricGroups() {
-  dcgmProfGetMetricGroups_t gmg;
-  memset(&gmg, 0, sizeof(gmg));
-  gmg.version = dcgmProfGetMetricGroups_version;
-  gmg.groupId = groupId_;
-  if (retCode_ = dcgmProfGetSupportedMetricGroups_stub(dcgmHandle_, &gmg);
-      retCode_ == DCGM_ST_GROUP_INCOMPATIBLE) {
-    errorCode_ = retCode_;
-    LOG(ERROR)
-        << "Error: the GPUs provided (or not provided) are not the same SKU";
-  } else if (retCode_ != DCGM_ST_OK) {
-    errorCode_ = retCode_;
-    LOG(ERROR) << "Failed dcgmProfGetSupportedMetricGroups() return: "
-               << retCode_;
-  }
-
-  for (unsigned int i = 0; i < gmg.numMetricGroups; i++) {
-    dcgmProfMetricGroupInfo_t* mgInfo = &gmg.metricGroups[i];
-    LOG(INFO) << "Major id: " << mgInfo->majorId
-              << " minor id: " << mgInfo->minorId;
-    std::string idstr = "";
-    for (int j = 0; j < mgInfo->numFieldIds; j++) {
-      idstr += std::to_string(mgInfo->fieldIds[j]) + " ";
-    }
-    LOG(INFO) << idstr;
   }
 }
 
@@ -400,12 +382,14 @@ DcgmGroupInfo::~DcgmGroupInfo() {
   memset(&unwatchFields, 0, sizeof(unwatchFields));
   unwatchFields.version = dcgmProfUnwatchFields_version;
   unwatchFields.groupId = groupId_;
-  if (retCode_ = dcgmProfUnwatchFields_stub(dcgmHandle_, &unwatchFields);
-      retCode_ != DCGM_ST_OK) {
-    errorCode_ = retCode_;
-    LOG(ERROR) << "Failed dcgmProfUnwatchFields(), return: " << retCode_;
-  } else {
-    LOG(INFO) << "Unwatched profiling fields for group id " << groupId_;
+  if (FLAGS_dcgm_major_version == 2) {
+    if (retCode_ = dcgmProfUnwatchFields_stub(dcgmHandle_, &unwatchFields);
+        retCode_ != DCGM_ST_OK) {
+      errorCode_ = retCode_;
+      LOG(ERROR) << "Failed dcgmProfUnwatchFields(), return: " << retCode_;
+    } else {
+      LOG(INFO) << "Unwatched profiling fields for group id " << groupId_;
+    }
   }
   for (const auto& fieldGroupId : fieldGroupIds_) {
     if (retCode_ = dcgmUnwatchFields_stub(dcgmHandle_, groupId_, fieldGroupId);

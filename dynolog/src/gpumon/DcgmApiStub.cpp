@@ -5,7 +5,6 @@
 
 #include "dynolog/src/gpumon/DcgmApiStub.h"
 #include <dlfcn.h>
-#include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <mutex>
 #include <ostream>
@@ -17,6 +16,11 @@ DEFINE_string(
     dcgm_lib_path,
     kDcgmDefaultLibPath,
     "The path to dynamic loading DCGM shared libraries");
+
+DEFINE_int32(
+    dcgm_major_version,
+    2,
+    "Version of Nvidia DCGM library. Currently supports 2 and 3");
 
 #define CHECK_NULL(val) CHECK_EQ((val), static_cast<void*>(NULL))
 

@@ -37,7 +37,7 @@ class DcgmGroupInfo {
 
  private:
   DcgmGroupInfo(
-      const std::vector<unsigned short>& fields,
+      std::vector<unsigned short> fields,
       const std::vector<unsigned short>& prof_fields,
       int updateIntervalMs);
   void init();
@@ -45,7 +45,6 @@ class DcgmGroupInfo {
   void createFieldGroups(const std::vector<unsigned short>& fields);
   void watchFields();
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
-  void printSupportedProfMetricGroups();
 
   std::vector<unsigned int> gpuIdList_;
   int deviceCount_ = 0;
