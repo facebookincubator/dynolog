@@ -11,7 +11,7 @@
 
 set -eux -o pipefail
 
-VERSION=${VERSION:-"0.0.1"}
+VERSION=${VERSION:-"0.1.0"}
 ARCH=${ARCH:-"amd64"}
 DEBDIR="dynolog_${VERSION}-0-${ARCH}"
 
@@ -25,6 +25,7 @@ IFS=" " read -r -a generated_bins <<< "$(./scripts/build.sh | tail -n 1)"
 
 cp -p "${generated_bins[@]}" "$DEBDIR/usr/local/bin"
 cp -p scripts/dynolog.service "$DEBDIR/usr/lib/systemd/system"
+cp -p scripts/pytorch/unitrace.py "$DEBDIR/usr/local/bin"
 perl -p -e "s/__VERSION__/$VERSION/" scripts/debian/control > "$DEBDIR/DEBIAN/control"
 
 tree "$DEBDIR"

@@ -43,6 +43,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_mybindir}
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 cp dynolog $RPM_BUILD_ROOT/%{_mybindir}
 cp dyno $RPM_BUILD_ROOT/%{_mybindir}
+cp unitrace.py $RPM_BUILD_ROOT/%{_mybindir}
 cp dynolog.service $RPM_BUILD_ROOT/%{_unitdir}
 
 %files
@@ -50,6 +51,7 @@ cp dynolog.service $RPM_BUILD_ROOT/%{_unitdir}
 # perc doc add-docs-here
 %{_mybindir}/dynolog
 %{_mybindir}/dyno
+%{_mybindir}/unitrace.py
 %{_unitdir}/dynolog.service
 
 %changelog

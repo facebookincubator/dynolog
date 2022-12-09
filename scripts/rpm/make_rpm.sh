@@ -11,10 +11,10 @@
 
 set -eux -o pipefail
 
-VERSION=${VERSION:-"0.0.1"}
+VERSION=${VERSION:-"0.1.0"}
 DYNOROOT="$PWD"
 SPECBASE="$DYNOROOT/scripts/rpm/"
-SYSTEMDBASE="$DYNOROOT/scripts/"
+SCRIPTS="$DYNOROOT/scripts/"
 
 # For some reason the RPM build tools only work with the directory
 # path at ~/rpmbuild. Just using this path for now.
@@ -53,7 +53,8 @@ cd "$RPMDIR"
 cp "${generated_bins[@]}" "dynolog-${VERSION}/"
 
 # Add static files
-cp "$SYSTEMDBASE/dynolog.service" "dynolog-${VERSION}/"
+cp "$SCRIPTS/dynolog.service" "dynolog-${VERSION}/"
+cp "$SCRIPTS/pytorch/unitrace.py" "dynolog-${VERSION}/"
 
 # Compress sources
 tar --create --file "dynolog-${VERSION}.tar.gz" "dynolog-${VERSION}"
