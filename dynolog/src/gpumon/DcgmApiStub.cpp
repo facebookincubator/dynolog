@@ -6,6 +6,8 @@
 #include "dynolog/src/gpumon/DcgmApiStub.h"
 #include <dlfcn.h>
 #include <glog/logging.h>
+#include <cctype>
+#include <filesystem>
 #include <mutex>
 #include <ostream>
 #include <string>
@@ -21,6 +23,8 @@ DEFINE_int32(
     dcgm_major_version,
     2,
     "Version of Nvidia DCGM library. Currently supports 2 and 3");
+
+constexpr int kDcgmDefaultVersion = 2;
 
 #define CHECK_NULL(val) CHECK_EQ((val), static_cast<void*>(NULL))
 
@@ -99,7 +103,20 @@ struct dcgmApi {
   dcgmReturn_t (*dcgmGetGpuInstanceHierarchy)(
       dcgmHandle_t dcgmHandle,
       dcgmMigHierarchy_v2* hierarchy);
+
+  unsigned int dcgm_major_version = kDcgmDefaultVersion;
 };
+
+inline int parse_lib_major_version(const std::filesystem::path& lib_path) {
+  for (const auto& c : lib_path.filename().string()) {
+    if (std::isdigit(c)) {
+      return c - '0';
+    }
+  }
+  LOG(INFO) << "Couldn't find version in lib path " << lib_path
+            << ", using default version " << kDcgmDefaultVersion;
+  return kDcgmDefaultVersion;
+}
 
 /* does dlopen and loads symbols */
 dcgmApi* getDcgmAPI() {
@@ -118,6 +135,14 @@ dcgmApi* getDcgmAPI() {
     if (!handle) {
       LOG(ERROR) << "Couldn't load libdcgm : " << dlerror();
       return;
+    }
+
+    std::filesystem::path p(FLAGS_dcgm_lib_path);
+    if (std::filesystem::exists(p) && std::filesystem::is_symlink(p)) {
+      api.dcgm_major_version =
+          parse_lib_major_version(std::filesystem::read_symlink(p));
+      LOG(INFO) << "Parse " << std::filesystem::read_symlink(p)
+                << ", dcgm version = " << api.dcgm_major_version;
     }
 
 #define SETAPI(name)                                        \
@@ -186,13 +211,20 @@ dcgmReturn_t dcgmGroupAddEntity_stub(
 
 dcgmReturn_t dcgmFieldGroupCreate_stub(
     dcgmHandle_t dcgmHandle,
-    int numFieldIds,
-    unsigned short* fieldIds,
+    std::vector<unsigned short> fieldIds,
+    const std::vector<unsigned short>& profFieldIds,
     char* fieldGroupName,
     dcgmFieldGrp_t* dcgmFieldGroupId) {
   if (auto api = detail::getDcgmAPI(); api) {
+    if (api->dcgm_major_version == 3) {
+      fieldIds.insert(fieldIds.end(), profFieldIds.begin(), profFieldIds.end());
+    }
     return api->dcgmFieldGroupCreate(
-        dcgmHandle, numFieldIds, fieldIds, fieldGroupName, dcgmFieldGroupId);
+        dcgmHandle,
+        fieldIds.size(),
+        (unsigned short*)fieldIds.data(),
+        fieldGroupName,
+        dcgmFieldGroupId);
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -314,7 +346,6 @@ dcgmReturn_t dcgmShutdown_stub() {
 dcgmReturn_t dcgmStopEmbedded_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
     return api->dcgmStopEmbedded(pDcgmHandle);
-    ;
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -325,7 +356,6 @@ dcgmReturn_t dcgmProfGetSupportedMetricGroups_stub(
     dcgmProfGetMetricGroups_t* metricGroups) {
   if (auto api = detail::getDcgmAPI(); api) {
     return api->dcgmProfGetSupportedMetricGroups(pDcgmHandle, metricGroups);
-    ;
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -335,8 +365,12 @@ dcgmReturn_t dcgmProfWatchFields_stub(
     dcgmHandle_t pDcgmHandle,
     dcgmProfWatchFields_t* watchFields) {
   if (auto api = detail::getDcgmAPI(); api) {
+    if (api->dcgm_major_version == 3) {
+      // DCGM 3.0 deprecated dcgmProfWatchFields and uses dcgmWatchFields
+      // instead
+      return DCGM_ST_OK;
+    }
     return api->dcgmProfWatchFields(pDcgmHandle, watchFields);
-    ;
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -346,8 +380,12 @@ dcgmReturn_t dcgmProfUnwatchFields_stub(
     dcgmHandle_t pDcgmHandle,
     dcgmProfUnwatchFields_t* unwatchFields) {
   if (auto api = detail::getDcgmAPI(); api) {
+    if (api->dcgm_major_version == 3) {
+      // DCGM 3.0 deprecated dcgmProfUnWatchFields and uses dcgmWatchFields
+      // instead
+      return DCGM_ST_OK;
+    }
     return api->dcgmProfUnwatchFields(pDcgmHandle, unwatchFields);
-    ;
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -359,7 +397,6 @@ dcgmReturn_t dcgmUnwatchFields_stub(
     dcgmFieldGrp_t fieldGroupId) {
   if (auto api = detail::getDcgmAPI(); api) {
     return api->dcgmUnwatchFields(pDcgmHandle, groupId, fieldGroupId);
-    ;
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;
@@ -367,6 +404,11 @@ dcgmReturn_t dcgmUnwatchFields_stub(
 
 dcgmReturn_t dcgmProfPause_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
+    // disabled pause/resume of profiling for DCGM 3.0 as dcgmProfWatchFields
+    // was deprecated
+    if (api->dcgm_major_version == 3) {
+      return DCGM_ST_OK;
+    }
     return api->dcgmProfPause(pDcgmHandle);
   }
   log_missing_api(__func__);
@@ -375,6 +417,11 @@ dcgmReturn_t dcgmProfPause_stub(dcgmHandle_t pDcgmHandle) {
 
 dcgmReturn_t dcgmProfResume_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
+    if (api->dcgm_major_version == 3) {
+      // disabled pause/resume of profiling for DCGM 3.0 as dcgmProfWatchFields
+      // was deprecated
+      return DCGM_ST_OK;
+    }
     return api->dcgmProfResume(pDcgmHandle);
   }
   log_missing_api(__func__);
