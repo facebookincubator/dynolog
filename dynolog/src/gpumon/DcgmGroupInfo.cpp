@@ -97,11 +97,6 @@ static inline bool isProfField(unsigned short field_id) {
 std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
     const std::string& fields_str,
     int updateIntervalMs) {
-  if (FLAGS_dcgm_major_version != 2 && FLAGS_dcgm_major_version != 3) {
-    LOG(INFO) << "Unsupported dcgm version " << FLAGS_dcgm_major_version;
-    return nullptr;
-  }
-
   std::stringstream field_ss(fields_str);
   std::string field;
   std::vector<unsigned short> fields;
@@ -138,21 +133,15 @@ std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
 }
 
 DcgmGroupInfo::DcgmGroupInfo(
-    std::vector<unsigned short> fields,
+    const std::vector<unsigned short>& fields,
     const std::vector<unsigned short>& prof_fields,
     int updateIntervalMs)
     : updateIntervalMs_(updateIntervalMs) {
   init();
   createGroups();
-  if (FLAGS_dcgm_major_version == 2) {
-    createFieldGroups(fields);
-    watchFields();
-    watchProfFields(prof_fields);
-  } else {
-    fields.insert(fields.end(), prof_fields.begin(), prof_fields.end());
-    createFieldGroups(fields);
-    watchFields();
-  }
+  createFieldGroups(fields, prof_fields);
+  watchFields();
+  watchProfFields(prof_fields);
 }
 
 void DcgmGroupInfo::init() {
@@ -211,7 +200,8 @@ void DcgmGroupInfo::createGroups() {
 // TODO: make field ids configurable from configerator
 // TODO: make more than one field group configuration available
 void DcgmGroupInfo::createFieldGroups(
-    const std::vector<unsigned short>& fields) {
+    const std::vector<unsigned short>& fields,
+    const std::vector<unsigned short>& prof_fields) {
   if (isFailing() || fields.size() == 0) {
     // initialization failed, no group will be created
     return;
@@ -219,8 +209,8 @@ void DcgmGroupInfo::createFieldGroups(
   dcgmFieldGrp_t fieldGroupId;
   if (retCode_ = dcgmFieldGroupCreate_stub(
           dcgmHandle_,
-          fields.size(),
-          (unsigned short*)fields.data(),
+          fields,
+          prof_fields,
           (char*)fieldGroupName.c_str(),
           &fieldGroupId);
       retCode_ != DCGM_ST_OK) {
@@ -382,14 +372,12 @@ DcgmGroupInfo::~DcgmGroupInfo() {
   memset(&unwatchFields, 0, sizeof(unwatchFields));
   unwatchFields.version = dcgmProfUnwatchFields_version;
   unwatchFields.groupId = groupId_;
-  if (FLAGS_dcgm_major_version == 2) {
-    if (retCode_ = dcgmProfUnwatchFields_stub(dcgmHandle_, &unwatchFields);
-        retCode_ != DCGM_ST_OK) {
-      errorCode_ = retCode_;
-      LOG(ERROR) << "Failed dcgmProfUnwatchFields(), return: " << retCode_;
-    } else {
-      LOG(INFO) << "Unwatched profiling fields for group id " << groupId_;
-    }
+  if (retCode_ = dcgmProfUnwatchFields_stub(dcgmHandle_, &unwatchFields);
+      retCode_ != DCGM_ST_OK) {
+    errorCode_ = retCode_;
+    LOG(ERROR) << "Failed dcgmProfUnwatchFields(), return: " << retCode_;
+  } else {
+    LOG(INFO) << "Unwatched profiling fields for group id " << groupId_;
   }
   for (const auto& fieldGroupId : fieldGroupIds_) {
     if (retCode_ = dcgmUnwatchFields_stub(dcgmHandle_, groupId_, fieldGroupId);

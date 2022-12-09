@@ -37,12 +37,14 @@ class DcgmGroupInfo {
 
  private:
   DcgmGroupInfo(
-      std::vector<unsigned short> fields,
+      const std::vector<unsigned short>& fields,
       const std::vector<unsigned short>& prof_fields,
       int updateIntervalMs);
   void init();
   void createGroups();
-  void createFieldGroups(const std::vector<unsigned short>& fields);
+  void createFieldGroups(
+      const std::vector<unsigned short>& fields,
+      const std::vector<unsigned short>& prof_fields);
   void watchFields();
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
 
