@@ -188,6 +188,24 @@ dyno gputrace --pids <pid of process> --log_file <output file path>
 Dyno can also 1) capture traces on remote nodes, 2) coordinate tracing across a distributed training job (with slurm job scheduler). Please see the recipe in [docs/pytorch_profiler.md](docs/pytorch_profiler.md) for a detailed walkthrough of this feature.
 
 
+### Performance Monitoring
+Dynolog currently supports collection of performance counters. We are enabling instructions and cycles as the first set of counters to onboard, referred as mips (millions of instructions per second) and mega_instructions_per_second. See [docs/Metrics.md](docs/Metrics.md) for more details.
+
+ The following flags are relevant to performance monitoring:
+* --enable_perf_monitor (default=false): enable performance monitoring.
+* --perf_monitor_reporting_interval_s (default=60): set the reporting interval of performance metrics in seconds.
+
+By default, performance monitoring is disabled and the reporting interval is 60s.
+
+Sample logs emitted using JSON_logger:
+```
+I20221208 15:28:34.730270 3345417 Logger.cpp:55] Logging : 2 values
+I20221208 15:28:34.730316 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"735.696","mips":"691.497"}
+I20221208 15:29:34.731652 3345417 Logger.cpp:55] Logging : 2 values
+I20221208 15:29:34.731690 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"514.156","mips":"479.397"}
+
+```
+
 ### GPU Monitoring<!-- {#gpu-monitoring} -->
 
 Dynolog uses NVIDIA Datacenter GPU Manager [DCGM](https://developer.nvidia.com/dcgm) to monitor NVIDIA GPUs today. DCGM supports GPU models from Kepler/Volta V100 onwards, please see [this page]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms) for details.
