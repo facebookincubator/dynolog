@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include <glog/logging.h>
 #include <cstddef>
 #include <deque>
 #include <exception>
