@@ -208,7 +208,7 @@ I20221208 15:29:34.731690 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z
 
 ### GPU Monitoring<!-- {#gpu-monitoring} -->
 
-Dynolog uses NVIDIA Datacenter GPU Manager [DCGM](https://developer.nvidia.com/dcgm) to monitor NVIDIA GPUs today. DCGM supports GPU models from Kepler/Volta V100 onwards, please see [this page]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms) for details.
+Dynolog uses NVIDIA Datacenter GPU Manager [DCGM](https://developer.nvidia.com/dcgm) to monitor NVIDIA GPUs today. DCGM supports GPU models from Kepler/Volta V100 onwards, please see [this page]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms) for details. Currently Dynolog dynamically supports both DCGM 2.x and DCGM 3.x based on the version of the shared library libdcgm.so.
 
 **Prerequisite:** Install DCGM on your system following the instructions [here]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#ubuntu-lts-and-debian](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#ubuntu-lts-and-debian)). After the installation please make sure to initialize the dcgm service using -
 
@@ -236,12 +236,12 @@ By default dynolog will save monitoring metrics to the std output -
 I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" ...
 ```
 
-Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md). Dynolog team is happy to support new loggers.
+Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, and Meta Scuba data system, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md) and [docs/logging_to_scuba.md](docs/logging_to_scuba.md). Dynolog team is happy to support new loggers.
 
 ## Releases<!-- {#release} -->
-The current 0.0.2 release supports the following-
+The current 0.1.0 release supports the following-
 * CPU utilization and network utilization metrics.
-* GPU performance monitoring for NVIDIA GPUs using DCGM.
+* GPU performance monitoring for NVIDIA GPUs using DCGM 2.x and 3.x.
 * Capability to interface with pytorch profiler and support remote on-demand tracing.
 * CPU performance counters (PMUs) are still a work in progress at this point.
 

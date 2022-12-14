@@ -9,7 +9,7 @@
 
 namespace dynolog {
 
-DECLARE_string(fair_scribe_category);
+DECLARE_string(scribe_category);
 
 class ScubaLogger final : public Logger {
  public:
