@@ -132,7 +132,7 @@ void gpu_monitor_loop() {
   std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
       gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
 
-  auto logger = getLogger(FLAGS_fair_scribe_category);
+  auto logger = getLogger(FLAGS_scribe_category);
 
   LOG(INFO) << "Running DCGM loop : interval = "
             << FLAGS_dcgm_reporting_interval_s << " s.";

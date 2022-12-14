@@ -19,9 +19,9 @@ namespace dynolog {
 constexpr int HOSTNAME_MAX = 50;
 constexpr char kScubaUrl[] = "https://graph.facebook.com/scribe_logs";
 DEFINE_string(
-    fair_scribe_category,
+    scribe_category,
     "perfpipe_fair_cluster_gpu_stats",
-    "The scribe category name for fair gpu stats, used for scuba logging");
+    "The scribe category name for scuba logging");
 
 ScubaLogger::ScubaLogger(const std::string& scribe_category)
     : scribe_category_(scribe_category) {
