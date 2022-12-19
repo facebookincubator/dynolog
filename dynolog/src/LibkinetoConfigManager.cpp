@@ -127,7 +127,7 @@ void LibkinetoConfigManager::runGc() {
 }
 
 int32_t LibkinetoConfigManager::registerLibkinetoContext(
-    int64_t jobId,
+    const std::string& jobId,
     int32_t pid,
     int32_t gpu) {
   std::lock_guard<std::mutex> guard(mutex_);
@@ -144,7 +144,7 @@ int32_t LibkinetoConfigManager::registerLibkinetoContext(
 // LibkinetoConfigManager::run() periodically scans the table
 // for processes no longer calling this function and removes them.
 std::string LibkinetoConfigManager::obtainOnDemandConfig(
-    int64_t jobId,
+    const std::string& jobId,
     const std::vector<int32_t>& pids,
     int32_t configType) {
   VLOG(2) << fmt::format(
@@ -229,7 +229,7 @@ void LibkinetoConfigManager::setOnDemandConfigForProcess(
 // For example, when specifying a pid with 8 child processes,
 // the limit argument can be used to profile 2 of those.
 GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
-    int64_t jobId,
+    const std::string& jobId,
     const std::set<int32_t>& pids,
     const std::string& config,
     int32_t configType /* LibkinetoConfigType */,
@@ -288,7 +288,7 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   return res;
 }
 
-int LibkinetoConfigManager::processCount(int64_t jobId) const {
+int LibkinetoConfigManager::processCount(const std::string& jobId) const {
   int count = 0;
   std::lock_guard<std::mutex> guard(mutex_);
   auto it = jobs_.find(jobId);
