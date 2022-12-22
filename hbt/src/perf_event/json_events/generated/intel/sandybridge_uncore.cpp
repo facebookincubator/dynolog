@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace sandybridge_uncore_v16 {
+namespace sandybridge_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sandybridge_uncore_v16.json (34 events).
+    Events from sandybridge_uncore.json (34 events).
 
     Supported SKUs:
         - Arch: x86, Model: SNB id: 42
@@ -427,5 +427,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace sandybridge_uncore_v16
+} // namespace sandybridge_uncore
 } // namespace facebook::hbt::perf_event::generated

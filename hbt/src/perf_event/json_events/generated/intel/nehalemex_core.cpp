@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace nehalemex_core_v2 {
+namespace nehalemex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from NehalemEX_core_V2.json (553 events).
+    Events from NehalemEX_core.json (553 events).
 
     Supported SKUs:
         - Arch: x86, Model: NHM-EX id: 46
@@ -5085,8 +5085,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.IO_CSR_MMIO",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x8033}},
-      R"(Offcore data reads, RFO's and prefetches satisfied by the IO, CSR, MMIO unit)",
-      R"(Offcore data reads, RFO's and prefetches satisfied by the IO, CSR, MMIO unit)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the IO, CSR, MMIO unit)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the IO, CSR, MMIO unit)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5098,8 +5098,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_NO_OTHER_CORE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x133}},
-      R"(Offcore data reads, RFO's and prefetches statisfied by the LLC and not found in a sibling core)",
-      R"(Offcore data reads, RFO's and prefetches statisfied by the LLC and not found in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC and not found in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC and not found in a sibling core)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5111,8 +5111,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_OTHER_CORE_HIT",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x233}},
-      R"(Offcore data reads, RFO's and prefetches satisfied by the LLC and HIT in a sibling core)",
-      R"(Offcore data reads, RFO's and prefetches satisfied by the LLC and HIT in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC and HIT in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC and HIT in a sibling core)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5124,8 +5124,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_OTHER_CORE_HITM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x433}},
-      R"(Offcore data reads, RFO's and prefetches satisfied by the LLC  and HITM in a sibling core)",
-      R"(Offcore data reads, RFO's and prefetches satisfied by the LLC  and HITM in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC  and HITM in a sibling core)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the LLC  and HITM in a sibling core)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5163,8 +5163,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.LOCAL_DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x4033}},
-      R"(Offcore data reads, RFO's and prefetches statisfied by the local DRAM.)",
-      R"(Offcore data reads, RFO's and prefetches statisfied by the local DRAM.)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the local DRAM.)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the local DRAM.)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5202,8 +5202,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE_HIT",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1033}},
-      R"(Offcore data reads, RFO's and prefetches that HIT in a remote cache )",
-      R"(Offcore data reads, RFO's and prefetches that HIT in a remote cache )",
+      R"(Offcore data reads, RFOs, and prefetches that HIT in a remote cache )",
+      R"(Offcore data reads, RFOs, and prefetches that HIT in a remote cache )",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5215,8 +5215,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE_HITM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x833}},
-      R"(Offcore data reads, RFO's and prefetches that HITM in a remote cache)",
-      R"(Offcore data reads, RFO's and prefetches that HITM in a remote cache)",
+      R"(Offcore data reads, RFOs, and prefetches that HITM in a remote cache)",
+      R"(Offcore data reads, RFOs, and prefetches that HITM in a remote cache)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5228,8 +5228,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x2033}},
-      R"(Offcore data reads, RFO's and prefetches statisfied by the remote DRAM)",
-      R"(Offcore data reads, RFO's and prefetches statisfied by the remote DRAM)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the remote DRAM)",
+      R"(Offcore data reads, RFOs, and prefetches satisfied by the remote DRAM)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7304,5 +7304,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace nehalemex_core_v2
+} // namespace nehalemex_core
 } // namespace facebook::hbt::perf_event::generated
