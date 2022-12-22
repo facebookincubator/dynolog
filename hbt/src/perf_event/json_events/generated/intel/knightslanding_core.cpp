@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace knightslanding_core_v9 {
+namespace knightslanding_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from KnightsLanding_core_V9.json (374 events).
+    Events from KnightsLanding_core.json (374 events).
 
     Supported SKUs:
         - Arch: x86, Model: KNL id: 87
@@ -5792,5 +5792,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace knightslanding_core_v9
+} // namespace knightslanding_core
 } // namespace facebook::hbt::perf_event::generated
