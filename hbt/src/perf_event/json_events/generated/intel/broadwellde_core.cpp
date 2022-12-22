@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace broadwellde_core_v7 {
+namespace broadwellde_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwellde_core_v7.json (340 events).
+    Events from broadwellde_core.json (340 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW-DE id: 86
@@ -4086,7 +4086,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x41, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops that split across a cacheline boundary.(Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts line-splitted load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(This is a precise version (that is, uses PEBS) of the event that counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4099,7 +4099,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x42, .cmask = 0, .msr_values = {0}},
       R"(Retired store uops that split across a cacheline boundary. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts line-splitted store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(This is a precise version (that is, uses PEBS) of the event that counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -4518,5 +4518,5 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       ));
 }
 
-} // namespace broadwellde_core_v7
+} // namespace broadwellde_core
 } // namespace facebook::hbt::perf_event::generated
