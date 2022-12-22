@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace skylakex_uncore_v1_21 {
+namespace skylakex_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylakex_uncore_v1.21.json (252 events).
+    Events from skylakex_uncore.json (268 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -23,7 +23,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IO_HIT",
       EventDef::Encoding{.code = 0x35, .umask = 0x14, .msr_values = {0x00}},
       R"(TOR Inserts; Hits from Local IO)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -35,7 +35,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IO_MISS",
       EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
       R"(TOR Inserts; Misses from Local IO)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -47,7 +47,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IA",
       EventDef::Encoding{.code = 0x35, .umask = 0x31, .msr_values = {0x00}},
       R"(TOR Inserts; All from Local iA)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; All locally initiated requests from iA Cores)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; All locally initiated requests from iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -59,7 +59,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IA_HIT",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
       R"(TOR Inserts; Hits from Local iA)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -70,8 +70,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS (Description is auto-generated))",
+      R"(TOR Inserts : All requests from iA Cores that Missed the LLC)",
+      R"(TOR Inserts : All requests from iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -395,7 +395,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_SNOOP_RESP.RSP_WBWB",
       EventDef::Encoding{.code = 0x5C, .umask = 0x10, .msr_values = {0x00}},
       R"(Rsp*WB Snoop Responses Received)",
-      R"(Counts when a transaction with the opcode type Rsp*WB Snoop Response was received which indicates which indicates the data was written back to it's home.  This is returned when a non-RFO request hits a cacheline in the Modified state. The Cache can either downgrade the cacheline to a S (Shared) or I (Invalid) state depending on how the system has been configured.  This reponse will also be sent when a cache requests E (Exclusive) ownership of a cache line without receiving data, because the cache must acquire ownership.)",
+      R"(Counts when a transaction with the opcode type Rsp*WB Snoop Response was received which indicates which indicates the data was written back to its home.  This is returned when a non-RFO request hits a cacheline in the Modified state. The Cache can either downgrade the cacheline to a S (Shared) or I (Invalid) state depending on how the system has been configured.  This response will also be sent when a cache requests E (Exclusive) ownership of a cache line without receiving data, because the cache must acquire ownership.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -407,7 +407,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_SNOOP_RESP.RSP_FWD_WB",
       EventDef::Encoding{.code = 0x5C, .umask = 0x20, .msr_values = {0x00}},
       R"(Rsp*Fwd*WB Snoop Responses Received)",
-      R"(Counts when a transaction with the opcode type Rsp*Fwd*WB Snoop Response was received which indicates the data was written back to it's home socket, and the cacheline was forwarded to the requestor socket.  This snoop response is only used in >= 4 socket systems.  It is used when a snoop HITM's in a remote caching agent and it directly forwards data to a requestor, and simultaneously returns data to it's home socket to be written back to memory.)",
+      R"(Counts when a transaction with the opcode type Rsp*Fwd*WB Snoop Response was received which indicates the data was written back to its home socket, and the cacheline was forwarded to the requestor socket.  This snoop response is only used in &gt;= 4 socket systems.  It is used when a snoop HITM's in a remote caching agent and it directly forwards data to a requestor, and simultaneously returns data to its home socket to be written back to memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -550,8 +550,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_DRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_DRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_DRD (Description is auto-generated))",
+      R"(TOR Inserts : DRds issued by iA Cores that Hit the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores that Hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -562,8 +562,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_CRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_CRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_CRD (Description is auto-generated))",
+      R"(TOR Inserts : CRds issued by iA Cores that Hit the LLC)",
+      R"(TOR Inserts : CRds issued by iA Cores that Hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -574,8 +574,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_RFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_RFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_RFO (Description is auto-generated))",
+      R"(TOR Inserts : RFOs issued by iA Cores that Hit the LLC)",
+      R"(TOR Inserts : RFOs issued by iA Cores that Hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -586,8 +586,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefDRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefDRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefDRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefDRD)",
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefDRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -598,8 +598,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefCRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefCRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefCRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefCRD)",
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefCRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -610,8 +610,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefRFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefRFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_HIT_LlcPrefRFO (Description is auto-generated))",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -622,8 +622,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD (Description is auto-generated))",
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -634,8 +634,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_CRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_CRD (Description is auto-generated))",
+      R"(TOR Inserts : CRds issued by iA Cores that Missed the LLC)",
+      R"(TOR Inserts : CRds issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -646,8 +646,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO (Description is auto-generated))",
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC)",
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -658,8 +658,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefDRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefDRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefDRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefDRD)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefDRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -670,8 +670,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefCRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefCRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefCRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefCRD)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefCRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -682,8 +682,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefRFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefRFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LlcPrefRFO (Description is auto-generated))",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -694,8 +694,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -706,8 +706,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -718,8 +718,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -730,8 +730,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefDRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefDRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefDRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefDRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefDRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -742,8 +742,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefCRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefCRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefCRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefCRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefCRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -754,8 +754,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefRFO",
       EventDef::Encoding{.code = 0x36, .umask = 0x11, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefRFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefRFO (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefRFO)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_LlcPrefRFO)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -766,8 +766,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -778,8 +778,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -790,8 +790,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -802,8 +802,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefDRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefDRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefDRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefDRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefDRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -814,8 +814,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefCRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefCRD (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefCRD (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefCRD)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefCRD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -826,8 +826,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefRFO",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefRFO (Description is auto-generated))",
-      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefRFO (Description is auto-generated))",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefRFO)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LlcPrefRFO)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1043,7 +1043,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART0",
       EventDef::Encoding{.code = 0x83, .umask = 0x01, .msr_values = {0x00}},
       R"(Write request of 4 bytes made by IIO Part0 to Memory)",
-      R"(Counts every write request of 4 bytes of data made by IIO Part0 to a unit onthe main die (generally memory). In the general case, Part0 refers to a standard PCIe card of any size (x16,x8,x4) that is plugged directly into one of the PCIe slots. Part0 could also refer to any device plugged into the first slot of a PCIe riser card or to a device attached to the IIO unit which starts its use of the bus using lane 0 of the 16 lanes supported by the bus.)",
+      R"(Counts every write request of 4 bytes of data made by IIO Part0 to a unit on the main die (generally memory). In the general case, Part0 refers to a standard PCIe card of any size (x16,x8,x4) that is plugged directly into one of the PCIe slots. Part0 could also refer to any device plugged into the first slot of a PCIe riser card or to a device attached to the IIO unit which starts its use of the bus using lane 0 of the 16 lanes supported by the bus.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1615,6 +1615,198 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART0",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x03, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 0)",
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART1",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x03, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 1)",
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART2",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x03, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 2)",
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART3",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x03, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 3)",
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART0",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x01, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 0)",
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART1",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x02, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 1)",
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART2",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x04, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 2)",
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART3",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x08, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 3)",
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.CMPD.ALL_PARTS",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x03, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 0-3)",
+      R"(PCIe Completion Buffer Inserts of completions with data: Part 0-3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.ALL_PARTS",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x0f, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 0-3)",
+      R"(PCIe Completion Buffer occupancy of completions with data: Part 0-3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_CACHE_TOTAL_OCCUPANCY.MEM",
+      EventDef::Encoding{.code = 0xF, .umask = 0x4, .msr_values = {0x00}},
+      R"(Total IRP occupancy of inbound read and write requests.)",
+      R"(Total IRP occupancy of inbound read and write requests.  This is effectively the sum of read occupancy and write occupancy.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.RFO",
+      EventDef::Encoding{.code = 0x10, .umask = 0x8, .msr_values = {0x00}},
+      R"(RFO request issued by the IRP unit to the mesh with the intention of writing a partial cacheline.)",
+      R"(RFO request issued by the IRP unit to the mesh with the intention of writing a partial cacheline to coherent memory.  RFO is a Read For Ownership command that requests ownership of the cacheline and moves data from the mesh to IRP cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.PCITOM",
+      EventDef::Encoding{.code = 0x10, .umask = 0x10, .msr_values = {0x00}},
+      R"(PCIITOM request issued by the IRP unit to the mesh with the intention of writing a full cacheline.)",
+      R"(PCIITOM request issued by the IRP unit to the mesh with the intention of writing a full cacheline to coherent memory, without a RFO.  PCIITOM is a speculative Invalidate to Modified command that requests ownership of the cacheline and does not move data from the mesh to IRP cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_FAF_INSERTS",
+      EventDef::Encoding{.code = 0x18, .umask = 0x0, .msr_values = {0x00}},
+      R"(Inbound read requests received by the IRP and inserted into the FAF queue.)",
+      R"(Inbound read requests to coherent memory, received by the IRP and inserted into the Fire and Forget queue (FAF), a queue used for processing inbound reads in the IRP.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_FAF_OCCUPANCY",
+      EventDef::Encoding{.code = 0x19, .umask = 0x0, .msr_values = {0x00}},
+      R"(Occupancy of the IRP FAF queue.)",
+      R"(Occupancy of the IRP Fire and Forget (FAF) queue, a queue used for processing inbound reads in the IRP.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.WR_PREF",
+      EventDef::Encoding{.code = 0x11, .umask = 0x8, .msr_values = {0x00}},
+      R"(Inbound write (fast path) requests received by the IRP.)",
+      R"(Inbound write (fast path) requests to coherent memory, received by the IRP resulting in write ownership requests issued by IRP to the mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_CLOCKTICKS",
       EventDef::Encoding{.code = 0x1, .umask = 0x0, .msr_values = {0x00}},
@@ -1667,7 +1859,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_UPI_RxL_BYPASSED.SLOT0",
       EventDef::Encoding{.code = 0x31, .umask = 0x1, .msr_values = {0x00}},
       R"(FLITs received which bypassed the Slot0 Receive Buffer)",
-      R"(Counts incoming FLITs (FLow control unITs) which bypassed the slot0 RxQ buffer (Receive Queue) and passed directly to the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transfered, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
+      R"(Counts incoming FLITs (FLow control unITs) which bypassed the slot0 RxQ buffer (Receive Queue) and passed directly to the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transferred, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1679,7 +1871,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_UPI_RxL_BYPASSED.SLOT1",
       EventDef::Encoding{.code = 0x31, .umask = 0x2, .msr_values = {0x00}},
       R"(FLITs received which bypassed the Slot0 Receive Buffer)",
-      R"(Counts incoming FLITs (FLow control unITs) which bypassed the slot1 RxQ buffer  (Receive Queue) and passed directly across the BGF and into the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transfered, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
+      R"(Counts incoming FLITs (FLow control unITs) which bypassed the slot1 RxQ buffer  (Receive Queue) and passed directly across the BGF and into the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transferred, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1690,8 +1882,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BYPASSED.SLOT2",
       EventDef::Encoding{.code = 0x31, .umask = 0x4, .msr_values = {0x00}},
-      R"(FLITs received which bypassed the Slot0 Recieve Buffer)",
-      R"(Counts incoming FLITs (FLow control unITs) whcih bypassed the slot2 RxQ buffer (Receive Queue)  and passed directly to the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transfered, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
+      R"(FLITs received which bypassed the Slot0 Receive Buffer)",
+      R"(Counts incoming FLITs (FLow control unITs) which bypassed the slot2 RxQ buffer (Receive Queue)  and passed directly to the Egress.  This is a latency optimization, and should generally be the common case.  If this value is less than the number of FLITs transferred, it implies that there was queueing getting onto the ring, and thus the transactions saw higher latency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2074,8 +2266,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_PROMOTIONS",
       EventDef::Encoding{.code = 0x56, .umask = 0x0, .msr_values = {0x00}},
-      R"(Prefecth requests that got turn into a demand request)",
-      R"(Counts when the M2M (Mesh to Memory) promotes a outstanding request in the prefetch queue due to a subsequent demand read request that entered the M2M with the same address.  Explanatory Side Note: The Prefecth queue is made of CAM (Content Addressable Memory))",
+      R"(Prefetch requests that got turn into a demand request)",
+      R"(Counts when the M2M (Mesh to Memory) promotes a outstanding request in the prefetch queue due to a subsequent demand read request that entered the M2M with the same address.  Explanatory Side Note: The Prefetch queue is made of CAM (Content Addressable Memory))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2087,7 +2279,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M2M_PREFCAM_INSERTS",
       EventDef::Encoding{.code = 0x57, .umask = 0x0, .msr_values = {0x00}},
       R"(Inserts into the Memory Controller Prefetch Queue)",
-      R"(Counts when the M2M (Mesh to Memory) recieves a prefetch request and inserts it into its outstanding prefetch queue.  Explanatory Side Note: the prefect queue is made from CAM: Content Addressable Memory)",
+      R"(Counts when the M2M (Mesh to Memory) receives a prefetch request and inserts it into its outstanding prefetch queue.  Explanatory Side Note: the prefect queue is made from CAM: Content Addressable Memory)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2443,5 +2635,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace skylakex_uncore_v1_21
+} // namespace skylakex_uncore
 } // namespace facebook::hbt::perf_event::generated

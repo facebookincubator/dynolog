@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace skylakex_core_v1_21 {
+namespace skylakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylakex_core_v1.21.json (449 events).
+    Events from skylakex_core.json (455 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -28,7 +28,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -40,7 +41,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -56,7 +58,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -68,7 +71,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -80,7 +84,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -92,7 +97,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -104,7 +110,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -116,7 +123,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -124,11 +132,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 4K page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (4K sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -136,11 +145,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 2M/4M page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 2M/4M pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (2M/4M sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -148,23 +158,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 1G page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (1G sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x08, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x08, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Load miss in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts demand data loads that caused a completed page walk of any page size (4K/2M/4M/1G). This implies it missed in all TLB levels. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks  (all page sizes) caused by demand data loads. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -176,7 +188,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -188,7 +201,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -200,19 +214,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEMORY_DISAMBIGUATION.HISTORY_RESET",
       EventDef::Encoding{
           .code = 0x09, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET (Description is auto-generated))",
-      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET (Description is auto-generated))",
+      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET)",
+      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -224,7 +240,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -240,7 +257,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -252,7 +270,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -268,7 +287,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -280,7 +300,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -292,7 +313,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -304,7 +326,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -316,7 +339,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -328,7 +352,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -340,7 +365,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -352,7 +378,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -364,7 +391,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -376,7 +404,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -388,7 +417,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -400,7 +430,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -412,7 +443,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -424,7 +456,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -436,7 +469,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -448,7 +482,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -460,7 +495,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -472,7 +508,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -484,7 +521,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -496,7 +534,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -508,7 +547,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -520,7 +560,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -532,7 +573,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -544,7 +586,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -556,7 +599,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -592,7 +636,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -604,7 +649,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -616,7 +662,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -628,7 +675,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -640,7 +688,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -656,7 +705,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -672,7 +722,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -684,7 +735,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -700,7 +752,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -716,7 +769,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -728,7 +782,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -740,7 +795,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -752,7 +808,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -764,7 +821,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -776,7 +834,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -792,7 +851,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -804,7 +864,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -816,7 +877,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -824,11 +886,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 4K page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (4K sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -836,11 +899,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 2M/4M page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 2M/4M pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (2M/4M sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -848,23 +912,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 1G page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 1G pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (1G sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x49, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x49, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Store misses in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts demand data stores that caused a completed page walk of any page size (4K/2M/4M/1G). This implies it missed in all TLB levels. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks  (all page sizes) caused by demand data stores. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -876,7 +942,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -888,7 +955,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -900,7 +968,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -912,19 +981,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EPT.WALK_PENDING",
       EventDef::Encoding{
-          .code = 0x4F, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+          .code = 0x4f, .umask = 0x10, .cmask = 0, .msr_values = {0}},
       R"(Counts 1 per cycle for each PMH that is busy with a EPT (Extended Page Table) walk for any request type.)",
       R"(Counts cycles for each PMH (Page Miss Handler) that is busy with an EPT (Extended Page Table) walk for any request type.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -936,7 +1007,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -948,7 +1020,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -960,7 +1033,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -972,7 +1046,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -984,7 +1059,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -996,7 +1072,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1008,7 +1085,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1020,7 +1098,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "INST_DECODED.DECODERS",
+      EventDef::Encoding{
+          .code = 0x55, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Instruction decoders utilized in a cycle)",
+      R"(Number of decoders utilized in a cycle when the MITE (legacy decode pipeline) fetches instructions.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1032,7 +1124,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1044,7 +1137,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1056,7 +1150,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1068,7 +1163,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1080,7 +1176,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1092,7 +1189,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1109,7 +1207,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1121,7 +1220,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1133,7 +1233,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1145,7 +1246,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1157,7 +1259,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1169,7 +1272,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1181,7 +1285,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1193,7 +1298,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1205,7 +1311,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1217,7 +1324,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1229,7 +1337,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1241,7 +1350,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1253,7 +1363,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1265,7 +1376,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1277,7 +1389,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1289,7 +1402,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1301,7 +1415,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1313,7 +1428,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1325,7 +1441,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1337,7 +1454,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1349,7 +1467,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1361,7 +1480,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1373,7 +1493,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1385,7 +1506,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1397,7 +1519,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1409,7 +1532,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1425,7 +1549,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1437,7 +1562,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1449,7 +1575,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1461,7 +1588,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1473,7 +1601,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1485,7 +1614,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1493,11 +1623,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (4K))",
-      R"(Counts completed page walks (4K page size) caused by a code fetch. This implies it missed in the ITLB and further levels of TLB. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (4K page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1505,11 +1636,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (2M/4M))",
-      R"(Counts code misses in all ITLB levels that caused a completed page walk (2M and 4M page sizes). The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (2M/4M page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1517,23 +1649,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (1G))",
-      R"(Counts store misses in all DTLB levels that cause a completed page walk (1G page size). The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (1G page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x85, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x85, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts completed page walks (2M and 4M page sizes) caused by a code fetch. This implies it missed in the ITLB and further levels of TLB. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (all page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1545,7 +1679,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1557,7 +1692,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1569,7 +1705,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1581,7 +1718,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1597,7 +1735,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1609,7 +1748,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1621,7 +1761,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1633,7 +1774,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1645,7 +1787,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1657,7 +1800,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1669,7 +1813,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1681,7 +1826,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1693,7 +1839,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1705,7 +1852,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1717,7 +1865,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1729,7 +1878,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1741,7 +1891,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1753,7 +1904,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1765,7 +1917,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1777,7 +1930,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1789,7 +1943,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1801,7 +1956,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1813,7 +1969,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1825,7 +1982,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1837,7 +1995,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1849,7 +2008,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1861,7 +2021,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1873,7 +2034,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1885,7 +2047,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1897,7 +2060,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1909,7 +2073,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1921,7 +2086,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1933,7 +2099,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1945,7 +2112,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1957,7 +2125,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1969,7 +2138,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1981,7 +2151,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1993,7 +2164,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2006,7 +2178,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2018,7 +2191,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2030,7 +2204,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2042,7 +2217,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2054,7 +2230,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2066,7 +2243,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2078,7 +2256,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2090,7 +2269,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2102,7 +2282,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2114,7 +2295,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2126,7 +2308,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2138,7 +2321,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2150,7 +2334,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2166,7 +2351,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2178,7 +2364,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2190,7 +2377,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2206,7 +2394,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2218,7 +2407,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2230,7 +2420,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2242,7 +2433,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2254,7 +2446,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2266,7 +2459,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2278,7 +2472,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2303,7 +2498,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2315,7 +2511,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2359,6 +2556,18 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "INST_RETIRED.NOP",
+      EventDef::Encoding{
+          .code = 0xC0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Number of all retired NOP instructions.)",
+      R"(Number of all retired NOP instructions.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      R"(SKL091, SKL044)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "OTHER_ASSISTS.ANY",
       EventDef::Encoding{
           .code = 0xC1, .umask = 0x3F, .cmask = 0, .msr_values = {0x00}},
@@ -2367,7 +2576,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2376,14 +2586,15 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .code = 0xC2,
           .umask = 0x02,
           .inv = true,
-          .cmask = 10,
+          .cmask = 16,
           .msr_values = {0}},
       R"(Cycles with less than 10 actually retired uops.)",
       R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2399,7 +2610,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2411,7 +2623,21 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_RETIRED.MACRO_FUSED",
+      EventDef::Encoding{
+          .code = 0xc2, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Number of macro-fused uops retired. (non precise))",
+      R"(Counts the number of macro-fused uops retired. (non precise))",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2427,7 +2653,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2451,7 +2678,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2571,7 +2799,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2583,7 +2812,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2595,7 +2825,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2607,7 +2838,21 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_RETIRED.RET",
+      EventDef::Encoding{
+          .code = 0xC5, .umask = 0x08, .cmask = 0, .msr_values = {0}},
+      R"(This event counts the number of mispredicted ret instructions retired. Non PEBS)",
+      R"(This is a non-precise version (that is, does not use PEBS) of the event that counts mispredicted return instructions retired.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2619,7 +2864,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2631,7 +2877,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2643,7 +2890,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2655,7 +2903,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2667,7 +2916,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2679,7 +2929,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2691,7 +2942,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2703,19 +2955,21 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.DSB_MISS",
       EventDef::Encoding{
           .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x11}},
-      R"(Retired Instructions who experienced decode stream buffer (DSB - the decoded instruction-cache) miss.)",
-      R"(Counts retired Instructions that experienced DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. )",
+      R"(Retired Instructions who experienced a critical DSB miss.)",
+      R"(Number of retired Instructions that experienced a critical DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. Critical means stalls were exposed to the back-end as a result of the DSB miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2727,7 +2981,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2739,7 +2994,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2751,7 +3007,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2763,7 +3020,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2775,7 +3033,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2787,7 +3046,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2799,7 +3059,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2811,7 +3072,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2823,7 +3085,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2835,103 +3098,125 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.ANY_DSB_MISS",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x1}},
+      R"(Retired Instructions who experienced DSB miss.)",
+      R"(Counts retired Instructions that experienced DSB (Decode stream buffer i.e. the decoded instruction-cache) miss.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD scalar computational double precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD scalar computational single precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT14 RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT14 RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 128-bit packed computational double precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 128-bit packed computational double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 128-bit packed computational single precision floating-point instruction retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 128-bit packed computational single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.512B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x40, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 8 calculations per element.)",
-      R"(Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 8 calculations per element.)",
+      R"(Counts number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x80, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 16 calculations per element.)",
-      R"(Number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 16 calculations per element.)",
+      R"(Counts number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2943,7 +3228,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2955,7 +3241,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2967,7 +3254,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2979,7 +3267,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2991,7 +3280,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3003,7 +3293,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3015,7 +3306,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3027,7 +3319,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3039,7 +3332,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3051,7 +3345,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3063,7 +3358,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3075,7 +3371,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3087,7 +3384,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3099,7 +3397,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3111,7 +3410,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3123,7 +3423,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3135,7 +3436,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3147,7 +3449,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       203,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3159,7 +3462,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3171,7 +3475,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3183,7 +3488,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       101,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3195,7 +3501,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       503,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3207,7 +3514,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       1009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3219,7 +3527,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3231,7 +3540,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3243,7 +3553,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3255,7 +3566,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3267,7 +3579,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3275,11 +3588,12 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x11, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions that miss the STLB.)",
-      R"(Retired load instructions that miss the STLB.)",
+      R"(Number of retired load instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3287,12 +3601,13 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x12, .cmask = 0, .msr_values = {0}},
       R"(Retired store instructions that miss the STLB.)",
-      R"(Retired store instructions that miss the STLB.)",
+      R"(Number of retired store instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3304,7 +3619,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3316,7 +3632,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3329,7 +3646,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3341,7 +3659,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3354,7 +3673,22 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_INST_RETIRED.ANY",
+      EventDef::Encoding{
+          .code = 0xD0, .umask = 0x83, .cmask = 0, .msr_values = {0}},
+      R"(All retired memory instructions.)",
+      R"(Counts all retired memory instructions - loads and stores.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{
+          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3366,7 +3700,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3378,7 +3713,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3390,7 +3726,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3402,7 +3739,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3414,7 +3752,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3426,7 +3765,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3438,7 +3778,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3450,7 +3791,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3462,7 +3804,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3474,7 +3817,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3486,7 +3830,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3498,7 +3843,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3510,7 +3856,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3522,7 +3869,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3534,7 +3882,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3546,7 +3895,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3558,91 +3908,99 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IHITI",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_IHITI (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_IHITI (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_IHITI)",
+      R"(CORE_SNOOP_RESPONSE.RSP_IHITI)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IHITFSE",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_IHITFSE (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_IHITFSE (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_IHITFSE)",
+      R"(CORE_SNOOP_RESPONSE.RSP_IHITFSE)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SHITFSE",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_SHITFSE (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_SHITFSE (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_SHITFSE)",
+      R"(CORE_SNOOP_RESPONSE.RSP_SHITFSE)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SFWDM",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_SFWDM (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_SFWDM (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_SFWDM)",
+      R"(CORE_SNOOP_RESPONSE.RSP_SFWDM)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IFWDM",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_IFWDM (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_IFWDM (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_IFWDM)",
+      R"(CORE_SNOOP_RESPONSE.RSP_IFWDM)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IFWDFE",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_IFWDFE (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_IFWDFE (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_IFWDFE)",
+      R"(CORE_SNOOP_RESPONSE.RSP_IFWDFE)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SFWDFE",
       EventDef::Encoding{
           .code = 0xEF, .umask = 0x40, .cmask = 0, .msr_values = {0}},
-      R"(CORE_SNOOP_RESPONSE.RSP_SFWDFE (Description is auto-generated))",
-      R"(CORE_SNOOP_RESPONSE.RSP_SFWDFE (Description is auto-generated))",
+      R"(CORE_SNOOP_RESPONSE.RSP_SFWDFE)",
+      R"(CORE_SNOOP_RESPONSE.RSP_SFWDFE)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3654,7 +4012,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3666,7 +4025,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3678,7 +4038,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3690,7 +4051,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3702,7 +4064,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3714,7 +4077,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3726,7 +4090,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3738,18 +4103,16 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10001}},
       R"(Counts demand data reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3760,12 +4123,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0001}},
       R"(Counts demand data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3776,12 +4136,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0001}},
       R"(Counts demand data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3797,7 +4154,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0001}},
       R"(Counts demand data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3813,7 +4170,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0001}},
       R"(Counts demand data reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3829,7 +4186,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000001}},
       R"(Counts demand data reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3840,12 +4197,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00001}},
       R"(Counts demand data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3861,7 +4215,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00001}},
       R"(Counts demand data reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3872,12 +4226,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00001}},
       R"(Counts demand data reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3888,12 +4239,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800001}},
       R"(Counts demand data reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3904,12 +4252,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000001}},
       R"(Counts demand data reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts demand data reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3920,12 +4265,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
       R"(Counts all demand data writes (RFOs) that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3936,12 +4278,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0002}},
       R"(Counts all demand data writes (RFOs) that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3952,12 +4291,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0002}},
       R"(Counts all demand data writes (RFOs) that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3973,7 +4309,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0002}},
       R"(Counts all demand data writes (RFOs) that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3989,7 +4325,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0002}},
       R"(Counts all demand data writes (RFOs) that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4005,7 +4341,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000002}},
       R"(Counts all demand data writes (RFOs) that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4016,12 +4352,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00002}},
       R"(Counts all demand data writes (RFOs) that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4037,7 +4370,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00002}},
       R"(Counts all demand data writes (RFOs) that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4048,12 +4381,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00002}},
       R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4064,12 +4394,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800002}},
       R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4080,12 +4407,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000002}},
       R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand data writes (RFOs) that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4096,12 +4420,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10004}},
       R"(Counts all demand code reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4112,12 +4433,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0004}},
       R"(Counts all demand code reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4128,12 +4446,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0004}},
       R"(Counts all demand code reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4149,7 +4464,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0004}},
       R"(Counts all demand code reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4165,7 +4480,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0004}},
       R"(Counts all demand code reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4181,7 +4496,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000004}},
       R"(Counts all demand code reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4192,12 +4507,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00004}},
       R"(Counts all demand code reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4213,7 +4525,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00004}},
       R"(Counts all demand code reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4224,12 +4536,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00004}},
       R"(Counts all demand code reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4240,12 +4549,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800004}},
       R"(Counts all demand code reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4256,12 +4562,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000004}},
       R"(Counts all demand code reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand code reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4272,12 +4575,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10010}},
       R"(Counts prefetch (that bring data to L2) data reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4288,12 +4588,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0010}},
       R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4304,12 +4601,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0010}},
       R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4325,7 +4619,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0010}},
       R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4341,7 +4635,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0010}},
       R"(Counts prefetch (that bring data to L2) data reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4357,7 +4651,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4368,12 +4662,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4389,7 +4680,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4400,12 +4691,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4416,12 +4704,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4432,12 +4717,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000010}},
       R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch (that bring data to L2) data reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4448,12 +4730,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4464,12 +4743,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4480,12 +4756,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4501,7 +4774,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4517,7 +4790,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4533,7 +4806,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4544,12 +4817,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4565,7 +4835,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4576,12 +4846,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4592,12 +4859,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4608,12 +4872,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000020}},
       R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to L2) RFOs that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4624,12 +4885,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4640,12 +4898,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4656,12 +4911,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4677,7 +4929,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4693,7 +4945,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4709,7 +4961,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4720,12 +4972,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4741,7 +4990,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4752,12 +5001,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4768,12 +5014,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4784,12 +5027,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000080}},
       R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) data reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4800,12 +5040,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4816,12 +5053,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4832,12 +5066,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4853,7 +5084,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4869,7 +5100,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4885,7 +5116,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4896,12 +5127,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4917,7 +5145,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4928,12 +5156,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4944,12 +5169,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4960,12 +5182,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000100}},
       R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4976,12 +5195,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4992,12 +5208,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5008,12 +5221,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5029,7 +5239,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5045,7 +5255,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5061,7 +5271,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5072,12 +5282,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5093,7 +5300,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5104,12 +5311,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5120,12 +5324,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5136,12 +5337,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000400}},
       R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts L1 data cache hardware prefetch requests and software prefetch requests that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5152,12 +5350,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10490}},
       R"(Counts all prefetch data reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5168,12 +5363,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0490}},
       R"(Counts all prefetch data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5184,12 +5376,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0490}},
       R"(Counts all prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5205,7 +5394,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0490}},
       R"(Counts all prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5221,7 +5410,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0490}},
       R"(Counts all prefetch data reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5237,7 +5426,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000490}},
       R"(Counts all prefetch data reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5248,12 +5437,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00490}},
       R"(Counts all prefetch data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5269,7 +5455,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00490}},
       R"(Counts all prefetch data reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5280,12 +5466,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00490}},
       R"(Counts all prefetch data reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5296,12 +5479,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800490}},
       R"(Counts all prefetch data reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5312,12 +5492,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000490}},
       R"(Counts all prefetch data reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all prefetch data reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5328,12 +5505,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10120}},
       R"(Counts prefetch RFOs that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5344,12 +5518,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0120}},
       R"(Counts prefetch RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5360,12 +5531,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0120}},
       R"(Counts prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5381,7 +5549,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0120}},
       R"(Counts prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5397,7 +5565,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0120}},
       R"(Counts prefetch RFOs that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5413,7 +5581,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000120}},
       R"(Counts prefetch RFOs that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5424,12 +5592,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00120}},
       R"(Counts prefetch RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5445,7 +5610,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00120}},
       R"(Counts prefetch RFOs that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5456,12 +5621,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00120}},
       R"(Counts prefetch RFOs that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5472,12 +5634,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800120}},
       R"(Counts prefetch RFOs that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5488,12 +5647,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000120}},
       R"(Counts prefetch RFOs that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts prefetch RFOs that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5504,12 +5660,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10491}},
       R"(Counts all demand & prefetch data reads that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5520,12 +5673,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0491}},
       R"(Counts all demand & prefetch data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5536,12 +5686,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0491}},
       R"(Counts all demand & prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5557,7 +5704,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0491}},
       R"(Counts all demand & prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5573,7 +5720,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0491}},
       R"(Counts all demand & prefetch data reads that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5589,7 +5736,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000491}},
       R"(Counts all demand & prefetch data reads that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5600,12 +5747,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00491}},
       R"(Counts all demand & prefetch data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5621,7 +5765,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00491}},
       R"(Counts all demand & prefetch data reads that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5632,12 +5776,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00491}},
       R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5648,12 +5789,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800491}},
       R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5664,12 +5802,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000491}},
       R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch data reads that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5680,12 +5815,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10122}},
       R"(Counts all demand & prefetch RFOs that have any response type.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5696,12 +5828,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.NO_SNOOP_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0122}},
       R"(Counts all demand & prefetch RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that hit in the L3 and sibling core snoops are not needed as either the core-valid bit is not set or the shared line is present in multiple cores.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5712,12 +5841,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0122}},
       R"(Counts all demand & prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5733,7 +5859,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x10003C0122}},
       R"(Counts all demand & prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5749,7 +5875,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3F803C0122}},
       R"(Counts all demand & prefetch RFOs that hit in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that hit in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5765,7 +5891,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x3FBC000122}},
       R"(Counts all demand & prefetch RFOs that miss in the L3.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss in the L3.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5776,12 +5902,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00122}},
       R"(Counts all demand & prefetch RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss the L3 and clean or shared data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5797,7 +5920,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .cmask = 0,
           .msr_values = {0x103FC00122}},
       R"(Counts all demand & prefetch RFOs that miss the L3 and the modified data is transferred from remote cache.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss the L3 and the modified data is transferred from remote cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5808,12 +5931,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063FC00122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63FC00122}},
       R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from local or remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from local or remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5824,12 +5944,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063B800122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63B800122}},
       R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from remote dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from remote dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5840,12 +5957,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0604000122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x604000122}},
       R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from local dram.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Counts all demand & prefetch RFOs that miss the L3 and the data is returned from local dram.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5856,12 +5970,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0001}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0001}},
       R"(OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5872,12 +5983,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0002}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0002}},
       R"(OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5888,12 +5996,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0004}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0004}},
       R"(OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5904,12 +6009,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0010}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0010}},
       R"(OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5920,12 +6022,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0020}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0020}},
       R"(OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5936,12 +6035,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0080}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0080}},
       R"(OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5952,12 +6048,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0100}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0100}},
       R"(OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5968,12 +6061,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0400}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0400}},
       R"(OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.PF_L1D_AND_SW.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5984,12 +6074,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0490}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0490}},
       R"(OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6000,12 +6087,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0120}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0120}},
       R"(OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6016,12 +6100,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0491}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0491}},
       R"(OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6032,12 +6113,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x08003C0122}},
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0122}},
       R"(OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6045,5 +6123,5 @@ Note: Invoking MITE requires two or three cycles delay.)",
       ));
 }
 
-} // namespace skylakex_core_v1_21
+} // namespace skylakex_core
 } // namespace facebook::hbt::perf_event::generated
