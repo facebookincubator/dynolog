@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace broadwell_core_v25 {
+namespace broadwell_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwell_core_v25.json (741 events).
+    Events from broadwell_core.json (741 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW id: 61
@@ -3031,7 +3031,7 @@ Note: Writeback pending FIFO has six entries.)",
       R"(This event counts all actually retired uops. Counting increments by two for micro-fused uops, and by one for macro-fused and other uops. Maximal increment value for one cycle is eight.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.pebs = 1},
       R"(0)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -3703,96 +3703,96 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
       R"(Randomly selected loads with latency value being above 4)",
       R"(Counts randomly selected loads with latency value being above four.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_8",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
       R"(Randomly selected loads with latency value being above 8)",
       R"(Counts randomly selected loads with latency value being above eight.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
       R"(Randomly selected loads with latency value being above 16)",
       R"(Counts randomly selected loads with latency value being above 16.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
       R"(Randomly selected loads with latency value being above 32)",
       R"(Counts randomly selected loads with latency value being above 32.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
       R"(Randomly selected loads with latency value being above 64)",
       R"(Counts randomly selected loads with latency value being above 64.)",
       2003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
       R"(Randomly selected loads with latency value being above 128)",
       R"(Counts randomly selected loads with latency value being above 128.)",
       1009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
       R"(Randomly selected loads with latency value being above 256)",
       R"(Counts randomly selected loads with latency value being above 256.)",
       503,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
       R"(Randomly selected loads with latency value being above 512)",
       R"(Counts randomly selected loads with latency value being above 512.)",
       101,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -3838,7 +3838,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x41, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops that split across a cacheline boundary.)",
-      R"(This event counts line-splitted load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(This event counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3850,7 +3850,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x42, .cmask = 0, .msr_values = {0}},
       R"(Retired store uops that split across a cacheline boundary.)",
-      R"(This event counts line-splitted store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(This event counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -10256,5 +10256,5 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       R"(0)"));
 }
 
-} // namespace broadwell_core_v25
+} // namespace broadwell_core
 } // namespace facebook::hbt::perf_event::generated
