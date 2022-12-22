@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace haswellx_core_v20 {
+namespace haswellx_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from haswellx_core_v20.json (385 events).
+    Events from haswellx_core.json (385 events).
 
     Supported SKUs:
         - Arch: x86, Model: HSX id: 63
@@ -40,23 +40,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.THREAD_ANY",
-      EventDef::Encoding{
-          .code = 0x00,
-          .umask = 0x02,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
-      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -68,7 +53,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -80,7 +66,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -92,7 +79,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -104,7 +92,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -116,7 +105,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -128,7 +118,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -140,7 +131,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -152,7 +144,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -164,7 +157,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -176,19 +170,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "DTLB_LOAD_MISSES.WALK_COMPLETED",
-      EventDef::Encoding{
-          .code = 0x08, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
-      R"(Demand load Miss in all translation lookaside buffer (TLB) levels causes a page walk that completes of any page size.)",
-      R"(Completed page walks in any TLB of any page size due to demand load misses.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -200,7 +183,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -212,7 +196,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -224,19 +209,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "DTLB_LOAD_MISSES.STLB_HIT",
-      EventDef::Encoding{
-          .code = 0x08, .umask = 0x60, .cmask = 0, .msr_values = {0}},
-      R"(Load operations that miss the first DTLB level but hit the second and do not cause page walks)",
-      R"(Number of cache load STLB hits. No page walk.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -248,7 +222,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -260,23 +235,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "INT_MISC.RECOVERY_CYCLES_ANY",
-      EventDef::Encoding{
-          .code = 0x0D,
-          .umask = 0x03,
-          .any = true,
-          .cmask = 1,
-          .msr_values = {0}},
-      R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke))",
-      R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke).)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -288,7 +248,47 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_ISSUED.FLAGS_MERGE",
+      EventDef::Encoding{
+          .code = 0x0E, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+      R"(Number of flags-merge uops being allocated. Such uops considered perf sensitive; added by GSR u-arch.)",
+      R"(Number of flags-merge uops allocated. Such uops add delay.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_ISSUED.SLOW_LEA",
+      EventDef::Encoding{
+          .code = 0x0E, .umask = 0x20, .cmask = 0, .msr_values = {0}},
+      R"(Number of slow LEA uops being allocated. A uop is generally considered SlowLea if it has 3 sources (e.g. 2 sources + immediate) regardless if as a result of LEA instruction or not.)",
+      R"(Number of slow LEA or similar uops allocated. Such uop has 3 sources (for example, 2 sources + immediate) regardless of whether it is a result of LEA instruction or not.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_ISSUED.SINGLE_MUL",
+      EventDef::Encoding{
+          .code = 0x0E, .umask = 0x40, .cmask = 0, .msr_values = {0}},
+      R"(Number of Multiply packed/scalar single precision uops allocated)",
+      R"(Number of multiply packed/scalar single precision uops allocated.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -304,7 +304,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -321,43 +322,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_ISSUED.FLAGS_MERGE",
-      EventDef::Encoding{
-          .code = 0x0E, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Number of flags-merge uops being allocated. Such uops considered perf sensitive; added by GSR u-arch.)",
-      R"(Number of flags-merge uops allocated. Such uops add delay.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_ISSUED.SLOW_LEA",
-      EventDef::Encoding{
-          .code = 0x0E, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Number of slow LEA uops being allocated. A uop is generally considered SlowLea if it has 3 sources (e.g. 2 sources + immediate) regardless if as a result of LEA instruction or not.)",
-      R"(Number of slow LEA or similar uops allocated. Such uop has 3 sources (for example, 2 sources + immediate) regardless of whether it is a result of LEA instruction or not.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_ISSUED.SINGLE_MUL",
-      EventDef::Encoding{
-          .code = 0x0E, .umask = 0x40, .cmask = 0, .msr_values = {0}},
-      R"(Number of Multiply packed/scalar single precision uops allocated)",
-      R"(Number of multiply packed/scalar single precision uops allocated.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -369,7 +335,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -381,67 +348,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.RFO_MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x22, .cmask = 0, .msr_values = {0}},
-      R"(RFO requests that miss L2 cache)",
-      R"(Counts the number of store RFO requests that miss the L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.CODE_RD_MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x24, .cmask = 0, .msr_values = {0}},
-      R"(L2 cache misses when fetching instructions)",
-      R"(Number of instruction fetches that missed the L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.ALL_DEMAND_MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x27, .cmask = 0, .msr_values = {0}},
-      R"(Demand requests that miss L2 cache)",
-      R"(Demand requests that miss L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.L2_PF_MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(L2 prefetch requests that miss L2 cache)",
-      R"(Counts all L2 HW prefetcher requests that missed L2.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x3F, .cmask = 0, .msr_values = {0}},
-      R"(All requests that miss L2 cache)",
-      R"(All requests that missed L2.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      R"(HSD78, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -453,31 +360,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      R"(HSD78, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "L2_RQSTS.RFO_HIT",
+      "L2_RQSTS.L2_PF_MISS",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0xc2, .cmask = 0, .msr_values = {0}},
-      R"(RFO requests that hit L2 cache)",
-      R"(Counts the number of store RFO requests that hit the L2 cache.)",
+          .code = 0x24, .umask = 0x30, .cmask = 0, .msr_values = {0}},
+      R"(L2 prefetch requests that miss L2 cache)",
+      R"(Counts all L2 HW prefetcher requests that missed L2.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.CODE_RD_HIT",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0xc4, .cmask = 0, .msr_values = {0}},
-      R"(L2 cache hits when fetching instructions, code reads.)",
-      R"(Number of instruction fetches that hit the L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -489,19 +385,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_DATA_RD",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0xE1, .cmask = 0, .msr_values = {0}},
+          .code = 0x24, .umask = 0xe1, .cmask = 0, .msr_values = {0}},
       R"(Demand Data Read requests)",
       R"(Counts any demand and L1 HW prefetch data load requests to L2.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      R"(HSD78, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -513,7 +410,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -525,19 +423,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.ALL_DEMAND_REFERENCES",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0xe7, .cmask = 0, .msr_values = {0}},
-      R"(Demand requests to L2 cache)",
-      R"(Demand requests to L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -549,19 +436,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.REFERENCES",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0xFF, .cmask = 0, .msr_values = {0}},
-      R"(All L2 requests)",
-      R"(All requests to L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -573,7 +449,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -585,7 +462,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -597,35 +475,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.THREAD_P",
-      EventDef::Encoding{
-          .code = 0x3C, .umask = 0x00, .cmask = 0, .msr_values = {0}},
-      R"(Thread cycles when thread is not in halt state)",
-      R"(Counts the number of thread cycles while the thread is not in a halt state. The thread enters the halt state when it is running the HLT instruction. The core frequency may change from time to time due to power or thermal throttling.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.THREAD_P_ANY",
-      EventDef::Encoding{
-          .code = 0x3C,
-          .umask = 0x00,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
-      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -634,54 +485,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate))",
       R"(Increments at the frequency of XCLK (100 MHz) when not halted.)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_THREAD_UNHALTED.REF_XCLK_ANY",
-      EventDef::Encoding{
-          .code = 0x3C,
-          .umask = 0x01,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate))",
-      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.REF_XCLK",
-      EventDef::Encoding{
-          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate))",
-      R"(Reference cycles when the thread is unhalted. (counts at 100 MHz rate))",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.REF_XCLK_ANY",
-      EventDef::Encoding{
-          .code = 0x3C,
-          .umask = 0x01,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0x00}},
-      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate))",
-      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -690,62 +498,24 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x3c, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.ONE_THREAD_ACTIVE",
-      EventDef::Encoding{
-          .code = 0x3C, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
-      R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
-      R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles)",
+      R"(L1D miss outstanding duration in cycles)",
       R"(Increments the number of outstanding L1D misses every cycle. Set Cmask = 1 and Edge =1 to count occurrences.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L1D_PEND_MISS.PENDING_CYCLES",
-      EventDef::Encoding{
-          .code = 0x48, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles with L1D load Misses outstanding.)",
-      R"(Cycles with L1D load Misses outstanding.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L1D_PEND_MISS.PENDING_CYCLES_ANY",
-      EventDef::Encoding{
-          .code = 0x48,
-          .umask = 0x01,
-          .any = true,
-          .cmask = 1,
-          .msr_values = {0x00}},
-      R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
-      R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -757,19 +527,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "L1D_PEND_MISS.FB_FULL",
+      "L1D_PEND_MISS.PENDING_CYCLES",
       EventDef::Encoding{
-          .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+          .code = 0x48, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles with L1D load Misses outstanding.)",
+      R"(Cycles with L1D load Misses outstanding.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -781,7 +553,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -793,7 +566,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -805,7 +579,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -817,19 +592,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "DTLB_STORE_MISSES.WALK_COMPLETED",
-      EventDef::Encoding{
-          .code = 0x49, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
-      R"(Store misses in all DTLB levels that cause completed page walks)",
-      R"(Completed page walks due to store miss in any TLB levels of any page size (4K/2M/4M/1G).)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -841,7 +605,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -853,7 +618,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -865,19 +631,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "DTLB_STORE_MISSES.STLB_HIT",
-      EventDef::Encoding{
-          .code = 0x49, .umask = 0x60, .cmask = 0, .msr_values = {0}},
-      R"(Store operations that miss the first TLB level but hit the second and do not cause page walks)",
-      R"(Store operations that miss the first TLB level but hit the second and do not cause page walks.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -889,7 +644,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -901,7 +657,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -913,7 +670,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -925,7 +683,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -937,7 +696,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -949,7 +709,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -961,7 +722,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -973,7 +735,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -985,7 +748,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -997,7 +761,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1009,7 +774,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1021,7 +787,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1033,7 +800,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1045,7 +813,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1057,7 +826,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1069,7 +839,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1081,7 +852,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPL_CYCLES.RING123",
+      EventDef::Encoding{
+          .code = 0x5C, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Unhalted core cycles when thread is in rings 1, 2, or 3)",
+      R"(Unhalted core cycles when the thread is not in ring 0.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1097,19 +882,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPL_CYCLES.RING123",
-      EventDef::Encoding{
-          .code = 0x5C, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Unhalted core cycles when thread is in rings 1, 2, or 3)",
-      R"(Unhalted core cycles when the thread is not in ring 0.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1121,7 +895,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1133,7 +908,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1145,7 +921,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1157,7 +934,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1169,7 +947,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1181,24 +960,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "RS_EVENTS.EMPTY_END",
-      EventDef::Encoding{
-          .code = 0x5E,
-          .umask = 0x01,
-          .edge = true,
-          .inv = true,
-          .cmask = 1,
-          .msr_values = {0}},
-      R"(Counts end of periods where the Reservation Station (RS) was empty. Could be useful to precisely locate Frontend Latency Bound issues.)",
-      R"(Counts end of periods where the Reservation Station (RS) was empty. Could be useful to precisely locate Frontend Latency Bound issues.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1210,31 +973,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78, HSD62, HSD61)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_DATA_RD",
-      EventDef::Encoding{
-          .code = 0x60, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when offcore outstanding Demand Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
-      R"(Cycles when offcore outstanding Demand Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78, HSD62, HSD61)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD_GE_6",
-      EventDef::Encoding{
-          .code = 0x60, .umask = 0x01, .cmask = 6, .msr_values = {0x00}},
-      R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
-      R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD78, HSD62, HSD61)"));
+      R"(HSD78, HSD62, HSD61, HSM63, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1246,7 +985,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD62, HSD61)"));
+      R"(HSD62, HSD61, HSM63)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1258,19 +997,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD62, HSD61)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_RFO",
-      EventDef::Encoding{
-          .code = 0x60, .umask = 0x04, .cmask = 1, .msr_values = {0}},
-      R"(Offcore outstanding demand rfo reads transactions in SuperQueue (SQ), queue to uncore, every cycle.)",
-      R"(Offcore outstanding demand rfo reads transactions in SuperQueue (SQ), queue to uncore, every cycle.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD62, HSD61)"));
+      R"(HSD62, HSD61, HSM63)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1282,7 +1009,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD62, HSD61)"));
+      R"(HSD62, HSD61, HSM63)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_DATA_RD",
+      EventDef::Encoding{
+          .code = 0x60, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when offcore outstanding Demand Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
+      R"(Cycles when offcore outstanding Demand Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSD62, HSD61, HSM63, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1294,7 +1033,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD62, HSD61)"));
+      R"(HSD62, HSD61, HSM63)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_RFO",
+      EventDef::Encoding{
+          .code = 0x60, .umask = 0x04, .cmask = 1, .msr_values = {0}},
+      R"(Offcore outstanding demand rfo reads transactions in SuperQueue (SQ), queue to uncore, every cycle.)",
+      R"(Offcore outstanding demand rfo reads transactions in SuperQueue (SQ), queue to uncore, every cycle.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD62, HSD61, HSM63)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1306,7 +1057,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1318,7 +1070,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1342,19 +1095,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MITE_CYCLES",
-      EventDef::Encoding{
-          .code = 0x79, .umask = 0x04, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path.)",
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1366,7 +1108,73 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_DSB_UOPS",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Increment each cycle # of uops delivered to IDQ when MS_busy by DSB. Set Cmask = 1 to count cycles. Add Edge=1 to count # of delivery.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_MITE_UOPS",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Increment each cycle # of uops delivered to IDQ when MS_busy by MITE. Set Cmask = 1 to count cycles.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_UOPS",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts uops delivered by the Front-end with the assistance of the microcode sequencer.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_CYCLES",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts cycles during which the microcode sequencer assisted the Front-end in delivering uops.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MITE_CYCLES",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x04, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1378,31 +1186,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MS_DSB_UOPS",
-      EventDef::Encoding{
-          .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Increment each cycle # of uops delivered to IDQ when MS_busy by DSB. Set Cmask = 1 to count cycles. Add Edge=1 to count # of delivery.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1413,12 +1211,13 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy.)",
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy.)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy.)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1430,7 +1229,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1442,19 +1242,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MS_MITE_UOPS",
-      EventDef::Encoding{
-          .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Increment each cycle # of uops delivered to IDQ when MS_busy by MITE. Set Cmask = 1 to count cycles.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1466,7 +1255,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1478,47 +1268,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MS_UOPS",
-      EventDef::Encoding{
-          .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts uops delivered by the Front-end with the assistance of the microcode sequencer.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MS_CYCLES",
-      EventDef::Encoding{
-          .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts cycles during which the microcode sequencer assisted the Front-end in delivering uops.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ.MS_SWITCHES",
-      EventDef::Encoding{
-          .code = 0x79,
-          .umask = 0x30,
-          .edge = true,
-          .cmask = 1,
-          .msr_values = {0}},
-      R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer.)",
-      R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1530,7 +1281,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1542,7 +1294,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1554,7 +1307,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1566,19 +1320,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "ICACHE.IFDATA_STALL",
-      EventDef::Encoding{
-          .code = 0x80, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Cycles where a code fetch is stalled due to L1 instruction-cache miss.)",
-      R"(Cycles where a code fetch is stalled due to L1 instruction-cache miss.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1590,7 +1333,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1602,7 +1346,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1614,7 +1359,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1626,19 +1372,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "ITLB_MISSES.WALK_COMPLETED",
-      EventDef::Encoding{
-          .code = 0x85, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
-      R"(Misses in all ITLB levels that cause completed page walks)",
-      R"(Completed page walks in ITLB of any page size.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1650,7 +1385,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1662,7 +1398,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1674,19 +1411,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "ITLB_MISSES.STLB_HIT",
-      EventDef::Encoding{
-          .code = 0x85, .umask = 0x60, .cmask = 0, .msr_values = {0}},
-      R"(Operations that miss the first ITLB level but hit the second and do not cause any page walks)",
-      R"(ITLB misses that hit STLB. No page walk.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1698,7 +1424,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1710,7 +1437,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1722,7 +1450,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1734,7 +1463,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1746,7 +1476,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1758,7 +1489,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1770,7 +1502,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1782,7 +1515,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1794,7 +1528,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1806,7 +1541,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1818,7 +1554,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1830,7 +1567,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1842,7 +1580,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1854,7 +1593,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1866,7 +1606,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1878,7 +1619,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1890,7 +1632,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1902,7 +1645,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1914,19 +1658,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "BR_MISP_EXEC.TAKEN_INDIRECT_NEAR_CALL",
-      EventDef::Encoding{
-          .code = 0x89, .umask = 0xA0, .cmask = 0, .msr_values = {0}},
-      R"(Taken speculative and retired mispredicted indirect calls.)",
-      R"(Taken speculative and retired mispredicted indirect calls.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1938,7 +1671,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1950,7 +1684,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1962,7 +1697,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2050,35 +1786,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_0_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x01,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are executed in port 0.)",
-      R"(Cycles per core when uops are exectuted in port 0.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_0",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 0.)",
-      R"(Cycles per thread when uops are executed in port 0.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2090,35 +1799,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_1_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x02,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are executed in port 1.)",
-      R"(Cycles per core when uops are exectuted in port 1.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_1",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 1.)",
-      R"(Cycles per thread when uops are executed in port 1.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2130,35 +1812,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_2_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x04,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are dispatched to port 2.)",
-      R"(Cycles per core when uops are dispatched to port 2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_2",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 2.)",
-      R"(Cycles per thread when uops are executed in port 2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2170,35 +1825,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_3_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x08,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are dispatched to port 3.)",
-      R"(Cycles per core when uops are dispatched to port 3.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_3",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 3.)",
-      R"(Cycles per thread when uops are executed in port 3.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2210,35 +1838,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_4_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x10,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are executed in port 4.)",
-      R"(Cycles per core when uops are exectuted in port 4.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_4",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 4.)",
-      R"(Cycles per thread when uops are executed in port 4.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2250,35 +1851,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_5_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x20,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are executed in port 5.)",
-      R"(Cycles per core when uops are exectuted in port 5.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_5",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 5.)",
-      R"(Cycles per thread when uops are executed in port 5.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2290,35 +1864,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_6_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x40,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are executed in port 6.)",
-      R"(Cycles per core when uops are exectuted in port 6.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_6",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 6.)",
-      R"(Cycles per thread when uops are executed in port 6.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2330,35 +1877,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED_PORT.PORT_7_CORE",
-      EventDef::Encoding{
-          .code = 0xA1,
-          .umask = 0x80,
-          .any = true,
-          .cmask = 0,
-          .msr_values = {0}},
-      R"(Cycles per core when uops are dispatched to port 7.)",
-      R"(Cycles per core when uops are dispatched to port 7.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_DISPATCHED_PORT.PORT_7",
-      EventDef::Encoding{
-          .code = 0xA1, .umask = 0x80, .cmask = 0, .msr_values = {0}},
-      R"(Cycles per thread when uops are executed in port 7.)",
-      R"(Cycles per thread when uops are executed in port 7.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2382,7 +1902,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2394,7 +1915,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2406,67 +1928,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L2_PENDING",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+          .code = 0xa3, .umask = 0x01, .cmask = 1, .msr_values = {0}},
       R"(Cycles with pending L2 cache miss loads.)",
       R"(Cycles with pending L2 miss loads. Set Cmask=2 to count cycle.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CYCLE_ACTIVITY.CYCLES_LDM_PENDING",
-      EventDef::Encoding{
-          .code = 0xA3, .umask = 0x02, .cmask = 2, .msr_values = {0}},
-      R"(Cycles with pending memory loads.)",
-      R"(Cycles with pending memory loads. Set Cmask=2 to count cycle.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CYCLE_ACTIVITY.CYCLES_NO_EXECUTE",
-      EventDef::Encoding{
-          .code = 0xA3, .umask = 0x04, .cmask = 4, .msr_values = {0}},
-      R"(This event increments by 1 for every cycle where there was no execute for this thread.)",
-      R"(This event counts cycles during which no instructions were executed in the execution stage of the pipeline.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CYCLE_ACTIVITY.STALLS_L2_PENDING",
-      EventDef::Encoding{
-          .code = 0xA3, .umask = 0x05, .cmask = 5, .msr_values = {0}},
-      R"(Execution stalls due to L2 cache misses.)",
-      R"(Number of loads missed L2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CYCLE_ACTIVITY.STALLS_LDM_PENDING",
-      EventDef::Encoding{
-          .code = 0xA3, .umask = 0x06, .cmask = 6, .msr_values = {0}},
-      R"(Execution stalls due to memory subsystem.)",
-      R"(This event counts cycles during which no instructions were executed in the execution stage of the pipeline and there were memory instructions pending (waiting for data).)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      R"(HSD78, HSM63, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2478,7 +1953,59 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CYCLE_ACTIVITY.CYCLES_LDM_PENDING",
+      EventDef::Encoding{
+          .code = 0xA3, .umask = 0x02, .cmask = 2, .msr_values = {0}},
+      R"(Cycles with pending memory loads.)",
+      R"(Cycles with pending memory loads. Set Cmask=2 to count cycle.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CYCLE_ACTIVITY.CYCLES_NO_EXECUTE",
+      EventDef::Encoding{
+          .code = 0xA3, .umask = 0x04, .cmask = 4, .msr_values = {0}},
+      R"(This event increments by 1 for every cycle where there was no execute for this thread.)",
+      R"(This event counts cycles during which no instructions were executed in the execution stage of the pipeline.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CYCLE_ACTIVITY.STALLS_L2_PENDING",
+      EventDef::Encoding{
+          .code = 0xa3, .umask = 0x05, .cmask = 5, .msr_values = {0}},
+      R"(Execution stalls due to L2 cache misses.)",
+      R"(Number of loads missed L2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSM63, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CYCLE_ACTIVITY.STALLS_LDM_PENDING",
+      EventDef::Encoding{
+          .code = 0xA3, .umask = 0x06, .cmask = 6, .msr_values = {0}},
+      R"(Execution stalls due to memory subsystem.)",
+      R"(This event counts cycles during which no instructions were executed in the execution stage of the pipeline and there were memory instructions pending (waiting for data).)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2490,7 +2017,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2502,31 +2030,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "LSD.CYCLES_ACTIVE",
-      EventDef::Encoding{
-          .code = 0xA8, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
-      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "LSD.CYCLES_4_UOPS",
-      EventDef::Encoding{
-          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0}},
-      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
-      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2538,7 +2043,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2550,31 +2056,33 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_DATA_RD",
       EventDef::Encoding{
-          .code = 0xB0, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+          .code = 0xb0, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Demand Data Read requests sent to uncore)",
       R"(Demand data read requests sent to uncore.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(HSD78)"));
+      R"(HSD78, HSM80)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
+      R"(Cacheable and noncacheable code read requests)",
       R"(Demand code read requests sent to uncore.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2586,7 +2094,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2598,7 +2107,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Number of uops executed on the core.)",
+      R"(Counts total number of uops to be executed per-core each cycle.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2618,148 +2140,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles where at least 1 uop was executed per-thread)",
-      R"(This events counts the cycles where at least one uop was executed. It is counted per thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD144, HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 2, .msr_values = {0}},
-      R"(Cycles where at least 2 uops were executed per-thread)",
-      R"(This events counts the cycles where at least two uop were executed. It is counted per thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD144, HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 3, .msr_values = {0}},
-      R"(Cycles where at least 3 uops were executed per-thread)",
-      R"(This events counts the cycles where at least three uop were executed. It is counted per thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD144, HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 4, .msr_values = {0}},
-      R"(Cycles where at least 4 uops were executed per-thread.)",
-      R"(Cycles where at least 4 uops were executed per-thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD144, HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Number of uops executed on the core.)",
-      R"(Counts total number of uops to be executed per-core each cycle.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_1",
-      EventDef::Encoding{
-          .code = 0xb1, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_2",
-      EventDef::Encoding{
-          .code = 0xb1, .umask = 0x02, .cmask = 2, .msr_values = {0x00}},
-      R"(Cycles at least 2 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 2 micro-op is executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_3",
-      EventDef::Encoding{
-          .code = 0xb1, .umask = 0x02, .cmask = 3, .msr_values = {0x00}},
-      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_4",
-      EventDef::Encoding{
-          .code = 0xb1, .umask = 0x02, .cmask = 4, .msr_values = {0x00}},
-      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_NONE",
-      EventDef::Encoding{
-          .code = 0xb1,
-          .umask = 0x02,
-          .inv = true,
-          .cmask = 0,
-          .msr_values = {0x00}},
-      R"(Cycles with no micro-ops executed from any thread on physical core.)",
-      R"(Cycles with no micro-ops executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(HSD30, HSM31)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "OFFCORE_REQUESTS_BUFFER.SQ_FULL",
       EventDef::Encoding{
           .code = 0xb2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Offcore requests buffer cannot take more entries for this thread core.)",
       R"(Offcore requests buffer cannot take more entries for this thread core.)",
       2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OFFCORE_RESPONSE",
-      EventDef::Encoding{
-          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
-      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
-      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -2775,7 +2161,47 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.ITLB_L1",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x21, .cmask = 0, .msr_values = {0}},
+      R"(Number of ITLB page walker hits in the L1+FB)",
+      R"(Number of ITLB page walker loads that hit in the L1+FB.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.EPT_DTLB_L1",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x41, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L1 and FB.)",
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L1 and FB.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.EPT_ITLB_L1",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x81, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L1 and FB.)",
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L1 and FB.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2787,7 +2213,47 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.ITLB_L2",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x22, .cmask = 0, .msr_values = {0}},
+      R"(Number of ITLB page walker hits in the L2)",
+      R"(Number of ITLB page walker loads that hit in the L2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.EPT_DTLB_L2",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x42, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L2.)",
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "PAGE_WALKER_LOADS.EPT_ITLB_L2",
+      EventDef::Encoding{
+          .code = 0xBC, .umask = 0x82, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2803,11 +2269,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "PAGE_WALKER_LOADS.DTLB_MEMORY",
+      "PAGE_WALKER_LOADS.ITLB_L3",
       EventDef::Encoding{
-          .code = 0xBC, .umask = 0x18, .cmask = 0, .msr_values = {0}},
-      R"(Number of DTLB page walker hits in Memory)",
-      R"(Number of DTLB page walker loads from memory.)",
+          .code = 0xBC, .umask = 0x24, .cmask = 0, .msr_values = {0}},
+      R"(Number of ITLB page walker hits in the L3 + XSNP)",
+      R"(Number of ITLB page walker loads that hit in the L3.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2815,35 +2281,37 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "PAGE_WALKER_LOADS.ITLB_L1",
+      "PAGE_WALKER_LOADS.EPT_DTLB_L3",
       EventDef::Encoding{
-          .code = 0xBC, .umask = 0x21, .cmask = 0, .msr_values = {0}},
-      R"(Number of ITLB page walker hits in the L1+FB)",
-      R"(Number of ITLB page walker loads that hit in the L1+FB.)",
+          .code = 0xBC, .umask = 0x44, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L3.)",
+      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L3.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "PAGE_WALKER_LOADS.ITLB_L2",
+      "PAGE_WALKER_LOADS.EPT_ITLB_L3",
       EventDef::Encoding{
-          .code = 0xBC, .umask = 0x22, .cmask = 0, .msr_values = {0}},
-      R"(Number of ITLB page walker hits in the L2)",
-      R"(Number of ITLB page walker loads that hit in the L2.)",
+          .code = 0xBC, .umask = 0x84, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
+      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "PAGE_WALKER_LOADS.ITLB_L3",
+      "PAGE_WALKER_LOADS.DTLB_MEMORY",
       EventDef::Encoding{
-          .code = 0xBC, .umask = 0x24, .cmask = 0, .msr_values = {0}},
-      R"(Number of ITLB page walker hits in the L3 + XSNP)",
-      R"(Number of ITLB page walker loads that hit in the L3.)",
+          .code = 0xBC, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of DTLB page walker hits in Memory)",
+      R"(Number of DTLB page walker loads from memory.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2863,42 +2331,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_DTLB_L1",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x41, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L1 and FB.)",
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L1 and FB.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_DTLB_L2",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x42, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L2.)",
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_DTLB_L3",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x44, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L3.)",
-      R"(Counts the number of Extended Page Table walks from the DTLB that hit in the L3.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "PAGE_WALKER_LOADS.EPT_DTLB_MEMORY",
       EventDef::Encoding{
           .code = 0xBC, .umask = 0x48, .cmask = 0, .msr_values = {0}},
@@ -2907,43 +2339,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_ITLB_L1",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L1 and FB.)",
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L1 and FB.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_ITLB_L2",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "PAGE_WALKER_LOADS.EPT_ITLB_L3",
-      EventDef::Encoding{
-          .code = 0xBC, .umask = 0x84, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
-      R"(Counts the number of Extended Page Table walks from the ITLB that hit in the L2.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2955,7 +2352,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2967,7 +2365,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2979,7 +2378,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2995,6 +2395,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "INST_RETIRED.X87",
+      EventDef::Encoding{
+          .code = 0xC0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(FP operations retired. X87 FP operations that have no exceptions: Counts also flows that have several X87 or flows that use X87 uops in the exception handling.)",
+      R"(This is a non-precise version (that is, does not use PEBS) of the event that counts FP operations retired. For X87 FP operations that have no exceptions counting also includes flows that have several X87, or flows that use X87 uops in the exception handling.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "INST_RETIRED.PREC_DIST",
       EventDef::Encoding{
           .code = 0xC0, .umask = 0x01, .cmask = 0, .msr_values = {0}},
@@ -3004,18 +2417,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(HSD140)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "INST_RETIRED.X87",
-      EventDef::Encoding{
-          .code = 0xC0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(FP operations retired. X87 FP operations that have no exceptions: Counts also flows that have several X87 or flows that use X87 uops in the exception handling.)",
-      R"(This is a non-precise version (that is, does not use PEBS) of the event that counts FP operations retired. For X87 FP operations that have no exceptions counting also includes flows that have several X87, or flows that use X87 uops in the exception handling.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3051,7 +2452,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3062,8 +2464,22 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of micro-ops retired. Use Cmask=1 and invert to count active cycles or stalled cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_RETIRED.RETIRE_SLOTS",
+      EventDef::Encoding{
+          .code = 0xC2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Retirement slots used.)",
+      R"(This event counts the number of retirement slots used each cycle.  There are potentially 4 slots that can be used each cycle - meaning, 4 uops or 4 instructions could retire each cycle.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3079,7 +2495,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3088,14 +2505,15 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0xC2,
           .umask = 0x01,
           .inv = true,
-          .cmask = 10,
+          .cmask = 16,
           .msr_values = {0}},
       R"(Cycles with less than 10 actually retired uops.)",
       R"(Cycles with less than 10 actually retired uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3112,19 +2530,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_RETIRED.RETIRE_SLOTS",
-      EventDef::Encoding{
-          .code = 0xC2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Retirement slots used.)",
-      R"(This event counts the number of retirement slots used each cycle.  There are potentially 4 slots that can be used each cycle - meaning, 4 uops or 4 instructions could retire each cycle.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3136,23 +2543,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MACHINE_CLEARS.COUNT",
-      EventDef::Encoding{
-          .code = 0xC3,
-          .umask = 0x01,
-          .edge = true,
-          .cmask = 1,
-          .msr_values = {0x00}},
-      R"(Number of machine clears (nukes) of any type.)",
-      R"(Number of machine clears (nukes) of any type.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3164,7 +2556,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3176,7 +2569,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3188,19 +2582,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "BR_INST_RETIRED.ALL_BRANCHES",
-      EventDef::Encoding{
-          .code = 0xC4, .umask = 0x00, .cmask = 0, .msr_values = {0}},
-      R"(All (macro) branch instructions retired.)",
-      R"(Branch instructions at retirement.)",
-      400009,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3212,7 +2595,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3224,31 +2608,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "BR_INST_RETIRED.NEAR_CALL_R3",
+      "BR_INST_RETIRED.ALL_BRANCHES",
       EventDef::Encoding{
-          .code = 0xC4, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Direct and indirect macro near call instructions retired (captured in ring 3).)",
-      R"(Direct and indirect macro near call instructions retired (captured in ring 3).)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "BR_INST_RETIRED.ALL_BRANCHES_PEBS",
-      EventDef::Encoding{
-          .code = 0xC4, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+          .code = 0xC4, .umask = 0x00, .cmask = 0, .msr_values = {0}},
       R"(All (macro) branch instructions retired.)",
-      R"(All (macro) branch instructions retired.)",
+      R"(Branch instructions at retirement.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3260,7 +2634,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3272,7 +2647,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3284,7 +2660,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3296,19 +2673,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "BR_MISP_RETIRED.ALL_BRANCHES",
+      "BR_INST_RETIRED.ALL_BRANCHES_PEBS",
       EventDef::Encoding{
-          .code = 0xC5, .umask = 0x00, .cmask = 0, .msr_values = {0}},
-      R"(All mispredicted macro branch instructions retired.)",
-      R"(Mispredicted branch instructions at retirement.)",
+          .code = 0xC4, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(All (macro) branch instructions retired.)",
+      R"(All (macro) branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      EventDef::IntelFeatures{.pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_INST_RETIRED.NEAR_CALL_R3",
+      EventDef::Encoding{
+          .code = 0xC4, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Direct and indirect macro near call instructions retired (captured in ring 3).)",
+      R"(Direct and indirect macro near call instructions retired (captured in ring 3).)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3320,7 +2712,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_RETIRED.ALL_BRANCHES",
+      EventDef::Encoding{
+          .code = 0xC5, .umask = 0x00, .cmask = 0, .msr_values = {0}},
+      R"(All mispredicted macro branch instructions retired.)",
+      R"(Mispredicted branch instructions at retirement.)",
+      400009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3332,31 +2738,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "BR_MISP_RETIRED.NEAR_TAKEN",
-      EventDef::Encoding{
-          .code = 0xC5, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(number of near branch instructions retired that were mispredicted and taken.)",
-      R"(Number of near branch instructions retired that were taken but mispredicted.)",
-      400009,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "AVX_INSTS.ALL",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x07, .cmask = 0, .msr_values = {0}},
-      R"(Approximate counts of AVX & AVX2 256-bit instructions, including non-arithmetic instructions, loads, and stores.  May count non-AVX instructions that employ 256-bit operations, including (but not necessarily limited to) rep string instructions that use 256-bit loads and stores for optimized performance, XSAVE* and XRSTOR*, and operations that transition the x87 FPU data registers between x87 and MMX.)",
-      R"(Note that a whole rep string only counts AVX_INST.ALL once.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3368,7 +2751,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3380,7 +2764,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3392,7 +2777,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3404,7 +2790,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3416,7 +2803,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3428,7 +2816,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3452,7 +2841,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3464,7 +2854,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3476,7 +2867,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3488,7 +2880,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3500,7 +2893,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3512,7 +2906,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3524,7 +2919,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3548,7 +2944,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3560,7 +2957,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3572,7 +2970,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3584,7 +2983,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3596,7 +2996,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3608,7 +3009,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3620,102 +3022,103 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
       R"(Randomly selected loads with latency value being above 4.)",
       R"(Randomly selected loads with latency value being above 4.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_8",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
       R"(Randomly selected loads with latency value being above 8.)",
       R"(Randomly selected loads with latency value being above 8.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
       R"(Randomly selected loads with latency value being above 16.)",
       R"(Randomly selected loads with latency value being above 16.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
       R"(Randomly selected loads with latency value being above 32.)",
       R"(Randomly selected loads with latency value being above 32.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
       R"(Randomly selected loads with latency value being above 64.)",
       R"(Randomly selected loads with latency value being above 64.)",
       2003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
       R"(Randomly selected loads with latency value being above 128.)",
       R"(Randomly selected loads with latency value being above 128.)",
       1009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
       R"(Randomly selected loads with latency value being above 256.)",
       R"(Randomly selected loads with latency value being above 256.)",
       503,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
       R"(Randomly selected loads with latency value being above 512.)",
       R"(Randomly selected loads with latency value being above 512.)",
       101,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(HSD76, HSD25, HSM26)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -3785,8 +3188,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MEM_UOPS_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load uops.)",
-      R"(All retired load uops.)",
+      R"(Retired load uops.)",
+      R"(Counts all retired load uops. This event accounts for SW prefetch uops of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3797,8 +3200,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MEM_UOPS_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(All retired store uops.)",
-      R"(All retired store uops.)",
+      R"(Retired store uops.)",
+      R"(Counts all retired store uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -3987,15 +3390,16 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "BACLEARS.ANY",
+      "CPU_CLK_UNHALTED.THREAD_P",
       EventDef::Encoding{
-          .code = 0xe6, .umask = 0x1f, .cmask = 0, .msr_values = {0}},
-      R"(Counts the total number when the front end is resteered, mainly when the BPU cannot provide a correct prediction and this is corrected by other branch handling mechanisms at the front end.)",
-      R"(Number of front end re-steers due to BPU misprediction.)",
-      100003,
+          .code = 0x3C, .umask = 0x00, .cmask = 0, .msr_values = {0}},
+      R"(Thread cycles when thread is not in halt state)",
+      R"(Counts the number of thread cycles while the thread is not in a halt state. The thread enters the halt state when it is running the HLT instruction. The core frequency may change from time to time due to power or thermal throttling.)",
+      2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4007,7 +3411,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4019,7 +3424,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4031,7 +3437,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4043,7 +3450,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4055,7 +3463,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4067,7 +3476,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4079,7 +3489,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4091,7 +3502,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4103,7 +3515,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4115,7 +3528,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4127,7 +3541,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4139,7 +3554,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4151,7 +3567,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4163,7 +3580,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4175,17 +3593,854 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.TAKEN_INDIRECT_NEAR_CALL",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xA0, .cmask = 0, .msr_values = {0}},
+      R"(Taken speculative and retired mispredicted indirect calls.)",
+      R"(Taken speculative and retired mispredicted indirect calls.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_0_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x01,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are executed in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_1_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x02,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are executed in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_2_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x04,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are dispatched to port 2.)",
+      R"(Cycles per core when uops are dispatched to port 2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_3_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x08,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are dispatched to port 3.)",
+      R"(Cycles per core when uops are dispatched to port 3.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_4_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x10,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are executed in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_5_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x20,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are executed in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_6_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x40,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are executed in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED_PORT.PORT_7_CORE",
+      EventDef::Encoding{
+          .code = 0xA1,
+          .umask = 0x80,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Cycles per core when uops are dispatched to port 7.)",
+      R"(Cycles per core when uops are dispatched to port 7.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_RETIRED.NEAR_TAKEN",
+      EventDef::Encoding{
+          .code = 0xC5, .umask = 0x20, .cmask = 0, .msr_values = {0}},
+      R"(number of near branch instructions retired that were mispredicted and taken.)",
+      R"(Number of near branch instructions retired that were taken but mispredicted.)",
+      400009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DTLB_LOAD_MISSES.WALK_COMPLETED",
+      EventDef::Encoding{
+          .code = 0x08, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
+      R"(Demand load Miss in all translation lookaside buffer (TLB) levels causes a page walk that completes of any page size.)",
+      R"(Completed page walks in any TLB of any page size due to demand load misses.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DTLB_LOAD_MISSES.STLB_HIT",
+      EventDef::Encoding{
+          .code = 0x08, .umask = 0x60, .cmask = 0, .msr_values = {0}},
+      R"(Load operations that miss the first DTLB level but hit the second and do not cause page walks)",
+      R"(Number of cache load STLB hits. No page walk.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.RFO_HIT",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0xc2, .cmask = 0, .msr_values = {0}},
+      R"(RFO requests that hit L2 cache)",
+      R"(Counts the number of store RFO requests that hit the L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.RFO_MISS",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0x22, .cmask = 0, .msr_values = {0}},
+      R"(RFO requests that miss L2 cache)",
+      R"(Counts the number of store RFO requests that miss the L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.CODE_RD_HIT",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0xc4, .cmask = 0, .msr_values = {0}},
+      R"(L2 cache hits when fetching instructions, code reads.)",
+      R"(Number of instruction fetches that hit the L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.CODE_RD_MISS",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0x24, .cmask = 0, .msr_values = {0}},
+      R"(L2 cache misses when fetching instructions)",
+      R"(Number of instruction fetches that missed the L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.ALL_DEMAND_MISS",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0x27, .cmask = 0, .msr_values = {0}},
+      R"(Demand requests that miss L2 cache)",
+      R"(Demand requests that miss L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.ALL_DEMAND_REFERENCES",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0xe7, .cmask = 0, .msr_values = {0}},
+      R"(Demand requests to L2 cache)",
+      R"(Demand requests to L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.MISS",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0x3f, .cmask = 0, .msr_values = {0}},
+      R"(All requests that miss L2 cache)",
+      R"(All requests that missed L2.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_RQSTS.REFERENCES",
+      EventDef::Encoding{
+          .code = 0x24, .umask = 0xff, .cmask = 0, .msr_values = {0}},
+      R"(All L2 requests)",
+      R"(All requests to L2 cache.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DTLB_STORE_MISSES.WALK_COMPLETED",
+      EventDef::Encoding{
+          .code = 0x49, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
+      R"(Store misses in all DTLB levels that cause completed page walks)",
+      R"(Completed page walks due to store miss in any TLB levels of any page size (4K/2M/4M/1G).)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DTLB_STORE_MISSES.STLB_HIT",
+      EventDef::Encoding{
+          .code = 0x49, .umask = 0x60, .cmask = 0, .msr_values = {0}},
+      R"(Store operations that miss the first TLB level but hit the second and do not cause page walks)",
+      R"(Store operations that miss the first TLB level but hit the second and do not cause page walks.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ITLB_MISSES.WALK_COMPLETED",
+      EventDef::Encoding{
+          .code = 0x85, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
+      R"(Misses in all ITLB levels that cause completed page walks)",
+      R"(Completed page walks in ITLB of any page size.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ITLB_MISSES.STLB_HIT",
+      EventDef::Encoding{
+          .code = 0x85, .umask = 0x60, .cmask = 0, .msr_values = {0}},
+      R"(Operations that miss the first ITLB level but hit the second and do not cause any page walks)",
+      R"(ITLB misses that hit STLB. No page walk.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles where at least 1 uop was executed per-thread)",
+      R"(This events counts the cycles where at least one uop was executed. It is counted per thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD144, HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 2, .msr_values = {0}},
+      R"(Cycles where at least 2 uops were executed per-thread)",
+      R"(This events counts the cycles where at least two uop were executed. It is counted per thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD144, HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 3, .msr_values = {0}},
+      R"(Cycles where at least 3 uops were executed per-thread)",
+      R"(This events counts the cycles where at least three uop were executed. It is counted per thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD144, HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 4, .msr_values = {0}},
+      R"(Cycles where at least 4 uops were executed per-thread.)",
+      R"(Cycles where at least 4 uops were executed per-thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD144, HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BACLEARS.ANY",
+      EventDef::Encoding{
+          .code = 0xe6, .umask = 0x1f, .cmask = 0, .msr_values = {0}},
+      R"(Counts the total number when the front end is resteered, mainly when the BPU cannot provide a correct prediction and this is corrected by other branch handling mechanisms at the front end.)",
+      R"(Number of front end re-steers due to BPU misprediction.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_RESPONSE",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      R"(Offcore response can be programmed only with a specific pair of event select and counter MSR, and with specific event codes and predefine mask bit value in a dedicated MSR to specify attributes of the offcore transaction.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MACHINE_CLEARS.COUNT",
+      EventDef::Encoding{
+          .code = 0xC3,
+          .umask = 0x01,
+          .edge = true,
+          .cmask = 1,
+          .msr_values = {0x00}},
+      R"(Number of machine clears (nukes) of any type.)",
+      R"(Number of machine clears (nukes) of any type.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "LSD.CYCLES_ACTIVE",
+      EventDef::Encoding{
+          .code = 0xA8, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
+      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "LSD.CYCLES_4_UOPS",
+      EventDef::Encoding{
+          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0}},
+      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
+      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "RS_EVENTS.EMPTY_END",
+      EventDef::Encoding{
+          .code = 0x5E,
+          .umask = 0x01,
+          .edge = true,
+          .inv = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Counts end of periods where the Reservation Station (RS) was empty. Could be useful to precisely locate Frontend Latency Bound issues.)",
+      R"(Counts end of periods where the Reservation Station (RS) was empty. Could be useful to precisely locate Frontend Latency Bound issues.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_SWITCHES",
+      EventDef::Encoding{
+          .code = 0x79,
+          .umask = 0x30,
+          .edge = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer.)",
+      R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_0",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 0.)",
+      R"(Cycles per thread when uops are executed in port 0.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_1",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 1.)",
+      R"(Cycles per thread when uops are executed in port 1.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_2",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 2.)",
+      R"(Cycles per thread when uops are executed in port 2.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_3",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x08, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 3.)",
+      R"(Cycles per thread when uops are executed in port 3.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_4",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 4.)",
+      R"(Cycles per thread when uops are executed in port 4.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_5",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x20, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 5.)",
+      R"(Cycles per thread when uops are executed in port 5.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_6",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 6.)",
+      R"(Cycles per thread when uops are executed in port 6.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_DISPATCHED_PORT.PORT_7",
+      EventDef::Encoding{
+          .code = 0xA1, .umask = 0x80, .cmask = 0, .msr_values = {0}},
+      R"(Cycles per thread when uops are executed in port 7.)",
+      R"(Cycles per thread when uops are executed in port 7.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_UNHALTED.THREAD_ANY",
+      EventDef::Encoding{
+          .code = 0x00,
+          .umask = 0x02,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
+      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_UNHALTED.THREAD_P_ANY",
+      EventDef::Encoding{
+          .code = 0x3C,
+          .umask = 0x00,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
+      R"(Core cycles when at least one thread on the physical core is not in halt state.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_THREAD_UNHALTED.REF_XCLK_ANY",
+      EventDef::Encoding{
+          .code = 0x3C,
+          .umask = 0x01,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0}},
+      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate))",
+      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "INT_MISC.RECOVERY_CYCLES_ANY",
+      EventDef::Encoding{
+          .code = 0x0D,
+          .umask = 0x03,
+          .any = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke))",
+      R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke).)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_GE_1",
+      EventDef::Encoding{
+          .code = 0xb1, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
+      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_GE_2",
+      EventDef::Encoding{
+          .code = 0xb1, .umask = 0x02, .cmask = 2, .msr_values = {0x00}},
+      R"(Cycles at least 2 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 2 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_GE_3",
+      EventDef::Encoding{
+          .code = 0xb1, .umask = 0x02, .cmask = 3, .msr_values = {0x00}},
+      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_GE_4",
+      EventDef::Encoding{
+          .code = 0xb1, .umask = 0x02, .cmask = 4, .msr_values = {0x00}},
+      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_NONE",
+      EventDef::Encoding{
+          .code = 0xb1,
+          .umask = 0x02,
+          .inv = true,
+          .cmask = 0,
+          .msr_values = {0x00}},
+      R"(Cycles with no micro-ops executed from any thread on physical core.)",
+      R"(Cycles with no micro-ops executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD30, HSM31)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD_GE_6",
+      EventDef::Encoding{
+          .code = 0x60, .umask = 0x01, .cmask = 6, .msr_values = {0x00}},
+      R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
+      R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(HSD78, HSD62, HSD61, HSM63, HSM80)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L1D_PEND_MISS.PENDING_CYCLES_ANY",
+      EventDef::Encoding{
+          .code = 0x48,
+          .umask = 0x01,
+          .any = true,
+          .cmask = 1,
+          .msr_values = {0x00}},
+      R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
+      R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L1D_PEND_MISS.FB_FULL",
+      EventDef::Encoding{
+          .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
+      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "AVX_INSTS.ALL",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x07, .cmask = 0, .msr_values = {0}},
+      R"(Approximate counts of AVX & AVX2 256-bit instructions, including non-arithmetic instructions, loads, and stores.  May count non-AVX instructions that employ 256-bit operations, including (but not necessarily limited to) rep string instructions that use 256-bit loads and stores for optimized performance, XSAVE* and XRSTOR*, and operations that transition the x87 FPU data registers between x87 and MMX.)",
+      R"(Note that a whole rep string only counts AVX_INST.ALL once.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ICACHE.IFDATA_STALL",
+      EventDef::Encoding{
+          .code = 0x80, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Cycles where a code fetch is stalled due to L1 instruction-cache miss.)",
+      R"(Cycles where a code fetch is stalled due to L1 instruction-cache miss.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_UNHALTED.REF_XCLK",
+      EventDef::Encoding{
+          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
+      R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate))",
+      R"(Reference cycles when the thread is unhalted. (counts at 100 MHz rate))",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_UNHALTED.REF_XCLK_ANY",
+      EventDef::Encoding{
+          .code = 0x3C,
+          .umask = 0x01,
+          .any = true,
+          .cmask = 0,
+          .msr_values = {0x00}},
+      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate))",
+      R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "CPU_CLK_UNHALTED.ONE_THREAD_ACTIVE",
+      EventDef::Encoding{
+          .code = 0x3C, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
+      R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
+      R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0001}},
-      R"(Counts demand data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0001}},
+      R"(Counts demand data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts demand data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4201,7 +4456,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0001}},
-      R"(Counts demand data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts demand data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts demand data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4217,7 +4472,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00001}},
-      R"(Counts demand data reads miss in the L3 )",
+      R"(Counts demand data reads miss in the L3)",
       R"(Counts demand data reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4229,11 +4484,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400001}},
-      R"(Counts demand data reads miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400001}},
+      R"(Counts demand data reads miss the L3 and the data is returned from local dram)",
       R"(Counts demand data reads miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4245,11 +4497,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0002}},
-      R"(Counts all demand data writes (RFOs) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0002}},
+      R"(Counts all demand data writes (RFOs) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all demand data writes (RFOs) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4265,7 +4514,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0002}},
-      R"(Counts all demand data writes (RFOs) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts all demand data writes (RFOs) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts all demand data writes (RFOs) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4281,7 +4530,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00002}},
-      R"(Counts all demand data writes (RFOs) miss in the L3 )",
+      R"(Counts all demand data writes (RFOs) miss in the L3)",
       R"(Counts all demand data writes (RFOs) miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4293,11 +4542,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400002}},
-      R"(Counts all demand data writes (RFOs) miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400002}},
+      R"(Counts all demand data writes (RFOs) miss the L3 and the data is returned from local dram)",
       R"(Counts all demand data writes (RFOs) miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4313,7 +4559,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103FC00002}},
-      R"(Counts all demand data writes (RFOs) miss the L3 and the modified data is transferred from remote cache )",
+      R"(Counts all demand data writes (RFOs) miss the L3 and the modified data is transferred from remote cache)",
       R"(Counts all demand data writes (RFOs) miss the L3 and the modified data is transferred from remote cache)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4325,11 +4571,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0004}},
-      R"(Counts all demand code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0004}},
+      R"(Counts all demand code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all demand code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4345,7 +4588,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0004}},
-      R"(Counts all demand code reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts all demand code reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts all demand code reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4361,7 +4604,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00004}},
-      R"(Counts all demand code reads miss in the L3 )",
+      R"(Counts all demand code reads miss in the L3)",
       R"(Counts all demand code reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4373,11 +4616,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400004}},
-      R"(Counts all demand code reads miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400004}},
+      R"(Counts all demand code reads miss the L3 and the data is returned from local dram)",
       R"(Counts all demand code reads miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4393,7 +4633,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads hit in the L3 )",
+      R"(Counts prefetch (that bring data to L2) data reads hit in the L3)",
       R"(Counts prefetch (that bring data to L2) data reads hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4409,7 +4649,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00010}},
-      R"(Counts prefetch (that bring data to L2) data reads miss in the L3 )",
+      R"(Counts prefetch (that bring data to L2) data reads miss in the L3)",
       R"(Counts prefetch (that bring data to L2) data reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4425,7 +4665,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs hit in the L3 )",
+      R"(Counts all prefetch (that bring data to L2) RFOs hit in the L3)",
       R"(Counts all prefetch (that bring data to L2) RFOs hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4441,7 +4681,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs miss in the L3 )",
+      R"(Counts all prefetch (that bring data to L2) RFOs miss in the L3)",
       R"(Counts all prefetch (that bring data to L2) RFOs miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4457,7 +4697,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads hit in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads hit in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) code reads hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4473,7 +4713,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads miss in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads miss in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) code reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4489,7 +4729,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads hit in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads hit in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) data reads hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4505,7 +4745,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads miss in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads miss in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) data reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4521,7 +4761,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs hit in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs hit in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4537,7 +4777,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs miss in the L3 )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs miss in the L3)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4553,7 +4793,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads hit in the L3 )",
+      R"(Counts prefetch (that bring data to LLC only) code reads hit in the L3)",
       R"(Counts prefetch (that bring data to LLC only) code reads hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4569,7 +4809,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads miss in the L3 )",
+      R"(Counts prefetch (that bring data to LLC only) code reads miss in the L3)",
       R"(Counts prefetch (that bring data to LLC only) code reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4581,11 +4821,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0091}},
-      R"(Counts all demand & prefetch data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0091}},
+      R"(Counts all demand & prefetch data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all demand & prefetch data reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4601,7 +4838,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0091}},
-      R"(Counts all demand & prefetch data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts all demand & prefetch data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts all demand & prefetch data reads hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4617,7 +4854,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00091}},
-      R"(Counts all demand & prefetch data reads miss in the L3 )",
+      R"(Counts all demand & prefetch data reads miss in the L3)",
       R"(Counts all demand & prefetch data reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4629,11 +4866,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400091}},
-      R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400091}},
+      R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from local dram)",
       R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4645,11 +4879,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.LLC_MISS.REMOTE_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063F800091}},
-      R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from remote dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63F800091}},
+      R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from remote dram)",
       R"(Counts all demand & prefetch data reads miss the L3 and the data is returned from remote dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4665,7 +4896,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103FC00091}},
-      R"(Counts all demand & prefetch data reads miss the L3 and the modified data is transferred from remote cache )",
+      R"(Counts all demand & prefetch data reads miss the L3 and the modified data is transferred from remote cache)",
       R"(Counts all demand & prefetch data reads miss the L3 and the modified data is transferred from remote cache)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4677,11 +4908,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.LLC_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC00091}},
-      R"(Counts all demand & prefetch data reads miss the L3 and clean or shared data is transferred from remote cache )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC00091}},
+      R"(Counts all demand & prefetch data reads miss the L3 and clean or shared data is transferred from remote cache)",
       R"(Counts all demand & prefetch data reads miss the L3 and clean or shared data is transferred from remote cache)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4693,11 +4921,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0122}},
-      R"(Counts all demand & prefetch RFOs hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0122}},
+      R"(Counts all demand & prefetch RFOs hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all demand & prefetch RFOs hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4713,7 +4938,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0122}},
-      R"(Counts all demand & prefetch RFOs hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts all demand & prefetch RFOs hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts all demand & prefetch RFOs hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4729,7 +4954,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00122}},
-      R"(Counts all demand & prefetch RFOs miss in the L3 )",
+      R"(Counts all demand & prefetch RFOs miss in the L3)",
       R"(Counts all demand & prefetch RFOs miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4741,11 +4966,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400122}},
-      R"(Counts all demand & prefetch RFOs miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400122}},
+      R"(Counts all demand & prefetch RFOs miss the L3 and the data is returned from local dram)",
       R"(Counts all demand & prefetch RFOs miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4757,11 +4979,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_CODE_RD.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0244}},
-      R"(Counts all demand & prefetch code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0244}},
+      R"(Counts all demand & prefetch code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all demand & prefetch code reads hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4777,7 +4996,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC00244}},
-      R"(Counts all demand & prefetch code reads miss in the L3 )",
+      R"(Counts all demand & prefetch code reads miss in the L3)",
       R"(Counts all demand & prefetch code reads miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4789,11 +5008,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_CODE_RD.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0600400244}},
-      R"(Counts all demand & prefetch code reads miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x600400244}},
+      R"(Counts all demand & prefetch code reads miss the L3 and the data is returned from local dram)",
       R"(Counts all demand & prefetch code reads miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4805,11 +5021,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_READS.LLC_HIT.HIT_OTHER_CORE_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C07F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C07F7}},
+      R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoops to sibling cores hit in either E/S state and the line is not forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4825,7 +5038,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C07F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded )",
+      R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       R"(Counts all data/code/rfo reads (demand & prefetch) hit in the L3 and the snoop to one of the sibling cores hits the line in M state and the line is forwarded)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4841,7 +5054,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC007F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) miss in the L3 )",
+      R"(Counts all data/code/rfo reads (demand & prefetch) miss in the L3)",
       R"(Counts all data/code/rfo reads (demand & prefetch) miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4853,11 +5066,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_READS.LLC_MISS.LOCAL_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x06004007F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from local dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x6004007F7}},
+      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from local dram)",
       R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from local dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4869,11 +5079,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_READS.LLC_MISS.REMOTE_DRAM",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x063F8007F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from remote dram )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x63F8007F7}},
+      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from remote dram)",
       R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the data is returned from remote dram)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4889,7 +5096,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103FC007F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the modified data is transferred from remote cache )",
+      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the modified data is transferred from remote cache)",
       R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and the modified data is transferred from remote cache)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4901,11 +5108,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_READS.LLC_MISS.REMOTE_HIT_FORWARD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x083FC007F7}},
-      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and clean or shared data is transferred from remote cache )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x83FC007F7}},
+      R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and clean or shared data is transferred from remote cache)",
       R"(Counts all data/code/rfo reads (demand & prefetch) miss the L3 and clean or shared data is transferred from remote cache)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4921,7 +5125,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C8FFF}},
-      R"(Counts all requests hit in the L3 )",
+      R"(Counts all requests hit in the L3)",
       R"(Counts all requests hit in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4937,7 +5141,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FBFC08FFF}},
-      R"(Counts all requests miss in the L3 )",
+      R"(Counts all requests miss in the L3)",
       R"(Counts all requests miss in the L3)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4946,5 +5150,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace haswellx_core_v20
+} // namespace haswellx_core
 } // namespace facebook::hbt::perf_event::generated
