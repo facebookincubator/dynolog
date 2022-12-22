@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace broadwellde_uncore_v7 {
+namespace broadwellde_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwellde_uncore_v7.json (900 events).
+    Events from broadwellde_uncore.json (900 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW-DE id: 86
@@ -1907,7 +1907,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TxR_INSERTS.BL_CORE",
       EventDef::Encoding{.code = 0x2, .umask = 0x40, .msr_values = {0}},
       R"(Egress Allocations; BL - Corebo)",
-      R"(Number of allocations into the Cbo Egress.  The Egress is used to queue up requests destined for the ring.; Ring transactions from the Corebo destined for the BL ring.  This is commonly used for transfering writeback data to the cache.)",
+      R"(Number of allocations into the Cbo Egress.  The Egress is used to queue up requests destined for the ring.; Ring transactions from the Corebo destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10819,5 +10819,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace broadwellde_uncore_v7
+} // namespace broadwellde_uncore
 } // namespace facebook::hbt::perf_event::generated
