@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace sandybridge_core_v16 {
+namespace sandybridge_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sandybridge_core_v16.json (406 events).
+    Events from sandybridge_core.json (406 events).
 
     Supported SKUs:
         - Arch: x86, Model: SNB id: 42
@@ -88,7 +88,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x03, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Cases when loads get true Block-on-Store blocking code preventing store forwarding.)",
-      R"(This event counts loads that followed a store to the same address, where the data could not be forwarded inside the pipeline from the store to the load.  The most common reason why store forwarding would be blocked is when a load's address range overlaps with a preceeding smaller uncompleted store.  See the table of not supported store forwards in the Intel\xae 64 and IA-32 Architectures Optimization Reference Manual.  The penalty for blocked store forwarding is that the load must wait for the store to complete before it can be issued.)",
+      R"(This event counts loads that followed a store to the same address, where the data could not be forwarded inside the pipeline from the store to the load.  The most common reason why store forwarding would be blocked is when a load's address range overlaps with a preceding smaller uncompleted store.  See the table of not supported store forwards in the Intel(R) 64 and IA-32 Architectures Optimization Reference Manual.  The penalty for blocked store forwarding is that the load must wait for the store to complete before it can be issued.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -235,8 +235,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Number of occurences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc...).)",
-      R"(Number of occurences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc...).)",
+      R"(Number of occurrences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc...).)",
+      R"(Number of occurrences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc...).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -320,8 +320,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "FP_COMP_OPS_EXE.X87",
       EventDef::Encoding{
           .code = 0x10, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULsand IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s.)",
-      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULsand IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s.)",
+      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULs and IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s.)",
+      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULs and IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -816,8 +816,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles.)",
-      R"(L1D miss oustandings duration in cycles.)",
+      R"(L1D miss outstanding duration in cycles.)",
+      R"(L1D miss outstanding duration in cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -856,8 +856,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L1D_PEND_MISS.FB_FULL",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1025,7 +1025,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x59, .umask = 0x20, .cmask = 1, .msr_values = {0}},
       R"(Performance sensitive flags-merging uops added by Sandy Bridge u-arch.)",
-      R"(This event counts the number of cycles spent executing performance-sensitive flags-merging uops. For example, shift CL (merge_arith_flags). For more details, See the Intel\xae 64 and IA-32 Architectures Optimization Reference Manual.)",
+      R"(This event counts the number of cycles spent executing performance-sensitive flags-merging uops. For example, shift CL (merge_arith_flags). For more details, See the Intel(R) 64 and IA-32 Architectures Optimization Reference Manual.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1037,7 +1037,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x59, .umask = 0x40, .cmask = 0, .msr_values = {0}},
       R"(Cycles with at least one slow LEA uop being allocated.)",
-      R"(This event counts the number of cycles with at least one slow LEA uop being allocated. A uop is generally considered as slow LEA if it has three sources (for example, two sources and immediate) regardless of whether it is a result of LEA instruction or not. Examples of the slow LEA uop are or uops with base, index, and offset source operands using base and index reqisters, where base is EBR/RBP/R13, using RIP relative or 16-bit addressing modes. See the Intel\xae 64 and IA-32 Architectures Optimization Reference Manual for more details about slow LEA instructions.)",
+      R"(This event counts the number of cycles with at least one slow LEA uop being allocated. A uop is generally considered as slow LEA if it has three sources (for example, two sources and immediate) regardless of whether it is a result of LEA instruction or not. Examples of the slow LEA uop are or uops with base, index, and offset source operands using base and index reqisters, where base is EBR/RBP/R13, using RIP relative or 16-bit addressing modes. See the Intel(R) 64 and IA-32 Architectures Optimization Reference Manual for more details about slow LEA instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1345,8 +1345,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_DSB_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1357,8 +1357,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1373,8 +1373,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy.)",
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy.)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy.)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1409,8 +1409,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1445,8 +1445,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1457,8 +1457,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
-      R"(This event counts cycles during which the microcode sequencer assisted the front-end in delivering uops.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.  See the Intel\xae 64 and IA-32 Architectures Optimization Reference Manual for more information.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
+      R"(This event counts cycles during which the microcode sequencer assisted the front-end in delivering uops.  Microcode assists are used for complex instructions or scenarios that can't be handled by the standard decoder.  Using other instructions, if possible, will usually improve performance.  See the Intel(R) 64 and IA-32 Architectures Optimization Reference Manual for more information.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2405,8 +2405,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests.)",
-      R"(Cacheable and noncachaeble code read requests.)",
+      R"(Cacheable and noncacheable code read requests.)",
+      R"(Cacheable and noncacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3194,7 +3194,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x41, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops that split across a cacheline boundary. (Precise Event - PEBS).)",
-      R"(This event counts line-splitted load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
+      R"(This event counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3206,7 +3206,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x42, .cmask = 0, .msr_values = {0}},
       R"(Retired store uops that split across a cacheline boundary. (Precise Event - PEBS).)",
-      R"(This event counts line-splitted store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
+      R"(This event counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -4136,8 +4136,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.COREWB.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10008}},
-      R"(OFFCORE_RESPONSE.COREWB.ANY_RESPONSE (Description is auto-generated))",
-      R"(OFFCORE_RESPONSE.COREWB.ANY_RESPONSE (Description is auto-generated))",
+      R"(OFFCORE_RESPONSE.COREWB.ANY_RESPONSE)",
+      R"(OFFCORE_RESPONSE.COREWB.ANY_RESPONSE)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5064,7 +5064,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.ANY_REQUEST.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80408fff}},
-      R"( REQUEST = ANY_REQUEST and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = ANY_REQUEST and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       R"(This event counts any requests that miss the LLC where the data was returned from local DRAM)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5077,8 +5077,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.DATA_IN.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x10433}},
-      R"( REQUEST = DATA_INTO_CORE and RESPONSE = ANY_RESPONSE)",
-      R"( REQUEST = DATA_INTO_CORE and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = DATA_INTO_CORE and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = DATA_INTO_CORE and RESPONSE = ANY_RESPONSE)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5090,8 +5090,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.DATA_IN_SOCKET.LLC_MISS_LOCAL.ANY_LLC_HIT",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x17004001b3}},
-      R"( REQUEST = DATA_IN_SOCKET and RESPONSE = LLC_MISS_LOCAL and SNOOP = ANY_LLC_HIT)",
-      R"( REQUEST = DATA_IN_SOCKET and RESPONSE = LLC_MISS_LOCAL and SNOOP = ANY_LLC_HIT)",
+      R"(REQUEST = DATA_IN_SOCKET and RESPONSE = LLC_MISS_LOCAL and SNOOP = ANY_LLC_HIT)",
+      R"(REQUEST = DATA_IN_SOCKET and RESPONSE = LLC_MISS_LOCAL and SNOOP = ANY_LLC_HIT)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5103,8 +5103,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.DEMAND_IFETCH.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80400004}},
-      R"( REQUEST = DEMAND_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
-      R"( REQUEST = DEMAND_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = DEMAND_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = DEMAND_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5116,8 +5116,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.DEMAND_RFO.LLC_HIT_M.HITM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1000040002}},
-      R"( REQUEST = DEMAND_RFO and RESPONSE = LLC_HIT_M and SNOOP = HITM)",
-      R"( REQUEST = DEMAND_RFO and RESPONSE = LLC_HIT_M and SNOOP = HITM)",
+      R"(REQUEST = DEMAND_RFO and RESPONSE = LLC_HIT_M and SNOOP = HITM)",
+      R"(REQUEST = DEMAND_RFO and RESPONSE = LLC_HIT_M and SNOOP = HITM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5129,8 +5129,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_DATA_RD.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80400010}},
-      R"( REQUEST = PF_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
-      R"( REQUEST = PF_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5142,8 +5142,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_IFETCH.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x10040}},
-      R"( REQUEST = PF_RFO and RESPONSE = ANY_RESPONSE)",
-      R"( REQUEST = PF_RFO and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_RFO and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_RFO and RESPONSE = ANY_RESPONSE)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5155,8 +5155,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_IFETCH.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80400040}},
-      R"( REQUEST = PF_RFO and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
-      R"( REQUEST = PF_RFO and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_RFO and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_RFO and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5168,8 +5168,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_L_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x10080}},
-      R"( REQUEST = PF_LLC_DATA_RD and RESPONSE = ANY_RESPONSE)",
-      R"( REQUEST = PF_LLC_DATA_RD and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_LLC_DATA_RD and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_LLC_DATA_RD and RESPONSE = ANY_RESPONSE)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5181,8 +5181,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_L_DATA_RD.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80400080}},
-      R"( REQUEST = PF_LLC_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
-      R"( REQUEST = PF_LLC_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_LLC_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_LLC_DATA_RD and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5194,8 +5194,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_L_IFETCH.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x10200}},
-      R"( REQUEST = PF_LLC_IFETCH and RESPONSE = ANY_RESPONSE)",
-      R"( REQUEST = PF_LLC_IFETCH and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_LLC_IFETCH and RESPONSE = ANY_RESPONSE)",
+      R"(REQUEST = PF_LLC_IFETCH and RESPONSE = ANY_RESPONSE)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5207,8 +5207,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_RESPONSE.PF_L_IFETCH.LLC_MISS_LOCAL.DRAM",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x1, .cmask = 0, .msr_values = {0x1f80400200}},
-      R"( REQUEST = PF_LLC_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
-      R"( REQUEST = PF_LLC_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_LLC_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
+      R"(REQUEST = PF_LLC_IFETCH and RESPONSE = LLC_MISS_LOCAL and SNOOP = DRAM)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5216,5 +5216,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace sandybridge_core_v16
+} // namespace sandybridge_core
 } // namespace facebook::hbt::perf_event::generated
