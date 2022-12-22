@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace ivybridge_core_v21 {
+namespace ivybridge_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from ivybridge_core_v21.json (317 events).
+    Events from ivybridge_core.json (317 events).
 
     Supported SKUs:
         - Arch: x86, Model: IVB id: 58
@@ -199,8 +199,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Number of occurences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc.))",
-      R"(Number of occurences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc.))",
+      R"(Number of occurrences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc.))",
+      R"(Number of occurrences waiting for the checkpoints in Resource Allocation Table (RAT) to be recovered after Nuke due to all other cases except JEClear (e.g. whenever a ucode assist is needed like SSE exception, memory disambiguation, etc.))",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3994,5 +3994,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace ivybridge_core_v21
+} // namespace ivybridge_core
 } // namespace facebook::hbt::perf_event::generated
