@@ -449,9 +449,10 @@ struct GroupReadValues {
   uint64_t getCount(size_t i) const {
     HBT_DCHECK_LE(t->time_running, t->time_enabled);
     HBT_ARG_CHECK_LT(i, getNumEvents()) << "Index out of range";
-    if (t->time_enabled == 0) {
+    if (t->time_enabled == 0 || t->time_running == 0) {
       return 0;
     }
+
     return static_cast<uint64_t>(
         static_cast<double>(t->count[i]) *
         static_cast<double>(t->time_enabled) /

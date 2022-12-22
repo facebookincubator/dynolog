@@ -153,9 +153,10 @@ bool BPerfEventsGroup::reenable_() {
 
 [[nodiscard]] bool BPerfEventsGroup::enable() {
   int attr_map_fd, err;
-  struct bperf_attr_map_elem entry = {};
-  struct bpf_perf_event_value val = {};
   bool success = false;
+  struct bperf_attr_map_elem entry = {};
+  std::vector<struct bpf_perf_event_value> val;
+  val.resize((uint64_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE, {});
 
   if (enabled_) {
     HBT_LOG_WARNING() << "BPerfEventsGroup is already enabled";
@@ -212,10 +213,15 @@ bool BPerfEventsGroup::reenable_() {
       break;
     case BPerfEventType::Cgroup:
       output_fd_ = ::bpf_map_get_fd_by_id(entry.cgroup_output_map_id);
-      err = ::bpf_map_lookup_elem(output_fd_, &id_, &val);
+      err = ::bpf_map_lookup_elem(output_fd_, &id_, val.data());
       if (err) {
-        ::bpf_map_update_elem(output_fd_, &id_, &val, BPF_ANY);
+        err = ::bpf_map_update_elem(output_fd_, &id_, val.data(), BPF_ANY);
+        if (err) {
+          HBT_LOG_ERROR() << "Failed to initlize map elem: " << err;
+          goto out;
+        }
       }
+
       break;
   }
 
@@ -348,14 +354,16 @@ out:
     struct bpf_perf_event_value* output,
     bool skip_offset) {
   auto event_cnt = confs_.size();
-  struct bpf_perf_event_value values[cpu_cnt_ * BPERF_MAX_GROUP_SIZE];
+  std::vector<struct bpf_perf_event_value> values;
+  values.resize((uint64_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE);
 
   if (!enabled_) {
     return -1;
   }
 
   syncGlobal_();
-  if (int ret = ::bpf_map_lookup_elem(output_fd_, &id_, values); ret) {
+  HBT_LOG_WARNING() << "id_:" << id_;
+  if (int ret = ::bpf_map_lookup_elem(output_fd_, &id_, values.data()); ret) {
     HBT_LOG_ERROR() << "cannot look up key " << id_
                     << " from output map. Return value: " << ret;
     return -1;

@@ -22,6 +22,14 @@ class BuiltinMetricsTest : public ::testing::Test {
   std::shared_ptr<Metrics> metrics;
 };
 
+std::vector<std::string> zeroPeriod = {
+    "instructions",
+    "cycles",
+    "l3_cache_misses_per_instruction",
+    "dram_access_reads",
+    "fp_instrs_single_precision",
+    "fp_instrs_double_precision"};
+
 TEST_F(BuiltinMetricsTest, Init) {
   EXPECT_GT(pmu_manager->getNumPmus(), 0);
   const auto& descs = metrics->getMetricDescs();
@@ -29,7 +37,12 @@ TEST_F(BuiltinMetricsTest, Init) {
   for (const auto& [k, d] : descs) {
     EXPECT_GT(d->brief_desc.size(), 0);
     EXPECT_GT(d->full_desc.size(), 0);
-    EXPECT_GT(d->default_sampling_period, 0);
+    if (std::find(zeroPeriod.begin(), zeroPeriod.end(), d->id) !=
+        zeroPeriod.end()) {
+      EXPECT_EQ(d->default_sampling_period, 0);
+    } else {
+      EXPECT_GT(d->default_sampling_period, 0);
+    }
   }
   auto ipc_desc = metrics->getMetricDesc("ipc");
   EXPECT_EQ(ipc_desc->id, "ipc");
@@ -256,8 +269,10 @@ TEST_F(BuiltinMetricsTest, PerfEventAttrPrecise) {
 }
 
 TEST_F(BuiltinMetricsTest, PerfEventAttrPreciseJson) {
-  if (facebook::hbt::CpuInfo::load().cpu_family == CpuFamily::INTEL) {
-    GTEST_SKIP() << "Unsupported cpu_family (run this test on Intel)";
+  if (facebook::hbt::CpuInfo::load().cpu_family != CpuFamily::INTEL) {
+    GTEST_SKIP() << "Unsupported cpu_family "
+                 << facebook::hbt::CpuInfo::load().cpu_family
+                 << " (run this test on Intel)";
   }
 
   auto ev_def = pmu_manager->findEventDef("UOPS_RETIRED.ALL");
@@ -266,8 +281,14 @@ TEST_F(BuiltinMetricsTest, PerfEventAttrPreciseJson) {
   }
 
   ASSERT_TRUE(ev_def != nullptr);
-  EXPECT_EQ(ev_def->id, "UOPS_RETIRED.ALL");
-  EXPECT_EQ(ev_def->isPrecise(), true);
+  EXPECT_TRUE(
+      ev_def->id == "UOPS_RETIRED.ALL" ||
+      ev_def->id == "UOPS_RETIRED.RETIRE_SLOTS");
+
+  // UOPS_RETIRED.RETIRE_SLOTS is only precise on systems where UOPS_RETIRED.ALL
+  // is already present.
+  EXPECT_EQ(
+      ev_def->isPrecise(), ev_def->id == "UOPS_RETIRED.ALL" ? true : false);
 
   // A map of CPU ID: Event Configuration.
   PerCpuEventConfs per_cpu_confs;
