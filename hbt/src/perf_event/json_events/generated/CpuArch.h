@@ -172,6 +172,8 @@ inline CpuArch makeCpuArch(
         return CpuArch::SKL;
       case 95:
         return CpuArch::GLM;
+      case 125:
+        return CpuArch::ICL;
       case 126:
         return CpuArch::ICL;
       case 133:
@@ -182,6 +184,12 @@ inline CpuArch makeCpuArch(
         return CpuArch::SKL;
       case 158:
         return CpuArch::SKL;
+      case 165:
+        return CpuArch::SKL;
+      case 166:
+        return CpuArch::SKL;
+      case 167:
+        return CpuArch::ICL;
       default:
         return CpuArch::UNKNOWN;
     } // End of model switch case
