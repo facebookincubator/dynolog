@@ -14,9 +14,9 @@ namespace nehalemex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace nehalemex_core
 
-namespace goldmont_core_v13 {
+namespace goldmont_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace goldmont_core_v13
+} // namespace goldmont_core
 
 namespace sandybridge_core {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -26,21 +26,21 @@ namespace sandybridge_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace sandybridge_uncore
 
-namespace ivybridge_core_v21 {
+namespace ivybridge_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace ivybridge_core_v21
+} // namespace ivybridge_core
 
-namespace ivybridge_uncore_v21 {
+namespace ivybridge_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace ivybridge_uncore_v21
+} // namespace ivybridge_uncore
 
-namespace haswellx_core_v20 {
+namespace haswellx_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace haswellx_core_v20
+} // namespace haswellx_core
 
-namespace haswellx_uncore_v20 {
+namespace haswellx_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace haswellx_uncore_v20
+} // namespace haswellx_uncore
 
 namespace broadwell_core_v25 {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -191,10 +191,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(58, 0x13): // fall-through
     case toCpuKey(58, 0x14): // fall-through
     case toCpuKey(58, 0x15): // fall-through
-      // from ivybridge_core_v21.json
-      ivybridge_core_v21::addEvents(pmu_manager);
-      // from ivybridge_uncore_v21.json
-      ivybridge_uncore_v21::addEvents(pmu_manager);
+      // from ivybridge_core.json
+      ivybridge_core::addEvents(pmu_manager);
+      // from ivybridge_uncore.json
+      ivybridge_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(61, 0x0): // fall-through
@@ -235,10 +235,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(63, 0x13): // fall-through
     case toCpuKey(63, 0x14): // fall-through
     case toCpuKey(63, 0x15): // fall-through
-      // from haswellx_core_v20.json
-      haswellx_core_v20::addEvents(pmu_manager);
-      // from haswellx_uncore_v20.json
-      haswellx_uncore_v20::addEvents(pmu_manager);
+      // from haswellx_core.json
+      haswellx_core::addEvents(pmu_manager);
+      // from haswellx_uncore.json
+      haswellx_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(71, 0x0): // fall-through
@@ -399,8 +399,8 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(92, 0x13): // fall-through
     case toCpuKey(92, 0x14): // fall-through
     case toCpuKey(92, 0x15): // fall-through
-      // from goldmont_core_v13.json
-      goldmont_core_v13::addEvents(pmu_manager);
+      // from goldmont_core.json
+      goldmont_core::addEvents(pmu_manager);
       break;
 
     case toCpuKey(94, 0x0): // fall-through
@@ -441,8 +441,8 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(95, 0x13): // fall-through
     case toCpuKey(95, 0x14): // fall-through
     case toCpuKey(95, 0x15): // fall-through
-      // from goldmont_core_v13.json
-      goldmont_core_v13::addEvents(pmu_manager);
+      // from goldmont_core.json
+      goldmont_core::addEvents(pmu_manager);
       break;
 
     case toCpuKey(126, 0x0): // fall-through

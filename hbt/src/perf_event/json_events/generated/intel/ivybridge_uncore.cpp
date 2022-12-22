@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace ivybridge_uncore_v21 {
+namespace ivybridge_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from ivybridge_uncore_v21.json (34 events).
+    Events from ivybridge_uncore.json (34 events).
 
     Supported SKUs:
         - Arch: x86, Model: IVB id: 58
@@ -427,5 +427,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace ivybridge_uncore_v21
+} // namespace ivybridge_uncore
 } // namespace facebook::hbt::perf_event::generated
