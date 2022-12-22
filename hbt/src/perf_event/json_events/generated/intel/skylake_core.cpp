@@ -9,17 +9,19 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace skylake_core_v48 {
+namespace skylake_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylake_core_v48.json (546 events).
+    Events from skylake_core.json (551 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKL id: 78
         - Arch: x86, Model: SKL id: 94
         - Arch: x86, Model: SKL id: 142
         - Arch: x86, Model: SKL id: 158
+        - Arch: x86, Model: SKL id: 165
+        - Arch: x86, Model: SKL id: 166
   */
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -31,7 +33,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -43,7 +46,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -59,7 +63,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -71,7 +76,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -83,7 +89,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -95,7 +102,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -107,7 +115,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -119,7 +128,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -127,11 +137,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 4K page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (4K sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -139,11 +150,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 2M/4M page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 2M/4M pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (2M/4M sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -151,23 +163,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x08, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data load to a 1G page)",
-      R"(Counts page walks completed due to demand data loads whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (1G sizes) caused by demand data loads. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x08, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x08, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Load miss in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts demand data loads that caused a completed page walk of any page size (4K/2M/4M/1G). This implies it missed in all TLB levels. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks  (all page sizes) caused by demand data loads. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -179,7 +193,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -191,7 +206,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -203,7 +219,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -215,7 +232,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -227,7 +245,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -243,7 +262,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -255,7 +275,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -267,7 +288,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -283,7 +305,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -295,7 +318,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -307,7 +331,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -319,7 +344,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -331,7 +357,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -343,7 +370,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -355,7 +383,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -367,7 +396,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -379,7 +409,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -391,7 +422,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -403,7 +435,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -415,7 +448,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -427,7 +461,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -439,7 +474,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -451,7 +487,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -463,7 +500,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -475,7 +513,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -487,7 +526,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -499,7 +539,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -511,7 +552,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -547,7 +589,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -559,7 +602,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -571,7 +615,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -583,7 +628,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -595,7 +641,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -611,7 +658,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -627,7 +675,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -639,7 +688,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -655,7 +705,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -667,7 +718,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -683,7 +735,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -695,7 +748,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -707,7 +761,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -719,7 +774,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -731,7 +787,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -747,7 +804,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -759,7 +817,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -771,7 +830,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -779,11 +839,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 4K page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 4K pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (4K sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -791,11 +852,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 2M/4M page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 2M/4M pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (2M/4M sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -803,23 +865,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x49, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Page walk completed due to a demand data store to a 1G page)",
-      R"(Counts page walks completed due to demand data stores whose address translations missed in the TLB and were mapped to 1G pages.  The page walks can end with or without a page fault.)",
+      R"(Counts completed page walks  (1G sizes) caused by demand data stores. This implies address translations missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x49, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x49, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Store misses in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts demand data stores that caused a completed page walk of any page size (4K/2M/4M/1G). This implies it missed in all TLB levels. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks  (all page sizes) caused by demand data stores. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -831,7 +895,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -843,7 +908,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -855,7 +921,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -867,19 +934,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EPT.WALK_PENDING",
       EventDef::Encoding{
-          .code = 0x4F, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+          .code = 0x4f, .umask = 0x10, .cmask = 0, .msr_values = {0}},
       R"(Counts 1 per cycle for each PMH that is busy with a EPT (Extended Page Table) walk for any request type.)",
       R"(Counts cycles for each PMH (Page Miss Handler) that is busy with an EPT (Extended Page Table) walk for any request type.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -891,7 +960,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -903,7 +973,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -915,7 +986,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -927,7 +999,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -939,7 +1012,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -951,7 +1025,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -963,7 +1038,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -975,7 +1051,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "INST_DECODED.DECODERS",
+      EventDef::Encoding{
+          .code = 0x55, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Instruction decoders utilized in a cycle)",
+      R"(Number of decoders utilized in a cycle when the MITE (legacy decode pipeline) fetches instructions.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -987,7 +1077,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -999,7 +1090,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1011,7 +1103,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1023,7 +1116,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1035,7 +1129,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1047,7 +1142,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1059,7 +1155,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1076,7 +1173,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1088,7 +1186,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1100,7 +1199,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1112,7 +1212,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1124,7 +1225,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1136,7 +1238,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1148,7 +1251,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1160,7 +1264,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1172,7 +1277,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1184,7 +1290,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1196,7 +1303,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1208,7 +1316,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1220,7 +1329,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1232,7 +1342,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1244,7 +1355,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1256,7 +1368,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1268,7 +1381,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1280,7 +1394,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1292,7 +1407,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1304,7 +1420,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1316,7 +1433,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1328,7 +1446,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1340,7 +1459,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1352,7 +1472,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1368,7 +1489,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1380,7 +1502,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1392,7 +1515,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1404,7 +1528,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1416,7 +1541,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1428,7 +1554,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1440,7 +1567,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1448,11 +1576,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (4K))",
-      R"(Counts completed page walks (4K page size) caused by a code fetch. This implies it missed in the ITLB and further levels of TLB. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (4K page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1460,11 +1589,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (2M/4M))",
-      R"(Counts code misses in all ITLB levels that caused a completed page walk (2M and 4M page sizes). The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (2M/4M page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1472,23 +1602,25 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (1G))",
-      R"(Counts store misses in all DTLB levels that cause a completed page walk (1G page size). The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (1G page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
       EventDef::Encoding{
-          .code = 0x85, .umask = 0x0E, .cmask = 0, .msr_values = {0}},
+          .code = 0x85, .umask = 0x0e, .cmask = 0, .msr_values = {0}},
       R"(Code miss in all TLB levels causes a page walk that completes. (All page sizes))",
-      R"(Counts completed page walks (2M and 4M page sizes) caused by a code fetch. This implies it missed in the ITLB and further levels of TLB. The page walk can end with or without a fault.)",
+      R"(Counts completed page walks (all page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1500,7 +1632,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1512,7 +1645,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1524,7 +1658,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1536,7 +1671,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1548,7 +1684,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1560,7 +1697,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1572,7 +1710,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1584,7 +1723,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1596,7 +1736,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1612,7 +1753,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1624,7 +1766,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1636,7 +1779,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1648,7 +1792,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1660,7 +1805,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1672,7 +1818,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1684,7 +1831,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1696,7 +1844,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1708,7 +1857,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1720,7 +1870,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1732,7 +1883,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1744,7 +1896,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1756,7 +1909,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1768,7 +1922,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1780,7 +1935,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1792,7 +1948,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1804,7 +1961,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1816,7 +1974,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1828,7 +1987,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1840,7 +2000,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1852,7 +2013,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1864,7 +2026,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1876,7 +2039,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1888,7 +2052,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1900,7 +2065,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1912,7 +2078,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1924,7 +2091,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1936,7 +2104,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1948,7 +2117,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1961,7 +2131,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1973,7 +2144,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1985,7 +2157,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1997,7 +2170,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2009,7 +2183,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2021,7 +2196,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2033,7 +2209,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2045,7 +2222,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2057,7 +2235,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2069,7 +2248,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2085,7 +2265,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2097,7 +2278,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2109,7 +2291,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2121,7 +2304,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2133,7 +2317,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2145,7 +2330,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2157,7 +2343,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2169,7 +2356,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2181,7 +2369,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2193,7 +2382,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2209,7 +2399,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2221,7 +2412,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2233,7 +2425,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2258,7 +2451,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2270,7 +2464,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2314,6 +2509,18 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "INST_RETIRED.NOP",
+      EventDef::Encoding{
+          .code = 0xC0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Number of all retired NOP instructions.)",
+      R"(Number of all retired NOP instructions.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      R"(SKL091, SKL044)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "OTHER_ASSISTS.ANY",
       EventDef::Encoding{
           .code = 0xC1, .umask = 0x3F, .cmask = 0, .msr_values = {0x00}},
@@ -2322,7 +2529,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2334,7 +2542,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2350,7 +2559,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2359,14 +2569,28 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .code = 0xC2,
           .umask = 0x02,
           .inv = true,
-          .cmask = 10,
+          .cmask = 16,
           .msr_values = {0}},
       R"(Cycles with less than 10 actually retired uops.)",
       R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_RETIRED.MACRO_FUSED",
+      EventDef::Encoding{
+          .code = 0xc2, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Number of macro-fused uops retired. (non precise))",
+      R"(Counts the number of macro-fused uops retired. (non precise))",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2382,7 +2606,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2406,7 +2631,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2526,7 +2752,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2538,7 +2765,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2550,7 +2778,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2562,7 +2791,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2574,19 +2804,21 @@ Note: Invoking MITE requires two or three cycles delay.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.DSB_MISS",
       EventDef::Encoding{
           .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x11}},
-      R"(Retired Instructions who experienced decode stream buffer (DSB - the decoded instruction-cache) miss.)",
-      R"(Counts retired Instructions that experienced DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. )",
+      R"(Retired Instructions who experienced a critical DSB miss.)",
+      R"(Number of retired Instructions that experienced a critical DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. Critical means stalls were exposed to the back-end as a result of the DSB miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2598,7 +2830,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2610,7 +2843,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2622,7 +2856,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2634,7 +2869,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2646,7 +2882,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2658,7 +2895,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2670,7 +2908,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2682,7 +2921,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2694,7 +2934,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2706,7 +2947,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2718,7 +2960,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2730,7 +2973,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2742,7 +2986,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2754,7 +2999,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2766,7 +3012,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2778,7 +3025,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2790,79 +3038,99 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.ANY_DSB_MISS",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x1}},
+      R"(Retired Instructions who experienced DSB miss.)",
+      R"(Counts retired Instructions that experienced DSB (Decode stream buffer i.e. the decoded instruction-cache) miss.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD scalar computational double precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD scalar computational single precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 128-bit packed computational double precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 128-bit packed computational double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 128-bit packed computational single precision floating-point instruction retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 128-bit packed computational single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2874,7 +3142,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2886,7 +3155,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2898,7 +3168,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2910,7 +3181,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2922,7 +3194,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2934,7 +3207,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2946,7 +3220,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2958,7 +3233,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2970,7 +3246,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2982,7 +3259,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2994,7 +3272,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3006,7 +3285,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3018,7 +3298,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3030,7 +3311,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3042,7 +3324,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3054,7 +3337,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3066,7 +3350,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3078,7 +3363,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       203,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3090,7 +3376,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3102,7 +3389,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3114,7 +3402,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3126,7 +3415,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3138,7 +3428,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3150,7 +3441,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3162,7 +3454,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3174,7 +3467,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       1009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3186,7 +3480,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       503,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3198,7 +3493,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       101,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3206,11 +3502,12 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x11, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions that miss the STLB.)",
-      R"(Retired load instructions that miss the STLB.)",
+      R"(Number of retired load instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3218,12 +3515,13 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x12, .cmask = 0, .msr_values = {0}},
       R"(Retired store instructions that miss the STLB.)",
-      R"(Retired store instructions that miss the STLB.)",
+      R"(Number of retired store instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3235,7 +3533,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3247,7 +3546,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3260,7 +3560,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3272,7 +3573,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3285,7 +3587,22 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_INST_RETIRED.ANY",
+      EventDef::Encoding{
+          .code = 0xD0, .umask = 0x83, .cmask = 0, .msr_values = {0}},
+      R"(All retired memory instructions.)",
+      R"(Counts all retired memory instructions - loads and stores.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{
+          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3297,7 +3614,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3309,7 +3627,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3321,7 +3640,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3333,7 +3653,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3345,7 +3666,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3357,7 +3679,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3369,7 +3692,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3381,7 +3705,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3393,7 +3718,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3405,7 +3731,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3417,7 +3744,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3429,7 +3757,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3441,7 +3770,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3453,7 +3783,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3465,7 +3796,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3477,7 +3809,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3489,7 +3822,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3501,7 +3835,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3513,7 +3848,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3525,7 +3861,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3535,7 +3872,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FFC408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3551,7 +3888,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x203C408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3567,7 +3904,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103C408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3579,11 +3916,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3595,11 +3929,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3611,11 +3942,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3627,11 +3955,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3643,11 +3968,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x007C408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x7C408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3663,7 +3985,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC4008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3679,7 +4001,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3695,7 +4017,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3707,11 +4029,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3723,11 +4042,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3739,11 +4055,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3755,11 +4068,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3771,11 +4081,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0044008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x44008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3791,7 +4098,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3807,7 +4114,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3823,7 +4130,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000408000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3835,11 +4142,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L4_HIT_LOCAL_L4.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3851,11 +4155,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L4_HIT_LOCAL_L4.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3867,11 +4168,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L4_HIT_LOCAL_L4.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3883,11 +4181,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L4_HIT_LOCAL_L4.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3899,11 +4194,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L4_HIT_LOCAL_L4.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040408000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40408000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3919,7 +4211,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC01C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3935,7 +4227,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20001C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3951,7 +4243,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10001C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3963,11 +4255,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04001C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4001C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3979,11 +4268,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02001C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2001C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -3995,11 +4281,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01001C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1001C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4011,11 +4294,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00801C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x801C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4027,11 +4307,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00401C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x401C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4047,7 +4324,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0108000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4063,7 +4340,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000108000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4079,7 +4356,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000108000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4091,11 +4368,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_S.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400108000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400108000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4107,11 +4381,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_S.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200108000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200108000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4123,11 +4394,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_S.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100108000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100108000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4139,11 +4407,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_S.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080108000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80108000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4155,11 +4420,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_S.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040108000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40108000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4175,7 +4437,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0088000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4191,7 +4453,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000088000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4207,7 +4469,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000088000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4219,11 +4481,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_E.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400088000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400088000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4235,11 +4494,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_E.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200088000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200088000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4251,11 +4507,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_E.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100088000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100088000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4267,11 +4520,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_E.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080088000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80088000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4283,11 +4533,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_E.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040088000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40088000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4303,7 +4550,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0048000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4319,7 +4566,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000048000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4335,7 +4582,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000048000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4347,11 +4594,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_M.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400048000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400048000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4363,11 +4607,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_M.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200048000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200048000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4379,11 +4620,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_M.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100048000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100048000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4395,11 +4633,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_M.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080048000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80048000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4411,11 +4646,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT_M.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040048000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40048000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4431,7 +4663,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4447,7 +4679,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4463,7 +4695,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4475,11 +4707,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4491,11 +4720,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4507,11 +4733,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4523,11 +4746,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4539,11 +4759,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4555,11 +4772,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000018000}},
-      R"(Counts any other requestshave any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x18000}},
+      R"(Counts any other requestshave any response type.)",
       R"(Counts any other requestshave any response type.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4575,7 +4789,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FFC400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4591,7 +4805,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x203C400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4607,7 +4821,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103C400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4619,11 +4833,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4635,11 +4846,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4651,11 +4859,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4667,11 +4872,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4683,11 +4885,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x007C400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x7C400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4703,7 +4902,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC4000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4719,7 +4918,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4735,7 +4934,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4747,11 +4946,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4763,11 +4959,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4779,11 +4972,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4795,11 +4985,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4811,11 +4998,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0044000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x44000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4831,7 +5015,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4847,7 +5031,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4863,7 +5047,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000400004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4875,11 +5059,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L4_HIT_LOCAL_L4.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4891,11 +5072,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L4_HIT_LOCAL_L4.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4907,11 +5085,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L4_HIT_LOCAL_L4.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4923,11 +5098,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L4_HIT_LOCAL_L4.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4939,11 +5111,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L4_HIT_LOCAL_L4.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040400004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40400004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4959,7 +5128,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC01C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4975,7 +5144,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20001C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4991,7 +5160,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10001C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5003,11 +5172,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04001C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4001C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5019,11 +5185,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02001C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2001C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5035,11 +5198,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01001C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1001C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5051,11 +5211,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00801C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x801C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5067,11 +5224,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00401C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x401C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5087,7 +5241,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0100004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5103,7 +5257,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000100004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5119,7 +5273,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000100004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5131,11 +5285,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_S.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400100004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400100004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5147,11 +5298,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_S.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200100004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200100004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5163,11 +5311,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_S.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100100004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100100004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5179,11 +5324,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_S.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080100004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80100004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5195,11 +5337,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_S.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040100004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40100004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5215,7 +5354,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0080004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5231,7 +5370,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000080004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5247,7 +5386,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000080004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5259,11 +5398,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_E.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400080004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400080004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5275,11 +5411,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_E.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200080004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200080004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5291,11 +5424,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_E.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100080004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100080004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5307,11 +5437,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_E.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080080004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80080004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5323,11 +5450,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_E.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040080004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40080004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5343,7 +5467,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0040004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5359,7 +5483,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000040004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5375,7 +5499,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000040004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5387,11 +5511,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_M.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400040004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400040004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5403,11 +5524,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_M.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200040004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200040004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5419,11 +5537,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_M.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100040004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100040004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5435,11 +5550,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_M.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080040004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80040004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5451,11 +5563,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT_M.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040040004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40040004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5471,7 +5580,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5487,7 +5596,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5503,7 +5612,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5515,11 +5624,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5531,11 +5637,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5547,11 +5650,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5563,11 +5663,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5579,11 +5676,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5595,11 +5689,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010004}},
-      R"(Counts all demand code readshave any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10004}},
+      R"(Counts all demand code readshave any response type.)",
       R"(Counts all demand code readshave any response type.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -5615,7 +5706,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FFC400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5631,7 +5722,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x203C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5647,7 +5738,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5659,11 +5750,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5675,11 +5763,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5691,11 +5776,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5707,11 +5789,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5723,11 +5802,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x007C400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x7C400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5743,7 +5819,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC4000002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5759,7 +5835,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5775,7 +5851,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5787,11 +5863,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5803,11 +5876,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5819,11 +5889,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5835,11 +5902,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5851,11 +5915,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0044000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x44000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5871,7 +5932,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5887,7 +5948,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5903,7 +5964,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000400002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5915,11 +5976,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L4_HIT_LOCAL_L4.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5931,11 +5989,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L4_HIT_LOCAL_L4.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5947,11 +6002,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L4_HIT_LOCAL_L4.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5963,11 +6015,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L4_HIT_LOCAL_L4.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5979,11 +6028,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L4_HIT_LOCAL_L4.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040400002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40400002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -5999,7 +6045,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC01C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6015,7 +6061,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20001C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6031,7 +6077,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10001C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6043,11 +6089,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04001C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4001C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6059,11 +6102,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02001C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2001C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6075,11 +6115,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01001C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1001C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6091,11 +6128,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00801C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x801C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6107,11 +6141,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00401C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x401C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6127,7 +6158,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0100002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6143,7 +6174,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000100002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6159,7 +6190,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000100002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6171,11 +6202,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_S.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400100002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400100002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6187,11 +6215,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_S.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200100002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200100002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6203,11 +6228,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_S.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100100002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100100002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6219,11 +6241,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_S.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080100002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80100002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6235,11 +6254,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_S.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040100002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40100002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6255,7 +6271,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0080002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6271,7 +6287,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000080002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6287,7 +6303,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000080002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6299,11 +6315,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_E.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400080002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400080002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6315,11 +6328,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_E.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200080002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200080002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6331,11 +6341,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_E.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100080002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100080002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6347,11 +6354,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_E.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080080002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80080002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6363,11 +6367,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_E.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040080002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40080002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6383,7 +6384,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0040002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6399,7 +6400,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000040002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6415,7 +6416,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000040002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6427,11 +6428,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_M.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400040002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400040002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6443,11 +6441,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_M.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200040002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200040002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6459,11 +6454,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_M.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100040002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100040002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6475,11 +6467,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_M.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080040002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80040002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6491,11 +6480,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT_M.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040040002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40040002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6511,7 +6497,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0020002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6527,7 +6513,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6543,7 +6529,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6555,11 +6541,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6571,11 +6554,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6587,11 +6567,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6603,11 +6580,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6619,11 +6593,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.SUPPLIER_NONE.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040020002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40020002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
@@ -6635,11 +6606,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010002}},
-      R"(Counts all demand data writes (RFOs)have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
+      R"(Counts all demand data writes (RFOs)have any response type.)",
       R"(Counts all demand data writes (RFOs)have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6655,7 +6623,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FFC400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6671,7 +6639,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x203C400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6687,7 +6655,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x103C400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6699,11 +6667,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6715,11 +6680,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6731,11 +6693,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6747,11 +6706,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6763,11 +6719,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x007C400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x7C400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6783,7 +6736,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC4000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6799,7 +6752,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6815,7 +6768,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6827,11 +6780,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6843,11 +6793,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6859,11 +6806,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6875,11 +6819,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6891,11 +6832,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0044000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x44000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6911,7 +6849,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6927,7 +6865,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6943,7 +6881,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000400001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6955,11 +6893,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L4_HIT_LOCAL_L4.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6971,11 +6906,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L4_HIT_LOCAL_L4.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -6987,11 +6919,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L4_HIT_LOCAL_L4.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7003,11 +6932,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L4_HIT_LOCAL_L4.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7019,11 +6945,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L4_HIT_LOCAL_L4.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040400001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40400001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7039,7 +6962,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC01C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7055,7 +6978,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20001C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7071,7 +6994,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10001C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7083,11 +7006,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04001C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4001C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7099,11 +7019,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02001C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2001C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7115,11 +7032,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01001C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1001C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7131,11 +7045,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00801C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x801C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7147,11 +7058,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00401C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x401C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7167,7 +7075,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0100001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7183,7 +7091,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000100001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7199,7 +7107,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000100001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7211,11 +7119,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_S.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400100001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400100001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7227,11 +7132,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_S.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200100001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200100001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7243,11 +7145,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_S.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100100001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100100001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7259,11 +7158,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_S.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080100001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80100001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7275,11 +7171,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_S.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040100001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40100001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7295,7 +7188,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0080001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7311,7 +7204,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000080001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7327,7 +7220,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000080001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7339,11 +7232,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_E.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400080001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400080001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7355,11 +7245,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_E.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200080001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200080001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7371,11 +7258,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_E.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100080001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100080001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7387,11 +7271,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_E.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080080001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80080001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7403,11 +7284,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_E.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040080001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40080001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7423,7 +7301,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0040001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7439,7 +7317,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000040001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7455,7 +7333,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000040001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7467,11 +7345,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_M.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400040001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400040001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7483,11 +7358,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_M.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200040001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200040001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7499,11 +7371,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_M.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100040001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100040001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7515,11 +7384,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_M.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080040001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80040001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7531,11 +7397,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT_M.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040040001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40040001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7551,7 +7414,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3FC0020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7567,7 +7430,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7583,7 +7446,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7595,11 +7458,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7611,11 +7471,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7627,11 +7484,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7643,11 +7497,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7659,11 +7510,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SPL_HIT",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0040020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x40020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7675,11 +7523,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010001}},
-      R"(Counts demand data readshave any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10001}},
+      R"(Counts demand data readshave any response type.)",
       R"(Counts demand data readshave any response type.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -7688,5 +7533,5 @@ Note: Invoking MITE requires two or three cycles delay.)",
       ));
 }
 
-} // namespace skylake_core_v48
+} // namespace skylake_core
 } // namespace facebook::hbt::perf_event::generated

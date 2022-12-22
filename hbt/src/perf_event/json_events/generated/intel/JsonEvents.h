@@ -66,13 +66,13 @@ namespace broadwellde_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace broadwellde_uncore
 
-namespace skylake_core_v48 {
+namespace skylake_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace skylake_core_v48
+} // namespace skylake_core
 
-namespace skylake_uncore_v48 {
+namespace skylake_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace skylake_uncore_v48
+} // namespace skylake_uncore
 
 namespace knightslanding_core_v9 {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -82,18 +82,17 @@ namespace knightslanding_uncore_v9 {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace knightslanding_uncore_v9
 
-namespace skylakex_core_v1_21 {
+namespace skylakex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace skylakex_core_v1_21
+} // namespace skylakex_core
 
-namespace skylakex_uncore_v1_21 {
+namespace skylakex_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace skylakex_uncore_v1_21
+} // namespace skylakex_uncore
 
-namespace skylakex_uncore_v1_21_experimental {
+namespace skylakex_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace skylakex_uncore_v1_21_experimental
-
+} // namespace skylakex_uncore_experimental
 namespace cascadelakex_core_v1_08 {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace cascadelakex_core_v1_08
@@ -279,10 +278,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(78, 0x13): // fall-through
     case toCpuKey(78, 0x14): // fall-through
     case toCpuKey(78, 0x15): // fall-through
-      // from skylake_core_v48.json
-      skylake_core_v48::addEvents(pmu_manager);
-      // from skylake_uncore_v48.json
-      skylake_uncore_v48::addEvents(pmu_manager);
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(79, 0x0): // fall-through
@@ -312,12 +311,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(85, 0x2): // fall-through
     case toCpuKey(85, 0x3): // fall-through
     case toCpuKey(85, 0x4): // fall-through
-      // from skylakex_core_v1.21.json
-      skylakex_core_v1_21::addEvents(pmu_manager);
-      // from skylakex_uncore_v1.21.json
-      skylakex_uncore_v1_21::addEvents(pmu_manager);
-      // from skylakex_uncore_v1.21_experimental.json
-      skylakex_uncore_v1_21_experimental::addEvents(pmu_manager);
+      // from skylakex_core.json
+      skylakex_core::addEvents(pmu_manager);
+      // from skylakex_uncore.json
+      skylakex_uncore::addEvents(pmu_manager);
+      // from skylakex_uncore_experimental.json
+      skylakex_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(85, 0x5): // fall-through
@@ -419,10 +418,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(94, 0x13): // fall-through
     case toCpuKey(94, 0x14): // fall-through
     case toCpuKey(94, 0x15): // fall-through
-      // from skylake_core_v48.json
-      skylake_core_v48::addEvents(pmu_manager);
-      // from skylake_uncore_v48.json
-      skylake_uncore_v48::addEvents(pmu_manager);
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(95, 0x0): // fall-through
@@ -527,10 +526,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(142, 0x13): // fall-through
     case toCpuKey(142, 0x14): // fall-through
     case toCpuKey(142, 0x15): // fall-through
-      // from skylake_core_v48.json
-      skylake_core_v48::addEvents(pmu_manager);
-      // from skylake_uncore_v48.json
-      skylake_uncore_v48::addEvents(pmu_manager);
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(158, 0x0): // fall-through
@@ -549,10 +548,54 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(158, 0x13): // fall-through
     case toCpuKey(158, 0x14): // fall-through
     case toCpuKey(158, 0x15): // fall-through
-      // from skylake_core_v48.json
-      skylake_core_v48::addEvents(pmu_manager);
-      // from skylake_uncore_v48.json
-      skylake_uncore_v48::addEvents(pmu_manager);
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(165, 0x0): // fall-through
+    case toCpuKey(165, 0x1): // fall-through
+    case toCpuKey(165, 0x2): // fall-through
+    case toCpuKey(165, 0x3): // fall-through
+    case toCpuKey(165, 0x4): // fall-through
+    case toCpuKey(165, 0x5): // fall-through
+    case toCpuKey(165, 0x6): // fall-through
+    case toCpuKey(165, 0x7): // fall-through
+    case toCpuKey(165, 0x8): // fall-through
+    case toCpuKey(165, 0x9): // fall-through
+    case toCpuKey(165, 0x10): // fall-through
+    case toCpuKey(165, 0x11): // fall-through
+    case toCpuKey(165, 0x12): // fall-through
+    case toCpuKey(165, 0x13): // fall-through
+    case toCpuKey(165, 0x14): // fall-through
+    case toCpuKey(165, 0x15): // fall-through
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(166, 0x0): // fall-through
+    case toCpuKey(166, 0x1): // fall-through
+    case toCpuKey(166, 0x2): // fall-through
+    case toCpuKey(166, 0x3): // fall-through
+    case toCpuKey(166, 0x4): // fall-through
+    case toCpuKey(166, 0x5): // fall-through
+    case toCpuKey(166, 0x6): // fall-through
+    case toCpuKey(166, 0x7): // fall-through
+    case toCpuKey(166, 0x8): // fall-through
+    case toCpuKey(166, 0x9): // fall-through
+    case toCpuKey(166, 0x10): // fall-through
+    case toCpuKey(166, 0x11): // fall-through
+    case toCpuKey(166, 0x12): // fall-through
+    case toCpuKey(166, 0x13): // fall-through
+    case toCpuKey(166, 0x14): // fall-through
+    case toCpuKey(166, 0x15): // fall-through
+      // from skylake_core.json
+      skylake_core::addEvents(pmu_manager);
+      // from skylake_uncore.json
+      skylake_uncore::addEvents(pmu_manager);
       break;
 
     default:
