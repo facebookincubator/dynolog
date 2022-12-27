@@ -15,11 +15,12 @@ class IPCMonitor {
  public:
   using FabricManager = dynolog::ipcfabric::FabricManager;
   IPCMonitor(const std::string& ipc_fabric_name = "dynolog");
+  virtual ~IPCMonitor(){};
 
   void loop();
 
  public:
-  void processMsg(std::unique_ptr<ipcfabric::Message> msg);
+  virtual void processMsg(std::unique_ptr<ipcfabric::Message> msg);
   void getLibkinetoOnDemandRequest(std::unique_ptr<ipcfabric::Message> msg);
   void registerLibkinetoContext(std::unique_ptr<ipcfabric::Message> msg);
 
