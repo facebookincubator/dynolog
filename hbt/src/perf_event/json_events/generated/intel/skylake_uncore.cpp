@@ -9,17 +9,19 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace skylake_uncore_v48 {
+namespace skylake_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylake_uncore_v48.json (23 events).
+    Events from skylake_uncore.json (23 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKL id: 78
         - Arch: x86, Model: SKL id: 94
         - Arch: x86, Model: SKL id: 142
         - Arch: x86, Model: SKL id: 158
+        - Arch: x86, Model: SKL id: 165
+        - Arch: x86, Model: SKL id: 166
   */
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cbox,
@@ -217,8 +219,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_arb,
       "UNC_ARB_TRK_REQUESTS.ALL",
       EventDef::Encoding{.code = 0x81, .umask = 0x01, .cmask = 0},
-      R"(Total number of Core outgoing entries allocated. Accounts for Coherent and non-coherent traffic.)",
-      R"(Total number of Core outgoing entries allocated. Accounts for Coherent and non-coherent traffic.)",
+      R"(UNC_ARB_TRK_REQUESTS.ALL (Description is auto-generated))",
+      R"(UNC_ARB_TRK_REQUESTS.ALL (Description is auto-generated))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -298,5 +300,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace skylake_uncore_v48
+} // namespace skylake_uncore
 } // namespace facebook::hbt::perf_event::generated
