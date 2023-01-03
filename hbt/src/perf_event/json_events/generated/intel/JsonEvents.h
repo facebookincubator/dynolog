@@ -126,6 +126,18 @@ namespace snowridgex_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace snowridgex_uncore_experimental
 
+namespace sapphirerapids_core {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace sapphirerapids_core
+
+namespace sapphirerapids_uncore {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace sapphirerapids_uncore
+
+namespace sapphirerapids_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace sapphirerapids_uncore_experimental
+
 // Make a key by combining cpu_model ond cpu_step
 constexpr uint64_t toCpuKey(uint32_t cpu_model, uint32_t cpu_step) {
   uint64_t r = cpu_model;
@@ -559,6 +571,30 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
       skylake_uncore::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(143, 0x0): // fall-through
+    case toCpuKey(143, 0x1): // fall-through
+    case toCpuKey(143, 0x2): // fall-through
+    case toCpuKey(143, 0x3): // fall-through
+    case toCpuKey(143, 0x4): // fall-through
+    case toCpuKey(143, 0x5): // fall-through
+    case toCpuKey(143, 0x6): // fall-through
+    case toCpuKey(143, 0x7): // fall-through
+    case toCpuKey(143, 0x8): // fall-through
+    case toCpuKey(143, 0x9): // fall-through
+    case toCpuKey(143, 0x10): // fall-through
+    case toCpuKey(143, 0x11): // fall-through
+    case toCpuKey(143, 0x12): // fall-through
+    case toCpuKey(143, 0x13): // fall-through
+    case toCpuKey(143, 0x14): // fall-through
+    case toCpuKey(143, 0x15): // fall-through
+      // from sapphirerapids_core.json
+      sapphirerapids_core::addEvents(pmu_manager);
+      // from sapphirerapids_uncore.json
+      sapphirerapids_uncore::addEvents(pmu_manager);
+      // from sapphirerapids_uncore_experimental.json
+      sapphirerapids_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(158, 0x0): // fall-through

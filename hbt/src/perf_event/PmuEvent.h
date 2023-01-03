@@ -68,7 +68,11 @@ enum class PmuType : uint16_t {
   uncore_m2pcie,
 
   // Intel PT
-  intel_pt
+  intel_pt,
+
+  // HBM Memory Controller
+  // XXX: Need to test them?
+  uncore_mchbm,
 };
 
 std::string PmuTypeToStr(PmuType);
