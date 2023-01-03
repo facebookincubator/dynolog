@@ -106,21 +106,25 @@ namespace cascadelakex_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace cascadelakex_uncore_experimental
 
-namespace icelake_core_v1_05 {
+namespace icelake_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace icelake_core_v1_05
+} // namespace icelake_core
 
-namespace icelake_uncore_v1_05 {
+namespace icelake_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace icelake_uncore_v1_05
+} // namespace icelake_uncore
 
-namespace snowridgex_core_v1_07 {
+namespace snowridgex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace snowridgex_core_v1_07
+} // namespace snowridgex_core
 
-namespace snowridgex_uncore_v1_07 {
+namespace snowridgex_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace snowridgex_uncore_v1_07
+} // namespace snowridgex_uncore
+
+namespace snowridgex_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace snowridgex_uncore_experimental
 
 // Make a key by combining cpu_model ond cpu_step
 constexpr uint64_t toCpuKey(uint32_t cpu_model, uint32_t cpu_step) {
@@ -445,6 +449,28 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       goldmont_core::addEvents(pmu_manager);
       break;
 
+    case toCpuKey(125, 0x0): // fall-through
+    case toCpuKey(125, 0x1): // fall-through
+    case toCpuKey(125, 0x2): // fall-through
+    case toCpuKey(125, 0x3): // fall-through
+    case toCpuKey(125, 0x4): // fall-through
+    case toCpuKey(125, 0x5): // fall-through
+    case toCpuKey(125, 0x6): // fall-through
+    case toCpuKey(125, 0x7): // fall-through
+    case toCpuKey(125, 0x8): // fall-through
+    case toCpuKey(125, 0x9): // fall-through
+    case toCpuKey(125, 0x10): // fall-through
+    case toCpuKey(125, 0x11): // fall-through
+    case toCpuKey(125, 0x12): // fall-through
+    case toCpuKey(125, 0x13): // fall-through
+    case toCpuKey(125, 0x14): // fall-through
+    case toCpuKey(125, 0x15): // fall-through
+      // from icelake_core.json
+      icelake_core::addEvents(pmu_manager);
+      // from icelake_uncore.json
+      icelake_uncore::addEvents(pmu_manager);
+      break;
+
     case toCpuKey(126, 0x0): // fall-through
     case toCpuKey(126, 0x1): // fall-through
     case toCpuKey(126, 0x2): // fall-through
@@ -461,10 +487,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(126, 0x13): // fall-through
     case toCpuKey(126, 0x14): // fall-through
     case toCpuKey(126, 0x15): // fall-through
-      // from icelake_core_v1.05.json
-      icelake_core_v1_05::addEvents(pmu_manager);
-      // from icelake_uncore_v1.05.json
-      icelake_uncore_v1_05::addEvents(pmu_manager);
+      // from icelake_core.json
+      icelake_core::addEvents(pmu_manager);
+      // from icelake_uncore.json
+      icelake_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(133, 0x0): // fall-through
@@ -505,10 +531,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(134, 0x13): // fall-through
     case toCpuKey(134, 0x14): // fall-through
     case toCpuKey(134, 0x15): // fall-through
-      // from snowridgex_core_v1.07.json
-      snowridgex_core_v1_07::addEvents(pmu_manager);
-      // from snowridgex_uncore_v1.07.json
-      snowridgex_uncore_v1_07::addEvents(pmu_manager);
+      // from snowridgex_core.json
+      snowridgex_core::addEvents(pmu_manager);
+      // from snowridgex_uncore.json
+      snowridgex_uncore::addEvents(pmu_manager);
+      // from snowridgex_uncore_experimental.json
+      snowridgex_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(142, 0x0): // fall-through
@@ -597,6 +625,28 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
       skylake_uncore::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(167, 0x0): // fall-through
+    case toCpuKey(167, 0x1): // fall-through
+    case toCpuKey(167, 0x2): // fall-through
+    case toCpuKey(167, 0x3): // fall-through
+    case toCpuKey(167, 0x4): // fall-through
+    case toCpuKey(167, 0x5): // fall-through
+    case toCpuKey(167, 0x6): // fall-through
+    case toCpuKey(167, 0x7): // fall-through
+    case toCpuKey(167, 0x8): // fall-through
+    case toCpuKey(167, 0x9): // fall-through
+    case toCpuKey(167, 0x10): // fall-through
+    case toCpuKey(167, 0x11): // fall-through
+    case toCpuKey(167, 0x12): // fall-through
+    case toCpuKey(167, 0x13): // fall-through
+    case toCpuKey(167, 0x14): // fall-through
+    case toCpuKey(167, 0x15): // fall-through
+      // from icelake_core.json
+      icelake_core::addEvents(pmu_manager);
+      // from icelake_uncore.json
+      icelake_uncore::addEvents(pmu_manager);
       break;
 
     default:
