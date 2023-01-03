@@ -38,6 +38,7 @@ TEST(PerCpuThreadSwitchGenerator, SmokeTest) {
 
   g.open(2);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -66,6 +67,7 @@ TEST(PerCpuCountSampleGenerator, SmokeTest) {
 
   g.open(2, 2 * 1024 * 1024);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -140,6 +142,7 @@ TEST(PerCpuCountReader, SmokeTest) {
   // Open without pinning the events.
   g.open(false);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   // Object to store data read from counters.
   // Definition comes from GroupReadValues<>.
@@ -160,6 +163,9 @@ TEST(PerCpuCountReader, SmokeTest) {
   uint64_t total_time_running = 0;
   uint64_t total_time_enabled = 0;
 
+  // Sometimes the test can run fast enough that the first sampling for time
+  // running is not hit yet and can return 0 values
+  sleep(1);
   {
     // Read counts of cgroup counters in CPU 1.
     // Reading overwrites rv.
@@ -255,6 +261,7 @@ TEST(BPerfCountReader, SmokeTest) {
       std::make_unique<FdWrapper>(cgroup_path));
 
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   // Object to store data read from counters.
   // Definition comes from GroupReadValues<>.
@@ -274,6 +281,10 @@ TEST(BPerfCountReader, SmokeTest) {
   uint64_t total_count_cycles = 0;
   uint64_t total_time_running = 0;
   uint64_t total_time_enabled = 0;
+
+  // Sometimes the test can run fast enough that the first sampling for time
+  // running is not hit yet and can return 0 values
+  sleep(1);
 
   // Read from all CPUs, sums must be larger than the sum of only CPU 1 and 3.
   // User can call this method directly rather than reading from each CPU.
@@ -311,6 +322,7 @@ TEST(PerCpuCountSampleGenerator, TracePointTest) {
 
   g.open(2, 2 * 1024 * 1024);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -338,6 +350,7 @@ TEST(PerCpuDummyGenerator, SmokeTest) {
 
   g.open();
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.now();
   g.tstampFromTsc(1000000);
@@ -380,6 +393,8 @@ TEST(CpuTraceAuxGenerator, SmokeTest) {
           "test_aux_cpu_generator"));
   g.open(16, CpuTraceAuxGenerator::AUXBufferMode::OVERWRITABLE);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
+
   sleep(1);
   g.disable();
   // we should receive a itrace start perf event
@@ -435,6 +450,8 @@ TEST(PerCpuTraceAuxGenerator, SmokeTest) {
           "test_aux_cpu_generator"));
   g.open(16, CpuTraceAuxGenerator::AUXBufferMode::OVERWRITABLE);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
+
   *phase = 1;
   while (*phase == 1)
     ;
