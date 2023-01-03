@@ -38,6 +38,7 @@ TEST(PerCpuThreadSwitchGenerator, SmokeTest) {
 
   g.open(2);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -66,6 +67,7 @@ TEST(PerCpuCountSampleGenerator, SmokeTest) {
 
   g.open(2, 2 * 1024 * 1024);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -140,6 +142,7 @@ TEST(PerCpuCountReader, SmokeTest) {
   // Open without pinning the events.
   g.open(false);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   // Object to store data read from counters.
   // Definition comes from GroupReadValues<>.
@@ -255,6 +258,7 @@ TEST(BPerfCountReader, SmokeTest) {
       std::make_unique<FdWrapper>(cgroup_path));
 
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   // Object to store data read from counters.
   // Definition comes from GroupReadValues<>.
@@ -311,6 +315,7 @@ TEST(PerCpuCountSampleGenerator, TracePointTest) {
 
   g.open(2, 2 * 1024 * 1024);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.getCpuGenerator(1).consume(10);
   g.getCpuGenerator(3).consume(10);
@@ -338,6 +343,7 @@ TEST(PerCpuDummyGenerator, SmokeTest) {
 
   g.open();
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
 
   g.now();
   g.tstampFromTsc(1000000);
@@ -380,6 +386,8 @@ TEST(CpuTraceAuxGenerator, SmokeTest) {
           "test_aux_cpu_generator"));
   g.open(16, CpuTraceAuxGenerator::AUXBufferMode::OVERWRITABLE);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
+
   sleep(1);
   g.disable();
   // we should receive a itrace start perf event
@@ -435,6 +443,8 @@ TEST(PerCpuTraceAuxGenerator, SmokeTest) {
           "test_aux_cpu_generator"));
   g.open(16, CpuTraceAuxGenerator::AUXBufferMode::OVERWRITABLE);
   g.enable();
+  ASSERT_TRUE(g.isEnabled());
+
   *phase = 1;
   while (*phase == 1)
     ;
