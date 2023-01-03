@@ -9,27 +9,17 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace icelake_uncore_v1_05 {
+namespace icelake_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from icelake_uncore_v1.05.json (3 events).
+    Events from icelake_uncore.json (3 events).
 
     Supported SKUs:
+        - Arch: x86, Model: ICL id: 125
         - Arch: x86, Model: ICL id: 126
+        - Arch: x86, Model: ICL id: 167
   */
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ncu,
-      "UNC_CLOCK.SOCKET",
-      EventDef::Encoding{.code = 0x00, .umask = 0x01, .cmask = 0},
-      R"(UNC_CLOCK.SOCKET (Description is auto-generated))",
-      R"(UNC_CLOCK.SOCKET (Description is auto-generated))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_REQUESTS.ALL",
@@ -53,7 +43,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ncu,
+      "UNC_CLOCK.SOCKET",
+      EventDef::Encoding{.code = 0x00, .umask = 0x01, .cmask = 0},
+      R"(UNC_CLOCK.SOCKET)",
+      R"(UNC_CLOCK.SOCKET)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 }
 
-} // namespace icelake_uncore_v1_05
+} // namespace icelake_uncore
 } // namespace facebook::hbt::perf_event::generated
