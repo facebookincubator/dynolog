@@ -27,7 +27,7 @@ IPCMonitor::IPCMonitor(const std::string& ipc_fabric_name) {
   ipc_manager_ = FabricManager::factory(ipc_fabric_name);
   // below ensures singleton exists
   LOG(INFO) << "Kineto config manager : active processes = "
-            << LibkinetoConfigManager::getInstance()->processCount(0);
+            << LibkinetoConfigManager::getInstance()->processCount("0");
 }
 
 void IPCMonitor::loop() {
@@ -71,7 +71,7 @@ void IPCMonitor::getLibkinetoOnDemandRequest(
   std::vector<int32_t> pids(req->pids, req->pids + req->n);
   try {
     ret_config = LibkinetoConfigManager::getInstance()->obtainOnDemandConfig(
-        req->jobid, pids, req->type);
+        std::to_string(req->jobid), pids, req->type);
     VLOG(0) << "getLibkinetoOnDemandRequest() : job id " << req->jobid
             << " pids = " << pids[0];
   } catch (const std::runtime_error& ex) {
@@ -98,7 +98,7 @@ void IPCMonitor::registerLibkinetoContext(
   int32_t size = -1;
   try {
     size = LibkinetoConfigManager::getInstance()->registerLibkinetoContext(
-        ctxt->jobid, ctxt->pid, ctxt->gpu);
+        std::to_string(ctxt->jobid), ctxt->pid, ctxt->gpu);
   } catch (const std::runtime_error& ex) {
     LOG(ERROR) << "Kineto config manager exception : " << ex.what();
   }

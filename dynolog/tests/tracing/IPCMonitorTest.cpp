@@ -80,7 +80,7 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
   } else {
     // Receiver side - IPC Monitor
     auto monitor = std::make_unique<IPCMonitor>("dynolog_unittest");
-    EXPECT_EQ(LibkinetoConfigManager::getInstance()->processCount(0), 0);
+    EXPECT_EQ(LibkinetoConfigManager::getInstance()->processCount("0"), 0);
 
     /* sleep override */
     std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -102,7 +102,10 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
 
     monitor->processMsg(std::move(msg));
 
-    EXPECT_EQ(LibkinetoConfigManager::getInstance()->processCount(kJobID), 1);
+    EXPECT_EQ(
+        LibkinetoConfigManager::getInstance()->processCount(
+            std::to_string(kJobID)),
+        1);
 
     // Wait for child thread to either change state or stopped.
     int wstatus;

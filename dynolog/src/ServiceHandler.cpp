@@ -18,7 +18,13 @@ GpuProfilerResult ServiceHandler::setKinetOnDemandRequest(
     const std::string& config,
     int limit) {
   return LibkinetoConfigManager::getInstance()->setOnDemandConfig(
-      job_id, pids, config, (int)LibkinetoConfigType::ACTIVITIES, limit);
+      // Temporarily cast to string while we iteratively migrate to string job
+      // id
+      std::to_string(job_id),
+      pids,
+      config,
+      (int)LibkinetoConfigType::ACTIVITIES,
+      limit);
 }
 
 } // namespace dynolog
