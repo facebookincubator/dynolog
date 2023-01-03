@@ -256,8 +256,10 @@ TEST_F(BuiltinMetricsTest, PerfEventAttrPrecise) {
 }
 
 TEST_F(BuiltinMetricsTest, PerfEventAttrPreciseJson) {
-  if (facebook::hbt::CpuInfo::load().cpu_family == CpuFamily::INTEL) {
-    GTEST_SKIP() << "Unsupported cpu_family (run this test on Intel)";
+  if (facebook::hbt::CpuInfo::load().cpu_family != CpuFamily::INTEL) {
+    GTEST_SKIP() << "Unsupported cpu_family "
+                 << facebook::hbt::CpuInfo::load().cpu_family
+                 << " (run this test on Intel)";
   }
 
   auto ev_def = pmu_manager->findEventDef("UOPS_RETIRED.ALL");
@@ -266,8 +268,14 @@ TEST_F(BuiltinMetricsTest, PerfEventAttrPreciseJson) {
   }
 
   ASSERT_TRUE(ev_def != nullptr);
-  EXPECT_EQ(ev_def->id, "UOPS_RETIRED.ALL");
-  EXPECT_EQ(ev_def->isPrecise(), true);
+  EXPECT_TRUE(
+      ev_def->id == "UOPS_RETIRED.ALL" ||
+      ev_def->id == "UOPS_RETIRED.RETIRE_SLOTS");
+
+  // UOPS_RETIRED.RETIRE_SLOTS is only precise on systems where UOPS_RETIRED.ALL
+  // is already present.
+  EXPECT_EQ(
+      ev_def->isPrecise(), ev_def->id == "UOPS_RETIRED.ALL" ? true : false);
 
   // A map of CPU ID: Event Configuration.
   PerCpuEventConfs per_cpu_confs;

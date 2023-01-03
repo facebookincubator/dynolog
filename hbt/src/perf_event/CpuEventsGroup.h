@@ -452,6 +452,7 @@ struct GroupReadValues {
     if (t->time_enabled == 0) {
       return 0;
     }
+
     return static_cast<uint64_t>(
         static_cast<double>(t->count[i]) *
         static_cast<double>(t->time_enabled) /

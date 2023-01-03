@@ -483,7 +483,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                "retired_instructions",
                EventExtraAttr{},
                {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
@@ -500,7 +500,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                "cpu_cycles",
                EventExtraAttr{},
                {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
@@ -527,7 +527,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    "retired_instructions",
                    EventExtraAttr{},
                    {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
@@ -572,7 +572,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                "DynoPerfCounter::DRAM_ACCESS_READS",
                EventExtraAttr{},
                {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
@@ -611,7 +611,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
                    EventExtraAttr{},
                    {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
@@ -649,7 +649,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
                    EventExtraAttr{},
                    {}}}}},
-      0,
+      100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
 
