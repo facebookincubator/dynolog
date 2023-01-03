@@ -25,7 +25,8 @@ class LibkinetoConfigManager {
   LibkinetoConfigManager();
   virtual ~LibkinetoConfigManager();
 
-  int32_t registerLibkinetoContext(int64_t jobId, int32_t pid, int32_t gpu);
+  int32_t
+  registerLibkinetoContext(const std::string& jobId, int32_t pid, int32_t gpu);
   static std::shared_ptr<LibkinetoConfigManager> getInstance();
 
   std::string getBaseConfig() {
@@ -34,12 +35,12 @@ class LibkinetoConfigManager {
   }
 
   std::string obtainOnDemandConfig(
-      int64_t jobId,
+      const std::string& jobId,
       const std::vector<int32_t>& pids,
       int32_t configType);
 
   GpuProfilerResult setOnDemandConfig(
-      int64_t jobId,
+      const std::string& jobId,
       const std::set<int32_t>& pids,
       const std::string& config,
       int32_t configType,
@@ -47,7 +48,7 @@ class LibkinetoConfigManager {
 
   // Return the number of active libkineto processes
   // with the given Chronos / Tangram Job Id
-  int processCount(int64_t jobId) const;
+  int processCount(const std::string& jobId) const;
 
  protected:
   struct LibkinetoProcess {
@@ -68,12 +69,12 @@ class LibkinetoConfigManager {
 
   // Map of pid ancestry -> LibkinetoProcess
   using ProcessMap = std::map<std::set<int32_t>, LibkinetoProcess>;
-  std::map<int64_t, ProcessMap> jobs_;
+  std::map<std::string, ProcessMap> jobs_;
 
   // Map of gpu id -> pids
   using InstancesPerGpuMap = std::map<int32_t, std::set<int32_t>>;
   // Job id -> InstancesPerGpu
-  std::map<int64_t, InstancesPerGpuMap> jobInstancesPerGpu_;
+  std::map<std::string, InstancesPerGpuMap> jobInstancesPerGpu_;
   mutable std::mutex mutex_;
 
   void setOnDemandConfigForProcess(
