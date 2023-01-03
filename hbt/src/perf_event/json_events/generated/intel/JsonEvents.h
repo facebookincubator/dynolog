@@ -10,21 +10,21 @@
 
 namespace facebook::hbt::perf_event::generated {
 
-namespace nehalemex_core_v2 {
+namespace nehalemex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace nehalemex_core_v2
+} // namespace nehalemex_core
 
 namespace goldmont_core_v13 {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace goldmont_core_v13
 
-namespace sandybridge_core_v16 {
+namespace sandybridge_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace sandybridge_core_v16
+} // namespace sandybridge_core
 
-namespace sandybridge_uncore_v16 {
+namespace sandybridge_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace sandybridge_uncore_v16
+} // namespace sandybridge_uncore
 
 namespace ivybridge_core_v21 {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -149,10 +149,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(42, 0x13): // fall-through
     case toCpuKey(42, 0x14): // fall-through
     case toCpuKey(42, 0x15): // fall-through
-      // from sandybridge_core_v16.json
-      sandybridge_core_v16::addEvents(pmu_manager);
-      // from sandybridge_uncore_v16.json
-      sandybridge_uncore_v16::addEvents(pmu_manager);
+      // from sandybridge_core.json
+      sandybridge_core::addEvents(pmu_manager);
+      // from sandybridge_uncore.json
+      sandybridge_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(46, 0x0): // fall-through
@@ -171,8 +171,8 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(46, 0x13): // fall-through
     case toCpuKey(46, 0x14): // fall-through
     case toCpuKey(46, 0x15): // fall-through
-      // from NehalemEX_core_V2.json
-      nehalemex_core_v2::addEvents(pmu_manager);
+      // from NehalemEX_core.json
+      nehalemex_core::addEvents(pmu_manager);
       break;
 
     case toCpuKey(58, 0x0): // fall-through
