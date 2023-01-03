@@ -84,6 +84,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(uncore_m2pcie);
 
     CASE_PMU_TYPE(intel_pt);
+
+    CASE_PMU_TYPE(uncore_mchbm);
   };
 }
 
@@ -130,6 +132,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, uncore_m2pcie);
 
   IF_PMU_TYPE(str, intel_pt);
+
+  IF_PMU_TYPE(str, uncore_mchbm);
 
   HBT_THROW_EINVAL() << "Unrecognized PmuType string: \"" + str + "\"";
   __builtin_unreachable();
