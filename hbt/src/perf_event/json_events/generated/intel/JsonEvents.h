@@ -74,13 +74,13 @@ namespace skylake_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace skylake_uncore
 
-namespace knightslanding_core_v9 {
+namespace knightslanding_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace knightslanding_core_v9
+} // namespace knightslanding_core
 
-namespace knightslanding_uncore_v9 {
+namespace knightslanding_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace knightslanding_uncore_v9
+} // namespace knightslanding_uncore
 
 namespace skylakex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -93,17 +93,18 @@ void addEvents(PmuDeviceManager& pmu_manager);
 namespace skylakex_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace skylakex_uncore_experimental
-namespace cascadelakex_core_v1_08 {
-void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace cascadelakex_core_v1_08
 
-namespace cascadelakex_uncore_v1_08 {
+namespace cascadelakex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace cascadelakex_uncore_v1_08
+} // namespace cascadelakex_core
 
-namespace cascadelakex_uncore_v1_08_experimental {
+namespace cascadelakex_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace cascadelakex_uncore_v1_08_experimental
+} // namespace cascadelakex_uncore
+
+namespace cascadelakex_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace cascadelakex_uncore_experimental
 
 namespace icelake_core_v1_05 {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -330,12 +331,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(85, 0xD): // fall-through
     case toCpuKey(85, 0xE): // fall-through
     case toCpuKey(85, 0xF): // fall-through
-      // from cascadelakex_core_v1.08.json
-      cascadelakex_core_v1_08::addEvents(pmu_manager);
-      // from cascadelakex_uncore_v1.08.json
-      cascadelakex_uncore_v1_08::addEvents(pmu_manager);
-      // from cascadelakex_uncore_v1.08_experimental.json
-      cascadelakex_uncore_v1_08_experimental::addEvents(pmu_manager);
+      // from cascadelakex_core.json
+      cascadelakex_core::addEvents(pmu_manager);
+      // from cascadelakex_uncore.json
+      cascadelakex_uncore::addEvents(pmu_manager);
+      // from cascadelakex_uncore_experimental.json
+      cascadelakex_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(86, 0x0): // fall-through
@@ -376,10 +377,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(87, 0x13): // fall-through
     case toCpuKey(87, 0x14): // fall-through
     case toCpuKey(87, 0x15): // fall-through
-      // from KnightsLanding_core_V9.json
-      knightslanding_core_v9::addEvents(pmu_manager);
-      // from KnightsLanding_uncore_V9.json
-      knightslanding_uncore_v9::addEvents(pmu_manager);
+      // from KnightsLanding_core.json
+      knightslanding_core::addEvents(pmu_manager);
+      // from KnightsLanding_uncore.json
+      knightslanding_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(92, 0x0): // fall-through
@@ -482,10 +483,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(133, 0x13): // fall-through
     case toCpuKey(133, 0x14): // fall-through
     case toCpuKey(133, 0x15): // fall-through
-      // from KnightsLanding_core_V9.json
-      knightslanding_core_v9::addEvents(pmu_manager);
-      // from KnightsLanding_uncore_V9.json
-      knightslanding_uncore_v9::addEvents(pmu_manager);
+      // from KnightsLanding_core.json
+      knightslanding_core::addEvents(pmu_manager);
+      // from KnightsLanding_uncore.json
+      knightslanding_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(134, 0x0): // fall-through
