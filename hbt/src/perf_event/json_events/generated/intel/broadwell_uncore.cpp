@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace broadwell_uncore_v25 {
+namespace broadwell_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwell_uncore_v25.json (23 events).
+    Events from broadwell_uncore.json (23 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW id: 61
@@ -296,5 +296,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 }
 
-} // namespace broadwell_uncore_v25
+} // namespace broadwell_uncore
 } // namespace facebook::hbt::perf_event::generated

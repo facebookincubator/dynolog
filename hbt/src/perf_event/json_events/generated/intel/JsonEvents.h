@@ -42,29 +42,29 @@ namespace haswellx_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace haswellx_uncore
 
-namespace broadwell_core_v25 {
+namespace broadwell_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwell_core_v25
+} // namespace broadwell_core
 
-namespace broadwell_uncore_v25 {
+namespace broadwell_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwell_uncore_v25
+} // namespace broadwell_uncore
 
-namespace broadwellx_core_v14 {
+namespace broadwellx_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwellx_core_v14
+} // namespace broadwellx_core
 
-namespace broadwellx_uncore_v14 {
+namespace broadwellx_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwellx_uncore_v14
+} // namespace broadwellx_uncore
 
-namespace broadwellde_core_v7 {
+namespace broadwellde_core {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwellde_core_v7
+} // namespace broadwellde_core
 
-namespace broadwellde_uncore_v7 {
+namespace broadwellde_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace broadwellde_uncore_v7
+} // namespace broadwellde_uncore
 
 namespace skylake_core_v48 {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -213,10 +213,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(61, 0x13): // fall-through
     case toCpuKey(61, 0x14): // fall-through
     case toCpuKey(61, 0x15): // fall-through
-      // from broadwell_core_v25.json
-      broadwell_core_v25::addEvents(pmu_manager);
-      // from broadwell_uncore_v25.json
-      broadwell_uncore_v25::addEvents(pmu_manager);
+      // from broadwell_core.json
+      broadwell_core::addEvents(pmu_manager);
+      // from broadwell_uncore.json
+      broadwell_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(63, 0x0): // fall-through
@@ -257,10 +257,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(71, 0x13): // fall-through
     case toCpuKey(71, 0x14): // fall-through
     case toCpuKey(71, 0x15): // fall-through
-      // from broadwell_core_v25.json
-      broadwell_core_v25::addEvents(pmu_manager);
-      // from broadwell_uncore_v25.json
-      broadwell_uncore_v25::addEvents(pmu_manager);
+      // from broadwell_core.json
+      broadwell_core::addEvents(pmu_manager);
+      // from broadwell_uncore.json
+      broadwell_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(78, 0x0): // fall-through
@@ -301,10 +301,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(79, 0x13): // fall-through
     case toCpuKey(79, 0x14): // fall-through
     case toCpuKey(79, 0x15): // fall-through
-      // from broadwellx_core_v14.json
-      broadwellx_core_v14::addEvents(pmu_manager);
-      // from broadwellx_uncore_v14.json
-      broadwellx_uncore_v14::addEvents(pmu_manager);
+      // from broadwellx_core.json
+      broadwellx_core::addEvents(pmu_manager);
+      // from broadwellx_uncore.json
+      broadwellx_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(85, 0x0): // fall-through
@@ -355,10 +355,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(86, 0x13): // fall-through
     case toCpuKey(86, 0x14): // fall-through
     case toCpuKey(86, 0x15): // fall-through
-      // from broadwellde_core_v7.json
-      broadwellde_core_v7::addEvents(pmu_manager);
-      // from broadwellde_uncore_v7.json
-      broadwellde_uncore_v7::addEvents(pmu_manager);
+      // from broadwellde_core.json
+      broadwellde_core::addEvents(pmu_manager);
+      // from broadwellde_uncore.json
+      broadwellde_uncore::addEvents(pmu_manager);
       break;
 
     case toCpuKey(87, 0x0): // fall-through
