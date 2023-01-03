@@ -9,11 +9,11 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace goldmont_core_v13 {
+namespace goldmont_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from goldmont_core_v13.json (169 events).
+    Events from goldmont_core.json (169 events).
 
     Supported SKUs:
         - Arch: x86, Model: GLM id: 92
@@ -2295,5 +2295,5 @@ This event counts differently than Intel processors based on Silvermont microarc
       R"(0)"));
 }
 
-} // namespace goldmont_core_v13
+} // namespace goldmont_core
 } // namespace facebook::hbt::perf_event::generated
