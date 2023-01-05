@@ -218,9 +218,9 @@ struct BinaryOp : public FilterChain::Step {
 
           for (size_t s = 0; s < b_sel_slices.size(); ++s) {
             if constexpr (BinaryOpType::Or == kType) {
-              new_sel_slices[s] = new_sel_slices[s] | b_sel_slices[s];
+              new_sel_slices[s] = new_sel_slices[s] || b_sel_slices[s];
             } else if (BinaryOpType::And == kType) {
-              new_sel_slices[s] = new_sel_slices[s] & b_sel_slices[s];
+              new_sel_slices[s] = new_sel_slices[s] && b_sel_slices[s];
             } else if (BinaryOpType::Xor == kType) {
               new_sel_slices[s] = new_sel_slices[s] ^ b_sel_slices[s];
             }
