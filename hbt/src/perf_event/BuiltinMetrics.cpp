@@ -571,6 +571,13 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                PmuType::cpu,
                "DynoPerfCounter::DRAM_ACCESS_READS",
                EventExtraAttr{},
+               {}}}},
+          {CpuArch::CLX,
+           EventRefs{EventRef{
+               "dram_access_reads",
+               PmuType::cpu,
+               "DynoPerfCounter::DRAM_ACCESS_READS",
+               EventExtraAttr{},
                {}}}}},
       100'000'000,
       System::Permissions{},
