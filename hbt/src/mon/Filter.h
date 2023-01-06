@@ -202,9 +202,9 @@ struct BinaryOp : public FilterChain::Step {
         while (new_it != new_sel.sel_counts->end()) {
           HBT_DCHECK(b_it != b_sel.sel_counts->cend());
           if constexpr (BinaryOpType::Or == kType) {
-            *new_it = *new_it | *b_it;
+            *new_it = *new_it || *b_it;
           } else if (BinaryOpType::And == kType) {
-            *new_it = *new_it & *b_it;
+            *new_it = *new_it && *b_it;
           } else if (BinaryOpType::Xor == kType) {
             *new_it = *new_it ^ *b_it;
           }
@@ -218,9 +218,9 @@ struct BinaryOp : public FilterChain::Step {
 
           for (size_t s = 0; s < b_sel_slices.size(); ++s) {
             if constexpr (BinaryOpType::Or == kType) {
-              new_sel_slices[s] = new_sel_slices[s] | b_sel_slices[s];
+              new_sel_slices[s] = new_sel_slices[s] || b_sel_slices[s];
             } else if (BinaryOpType::And == kType) {
-              new_sel_slices[s] = new_sel_slices[s] & b_sel_slices[s];
+              new_sel_slices[s] = new_sel_slices[s] && b_sel_slices[s];
             } else if (BinaryOpType::Xor == kType) {
               new_sel_slices[s] = new_sel_slices[s] ^ b_sel_slices[s];
             }
