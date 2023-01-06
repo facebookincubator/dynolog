@@ -16,6 +16,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include "dynolog/src/metric_frame/ExtraTypes.h"
+
 namespace facebook::dynolog {
 
 template <typename T>

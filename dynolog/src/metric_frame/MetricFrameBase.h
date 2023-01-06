@@ -9,16 +9,21 @@
 #include "dynolog/src/metric_frame/MetricSeries.h"
 
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <variant>
 
 namespace facebook::dynolog {
 
-using SampleVarT = std::variant<int64_t, double>;
+using SampleVarT = std::variant<int64_t, double, PerfReadValues>;
 using MetricSeriesInt64Ptr = std::shared_ptr<MetricSeries<int64_t>>;
 using MetricSeriesDoublePtr = std::shared_ptr<MetricSeries<double>>;
-using MetricSeriesVar =
-    std::variant<MetricSeriesInt64Ptr, MetricSeriesDoublePtr>;
+using MetricSeriesPerfReadValuePtr =
+    std::shared_ptr<MetricSeries<PerfReadValues>>;
+using MetricSeriesVar = std::variant<
+    MetricSeriesInt64Ptr,
+    MetricSeriesDoublePtr,
+    MetricSeriesPerfReadValuePtr>;
 
 class MetricFrameSlice;
 
