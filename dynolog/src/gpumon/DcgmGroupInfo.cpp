@@ -139,7 +139,7 @@ DcgmGroupInfo::DcgmGroupInfo(
     : updateIntervalMs_(updateIntervalMs) {
   init();
   createGroups();
-  createFieldGroups(fields, prof_fields);
+  createFieldGroups(fields);
   watchFields();
   watchProfFields(prof_fields);
 }
@@ -200,19 +200,14 @@ void DcgmGroupInfo::createGroups() {
 // TODO: make field ids configurable from configerator
 // TODO: make more than one field group configuration available
 void DcgmGroupInfo::createFieldGroups(
-    const std::vector<unsigned short>& fields,
-    const std::vector<unsigned short>& prof_fields) {
+    const std::vector<unsigned short>& fields) {
   if (isFailing() || fields.size() == 0) {
     // initialization failed, no group will be created
     return;
   }
   dcgmFieldGrp_t fieldGroupId;
   if (retCode_ = dcgmFieldGroupCreate_stub(
-          dcgmHandle_,
-          fields,
-          prof_fields,
-          (char*)fieldGroupName.c_str(),
-          &fieldGroupId);
+          dcgmHandle_, fields, (char*)fieldGroupName.c_str(), &fieldGroupId);
       retCode_ != DCGM_ST_OK) {
     errorCode_ = retCode_;
     LOG(ERROR) << "Failed dcgmFieldGroupCreate() return: " << retCode_
