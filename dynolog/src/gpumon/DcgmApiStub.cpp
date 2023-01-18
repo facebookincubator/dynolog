@@ -211,14 +211,10 @@ dcgmReturn_t dcgmGroupAddEntity_stub(
 
 dcgmReturn_t dcgmFieldGroupCreate_stub(
     dcgmHandle_t dcgmHandle,
-    std::vector<unsigned short> fieldIds,
-    const std::vector<unsigned short>& profFieldIds,
+    const std::vector<unsigned short>& fieldIds,
     char* fieldGroupName,
     dcgmFieldGrp_t* dcgmFieldGroupId) {
   if (auto api = detail::getDcgmAPI(); api) {
-    if (api->dcgm_major_version == 3) {
-      fieldIds.insert(fieldIds.end(), profFieldIds.begin(), profFieldIds.end());
-    }
     return api->dcgmFieldGroupCreate(
         dcgmHandle,
         fieldIds.size(),

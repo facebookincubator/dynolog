@@ -80,8 +80,6 @@ dcgmReturn_t dcgmGroupAddEntity_stub(
  * @param dcgmHandle         IN: DCGM handle
  * @param fieldIds           IN: Field IDs to be added to the newly-created
  * field group
- * @param profFieldIds       IN: Prof Field IDs to be added to the newly-created
- * field group, needed for DCGM 3.0
  * @param fieldGroupName     IN: Unique name for this group of fields. This must
  * not be the same as any existing field groups.
  * @param dcgmFieldGroupId  OUT: Handle to the newly-created field group
@@ -97,8 +95,7 @@ dcgmReturn_t dcgmGroupAddEntity_stub(
  */
 dcgmReturn_t dcgmFieldGroupCreate_stub(
     dcgmHandle_t dcgmHandle,
-    std::vector<unsigned short> fieldIds,
-    const std::vector<unsigned short>& profFieldIds,
+    const std::vector<unsigned short>& fieldIds,
     char* fieldGroupName,
     dcgmFieldGrp_t* dcgmFieldGroupId);
 

@@ -42,9 +42,7 @@ class DcgmGroupInfo {
       int updateIntervalMs);
   void init();
   void createGroups();
-  void createFieldGroups(
-      const std::vector<unsigned short>& fields,
-      const std::vector<unsigned short>& prof_fields);
+  void createFieldGroups(const std::vector<unsigned short>& fields);
   void watchFields();
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
 
