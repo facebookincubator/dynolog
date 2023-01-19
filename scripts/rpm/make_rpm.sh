@@ -11,8 +11,15 @@
 
 set -eux -o pipefail
 
-VERSION=${VERSION:-"0.1.0"}
 DYNOROOT="$PWD"
+
+VERSION=""
+while read -r _ ver_num; do
+    VERSION+="$ver_num."
+done < "$DYNOROOT/dynolog/src/version.txt"
+VERSION=${VERSION::-1}
+echo "$VERSION"
+
 SPECBASE="$DYNOROOT/scripts/rpm/"
 SCRIPTS="$DYNOROOT/scripts/"
 

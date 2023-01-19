@@ -28,8 +28,6 @@ using namespace dynolog;
 using json = nlohmann::json;
 namespace hbt = facebook::hbt;
 
-constexpr const char* VERSION = "0.1.0";
-
 DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
 DEFINE_int32(
     kernel_monitor_reporting_interval_s,
@@ -154,7 +152,8 @@ int main(int argc, char** argv) {
   FLAGS_logtostderr = 1;
   google::InitGoogleLogging(argv[0]);
 
-  LOG(INFO) << "Starting dynolog min, version " << VERSION;
+  LOG(INFO) << "Starting dynolog min, version " << VERSION_MAJOR << "."
+            << VERSION_MINOR << "." << VERSION_PATCH;
 
   // setup service
   auto handler = std::make_shared<ServiceHandler>();
