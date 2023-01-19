@@ -52,6 +52,11 @@ std::optional<MetricFrameSlice> MetricFrameBase::slice(
   return MetricFrameSlice(*this, rangeMaybe.value());
 }
 
+template <bool flag = false>
+void unknown_type_assert() {
+  static_assert(flag, "type provided to add samples is not supported");
+}
+
 void MetricFrameBase::addSample(
     const SampleVarT& sampleVar,
     MetricSeriesVar& seriesVar) {
@@ -62,6 +67,10 @@ void MetricFrameBase::addSample(
           arg->addSample(std::get<int64_t>(sampleVar));
         } else if constexpr (std::is_same_v<T, MetricSeriesDoublePtr>) {
           arg->addSample(std::get<double>(sampleVar));
+        } else if constexpr (std::is_same_v<T, MetricSeriesPerfReadValuePtr>) {
+          arg->addSample(std::get<PerfReadValues>(sampleVar));
+        } else {
+          unknown_type_assert();
         }
       },
       seriesVar);

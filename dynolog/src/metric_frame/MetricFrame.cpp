@@ -40,10 +40,12 @@ bool MetricFrameMap::eraseSeries(const std::string& name) {
 
 bool MetricFrameMap::addSamples(const MapSamplesT& samples, TimePoint time) {
   for (const auto& [name, sampleVar] : samples) {
-    auto seriesIt = series_.find(name);
-    if (seriesIt == series_.end()) {
-      continue;
+    if (!series_.count(name)) {
+      return false;
     }
+  }
+  for (const auto& [name, sampleVar] : samples) {
+    auto seriesIt = series_.find(name);
     auto& seriesVar = seriesIt->second;
     addSample(sampleVar, seriesVar);
   }
