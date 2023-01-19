@@ -27,7 +27,7 @@ enum class BPerfEventType {
 // This map doesn't hold reference on any of these programs or maps.
 struct bperf_attr_map_key {
   __u32 size;
-  __u32 flags;
+  __u32 flags = 0;
   char name[BPERF_METRIC_NAME_SIZE];
   bperf_attr_map_key(std::string n, int s);
 };
