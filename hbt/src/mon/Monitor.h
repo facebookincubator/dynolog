@@ -303,6 +303,19 @@ class Monitor {
     return it->second;
   }
 
+  bool eraseCountReader(const MuxGroupId& mux_group_id, const ElemId& elem_id) {
+    std::lock_guard<std::mutex> lock{mutex_};
+    if (!count_readers_.count(elem_id)) {
+      return false;
+    }
+    if (!removeMuxEntry_(mux_group_id, elem_id)) {
+      return false;
+    }
+    count_readers_.erase(elem_id);
+    sync_();
+    return true;
+  }
+
 #ifdef HBT_ENABLE_BPERF
   /// Read counts for all events opened in counting mode
   /// in all BPerfCountReaders.
