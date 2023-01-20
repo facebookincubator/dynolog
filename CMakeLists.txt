@@ -6,6 +6,20 @@ option(BUILD_TESTS "Build the unit tests" ON)
 option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
 ON)
 
+file(READ "version.txt" DYNOLOG_VERSION)
+string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)
+
+execute_process (
+  COMMAND git rev-parse --short HEAD
+  OUTPUT_VARIABLE DYNOLOG_GIT_REV
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+set(DYNOLOG_VERSION "\"${DYNOLOG_VERSION}\"")
+set(DYNOLOG_GIT_REV "\"${DYNOLOG_GIT_REV}\"")
+message("Dynolog version = ${DYNOLOG_VERSION}")
+message("Dynolog git rev = ${DYNOLOG_GIT_REV}")
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -13,7 +27,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_POSITION_INDEPENDENT_CODE True)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
 
 if(BUILD_TESTS)
   enable_testing()
