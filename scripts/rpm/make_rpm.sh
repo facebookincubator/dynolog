@@ -11,7 +11,7 @@
 
 set -eux -o pipefail
 
-VERSION=${VERSION:-"0.1.0"}
+VERSION=${VERSION:-"$(tr -d '\n' < version.txt)"}
 DYNOROOT="$PWD"
 SPECBASE="$DYNOROOT/scripts/rpm/"
 SCRIPTS="$DYNOROOT/scripts/"

@@ -1,12 +1,13 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 
 cmake_minimum_required(VERSION 3.20)
+add_definitions(-DDYNOLOG_VERSION=${DYNOLOG_VERSION} -DDYNOLOG_GIT_REV=${DYNOLOG_GIT_REV})
 
 # our build script will first create a src/ dir where all source code will exist
 file (GLOB dynolog_src "*.h" "*.cpp")
 
 # Remove main from library, only needed for exec.
-list(REMOVE_ITEM dynolog_src "dynolog/src/Main.cc")
+list(REMOVE_ITEM dynolog_src "${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp")
 add_library(dynolog_lib ${dynolog_src})
 
 if(USE_ODS_GRAPH_API)

@@ -11,7 +11,7 @@
 
 set -eux -o pipefail
 
-VERSION=${VERSION:-"0.1.0"}
+VERSION=${VERSION:-"$(tr -d '\n' < version.txt)"}
 ARCH=${ARCH:-"amd64"}
 DEBDIR="dynolog_${VERSION}-0-${ARCH}"
 
