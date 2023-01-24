@@ -27,17 +27,17 @@ pub fn run_gputrace(
 ) -> Result<()> {
     let trigger_config = if iterations > 0 {
         format!(
-            r#"PROFILE_START_ITERATION_ROUNDUP={}\nACTIVITIES_ITERATIONS={}"#,
+            r#"PROFILE_START_ITERATION=0\nPROFILE_START_ITERATION_ROUNDUP={}\nACTIVITIES_ITERATIONS={}"#,
             profile_start_iteration_roundup, iterations
         )
     } else {
-        format!(r#"ACTIVITIES_DURATION_MSECS={}"#, duration_ms)
+        format!(
+            r#"PROFILE_START_TIME={}\nACTIVITIES_DURATION_MSECS={}"#,
+            profile_start_time, duration_ms
+        )
     };
 
-    let kineto_config = format!(
-        r#"PROFILE_START_TIME={}\nACTIVITIES_LOG_FILE={}\n{}"#,
-        profile_start_time, log_file, trigger_config
-    );
+    let kineto_config = format!(r#"ACTIVITIES_LOG_FILE={}\n{}"#, log_file, trigger_config);
 
     println!("Kineto config = \n{}", kineto_config);
 
