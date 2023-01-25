@@ -14,8 +14,6 @@ if(USE_ODS_GRAPH_API)
   target_compile_options(dynolog_lib PUBLIC "-DUSE_GRAPH_ENDPOINT")
 endif()
 
-include_directories(${PROJECT_SOURCE_DIR}/third_party/range-v3/include)
-
 target_link_libraries(dynolog_lib PUBLIC Monitor)
 target_link_libraries(dynolog_lib PUBLIC BuiltinMetrics)
 

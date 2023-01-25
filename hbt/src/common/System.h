@@ -9,9 +9,9 @@
 #include "hbt/src/perf_event/json_events/generated/CpuArch.h"
 #include "pfs/procfs.hpp"
 
+#include <fmt/core.h>
 #include <fmt/ostream.h>
 #include <limits.h>
-#include <range/v3/view.hpp>
 #include <sys/prctl.h>
 #include <unistd.h>
 #include <algorithm>
@@ -484,7 +484,7 @@ inline std::optional<std::string> readProcFsCmdLine(pid_t tid) noexcept {
   pfs::procfs pfs;
   try {
     auto vec = pfs.get_task(tid).get_cmdline();
-    return vec | ranges::views::join(' ') | ranges::to<std::string>();
+    return fmt::format("{}", fmt::join(vec, " "));
   } catch (const std::system_error&) {
     return std::nullopt;
   }

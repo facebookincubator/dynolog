@@ -68,9 +68,6 @@ target_link_libraries(dynolog_lib PUBLIC pfs)
 add_subdirectory(third_party/fmt)
 target_link_libraries(dynolog_lib PUBLIC fmt::fmt)
 
-set(BUILD_SAMPLES OFF CACHE BOOL "")
-add_subdirectory(third_party/range-v3)
-
 if(USE_ODS_GRAPH_API)
   add_subdirectory(third_party/cpr)
   target_link_libraries(dynolog_lib PUBLIC cpr::cpr)
