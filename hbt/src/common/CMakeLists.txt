@@ -9,7 +9,6 @@ add_library(System System.h System.cpp)
 target_include_directories(System PUBLIC ${PROJECT_SOURCE_DIR})
 target_link_libraries(System PUBLIC fmt::fmt)
 target_link_libraries(System PUBLIC pfs)
-target_link_libraries(System PUBLIC range-v3::range-v3)
 target_link_libraries(System PUBLIC Defs)
 target_link_libraries(System PUBLIC CpuArch)
 
