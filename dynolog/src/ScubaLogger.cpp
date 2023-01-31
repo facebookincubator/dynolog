@@ -17,7 +17,7 @@
 
 namespace dynolog {
 constexpr int HOSTNAME_MAX = 50;
-constexpr char kScubaUrl[] = "https://graph.facebook.com/scribe_logs";
+constexpr char kScubaUrl[] = "http://graph.facebook.com/v2.2/scribe_logs";
 DEFINE_string(
     scribe_category,
     "perfpipe_fair_cluster_gpu_stats",

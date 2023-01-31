@@ -125,11 +125,7 @@ auto setup_server(std::shared_ptr<ServiceHandler> handler) {
       handler, FLAGS_port);
 }
 
-void gpu_monitor_loop() {
-  LOG(INFO) << "Setting up DCGM (GPU)  monitoring.";
-  std::unique_ptr<gpumon::DcgmGroupInfo> dcgm = gpumon::DcgmGroupInfo::factory(
-      gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
-
+void gpu_monitor_loop(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm) {
   auto logger = getLogger(FLAGS_scribe_category);
 
   LOG(INFO) << "Running DCGM loop : interval = "
@@ -155,12 +151,7 @@ int main(int argc, char** argv) {
   LOG(INFO) << "Starting dynolog, version = " DYNOLOG_VERSION
             << ", build git-hash = " DYNOLOG_GIT_REV;
 
-  // setup service
-  auto handler = std::make_shared<ServiceHandler>();
-
-  // use simple json RPC server for now
-  auto server = setup_server(handler);
-  server->run();
+  std::shared_ptr<gpumon::DcgmGroupInfo> dcgm;
 
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
   std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread, pm_thread;
@@ -173,12 +164,21 @@ int main(int argc, char** argv) {
   }
 
   if (FLAGS_enable_gpu_monitor) {
-    gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop);
+    dcgm = gpumon::DcgmGroupInfo::factory(
+        gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
+    gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
   }
   std::thread km_thread{kernel_monitor_loop};
   if (FLAGS_enable_perf_monitor) {
     pm_thread = std::make_unique<std::thread>(perf_monitor_loop);
   }
+
+  // setup service
+  auto handler = std::make_shared<ServiceHandler>(dcgm);
+
+  // use simple json RPC server for now
+  auto server = setup_server(handler);
+  server->run();
 
   km_thread.join();
   if (pm_thread) {

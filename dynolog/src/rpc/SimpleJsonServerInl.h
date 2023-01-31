@@ -100,6 +100,17 @@ std::string SimpleJsonServer<TServiceHandler>::processOneImpl(
             fmt::format("failed with exception = {}", ex.what());
       }
     }
+  } else if (request["fn"] == "dcgmProfPause") {
+    if (!request.contains("duration_s")) {
+      response["status"] = "failed";
+    } else {
+      int duration_s = request.value("duration_s", 300);
+      bool result = handler_->dcgmProfPause(duration_s);
+      response["status"] = result;
+    }
+  } else if (request["fn"] == "dcgmProfResume") {
+    bool result = handler_->dcgmProfResume();
+    response["status"] = result;
   } else {
     LOG(ERROR) << "Unknown RPC call = " << request["fn"];
     return "";
