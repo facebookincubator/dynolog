@@ -38,6 +38,19 @@ struct MockServiceHandler {
     return result;
   }
 
+  bool dcgmProfPause(int duration_s) {
+    duration_s_ = duration_s;
+    dcgm_prof_enabled_ = false;
+    dcgmProfPauseCalls_++;
+    return true;
+  }
+
+  bool dcgmProfResume() {
+    dcgm_prof_enabled_ = true;
+    dcgmProfResumeCalls_++;
+    return true;
+  }
+
   int status_ = 0;
   int statusCalls_ = 0;
   GpuProfilerResult result;
@@ -47,6 +60,10 @@ struct MockServiceHandler {
   std::set<int> pids_;
   std::string config_;
   int limit_ = -1;
+  int duration_s_ = -1;
+  bool dcgm_prof_enabled_ = true;
+  int dcgmProfPauseCalls_ = 0;
+  int dcgmProfResumeCalls_ = 0;
 };
 
 using TestSimpleJsonServer = SimpleJsonServer<MockServiceHandler>;
@@ -200,6 +217,47 @@ TEST_F(SimpleJsonClientTest, SetKinetoOnDemandRequestTest) {
   EXPECT_EQ(resp["eventProfilersBusy"], expected_result.eventProfilersBusy);
   EXPECT_EQ(
       resp["activityProfilersBusy"], expected_result.activityProfilersBusy);
+}
+
+TEST_F(SimpleJsonClientTest, DcgmTest) {
+  rpc_ready_.notify_one();
+
+  auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
+  ASSERT_TRUE(client->initSuccessful())
+      << "Failed to connect to port " << port_;
+
+  json request_pause{
+      {"fn", "dcgmProfPause"},
+      {"duration_s", 100},
+  };
+
+  auto resp_str = client->invoke_rpc(request_pause.dump());
+  client.reset(); // disconnect
+
+  ASSERT_TRUE(resp_str) << "Null response on dcgmProfPause()";
+  EXPECT_EQ(handler_->dcgmProfPauseCalls_, 1);
+  EXPECT_EQ(handler_->dcgm_prof_enabled_, false);
+  EXPECT_EQ(handler_->duration_s_, 100);
+
+  json resp = json::parse(resp_str.value());
+  EXPECT_EQ(resp["status"], true);
+
+  rpc_ready_.notify_one();
+
+  json request_resume{
+      {"fn", "dcgmProfResume"},
+  };
+  // Create a new connection for new rpc
+  client = std::make_unique<SimpleJsonServerClient>("::1", port_);
+  resp_str = client->invoke_rpc(request_resume.dump());
+  client.reset(); // disconnect
+
+  ASSERT_TRUE(resp_str) << "Null response on dcgmProfResume()";
+  EXPECT_EQ(handler_->dcgmProfResumeCalls_, 1);
+
+  resp = json::parse(resp_str.value());
+  EXPECT_EQ(resp["status"], true);
+  EXPECT_EQ(handler_->dcgm_prof_enabled_, true);
 }
 
 } // namespace dynolog

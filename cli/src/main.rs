@@ -72,6 +72,14 @@ enum Command {
         #[clap(long, default_value_t = 3)]
         process_limit: u32,
     },
+    /// Pause dcgm profiling. This enables running tools like Nsight compute and avoids conflicts.
+    DcgmPause {
+        /// Duration to pause dcgm profiling in seconds
+        #[clap(long, default_value_t = 300)]
+        duration_s: i32,
+    },
+    /// Resume dcgm profiling
+    DcgmResume,
 }
 
 /// Create a socket connection to dynolog
@@ -116,6 +124,8 @@ fn main() -> Result<()> {
             profile_start_iteration_roundup,
             process_limit,
         ),
+        Command::DcgmPause { duration_s } => dcgm::run_dcgm_pause(dyno_client, duration_s),
+        Command::DcgmResume => dcgm::run_dcgm_resume(dyno_client),
         // ... add new commands here
     }
 }

@@ -7,8 +7,8 @@
 #include <string.h>
 #include <cstdint>
 #include <memory>
+#include <mutex>
 #include <unordered_map>
-#include <variant>
 #include <vector>
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/gpumon/dcgm_structs.h"
@@ -23,17 +23,19 @@ constexpr char kDcgmDefaultFieldIds[] =
 class DcgmGroupInfo {
  public:
   ~DcgmGroupInfo();
-  static std::unique_ptr<DcgmGroupInfo> factory(
+  static std::shared_ptr<DcgmGroupInfo> factory(
       const std::string& fields_str,
       int updateIntervalMs);
   void update();
-  dcgmStatus_t getDcgmStatus() {
+  dcgmStatus_t getDcgmStatus() const {
     return errorCode_;
   }
-  bool isFailing() {
+  bool isFailing() const {
     return errorCode_ != DCGM_ST_OK;
   }
   void log(Logger& logger);
+  bool pauseProfiling(int duration_s);
+  bool resumeProfiling();
 
  private:
   DcgmGroupInfo(
@@ -48,7 +50,7 @@ class DcgmGroupInfo {
 
   std::vector<unsigned int> gpuIdList_;
   int deviceCount_ = 0;
-  bool prof_enabled_ = false;
+  bool profEnabled_ = false;
   int updateIntervalMs_;
   dcgmReturn_t errorCode_{DCGM_ST_OK};
   dcgmReturn_t retCode_{DCGM_ST_OK};
@@ -64,6 +66,8 @@ class DcgmGroupInfo {
   std::unordered_map<int, std::unordered_map<std::string, std::string>>
       envMetadataMapString_;
   std::vector<dcgmFieldGrp_t> fieldGroupIds_;
+  std::mutex profLock_;
+  std::chrono::seconds profPauseTimer_;
 };
 
 } // namespace gpumon

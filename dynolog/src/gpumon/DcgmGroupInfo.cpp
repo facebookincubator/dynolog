@@ -94,7 +94,7 @@ static inline bool isProfField(unsigned short field_id) {
   return field_id >= DCGM_FI_PROF_GR_ENGINE_ACTIVE;
 }
 
-std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
+std::shared_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
     const std::string& fields_str,
     int updateIntervalMs) {
   std::stringstream field_ss(fields_str);
@@ -124,7 +124,7 @@ std::unique_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
   }
   LOG(INFO) << ss.str();
 
-  auto dcgmGroupInfo = std::unique_ptr<DcgmGroupInfo>(
+  auto dcgmGroupInfo = std::shared_ptr<DcgmGroupInfo>(
       new DcgmGroupInfo(fields, prof_fields, updateIntervalMs));
   if (dcgmGroupInfo->isFailing()) {
     return nullptr;
@@ -265,9 +265,9 @@ void DcgmGroupInfo::watchProfFields(
       retCode_ != DCGM_ST_OK) {
     errorCode_ = retCode_;
     LOG(ERROR) << "Failed dcgmProfWatchFields() return: " << retCode_;
-    prof_enabled_ = false;
+    profEnabled_ = false;
   } else {
-    prof_enabled_ = true;
+    profEnabled_ = true;
   }
 }
 
@@ -306,7 +306,7 @@ void DcgmGroupInfo::update() {
             LOG(ERROR) << "Field id not supported, got: " << v.fieldId;
           } else {
             // skip prof field reporting if profiling is disabled
-            if (!prof_enabled_ && isProfField(v.fieldId)) {
+            if (profEnabled_ && isProfField(v.fieldId)) {
               continue;
             }
 
@@ -338,6 +338,17 @@ void DcgmGroupInfo::update() {
       }
     }
   }
+
+  // if profiling disabled, check countdown timer to see if we should
+  // re-enable dcgm profiling
+  if (!profEnabled_) {
+    if (profPauseTimer_.count() <= 0) {
+      resumeProfiling();
+    } else {
+      std::lock_guard<std::mutex> wguard(profLock_);
+      profPauseTimer_ -= std::chrono::seconds(updateIntervalMs_ / 1000);
+    }
+  }
 }
 
 void DcgmGroupInfo::log(Logger& logger) {
@@ -360,6 +371,34 @@ void DcgmGroupInfo::log(Logger& logger) {
     logger.logInt("device", index);
     logger.finalize();
   }
+}
+
+bool DcgmGroupInfo::pauseProfiling(int duration) {
+  std::lock_guard<std::mutex> wguard(profLock_);
+  LOG(INFO) << "Pausing dcgm profiling";
+  profPauseTimer_ = std::chrono::seconds(duration);
+  profEnabled_ = false;
+
+  if (retCode_ = dcgmProfPause_stub(dcgmHandle_); retCode_ != DCGM_ST_OK) {
+    errorCode_ = retCode_;
+    LOG(ERROR) << "Failed dcgmProfPause() return: " << retCode_;
+    return false;
+  }
+
+  return true;
+}
+
+bool DcgmGroupInfo::resumeProfiling() {
+  std::lock_guard<std::mutex> wguard(profLock_);
+  LOG(INFO) << "Resuming dcgm profiling";
+  profEnabled_ = true;
+  if (retCode_ = dcgmProfResume_stub(dcgmHandle_); retCode_ != DCGM_ST_OK) {
+    errorCode_ = retCode_;
+    LOG(ERROR) << "Failed dcgmProfResume() return: " << retCode_;
+    return false;
+  }
+
+  return true;
 }
 
 DcgmGroupInfo::~DcgmGroupInfo() {

@@ -27,4 +27,18 @@ GpuProfilerResult ServiceHandler::setKinetOnDemandRequest(
       limit);
 }
 
+bool ServiceHandler::dcgmProfPause(int duration_s) {
+  if (dcgm_) {
+    return dcgm_->pauseProfiling(duration_s);
+  }
+  return false;
+}
+
+bool ServiceHandler::dcgmProfResume() {
+  if (dcgm_) {
+    return dcgm_->resumeProfiling();
+  }
+  return false;
+}
+
 } // namespace dynolog
