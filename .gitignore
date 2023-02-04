@@ -1,1 +1,13 @@
 Cargo.lock
+
+# build script files
+build
+/build_*
+cmake_build
+.cmake_build
+
+# buck generated files
+.buckd/
+.lsp-buck-out/
+.lsp.buckd/
+buck-out/
