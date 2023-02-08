@@ -400,11 +400,6 @@ dcgmReturn_t dcgmUnwatchFields_stub(
 
 dcgmReturn_t dcgmProfPause_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
-    // disabled pause/resume of profiling for DCGM 3.0 as dcgmProfWatchFields
-    // was deprecated
-    if (api->dcgm_major_version == 3) {
-      return DCGM_ST_OK;
-    }
     return api->dcgmProfPause(pDcgmHandle);
   }
   log_missing_api(__func__);
@@ -413,11 +408,6 @@ dcgmReturn_t dcgmProfPause_stub(dcgmHandle_t pDcgmHandle) {
 
 dcgmReturn_t dcgmProfResume_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
-    if (api->dcgm_major_version == 3) {
-      // disabled pause/resume of profiling for DCGM 3.0 as dcgmProfWatchFields
-      // was deprecated
-      return DCGM_ST_OK;
-    }
     return api->dcgmProfResume(pDcgmHandle);
   }
   log_missing_api(__func__);
