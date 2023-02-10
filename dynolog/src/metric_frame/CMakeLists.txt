@@ -1,6 +1,8 @@
 add_library(extra_types STATIC ExtraTypes.h ExtraTypes.cpp)
 add_library(metric_series STATIC MetricSeries.h)
 set_target_properties(metric_series PROPERTIES LINKER_LANGUAGE CXX)
+add_library(metric_values STATIC MetricValues.h)
+set_target_properties(metric_values PROPERTIES LINKER_LANGUAGE CXX)
 add_library(metric_frame_ts_unit STATIC
     MetricFrameTsUnit.h MetricFrameTsUnit.cpp MetricFrameTsUnitInterface.h)
 add_library(metric_frame STATIC

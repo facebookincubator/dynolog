@@ -2,6 +2,9 @@
 dynolog_add_test(MetricSeriesTest MetricSeriesTest.cpp)
 target_link_libraries(MetricSeriesTest PRIVATE metric_series)
 
+dynolog_add_test(MetricValuesTest MetricValuesTest.cpp)
+target_link_libraries(MetricValuesTest PRIVATE metric_values)
+
 dynolog_add_test(MetricFrameTsUnitTest MetricFrameTsUnitTest.cpp)
 target_link_libraries(MetricFrameTsUnitTest PRIVATE metric_frame_ts_unit)
 
