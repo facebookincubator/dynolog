@@ -20,7 +20,7 @@ echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
-cmake -DCMAKE_BUILD_TYPE=Release -G=Ninja "$@" ..
+cmake -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
 echo "Binary files ="

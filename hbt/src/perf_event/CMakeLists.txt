@@ -1,6 +1,9 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 
 add_compile_options("-Wconversion")
+if(USE_JSON_GENERATED_PERF_EVENTS)
+  add_definitions(-DUSE_JSON_GENERATED_PERF_EVENTS)
+endif()
 
 add_subdirectory(json_events)
 add_subdirectory(tests)
@@ -33,9 +36,11 @@ target_link_libraries(BuiltinMetrics
                         PUBLIC PmuDevices
                         PUBLIC System
                         PUBLIC IptEventBuilder
-                        PUBLIC JsonEvents
                         PUBLIC Metrics
                         PUBLIC CpuArch)
+if(USE_JSON_GENERATED_PERF_EVENTS)
+  target_link_libraries(BuiltinMetrics PUBLIC JsonEvents)
+endif()
 
 add_library(PerCpuBase PerCpuBase.h)
 target_link_libraries(PerCpuBase PUBLIC CpuEventsGroup)

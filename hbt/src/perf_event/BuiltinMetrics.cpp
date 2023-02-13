@@ -14,7 +14,9 @@
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
 #include "hbt/src/perf_event/json_events/generated/CpuArch.h"
+#ifdef USE_JSON_GENERATED_PERF_EVENTS
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
+#endif // USE_JSON_GENERATED_PERF_EVENTS
 
 #include <map>
 #include <memory>
@@ -434,6 +436,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
     //
     // Add Intel generated events
     //
+#ifdef USE_JSON_GENERATED_PERF_EVENTS
     try {
       generated::addEvents(
           cpu_info.cpu_model_num, cpu_info.cpu_step_num, *pmu_manager);
@@ -441,6 +444,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
       HBT_LOG_ERROR() << "Could not load auto-generated events due to: \""
                       << e.what() << "\"";
     }
+#endif // USE_JSON_GENERATED_PERF_EVENTS
   }
 
   // Add predefined offcore events
