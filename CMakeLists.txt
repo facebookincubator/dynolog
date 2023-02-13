@@ -5,6 +5,9 @@ project(Dynolog VERSION 1.0)
 option(BUILD_TESTS "Build the unit tests" ON)
 option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
 ON)
+option(USE_JSON_GENERATED_PERF_EVENTS "Add performance events generated using
+Intel json spec, see hbt/src/perf_event/json_events/intel"
+OFF)
 
 file(READ "version.txt" DYNOLOG_VERSION)
 string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)
