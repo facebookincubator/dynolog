@@ -19,6 +19,8 @@ mkdir -p "$DEBDIR/usr/local/bin/"
 mkdir -p "$DEBDIR/usr/lib/systemd/system/"
 # control file goes here
 mkdir -p "$DEBDIR/DEBIAN"
+# logrotate config file goes here
+mkdir -p "$DEBDIR/etc/logrotate.d/"
 
 # Build the binaries
 IFS=" " read -r -a generated_bins <<< "$(./scripts/build.sh | tail -n 1)"
@@ -26,6 +28,7 @@ IFS=" " read -r -a generated_bins <<< "$(./scripts/build.sh | tail -n 1)"
 cp -p "${generated_bins[@]}" "$DEBDIR/usr/local/bin"
 cp -p scripts/dynolog.service "$DEBDIR/usr/lib/systemd/system"
 cp -p scripts/pytorch/unitrace.py "$DEBDIR/usr/local/bin"
+cp -p scripts/dynolog.conf "$DEBDIR/etc/logrotate.d"
 perl -p -e "s/__VERSION__/$VERSION/" scripts/debian/control > "$DEBDIR/DEBIAN/control"
 
 tree "$DEBDIR"

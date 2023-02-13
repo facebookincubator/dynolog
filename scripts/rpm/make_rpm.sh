@@ -55,6 +55,7 @@ cp "${generated_bins[@]}" "dynolog-${VERSION}/"
 # Add static files
 cp "$SCRIPTS/dynolog.service" "dynolog-${VERSION}/"
 cp "$SCRIPTS/pytorch/unitrace.py" "dynolog-${VERSION}/"
+cp "$SCRIPTS/dynolog.conf" "dynolog-${VERSION}/"
 
 # Compress sources
 tar --create --file "dynolog-${VERSION}.tar.gz" "dynolog-${VERSION}"
