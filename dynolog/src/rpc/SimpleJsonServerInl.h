@@ -73,6 +73,9 @@ std::string SimpleJsonServer<TServiceHandler>::processOneImpl(
   if (request["fn"] == "getStatus") {
     int status = handler_->getStatus();
     response["status"] = status;
+  } else if (request["fn"] == "getVersion") {
+    std::string version = handler_->getVersion();
+    response["version"] = version;
   } else if (request["fn"] == "setKinetOnDemandRequest") {
     if (!request.contains("config") || !request.contains("pids")) {
       response["status"] = "failed";

@@ -42,8 +42,10 @@ struct Opts {
 
 #[derive(Debug, Parser)]
 enum Command {
-    /// Check the status of dynolog process
+    /// Check the status of a dynolog process
     Status,
+    /// Check the version of a dynolog process
+    Version,
     /// Capture gputrace
     Gputrace {
         /// Job id of the application to trace
@@ -104,6 +106,7 @@ fn main() -> Result<()> {
 
     match cmd {
         Command::Status => status::run_status(dyno_client),
+        Command::Version => version::run_version(dyno_client),
         Command::Gputrace {
             job_id,
             pids,

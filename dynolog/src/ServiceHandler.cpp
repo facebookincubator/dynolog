@@ -12,6 +12,10 @@ int ServiceHandler::getStatus() {
   return 1;
 }
 
+std::string ServiceHandler::getVersion() {
+  return DYNOLOG_VERSION;
+}
+
 GpuProfilerResult ServiceHandler::setKinetOnDemandRequest(
     int job_id,
     const std::set<int>& pids,
