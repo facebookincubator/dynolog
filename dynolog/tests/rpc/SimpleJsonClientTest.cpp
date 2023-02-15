@@ -24,6 +24,11 @@ struct MockServiceHandler {
     return status_;
   }
 
+  std::string getVersion() {
+    versionCalls_++;
+    return version_;
+  }
+
   GpuProfilerResult setKinetOnDemandRequest(
       int job_id,
       const std::set<int>& pids,
@@ -52,7 +57,9 @@ struct MockServiceHandler {
   }
 
   int status_ = 0;
+  std::string version_ = "0.0.0";
   int statusCalls_ = 0;
+  int versionCalls_ = 0;
   GpuProfilerResult result;
 
   int setKinetoOnDemandCalls_ = 0;
@@ -258,6 +265,41 @@ TEST_F(SimpleJsonClientTest, DcgmTest) {
   resp = json::parse(resp_str.value());
   EXPECT_EQ(resp["status"], true);
   EXPECT_EQ(handler_->dcgm_prof_enabled_, true);
+}
+
+TEST_F(SimpleJsonClientTest, VersionTest) {
+  rpc_ready_.notify_one();
+
+  auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
+  ASSERT_TRUE(client->initSuccessful())
+      << "Failed to connect to port " << port_;
+
+  json request{
+      {"fn", "getVersion"},
+  };
+
+  auto resp_str = client->invoke_rpc(request.dump());
+  client.reset(); // disconnect
+
+  ASSERT_TRUE(resp_str) << "Null response on getVersion()";
+  EXPECT_EQ(handler_->versionCalls_, 1);
+
+  json resp = json::parse(resp_str.value());
+  EXPECT_EQ(resp["version"], "0.0.0");
+
+  handler_->status_ = 1;
+  rpc_ready_.notify_one();
+
+  // Create a new connection for new rpc
+  client = std::make_unique<SimpleJsonServerClient>("::1", port_);
+  resp_str = client->invoke_rpc(request.dump());
+  client.reset(); // disconnect
+
+  ASSERT_TRUE(resp_str) << "Null response on getVersion()";
+  EXPECT_EQ(handler_->versionCalls_, 2);
+
+  resp = json::parse(resp_str.value());
+  EXPECT_EQ(resp["version"], "0.0.0");
 }
 
 } // namespace dynolog

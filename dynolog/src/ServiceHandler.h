@@ -22,6 +22,7 @@ class ServiceHandler {
       : dcgm_(dcgm) {}
   // returns the state of the service
   int getStatus();
+  std::string getVersion();
 
   GpuProfilerResult setKinetOnDemandRequest(
       int job_id,
