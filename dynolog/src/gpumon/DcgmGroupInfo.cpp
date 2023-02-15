@@ -306,7 +306,7 @@ void DcgmGroupInfo::update() {
             LOG(ERROR) << "Field id not supported, got: " << v.fieldId;
           } else {
             // skip prof field reporting if profiling is disabled
-            if (profEnabled_ && isProfField(v.fieldId)) {
+            if (!profEnabled_ && isProfField(v.fieldId)) {
               continue;
             }
 
