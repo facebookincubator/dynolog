@@ -247,7 +247,7 @@ void populateGenericEventsSoftware(
       "alignment_faults",
       EventDef::Encoding{.code = PERF_COUNT_SW_ALIGNMENT_FAULTS},
       "Alignment faults handled by kernel",
-      "Alignment faults hanlded by kernel. "
+      "Alignment faults handled by kernel. "
       "These are instances where accesses are not aligned with pages. "
       "It usually has has a significant slowdown (100x or worse)."));
 
