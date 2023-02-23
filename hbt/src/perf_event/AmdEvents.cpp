@@ -4,6 +4,9 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/perf_event/AmdEvents.h"
+#ifdef FACEBOOK
+#include "hbt/src/perf_event/fb/AmdEvents.h"
+#endif
 
 namespace facebook::hbt::perf_event {
 
@@ -35,6 +38,9 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   switch (cpu_info.cpu_arch) {
     case CpuArch::MILAN:
       milan::addEvents(pmu_manager);
+#ifdef FACEBOOK
+      milan::addEventsFb(pmu_manager);
+#endif
       break;
     default:
       HBT_LOG_ERROR()
