@@ -162,6 +162,10 @@ constexpr PmuMsr kL3FillRdCnt{.amdL3 = {.event = 0x9A, .unitMask = 0x1F}};
 
 } // namespace amd_msr
 
-void addAmdEvents(const CpuInfo& info, PmuDeviceManager& pmu_manager);
+namespace milan {
+void addEvents(PmuDeviceManager& pmu_manager);
+}
+
+void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager);
 
 } // namespace facebook::hbt::perf_event
