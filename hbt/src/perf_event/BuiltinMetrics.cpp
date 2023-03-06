@@ -508,6 +508,29 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       System::Permissions{},
       std::vector<std::string>{}));
 
+  metrics->add(std::make_shared<MetricDesc>(
+      "instructions_per_cycle",
+      "Average number of instructions executed each clock cycle.",
+      "Average number of instructions executed each clock cycle.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{
+               EventRef{
+                   "instructions",
+                   PmuType::generic_hardware,
+                   "retired_instructions",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "cycles",
+                   PmuType::generic_hardware,
+                   "cpu_cycles",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(
       "l3_cache_misses_per_instruction",
