@@ -23,5 +23,9 @@ mkdir -p build; cd build;
 cmake -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
+mkdir -p bin
+ln -sf "$PWD/dynolog/src/dynolog" bin/dynolog
+ln -sf "$PWD/release/dyno" bin/dyno
+
 echo "Binary files ="
 echo "$PWD/dynolog/src/dynolog" "$PWD/release/dyno"

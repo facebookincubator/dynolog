@@ -6,6 +6,9 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/facebookincubator/dynolog/blob/main/LICENSE)
 [![DynologCI](https://github.com/facebookincubator/dynolog/actions/workflows/dynolog-ci.yml/badge.svg)](https://github.com/facebookincubator/dynolog/actions)
+[![GitHub Release](https://img.shields.io/github/release/tterb/PlayMusic.svg?style=flat)](https://github.com/facebookincubator/dynolog/releases)
+[![Issues](https://img.shields.io/github/issues-raw/tterb/PlayMusic.svg?maxAge=25000)](https://github.com/facebookincubator/dynolog/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 <!-- TOC is a TODO -->
 
@@ -40,14 +43,138 @@ Dynolog’s always-on or continuous monitoring supports the following class of m
 
 Detailed list of covered metrics are provided in [docs/Metrics.md](docs/Metrics.md).
 
-## Building dynolog<!-- {#building-dynolog} -->
+## Getting Started<!-- {#getting=started} -->
+
+### Installation<!-- {#install-rpm-deb} -->
+
+Dynolog can be installed using the package manager of your choice with either RPM for CentoOS or Debian for Ubuntu like distros. We do not support non-Linux platforms.
+There are no required dependencies except for DCGM if you need to monitor GPUs, please see the section on [GPU monitoring](#gpu-monitoring) below.
+
+Obtain the latest dynolog release or pick up one of the releases [here](https://github.com/facebookincubator/dynolog/releases)
+```bash
+# for CentoOS
+wget https://github.com/facebookincubator/dynolog/releases/downdload/v0.2.1/dynolog-0.2.1-1.el8.x86_64.rpm
+sudo rpm -i dynolog-0.2.1-1.el8.x86_64.rpm
+
+# for Ubuntu or similar Debian based linux distros
+wget https://github.com/facebookincubator/dynolog/releases/download/v0.2.1/dynolog_0.2.1-0-amd64.deb
+sudo dpkg -i dynolog_0.2.1-0-amd64.deb
+```
+
+#### No sudo access?
+Dynolog can run in userspace mode with most features functional. There are a few options to run dynolog userspace.
+One way is to simply decompress the RPM or debian packages as shown below.
+```bash
+mkdir -p dynolog_pkg; cd dynolog_pkg
+wget https://github.com/facebookincubator/dynolog/releases/download/v0.2.1/dynolog_0.2.1-0-amd64.deb
+ar x dynolog_0.2.1-0-amd64.deb; tar xvf data.tar.xz
+# binaries should now be available in ./usr/local/bin, you can add this directory to your $PATH.
+```
+
+Alternatively, you can [build dynolog from source](#building-dynolog). The binaries should be present in the `build/bin` directory.
+The packages provides systemd support to run the server as a daemon. You can however still run dynolog server directly in a separate terminal.
+
+### Running dynolog<!-- {#running-dynolog} -->
+
+Start the Dynolog service using systemd -
+```bash
+sudo systemctl start dynolog
+```
+Note:
+* The dynolog service picks up runtime flags from `/etc/dynolog.gflags` if the file is present.
+* Output logs will be written to `/var/logs/dynolog.log` and logs are automatically rotated.
+
+One can check the values of the metrics emitted in the output log file.
+```bash
+$> tail /var/log/dynolog.log
+I20220721 23:42:34.141083 3632432 Logger.cpp:37] Logging : 12 values
+I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" …
+```
+
+The `dyno` command line tool communicates with the dynolog daemon on the local or remote system.
+For example, we can verify if the daemon is running using the `status` subcommand.
+```bash
+$> dyno status
+response length = 12
+response = {"status":1}
+
+$> dyno --hostname some_remote_host.com status
+response length = 12
+response = {"status":1}
+```
+Run `dyno --help` for help on other subcommands.
+
+**Server Command Line options**
+Lastly, the dynolog server provides various flags, we list the key ones here. Run `dynolog --help` for more info.
+* `--port` (default = 1778) - the port used to setup a service for remote queries.
+* `--reporting_interval_s` (default=60) - the reporting interval for metrics. Please see the [Logging](#logging) section for more details.
+* `--enable_ipc_monitor` sets up inter-process communication endpoint. This can be used to talk to applications like pytorch trainers.
+
+### Collecting pytorch/GPU traces<!-- {#collecting-pytorch-gpu-traces} -->
+
+To enable pytorch profiling add the flag `--enable_ipc_monitor`. This enables the server to communicate with the pytorch process.
+If you are running the server with systemd, do the following-
+```bash
+echo "--enable_ipc_monitor" | sudo tee -a /etc/dynolog.gflags
+sudo systemctl restart dynolog
+```
+
+You also need to use a compatible version of **pytorch v1.13.0** and set the env variable `KINETO_USE_DAEMON=1` before running the pytorch program.
+See [docs/pytorch_profiler.md](docs/pytorch_profiler.md) for details.
+
+Traces can now be captured using the `gputrace` subcommand
+```bash
+dyno gputrace --pids <pid of process> --log_file <output file path>
+```
+
+Dynolog can also 1) capture traces on remote nodes, 2) co-ordinate tracing across a distributed training job (with slurm job scheduler). Please see the recipe in [docs/pytorch_profiler.md](docs/pytorch_profiler.md) for a detailed walkthrough of this feature.
+
+
+### GPU Monitoring<!-- {#gpu-monitoring} -->
+
+Dynolog leverages NVIDIA Datacenter GPU Manager [DCGM](https://developer.nvidia.com/dcgm) for NVIDIA GPUs today. DCGM supports GPU models from Kepler/Volta V100 onwards, Please see [this page](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms) for details. Currently Dynolog dynamically supports both DCGM 2.x and DCGM 3.x based on the version of the shared library `libdcgm.so` installed on the system.
+
+**Prerequisite:** Install DCGM on your system following the instructions [here](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#ubuntu-lts-and-debian). After the installation please make sure to initialize the dcgm service using -
+
+```bash
+sudo systemctl --now enable nvidia-dcgm
+```
+
+To run dynolog with GPU monitoring you can add/tweak these flags
+
+* `--enable_gpu_monitor` (default=false): enable GPU monitoring using DCGM.
+* `--dcgm_lib_path` (default=/lib64/libdcgm.so): the path to DCGM shared library libdcgm.so. If the default path does not exist please adjust it.
+* `--dcgm_fields` (default=”100,155,204,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012”): comma separated string of DCGM field ids to monitor, please see [Nvidia headers](https://fburl.com/p3zpudyj) for field definitions
+* `--dcgm_report_interval_s` (default=10): the interval between each DCGM counter update in second. Please note when this value is too small DCGM may start multiplexing the counters and potentially affect counter accuracy.
+
+```
+echo "--enable_gpu_monitor" | sudo tee -a /etc/dynolog.gflags
+sudo systemctl restart dynolog
+```
+
+### CPU Performance Events<!-- {#cpu-performance-events} -->
+Dynolog also supports collection of CPU hardware performance events. We added CPU instructions and cycles as the first set of counters; referred to as `mips` (millions of instructions per second) and `mega_instructions_per_second`. See [docs/Metrics.md](docs/Metrics.md) for more details.
+
+The following flags are relevant to hardware PMU performance monitoring:
+* `--enable_perf_monitor` (default=false): enable hardware PMU performance monitoring.
+* `--perf_monitor_reporting_interval_s` (default=60): set the reporting interval of performance metrics in seconds.
+
+Sample logs emitted to the log file:
+```
+I20221208 15:28:34.730270 3345417 Logger.cpp:55] Logging : 2 values
+I20221208 15:28:34.730316 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"735.696","mips":"691.497"}
+I20221208 15:29:34.731652 3345417 Logger.cpp:55] Logging : 2 values
+I20221208 15:29:34.731690 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"514.156","mips":"479.397"}
+
+```
+## Building from source<!-- {#building-dynolog} -->
 
 Dynolog consists of two binaries - 1) dynolog server and 2) dyno command line tool.
 To build from source please check out the project and initialize submodules.
 
 ```bash
 git clone https://github.com/facebookincubator/dynolog.git
-git submodule update --init
+git submodule update --init --recursive
 ```
 
 ### Requirements<!-- {#requirements} -->
@@ -111,7 +238,7 @@ conda install -c conda-forge "rust=1.64.0"
 
 **GPU Monitoring**
 
-For NVIDIA GPUs (currently the only ones supported) you can install DCGM as described in [GPU monitoring](#gpu-monitoring) section below.
+For NVIDIA GPUs (currently the only ones supported) you can install DCGM as described in [GPU monitoring](#gpu-monitoring) section.
 
 ### Building<!-- {#building} -->
 
@@ -121,116 +248,12 @@ Please use the build script, this should generate files in ./build relative to y
 ```
 Note that the build system for Rust will need an internet connection for the first time.
 
-## Usage<!-- {#usage} -->
-
-### Running dynolog<!-- {#running-dynolog} -->
-
-The Dynolog server can runs as adaemon. The command line client tool will communicate with the  daemon on the local or remote system. One method to spin up dynolog is to use systemd; this is explained in the [Deploying using a Package Manager](#using-a-package-manager-and-systemd) section. Alternatively you can run it directly on a shell -
-
-```bash
-./build/dynolog/src/dynolog
-```
-
-We can then check the daemon's status using the command line tool -
-
-```bash
-./build/release/dyno status
-response length = 12
-response = {"status":1}
-```
-
-**Server Command Line options**
-
-The dynolog server provides multiple flags, we list the key ones here. Please run dynolog `--help` for more info.
-
-* `--port` (default = 1778) - the port used to setup a service for remote queries.
-* `--reporting_interval_s` (default=60) - the reporting interval for metrics. Please see the [Logging](#logging) section for more details.
-* `--enable_ipc_monitor` sets up inter-process communication endpoint. This can be used to talk to applications like pytorch trainers.
-
-
-### Using a package manager and systemd<!-- {#using-a-package-manager-and-systemd} -->
-
+### Building packages
 The preferred method to run dynolog is by deploying a package - either RPM or debian. Please see [scripts/README.md](scripts/README.md) for instructions on how to build dynolog packages.
-
-We use systemd to handle executing the daemon; you can find the systemd unit file in the `scripts/` directory.
-Use the following command to start dynolog.
-
-```bash
-sudo systemctl start dynolog
-```
-
-Also note:
-* Dynolog will pick up gflags from `/etc/dynolog.gflags` if the file is present.
-* Output logs will be written to `/var/logs/dynolog.log`.
-
-Here is an example of output in the log file-
-
-```bash
-$> tail /var/log/dynolog.log
-I20220721 23:42:34.141083 3632432 Logger.cpp:37] Logging : 12 values
-I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" …
-```
-
-### Collecting pytorch/GPU traces<!-- {#collecting-pytorch-gpu-traces} -->
-
-To enable pytorch profiling we need to configure dynolog to enable IPC aka inter process communication module. Add the flag `--enable_ipcmonitor`. In case you are running it as a systemd daemon please run -
-
-```bash
-echo "--enable_ipc_monitor" | sudo tee -a /etc/dynolog.gflags
-sudo systemctl restart dynolog
-```
-You need to use a compatible version of **pytorch v1.13.0**. Run the pytorch application and call dyno cli tool
-
-```bash
-dyno gputrace --pids <pid of process> --log_file <output file path>
-```
-
-Dyno can also 1) capture traces on remote nodes, 2) coordinate tracing across a distributed training job (with slurm job scheduler). Please see the recipe in [docs/pytorch_profiler.md](docs/pytorch_profiler.md) for a detailed walkthrough of this feature.
-
-
-### Performance Monitoring
-Dynolog currently supports collection of performance counters. We are enabling instructions and cycles as the first set of counters to onboard, referred as mips (millions of instructions per second) and mega_instructions_per_second. See [docs/Metrics.md](docs/Metrics.md) for more details.
-
- The following flags are relevant to performance monitoring:
-* --enable_perf_monitor (default=false): enable performance monitoring.
-* --perf_monitor_reporting_interval_s (default=60): set the reporting interval of performance metrics in seconds.
-
-By default, performance monitoring is disabled and the reporting interval is 60s.
-
-Sample logs emitted using JSON_logger:
-```
-I20221208 15:28:34.730270 3345417 Logger.cpp:55] Logging : 2 values
-I20221208 15:28:34.730316 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"735.696","mips":"691.497"}
-I20221208 15:29:34.731652 3345417 Logger.cpp:55] Logging : 2 values
-I20221208 15:29:34.731690 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"514.156","mips":"479.397"}
-
-```
-
-### GPU Monitoring<!-- {#gpu-monitoring} -->
-
-Dynolog uses NVIDIA Datacenter GPU Manager [DCGM](https://developer.nvidia.com/dcgm) to monitor NVIDIA GPUs today. DCGM supports GPU models from Kepler/Volta V100 onwards, please see [this page]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#supported-platforms) for details. Currently Dynolog dynamically supports both DCGM 2.x and DCGM 3.x based on the version of the shared library libdcgm.so.
-
-**Prerequisite:** Install DCGM on your system following the instructions [here]([https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#ubuntu-lts-and-debian](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/getting-started.html#ubuntu-lts-and-debian)). After the installation please make sure to initialize the dcgm service using -
-
-```bash
-sudo systemctl --now enable nvidia-dcgm
-```
-
-To run dynolog with GPU monitoring you can add/tweak these flags
-
-* `--enable_gpu_monitor` : enable GPU monitoring using DCGM.
-* `--dcgm_lib_path` (default=/lib64/libdcgm.so): the path to DCGM shared library libdcgm.so. If the default path does not exist please adjust it.
-* `--dcgm_fields` (default=”100,155,204,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012”): comma separated string of DCGM field ids to monitor, please see [Nvidia headers](https://fburl.com/p3zpudyj) for field definitions
-* `--dcgm_report_interval_s` (default=10): the interval between each DCGM counter update in second. Please note when this value is too small DCGM may start multiplexing the counters and potentially affect counter accuracy.
-
-```
-echo "--enable_gpu_monitor" | sudo tee -a /etc/dynolog.gflags
-sudo systemctl restart dynolog
-```
 
 ## Logging<!-- {#logging} -->
 
-By default dynolog will save monitoring metrics to the std output -
+By default dynolog will save monitoring metrics to the standard output -
 
 ```
 I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" ...
@@ -239,27 +262,23 @@ I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z
 Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, and Meta Scuba data system, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md) and [docs/logging_to_scuba.md](docs/logging_to_scuba.md). Dynolog team is happy to support new loggers.
 
 ## Releases<!-- {#release} -->
-The current 0.1.0 release supports the following-
-* CPU utilization and network utilization metrics.
-* GPU performance monitoring for NVIDIA GPUs using DCGM 2.x and 3.x.
-* Capability to interface with pytorch profiler and support remote on-demand tracing.
-* CPU performance counters (PMUs) are still a work in progress at this point.
+
+Please see our [releases](https://github.com/facebookincubator/dynolog/releases) page for latest releases and features/fixes included in them.
 
 In the next and near term release we plan to add
 * Disk usage metrics like storage size and IO operations per second.
-* Basic CPU PMU events for Intel and AMD CPUs.
 * Memory latency and bandwidth monitoring per socket for Intel and AMD CPUs.
 
 At some future point we would also like to add -
 * Capability to collect CPU traces using Intel Processor Trace.
 * [Open telemetry](https://cloud.google.com/learn/what-is-opentelemetry) support for logging.
-* Supporting more accelerator/GPU hardware typess.
 
 ## Contact Us
 
 Dynolog is actively maintained by Meta engineers: [Brian Coutinho](https://github.com/briancoutinho/), [Zachary Jones](https://github.com/bigzachattack/), [Hao Wang](https://github.com/haowangludx/), [William Sumendap](https://github.com/williamsumendap/), [Jakob Johnson](https://github.com/jj10306/),[Alston Tang](https://github.com/Alston-Tang/), [Walter Erquinigo](https://github.com/a20012251/),[David Carrillo Cisneros](https://github.com/ccdavid/). We would also like to thank various contributors to the dynolog project internally- Sam Crossley, Jayesh Lahori, Matt Skach, Darshan Sanghani, Lucas Molander, Parth Malani, Jason Taylor - this is by no means an exhaustive list. Special thanks to Herman Chin, Victor Henriquez, Anupam Bhatnagar, Caleb Ho, Aaron Shi, Jay Chae, Song Liu, Susan Zhang, Geeta Chauhan and Gisle Dankel for supporting this initiative
 
 ## Join the dynolog community
+Please file bugs or feature requests as [issues](https://github.com/facebookincubator/dynolog/issues) on github.
 See the [CONTRIBUTING](CONTRIBUTING.md) file for how to help out.
 
 ## License
