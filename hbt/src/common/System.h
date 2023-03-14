@@ -409,11 +409,19 @@ struct Kernel {
   static Kernel create() {
     struct utsname buffer;
     int err = uname(&buffer);
-    std::string release;
 
     HBT_THROW_SYSTEM_IF(err != 0, errno)
         << "uname threw an error when trying to identify the kernel image";
     return Kernel(buffer.release);
+  }
+
+  static std::optional<Kernel> createNoThrow() {
+    try {
+      return create();
+    } catch (const std::system_error& e) {
+      HBT_LOG_ERROR() << e.what();
+    }
+    return std::nullopt;
   }
 
   std::optional<std::string> image_expected_path() const {
