@@ -242,6 +242,10 @@ CpuSet CpuSet::makeFromCpuSet(cpu_set_t cpu_set) {
   return makeCpuSet(cpu_set);
 }
 
+CpuSet CpuSet::makeFromCpusList(const std::string& cpuList) {
+  return makeCpuSet(parseCpusList(cpuList));
+}
+
 CpuSet CpuSet::getOrDefault(std::optional<CpuSet> opt) {
   if (opt.has_value()) {
     return *opt;

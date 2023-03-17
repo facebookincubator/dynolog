@@ -171,6 +171,67 @@ TEST(ParseCpu, CpuList) {
   }
 }
 
+TEST(CpuSet, MakeFromCpusList) {
+  // Skip on CI due to offline CPUs
+  // Error = <CpuSet max_cpu_id: 1 max_cpu_id_online: 1 cpus: 1 > unknown file:
+  // Failure
+  if (std::getenv("GITHUB_WORKFLOW") != nullptr) {
+    GTEST_SKIP() << "Skipping CPU set test on CI.";
+  }
+
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("");
+    EXPECT_EQ(cpuSet.asSet().size(), 0);
+  }
+
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("\n");
+    EXPECT_EQ(cpuSet.asSet().size(), 0);
+  }
+
+  {
+    auto cpuSet = CpuSet::makeFromCpusList(" \n ");
+    EXPECT_EQ(cpuSet.asSet().size(), 0);
+  }
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("5");
+    EXPECT_EQ(cpuSet.asSet().size(), 1);
+    EXPECT_TRUE(cpuSet.hasCpu(5));
+  }
+
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("0-1");
+    EXPECT_EQ(cpuSet.asSet().size(), 2);
+    EXPECT_TRUE(cpuSet.hasCpu(0));
+    EXPECT_TRUE(cpuSet.hasCpu(1));
+  }
+
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("3, 0-1");
+    EXPECT_EQ(cpuSet.asSet().size(), 3);
+    EXPECT_TRUE(cpuSet.hasCpu(0));
+    EXPECT_TRUE(cpuSet.hasCpu(1));
+    EXPECT_TRUE(cpuSet.hasCpu(3));
+  }
+  {
+    auto cpuSet = CpuSet::makeFromCpusList("4-5, 0-1,7");
+    EXPECT_EQ(cpuSet.asSet().size(), 5);
+    EXPECT_TRUE(cpuSet.hasCpu(0));
+    EXPECT_TRUE(cpuSet.hasCpu(1));
+    EXPECT_TRUE(cpuSet.hasCpu(4));
+    EXPECT_TRUE(cpuSet.hasCpu(5));
+    EXPECT_TRUE(cpuSet.hasCpu(7));
+  }
+  {
+    auto cpuSet = CpuSet::makeFromCpusList(" 0,2,  4, 6");
+    EXPECT_EQ(cpuSet.asSet().size(), 4);
+    EXPECT_TRUE(cpuSet.hasCpu(0));
+    EXPECT_TRUE(cpuSet.hasCpu(2));
+    EXPECT_TRUE(cpuSet.hasCpu(4));
+    EXPECT_TRUE(cpuSet.hasCpu(6));
+  }
+}
+
 TEST(Pow2, isPow2) {
   for (uint64_t i = 0; i < 63; ++i) {
     EXPECT_TRUE(isPow2(1ull << i));
