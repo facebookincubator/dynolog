@@ -228,6 +228,7 @@ struct CpuSet {
   static CpuSet makeAllOnline();
 
   static CpuSet makeFromCpuSet(cpu_set_t cpu_set);
+  static CpuSet makeFromCpusList(const std::string& cpuList);
 
   template <class TCont>
   static cpu_set_t make_cpu_set_t(const TCont& s) {
