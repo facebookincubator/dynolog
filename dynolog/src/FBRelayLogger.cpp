@@ -152,6 +152,16 @@ void FBRelayLogger::finalize() {
     return;
   }
 
+  nlohmann::json sample = sampleJson();
+
+  // for loggings of multiple devices, we use `device` attribute to represent
+  // the device number
+  std::string entity = "dyno";
+  if (sample.find("device") != sample.end()) {
+    entity += ".device" + std::to_string(sample["device"].get<int>());
+    sample.erase("device");
+  }
+
   // see fbcode/fava/monitoring/monitoring/favametrics.py?lines=97
   json data{
       {"@timestamp", timestampStr()},
@@ -159,13 +169,13 @@ void FBRelayLogger::finalize() {
        {
            {"hostname", hostname},
            {"name", hostname},
-           {"type", "dyno"},
+           {"type", entity},
            {"version", "0.1.0"},
        }},
-      {"event", {{"module", "dyno"}}},
+      {"event", {{"module", entity}}},
       {"backend", 0}, // 0 : ODS
       {"stack_metrics", false},
-      {"dyno", sampleJson()},
+      {entity, sample},
   };
 
   // pretty print data
