@@ -67,13 +67,13 @@ struct EndPointCtxt {
 
 template <size_t kMaxNumFds = 0>
 class EndPoint final {
+  using TCtxt = EndPointCtxt<kMaxNumFds>;
+
+ public:
   // Maximum defined in man unix, but minus 2 because abstract sockets, first
   // and last are '\0'.
   constexpr static size_t kMaxNameLen = 108 - 2;
 
-  using TCtxt = EndPointCtxt<kMaxNumFds>;
-
- public:
   explicit EndPoint(const std::string& address) {
     socket_fd_ = socket(AF_UNIX, SOCK_DGRAM, 0);
     if (socket_fd_ == -1) {
