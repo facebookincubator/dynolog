@@ -13,6 +13,24 @@ namespace amd_msr {
 // 2.1.16.3 MSRs - MSRC001_0xxx - Processor Programming
 // Reference (PPR) for AMD Family 19h Model 01h, Revision B1
 // Processors Volume 1
+
+/*
+MSRs, events, and formulas for this file come from AMD Processor Programming
+Reference (PPR) for
+  1) AMD Family 19h Model 01h, Revision B1 Processors
+  2) Family 19h Model 11h, Revision B1 Processors
+
+The section that defines MSRs is
+  1) Volume 1, Section 2.1.16.3 MSRs - MSRC001_0xxx
+  2) Volume 1, Section 2.1.14.3 MSRs - MSRC001_0xxx
+
+The section that defines performance events is
+  1) Volume 1, Section 2.1.17.2 Performance Measurement and Table 25: Guidance
+     for Common Performance Statistics with Complex Event Selects
+  2) Volume 1, Section 2.1.15.2 Performance Measurement and Table 27: Guidance
+     for Common Performance Statistics with Complex Event Selects
+*/
+
 struct CorePmuMsrAmd {
   uint64_t event : 8;
   uint64_t unitMask : 8;
@@ -71,21 +89,29 @@ static_assert(
     sizeof(DFPmuMsrAmd) == sizeof(uint64_t),
     "DFPmuMsrAmd is packed to be 64 bits to fit in MSR.");
 
+struct DFZen4PmuMsrAmd {
+  uint64_t event : 8;
+  uint64_t unitMask : 8;
+  uint64_t : 6;
+  uint64_t enable : 1;
+  uint64_t : 1;
+  uint64_t unitMask_11_8 : 4;
+  uint64_t : 4;
+  uint64_t event_13_8 : 6;
+  uint64_t : 26;
+};
+
+static_assert(
+    sizeof(DFZen4PmuMsrAmd) == sizeof(uint64_t),
+    "DFZen4PmuMsrAmd is packed to be 64 bits to fit in MSR.");
+
 union PmuMsr {
   uint64_t val = 0;
   CorePmuMsrAmd amdCore;
   L3PmuMsrAmd amdL3;
   DFPmuMsrAmd amdDf;
+  DFZen4PmuMsrAmd amdDfZen4;
 };
-
-/*
-Events and formulas for this file come from AMD Processor Programming
-Reference (PPR) for AMD Family 19h Model 01h, Revision B1 Processors
-Volume 1
-
-The section that defines them is 2.1.17.2 Performance Measurement and
-Table 25: Guidance for Common Performance Statistics with Complex Event Selects
-*/
 
 constexpr PmuMsr kRetiredInstructions{.amdCore = {.event = 0xc0}};
 constexpr PmuMsr kUnhaltedCycles{.amdCore = {.event = 0x76}};
@@ -193,6 +219,83 @@ constexpr PmuMsr kL3FillRdCnt{
         .enAllCores = 0x1,
         .sliceId = 0x0,
         .threadMask = 0x3}};
+
+// L3 counters (Zen 4)
+constexpr PmuMsr kL3Zen4CacheAccess = kL3CacheAccess;
+constexpr PmuMsr kL3Zen4CacheMisses = kL3CacheMisses;
+constexpr PmuMsr kL3Zen4FillRdRespCnt{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x3F,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4FillRdRespSmpl{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x3F,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+
+// DF counters (Zen 4)
+constexpr PmuMsr kDfZen4UmcAReadReqs{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x0}};
+constexpr PmuMsr kDfZen4UmcDReadReqs{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcGReadReqs{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x1,
+    }};
+constexpr PmuMsr kDfZen4UmcJReadReqs{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x2,
+    }};
+constexpr PmuMsr kDfZen4UmcAWriteReqs{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcDWriteReqs{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcGWriteReqs{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x1}};
+constexpr PmuMsr kDfZen4UmcJWriteReqs{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0x7,
+        .event_13_8 = 0x2}};
 
 } // namespace amd_msr
 
