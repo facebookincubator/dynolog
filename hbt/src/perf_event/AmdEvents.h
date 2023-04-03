@@ -157,8 +157,42 @@ constexpr PmuMsr kIcMabRequestsDemad{
     .amdCore = {.event = 0x85, .event_11_8 = 0x2}};
 
 // L3 counters
-constexpr PmuMsr kL3FillRdRespLat{.amdL3 = {.event = 0x90}};
-constexpr PmuMsr kL3FillRdCnt{.amdL3 = {.event = 0x9A, .unitMask = 0x1F}};
+constexpr PmuMsr kL3CacheAccess{
+    .amdL3 = {
+        .event = 0x04,
+        .unitMask = 0xFF,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x0,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3CacheMisses{
+    .amdL3 = {
+        .event = 0x04,
+        .unitMask = 0x01,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x0,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3FillRdRespLat{
+    .amdL3 = {
+        .event = 0x90,
+        .unitMask = 0x00,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x0,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3FillRdCnt{
+    .amdL3 = {
+        .event = 0x9A,
+        .unitMask = 0x1F,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x0,
+        .threadMask = 0x3}};
 
 } // namespace amd_msr
 
