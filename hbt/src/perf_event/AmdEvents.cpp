@@ -29,6 +29,15 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "Instructions retired.",
           "Instructions executed. Does not count speculative execution."),
       std::vector<EventId>({"retired_instructions", "retired-instructions"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l3_cache_misses",
+          EventDef::Encoding{.code = amd_msr::kL3CacheMisses.val},
+          "L3 Cache misses",
+          "L3 Cache misses"),
+      std::vector<EventId>({"l3-cache-misses"}));
 }
 } // namespace milan
 
