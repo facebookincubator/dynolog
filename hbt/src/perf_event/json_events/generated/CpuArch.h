@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include <cstdint>
+#include <iostream>
+
 namespace facebook::hbt::perf_event {
 
 enum class CpuFamily { AMD, INTEL, UNKNOWN };
@@ -37,6 +40,8 @@ inline CpuFamily makeCpuFamily(uint32_t cpu_family) {
 enum class CpuArch {
   // AMD Architectures
   MILAN,
+  GENOA,
+  BERGAMO,
   // Intel Architectures Sorted by model id.
   BDW,
   BDW_DE,
@@ -62,6 +67,10 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
   switch (ev) {
     case CpuArch::MILAN:
       return os << "MILAN";
+    case CpuArch::GENOA:
+      return os << "GENOA";
+    case CpuArch::BERGAMO:
+      return os << "BERGAMO";
     case CpuArch::BDW:
       return os << "BDW";
     case CpuArch::BDW_DE:
@@ -107,8 +116,12 @@ inline CpuArch makeCpuArch(
   auto cpu_family = makeCpuFamily(cpu_family_num);
   if (cpu_family == CpuFamily::AMD) {
     switch (cpu_model_num) {
-      case 1:
+      case 0x01:
         return CpuArch::MILAN;
+      case 0x11:
+        return CpuArch::GENOA;
+      case 0xA0:
+        return CpuArch::BERGAMO;
     }
   } else if (cpu_family == CpuFamily::INTEL) {
     switch (cpu_model_num) {
