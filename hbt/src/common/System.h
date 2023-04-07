@@ -235,9 +235,9 @@ struct CpuSet {
     cpu_set_t cpus;
     CPU_ZERO(&cpus);
     for (auto cpu : s) {
-      if (unlikely(cpu < 0)) {
+      if (__hbt_unlikely(cpu < 0)) {
         HBT_THROW_EINVAL() << "Invalid CPU ID: " << cpu;
-      } else if (unlikely(cpu >= kMaxCpus)) {
+      } else if (__hbt_unlikely(cpu >= kMaxCpus)) {
         HBT_THROW_EINVAL() << "Maximum CPU ID is " << kMaxCpus - 1
                            << " Got CPU ID: " << cpu
                            << ". Do you want to increase kMaxCpus?";

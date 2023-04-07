@@ -40,7 +40,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
   /// Return -EBUSY if there is contention and -EAGAIN if
   /// a temporal error occured.
   [[nodiscard]] ssize_t startTx() {
-    if (unlikely(inTx())) {
+    if (__hbt_unlikely(inTx())) {
       return -EBUSY;
     }
     bool f = false;
@@ -54,7 +54,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
   }
 
   [[nodiscard]] ssize_t writeInTx(size_t size, const void* data) noexcept {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     return this->copyToRingBuffer_(
@@ -72,7 +72,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
       const void* data) noexcept {
     static_assert(std::is_integral<TSize>::value);
 
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
 
@@ -93,7 +93,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
   }
 
   [[nodiscard]] ssize_t commitTx() noexcept {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     this->header_.incHead(this->tx_size_);
@@ -105,7 +105,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
   }
 
   [[nodiscard]] ssize_t cancelTx() noexcept {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     auto old_tx_size = static_cast<ssize_t>(this->tx_size_);
@@ -120,10 +120,10 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
   template <class TSize>
   [[nodiscard]] ssize_t writeInTxSizedChunk(const std::string& str) noexcept {
     static_assert(std::is_integral_v<TSize>);
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
-    if (unlikely(str.size() > std::numeric_limits<TSize>::max())) {
+    if (__hbt_unlikely(str.size() > std::numeric_limits<TSize>::max())) {
       return -EINVAL;
     }
     auto byte_size = static_cast<TSize>(str.size());
@@ -205,13 +205,13 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
       const size_t rb_offset) noexcept {
     HBT_THROW_IF_NULLPTR(d);
 
-    if (unlikely(size == 0)) {
+    if (__hbt_unlikely(size == 0)) {
       HBT_LOG_WARNING() << "Copies of size zero are not supported. "
                         << "Is size set correctly?";
       return -EINVAL;
     }
 
-    if (unlikely(size > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(size > this->header_.kDataPoolByteSize)) {
       HBT_LOG_WARNING() << "Asked to write " << size << " bytes in a buffer"
                         << " of size " << this->header_.kDataPoolByteSize;
       return -EINVAL;
@@ -223,7 +223,7 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
     HBT_DCHECK_LE(tail, head);
 
     uint64_t used = head - tail;
-    if (unlikely(used > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(used > this->header_.kDataPoolByteSize)) {
       HBT_LOG_ERROR()
           << "number of used bytes found to be larger than ring buffer size";
       return -EPERM;
@@ -231,14 +231,14 @@ class Producer : public RingBufferWrapper<THeaderExtraData> {
 
     // Check that there is enough space.
     uint64_t space = this->header_.kDataPoolByteSize - used;
-    if (unlikely(rb_offset + size > space)) {
+    if (__hbt_unlikely(rb_offset + size > space)) {
       return -ENOSPC;
     }
 
     uint64_t start = (rb_offset + head) & this->header_.kDataModMask;
     uint64_t end = (start + size) & this->header_.kDataModMask;
 
-    if (likely(start < end)) {
+    if (__hbt_likely(start < end)) {
       // d's content won't wrap around end of buffer.
       std::memcpy(&this->data_[start], d, size);
     } else {

@@ -31,7 +31,7 @@ class PerfEventStream {
 
   // XXX: Articulate the stream API.
   inline const Event* prepareNext(TimeStamp stop_ts) noexcept {
-    if (unlikely(rb_->getHeader().usedSizeWeak() == 0)) {
+    if (__hbt_unlikely(rb_->getHeader().usedSizeWeak() == 0)) {
       ssize_t ret = events_gen_->consume(kBatchSize_);
       HBT_LOG_ERROR_IF(0 > ret && ret != -ENODATA && ret != -ENOSPC)
           << "Unexpected error consuming perf_event ringbuffer data. "

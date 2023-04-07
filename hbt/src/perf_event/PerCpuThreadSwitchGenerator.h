@@ -227,7 +227,7 @@ class CpuThreadSwitchGenerator final
 
   auto handleRecordLost(const mode::ContextSwitch::Lost& r) noexcept {
     auto ret = pendingRecordLost_(r.sample_id.tstamp);
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       return ret;
     }
 
@@ -242,7 +242,7 @@ class CpuThreadSwitchGenerator final
     auto ev_start =
         tagstack::Event::makeWriteErrorsStart(last_tstamp_ + 1, comp_unit_id_);
     ret = output_producer_.write(ev_start);
-    if (likely(ret >= 0)) {
+    if (__hbt_likely(ret >= 0)) {
       last_tstamp_ = r.sample_id.tstamp;
       in_write_errors_ = true;
       // We've lost track of which threads are active. TID could've wrapped
@@ -266,7 +266,7 @@ class CpuThreadSwitchGenerator final
 
     TimeStamp new_tstamp = sample_id_ptr->tstamp;
     auto ret = pendingRecordLost_(new_tstamp);
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       return ret;
     }
 
@@ -304,7 +304,7 @@ class CpuThreadSwitchGenerator final
     HBT_DCHECK_GE(r.tid, 0);
 
     auto ret = pendingRecordLost_(new_tstamp);
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       return ret;
     }
     auto [vid, is_new_vid] =
@@ -312,7 +312,7 @@ class CpuThreadSwitchGenerator final
     auto ev = tagstack::Event::makeThreadDestruction(
         new_tstamp, tid_level_, vid, comp_unit_id_);
     ret = output_producer_.write(ev);
-    if (likely(ret >= 0)) {
+    if (__hbt_likely(ret >= 0)) {
       if (is_new_vid) {
         auto& tinfo = thread_stats_->createThreadInfo(
             static_cast<pid_t>(r.ppid),
@@ -339,7 +339,7 @@ class CpuThreadSwitchGenerator final
     HBT_DCHECK_GE(r.tid, 0);
 
     auto ret = pendingRecordLost_(new_tstamp);
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       return ret;
     }
 
@@ -348,7 +348,7 @@ class CpuThreadSwitchGenerator final
     auto ev = tagstack::Event::makeThreadCreation(
         new_tstamp, tid_level_, vid, comp_unit_id_);
     ret = output_producer_.write(ev);
-    if (likely(ret >= 0)) {
+    if (__hbt_likely(ret >= 0)) {
       if (!is_new_vid) {
         // Has already been seen, probably coming from another CPU.
         auto& tinfo = thread_stats_->info.at(vid);
@@ -375,7 +375,7 @@ class CpuThreadSwitchGenerator final
     TimeStamp new_tstamp = r.sample_id.tstamp;
 
     auto ret = pendingRecordLost_(new_tstamp);
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       return ret;
     }
 
@@ -395,7 +395,7 @@ class CpuThreadSwitchGenerator final
           thread_stats_->selectNextVid(static_cast<pid_t>(r.sample_id.tid));
       ret = output_producer_.write(tagstack::Event::makeSwitchIn(
           new_tstamp, tid_level_, vid, comp_unit_id_));
-      if (unlikely(is_new_vid && ret >= 0)) {
+      if (__hbt_unlikely(is_new_vid && ret >= 0)) {
         // Add ThreadInfo if this is a new vid.
         pid_t pid = static_cast<pid_t>(r.sample_id.pid);
         pid_t tid = static_cast<pid_t>(r.sample_id.tid);
@@ -405,7 +405,7 @@ class CpuThreadSwitchGenerator final
       }
     }
 
-    if (likely(ret >= 0)) {
+    if (__hbt_likely(ret >= 0)) {
       last_tstamp_ = new_tstamp;
     }
     return ret;
@@ -429,12 +429,12 @@ class CpuThreadSwitchGenerator final
 
   /// Try to write any pending record lost and clear error if succesful.
   inline ssize_t pendingRecordLost_(TimeStamp tstamp) noexcept {
-    if (likely(!in_write_errors_)) {
+    if (__hbt_likely(!in_write_errors_)) {
       return 0;
     }
     auto ev_end = tagstack::Event::makeWriteErrorsEnd(tstamp, comp_unit_id_);
     auto ret = output_producer_.write(ev_end);
-    if (likely(ret >= 0)) {
+    if (__hbt_likely(ret >= 0)) {
       last_tstamp_ = tstamp;
       in_write_errors_ = false;
     }

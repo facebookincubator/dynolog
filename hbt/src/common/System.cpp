@@ -395,7 +395,7 @@ CpuId cpu_first_set(const cpu_set_t& cpu_set) noexcept {
 
 CpuId getCpu() {
   int ret = sched_getcpu();
-  if (unlikely(0 > ret)) {
+  if (__hbt_unlikely(0 > ret)) {
     HBT_THROW_SYSTEM(errno) << "Error reading ID of current CPU.";
   }
   if (ret > kMaxCpus - 1) {

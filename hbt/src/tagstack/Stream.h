@@ -71,7 +71,7 @@ class RingBufferStream : protected ringbuffer::Consumer<TExtraData> {
     auto [ret, event] = this->template startReadTx<tagstack::Event>();
     if (ret == -ENODATA) {
       return nullptr;
-    } else if (unlikely(ret == -EAGAIN || ret == -EBUSY)) {
+    } else if (__hbt_unlikely(ret == -EAGAIN || ret == -EBUSY)) {
       if (ret == -EBUSY) {
         // If busy, then another thread is in the middle of a transaction.
         // Yield and retry.

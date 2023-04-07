@@ -55,7 +55,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// Returns -EBUSY if there is contention and -EAGAIN if
   /// a temporal error occured.
   [[nodiscard]] ssize_t startTx() DEXCEPT {
-    if (unlikely(inTx())) {
+    if (__hbt_unlikely(inTx())) {
       return -EBUSY;
     }
     bool f = false;
@@ -70,10 +70,10 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
 
   /// Returns {size, ptr) if succeded.
   std::pair<ssize_t, const void*> readInTx(const size_t size) DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return {-EINVAL, nullptr};
     }
-    if (unlikely(size > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(size > this->header_.kDataPoolByteSize)) {
       return {-EINVAL, nullptr};
     }
     auto ptr = this->read_(size);
@@ -102,7 +102,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   template <class TSize>
   std::pair<ssize_t, const void*> readInTxWithSize() DEXCEPT {
     static_assert(std::is_integral<TSize>::value);
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return {-EINVAL, nullptr};
     }
 
@@ -125,18 +125,18 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
 
   // Copy next <size> bytes to buffer.
   [[nodiscard]] ssize_t copyInTx(const size_t size, uint8_t* buffer) DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     if (size == 0) {
       return 0;
     }
-    if (unlikely(size > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(size > this->header_.kDataPoolByteSize)) {
       return -EINVAL;
     }
     auto [ptr, resized] = readFromRingBuffer_<true, false>(
         size, static_cast<uint8_t*>(buffer), size);
-    if (unlikely(resized)) {
+    if (__hbt_unlikely(resized)) {
       HBT_LOG_ERROR() << "Unexpeted resizing of buffers";
       return -EPERM;
     }
@@ -153,7 +153,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   }
 
   [[nodiscard]] ssize_t commitTx() DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     this->header_.incTail(this->tx_size_);
@@ -172,7 +172,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// It does not update <tx_size_>.
   template <bool kContiguous, uint8_t kElem = 0x0>
   ssize_t findInBufferInTx() const DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     uint64_t head = this->header_.readHead();
@@ -206,14 +206,14 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
 
     const auto loop1_end = wrap ? this->header_.kDataPoolByteSize : end;
     for (auto i = start; i < loop1_end; ++i) {
-      if (unlikely(this->data_[i] == kElem)) {
+      if (__hbt_unlikely(this->data_[i] == kElem)) {
         return static_cast<ssize_t>(i - start) + 1;
       }
     }
-    if (unlikely(wrap)) {
+    if (__hbt_unlikely(wrap)) {
       // Search in wrapped part of buffer.
       for (decltype(end) i = 0; i < end; ++i) {
-        if (unlikely(this->data_[i] == kElem)) {
+        if (__hbt_unlikely(this->data_[i] == kElem)) {
           return static_cast<ssize_t>(
               this->header_.kDataPoolByteSize - start + i + 1);
         }
@@ -227,7 +227,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// Both modes takes into account bytes already read in transaction.
   template <bool kContiguous, const uint8_t kStopByte = '\0'>
   [[nodiscard]] std::pair<ssize_t, const void*> readInTxChunk() {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return {-EINVAL, nullptr};
     }
     auto ret = findInBufferInTx<kContiguous, kStopByte>();
@@ -243,7 +243,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   }
 
   [[nodiscard]] ssize_t cancelTx() DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     auto old_tx_size = static_cast<ssize_t>(this->tx_size_);
@@ -257,7 +257,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// Drop the contents of buffer and commits transaction.
   /// Note that this is a writing operation.
   [[nodiscard]] ssize_t dropInTx() DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     auto old_tx_size = static_cast<ssize_t>(this->tx_size_);
@@ -271,7 +271,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// Clamps in [tail, head).
   /// Does not terminate transaction in error.
   [[nodiscard]] ssize_t seekInTx(size_t pos) DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     auto h = this->header_.readHead();
@@ -289,7 +289,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
   /// Clamps in [tail, head).
   /// Does not terminate transaction in error.
   [[nodiscard]] ssize_t relSeekInTx(ssize_t delta) DEXCEPT {
-    if (unlikely(!inTx())) {
+    if (__hbt_unlikely(!inTx())) {
       return -EINVAL;
     }
     auto h = static_cast<ssize_t>(this->header_.readHead());
@@ -356,7 +356,7 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
 
   /// Start transaction and get ptr to first element.
   std::pair<ssize_t, const void*> startReadTx(size_t size) DEXCEPT {
-    if (unlikely(size > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(size > this->header_.kDataPoolByteSize)) {
       return {-EINVAL, nullptr};
     }
 
@@ -491,26 +491,26 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
     HBT_DCHECK_LE(size, this->header_.kDataPoolByteSize);
 
     if constexpr (kAlwaysCopy) {
-      if (unlikely(copy_buffer == nullptr)) {
+      if (__hbt_unlikely(copy_buffer == nullptr)) {
         HBT_LOG_ERROR() << "kAlwaysCopy requires non-null copy_buffer";
         return {nullptr, nullptr};
       }
     }
 
     if constexpr (!kCanResizeCopyBuffer) {
-      if (unlikely(buffer_size < size)) {
+      if (__hbt_unlikely(buffer_size < size)) {
         HBT_LOG_ERROR() << "Copy buffer is too small and "
                         << "kCanResizeCopyBuffer is set to false";
         return {nullptr, nullptr};
       }
     }
 
-    if (unlikely(0 >= size)) {
+    if (__hbt_unlikely(0 >= size)) {
       HBT_LOG_ERROR() << "Cannot copy value of zero size";
       return {nullptr, nullptr};
     }
 
-    if (unlikely(size > this->header_.kDataPoolByteSize)) {
+    if (__hbt_unlikely(size > this->header_.kDataPoolByteSize)) {
       HBT_LOG_ERROR() << "reads larger than buffer are not supported";
       return {nullptr, nullptr};
     }
@@ -539,20 +539,20 @@ class Consumer : public RingBufferWrapper<THeaderExtraData> {
     }
 
     bool needs_resize = buffer_size < size;
-    if (unlikely(needs_resize)) {
+    if (__hbt_unlikely(needs_resize)) {
       if constexpr (!kCanResizeCopyBuffer) {
         HBT_LOG_ERROR() << "resizing is needed but kCanResizeCopyBuffer"
                         << " is set to false. Make buffer larger?";
         return {nullptr, nullptr};
       }
       copy_buffer = static_cast<uint8_t*>(realloc(copy_buffer, size));
-      if (unlikely(copy_buffer == nullptr)) {
+      if (__hbt_unlikely(copy_buffer == nullptr)) {
         HBT_LOG_ERROR() << "Bad alloc";
         return {nullptr, nullptr};
       }
     }
 
-    if (likely(!wrap)) {
+    if (__hbt_likely(!wrap)) {
       std::memcpy(copy_buffer, &this->data_[start], size);
     } else {
       size_t size0 = this->header_.kDataPoolByteSize - start;

@@ -88,7 +88,7 @@ class PerCpuSampleGeneratorBase : public PerCpuBase<TCpuGenerator> {
 
       // At this point it either finished because it hit stop_ts or
       // an unhandled error.
-      if (likely(ret >= 0)) {
+      if (__hbt_likely(ret >= 0)) {
         ++num_done;
       }
     }

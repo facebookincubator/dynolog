@@ -117,14 +117,14 @@ std::shared_ptr<TRingBuffer> load(
           header_name, perm_write, hbt::shm::PageType::Default);
 
   constexpr auto kHeaderSize = sizeof(typename TRingBuffer::THeader);
-  if (unlikely(kHeaderSize != header_segment->getSize())) {
+  if (__hbt_unlikely(kHeaderSize != header_segment->getSize())) {
     HBT_THROW_SYSTEM(EPERM) << "Header segment of unexpected size";
   }
 
   auto [data, data_segment] =
       hbt::shm::Segment::load<uint8_t[]>(data_name, perm_write, data_page_type);
 
-  if (unlikely(header->kDataPoolByteSize != data_segment->getSize())) {
+  if (__hbt_unlikely(header->kDataPoolByteSize != data_segment->getSize())) {
     HBT_THROW_SYSTEM(EPERM) << "Data segment of unexpected size";
   }
 

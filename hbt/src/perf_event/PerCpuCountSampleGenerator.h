@@ -132,7 +132,7 @@ class CpuCountSampleGenerator final
   ssize_t handleRecordSample(const mode::Sampling::Sample& r) noexcept {
     HBT_DCHECK_EQ(r.nr, kNumEvents);
 
-    if (unlikely(count_.tstamp == kInvalidTimeStamp)) {
+    if (__hbt_unlikely(count_.tstamp == kInvalidTimeStamp)) {
       // Discard this count because we don't know the start of
       // of the counting interval due to the lost package.
 
@@ -153,7 +153,7 @@ class CpuCountSampleGenerator final
       return 0;
     }
 
-    if (unlikely(count_.tstamp > r.tstamp)) {
+    if (__hbt_unlikely(count_.tstamp > r.tstamp)) {
       HBT_LOG_ERROR() << fmt::format(
           "New record's timestamp ({}) precedes last timestamp ({})",
           r.tstamp,
@@ -180,7 +180,7 @@ class CpuCountSampleGenerator final
 
     // Do not write the "values" part of Count.
     auto ret = output_producer_.write(&count_, kWriteByteSize);
-    if (unlikely(kNumBytesDropIfFull > 0 && ret == -ENOSPC)) {
+    if (__hbt_unlikely(kNumBytesDropIfFull > 0 && ret == -ENOSPC)) {
       auto err = output_producer_.dropN(kNumBytesDropIfFull);
       HBT_THROW_ASSERT_IF(0 > err);
       // Retry now that space has been cleared. There is
@@ -188,7 +188,7 @@ class CpuCountSampleGenerator final
       // cannot fail due too lack of space again.
       ret = output_producer_.write(&count_, kWriteByteSize);
     }
-    if (unlikely(0 > ret)) {
+    if (__hbt_unlikely(0 > ret)) {
       count_.tstamp = kInvalidTimeStamp;
       return ret;
     }
