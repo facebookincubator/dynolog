@@ -46,6 +46,7 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // to addEvents in json_events/generated/intel/JsonEvents.h
   switch (cpu_info.cpu_arch) {
     case CpuArch::MILAN:
+    case CpuArch::BERGAMO:
       milan::addEvents(pmu_manager);
 #ifdef FACEBOOK
       milan::addEventsFb(pmu_manager);

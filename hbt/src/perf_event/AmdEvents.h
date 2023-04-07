@@ -120,10 +120,6 @@ constexpr PmuMsr kUnhaltedCycles{.amdCore = {.event = 0x76}};
 constexpr PmuMsr kL1ICacheFillMisses{
     .amdCore = {.event = 0x64, .unitMask = 0x7}}; // Same as e=0x60,u=0x10
 
-// L1 dCache
-constexpr PmuMsr kL1DCacheMisses{
-    .amdCore = {.event = 0x41, .unitMask = 0x1f}}; // AMD recommended way
-
 // L2 Cache
 constexpr PmuMsr kL2ICacheFillMisses{
     .amdCore = {.event = 0x64, .unitMask = 0x1}};
@@ -134,10 +130,12 @@ constexpr PmuMsr kL2DCacheMisses{.amdCore = {.event = 0x64, .unitMask = 0x8}};
 // L2 with Prefetcher
 constexpr PmuMsr kL2Accesses{.amdCore = {.event = 0x64, .unitMask = 0x7f}};
 constexpr PmuMsr kL2Misses{.amdCore = {.event = 0x64, .unitMask = 0x9}};
-constexpr PmuMsr kL2PrefetcherHitsInL2{.amdCore = {.event = 0x70}};
-constexpr PmuMsr kL2PrefetcherHitsInL3{.amdCore = {.event = 0x71}};
-constexpr PmuMsr kL2PrefetcherMissesInL3{.amdCore = {.event = 0x72}};
-
+constexpr PmuMsr kL2PrefetcherHitsInL2{
+    .amdCore = {.event = 0x70, .unitMask = 0x1f}};
+constexpr PmuMsr kL2PrefetcherHitsInL3{
+    .amdCore = {.event = 0x71, .unitMask = 0x1f}};
+constexpr PmuMsr kL2PrefetcherMissesInL3{
+    .amdCore = {.event = 0x72, .unitMask = 0x1f}};
 // Flops
 constexpr PmuMsr kRetiredX87Flops{.amdCore = {.event = 0x2, .unitMask = 0x7}};
 constexpr PmuMsr kRetiredSseAvxFlops{
