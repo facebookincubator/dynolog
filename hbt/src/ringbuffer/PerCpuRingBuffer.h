@@ -84,7 +84,7 @@ class PerCpuRingBufferHeader {
   }
 
   THeader* getHeader(CpuId cpu_id) {
-    if (unlikely(!cpu_set.hasCpu(cpu_id))) {
+    if (__hbt_unlikely(!cpu_set.hasCpu(cpu_id))) {
       HBT_THROW_EINVAL() << "No CPU with ID: " << cpu_id;
     }
     auto header_offset = perCpuOffset<THeader, true>(cpu_id);
@@ -93,7 +93,7 @@ class PerCpuRingBufferHeader {
   }
 
   MemOffset getDataOffset(CpuId cpu_id) const {
-    if (unlikely(!cpu_set.hasCpu(cpu_id))) {
+    if (__hbt_unlikely(!cpu_set.hasCpu(cpu_id))) {
       HBT_THROW_EINVAL() << "No CPU with ID: " << cpu_id;
     }
     return rb_data_offsets_[cpu_id];
@@ -226,7 +226,7 @@ class PerCpuRingBufferHelper {
 
   TProdCons& atCpu(CpuId cpu) {
     auto& ptr = per_cpu_prodcons_[cpu];
-    if (unlikely(ptr == nullptr)) {
+    if (__hbt_unlikely(ptr == nullptr)) {
       std::ostringstream oss;
       oss << "No RingBuffer at CPU: " << cpu;
       throw std::out_of_range(oss.str());

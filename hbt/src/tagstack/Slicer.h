@@ -346,7 +346,7 @@ class Slicer {
     //           << " stop_ts: " << stop_ts
     while (num_processed < max_num_events) {
       const Event* ev = events_->prepareNext(stop_ts);
-      if (unlikely(ev == nullptr)) {
+      if (__hbt_unlikely(ev == nullptr)) {
         return num_processed;
       }
       HBT_DCHECK_NE(ev->tstamp, kInvalidTimeStamp);
@@ -361,7 +361,7 @@ class Slicer {
 
       // DLOG(INFO) << "Slicer sees next event: "
       //           << *ev << " in stream idx: " << group_idx;
-      if (unlikely(ev->tstamp < last_ts_)) {
+      if (__hbt_unlikely(ev->tstamp < last_ts_)) {
         // XXX: This case will happen (very rarely) in production.
         // Double check that handling it this way is robust enough.
         HBT_LOG_ERROR()
@@ -376,12 +376,12 @@ class Slicer {
       }
 
       // Has it reached the stop timestamp?
-      if (unlikely(ev->tstamp > stop_ts)) {
+      if (__hbt_unlikely(ev->tstamp > stop_ts)) {
         return num_processed;
       }
 
       // WriteErrors?
-      if (unlikely(handleWriteErrors_(ev))) {
+      if (__hbt_unlikely(handleWriteErrors_(ev))) {
         ++num_processed;
         continue;
       }
@@ -421,7 +421,7 @@ class Slicer {
       Stack last_stack = get_last_stack();
 
       if (ev->isOut()) {
-        if (unlikely(
+        if (__hbt_unlikely(
                 handleEventOutPreConditionError_(ev, group_idx, last_stack))) {
           ++num_processed;
           continue;
@@ -436,7 +436,7 @@ class Slicer {
       } else {
         // Event In.
 
-        if (unlikely(handleEventInPreConditionError_(ev, last_stack))) {
+        if (__hbt_unlikely(handleEventInPreConditionError_(ev, last_stack))) {
           ++num_processed;
           continue;
         }
@@ -674,7 +674,7 @@ class Slicer {
   /// Return true if an error was handled
   inline bool handleWriteErrors_(const Event* ev) {
     // WriteErrors?
-    if (unlikely(ev->type == Event::Type::WriteErrorsEnd)) {
+    if (__hbt_unlikely(ev->type == Event::Type::WriteErrorsEnd)) {
       HBT_LOG_WARNING() << "Slicer has found WriteErrorsEnd " << *ev;
       last_ts_ = ev->tstamp;
       ++stats_.num_processed;
@@ -684,7 +684,7 @@ class Slicer {
       return true;
     }
 
-    if (unlikely(ev->type == Event::Type::WriteErrorsStart)) {
+    if (__hbt_unlikely(ev->type == Event::Type::WriteErrorsStart)) {
       HBT_LOG_WARNING() << "Slicer has found WriteErrorsStart " << *ev;
       last_ts_ = ev->tstamp;
       ++stats_.num_processed;
@@ -695,7 +695,7 @@ class Slicer {
       return true;
     }
 
-    if (unlikely(num_active_write_errors_)) {
+    if (__hbt_unlikely(num_active_write_errors_)) {
       // HBT_LOG_WARNING() << "Slicer received event: " << *ev << " while in
       // write error";
       // Cannot process events while in error because we don't know
@@ -715,7 +715,7 @@ class Slicer {
           ev->type == Event::Type::ThreadCreation ||
           ev->type == Event::Type::ThreadDestruction);
 
-      if (unlikely(ev->level != 0)) {
+      if (__hbt_unlikely(ev->level != 0)) {
         HBT_LOG_ERROR() << "Thread event level was " << ev->level
                         << "but was expected to be zero";
         last_ts_ = ev->tstamp;
@@ -773,7 +773,7 @@ class Slicer {
       HBT_DCHECK_GT(last_state->stats.stack.num_set_tags, 0);
       dormant_states_[tags[0]].push_front(*last_state);
       HBT_DCHECK(last_state->is_linked());
-      if (unlikely(!last_state->is_linked())) {
+      if (__hbt_unlikely(!last_state->is_linked())) {
         HBT_LOG_ERROR()
             << "Inconsistent state: "
             << "Last state was expected to be in list of active states";
@@ -822,7 +822,7 @@ class Slicer {
     // match, unless we are starting.
     if (last_stack.known_num_levels && last_stack.num_set_tags > 0) {
       auto l = static_cast<int>(ev->level);
-      if (unlikely(last_stack.num_set_tags <= l)) {
+      if (__hbt_unlikely(last_stack.num_set_tags <= l)) {
         std::ostringstream oss;
         oss << "Event that pop a Tag from TagStack at level: " << l
             << " was received but the last stack for group_idx " << group_idx
@@ -851,7 +851,7 @@ class Slicer {
     // present) from the dormant_states_, unless it's a Phase start or the
     // TagStack is aliased.
     HBT_DCHECK(ev->isIn());
-    if (unlikely(
+    if (__hbt_unlikely(
             last_stack.num_set_tags > ev->level &&
             last_stack.tags[ev->level] != kNA)) {
       Tag old_tag = last_stack.tags[ev->level];

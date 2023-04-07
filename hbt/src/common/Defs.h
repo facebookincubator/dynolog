@@ -33,8 +33,8 @@ inline pid_t gettid() noexcept {
 #endif
 
 // Branch hint macros. C++20 will include them as part of language.
-#define likely(x) __builtin_expect(!!(x), 1)
-#define unlikely(x) __builtin_expect(!!(x), 0)
+#define __hbt_likely(x) __builtin_expect(!!(x), 1)
+#define __hbt_unlikely(x) __builtin_expect(!!(x), 0)
 
 template <class TStream>
 TStream& LogCtxt(TStream& oss) {
@@ -132,41 +132,41 @@ class EnvironmentError : public std::exception {
 
 #define HBT_THROW_EINVAL() HBT_THROW(std::invalid_argument)
 #define HBT_THROW_EINVAL_IF(cond) \
-  if (unlikely(cond))             \
+  if (__hbt_unlikely(cond))       \
   HBT_THROW_EINVAL() << "\t" << HBT_STRINGIFY(cond) << ". "
 
 #define HBT_THROW_ENVIRONMENT(err) HBT_THROW(EnvironmentError, err)
 #define HBT_THROW_ENVIRONMENT_IF(cond, err) \
-  if (unlikely(cond))                       \
+  if (__hbt_unlikely(cond))                 \
   HBT_THROW_ENVIRONMENT(err) << "\t" << HBT_STRINGIFY(cond) << ". "
 
 #define HBT_THROW_SYSTEM(err) \
   HBT_THROW(std::system_error, err, std::system_category())
 #define HBT_THROW_SYSTEM_IF(cond, err) \
-  if (unlikely(cond))                  \
+  if (__hbt_unlikely(cond))            \
   HBT_THROW_SYSTEM(err) << "\t" << HBT_STRINGIFY(cond) << ". "
 
 #define HBT_THROW_SYSTEM_CODE(err) HBT_THROW(std::system_error, err)
 #define HBT_THROW_SYSTEM_CODE_IF(cond, err) \
-  if (unlikely(cond))                       \
+  if (__hbt_unlikely(cond))                 \
   HBT_THROW_SYSTEM_CODE(err) << "\t" << HBT_STRINGIFY(cond) << ". "
 
 #define HBT_THROW_ASSERT() HBT_THROW(std::runtime_error)
 #define HBT_THROW_ASSERT_IF(cond) \
-  if (unlikely(cond))             \
+  if (__hbt_unlikely(cond))       \
   HBT_THROW_ASSERT() << "\t" << HBT_STRINGIFY(cond) << ". "
 
 // Conditional throwing exception
-#define HBT_THROW_IF_NULLPTR(ptr) \
-  if (unlikely(ptr == nullptr))   \
+#define HBT_THROW_IF_NULLPTR(ptr)     \
+  if (__hbt_unlikely(ptr == nullptr)) \
   HBT_THROW_EINVAL() << HBT_STRINGIFY(ptr) << " has nullptr value. "
 
 // Safe-cast to std::error_code
 inline std::error_code toErrorCode(ssize_t e) {
-  if (unlikely(e <= 0)) {
+  if (__hbt_unlikely(e <= 0)) {
     HBT_THROW_EINVAL() << "\n\tError " << e << " is not a positive number. "
                        << " Is this value really an error?";
-  } else if (unlikely(e > std::numeric_limits<int>::max())) {
+  } else if (__hbt_unlikely(e > std::numeric_limits<int>::max())) {
     HBT_THROW_EINVAL() << "\n\tError " << e << " is out of range. "
                        << " Is this really an error?";
   }
@@ -206,17 +206,17 @@ class LogEntry final {
       << "\n  " << HBT_LOG_PREFFIX << "]\n => \033[0m"
 
 #define HBT_LOG_INFO_IF(cond) \
-  if (unlikely(cond))         \
+  if (__hbt_unlikely(cond))   \
   HBT_LOG_INFO()
 #define HBT_LOG_WARNING_IF(cond) \
-  if (unlikely(cond))            \
+  if (__hbt_unlikely(cond))      \
   HBT_LOG_WARNING()
 #define HBT_LOG_ERROR_IF(cond) \
-  if (unlikely(cond))          \
+  if (__hbt_unlikely(cond))    \
   HBT_LOG_ERROR()
 
-#define HBT_DCHECK_NOT_NULLPTR(t) \
-  if (unlikely((t) == nullptr))   \
+#define HBT_DCHECK_NOT_NULLPTR(t)     \
+  if (__hbt_unlikely((t) == nullptr)) \
   HBT_THROW_ASSERT() << "\n\tExpected argument to be not null."
 
 #define __HBT_EXPAND_OPD(opd) HBT_STRINGIFY(opd) << " (" << (opd) << ")"
@@ -227,12 +227,12 @@ class LogEntry final {
 // must handle all errors explicitly.
 //
 
-#define __HBT_DCHECK(a) \
-  if (unlikely(!((a)))) \
+#define __HBT_DCHECK(a)       \
+  if (__hbt_unlikely(!((a)))) \
   HBT_THROW_ASSERT() << "\n\tExpected true for " << __HBT_EXPAND_OPD(a) << ". "
 
 #define __HBT_DCHECK_CMP(a, b, op)                                      \
-  if (unlikely(!((a)op(b))))                                            \
+  if (__hbt_unlikely(!((a)op(b))))                                      \
   HBT_THROW_ASSERT() << "\n\tExpected " << __HBT_EXPAND_OPD(a) << " "   \
                      << HBT_STRINGIFY(op) << " " << __HBT_EXPAND_OPD(b) \
                      << ". "
@@ -269,12 +269,12 @@ class LogEntry final {
 // Argument checks
 //
 #define HBT_ARG_CHECK(a)                                     \
-  if (unlikely(!((a))))                                      \
+  if (__hbt_unlikely(!((a))))                                \
   HBT_THROW_EINVAL() << "\n\tExpected argument to be true: " \
                      << __HBT_EXPAND_OPD(a) << ". "
 
 #define _HBT_ARG_CMP(a, b, op)                                              \
-  if (unlikely(!((a)op(b))))                                                \
+  if (__hbt_unlikely(!((a)op(b))))                                          \
   HBT_THROW_EINVAL() << "\n\tExpected argument " << __HBT_EXPAND_OPD(a)     \
                      << " " HBT_STRINGIFY(op) << " " << __HBT_EXPAND_OPD(b) \
                      << ". "

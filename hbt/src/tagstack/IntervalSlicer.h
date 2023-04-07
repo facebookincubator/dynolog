@@ -120,10 +120,10 @@ class IntervalSlicer {
     // IntervalSlicer is only writer
     for (int i = 0; i < kMaxNumRetries; ++i) {
       ret = slices_prod_->write(slice);
-      if (likely(0 < ret)) {
+      if (__hbt_likely(0 < ret)) {
         break;
       }
-      if (unlikely(kBytesDropIfFull > 0 && ret == -ENOSPC)) {
+      if (__hbt_unlikely(kBytesDropIfFull > 0 && ret == -ENOSPC)) {
         auto err = slices_prod_->dropN(kBytesDropIfFull);
         HBT_DCHECK_GE(err, 0);
       }

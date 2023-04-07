@@ -1356,7 +1356,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         reinterpret_cast<const struct perf_event_header*>(record_begin);
     auto record_end =
         data_start + ((data_tail + event_header->size) & data_offset_mask);
-    if (unlikely(record_end < record_begin)) {
+    if (__hbt_unlikely(record_end < record_begin)) {
       // perf event is wrapped around the ring buffer, make a contiguous copy.
       void* buffer = enlargeAuxBuffer(event_header->size);
       const uint8_t* sentinel = data_start + data_size;
@@ -1376,7 +1376,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordLost*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordLost(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           num_record_lost_ += r->num_lost;
@@ -1401,7 +1401,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordExit*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordExit(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_exit_;
@@ -1424,7 +1424,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordFork*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordFork(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_fork_;
@@ -1433,14 +1433,14 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
       case PERF_RECORD_SAMPLE: {
         if constexpr (!std::is_void<TRecordSample>::value) {
           auto r = reinterpret_cast<const TRecordSample*>(event_header);
-          if (unlikely(r->header.size != recordSize(*r))) {
+          if (__hbt_unlikely(r->header.size != recordSize(*r))) {
             HBT_LOG_ERROR() << "Invalid record size of: " << r->header.size
                             << " expected " << recordSize(*r);
             err = -EPERM;
             goto exit;
           }
           err = this->asImpl_().handleRecordSample(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_sample_;
@@ -1449,14 +1449,14 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
       case PERF_RECORD_READ: {
         if constexpr (!std::is_void<TRecordRead>::value) {
           auto r = reinterpret_cast<const TRecordRead*>(event_header);
-          if (unlikely(r->header.size != recordSize(*r))) {
+          if (__hbt_unlikely(r->header.size != recordSize(*r))) {
             HBT_LOG_ERROR() << "Invalid record read size of: " << r->header.size
                             << " expected " << recordSize(*r);
             err = -EPERM;
             goto exit;
           }
           err = this->asImpl_().handleRecordRead(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_read_;
@@ -1467,7 +1467,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordAux*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordAux(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_aux_;
@@ -1478,7 +1478,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordItraceStart*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordItraceStart(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_itrace_start_;
@@ -1489,7 +1489,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
           auto r = reinterpret_cast<const TRecordSwitchCpuWide*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordSwitchCpuWide(*r);
-          if (unlikely(0 > err)) {
+          if (__hbt_unlikely(0 > err)) {
             goto exit;
           }
           ++num_record_switch_cpu_wide_;
@@ -1557,7 +1557,7 @@ void CpuEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
       std::min(rb_num_bytes, static_cast<size_t>(sentinel - begin_ptr));
   CpuId cpuId = this->getCpu();
 
-  if (unlikely(end_ptr < begin_ptr)) {
+  if (__hbt_unlikely(end_ptr < begin_ptr)) {
     // Ring buffer wrapped, so there are two slices
     callback(cpuId, RbDataSlices(begin_ptr, len, data_start, data_size - len));
   } else {
