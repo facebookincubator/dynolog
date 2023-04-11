@@ -420,7 +420,7 @@ struct Kernel {
     try {
       return create();
     } catch (const std::system_error& e) {
-      HBT_LOG_ERROR() << e.what();
+      HBT_LOG_EXCEPTION(e);
     }
     return std::nullopt;
   }
@@ -438,7 +438,13 @@ struct Kernel {
   explicit Kernel(std::string release) : release(release) {}
 };
 
+// XXX: Verify that this intrinsic exists in __aarch64__ (ARM).
+inline TimeStamp rdtsc() {
+  return __rdtsc();
+}
+
 #if defined(__i386__) || defined(__x86_64__)
+// Store CPU ID in <cpu> variable.
 inline TimeStamp rdtscp(CpuId& cpu) {
   TimeStamp tstamp = __rdtscp(&cpu);
   // Lower 12 bits are the CPU, next 12 are socket.
@@ -447,6 +453,7 @@ inline TimeStamp rdtscp(CpuId& cpu) {
 }
 
 #elif defined(__aarch64__)
+// Store CPU ID in <cpu> variable.
 inline TimeStamp rdtscp(CpuId& cpu) {
   TimeStamp tstamp;
   // we don't have an equivalent to rdtscp, so we have to live with
@@ -497,6 +504,36 @@ inline std::optional<std::string> readProcFsCmdLine(pid_t tid) noexcept {
   } catch (const std::system_error&) {
     return std::nullopt;
   }
+}
+
+/// Return relative path of calling process' cgroup.
+inline std::optional<std::filesystem::path> readSelfCgroupV2Path() noexcept {
+  char path[] = "/proc/self/cgroup";
+  auto [err, s] = readProcFsByteStr(path);
+  if (err) {
+    return std::nullopt;
+  }
+  if (s[0] != '0') {
+    // Not Cgroup V2.
+    return std::nullopt;
+  }
+  int num_colons = 0, isize = (int)s.size();
+  for (int i = 0; i < isize; ++i) {
+    if (s[(size_t)i] == ':' && ++num_colons == 2) {
+      auto size = (isize - i - 1);
+      // Remove end-of-line if present.
+      if (isize > 0 && s[(size_t)(isize - 1)] == '\n') {
+        size--;
+      }
+      if (size <= 0) {
+        return std::nullopt;
+      }
+      return std::filesystem::path(
+                 std::string((char*)s.data() + i + 1, (size_t)size))
+          .relative_path();
+    }
+  }
+  return std::nullopt;
 }
 
 inline std::optional<std::string> readProcFsCgroup(pid_t tid) noexcept {
