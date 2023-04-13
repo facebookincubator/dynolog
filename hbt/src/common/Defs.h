@@ -30,6 +30,10 @@ inline pid_t gettid() noexcept {
   return static_cast<pid_t>(syscall(SYS_gettid));
 }
 
+inline pid_t getpid() noexcept {
+  return static_cast<pid_t>(syscall(SYS_gettid));
+}
+
 #endif
 
 // Branch hint macros. C++20 will include them as part of language.
