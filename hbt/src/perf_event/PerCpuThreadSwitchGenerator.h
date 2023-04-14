@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "hbt/src/common/ProcFsHelpers.h"
 #include "hbt/src/common/System.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerCpuSampleGeneratorBase.h"

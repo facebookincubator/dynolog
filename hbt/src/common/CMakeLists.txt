@@ -12,6 +12,10 @@ target_link_libraries(System PUBLIC pfs)
 target_link_libraries(System PUBLIC Defs)
 target_link_libraries(System PUBLIC CpuArch)
 
+add_library(ProcFsHelpers ProcFsHelpers.h)
+set_target_properties(ProcFsHelpers PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(ProcFsHelpers PUBLIC pfs)
+
 add_library(Defaults Defaults.h)
 set_target_properties(Defaults PROPERTIES LINKER_LANGUAGE CXX)
 

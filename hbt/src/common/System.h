@@ -7,7 +7,6 @@
 
 #include "hbt/src/common/Defs.h"
 #include "hbt/src/perf_event/json_events/generated/CpuArch.h"
-#include "pfs/procfs.hpp"
 
 #include <fmt/core.h>
 #include <fmt/ostream.h>
@@ -507,16 +506,6 @@ inline std::optional<std::string> readProcFsComm(pid_t tid) noexcept {
   auto end_it =
       std::find_first_of(s.begin(), s.end(), ends.begin(), ends.end());
   return std::string(s.begin(), end_it);
-}
-
-inline std::optional<std::string> readProcFsCmdLine(pid_t tid) noexcept {
-  pfs::procfs pfs;
-  try {
-    auto vec = pfs.get_task(tid).get_cmdline();
-    return fmt::format("{}", fmt::join(vec, " "));
-  } catch (const std::system_error&) {
-    return std::nullopt;
-  }
 }
 
 /// Return relative path of calling process' cgroup.
