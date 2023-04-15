@@ -62,6 +62,7 @@ add_library(PerCpuThreadSwitchGenerator PerCpuThreadSwitchGenerator.h)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC
     PerCpuSampleGeneratorBase)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC PerCpuRingBuffer)
+target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ProcFsHelpers)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC Event)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ValueTimeSeries)
 

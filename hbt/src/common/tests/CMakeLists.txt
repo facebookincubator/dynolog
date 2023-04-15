@@ -12,5 +12,6 @@ target_link_libraries(DefsTest PRIVATE Defs)
 
 hbt_common_add_test(SystemTest SystemTest.cpp)
 target_link_libraries(SystemTest PRIVATE System)
+target_link_libraries(SystemTest PRIVATE ProcFsHelpers)
 
 # todo: include folly:subprocess library (or alternative) for SystemProcFsTest.cpp
