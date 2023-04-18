@@ -99,7 +99,8 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
   }
 
   size_t getNumEvents() const {
-    return *this->metric_desc->getNumEvents(pmu_manager->cpuInfo.cpu_arch);
+    return this->metric_desc->getNumEvents(pmu_manager->cpuInfo.cpu_arch)
+        .value_or(0);
   }
 
   /// Utility method to create ReadValues structure of the right size.
