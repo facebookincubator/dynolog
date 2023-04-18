@@ -452,6 +452,9 @@ struct GroupReadValues {
     if (t->time_enabled == 0) {
       return 0;
     }
+    if (t->time_running == 0) {
+      return 0;
+    }
 
     return static_cast<uint64_t>(
         static_cast<double>(t->count[i]) *
@@ -638,7 +641,8 @@ class CpuEventsGroupBase {
     return static_cast<TImpl&>(*this);
   }
 
-  void open_counting_(uint64_t sampling_period, bool pinned);
+  void
+  open_counting_(uint64_t sampling_period, bool pinned, bool thread = false);
   void closeEvents_();
 };
 
@@ -960,7 +964,8 @@ void CpuEventsGroupBase<TImpl, TMode>::init_perf_event_attrs(
 template <class TImpl, class TMode>
 void CpuEventsGroupBase<TImpl, TMode>::open_counting_(
     uint64_t sample_period,
-    bool pinned) {
+    bool pinned,
+    bool thread) {
   HBT_THROW_ASSERT_IF(attrs_ != nullptr) << "Events already opened";
   if constexpr (std::is_same_v<TMode, mode::Counting>) {
     HBT_ARG_CHECK_EQ(sample_period, 0)
@@ -987,7 +992,7 @@ void CpuEventsGroupBase<TImpl, TMode>::open_counting_(
         __NR_perf_event_open,
         &attrs_[i],
         cgroup_fd_ >= 0 ? cgroup_fd_ : pid_,
-        cpu_,
+        thread ? -1 : static_cast<int>(cpu_),
         leader_fd,
         flags));
     // HBT_LOG_INFO() << "Call to perf_event_open with cpu: " << cpu_

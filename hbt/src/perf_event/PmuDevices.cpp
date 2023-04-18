@@ -222,7 +222,7 @@ void parseSysFsPmuFormat_(fs::directory_entry dentry, PmuDevice& pmu_device) {
 void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
   auto caps_dir = dentry.path() / "caps";
   if (!fs::is_directory(caps_dir)) {
-    HBT_LOG_INFO() << caps_dir << " is not a directory";
+    HBT_DLOG_INFO() << caps_dir << " is not a directory";
     return;
   }
   for (const auto& cap_entry : fs::directory_iterator(caps_dir)) {

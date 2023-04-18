@@ -49,6 +49,10 @@ target_link_libraries(PerCpuBase PUBLIC Metrics)
 add_library(PerCpuCountReader PerCpuCountReader.h)
 target_link_libraries(PerCpuCountReader PUBLIC PerCpuBase)
 
+add_library(ThreadCountReader ThreadCountReader.h)
+target_link_libraries(ThreadCountReader PUBLIC CpuEventsGroup)
+target_link_libraries(ThreadCountReader PUBLIC Metrics)
+
 add_library(PerCpuSampleGeneratorBase PerCpuSampleGeneratorBase.h)
 target_link_libraries(PerCpuSampleGeneratorBase PUBLIC PerCpuBase)
 

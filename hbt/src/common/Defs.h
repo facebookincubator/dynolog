@@ -225,6 +225,16 @@ class LogEntry final {
 
 #define __HBT_EXPAND_OPD(opd) HBT_STRINGIFY(opd) << " (" << (opd) << ")"
 
+#ifdef NDEBUG
+#define HBT_DLOG_INFO() \
+  while (false)         \
+  HBT_LOG_INFO()
+#else
+// Add a debug mode specific log info. Warnings and errors should always be
+// logged.
+#define HBT_DLOG_INFO() HBT_LOG_INFO()
+#endif
+
 //
 // Debug checks.
 // Note that non-debug checks are not provided because hbt developers
