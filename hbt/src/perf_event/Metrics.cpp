@@ -48,6 +48,11 @@ std::ostream& operator<<(std::ostream& os, const MetricDesc& desc) {
     }
     os << "]";
   }
+  if (desc.reducer) {
+    os << "\n has reducer";
+  } else {
+    os << "\n does not have reducer";
+  }
   return os << "\n";
 }
 

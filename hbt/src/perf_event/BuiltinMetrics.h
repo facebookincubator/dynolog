@@ -20,4 +20,6 @@ struct HwCacheEventInfo {
       : id(id), description(descrption) {}
 };
 
+const ReducerFunc& getAddReducer();
+const ReducerFunc& getRateReducer();
 } // namespace facebook::hbt::perf_event

@@ -86,6 +86,39 @@ static inline std::string constructDescription(
   return ss.str();
 }
 
+// A simple reducer that adds all metrics up
+const ReducerFunc& getAddReducer() {
+  static ReducerFunc add_reducer =
+      [](const std::vector<uint64_t>& metrics) -> std::optional<double> {
+    if (metrics.size() == 0) {
+      return std::nullopt;
+    }
+    return std::accumulate(metrics.begin(), metrics.end(), 0);
+  };
+  return add_reducer;
+}
+
+// Reducer that computes rate of two metrics
+// Note: this assumes event[0] is the numerator and event[1] is the denominator
+//  please be aware and setup event definitions accordingly.
+const ReducerFunc& getRateReducer() {
+  static ReducerFunc rate_reducer =
+      [](const std::vector<uint64_t>& metrics) -> std::optional<double> {
+    if (metrics.size() != 2) {
+      HBT_DLOG_INFO() << "Ratio Metrics are too few/many " << metrics.size();
+      return std::nullopt;
+    }
+    const auto& num = metrics[0];
+    const auto& denom = metrics[1];
+    if (denom == 0) {
+      HBT_DLOG_INFO() << "Ratio denom = 0";
+      return std::nullopt;
+    }
+    return static_cast<double>(num) / static_cast<double>(denom);
+  };
+  return rate_reducer;
+}
+
 /// Kernel abstracted HW events.
 /// The ones exposed in kernel headers
 /// (linux/include/uapi/perf_event.h) as PERF_TYPE_HARDWARE.
@@ -529,7 +562,8 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    {}}}}},
       100'000'000,
       System::Permissions{},
-      std::vector<std::string>{}));
+      std::vector<std::string>{},
+      getRateReducer()));
 
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(
@@ -556,7 +590,8 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    {}}}}},
       100'000'000,
       System::Permissions{},
-      std::vector<std::string>{}));
+      std::vector<std::string>{},
+      getRateReducer()));
 
   // dram_access_reads replaces DynoPerfCounter::DRAM_ACCESS_READS
   metrics->add(std::make_shared<MetricDesc>(

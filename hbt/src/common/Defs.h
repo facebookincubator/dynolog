@@ -10,6 +10,7 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <system_error>
@@ -35,6 +36,13 @@ inline pid_t getpid() noexcept {
 }
 
 #endif
+
+// A metric could define a function to reduce multiple event values.
+// ReducerFunc type is used as the reducer functor for these values.
+// - note that events will always be uint64_t as that is the type
+//   used by the kernel perf_event system call.
+using ReducerFunc =
+    std::function<std::optional<double>(const std::vector<uint64_t>&)>;
 
 // Branch hint macros. C++20 will include them as part of language.
 #define __hbt_likely(x) __builtin_expect(!!(x), 1)

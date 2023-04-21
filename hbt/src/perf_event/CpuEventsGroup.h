@@ -480,6 +480,18 @@ struct GroupReadValues {
     return v;
   }
 
+  /// Apply a reduction on the counts
+  std::optional<double> getReducedCount(const ReducerFunc& reducer) const {
+    const auto vals = this->getCounts();
+    if (vals.size() == 1) {
+      return vals[0];
+    }
+    if (!reducer) {
+      return std::nullopt;
+    }
+    return reducer(vals);
+  }
+
   /// The fraction of time enabled that this counter has been running.
   /// It can be less than one due to Hardware Performance Counter multiplexing.
   float getRunningRatio() const {
