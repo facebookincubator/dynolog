@@ -50,6 +50,7 @@ struct MetricDesc {
   uint64_t default_sampling_period;
   System::Permissions req_permissions;
   std::vector<std::string> dives;
+  ReducerFunc reducer;
 
   MetricDesc(
       MetricId id,
@@ -58,14 +59,16 @@ struct MetricDesc {
       const std::map<TOptCpuArch, EventRefs>& event_refs_by_arch,
       uint64_t default_sampling_period,
       const System::Permissions& req_permissions,
-      const std::vector<std::string> dives)
+      const std::vector<std::string>& dives,
+      ReducerFunc reducer = nullptr)
       : id{id},
         brief_desc{brief_desc},
         full_desc{full_desc},
         event_refs_by_arch{event_refs_by_arch},
         default_sampling_period{default_sampling_period},
         req_permissions{req_permissions},
-        dives{dives} {
+        dives{dives},
+        reducer{reducer} {
     HBT_ARG_CHECK_GT(id.size(), 0);
     HBT_ARG_CHECK_GT(brief_desc.size(), 0);
     HBT_ARG_CHECK_GT(full_desc.size(), 0);

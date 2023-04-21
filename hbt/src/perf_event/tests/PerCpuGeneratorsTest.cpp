@@ -121,7 +121,8 @@ TEST(PerCpuCountReader, SmokeTest) {
       0, // 0 sampling_period is ok because we do not require sampling.
       System::Permissions{}, // No special system permissions required for these
                              // events.
-      std::vector<std::string>{} // No post-processing dives
+      std::vector<std::string>{}, // No post-processing dives
+      getRateReducer() // Reduce the two events as a rate
   );
 
   auto pmu_manager = makePmuDeviceManager();
@@ -193,6 +194,14 @@ TEST(PerCpuCountReader, SmokeTest) {
   ASSERT_GT(rv.getCount(cycles_ev_idx), total_count_cycles);
   ASSERT_GT(rv.getTimeRunning(), total_time_running);
   ASSERT_GT(rv.getTimeEnabled(), total_time_enabled);
+
+  // Reducer computes the ratio of instructions per cycle
+  auto ipc = rv.getReducedCount(m->reducer);
+  ASSERT_TRUE(ipc.has_value());
+  EXPECT_EQ(
+      ipc,
+      static_cast<double>(rv.getCount(inst_ev_idx)) /
+          rv.getCount(cycles_ev_idx));
 
   // Easy to use version that always creates a ReadValues objecct.
   auto rrv = g.read();
