@@ -112,11 +112,13 @@ class SimpleJsonClientTest : public ::testing::Test {
   std::unique_ptr<std::thread> thread_;
   std::condition_variable rpc_ready_;
   std::mutex mutex_;
+  std::mutex serialized_test_mutex_;
 };
 
 TEST_F(SimpleJsonClientTest, StatusTest) {
-  rpc_ready_.notify_one();
+  std::unique_lock slk(serialized_test_mutex_);
 
+  rpc_ready_.notify_one();
   auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
   ASSERT_TRUE(client->initSuccessful())
       << "Failed to connect to port " << port_;
@@ -150,8 +152,9 @@ TEST_F(SimpleJsonClientTest, StatusTest) {
 }
 
 TEST_F(SimpleJsonClientTest, SetKinetoOnDemandRequestTest) {
-  rpc_ready_.notify_one();
+  std::unique_lock slk(serialized_test_mutex_);
 
+  rpc_ready_.notify_one();
   auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
   ASSERT_TRUE(client->initSuccessful())
       << "Failed to connect to port " << port_;
@@ -227,8 +230,9 @@ TEST_F(SimpleJsonClientTest, SetKinetoOnDemandRequestTest) {
 }
 
 TEST_F(SimpleJsonClientTest, DcgmTest) {
-  rpc_ready_.notify_one();
+  std::unique_lock slk(serialized_test_mutex_);
 
+  rpc_ready_.notify_one();
   auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
   ASSERT_TRUE(client->initSuccessful())
       << "Failed to connect to port " << port_;
@@ -268,8 +272,9 @@ TEST_F(SimpleJsonClientTest, DcgmTest) {
 }
 
 TEST_F(SimpleJsonClientTest, VersionTest) {
-  rpc_ready_.notify_one();
+  std::unique_lock slk(serialized_test_mutex_);
 
+  rpc_ready_.notify_one();
   auto client = std::make_unique<SimpleJsonServerClient>("::1", port_);
   ASSERT_TRUE(client->initSuccessful())
       << "Failed to connect to port " << port_;
