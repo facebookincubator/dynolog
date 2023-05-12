@@ -164,26 +164,38 @@ TEST(PerCpuCountReader, SmokeTest) {
   uint64_t total_time_running = 0;
   uint64_t total_time_enabled = 0;
 
+  auto rv_first = g.makeReadValues();
   {
     // Read counts of cgroup counters in CPU 1.
     // Reading overwrites rv.
     auto success = g.getCpuGenerator(1).read(rv);
     ASSERT_TRUE(success);
+    rv_first = rv;
     total_count_instructions += rv.getCount(inst_ev_idx);
     total_count_cycles += rv.getCount(cycles_ev_idx);
     total_time_running += rv.getTimeRunning();
     total_time_enabled += rv.getTimeEnabled();
   }
+  auto rv_second = g.makeReadValues();
   {
     // Read counts of cgroup counters in CPU 1.
     // Reading overwrites rv.
-    auto success = g.getCpuGenerator(3).read(rv);
+    auto success = g.getCpuGenerator(1).read(rv);
     ASSERT_TRUE(success);
+    rv_second = rv;
     total_count_instructions += rv.getCount(inst_ev_idx);
     total_count_cycles += rv.getCount(cycles_ev_idx);
     total_time_running += rv.getTimeRunning();
     total_time_enabled += rv.getTimeEnabled();
   }
+
+  // Check ReadValue diffs are valid
+  auto rv_diff = rv_second.diff(rv_first);
+  EXPECT_GE(rv_diff.t->time_enabled, 0);
+
+  // Add back to difference
+  rv_diff.accum(rv_first);
+  EXPECT_EQ(rv_diff.getCount(inst_ev_idx), rv_second.getCount(inst_ev_idx));
 
   // Read from all CPUs, sums must be larger than the sum of only CPU 1 and 3.
   // User can call this method directly rather than reading from each CPU.

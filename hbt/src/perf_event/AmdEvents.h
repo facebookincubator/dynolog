@@ -136,6 +136,11 @@ constexpr PmuMsr kL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0x1f}};
 constexpr PmuMsr kL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0x1f}};
+// L2 and L1 Prefetcher misses
+constexpr PmuMsr kL1AndL2PrefetcherHitsInL3{
+    .amdCore = {.event = 0x71, .unitMask = 0xff}};
+constexpr PmuMsr kL1AndL2PrefetcherMissesInL3{
+    .amdCore = {.event = 0x72, .unitMask = 0xff}};
 // Flops
 constexpr PmuMsr kRetiredX87Flops{.amdCore = {.event = 0x2, .unitMask = 0x7}};
 constexpr PmuMsr kRetiredSseAvxFlops{
