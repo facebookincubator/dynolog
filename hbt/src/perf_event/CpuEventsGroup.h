@@ -537,6 +537,23 @@ struct GroupReadValues {
     }
   }
 
+  GroupReadValues diff(const GroupReadValues& a) const {
+    HBT_DCHECK_LE(t->time_running, t->time_enabled);
+    HBT_DCHECK_EQ(getNumEvents(), a.getNumEvents());
+    HBT_DCHECK_GE(t->time_running, a.t->time_running);
+    HBT_DCHECK_GE(t->time_enabled, a.t->time_enabled);
+
+    // make a copy
+    auto res{*this};
+    res.t->time_enabled -= a.t->time_enabled;
+    res.t->time_running -= a.t->time_running;
+
+    for (auto i = 0u; i < getNumEvents(); ++i) {
+      res.t->count[i] -= a.t->count[i];
+    }
+    return res;
+  }
+
   ~GroupReadValues() {
     release_();
   }
@@ -586,7 +603,7 @@ class CpuEventsGroupBase {
 
   void close();
 
-  void enable();
+  void enable(bool reset = true);
 
   void disable();
 
@@ -611,7 +628,7 @@ class CpuEventsGroupBase {
   /// use not Dummy events.
   template <class T = TMode>
   mode::enable_if_counting_or_sampling<T, bool> read(
-      GroupReadValues<TMode>& rv) const {
+      GroupReadValues<TMode>& rv) const noexcept {
     HBT_ARG_CHECK_EQ(rv.getNumEvents(), event_fds_.size())
         << "GroupReadValues of " << rv.getNumEvents() << " but have "
         << event_fds_.size();
@@ -1256,16 +1273,18 @@ void CpuEventsGroup<TImpl, TMode>::close() {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::enable() {
+void CpuEventsGroupBase<TImpl, TMode>::enable(bool reset) {
   HBT_ARG_CHECK(isOpen()) << "Cannot enable events that are not open";
 
   if (enabled_) {
-    HBT_LOG_WARNING() << "Enabling already enabled event";
+    HBT_DLOG_INFO() << "Enabling already enabled event";
     return;
   }
 
-  if (int ret = ::ioctl(event_fds_[0], PERF_EVENT_IOC_RESET, 0); 0 > ret) {
-    HBT_THROW_SYSTEM(errno) << "ioctl PERF_EVENT_IOC_RESET";
+  if (reset) {
+    if (int ret = ::ioctl(event_fds_[0], PERF_EVENT_IOC_RESET, 0); 0 > ret) {
+      HBT_THROW_SYSTEM(errno) << "ioctl PERF_EVENT_IOC_RESET";
+    }
   }
   if (int ret = ::ioctl(event_fds_[0], PERF_EVENT_IOC_ENABLE, 0); 0 > ret) {
     HBT_THROW_SYSTEM(errno) << "ioctl PERF_EVENT_IOC_ENABLE";

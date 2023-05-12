@@ -33,6 +33,33 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::cpu,
+          "l2_cache_misses_no_prefetcher",
+          EventDef::Encoding{.code = amd_msr::kL2Misses.val},
+          "L2 cache misses excluding L2 prefetcher",
+          "L2 Data and Instruction cache misses excluding L2 prefetcher."),
+      std::vector<EventId>({"l2-cache-misses-no-prefetcher"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_l2_pf_hit_in_l3",
+          EventDef::Encoding{.code = amd_msr::kL1AndL2PrefetcherHitsInL3.val},
+          "L1 and L2 prefetch hits in L3",
+          "L1 and L2 prefetcher requests that hit in L3."),
+      std::vector<EventId>({"l2-pf-hit-in-l3"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_l2_pf_miss_in_l3",
+          EventDef::Encoding{.code = amd_msr::kL1AndL2PrefetcherMissesInL3.val},
+          "L1 and L2 prefetch misses in L3",
+          "L1 and L2 prefetcher requests that miss in L3"),
+      std::vector<EventId>({"l2-pf-miss-in-l3"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
           "l3_cache_misses",
           EventDef::Encoding{.code = amd_msr::kL3CacheMisses.val},
           "L3 Cache misses",

@@ -500,6 +500,12 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   pmu_manager->addAliases(
       "llc_load_misses", std::vector<EventId>({"LLC-load-misses"}));
 
+  // Alias for Intel
+  if (cpu_info.cpu_family == CpuFamily::INTEL) {
+    pmu_manager->addAliases(
+        "L2_RQSTS.MISS", std::vector<EventId>({"l2_cache_misses"}));
+  }
+
   return pmu_manager;
 }
 
@@ -565,6 +571,57 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       std::vector<std::string>{},
       getRateReducer()));
 
+  // l2_cache_misses replaces DynoPerfCounterType::L2CACHE_MISS
+  auto cpu_info = CpuInfo::load();
+  if (cpu_info.cpu_family == CpuFamily::INTEL) {
+    metrics->add(std::make_shared<MetricDesc>(
+        "l2_cache_misses",
+        "Core-originated cacheable demand requests missed L2",
+        "Counts core-originated cacheable requests that miss the L2 cache. "
+        "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L1 and L2. ",
+        std::map<TOptCpuArch, EventRefs>{
+            {std::nullopt,
+             EventRefs{EventRef{
+                 "l2_cache_misses",
+                 PmuType::cpu,
+                 "l2_cache_misses",
+                 EventExtraAttr{},
+                 {}}}}},
+        100'000'000,
+        System::Permissions{},
+        std::vector<std::string>{}));
+  } else if (cpu_info.cpu_family == CpuFamily::AMD) {
+    metrics->add(std::make_shared<MetricDesc>(
+        "l2_cache_misses",
+        "Core-originated cacheable demand requests missed L2",
+        "Counts core-originated cacheable requests that miss the L2 cache. "
+        "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L2. ",
+        std::map<TOptCpuArch, EventRefs>{
+            {std::nullopt,
+             EventRefs{
+                 EventRef{
+                     "l2_cache_misses_no_prefetcher",
+                     PmuType::cpu,
+                     "l2_cache_misses_no_prefetcher",
+                     EventExtraAttr{},
+                     {}},
+                 EventRef{
+                     "l1_l2_pf_hit_in_l3",
+                     PmuType::cpu,
+                     "l1_l2_pf_hit_in_l3",
+                     EventExtraAttr{},
+                     {}},
+                 EventRef{
+                     "l1_l2_pf_miss_in_l3",
+                     PmuType::cpu,
+                     "l1_l2_pf_miss_in_l3",
+                     EventExtraAttr{},
+                     {}}}}},
+        100'000'000,
+        System::Permissions{},
+        std::vector<std::string>{},
+        getAddReducer()));
+  }
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(
       "l3_cache_misses_per_instruction",
