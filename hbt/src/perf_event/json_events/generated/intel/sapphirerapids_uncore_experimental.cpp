@@ -12,13 +12,14 @@ namespace facebook::hbt::perf_event::generated {
 namespace sapphirerapids_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from sapphirerapids_uncore_experimental.json (1976 experimental
-    events).
+/*
+  Events from sapphirerapids_uncore_experimental.json (1976 experimental
+  events).
 
-    Supported SKUs:
-        - Arch: x86, Model: SPR id: 143
-  */
+  Supported SKUs:
+      - Arch: x86, Model: SPR id: 143
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.VLW_RCVD",
@@ -30,7 +31,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.MSI_RCVD",
@@ -42,7 +45,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.IPI_RCVD",
@@ -54,7 +59,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.DOORBELL_RCVD",
@@ -66,7 +73,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.INT_PRIO",
@@ -78,7 +87,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_PHOLD_CYCLES.ASSERT_TO_ACK",
@@ -90,7 +101,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_RACU_REQUESTS",
@@ -102,7 +115,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_RACU_DRNG.RDRAND",
@@ -114,7 +129,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_RACU_DRNG.RDSEED",
@@ -126,7 +143,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY",
@@ -138,7 +157,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SLOW_I",
@@ -150,7 +171,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SLOW_S",
@@ -162,7 +185,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SLOW_E",
@@ -174,7 +199,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SLOW_M",
@@ -186,7 +213,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SEC_RCVD_INVLD",
@@ -198,7 +227,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC1.SEC_RCVD_VLD",
@@ -210,7 +241,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_IRP_ALL.OUTBOUND_INSERTS",
@@ -222,7 +255,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_IRP_ALL.EVICTS",
@@ -234,7 +269,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU0.MISSES",
@@ -246,7 +283,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_PWT_OCCUPANCY",
@@ -258,7 +297,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART0",
@@ -270,7 +311,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART1",
@@ -282,7 +325,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART2",
@@ -294,7 +339,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART3",
@@ -306,7 +353,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART4",
@@ -318,7 +367,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART5",
@@ -330,7 +381,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART6",
@@ -342,7 +395,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.PEER_WRITE.PART7",
@@ -354,7 +409,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART0",
@@ -366,7 +423,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART1",
@@ -378,7 +437,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART2",
@@ -390,7 +451,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART3",
@@ -402,7 +465,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART0",
@@ -414,7 +479,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART1",
@@ -426,7 +493,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART2",
@@ -438,7 +507,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART3",
@@ -450,7 +521,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART4",
@@ -462,7 +535,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART5",
@@ -474,7 +549,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART6",
@@ -486,7 +563,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.PART7",
@@ -498,7 +577,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART4",
@@ -510,7 +591,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART5",
@@ -522,7 +605,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART6",
@@ -534,7 +619,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.PART7",
@@ -546,7 +633,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.RD_REG",
@@ -558,7 +647,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.RD_UNDERFILL",
@@ -570,7 +661,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.RD_PRE_REG",
@@ -582,7 +675,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.RD_PRE_UNDERFILL",
@@ -594,7 +689,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.WR_PRE",
@@ -606,7 +703,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_INSERTS",
@@ -618,7 +717,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_NOT_EMPTY",
@@ -630,7 +731,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_FULL",
@@ -642,7 +745,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_OCCUPANCY",
@@ -654,7 +759,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_SELF_REFRESH",
@@ -666,7 +773,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_DRAM_PRE_ALL",
@@ -678,7 +787,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CKE_CYCLES.LOW_0",
@@ -690,7 +801,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CKE_CYCLES.LOW_1",
@@ -702,7 +815,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CKE_CYCLES.LOW_2",
@@ -714,7 +829,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CKE_CYCLES.LOW_3",
@@ -726,7 +843,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CHANNEL_PPD",
@@ -738,7 +857,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CRIT_THROTTLE_CYCLES.SLOT0",
@@ -750,7 +871,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_POWER_CRIT_THROTTLE_CYCLES.SLOT1",
@@ -762,7 +885,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PCLS.RD",
@@ -774,7 +899,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PCLS.WR",
@@ -786,7 +913,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PCLS.TOTAL",
@@ -798,7 +927,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CYCLES_NE",
@@ -810,7 +941,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CYCLES_FULL",
@@ -822,7 +955,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.ACCEPTS",
@@ -834,7 +969,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.REJECTS",
@@ -846,7 +983,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.RD_ACCEPTS",
@@ -858,7 +997,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.RD_REJECTS",
@@ -870,7 +1011,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.WR_ACCEPTS",
@@ -882,7 +1025,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.WR_REJECTS",
@@ -894,7 +1039,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.NM_RD_CMPS",
@@ -906,7 +1053,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.NM_WR_CMPS",
@@ -918,7 +1067,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.FM_RD_CMPS",
@@ -930,7 +1081,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_ACCESSES.FM_WR_CMPS",
@@ -942,7 +1095,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_REJECT.NM_SET_CNFLT",
@@ -954,7 +1109,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_REJECT.FM_ADDR_CNFLT",
@@ -966,7 +1123,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_REJECT.PATROL_SET_CNFLT",
@@ -978,7 +1137,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_REJECT.CANARY",
@@ -990,7 +1151,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_REJECT.DDR_EARLY_CMP",
@@ -1002,7 +1165,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_OCCUPANCY.RDS",
@@ -1014,7 +1179,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_OCCUPANCY.BLOCK_RDS",
@@ -1026,7 +1193,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_OCCUPANCY.BLOCK_WRS",
@@ -1038,7 +1207,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.RDS",
@@ -1050,7 +1221,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.WRS",
@@ -1062,7 +1235,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.BLOCK_RDS",
@@ -1074,7 +1249,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.BLOCK_WRS",
@@ -1086,7 +1263,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.ALLOC",
@@ -1098,7 +1277,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.DEALLOC",
@@ -1110,7 +1291,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.VLD",
@@ -1122,7 +1305,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_INSERTS.ALL",
@@ -1134,7 +1319,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_OCCUPANCY.ALL",
@@ -1146,7 +1333,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.NEW",
@@ -1158,7 +1347,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.RD_HIT",
@@ -1170,7 +1361,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.RD_MISS",
@@ -1182,7 +1375,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.DDR4_CMP",
@@ -1194,7 +1389,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.OCC",
@@ -1206,7 +1403,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_RxC_AD_INSERTS",
@@ -1218,7 +1417,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_RxC_AD_OCCUPANCY",
@@ -1230,7 +1431,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_NOT_TAKEN_DIRSTATE",
@@ -1242,7 +1445,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_TXN_OVERRIDE",
@@ -1254,7 +1459,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_TAKEN",
@@ -1266,7 +1473,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_NOT_TAKEN_DIRSTATE",
@@ -1278,7 +1487,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_NOT_TAKEN_CREDITS",
@@ -1290,7 +1501,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_TXN_OVERRIDE",
@@ -1302,7 +1515,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.DIRTY_I",
@@ -1314,7 +1529,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.DIRTY_S",
@@ -1326,7 +1543,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.DIRTY_P",
@@ -1338,7 +1557,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.DIRTY_A",
@@ -1350,7 +1571,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.CLEAN_I",
@@ -1362,7 +1585,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.CLEAN_S",
@@ -1374,7 +1599,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.CLEAN_P",
@@ -1386,7 +1613,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_HIT.CLEAN_A",
@@ -1398,7 +1627,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.DIRTY_I",
@@ -1410,7 +1641,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.DIRTY_S",
@@ -1422,7 +1655,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.DIRTY_P",
@@ -1434,7 +1669,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.DIRTY_A",
@@ -1446,7 +1683,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.CLEAN_I",
@@ -1458,7 +1697,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.CLEAN_S",
@@ -1470,7 +1711,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.CLEAN_P",
@@ -1482,7 +1725,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_MISS.CLEAN_A",
@@ -1494,7 +1739,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A2I",
@@ -1506,7 +1753,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A2S",
@@ -1518,7 +1767,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I2A",
@@ -1530,7 +1781,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I2S",
@@ -1542,7 +1795,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S2A",
@@ -1554,7 +1809,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S2I",
@@ -1566,7 +1823,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0.TO_NM1LM",
@@ -1578,7 +1837,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0.TO_NMCache",
@@ -1590,7 +1851,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1.TO_NM1LM",
@@ -1602,7 +1865,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1.TO_NMCache",
@@ -1614,7 +1879,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.TO_NM1LM",
@@ -1626,7 +1893,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.TO_NMCACHE",
@@ -1638,7 +1907,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.ALL",
@@ -1650,7 +1921,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.NORMAL",
@@ -1662,7 +1935,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.NI",
@@ -1674,7 +1949,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0.NI",
@@ -1686,7 +1963,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1.NI",
@@ -1698,7 +1977,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.ALL",
@@ -1710,7 +1991,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.FULL",
@@ -1722,7 +2005,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.PARTIAL",
@@ -1734,7 +2019,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TGR_AD_CREDITS",
@@ -1746,7 +2033,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TGR_BL_CREDITS",
@@ -1758,7 +2047,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TRACKER_INSERTS.CH0",
@@ -1770,7 +2061,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TRACKER_INSERTS.CH1",
@@ -1782,7 +2075,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TRACKER_OCCUPANCY.CH0",
@@ -1794,7 +2089,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TRACKER_OCCUPANCY.CH1",
@@ -1806,7 +2103,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NE.CH0",
@@ -1818,7 +2117,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NE.CH1",
@@ -1830,7 +2131,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NE.MIRR",
@@ -1842,7 +2145,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NE.MIRR_NONTGR",
@@ -1854,7 +2159,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NE.MIRR_PWR",
@@ -1866,7 +2173,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_NO_REG_CRD.CHN0",
@@ -1878,7 +2187,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_NO_REG_CRD.CHN1",
@@ -1890,7 +2201,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_NO_SPEC_CRD.CHN0",
@@ -1902,7 +2215,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_NO_SPEC_CRD.CHN1",
@@ -1914,7 +2229,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_INSERTS.CH0",
@@ -1926,7 +2243,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_INSERTS.CH1",
@@ -1938,7 +2257,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_FLUSH.CH0",
@@ -1950,7 +2271,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WPQ_FLUSH.CH1",
@@ -1962,7 +2285,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_POSTED_OCCUPANCY.CH0",
@@ -1974,7 +2299,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_POSTED_OCCUPANCY.CH1",
@@ -1986,7 +2313,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_POSTED_INSERTS.CH0",
@@ -1998,7 +2327,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_POSTED_INSERTS.CH1",
@@ -2010,7 +2341,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_NOT_TAKEN_NOTFORKED",
@@ -2022,7 +2355,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TAG_MISS",
@@ -2034,7 +2369,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NONPOSTED_OCCUPANCY.CH0",
@@ -2046,7 +2383,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NONPOSTED_OCCUPANCY.CH1",
@@ -2058,7 +2397,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NONPOSTED_INSERTS.CH0",
@@ -2070,7 +2411,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_WR_TRACKER_NONPOSTED_INSERTS.CH1",
@@ -2082,7 +2425,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_OCCUPANCY.CH0",
@@ -2094,7 +2439,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_OCCUPANCY.CH1",
@@ -2106,7 +2453,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.CH0_XPT",
@@ -2118,7 +2467,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.CH0_UPI",
@@ -2130,7 +2481,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.CH1_XPT",
@@ -2142,7 +2495,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.CH1_UPI",
@@ -2154,7 +2509,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.CH0_XPT",
@@ -2166,7 +2523,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.CH0_UPI",
@@ -2178,7 +2537,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.CH1_XPT",
@@ -2190,7 +2551,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.CH1_UPI",
@@ -2202,7 +2565,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_CIS_DROPS",
@@ -2214,7 +2579,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RxC_DEALLOCS.SQUASHED",
@@ -2226,7 +2593,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RxC_DEALLOCS.1LM_POSTED",
@@ -2238,7 +2607,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RxC_DEALLOCS.CIS",
@@ -2250,7 +2621,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RESP_MISS.CH0",
@@ -2262,7 +2635,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RESP_MISS.CH1",
@@ -2274,7 +2649,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PREFETCH_SPAWN",
@@ -2286,7 +2663,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_D2U_SENT",
@@ -2298,7 +2677,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_D2C_SENT",
@@ -2310,7 +2691,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_CMS_CLOCKTICKS",
@@ -2322,7 +2705,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.SLOT0",
@@ -2334,7 +2719,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.SLOT1",
@@ -2346,7 +2733,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.SLOT2",
@@ -2358,7 +2747,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.DATA",
@@ -2370,7 +2761,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.LLCRD",
@@ -2382,7 +2775,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.NULL",
@@ -2394,7 +2789,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.LLCTRL",
@@ -2406,7 +2803,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.PROTHDR",
@@ -2418,7 +2817,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.IDLE",
@@ -2430,7 +2831,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.SLOT0",
@@ -2442,7 +2845,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.SLOT1",
@@ -2454,7 +2859,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.SLOT2",
@@ -2466,7 +2873,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.DATA",
@@ -2478,7 +2887,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.LLCRD",
@@ -2490,7 +2901,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.NULL",
@@ -2502,7 +2915,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.LLCTRL",
@@ -2514,7 +2929,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.PROTHDR",
@@ -2526,7 +2943,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_FLITS.IDLE",
@@ -2538,7 +2957,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB",
@@ -2563,7 +2984,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB_OPC",
@@ -2588,7 +3011,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS",
@@ -2613,7 +3038,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS_OPC",
@@ -2638,7 +3065,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB",
@@ -2663,7 +3092,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB_OPC",
@@ -2688,7 +3119,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS",
@@ -2713,7 +3146,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS_OPC",
@@ -2738,7 +3173,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_CRC_LLR_REQ_TRANSMIT",
@@ -2750,7 +3187,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_CRC_ERRORS",
@@ -2762,7 +3201,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_DIRECT_ATTEMPTS.D2C",
@@ -2774,7 +3215,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_DIRECT_ATTEMPTS.D2K",
@@ -2786,7 +3229,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2",
@@ -2798,7 +3243,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0",
@@ -2810,7 +3257,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3",
@@ -2822,7 +3271,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_BYP_BLOCKED.BGF_CRD",
@@ -2834,7 +3285,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK",
@@ -2846,7 +3299,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2",
@@ -2858,7 +3313,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH",
@@ -2870,7 +3327,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0",
@@ -2882,7 +3341,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH",
@@ -2894,7 +3355,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3",
@@ -2906,7 +3369,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD",
@@ -2918,7 +3383,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK",
@@ -2930,7 +3397,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_M3_CRD_RETURN_BLOCKED",
@@ -2942,7 +3411,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0",
@@ -2954,7 +3425,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1",
@@ -2966,7 +3439,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2",
@@ -2978,7 +3453,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0",
@@ -2990,7 +3467,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0",
@@ -3002,7 +3481,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1",
@@ -3014,7 +3495,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2",
@@ -3026,7 +3509,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3",
@@ -3038,7 +3523,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_PHY_INIT_CYCLES",
@@ -3050,7 +3537,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_POWER_L1_REQ",
@@ -3062,7 +3551,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_POWER_L1_NACK",
@@ -3074,7 +3565,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL0_POWER_CYCLES",
@@ -3086,7 +3579,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL0P_POWER_CYCLES",
@@ -3098,7 +3593,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0_POWER_CYCLES",
@@ -3110,7 +3607,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_POWER_CYCLES",
@@ -3122,7 +3621,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER",
@@ -3134,7 +3635,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT",
@@ -3146,7 +3649,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL",
@@ -3158,7 +3663,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ",
@@ -3170,7 +3677,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS",
@@ -3182,7 +3691,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED",
@@ -3194,7 +3705,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.TXQ",
@@ -3206,7 +3719,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.RETRY",
@@ -3218,7 +3733,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.DFX",
@@ -3230,7 +3747,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL0P_CLK_ACTIVE.SPARE",
@@ -3242,7 +3761,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_INSERTS.SLOT0",
@@ -3254,7 +3775,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_INSERTS.SLOT1",
@@ -3266,7 +3789,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_INSERTS.SLOT2",
@@ -3278,7 +3803,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BYPASSED.SLOT0",
@@ -3290,7 +3817,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BYPASSED.SLOT1",
@@ -3302,7 +3831,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_BYPASSED.SLOT2",
@@ -3314,7 +3845,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_OCCUPANCY.SLOT0",
@@ -3326,7 +3859,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_OCCUPANCY.SLOT1",
@@ -3338,7 +3873,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_OCCUPANCY.SLOT2",
@@ -3350,7 +3887,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1",
@@ -3362,7 +3901,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2",
@@ -3374,7 +3915,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0",
@@ -3386,7 +3929,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2",
@@ -3398,7 +3943,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0",
@@ -3410,7 +3957,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1",
@@ -3422,7 +3971,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_CREDITS_CONSUMED_VN0",
@@ -3434,7 +3985,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_CREDITS_CONSUMED_VN1",
@@ -3446,7 +3999,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_INSERTS",
@@ -3458,7 +4013,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_BYPASSED",
@@ -3470,7 +4027,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_OCCUPANCY",
@@ -3482,7 +4041,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_VNA_CREDIT_RETURN_OCCUPANCY",
@@ -3494,7 +4055,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01",
@@ -3506,7 +4069,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_REQ_SLOT2_FROM_M3.VNA",
@@ -3518,7 +4083,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_REQ_SLOT2_FROM_M3.VN0",
@@ -3530,7 +4097,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_REQ_SLOT2_FROM_M3.VN1",
@@ -3542,7 +4111,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_REQ_SLOT2_FROM_M3.ACK",
@@ -3554,7 +4125,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_REQUESTS.INVITOE",
@@ -3566,7 +4139,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.ALL",
@@ -3578,7 +4153,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.LOCAL",
@@ -3590,7 +4167,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.REMOTE",
@@ -3602,7 +4181,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.BCST_LOCAL",
@@ -3614,7 +4195,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.BCST_REMOTE",
@@ -3626,7 +4209,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.DIRECT_LOCAL",
@@ -3638,7 +4223,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOPS_SENT.DIRECT_REMOTE",
@@ -3650,7 +4237,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIR_LOOKUP.NO_SNP",
@@ -3662,7 +4251,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIR_LOOKUP.SNP",
@@ -3674,7 +4265,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.LOCAL_INVITOE",
@@ -3686,7 +4279,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.LOCAL_READ",
@@ -3698,7 +4293,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.REMOTE_READ",
@@ -3710,7 +4307,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.REMOTE_READINVITOE",
@@ -3722,7 +4321,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.RFO_HITS_SNP_BCAST",
@@ -3734,7 +4335,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_OSB.OFF_PWRHEURISTIC",
@@ -3746,7 +4349,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WB_PUSH_MTOI.LLC",
@@ -3758,7 +4363,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WB_PUSH_MTOI.MEM",
@@ -3770,7 +4377,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_BYPASS_CHA_IMC.TAKEN",
@@ -3782,7 +4391,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_BYPASS_CHA_IMC.INTERMEDIATE",
@@ -3794,7 +4405,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_BYPASS_CHA_IMC.NOT_TAKEN",
@@ -3806,7 +4419,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC0",
@@ -3818,7 +4433,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC1",
@@ -3830,7 +4447,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC2",
@@ -3842,7 +4461,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC3",
@@ -3854,7 +4475,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC4",
@@ -3866,7 +4489,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_READ_NO_CREDITS.MC5",
@@ -3878,7 +4503,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_IMC_READS_COUNT.PRIORITY",
@@ -3890,7 +4517,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC0",
@@ -3902,7 +4531,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC1",
@@ -3914,7 +4545,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC2",
@@ -3926,7 +4559,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC3",
@@ -3938,7 +4573,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC4",
@@ -3950,7 +4587,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_WRITE_NO_CREDITS.MC5",
@@ -3962,7 +4601,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_IMC_WRITES_COUNT.PARTIAL",
@@ -3974,7 +4615,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_IMC_WRITES_COUNT.FULL_PRIORITY",
@@ -3986,7 +4629,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_IMC_WRITES_COUNT.PARTIAL_PRIORITY",
@@ -3998,7 +4643,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPI",
@@ -4010,7 +4657,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPIFWD",
@@ -4022,7 +4671,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPS",
@@ -4034,7 +4685,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPSFWD",
@@ -4046,7 +4699,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPWB",
@@ -4058,7 +4713,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPFWDWB",
@@ -4070,7 +4727,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPCNFLCT",
@@ -4082,7 +4741,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP.RSPFWD",
@@ -4094,7 +4755,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPI",
@@ -4106,7 +4769,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPS",
@@ -4118,7 +4783,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPIFWD",
@@ -4130,7 +4797,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPSFWD",
@@ -4142,7 +4811,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPWB",
@@ -4154,7 +4825,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPFWDWB",
@@ -4166,7 +4839,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPCNFLCT",
@@ -4178,7 +4853,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPFWD",
@@ -4190,7 +4867,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_LOOKUP.READ",
@@ -4202,7 +4881,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_LOOKUP.WRITE",
@@ -4214,7 +4895,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_HIT.EX_RDS",
@@ -4226,7 +4909,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_HIT.SHARED_OWNREQ",
@@ -4238,7 +4923,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_HIT.WBMTOE",
@@ -4250,7 +4937,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_HIT.WBMTOI_OR_S",
@@ -4262,7 +4951,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_MISS.SHARED_RDINVOWN",
@@ -4274,7 +4965,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_MISS.NOTSHARED_RDINVOWN",
@@ -4286,7 +4979,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_MISS.READ_OR_INV",
@@ -4298,7 +4993,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.DEALLOCATE_RSPFWDI_LOC",
@@ -4310,7 +5007,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.RSPFWDI_REM",
@@ -4322,7 +5021,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.SHARED",
@@ -4334,7 +5035,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.RDINVOWN",
@@ -4346,7 +5049,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.DEALLOCATE",
@@ -4358,7 +5063,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.MTOI_RSPIFWDM",
@@ -4370,7 +5077,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.MTOI_RSPDATAM",
@@ -4382,7 +5091,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.RSPIFWDMPTL_HITSF",
@@ -4394,7 +5105,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.RSPIFWDMPTL_HITLLC",
@@ -4406,7 +5119,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.PULLDATAPTL_HITSF",
@@ -4418,7 +5133,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_SNOOP_RSP_MISC.PULLDATAPTL_HITLLC",
@@ -4430,7 +5147,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.EXTCMP",
@@ -4442,7 +5161,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.PULL",
@@ -4454,7 +5175,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.GO",
@@ -4466,7 +5189,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.GO_PULL",
@@ -4478,7 +5203,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.FAST_GO",
@@ -4490,7 +5217,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.FAST_GO_PULL",
@@ -4502,7 +5231,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.NOP",
@@ -4514,7 +5245,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO_OPC.IDLE_DUE_SUPPRESS",
@@ -4526,7 +5259,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO.HA_TOR_DEALLOC",
@@ -4538,7 +5273,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO.HA_SUPPRESS_NO_D2C",
@@ -4550,7 +5287,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_DIRECT_GO.HA_SUPPRESS_DRD",
@@ -4562,7 +5301,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.SENT0",
@@ -4574,7 +5315,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.DROP0_NOCRD",
@@ -4586,7 +5329,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.DROP0_CONFLICT",
@@ -4598,7 +5343,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.SENT1",
@@ -4610,7 +5357,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.DROP1_NOCRD",
@@ -4622,7 +5371,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_XPT_PREF.DROP1_CONFLICT",
@@ -4634,7 +5385,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_EGRESS_ORDERING.IV_SNOOPGO_UP",
@@ -4646,7 +5399,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_EGRESS_ORDERING.IV_SNOOPGO_DN",
@@ -4658,7 +5413,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OCCUPANCY.IPQ",
@@ -4670,7 +5427,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OCCUPANCY.RRQ",
@@ -4682,7 +5441,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OCCUPANCY.WBQ",
@@ -4694,7 +5455,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.IRQ",
@@ -4706,7 +5469,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.IRQ_REJ",
@@ -4718,7 +5483,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.IPQ",
@@ -4730,7 +5497,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.PRQ",
@@ -4742,7 +5511,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.PRQ_REJ",
@@ -4754,7 +5525,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.RRQ",
@@ -4766,7 +5539,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_INSERTS.WBQ",
@@ -4778,7 +5553,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.AD_REQ_VN0",
@@ -4790,7 +5567,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.AD_RSP_VN0",
@@ -4802,7 +5581,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.BL_RSP_VN0",
@@ -4814,7 +5595,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.BL_WB_VN0",
@@ -4826,7 +5609,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.BL_NCB_VN0",
@@ -4838,7 +5623,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.BL_NCS_VN0",
@@ -4850,7 +5637,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.AK_NON_UPI",
@@ -4862,7 +5651,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ0_REJECT.IV_NON_UPI",
@@ -4874,7 +5665,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.PA_MATCH",
@@ -4886,7 +5679,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.ANY0",
@@ -4898,7 +5693,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.HA",
@@ -4910,7 +5707,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.LLC_VICTIM",
@@ -4922,7 +5721,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.SF_VICTIM",
@@ -4934,7 +5735,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.VICTIM",
@@ -4946,7 +5749,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.LLC_OR_SF_WAY",
@@ -4958,7 +5763,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IRQ1_REJECT.ALLOW_SNP",
@@ -4970,7 +5777,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.AD_REQ_VN0",
@@ -4982,7 +5791,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.AD_RSP_VN0",
@@ -4994,7 +5805,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.BL_RSP_VN0",
@@ -5006,7 +5819,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.BL_WB_VN0",
@@ -5018,7 +5833,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.BL_NCB_VN0",
@@ -5030,7 +5847,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.BL_NCS_VN0",
@@ -5042,7 +5861,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.AK_NON_UPI",
@@ -5054,7 +5875,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ0_REJECT.IV_NON_UPI",
@@ -5066,7 +5889,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.ANY0",
@@ -5078,7 +5903,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.HA",
@@ -5090,7 +5917,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.LLC_VICTIM",
@@ -5102,7 +5931,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.SF_VICTIM",
@@ -5114,7 +5945,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.VICTIM",
@@ -5126,7 +5959,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.LLC_OR_SF_WAY",
@@ -5138,7 +5973,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.ALLOW_SNP",
@@ -5150,7 +5987,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_PRQ1_REJECT.PA_MATCH",
@@ -5162,7 +6001,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.AD_REQ_VN0",
@@ -5174,7 +6015,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.AD_RSP_VN0",
@@ -5186,7 +6029,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.BL_RSP_VN0",
@@ -5198,7 +6043,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.BL_WB_VN0",
@@ -5210,7 +6057,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.BL_NCB_VN0",
@@ -5222,7 +6071,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.BL_NCS_VN0",
@@ -5234,7 +6085,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.AK_NON_UPI",
@@ -5246,7 +6099,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ0_REJECT.IV_NON_UPI",
@@ -5258,7 +6113,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.ANY0",
@@ -5270,7 +6127,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.HA",
@@ -5282,7 +6141,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.LLC_VICTIM",
@@ -5294,7 +6155,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.SF_VICTIM",
@@ -5306,7 +6169,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.VICTIM",
@@ -5318,7 +6183,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.LLC_OR_SF_WAY",
@@ -5330,7 +6197,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.ALLOW_SNP",
@@ -5342,7 +6211,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_IPQ1_REJECT.PA_MATCH",
@@ -5354,7 +6225,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.AD_REQ_VN0",
@@ -5366,7 +6239,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.AD_RSP_VN0",
@@ -5378,7 +6253,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.BL_RSP_VN0",
@@ -5390,7 +6267,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.BL_WB_VN0",
@@ -5402,7 +6281,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.BL_NCB_VN0",
@@ -5414,7 +6295,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.BL_NCS_VN0",
@@ -5426,7 +6309,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.AK_NON_UPI",
@@ -5438,7 +6323,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_REJECT.IV_NON_UPI",
@@ -5450,7 +6337,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ1_REJECT.ANY0",
@@ -5462,7 +6351,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ1_REJECT.HA",
@@ -5474,7 +6365,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.AD_REQ_VN0",
@@ -5486,7 +6379,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.AD_RSP_VN0",
@@ -5498,7 +6393,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.BL_RSP_VN0",
@@ -5510,7 +6407,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.BL_WB_VN0",
@@ -5522,7 +6421,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.BL_NCB_VN0",
@@ -5534,7 +6435,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.BL_NCS_VN0",
@@ -5546,7 +6449,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.AK_NON_UPI",
@@ -5558,7 +6463,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ0_REJECT.IV_NON_UPI",
@@ -5570,7 +6477,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.ANY0",
@@ -5582,7 +6491,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.HA",
@@ -5594,7 +6505,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.LLC_VICTIM",
@@ -5606,7 +6519,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.SF_VICTIM",
@@ -5618,7 +6533,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.VICTIM",
@@ -5630,7 +6547,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.LLC_OR_SF_WAY",
@@ -5642,7 +6561,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.ALLOW_SNP",
@@ -5654,7 +6575,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_RRQ1_REJECT.PA_MATCH",
@@ -5666,7 +6589,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.AD_REQ_VN0",
@@ -5678,7 +6603,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.AD_RSP_VN0",
@@ -5690,7 +6617,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.BL_RSP_VN0",
@@ -5702,7 +6631,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.BL_WB_VN0",
@@ -5714,7 +6645,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.BL_NCB_VN0",
@@ -5726,7 +6659,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.BL_NCS_VN0",
@@ -5738,7 +6673,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.AK_NON_UPI",
@@ -5750,7 +6687,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ0_REJECT.IV_NON_UPI",
@@ -5762,7 +6701,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.ANY0",
@@ -5774,7 +6715,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.HA",
@@ -5786,7 +6729,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.LLC_VICTIM",
@@ -5798,7 +6743,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.SF_VICTIM",
@@ -5810,7 +6757,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.VICTIM",
@@ -5822,7 +6771,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.LLC_OR_SF_WAY",
@@ -5834,7 +6785,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.ALLOW_SNP",
@@ -5846,7 +6799,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_WBQ1_REJECT.PA_MATCH",
@@ -5858,7 +6813,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.AD_REQ_VN0",
@@ -5870,7 +6827,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.AD_RSP_VN0",
@@ -5882,7 +6841,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.BL_RSP_VN0",
@@ -5894,7 +6855,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.BL_WB_VN0",
@@ -5906,7 +6869,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.BL_NCB_VN0",
@@ -5918,7 +6883,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.BL_NCS_VN0",
@@ -5930,7 +6897,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.AK_NON_UPI",
@@ -5942,7 +6911,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q0_RETRY.IV_NON_UPI",
@@ -5954,7 +6925,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.ANY0",
@@ -5966,7 +6939,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.HA",
@@ -5978,7 +6953,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.LLC_VICTIM",
@@ -5990,7 +6967,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.SF_VICTIM",
@@ -6002,7 +6981,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.VICTIM",
@@ -6014,7 +6995,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.LLC_OR_SF_WAY",
@@ -6026,7 +7009,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.ALLOW_SNP",
@@ -6038,7 +7023,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_REQ_Q1_RETRY.PA_MATCH",
@@ -6050,7 +7037,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.AD_REQ_VN0",
@@ -6062,7 +7051,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.AD_RSP_VN0",
@@ -6074,7 +7065,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.BL_RSP_VN0",
@@ -6086,7 +7079,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.BL_WB_VN0",
@@ -6098,7 +7093,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.BL_NCB_VN0",
@@ -6110,7 +7107,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.BL_NCS_VN0",
@@ -6122,7 +7121,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.AK_NON_UPI",
@@ -6134,7 +7135,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ0_RETRY.IV_NON_UPI",
@@ -6146,7 +7149,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ1_RETRY.ANY0",
@@ -6158,7 +7163,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_ISMQ1_RETRY.HA",
@@ -6170,7 +7177,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.AD_REQ_VN0",
@@ -6182,7 +7191,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.AD_RSP_VN0",
@@ -6194,7 +7205,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.BL_RSP_VN0",
@@ -6206,7 +7219,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.BL_WB_VN0",
@@ -6218,7 +7233,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.BL_NCB_VN0",
@@ -6230,7 +7247,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.BL_NCS_VN0",
@@ -6242,7 +7261,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.AK_NON_UPI",
@@ -6254,7 +7275,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER0_RETRY.IV_NON_UPI",
@@ -6266,7 +7289,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.ANY0",
@@ -6278,7 +7303,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.HA",
@@ -6290,7 +7317,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.LLC_VICTIM",
@@ -6302,7 +7331,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.SF_VICTIM",
@@ -6314,7 +7345,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.VICTIM",
@@ -6326,7 +7359,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.LLC_OR_SF_WAY",
@@ -6338,7 +7373,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.ALLOW_SNP",
@@ -6350,7 +7387,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_RxC_OTHER1_RETRY.PA_MATCH",
@@ -6362,7 +7401,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.REMOTE_ONE",
@@ -6374,7 +7415,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.EXT_ONE",
@@ -6386,7 +7429,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.CORE_ONE",
@@ -6398,7 +7443,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.EVICT_ONE",
@@ -6410,7 +7457,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.ANY_ONE",
@@ -6422,7 +7471,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.REMOTE_GTONE",
@@ -6434,7 +7485,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.EXT_GTONE",
@@ -6446,7 +7499,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.CORE_GTONE",
@@ -6458,7 +7513,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.EVICT_GTONE",
@@ -6470,7 +7527,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CORE_SNP.ANY_GTONE",
@@ -6482,7 +7541,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.I",
@@ -6494,7 +7555,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.SF_S",
@@ -6506,7 +7569,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.SF_E",
@@ -6518,7 +7583,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.SF_H",
@@ -6530,7 +7597,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.S",
@@ -6542,7 +7611,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.E",
@@ -6554,7 +7625,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.M",
@@ -6566,7 +7639,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.F",
@@ -6578,7 +7653,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.RFO",
@@ -6590,7 +7667,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.ALL",
@@ -6602,7 +7681,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.DATA_RD",
@@ -6614,7 +7695,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.FLUSH_INV",
@@ -6626,7 +7709,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.CODE",
@@ -6638,7 +7723,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCALLY_HOMED_ADDRESS",
@@ -6650,7 +7737,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTELY_HOMED_ADDRESS",
@@ -6662,7 +7751,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_OTHER",
@@ -6674,7 +7765,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_FLUSH_INV",
@@ -6686,7 +7779,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_DATA_RD",
@@ -6698,7 +7793,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_RFO",
@@ -6710,7 +7807,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_CODE",
@@ -6722,7 +7821,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_SNP",
@@ -6734,7 +7835,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_FLUSH_INV",
@@ -6746,7 +7849,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_DATA_RD",
@@ -6758,7 +7863,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_RFO",
@@ -6770,7 +7877,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_CODE",
@@ -6782,7 +7891,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_DMND_DATA_RD",
@@ -6794,7 +7905,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_DMND_RFO",
@@ -6806,7 +7919,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_DMND_CODE",
@@ -6818,7 +7933,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_PF_DATA_RD",
@@ -6830,7 +7947,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_PF_RFO",
@@ -6842,7 +7961,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_PF_CODE",
@@ -6854,7 +7975,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_LLC_PF",
@@ -6866,7 +7989,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_PF",
@@ -6878,7 +8003,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.SNPS_FROM_REM",
@@ -6890,7 +8017,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.ALL",
@@ -6902,7 +8031,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_MISS_RFO",
@@ -6914,7 +8045,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IRQ_IA",
@@ -6926,7 +8059,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.EVICT",
@@ -6938,7 +8073,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.PRQ_IOSF",
@@ -6950,7 +8087,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IPQ",
@@ -6962,7 +8101,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IRQ_NON_IA",
@@ -6974,7 +8115,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.PRQ_NON_IOSF",
@@ -6986,7 +8129,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.RRQ",
@@ -6998,7 +8143,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.WBQ",
@@ -7010,7 +8157,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.LOC_IO",
@@ -7022,7 +8171,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.LOC_IA",
@@ -7034,7 +8185,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.LOC_ALL",
@@ -7046,7 +8199,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.REM_SNPS",
@@ -7058,7 +8213,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.REM_ALL",
@@ -7070,7 +8227,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.HIT",
@@ -7082,7 +8241,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.MISS",
@@ -7094,7 +8255,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.MMCFG",
@@ -7106,7 +8269,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.MMIO",
@@ -7118,7 +8283,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.LOCAL_TGT",
@@ -7130,7 +8297,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.REMOTE_TGT",
@@ -7142,7 +8311,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.MATCH_OPC",
@@ -7154,7 +8325,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.PREMORPH_OPC",
@@ -7166,7 +8339,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.NEARMEM",
@@ -7178,7 +8353,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.NOT_NEARMEM",
@@ -7190,7 +8367,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.NONCOH",
@@ -7202,7 +8381,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.ISOC",
@@ -7214,7 +8395,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT",
@@ -7226,7 +8409,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT_PREF",
@@ -7238,7 +8423,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
@@ -7250,7 +8437,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF",
@@ -7262,7 +8451,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_HIT_RFO",
@@ -7274,7 +8465,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_RFO",
@@ -7286,7 +8479,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRD",
@@ -7298,7 +8493,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRD_OPT",
@@ -7310,7 +8507,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRD_OPT_PREF",
@@ -7322,7 +8521,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_CRD_PREF",
@@ -7334,7 +8535,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_CLFLUSHOPT",
@@ -7346,7 +8549,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_ITOM",
@@ -7358,7 +8563,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.SNPS_FROM_REM",
@@ -7370,7 +8577,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.ALL",
@@ -7382,7 +8591,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD",
@@ -7394,7 +8605,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD",
@@ -7406,7 +8619,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFRFO",
@@ -7418,7 +8633,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO",
@@ -7430,7 +8647,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO",
@@ -7442,7 +8661,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RFO",
@@ -7454,7 +8675,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOM",
@@ -7466,7 +8689,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IRQ_IA",
@@ -7478,7 +8703,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.EVICT",
@@ -7490,7 +8717,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.PRQ",
@@ -7502,7 +8731,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IPQ",
@@ -7514,7 +8745,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IRQ_NON_IA",
@@ -7526,7 +8759,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.PRQ_NON_IOSF",
@@ -7538,7 +8773,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.RRQ",
@@ -7550,7 +8787,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.WBQ",
@@ -7562,7 +8801,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.LOC_IO",
@@ -7574,7 +8815,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.LOC_IA",
@@ -7586,7 +8829,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.LOC_ALL",
@@ -7598,7 +8843,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.REM_SNPS",
@@ -7610,7 +8857,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.REM_ALL",
@@ -7622,7 +8871,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.HIT",
@@ -7634,7 +8885,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.MISS",
@@ -7646,7 +8899,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.MMCFG",
@@ -7658,7 +8913,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.MMIO",
@@ -7670,7 +8927,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.LOCAL_TGT",
@@ -7682,7 +8941,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.REMOTE_TGT",
@@ -7694,7 +8955,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.MATCH_OPC",
@@ -7706,7 +8969,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.PREMORPH_OPC",
@@ -7718,7 +8983,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.NEARMEM",
@@ -7730,7 +8997,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.NOT_NEARMEM",
@@ -7742,7 +9011,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.NONCOH",
@@ -7754,7 +9025,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.ISOC",
@@ -7766,7 +9039,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD_PREF",
@@ -7778,7 +9053,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_PREF",
@@ -7790,7 +9067,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
@@ -7802,7 +9081,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
@@ -7814,7 +9095,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO_PREF",
@@ -7826,7 +9109,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF",
@@ -7838,7 +9123,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF",
@@ -7850,7 +9137,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
@@ -7862,7 +9151,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF",
@@ -7874,7 +9165,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF",
@@ -7886,7 +9179,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOM",
@@ -7898,7 +9193,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_HIT_RFO",
@@ -7910,7 +9207,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_RFO",
@@ -7922,7 +9221,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_ITOM",
@@ -7934,7 +9235,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_RFO_PREF",
@@ -7946,7 +9249,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFRFO",
@@ -7958,7 +9263,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_DRD_OPT",
@@ -7970,7 +9277,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_DRD_OPT_PREF",
@@ -7982,7 +9291,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_CRD_PREF",
@@ -7994,7 +9305,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_DRD_PREF",
@@ -8006,7 +9319,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_LOCAL",
@@ -8018,7 +9333,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_REMOTE",
@@ -8030,7 +9347,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_LOCAL",
@@ -8042,7 +9361,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_REMOTE",
@@ -8054,7 +9375,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_LOCAL",
@@ -8066,7 +9389,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_REMOTE",
@@ -8078,7 +9403,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.LOCAL_ALL",
@@ -8090,7 +9417,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.REMOTE_ALL",
@@ -8102,7 +9431,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.TOTAL_E",
@@ -8114,7 +9445,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.TOTAL_M",
@@ -8126,7 +9459,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.TOTAL_S",
@@ -8138,7 +9473,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.M_STATE",
@@ -8150,7 +9487,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.E_STATE",
@@ -8162,7 +9501,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.S_STATE",
@@ -8174,7 +9515,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.LOCAL_ONLY",
@@ -8186,7 +9529,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.REMOTE_ONLY",
@@ -8198,7 +9543,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.LOCAL_M",
@@ -8210,7 +9557,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.LOCAL_E",
@@ -8222,7 +9571,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.LOCAL_S",
@@ -8234,7 +9585,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.REMOTE_M",
@@ -8246,7 +9599,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.REMOTE_E",
@@ -8258,7 +9613,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.REMOTE_S",
@@ -8270,7 +9627,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_MISC.RFO_HIT_S",
@@ -8282,7 +9641,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_MISC.RSPI_WAS_FSE",
@@ -8294,7 +9655,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_MISC.WC_ALIASING",
@@ -8306,7 +9669,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_MISC.CV0_PREF_VIC",
@@ -8318,7 +9683,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_MISC.CV0_PREF_MISS",
@@ -8330,7 +9697,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.UPI_ALLCH",
@@ -8342,7 +9711,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_INSERTS.XPT_ALLCH",
@@ -8354,7 +9725,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.XPT_ALLCH",
@@ -8366,7 +9739,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_MERGE.UPI_ALLCH",
@@ -8378,7 +9753,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_MERGE.XPT_ALLCH",
@@ -8390,7 +9767,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_UP",
@@ -8402,7 +9781,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_DN",
@@ -8414,7 +9795,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRDPTE",
@@ -8426,7 +9809,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_DRDPTE",
@@ -8438,7 +9823,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRDPTE",
@@ -8450,7 +9837,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WBEFTOE",
@@ -8462,7 +9851,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_HIT_PCIRDCUR",
@@ -8474,7 +9865,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFCODE",
@@ -8486,7 +9879,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFDATA",
@@ -8498,7 +9893,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFCODE",
@@ -8510,7 +9907,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFCODE",
@@ -8522,7 +9921,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFDATA",
@@ -8534,7 +9935,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFDATA",
@@ -8546,7 +9949,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFCODE",
@@ -8558,7 +9963,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA",
@@ -8570,7 +9977,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_LLCPREFCODE",
@@ -8582,7 +9991,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFCODE",
@@ -8594,7 +10005,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_INSERTS.DDR",
@@ -8606,7 +10019,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_INSERTS.PMM",
@@ -8618,7 +10033,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.PMM0_CMP",
@@ -8630,7 +10047,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.PMM1_CMP",
@@ -8642,7 +10061,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_TAGGED.PMM2_CMP",
@@ -8654,7 +10075,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_OCCUPANCY.PMM_RDS",
@@ -8666,7 +10089,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_OCCUPANCY.PMM_WRS",
@@ -8678,7 +10103,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.PMM_RDS",
@@ -8690,7 +10117,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_INSERTS.PMM_WRS",
@@ -8702,7 +10131,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_NE",
@@ -8714,7 +10145,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_RPQ_OCCUPANCY.NO_GNT_SCH0",
@@ -8726,7 +10159,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_RPQ_OCCUPANCY.NO_GNT_SCH1",
@@ -8738,7 +10173,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_WPQ_OCCUPANCY.CAS",
@@ -8750,7 +10187,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_WPQ_OCCUPANCY.PWR",
@@ -8762,7 +10201,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_WPQ_CYCLES_NE",
@@ -8774,7 +10215,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.RD_PCH0",
@@ -8786,7 +10229,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.WR_PCH0",
@@ -8798,7 +10243,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.UFILL_PCH0",
@@ -8810,7 +10257,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.PGT_PCH0",
@@ -8822,7 +10271,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.RD_PCH1",
@@ -8834,7 +10285,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.WR_PCH1",
@@ -8846,7 +10299,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.UFILL_PCH1",
@@ -8858,7 +10313,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.PGT_PCH1",
@@ -8870,7 +10327,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.UFILL",
@@ -8882,7 +10341,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.WR_NONPRE",
@@ -8894,7 +10355,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.PCH0",
@@ -8906,7 +10369,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.PCH1",
@@ -8918,7 +10383,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.RD_64B",
@@ -8930,7 +10397,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.RD_UFILL_64B",
@@ -8942,7 +10411,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.WR_64B",
@@ -8954,7 +10425,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.RD_32B",
@@ -8966,7 +10439,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.RD_UFILL_32B",
@@ -8978,7 +10453,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.WR_32B",
@@ -8990,7 +10467,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.PCH0",
@@ -9002,7 +10481,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_ISSUED_REQ_LEN.PCH1",
@@ -9014,7 +10495,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_NE.PCH0",
@@ -9026,7 +10509,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_RDB_NE.PCH1",
@@ -9038,7 +10523,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_RPQ_OCCUPANCY.GNT_WAIT_SCH0",
@@ -9050,7 +10537,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_PMM_RPQ_OCCUPANCY.GNT_WAIT_SCH1",
@@ -9062,7 +10551,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.SLOW_INSERT",
@@ -9074,7 +10565,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.DDR4_FAST_INSERT",
@@ -9086,7 +10579,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.THROTTLE",
@@ -9098,7 +10593,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.REJ_IRQ",
@@ -9110,7 +10607,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.THROTTLE_PRQ",
@@ -9122,7 +10621,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.THROTTLE_IRQ",
@@ -9134,7 +10635,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS.SLOWTORQ_SKIP",
@@ -9146,7 +10649,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS_OCCUPANCY.DDR_SLOW_FIFO",
@@ -9158,7 +10663,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_QOS_OCCUPANCY.DDR_FAST_FIFO",
@@ -9170,7 +10677,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LOCAL_F",
@@ -9182,7 +10691,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_F",
@@ -9194,7 +10705,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.REMOTE_SNOOP_F",
@@ -9206,7 +10719,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.DATA_READ_F",
@@ -9218,7 +10733,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.ANY_F",
@@ -9230,7 +10747,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.OTHER_REQ_F",
@@ -9242,7 +10761,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.FLUSH_OR_INV_F",
@@ -9254,7 +10775,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.CODE_READ_F",
@@ -9266,7 +10789,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.LLCPREF_LOCAL_F",
@@ -9278,7 +10803,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.PREF_OR_DMND_REMOTE_F",
@@ -9290,7 +10817,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.RFO_F",
@@ -9302,7 +10831,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.MISS_ALL",
@@ -9314,7 +10845,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.DATA_READ_ALL",
@@ -9326,7 +10859,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.DATA_READ_MISS",
@@ -9338,7 +10873,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.DATA_READ_LOCAL",
@@ -9350,7 +10887,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.WRITE_LOCAL",
@@ -9362,7 +10901,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.RFO_LOCAL",
@@ -9374,7 +10915,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.WRITE_REMOTE",
@@ -9386,7 +10929,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.ALL_REMOTE",
@@ -9398,7 +10943,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IO",
@@ -9410,7 +10957,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IA",
@@ -9422,7 +10971,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_PMM",
@@ -9434,7 +10985,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_LOCAL_PMM",
@@ -9446,7 +10999,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_REMOTE_PMM",
@@ -9458,7 +11013,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_DDR",
@@ -9470,7 +11027,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_LOCAL_DDR",
@@ -9482,7 +11041,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_REMOTE_DDR",
@@ -9494,7 +11055,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_LOCAL",
@@ -9506,7 +11069,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_REMOTE",
@@ -9518,7 +11083,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_LOCAL",
@@ -9530,7 +11097,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_REMOTE",
@@ -9542,7 +11111,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_ITOMCACHENEAR",
@@ -9554,7 +11125,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WBMTOI",
@@ -9566,7 +11139,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_ITOM",
@@ -9578,7 +11153,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_ITOM",
@@ -9590,7 +11167,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_UCRDF",
@@ -9602,7 +11181,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WIL",
@@ -9614,7 +11195,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WCILF",
@@ -9626,7 +11209,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF",
@@ -9638,7 +11223,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF_PMM",
@@ -9650,7 +11237,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCILF_PMM",
@@ -9662,7 +11251,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCILF_PMM",
@@ -9674,7 +11265,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF_DDR",
@@ -9686,7 +11279,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCILF_DDR",
@@ -9698,7 +11293,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCILF_DDR",
@@ -9710,7 +11307,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WCIL",
@@ -9722,7 +11321,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL",
@@ -9734,7 +11335,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL_PMM",
@@ -9746,7 +11349,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCIL_PMM",
@@ -9758,7 +11363,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCIL_PMM",
@@ -9770,7 +11377,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL_DDR",
@@ -9782,7 +11391,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCIL_DDR",
@@ -9794,7 +11405,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCIL_DDR",
@@ -9806,7 +11419,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_WBMTOI",
@@ -9818,7 +11433,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_CLFLUSH",
@@ -9830,7 +11447,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL_PMM",
@@ -9842,7 +11461,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE_PMM",
@@ -9854,7 +11475,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL_DDR",
@@ -9866,7 +11489,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE_DDR",
@@ -9878,7 +11503,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_PMM",
@@ -9890,7 +11517,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_LOCAL_PMM",
@@ -9902,7 +11531,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_REMOTE_PMM",
@@ -9914,7 +11545,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_DDR",
@@ -9926,7 +11559,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_LOCAL_DDR",
@@ -9938,7 +11573,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_REMOTE_DDR",
@@ -9950,7 +11587,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_LOCAL",
@@ -9962,7 +11601,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_REMOTE",
@@ -9974,7 +11615,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_LOCAL",
@@ -9986,7 +11629,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_REMOTE",
@@ -9998,7 +11643,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSH",
@@ -10010,7 +11657,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSHOPT",
@@ -10022,7 +11671,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_ITOMCACHENEAR",
@@ -10034,7 +11685,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_SPECITOM",
@@ -10046,7 +11699,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_WBMTOI",
@@ -10058,7 +11713,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_ITOM",
@@ -10070,7 +11727,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_ITOM",
@@ -10082,7 +11741,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_ITOM",
@@ -10094,7 +11755,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_UCRDF",
@@ -10106,7 +11769,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WIL",
@@ -10118,7 +11783,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_WCILF",
@@ -10130,7 +11797,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF",
@@ -10142,7 +11811,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF_PMM",
@@ -10154,7 +11825,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCILF_PMM",
@@ -10166,7 +11839,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCILF_PMM",
@@ -10178,7 +11853,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF_DDR",
@@ -10190,7 +11867,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCILF_DDR",
@@ -10202,7 +11881,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCILF_DDR",
@@ -10214,7 +11895,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_WCIL",
@@ -10226,7 +11909,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL",
@@ -10238,7 +11923,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL_PMM",
@@ -10250,7 +11937,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCIL_PMM",
@@ -10262,7 +11951,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCIL_PMM",
@@ -10274,7 +11965,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL_DDR",
@@ -10286,7 +11979,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCIL_DDR",
@@ -10298,7 +11993,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCIL_DDR",
@@ -10310,7 +12007,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_WBMTOI",
@@ -10322,7 +12021,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_CLFLUSH",
@@ -10334,7 +12035,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOMCACHENEAR",
@@ -10346,7 +12049,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOMCACHENEAR",
@@ -10358,7 +12063,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.PMM",
@@ -10370,7 +12077,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.PMM",
@@ -10382,7 +12091,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.DDR",
@@ -10394,7 +12105,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.DDR",
@@ -10406,7 +12119,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS2.MEMWRNI",
@@ -10418,7 +12133,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS2.MEMWR",
@@ -10430,7 +12147,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS2.IODC",
@@ -10442,7 +12161,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_INVITOX.SETCONFLICT",
@@ -10454,7 +12175,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_INVITOX.REMOTE",
@@ -10466,7 +12189,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_INVITOX.LOCAL",
@@ -10478,7 +12203,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.LLC",
@@ -10490,7 +12217,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.TOR",
@@ -10502,7 +12231,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.SF",
@@ -10514,7 +12245,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_NOT_TAKEN_DIRSTATE.NON_CISGRESS",
@@ -10526,7 +12259,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_TXN_OVERRIDE.PMM_HIT",
@@ -10538,7 +12273,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2CORE_TXN_OVERRIDE.CISGRESS",
@@ -10550,7 +12287,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPITXN_OVERRIDE.PMM_HIT",
@@ -10562,7 +12301,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_TXN_OVERRIDE.CISGRESS",
@@ -10574,7 +12315,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TAG_HIT.NM_UFILL_HIT_CLEAN",
@@ -10586,7 +12329,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_TAG_HIT.NM_UFILL_HIT_DIRTY",
@@ -10598,7 +12343,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.HIT_NON_PMM",
@@ -10610,7 +12357,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I_TO_S_HIT_NON_PMM",
@@ -10622,7 +12371,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I_TO_A_HIT_NON_PMM",
@@ -10634,7 +12385,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S_TO_I_HIT_NON_PMM",
@@ -10646,7 +12399,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S_TO_A_HIT_NON_PMM",
@@ -10658,7 +12413,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A_TO_I_HIT_NON_PMM",
@@ -10670,7 +12427,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A_TO_S_HIT_NON_PMM",
@@ -10682,7 +12441,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.MISS_NON_PMM",
@@ -10694,7 +12455,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I_TO_S_MISS_NON_PMM",
@@ -10706,7 +12469,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.I_TO_A_MISS_NON_PMM",
@@ -10718,7 +12483,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S_TO_I_MISS_NON_PMM",
@@ -10730,7 +12497,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.S_TO_A_MISS_NON_PMM",
@@ -10742,7 +12511,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A_TO_I_MISS_NON_PMM",
@@ -10754,7 +12525,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECTORY_UPDATE.A_TO_S_MISS_NON_PMM",
@@ -10766,7 +12539,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_ISOCH",
@@ -10778,7 +12553,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_FROM_TGR",
@@ -10790,7 +12567,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_ISOCH",
@@ -10802,7 +12581,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_FROM_TGR",
@@ -10814,7 +12595,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.ISOCH",
@@ -10826,7 +12609,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.FROM_TGR",
@@ -10838,7 +12623,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_FULL_ISOCH",
@@ -10850,7 +12637,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_PARTIAL_ISOCH",
@@ -10862,7 +12651,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_TO_DDR_AS_MEM",
@@ -10874,7 +12665,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_TO_DDR_AS_CACHE",
@@ -10886,7 +12679,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_FROM_TGR",
@@ -10898,7 +12693,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_NI_MISS",
@@ -10910,7 +12707,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_FULL_ISOCH",
@@ -10922,7 +12721,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_PARTIAL_ISOCH",
@@ -10934,7 +12735,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_TO_DDR_AS_MEM",
@@ -10946,7 +12749,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_TO_DDR_AS_CACHE",
@@ -10958,7 +12763,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_FROM_TGR",
@@ -10970,7 +12777,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_NI_MISS",
@@ -10982,7 +12791,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.FULL_ISOCH",
@@ -10994,7 +12805,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.PARTIAL_ISOCH",
@@ -11006,7 +12819,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.FROM_TGR",
@@ -11018,7 +12833,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.NI_MISS",
@@ -11030,7 +12847,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_OCCUPANCY.ALLCH",
@@ -11042,7 +12861,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_DROPS.UPI_ALLCH",
@@ -11054,7 +12875,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_NO_MERGE.WR_SQUASHED",
@@ -11066,7 +12889,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_NO_MERGE.WR_MERGED",
@@ -11078,7 +12903,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_DEMAND_NO_MERGE.RD_MERGED",
@@ -11090,7 +12917,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RESP_MISS.ALLCH",
@@ -11102,7 +12931,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RxC_DEALLOCS.PMM_MEMMODE_ACCEPT",
@@ -11114,7 +12945,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART0_FREERUN",
@@ -11126,7 +12959,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART1_FREERUN",
@@ -11138,7 +12973,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART2_FREERUN",
@@ -11150,7 +12987,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART3_FREERUN",
@@ -11162,7 +13001,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART4_FREERUN",
@@ -11174,7 +13015,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART5_FREERUN",
@@ -11186,7 +13029,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART6_FREERUN",
@@ -11198,7 +13043,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_IN.PART7_FREERUN",
@@ -11210,7 +13057,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART0_FREERUN",
@@ -11222,7 +13071,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART4_FREERUN",
@@ -11234,7 +13085,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART3_FREERUN",
@@ -11246,7 +13099,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART2_FREERUN",
@@ -11258,7 +13113,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART1_FREERUN",
@@ -11270,7 +13127,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART6_FREERUN",
@@ -11282,7 +13141,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART5_FREERUN",
@@ -11294,7 +13155,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_BANDWIDTH_OUT.PART7_FREERUN",
@@ -11306,7 +13169,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.BUS0",
@@ -11318,7 +13183,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.BUS1",
@@ -11330,7 +13197,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.BUS0_NOT_BUS1",
@@ -11342,7 +13211,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.BUS0_BUS1",
@@ -11354,7 +13225,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_BUS1",
@@ -11366,7 +13239,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_NOT_BUS1",
@@ -11378,7 +13253,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.BUS0",
@@ -11390,7 +13267,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.BUS1",
@@ -11402,7 +13281,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.BUS0_NOT_BUS1",
@@ -11414,7 +13295,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.BUS0_BUS1",
@@ -11426,7 +13309,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_BUS1",
@@ -11438,7 +13323,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_NOT_BUS1",
@@ -11450,7 +13337,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU0.FIRST_LOOKUPS",
@@ -11462,7 +13351,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU0.CTXT_CACHE_LOOKUPS",
@@ -11474,7 +13365,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU0.CTXT_CACHE_HITS",
@@ -11486,7 +13379,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWT_CACHE_LOOKUPS",
@@ -11498,7 +13393,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.NUM_MEM_ACCESSES",
@@ -11510,7 +13407,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWC_2M_HITS",
@@ -11522,7 +13421,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWC_1G_HITS",
@@ -11534,7 +13435,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWC_512G_HITS",
@@ -11546,7 +13449,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWC_256T_HITS",
@@ -11558,7 +13463,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.PWC_CACHE_FILLS",
@@ -11570,7 +13477,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART0",
@@ -11582,7 +13491,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART1",
@@ -11594,7 +13505,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART2",
@@ -11606,7 +13519,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART3",
@@ -11618,7 +13533,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART4",
@@ -11630,7 +13547,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART5",
@@ -11642,7 +13561,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART6",
@@ -11654,7 +13575,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.PART7",
@@ -11666,7 +13589,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.IOMMU_REQ",
@@ -11678,7 +13603,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.IOMMU_HIT",
@@ -11690,7 +13617,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.REQ_OWN",
@@ -11702,7 +13631,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.FINAL_RD_WR",
@@ -11714,7 +13645,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.WR",
@@ -11726,7 +13659,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_REQ.DATA",
@@ -11738,7 +13673,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.IOMMU_REQ",
@@ -11750,7 +13687,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.IOMMU_HIT",
@@ -11762,7 +13701,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.REQ_OWN",
@@ -11774,7 +13715,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.FINAL_RD_WR",
@@ -11786,7 +13729,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.WR",
@@ -11798,7 +13743,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_INBOUND_ARB_WON.DATA",
@@ -11810,7 +13757,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.MSGB",
@@ -11822,7 +13771,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.MCAST",
@@ -11834,7 +13785,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.UBOX",
@@ -11846,7 +13799,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.MEM",
@@ -11858,7 +13813,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.REM_P2P",
@@ -11870,7 +13827,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.LOC_P2P",
@@ -11882,7 +13841,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.CONFINED_P2P",
@@ -11894,7 +13855,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_REQ_OF_CPU_BY_TGT.ABORT",
@@ -11906,7 +13869,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_NUM_TGT_MATCHED_REQ_OF_CPU",
@@ -11918,7 +13883,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_PASS_CMPL.REQ_OWN",
@@ -11930,7 +13897,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_PASS_CMPL.FINAL_RD_WR",
@@ -11942,7 +13911,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_PASS_CMPL.WR",
@@ -11954,7 +13925,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_PASS_CMPL.DATA",
@@ -11966,7 +13939,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CL_CMPL.REQ_OWN",
@@ -11978,7 +13953,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CL_CMPL.FINAL_RD_WR",
@@ -11990,7 +13967,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CL_CMPL.WR",
@@ -12002,7 +13981,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CL_CMPL.DATA",
@@ -12014,7 +13995,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CMPL.IOMMU_REQ",
@@ -12026,7 +14009,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CMPL.IOMMU_HIT",
@@ -12038,7 +14023,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CMPL.REQ_OWN",
@@ -12050,7 +14037,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_REQ_FROM_PCIE_CMPL.FINAL_RD_WR",
@@ -12062,7 +14051,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.IOMMU0",
@@ -12074,7 +14065,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.IOMMU1",
@@ -12086,7 +14079,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART0",
@@ -12098,7 +14093,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART1",
@@ -12110,7 +14107,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART2",
@@ -12122,7 +14121,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART3",
@@ -12134,7 +14135,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART4",
@@ -12146,7 +14149,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART5",
@@ -12158,7 +14163,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART6",
@@ -12170,7 +14177,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.PART7",
@@ -12182,7 +14191,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART0",
@@ -12194,7 +14205,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART1",
@@ -12206,7 +14219,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART2",
@@ -12218,7 +14233,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART3",
@@ -12230,7 +14247,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART4",
@@ -12242,7 +14261,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART5",
@@ -12254,7 +14275,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART6",
@@ -12266,7 +14289,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.PART7",
@@ -12278,7 +14303,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_INSERTS.CMPD.ALL_PARTS",
@@ -12290,7 +14317,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_OUTBOUND_CL_REQS_ISSUED.TO_IO",
@@ -12302,7 +14331,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_OUTBOUND_TLP_REQS_ISSUED.TO_IO",
@@ -12314,7 +14345,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART0",
@@ -12326,7 +14359,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART7",
@@ -12338,7 +14373,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART6",
@@ -12350,7 +14387,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART5",
@@ -12362,7 +14401,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART4",
@@ -12374,7 +14415,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART3",
@@ -12386,7 +14429,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART2",
@@ -12398,7 +14443,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.PART1",
@@ -12410,7 +14457,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_COMP_BUF_OCCUPANCY.CMPD.ALL_PARTS",
@@ -12422,7 +14471,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_CACHE_TOTAL_OCCUPANCY.MEM",
@@ -12434,7 +14485,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.2ND_ATOMIC_INSERT",
@@ -12446,7 +14499,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.2ND_RD_INSERT",
@@ -12458,7 +14513,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.2ND_WR_INSERT",
@@ -12470,7 +14527,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.FAST_REJ",
@@ -12482,7 +14541,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.FAST_REQ",
@@ -12494,7 +14555,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.FAST_XFER",
@@ -12506,7 +14569,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.PF_ACK_HINT",
@@ -12518,7 +14583,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_MISC0.SLOWPATH_FWPF_NO_PRF",
@@ -12530,7 +14597,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.ALL_HIT",
@@ -12542,7 +14611,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.ALL_HIT_ES",
@@ -12554,7 +14625,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.ALL_HIT_I",
@@ -12566,7 +14639,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.ALL_MISS",
@@ -12578,7 +14653,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.HIT_ES",
@@ -12590,7 +14667,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.HIT_I",
@@ -12602,7 +14681,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.HIT_M",
@@ -12614,7 +14695,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.MISS",
@@ -12626,7 +14709,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.SNPCODE",
@@ -12638,7 +14723,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.SNPDATA",
@@ -12650,7 +14737,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_SNOOP_RESP.SNPINV",
@@ -12662,7 +14751,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_AK_INSERTS",
@@ -12674,7 +14765,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_DRS_CYCLES_FULL",
@@ -12686,7 +14779,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_DRS_INSERTS",
@@ -12698,7 +14793,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_DRS_OCCUPANCY",
@@ -12710,7 +14807,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCB_CYCLES_FULL",
@@ -12722,7 +14821,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCB_INSERTS",
@@ -12734,7 +14835,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCB_OCCUPANCY",
@@ -12746,7 +14849,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCS_CYCLES_FULL",
@@ -12758,7 +14863,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCS_INSERTS",
@@ -12770,7 +14877,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxC_BL_NCS_OCCUPANCY",
@@ -12782,7 +14891,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxR2_AD0_STALL_CREDIT_CYCLES",
@@ -12794,7 +14905,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxR2_AD01_STALL_CREDIT_CYCLES",
@@ -12806,7 +14919,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxR2_AD1_STALL_CREDIT_CYCLES",
@@ -12818,7 +14933,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxR2_BL_STALL_CREDIT_CYCLES",
@@ -12830,7 +14947,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxS_DATA_INSERTS_NCB",
@@ -12842,7 +14961,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxS_DATA_INSERTS_NCS",
@@ -12854,7 +14975,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_TxS_REQUEST_OCCUPANCY",
@@ -12866,7 +14989,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_CORE_TRANSITION_CYCLES",
@@ -12878,7 +15003,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_DEMOTIONS",
@@ -12890,7 +15017,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FIVR_PS_PS0_CYCLES",
@@ -12902,7 +15031,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FIVR_PS_PS1_CYCLES",
@@ -12914,7 +15045,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FIVR_PS_PS2_CYCLES",
@@ -12926,7 +15059,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FIVR_PS_PS3_CYCLES",
@@ -12938,7 +15073,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_CLIP_AVX256",
@@ -12950,7 +15087,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_CLIP_AVX512",
@@ -12962,7 +15101,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_MAX_LIMIT_THERMAL_CYCLES",
@@ -12974,7 +15115,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_MAX_POWER_CYCLES",
@@ -12986,7 +15129,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_MIN_IO_P_CYCLES",
@@ -12998,7 +15143,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_FREQ_TRANS_CYCLES",
@@ -13010,7 +15157,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_MEMORY_PHASE_SHEDDING_CYCLES",
@@ -13022,7 +15171,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PKG_RESIDENCY_C0_CYCLES",
@@ -13034,7 +15185,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
@@ -13046,7 +15199,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PKG_RESIDENCY_C6_CYCLES",
@@ -13058,7 +15213,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PMAX_THROTTLED_CYCLES",
@@ -13070,7 +15227,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_POWER_STATE_OCCUPANCY_CORES_C0",
@@ -13082,7 +15241,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_POWER_STATE_OCCUPANCY_CORES_C3",
@@ -13094,7 +15255,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_POWER_STATE_OCCUPANCY_CORES_C6",
@@ -13106,7 +15269,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PROCHOT_EXTERNAL_CYCLES",
@@ -13118,7 +15283,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_PROCHOT_INTERNAL_CYCLES",
@@ -13130,7 +15297,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_TOTAL_TRANSITION_CYCLES",
@@ -13142,7 +15311,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_VR_HOT_CYCLES",
@@ -13154,7 +15325,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.RxC_CYCLES_NE_CBO_NCB",
@@ -13166,7 +15339,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.RxC_CYCLES_NE_CBO_NCS",
@@ -13178,7 +15353,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.RxC_CYCLES_NE_UPI_NCB",
@@ -13190,7 +15367,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.RxC_CYCLES_NE_UPI_NCS",
@@ -13202,7 +15381,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.TxC_CYCLES_CRD_OVF_CBO_NCB",
@@ -13214,7 +15395,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.TxC_CYCLES_CRD_OVF_CBO_NCS",
@@ -13226,7 +15409,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.TxC_CYCLES_CRD_OVF_UPI_NCB",
@@ -13238,7 +15423,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC1.TxC_CYCLES_CRD_OVF_UPI_NCS",
@@ -13250,7 +15437,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.RxC_CYCLES_EMPTY_BL",
@@ -13262,7 +15451,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.RxC_CYCLES_FULL_BL",
@@ -13274,7 +15465,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_CRD_OVF_VN0_NCB",
@@ -13286,7 +15479,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_CRD_OVF_VN0_NCS",
@@ -13298,7 +15493,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_EMPTY_AK",
@@ -13310,7 +15507,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_EMPTY_AKC",
@@ -13322,7 +15521,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_EMPTY_BL",
@@ -13334,7 +15535,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC2.TxC_CYCLES_FULL_BL",
@@ -13346,7 +15549,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC3.TxC_CYCLES_FULL_AK",
@@ -13358,7 +15563,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_M2U_MISC3.TxC_CYCLES_FULL_AKC",
@@ -13370,7 +15577,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.CHA_IDI",
@@ -13382,7 +15591,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.CHA_NCB",
@@ -13394,7 +15605,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.CHA_NCS",
@@ -13406,7 +15619,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.UPI_NCB",
@@ -13418,7 +15633,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.UPI_NCS",
@@ -13430,7 +15647,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.IIO_NCB",
@@ -13442,7 +15661,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.IIO_NCS",
@@ -13454,7 +15675,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_CYCLES_NE.ALL",
@@ -13466,7 +15689,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.CHA_IDI",
@@ -13478,7 +15703,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.CHA_NCB",
@@ -13490,7 +15717,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.CHA_NCS",
@@ -13502,7 +15731,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.UPI_NCB",
@@ -13514,7 +15745,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.UPI_NCS",
@@ -13526,7 +15759,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.IIO_NCB",
@@ -13538,7 +15773,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.IIO_NCS",
@@ -13550,7 +15787,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_RxC_INSERTS.ALL",
@@ -13562,7 +15801,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_CRD_OCCUPANCY.LOCAL_NCB",
@@ -13574,7 +15815,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_CRD_OCCUPANCY.LOCAL_NCS",
@@ -13586,7 +15829,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_CRD_OCCUPANCY.REMOTE_NCB",
@@ -13598,7 +15843,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_CRD_OCCUPANCY.REMOTE_NCS",
@@ -13610,7 +15857,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_CRD_OCCUPANCY.ALL",
@@ -13622,7 +15871,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_SHAR_RECEIVED.LOCAL_NCB",
@@ -13634,7 +15885,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_SHAR_RECEIVED.LOCAL_NCS",
@@ -13646,7 +15899,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_SHAR_RECEIVED.REMOTE_NCB",
@@ -13658,7 +15913,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_SHAR_RECEIVED.REMOTE_NCS",
@@ -13670,7 +15927,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_SHAR_RECEIVED.ALL",
@@ -13682,7 +15941,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_DED_RECEIVED.LOCAL_NCB",
@@ -13694,7 +15955,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_DED_RECEIVED.LOCAL_NCS",
@@ -13706,7 +15969,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_DED_RECEIVED.REMOTE_NCB",
@@ -13718,7 +15983,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_DED_RECEIVED.REMOTE_NCS",
@@ -13730,7 +15997,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_P2P_DED_RECEIVED.ALL",
@@ -13742,7 +16011,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_SHAR_RETURNED.AGENT_0",
@@ -13754,7 +16025,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_SHAR_RETURNED.AGENT_1",
@@ -13766,7 +16039,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_SHAR_RETURNED.AGENT_2",
@@ -13778,7 +16053,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_SHAR_RETURNED.AGENT_0",
@@ -13790,7 +16067,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_SHAR_RETURNED.AGENT_1",
@@ -13802,7 +16081,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_SHAR_RETURNED.AGENT_2",
@@ -13814,7 +16095,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF0_NCB",
@@ -13826,7 +16109,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF0_NCS",
@@ -13838,7 +16123,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF1_NCB",
@@ -13850,7 +16137,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF1_NCS",
@@ -13862,7 +16151,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF2_NCB",
@@ -13874,7 +16165,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF3_NCB",
@@ -13886,7 +16179,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF2_NCS",
@@ -13898,7 +16193,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_0.MS2IOSF3_NCS",
@@ -13910,7 +16207,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_1.MS2IOSF4_NCB",
@@ -13922,7 +16221,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_1.MS2IOSF4_NCS",
@@ -13934,7 +16235,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_1.MS2IOSF5_NCB",
@@ -13946,7 +16249,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_P2P_DED_RETURNED_1.MS2IOSF5_NCS",
@@ -13958,7 +16263,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI0_NCB",
@@ -13970,7 +16277,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI0_NCS",
@@ -13982,7 +16291,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI1_NCB",
@@ -13994,7 +16305,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI1_NCS",
@@ -14006,7 +16319,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI2_NCB",
@@ -14018,7 +16333,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_P2P_DED_RETURNED.UPI2_NCS",
@@ -14030,7 +16347,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CREDITS.PRQ",
@@ -14042,7 +16361,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CREDITS.PMM",
@@ -14054,7 +16375,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.DRS_0",
@@ -14066,7 +16389,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.DRS_1",
@@ -14078,7 +16403,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.NCB_0",
@@ -14090,7 +16417,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.NCB_1",
@@ -14102,7 +16431,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.NCS_0",
@@ -14114,7 +16445,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_USED.NCS_1",
@@ -14126,7 +16459,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.DRS_0",
@@ -14138,7 +16473,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.DRS_1",
@@ -14150,7 +16487,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.NCB_0",
@@ -14162,7 +16501,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.NCB_1",
@@ -14174,7 +16515,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.NCS_0",
@@ -14186,7 +16529,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_ACQUIRED.NCS_1",
@@ -14198,7 +16543,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_REJECT.DRS",
@@ -14210,7 +16557,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_REJECT.NCB",
@@ -14222,7 +16571,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_IIO_CREDITS_REJECT.NCS",
@@ -14234,7 +16585,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF0_NCB",
@@ -14246,7 +16599,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF0_NCS",
@@ -14258,7 +16613,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF1_NCB",
@@ -14270,7 +16627,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF1_NCS",
@@ -14282,7 +16641,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF2_NCB",
@@ -14294,7 +16655,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF2_NCS",
@@ -14306,7 +16669,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF3_NCB",
@@ -14318,7 +16683,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_0.M2IOSF3_NCS",
@@ -14330,7 +16697,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_1.M2IOSF4_NCB",
@@ -14342,7 +16711,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_1.M2IOSF4_NCS",
@@ -14354,7 +16725,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_1.M2IOSF5_NCB",
@@ -14366,7 +16739,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_TAKEN_1.M2IOSF5_NCS",
@@ -14378,7 +16753,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI0_DRS",
@@ -14390,7 +16767,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI0_NCB",
@@ -14402,7 +16781,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI0_NCS",
@@ -14414,7 +16795,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI1_DRS",
@@ -14426,7 +16809,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI1_NCB",
@@ -14438,7 +16823,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_0.UPI1_NCS",
@@ -14450,7 +16837,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_1.UPI2_DRS",
@@ -14462,7 +16851,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_1.UPI2_NCB",
@@ -14474,7 +16865,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_TAKEN_1.UPI2_NCS",
@@ -14486,7 +16879,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_0",
@@ -14498,7 +16893,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_1",
@@ -14510,7 +16907,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_2",
@@ -14522,7 +16921,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_3",
@@ -14534,7 +16935,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_4",
@@ -14546,7 +16949,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_RETURNED.AGENT_5",
@@ -14558,7 +16963,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_RETURNED.AGENT_0",
@@ -14570,7 +16977,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_RETURNED.AGENT_1",
@@ -14582,7 +16991,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_RETURNED.AGENT_2",
@@ -14594,7 +17005,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF0_NCB",
@@ -14606,7 +17019,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF0_NCS",
@@ -14618,7 +17033,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF1_NCB",
@@ -14630,7 +17047,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF1_NCS",
@@ -14642,7 +17061,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF2_NCB",
@@ -14654,7 +17075,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF2_NCS",
@@ -14666,7 +17089,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF3_NCB",
@@ -14678,7 +17103,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_0.M2IOSF3_NCS",
@@ -14690,7 +17117,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_1.M2IOSF4_NCB",
@@ -14702,7 +17131,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_1.M2IOSF4_NCS",
@@ -14714,7 +17145,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_1.M2IOSF5_NCB",
@@ -14726,7 +17159,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_DED_P2P_CRD_TAKEN_1.M2IOSF5_NCS",
@@ -14738,7 +17173,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI0_DRS",
@@ -14750,7 +17187,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI0_NCB",
@@ -14762,7 +17201,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI0_NCS",
@@ -14774,7 +17215,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI1_DRS",
@@ -14786,7 +17229,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI1_NCB",
@@ -14798,7 +17243,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_0.UPI1_NCS",
@@ -14810,7 +17257,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_1.UPI2_DRS",
@@ -14822,7 +17271,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_1.UPI2_NCB",
@@ -14834,7 +17285,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_DED_P2P_CRD_TAKEN_1.UPI2_NCS",
@@ -14846,7 +17299,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF0_NCB",
@@ -14858,7 +17313,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF0_NCS",
@@ -14870,7 +17327,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF1_NCB",
@@ -14882,7 +17341,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF1_NCS",
@@ -14894,7 +17355,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF2_NCB",
@@ -14906,7 +17369,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF2_NCS",
@@ -14918,7 +17383,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF3_NCB",
@@ -14930,7 +17397,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_0.M2IOSF3_NCS",
@@ -14942,7 +17411,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_1.M2IOSF4_NCB",
@@ -14954,7 +17425,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_1.M2IOSF4_NCS",
@@ -14966,7 +17439,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_1.M2IOSF5_NCB",
@@ -14978,7 +17453,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_LOCAL_SHAR_P2P_CRD_WAIT_1.M2IOSF5_NCS",
@@ -14990,7 +17467,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI0_DRS",
@@ -15002,7 +17481,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI0_NCB",
@@ -15014,7 +17495,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI0_NCS",
@@ -15026,7 +17509,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI1_DRS",
@@ -15038,7 +17523,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI1_NCB",
@@ -15050,7 +17537,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_0.UPI1_NCS",
@@ -15062,7 +17551,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_1.UPI2_DRS",
@@ -15074,7 +17565,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_1.UPI2_NCB",
@@ -15086,7 +17579,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_REMOTE_SHAR_P2P_CRD_WAIT_1.UPI2_NCS",
@@ -15098,7 +17593,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_EGRESS_ORDERING.IV_SNOOPGO_UP",
@@ -15110,7 +17607,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_EGRESS_ORDERING.IV_SNOOPGO_DN",
@@ -15122,7 +17621,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_EGRESS_ORDERING.IV_SNOOPGO_UP",
@@ -15134,7 +17635,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_EGRESS_ORDERING.IV_SNOOPGO_DN",
@@ -15146,7 +17649,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_CHA_AD_CREDITS_EMPTY.VNA",
@@ -15158,7 +17663,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_CHA_AD_CREDITS_EMPTY.WB",
@@ -15170,7 +17677,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_CHA_AD_CREDITS_EMPTY.REQ",
@@ -15182,7 +17691,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_CHA_AD_CREDITS_EMPTY.SNP",
@@ -15194,7 +17705,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.IIO2_NCB",
@@ -15206,7 +17719,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.IIO3_NCB",
@@ -15218,7 +17733,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.IIO4_NCB",
@@ -15230,7 +17747,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.IIO5_NCB",
@@ -15242,7 +17761,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.NCS",
@@ -15254,7 +17775,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.NCS_SEL",
@@ -15266,7 +17789,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.AD_SLOT0",
@@ -15278,7 +17803,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.AD_SLOT1",
@@ -15290,7 +17817,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.AD_SLOT2",
@@ -15302,7 +17831,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.BL_SLOT0",
@@ -15314,7 +17845,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.AK_SLOT0",
@@ -15326,7 +17859,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_MULTI_SLOT_RCVD.AK_SLOT2",
@@ -15338,7 +17873,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.AD_REQ",
@@ -15350,7 +17887,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.AD_SNP",
@@ -15362,7 +17901,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.AD_RSP",
@@ -15374,7 +17915,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.BL_RSP",
@@ -15386,7 +17929,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.BL_WB",
@@ -15398,7 +17943,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.BL_NCB",
@@ -15410,7 +17957,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN0.BL_NCS",
@@ -15422,7 +17971,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.AD_REQ",
@@ -15434,7 +17985,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.AD_SNP",
@@ -15446,7 +17999,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.AD_RSP",
@@ -15458,7 +18013,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.BL_RSP",
@@ -15470,7 +18027,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.BL_WB",
@@ -15482,7 +18041,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.BL_NCB",
@@ -15494,7 +18055,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_LOST_VN1.BL_NCS",
@@ -15506,7 +18069,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.NO_PROG_AD_VN0",
@@ -15518,7 +18083,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.NO_PROG_AD_VN1",
@@ -15530,7 +18097,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.NO_PROG_BL_VN0",
@@ -15542,7 +18111,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.NO_PROG_BL_VN1",
@@ -15554,7 +18125,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.ADBL_PARALLEL_WIN_VN0",
@@ -15566,7 +18139,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.ADBL_PARALLEL_WIN_VN1",
@@ -15578,7 +18153,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.VN01_PARALLEL_WIN",
@@ -15590,7 +18167,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_MISC.ALL_PARALLEL_WIN",
@@ -15602,7 +18181,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.AD_REQ",
@@ -15614,7 +18195,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.AD_SNP",
@@ -15626,7 +18209,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.AD_RSP",
@@ -15638,7 +18223,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.BL_RSP",
@@ -15650,7 +18237,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.BL_WB",
@@ -15662,7 +18251,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.BL_NCB",
@@ -15674,7 +18265,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN0.BL_NCS",
@@ -15686,7 +18279,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.AD_REQ",
@@ -15698,7 +18293,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.AD_SNP",
@@ -15710,7 +18307,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.AD_RSP",
@@ -15722,7 +18321,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.BL_RSP",
@@ -15734,7 +18335,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.BL_WB",
@@ -15746,7 +18349,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.BL_NCB",
@@ -15758,7 +18363,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOCRD_VN1.BL_NCS",
@@ -15770,7 +18377,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.AD_REQ",
@@ -15782,7 +18391,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.AD_SNP",
@@ -15794,7 +18405,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.AD_RSP",
@@ -15806,7 +18419,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.BL_RSP",
@@ -15818,7 +18433,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.BL_WB",
@@ -15830,7 +18447,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.BL_NCB",
@@ -15842,7 +18461,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN0.BL_NCS",
@@ -15854,7 +18475,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.AD_REQ",
@@ -15866,7 +18489,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.AD_SNP",
@@ -15878,7 +18503,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.AD_RSP",
@@ -15890,7 +18517,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.BL_RSP",
@@ -15902,7 +18531,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.BL_WB",
@@ -15914,7 +18545,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.BL_NCB",
@@ -15926,7 +18559,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_ARB_NOREQ_VN1.BL_NCS",
@@ -15938,7 +18573,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_BYPASSED.AD_S0_IDLE",
@@ -15950,7 +18587,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_BYPASSED.AD_S0_BL_ARB",
@@ -15962,7 +18601,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_BYPASSED.AD_S1_BL_SLOT",
@@ -15974,7 +18615,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_BYPASSED.AD_S2_BL_SLOT",
@@ -15986,7 +18629,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.ANY_BGF_FIFO",
@@ -15998,7 +18643,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.ANY_BGF_PATH",
@@ -16010,7 +18657,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.VN0_NO_D2K_FOR_ARB",
@@ -16022,7 +18671,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.VN1_NO_D2K_FOR_ARB",
@@ -16034,7 +18685,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.LT1_FOR_D2K",
@@ -16046,7 +18699,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_MISC.LT2_FOR_D2K",
@@ -16058,7 +18713,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.VNA_IN_USE",
@@ -16070,7 +18727,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.FLITS_IN_FIFO",
@@ -16082,7 +18741,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.FLITS_IN_PATH",
@@ -16094,7 +18755,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.TxQ_CRD",
@@ -16106,7 +18769,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.D2K_CRD",
@@ -16118,7 +18783,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.P1P_TOTAL",
@@ -16130,7 +18797,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.P1P_FIFO",
@@ -16142,7 +18811,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CRD_OCC.CONSUMED",
@@ -16154,7 +18825,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.AD_REQ",
@@ -16166,7 +18839,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.AD_SNP",
@@ -16178,7 +18853,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.AD_RSP",
@@ -16190,7 +18867,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.BL_RSP",
@@ -16202,7 +18881,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.BL_WB",
@@ -16214,7 +18895,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.BL_NCB",
@@ -16226,7 +18909,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_CYCLES_NE_VN0.BL_NCS",
@@ -16238,7 +18923,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_DATA_FLITS_NOT_SENT.ALL",
@@ -16250,7 +18937,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_DATA_FLITS_NOT_SENT.TSV_HI",
@@ -16262,7 +18951,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_DATA_FLITS_NOT_SENT.VALID_FOR_FLIT",
@@ -16274,7 +18965,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_DATA_FLITS_NOT_SENT.NO_BGF",
@@ -16286,7 +18979,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_DATA_FLITS_NOT_SENT.NO_TXQ",
@@ -16298,7 +18993,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P0_WAIT",
@@ -16310,7 +19007,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1_WAIT",
@@ -16322,7 +19021,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1P_TO_LIMBO",
@@ -16334,7 +19035,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1P_BUSY",
@@ -16346,7 +19049,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1P_AT_LIMIT",
@@ -16358,7 +19063,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1P_HOLD_P0",
@@ -16370,7 +19077,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_GEN_BL.P1P_FIFO_FULL",
@@ -16382,7 +19091,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_MISC.S2REQ_RECEIVED",
@@ -16394,7 +19105,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_MISC.S2REQ_WITHDRAWN",
@@ -16406,7 +19119,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_MISC.S2REQ_IN_HOLDOFF",
@@ -16418,7 +19133,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_MISC.S2REQ_IN_SERVICE",
@@ -16430,7 +19147,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.ALL",
@@ -16442,7 +19161,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.NEED_DATA",
@@ -16454,7 +19175,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.P0_WAIT",
@@ -16466,7 +19189,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.P1_WAIT",
@@ -16478,7 +19203,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.P1_NOT_REQ",
@@ -16490,7 +19217,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.P1_NOT_REQ_BUT_BUBBLE",
@@ -16502,7 +19231,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLITS_SLOT_BL.P1_NOT_REQ_NOT_AVAIL",
@@ -16514,7 +19245,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.ACCUM",
@@ -16526,7 +19259,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.ACCUM_READ",
@@ -16538,7 +19273,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.ACCUM_WASTED",
@@ -16550,7 +19287,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.AHEAD_BLOCKED",
@@ -16562,7 +19301,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.AHEAD_MSG1_DURING",
@@ -16574,7 +19315,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.AHEAD_MSG2_AFTER",
@@ -16586,7 +19329,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.AHEAD_MSG2_SENT",
@@ -16598,7 +19343,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.AHEAD_MSG1_AFTER",
@@ -16610,7 +19357,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR2.RMSTALL",
@@ -16622,7 +19371,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR2.RMSTALL_NOMSG",
@@ -16634,7 +19385,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR2.PAR",
@@ -16646,7 +19399,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR2.PAR_MSG",
@@ -16658,7 +19413,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR2.PAR_FLIT",
@@ -16670,7 +19427,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.1_MSG",
@@ -16682,7 +19441,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.2_MSGS",
@@ -16694,7 +19455,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.3_MSGS",
@@ -16706,7 +19469,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.1_MSG_VNX",
@@ -16718,7 +19483,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.SLOTS_1",
@@ -16730,7 +19497,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.SLOTS_2",
@@ -16742,7 +19511,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLITS_SENT.SLOTS_3",
@@ -16754,7 +19525,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.ALL",
@@ -16766,7 +19539,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.TSV_HI",
@@ -16778,7 +19553,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.VALID_FOR_FLIT",
@@ -16790,7 +19567,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.NO_BGF_CRD",
@@ -16802,7 +19581,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.NO_TXQ_CRD",
@@ -16814,7 +19595,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.NO_BGF_NO_MSG",
@@ -16826,7 +19609,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HDR_FLIT_NOT_SENT.NO_TXQ_NO_MSG",
@@ -16838,7 +19623,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.VN0",
@@ -16850,7 +19637,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.VN1",
@@ -16862,7 +19651,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.PARALLEL_ATTEMPT",
@@ -16874,7 +19665,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.PARALLEL_SUCCESS",
@@ -16886,7 +19679,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.CANT_SLOT_AD",
@@ -16898,7 +19693,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_HELD.CANT_SLOT_BL",
@@ -16910,7 +19707,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.AD_REQ",
@@ -16922,7 +19721,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.AD_SNP",
@@ -16934,7 +19735,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.AD_RSP",
@@ -16946,7 +19749,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.BL_RSP",
@@ -16958,7 +19763,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.BL_WB",
@@ -16970,7 +19777,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.BL_NCB",
@@ -16982,7 +19791,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN0.BL_NCS",
@@ -16994,7 +19805,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.AD_REQ",
@@ -17006,7 +19819,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.AD_SNP",
@@ -17018,7 +19833,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.AD_RSP",
@@ -17030,7 +19847,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.BL_RSP",
@@ -17042,7 +19861,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.BL_WB",
@@ -17054,7 +19875,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.BL_NCB",
@@ -17066,7 +19889,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_PACKING_MISS_VN1.BL_NCS",
@@ -17078,7 +19903,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.CORRECTED",
@@ -17090,7 +19917,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.LT1",
@@ -17102,7 +19931,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.LT4",
@@ -17114,7 +19945,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.LT5",
@@ -17126,7 +19959,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.LT10",
@@ -17138,7 +19973,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD.ANY_IN_USE",
@@ -17150,7 +19987,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.REQ_VN01_ALLOC_LT10",
@@ -17162,7 +20001,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.REQ_ADBL_ALLOC_L5",
@@ -17174,7 +20015,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN0_ONLY",
@@ -17186,7 +20029,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN1_ONLY",
@@ -17198,7 +20043,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN0_JUST_AD",
@@ -17210,7 +20057,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN0_JUST_BL",
@@ -17222,7 +20071,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN1_JUST_AD",
@@ -17234,7 +20085,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_VNA_CRD_MISC.VN1_JUST_BL",
@@ -17246,7 +20099,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN0_REQ",
@@ -17258,7 +20113,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN0_SNP",
@@ -17270,7 +20127,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN0_RSP",
@@ -17282,7 +20141,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN0_WB",
@@ -17294,7 +20155,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN1_REQ",
@@ -17306,7 +20169,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN1_SNP",
@@ -17318,7 +20183,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN1_RSP",
@@ -17330,7 +20197,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_ARB_FAIL.VN1_WB",
@@ -17342,7 +20211,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_BYPASS.AD_SLOT0",
@@ -17354,7 +20225,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_BYPASS.AD_SLOT1",
@@ -17366,7 +20239,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_BYPASS.AD_SLOT2",
@@ -17378,7 +20253,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_BYPASS.BL_EARLY_RSP",
@@ -17390,7 +20267,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN0_REQ",
@@ -17402,7 +20281,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN0_SNP",
@@ -17414,7 +20295,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN0_RSP",
@@ -17426,7 +20309,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN0_WB",
@@ -17438,7 +20323,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN1_REQ",
@@ -17450,7 +20337,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN1_SNP",
@@ -17462,7 +20351,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN1_RSP",
@@ -17474,7 +20365,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_CYCLES_NE.VN1_WB",
@@ -17486,7 +20379,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN0_REQ",
@@ -17498,7 +20393,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN0_SNP",
@@ -17510,7 +20407,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN0_RSP",
@@ -17522,7 +20421,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN0_WB",
@@ -17534,7 +20435,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN1_REQ",
@@ -17546,7 +20449,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN1_SNP",
@@ -17558,7 +20463,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_INSERTS.VN1_RSP",
@@ -17570,7 +20477,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN0_REQ",
@@ -17582,7 +20491,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN0_SNP",
@@ -17594,7 +20505,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN0_RSP",
@@ -17606,7 +20519,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN0_WB",
@@ -17618,7 +20533,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN1_REQ",
@@ -17630,7 +20547,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN1_SNP",
@@ -17642,7 +20561,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_OCCUPANCY.VN1_RSP",
@@ -17654,7 +20575,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN0_RSP",
@@ -17666,7 +20589,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN0_WB",
@@ -17678,7 +20603,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN0_NCB",
@@ -17690,7 +20617,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN0_NCS",
@@ -17702,7 +20631,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN1_RSP",
@@ -17714,7 +20645,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN1_WB",
@@ -17726,7 +20659,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN1_NCB",
@@ -17738,7 +20673,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_ARB_FAIL.VN1_NCS",
@@ -17750,7 +20687,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN0_REQ",
@@ -17762,7 +20701,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN0_SNP",
@@ -17774,7 +20715,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN0_RSP",
@@ -17786,7 +20729,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN0_WB",
@@ -17798,7 +20743,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN1_REQ",
@@ -17810,7 +20757,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN1_SNP",
@@ -17822,7 +20771,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN1_RSP",
@@ -17834,7 +20785,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_CYCLES_NE.VN1_WB",
@@ -17846,7 +20799,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN0_NCB",
@@ -17858,7 +20813,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN0_NCS",
@@ -17870,7 +20827,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN0_WB",
@@ -17882,7 +20841,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN0_RSP",
@@ -17894,7 +20855,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN1_NCB",
@@ -17906,7 +20869,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN1_NCS",
@@ -17918,7 +20883,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN1_WB",
@@ -17930,7 +20897,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_INSERTS.VN1_RSP",
@@ -17942,7 +20911,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN0_RSP",
@@ -17954,7 +20925,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN0_WB",
@@ -17966,7 +20939,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN0_NCB",
@@ -17978,7 +20953,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN0_NCS",
@@ -17990,7 +20967,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN1_RSP",
@@ -18002,7 +20981,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN1_WB",
@@ -18014,7 +20995,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN1_NCB",
@@ -18026,7 +21009,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_FLQ_OCCUPANCY.VN1_NCS",
@@ -18038,7 +21023,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN0_LOCAL",
@@ -18050,7 +21037,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN0_THROUGH",
@@ -18062,7 +21051,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN0_WRPULL",
@@ -18074,7 +21065,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN1_LOCAL",
@@ -18086,7 +21079,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN1_THROUGH",
@@ -18098,7 +21093,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_BL_WB_FLQ_OCCUPANCY.VN1_WRPULL",
@@ -18110,7 +21107,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VNA",
@@ -18122,7 +21121,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_REQ",
@@ -18134,7 +21135,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_SNP",
@@ -18146,7 +21149,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_RSP",
@@ -18158,7 +21163,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_REQ",
@@ -18170,7 +21177,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_SNP",
@@ -18182,7 +21191,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_RSP",
@@ -18194,7 +21205,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VNA",
@@ -18206,7 +21219,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN0_RSP",
@@ -18218,7 +21233,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN0_NCS_NCB",
@@ -18230,7 +21247,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN0_WB",
@@ -18242,7 +21261,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_RSP",
@@ -18254,7 +21275,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_NCS_NCB",
@@ -18266,7 +21289,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_WB",
@@ -18278,7 +21303,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.REQ",
@@ -18290,7 +21317,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.SNP",
@@ -18302,7 +21331,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.RSP",
@@ -18314,7 +21345,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.WB",
@@ -18326,7 +21359,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.NCB",
@@ -18338,7 +21373,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_CREDITS_USED.NCS",
@@ -18350,7 +21387,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.REQ",
@@ -18362,7 +21401,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.SNP",
@@ -18374,7 +21415,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.RSP",
@@ -18386,7 +21429,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.WB",
@@ -18398,7 +21443,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.NCB",
@@ -18410,7 +21457,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN0_NO_CREDITS.NCS",
@@ -18422,7 +21471,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.REQ",
@@ -18434,7 +21485,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.SNP",
@@ -18446,7 +21499,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.RSP",
@@ -18458,7 +21513,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.WB",
@@ -18470,7 +21527,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.NCB",
@@ -18482,7 +21541,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_CREDITS_USED.NCS",
@@ -18494,7 +21555,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.REQ",
@@ -18506,7 +21569,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.SNP",
@@ -18518,7 +21583,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.RSP",
@@ -18530,7 +21597,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.WB",
@@ -18542,7 +21611,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.NCB",
@@ -18554,7 +21625,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_VN1_NO_CREDITS.NCS",
@@ -18566,7 +21639,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_GT_LOCALDEST_VN0",
@@ -18578,7 +21653,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_EQ_LOCALDEST_VN0",
@@ -18590,7 +21667,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_LT_LOCALDEST_VN0",
@@ -18602,7 +21681,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_GT_LOCALDEST_VN1",
@@ -18614,7 +21695,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_EQ_LOCALDEST_VN1",
@@ -18626,7 +21709,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.RT_LT_LOCALDEST_VN1",
@@ -18638,7 +21723,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_GT_LOCALDEST_VN0",
@@ -18650,7 +21737,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_EQ_LOCALDEST_VN0",
@@ -18662,7 +21751,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_LT_LOCALDEST_VN0",
@@ -18674,7 +21765,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_GT_LOCALDEST_VN1",
@@ -18686,7 +21779,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_EQ_LOCALDEST_VN1",
@@ -18698,7 +21793,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_OCC_COMPARE.BOTHNONZERO_RT_LT_LOCALDEST_VN1",
@@ -18710,7 +21807,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.LOCALDEST_VN0",
@@ -18722,7 +21821,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.ROUTETHRU_VN0",
@@ -18734,7 +21835,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.LOCAL_AND_RT_VN0",
@@ -18746,7 +21849,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.WAITING4PULL_VN0",
@@ -18758,7 +21863,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.LOCALDEST_VN1",
@@ -18770,7 +21877,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.ROUTETHRU_VN1",
@@ -18782,7 +21891,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.LOCAL_AND_RT_VN1",
@@ -18794,7 +21905,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_WB_PENDING.WAITING4PULL_VN1",
@@ -18806,7 +21919,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.ARRIVED",
@@ -18818,7 +21933,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.BYPASS",
@@ -18830,7 +21947,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.ARB",
@@ -18842,7 +21961,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.LOST_ARB",
@@ -18854,7 +21975,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.FLITTED",
@@ -18866,7 +21989,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.LOST_OLD",
@@ -18878,7 +22003,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_XPT_PFTCH.LOST_QFULL",
@@ -18890,7 +22017,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AK_FLQ_INSERTS",
@@ -18902,7 +22031,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AK_FLQ_OCCUPANCY",
@@ -18914,7 +22045,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.IIO1_NCB",
@@ -18926,7 +22059,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_M2_BL_CREDITS_EMPTY.UBOX_NCB",
@@ -18938,7 +22073,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WBMTOE",
@@ -18950,7 +22087,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WBEFTOI",
@@ -18962,7 +22101,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_WBSTOI",
@@ -18974,7 +22115,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IO_MESF",
@@ -18986,7 +22129,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IO_E",
@@ -18998,7 +22143,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IO_FS",
@@ -19010,7 +22157,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_VICTIMS.IO_M",
@@ -19022,7 +22171,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.ALL_PARTS",
@@ -19034,7 +22185,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.ALL_PARTS",
@@ -19046,7 +22199,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.ALL_PARTS",
@@ -19058,7 +22213,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.MEM_READ.ALL_PARTS",
@@ -19070,7 +22227,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_OF_CPU.CMPD.ALL_PARTS",
@@ -19082,7 +22241,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_HCLOCKTICKS",
@@ -19094,7 +22255,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.RD",
@@ -19106,7 +22269,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.WR",
@@ -19118,7 +22283,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.ALL",
@@ -19130,7 +22297,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.RD_PCH0",
@@ -19142,7 +22311,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.WR_PCH0",
@@ -19154,7 +22325,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.UFILL_PCH0",
@@ -19166,7 +22339,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.RD_PCH1",
@@ -19178,7 +22353,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.WR_PCH1",
@@ -19190,7 +22367,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.UFILL_PCH1",
@@ -19202,7 +22381,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_ACT_COUNT.UFILL",
@@ -19214,7 +22395,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.RD",
@@ -19226,7 +22409,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.WR",
@@ -19238,7 +22423,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.PGT",
@@ -19250,7 +22437,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.ALL",
@@ -19262,7 +22451,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.RD_PCH0",
@@ -19274,7 +22465,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.WR_PCH0",
@@ -19286,7 +22479,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.UFILL_PCH0",
@@ -19298,7 +22493,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.PGT_PCH0",
@@ -19310,7 +22507,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.RD_PCH1",
@@ -19322,7 +22521,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.WR_PCH1",
@@ -19334,7 +22535,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.UFILL_PCH1",
@@ -19346,7 +22549,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.PGT_PCH1",
@@ -19358,7 +22563,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_PRE_COUNT.UFILL",
@@ -19370,7 +22577,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.RD_REG",
@@ -19382,7 +22591,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.RD_UNDERFILL",
@@ -19394,7 +22605,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.RD",
@@ -19406,7 +22619,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.WR",
@@ -19418,7 +22633,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.ALL",
@@ -19430,7 +22647,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.RD_PRE_REG",
@@ -19442,7 +22661,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.RD_PRE_UNDERFILL",
@@ -19454,7 +22675,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.WR_PRE",
@@ -19466,7 +22689,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.WR_NONPRE",
@@ -19478,7 +22703,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.PCH0",
@@ -19490,7 +22717,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_COUNT.PCH1",
@@ -19502,7 +22731,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.RD_64B",
@@ -19514,7 +22745,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.RD_UFILL_64B",
@@ -19526,7 +22759,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.WR_64B",
@@ -19538,7 +22773,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.RD_32B",
@@ -19550,7 +22787,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.RD_UFILL_32B",
@@ -19562,7 +22801,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.WR_32B",
@@ -19574,7 +22815,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.PCH0",
@@ -19586,7 +22829,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_CAS_ISSUED_REQ_LEN.PCH1",
@@ -19598,7 +22843,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RPQ_INSERTS.PCH0",
@@ -19610,7 +22857,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RPQ_INSERTS.PCH1",
@@ -19622,7 +22871,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RDB_INSERTS",
@@ -19634,7 +22885,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RDB_INSERTS.PCH0",
@@ -19646,7 +22899,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RDB_INSERTS.PCH1",
@@ -19658,7 +22913,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RDB_FULL",
@@ -19670,7 +22927,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RDB_OCCUPANCY",
@@ -19682,7 +22941,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_INSERTS.PCH0",
@@ -19694,7 +22955,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_INSERTS.PCH1",
@@ -19706,7 +22969,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_READ_HIT.PCH0",
@@ -19718,7 +22983,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_READ_HIT.PCH1",
@@ -19730,7 +22997,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_WRITE_HIT.PCH0",
@@ -19742,7 +23011,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_WRITE_HIT.PCH1",
@@ -19754,7 +23025,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_HBM_PRE_ALL",
@@ -19766,7 +23039,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_HBM_PREALL.PCH0",
@@ -19778,7 +23053,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_HBM_PREALL.PCH1",
@@ -19790,7 +23067,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RPQ_OCCUPANCY_PCH0",
@@ -19802,7 +23081,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_RPQ_OCCUPANCY_PCH1",
@@ -19814,7 +23095,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_OCCUPANCY_PCH0",
@@ -19826,7 +23109,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_OCCUPANCY_PCH1",
@@ -19838,7 +23123,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_ALLOC.NM_RD",
@@ -19850,7 +23137,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_ALLOC.NM_WR",
@@ -19862,7 +23151,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_OCC.NM_RD",
@@ -19874,7 +23165,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_OCC.FM_RD",
@@ -19886,7 +23179,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_OCC.NM_WR",
@@ -19898,7 +23193,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_OCC.FM_WR",
@@ -19910,7 +23207,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_OCC.FM_TGR",
@@ -19922,7 +23221,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.NM_RD_STARVED",
@@ -19934,7 +23235,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.NM_WR_STARVED",
@@ -19946,7 +23249,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.FM_RD_STARVED",
@@ -19958,7 +23263,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.FM_WR_STARVED",
@@ -19970,7 +23277,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_CANARY.FM_TGR_WR_STARVED",
@@ -19982,7 +23291,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_DEALLOC.NM_RD",
@@ -19994,7 +23305,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_DEALLOC.FM_RD",
@@ -20006,7 +23319,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_DEALLOC.NM_WR",
@@ -20018,7 +23333,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_DEALLOC.FM_WR",
@@ -20030,7 +23347,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_DEALLOC.FM_TGR",
@@ -20042,7 +23361,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_OCCUPANCY.DDR",
@@ -20054,7 +23375,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_ALLOC.FM_RD",
@@ -20066,7 +23389,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_ALLOC.FM_WR",
@@ -20078,7 +23403,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_STRV_ALLOC.FM_TGR",
@@ -20090,7 +23417,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_LLC_LOOKUP.COREPREF_OR_DMND_LOCAL_F",
@@ -20102,7 +23431,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.SLPWC_1G_HITS",
@@ -20114,7 +23445,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.SLPWC_256T_HITS",
@@ -20126,7 +23459,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU1.SLPWC_512G_HITS",
@@ -20138,7 +23473,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_IOMMU3.PWT_OCCUPANCY_MSB",
@@ -20150,7 +23487,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_NOT_TAKEN_DIRSTATE.EGRESS",
@@ -20162,7 +23501,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_NOT_TAKEN_DIRSTATE.NON_CISGRESS",
@@ -20174,7 +23515,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_DIRECT2UPI_NOT_TAKEN_DIRSTATE.CISGRESS",
@@ -20186,7 +23529,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_NORMAL",
@@ -20198,7 +23543,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_ALL",
@@ -20210,7 +23557,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_TO_PMM",
@@ -20222,7 +23571,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_NORMAL",
@@ -20234,7 +23585,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_ALL",
@@ -20246,7 +23599,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_TO_PMM",
@@ -20258,7 +23613,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_FULL",
@@ -20270,7 +23627,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_PARTIAL",
@@ -20282,7 +23641,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_ALL",
@@ -20294,7 +23655,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_TO_PMM",
@@ -20306,7 +23669,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_FULL",
@@ -20318,7 +23683,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_PARTIAL",
@@ -20330,7 +23697,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_ALL",
@@ -20342,7 +23711,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_TO_PMM",
@@ -20354,7 +23725,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IGR_STARVE_WINNER.MASK7",
@@ -20366,7 +23739,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_DRDPTE",
@@ -20378,7 +23753,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRDPTE",
@@ -20390,7 +23767,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRDPTE",
@@ -20402,7 +23781,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IO_ITOMCACHENEAR",
@@ -20414,7 +23795,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_WPQ_READ_HIT",
@@ -20426,7 +23809,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_WPQ_WRITE_HIT",
@@ -20438,7 +23823,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_SB_PREF_OCCUPANCY.PMM",
@@ -20450,7 +23837,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CYCLES_NE.PMM_DISTRESS_1",
@@ -20462,7 +23851,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CYCLES_NE.PMM_DISTRESS_0",
@@ -20474,7 +23865,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CYCLES_FULL.PMM_BLOCK_1",
@@ -20486,7 +23879,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2pcie,
       "UNC_M2P_TxC_CYCLES_FULL.PMM_BLOCK_0",
@@ -20498,7 +23893,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m3upi,
       "UNC_M3UPI_TxC_AD_FLQ_BYPASS",
@@ -20510,7 +23907,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.SLOT0",
@@ -20522,7 +23921,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.SLOT1",
@@ -20534,7 +23935,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.SLOT2",
@@ -20546,7 +23949,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.DATA",
@@ -20558,7 +23963,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.LLCRD",
@@ -20570,7 +23977,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.NULL",
@@ -20582,7 +23991,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.LLCTRL",
@@ -20594,7 +24005,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_ANY_FLITS.PROTHDR",
@@ -20606,7 +24019,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.SLOT0",
@@ -20618,7 +24033,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.SLOT1",
@@ -20630,7 +24047,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.SLOT2",
@@ -20642,7 +24061,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.DATA",
@@ -20654,7 +24075,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.LLCRD",
@@ -20666,7 +24089,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.NULL",
@@ -20678,7 +24103,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.LLCTRL",
@@ -20690,7 +24117,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_ANY_FLITS.PROTHDR",
@@ -20702,7 +24131,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_RxL_CREDITS_CONSUMED_VNA",
@@ -20714,7 +24145,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFOMORPH_CXL_ACC",
@@ -20726,7 +24159,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRDMORPH_CXL_ACC",
@@ -20738,7 +24173,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRDMORPH_CXL_ACC",
@@ -20750,7 +24187,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFCODE_CXL_ACC",
@@ -20762,7 +24201,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFOMORPH_CXL_ACC",
@@ -20774,7 +24215,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_CRDMORPH_CXL_ACC",
@@ -20786,7 +24229,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRDMORPH_CXL_ACC",
@@ -20798,7 +24243,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFCODE_CXL_ACC",
@@ -20810,7 +24257,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.ALL_PROTHDR",
@@ -20822,7 +24271,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.ALL_LLCTRL",
@@ -20834,7 +24285,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_upi,
       "UNC_UPI_TxL_FLITS.ALL_LLCRD",
@@ -20846,7 +24299,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_TO_DDR_AS_MEM",
@@ -20858,7 +24313,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH0_TO_DDR_AS_CACHE",
@@ -20870,7 +24327,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_TO_DDR_AS_MEM",
@@ -20882,7 +24341,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.CH1_TO_DDR_AS_CACHE",
@@ -20894,7 +24355,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.TO_DDR_AS_MEM",
@@ -20906,7 +24369,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_READS.TO_DDR_AS_CACHE",
@@ -20918,7 +24383,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.TO_DDR_AS_MEM",
@@ -20930,7 +24397,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.TO_DDR_AS_CACHE",
@@ -20942,7 +24411,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH0_NI",
@@ -20954,7 +24425,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_IMC_WRITES.CH1_NI",
@@ -20966,7 +24439,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_PREFCAM_RxC_OCCUPANCY",
@@ -20978,7 +24453,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_READ_HIT",
@@ -20990,7 +24467,9 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_mchbm,
       "UNC_MCHBM_WPQ_WRITE_HIT",
@@ -21002,6 +24481,7 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace sapphirerapids_uncore_experimental

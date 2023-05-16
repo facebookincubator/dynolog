@@ -12,12 +12,13 @@ namespace facebook::hbt::perf_event::generated {
 namespace nehalemex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from NehalemEX_core.json (553 events).
+/*
+  Events from NehalemEX_core.json (553 events).
 
-    Supported SKUs:
-        - Arch: x86, Model: NHM-EX id: 46
-  */
+  Supported SKUs:
+      - Arch: x86, Model: NHM-EX id: 46
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ARITH.CYCLES_DIV_BUSY",
@@ -30,7 +31,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ARITH.DIV",
@@ -48,7 +51,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ARITH.MUL",
@@ -61,7 +66,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEAR.BAD_TARGET",
@@ -74,7 +81,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEAR.CLEAR",
@@ -87,7 +96,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEAR_FORCE_IQ",
@@ -100,7 +111,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BPU_CLEARS.EARLY",
@@ -113,7 +126,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BPU_CLEARS.LATE",
@@ -126,7 +141,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BPU_MISSED_CALL_RET",
@@ -139,7 +156,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_DECODED",
@@ -152,7 +171,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ANY",
@@ -165,7 +186,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.COND",
@@ -178,7 +201,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.DIRECT",
@@ -191,7 +216,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.DIRECT_NEAR_CALL",
@@ -204,7 +231,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.INDIRECT_NEAR_CALL",
@@ -217,7 +246,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.INDIRECT_NON_CALL",
@@ -230,7 +261,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.NEAR_CALLS",
@@ -243,7 +276,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.NON_CALLS",
@@ -256,7 +291,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.RETURN_NEAR",
@@ -269,7 +306,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN",
@@ -282,7 +321,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -295,7 +336,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.CONDITIONAL",
@@ -308,7 +351,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_CALL",
@@ -321,7 +366,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.ANY",
@@ -334,7 +381,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.COND",
@@ -347,7 +396,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.DIRECT",
@@ -360,7 +411,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.DIRECT_NEAR_CALL",
@@ -373,7 +426,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.INDIRECT_NEAR_CALL",
@@ -386,7 +441,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.INDIRECT_NON_CALL",
@@ -399,7 +456,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.NEAR_CALLS",
@@ -412,7 +471,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.NON_CALLS",
@@ -425,7 +486,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.RETURN_NEAR",
@@ -438,7 +501,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.TAKEN",
@@ -451,7 +516,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.NEAR_CALL",
@@ -464,7 +531,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CACHE_LOCK_CYCLES.L1D",
@@ -477,7 +546,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CACHE_LOCK_CYCLES.L1D_L2",
@@ -490,7 +561,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF",
@@ -503,7 +576,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_P",
@@ -516,7 +591,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD",
@@ -529,7 +606,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P",
@@ -542,7 +621,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.TOTAL_CYCLES",
@@ -559,7 +640,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.ANY",
@@ -572,7 +655,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.PDE_MISS",
@@ -585,7 +670,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.STLB_HIT",
@@ -598,7 +685,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -611,7 +700,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_MISSES.ANY",
@@ -624,7 +715,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_MISSES.STLB_HIT",
@@ -637,7 +730,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_MISSES.WALK_COMPLETED",
@@ -650,7 +745,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ES_REG_RENAMES",
@@ -663,7 +760,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.ALL",
@@ -676,7 +775,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.INPUT",
@@ -689,7 +790,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.OUTPUT",
@@ -702,7 +805,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.MMX",
@@ -715,7 +820,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE_DOUBLE_PRECISION",
@@ -728,7 +835,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE_FP",
@@ -741,7 +850,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE_FP_PACKED",
@@ -754,7 +865,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE_FP_SCALAR",
@@ -767,7 +880,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE_SINGLE_PRECISION",
@@ -780,7 +895,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.SSE2_INTEGER",
@@ -793,7 +910,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_COMP_OPS_EXE.X87",
@@ -806,7 +925,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_MMX_TRANS.ANY",
@@ -819,7 +940,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_MMX_TRANS.TO_FP",
@@ -832,7 +955,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_MMX_TRANS.TO_MMX",
@@ -845,7 +970,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.ANY",
@@ -858,7 +985,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.IQ_FULL",
@@ -871,7 +1000,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.LCP",
@@ -884,7 +1015,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.MRU",
@@ -897,7 +1030,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.REGEN",
@@ -910,7 +1045,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_DECODED.DEC0",
@@ -923,7 +1060,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_QUEUE_WRITE_CYCLES",
@@ -936,7 +1075,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_QUEUE_WRITES",
@@ -949,7 +1090,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY",
@@ -962,7 +1105,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY_P",
@@ -975,7 +1120,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.MMX",
@@ -988,7 +1135,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.TOTAL_CYCLES",
@@ -1005,7 +1154,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.X87",
@@ -1018,7 +1169,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IO_TRANSACTIONS",
@@ -1031,7 +1184,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_FLUSH",
@@ -1044,7 +1199,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISS_RETIRED",
@@ -1057,7 +1214,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.ANY",
@@ -1070,7 +1229,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
@@ -1083,7 +1244,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.M_EVICT",
@@ -1096,7 +1259,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.M_REPL",
@@ -1109,7 +1274,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.M_SNOOP_EVICT",
@@ -1122,7 +1289,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.REPL",
@@ -1135,7 +1304,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_ALL_REF.ANY",
@@ -1148,7 +1319,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_ALL_REF.CACHEABLE",
@@ -1161,7 +1334,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LD.E_STATE",
@@ -1174,7 +1349,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LD.I_STATE",
@@ -1187,7 +1364,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LD.M_STATE",
@@ -1200,7 +1379,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LD.MESI",
@@ -1213,7 +1394,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LD.S_STATE",
@@ -1226,7 +1409,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LOCK.E_STATE",
@@ -1239,7 +1424,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LOCK.HIT",
@@ -1252,7 +1439,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LOCK.M_STATE",
@@ -1265,7 +1454,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LOCK.S_STATE",
@@ -1278,7 +1469,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_LOCK_FB_HIT",
@@ -1291,7 +1484,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_PREFETCH_LOCK_FB_HIT",
@@ -1304,7 +1499,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_ST.E_STATE",
@@ -1317,7 +1514,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_ST.M_STATE",
@@ -1330,7 +1529,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_CACHE_ST.S_STATE",
@@ -1343,7 +1544,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PREFETCH.MISS",
@@ -1356,7 +1559,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PREFETCH.REQUESTS",
@@ -1369,7 +1574,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PREFETCH.TRIGGERS",
@@ -1382,7 +1589,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_WB_L2.E_STATE",
@@ -1395,7 +1604,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_WB_L2.I_STATE",
@@ -1408,7 +1619,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_WB_L2.M_STATE",
@@ -1421,7 +1634,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_WB_L2.MESI",
@@ -1434,7 +1649,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_WB_L2.S_STATE",
@@ -1447,7 +1664,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1I.CYCLES_STALLED",
@@ -1460,7 +1679,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1I.HITS",
@@ -1473,7 +1694,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1I.MISSES",
@@ -1486,7 +1709,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1I.READS",
@@ -1499,7 +1724,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.ANY",
@@ -1512,7 +1739,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.DEMAND.E_STATE",
@@ -1525,7 +1754,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.DEMAND.I_STATE",
@@ -1538,7 +1769,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.DEMAND.M_STATE",
@@ -1551,7 +1784,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.DEMAND.MESI",
@@ -1564,7 +1799,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.DEMAND.S_STATE",
@@ -1577,7 +1814,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.PREFETCH.E_STATE",
@@ -1590,7 +1829,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.PREFETCH.I_STATE",
@@ -1603,7 +1844,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.PREFETCH.M_STATE",
@@ -1616,7 +1859,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.PREFETCH.MESI",
@@ -1629,7 +1874,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DATA_RQSTS.PREFETCH.S_STATE",
@@ -1642,7 +1889,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.ANY",
@@ -1655,7 +1904,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.E_STATE",
@@ -1668,7 +1919,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.S_STATE",
@@ -1681,7 +1934,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.ANY",
@@ -1694,7 +1949,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.DEMAND_CLEAN",
@@ -1707,7 +1964,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.DEMAND_DIRTY",
@@ -1720,7 +1979,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.PREFETCH_CLEAN",
@@ -1733,7 +1994,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.PREFETCH_DIRTY",
@@ -1746,7 +2009,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.IFETCH_HIT",
@@ -1759,7 +2024,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.IFETCH_MISS",
@@ -1772,7 +2039,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.IFETCHES",
@@ -1785,7 +2054,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.LD_HIT",
@@ -1798,7 +2069,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.LD_MISS",
@@ -1811,7 +2084,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.LOADS",
@@ -1824,7 +2099,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event L2_RQSTS.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.MISS",
@@ -1838,6 +2115,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.PREFETCH_HIT",
@@ -1850,7 +2128,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.PREFETCH_MISS",
@@ -1863,7 +2143,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.PREFETCHES",
@@ -1876,7 +2158,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.REFERENCES",
@@ -1889,7 +2173,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_HIT",
@@ -1902,7 +2188,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_MISS",
@@ -1915,7 +2203,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFOS",
@@ -1928,7 +2218,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.ANY",
@@ -1941,7 +2233,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.FILL",
@@ -1954,7 +2248,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.IFETCH",
@@ -1967,7 +2263,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.L1D_WB",
@@ -1980,7 +2278,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.LOAD",
@@ -1993,7 +2293,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.PREFETCH",
@@ -2006,7 +2308,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.RFO",
@@ -2019,7 +2323,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANSACTIONS.WB",
@@ -2032,7 +2338,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.E_STATE",
@@ -2045,7 +2353,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.HIT",
@@ -2058,7 +2368,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.I_STATE",
@@ -2071,7 +2383,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.M_STATE",
@@ -2084,7 +2398,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.MESI",
@@ -2097,7 +2413,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.LOCK.S_STATE",
@@ -2110,7 +2428,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.RFO.HIT",
@@ -2123,7 +2443,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.RFO.I_STATE",
@@ -2136,7 +2458,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.RFO.M_STATE",
@@ -2149,7 +2473,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.RFO.MESI",
@@ -2162,7 +2488,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_WRITE.RFO.S_STATE",
@@ -2175,7 +2503,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LARGE_ITLB.HIT",
@@ -2188,7 +2518,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_DISPATCH.ANY",
@@ -2201,7 +2533,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_DISPATCH.MOB",
@@ -2214,7 +2548,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_DISPATCH.RS",
@@ -2227,7 +2563,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_DISPATCH.RS_DELAYED",
@@ -2240,7 +2578,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_HIT_PRE",
@@ -2253,7 +2593,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event LONGEST_LAT_CACHE.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.MISS",
@@ -2267,6 +2609,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.REFERENCE",
@@ -2279,7 +2622,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.ACTIVE",
@@ -2292,7 +2637,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.INACTIVE",
@@ -2309,7 +2656,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD_OVERFLOW",
@@ -2322,7 +2671,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.CYCLES",
@@ -2335,7 +2686,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.MEM_ORDER",
@@ -2348,7 +2701,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.SMC",
@@ -2361,7 +2716,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACRO_INSTS.DECODED",
@@ -2374,7 +2731,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACRO_INSTS.FUSIONS_DECODED",
@@ -2387,7 +2746,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LOADS",
@@ -2400,7 +2761,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.STORES",
@@ -2413,7 +2776,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.DTLB_MISS",
@@ -2426,7 +2791,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.HIT_LFB",
@@ -2439,7 +2806,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L1D_HIT",
@@ -2452,7 +2821,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L2_HIT",
@@ -2465,7 +2836,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.LLC_MISS",
@@ -2478,7 +2851,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.LLC_UNSHARED_HIT",
@@ -2491,7 +2866,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.OTHER_CORE_L2_HIT_HITM",
@@ -2504,7 +2881,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_STORE_RETIRED.DTLB_MISS",
@@ -2517,7 +2896,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.L1D_WRITEBACK",
@@ -2530,7 +2911,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_SQ_FULL",
@@ -2543,7 +2926,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PARTIAL_ADDRESS_ALIAS",
@@ -2556,7 +2941,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RAT_STALLS.ANY",
@@ -2569,7 +2956,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RAT_STALLS.FLAGS",
@@ -2582,7 +2971,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RAT_STALLS.REGISTERS",
@@ -2595,7 +2986,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RAT_STALLS.ROB_READ_PORT",
@@ -2608,7 +3001,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RAT_STALLS.SCOREBOARD",
@@ -2621,7 +3016,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.ANY",
@@ -2634,7 +3031,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.FPCW",
@@ -2647,7 +3046,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.LOAD",
@@ -2660,7 +3061,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.MXCSR",
@@ -2673,7 +3076,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.OTHER",
@@ -2686,7 +3091,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.ROB_FULL",
@@ -2699,7 +3106,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.RS_FULL",
@@ -2712,7 +3121,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.STORE",
@@ -2725,7 +3136,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SB_DRAIN.ANY",
@@ -2738,7 +3151,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SEG_RENAME_STALLS",
@@ -2751,7 +3166,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.PACK",
@@ -2764,7 +3181,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.PACKED_ARITH",
@@ -2777,7 +3196,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.PACKED_LOGICAL",
@@ -2790,7 +3211,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.PACKED_MPY",
@@ -2803,7 +3226,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.PACKED_SHIFT",
@@ -2816,7 +3241,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.SHUFFLE_MOVE",
@@ -2829,7 +3256,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_128.UNPACK",
@@ -2842,7 +3271,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.PACK",
@@ -2855,7 +3286,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.PACKED_ARITH",
@@ -2868,7 +3301,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.PACKED_LOGICAL",
@@ -2881,7 +3316,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.PACKED_MPY",
@@ -2894,7 +3331,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.PACKED_SHIFT",
@@ -2907,7 +3346,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.SHUFFLE_MOVE",
@@ -2920,7 +3361,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SIMD_INT_64.UNPACK",
@@ -2933,7 +3376,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SNOOP_RESPONSE.HIT",
@@ -2946,7 +3391,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SNOOP_RESPONSE.HITE",
@@ -2959,7 +3406,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SNOOP_RESPONSE.HITM",
@@ -2972,7 +3421,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SQ_FULL_STALL_CYCLES",
@@ -2985,7 +3436,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SQ_MISC.SPLIT_LOCK",
@@ -2998,7 +3451,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SSEX_UOPS_RETIRED.PACKED_DOUBLE",
@@ -3011,7 +3466,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SSEX_UOPS_RETIRED.PACKED_SINGLE",
@@ -3024,7 +3481,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SSEX_UOPS_RETIRED.SCALAR_DOUBLE",
@@ -3037,7 +3496,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SSEX_UOPS_RETIRED.SCALAR_SINGLE",
@@ -3050,7 +3511,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SSEX_UOPS_RETIRED.VECTOR_INTEGER",
@@ -3063,7 +3526,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "STORE_BLOCKS.AT_RET",
@@ -3076,7 +3541,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "STORE_BLOCKS.L1D_BLOCK",
@@ -3089,7 +3556,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TWO_UOP_INSTS_DECODED",
@@ -3102,7 +3571,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOP_UNFUSION",
@@ -3115,7 +3586,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DECODED.ESP_FOLDING",
@@ -3128,7 +3601,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DECODED.ESP_SYNC",
@@ -3141,7 +3616,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DECODED.MS_CYCLES_ACTIVE",
@@ -3154,7 +3631,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DECODED.STALL_CYCLES",
@@ -3171,7 +3650,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_ACTIVE_CYCLES",
@@ -3188,7 +3669,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_ACTIVE_CYCLES_NO_PORT5",
@@ -3205,7 +3688,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_STALL_COUNT",
@@ -3224,7 +3709,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_STALL_COUNT_NO_PORT5",
@@ -3243,7 +3730,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_STALL_CYCLES",
@@ -3261,7 +3750,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_STALL_CYCLES_NO_PORT5",
@@ -3279,7 +3770,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT0",
@@ -3292,7 +3785,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT015",
@@ -3305,7 +3800,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT015_STALL_CYCLES",
@@ -3322,7 +3819,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT1",
@@ -3335,7 +3834,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT2_CORE",
@@ -3352,7 +3853,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT234_CORE",
@@ -3369,7 +3872,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT3_CORE",
@@ -3386,7 +3891,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT4_CORE",
@@ -3403,7 +3910,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.PORT5",
@@ -3416,7 +3925,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_ISSUED.ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.ANY",
@@ -3430,6 +3941,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.CORE_STALL_CYCLES",
@@ -3447,7 +3959,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.CYCLES_ALL_THREADS",
@@ -3464,7 +3978,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.FUSED",
@@ -3477,7 +3993,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.STALL_CYCLES",
@@ -3494,7 +4012,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.ACTIVE_CYCLES",
@@ -3507,7 +4027,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.ANY",
@@ -3520,7 +4042,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.MACRO_FUSED",
@@ -3533,7 +4057,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_RETIRED.RETIRE_SLOTS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.RETIRE_SLOTS",
@@ -3547,6 +4073,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.STALL_CYCLES",
@@ -3563,7 +4090,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.TOTAL_CYCLES",
@@ -3580,7 +4109,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.TOTAL_CYCLES_PS",
@@ -3597,7 +4128,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_0",
@@ -3610,7 +4143,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_1024",
@@ -3623,7 +4158,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_128",
@@ -3636,7 +4173,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_16",
@@ -3649,7 +4188,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_16384",
@@ -3662,7 +4203,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_2048",
@@ -3675,7 +4218,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_256",
@@ -3688,7 +4233,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_32",
@@ -3701,7 +4248,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_32768",
@@ -3714,7 +4263,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_4",
@@ -3727,7 +4278,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_4096",
@@ -3740,7 +4293,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_512",
@@ -3753,7 +4308,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_64",
@@ -3766,7 +4323,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_8",
@@ -3779,7 +4338,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LATENCY_ABOVE_THRESHOLD_8192",
@@ -3792,7 +4353,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.ANY_CACHE_DRAM",
@@ -3805,7 +4368,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.ANY_DRAM",
@@ -3818,7 +4383,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.ANY_LLC_MISS",
@@ -3831,7 +4398,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.ANY_LOCATION",
@@ -3844,7 +4413,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.IO_CSR_MMIO",
@@ -3857,7 +4428,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LLC_HIT_NO_OTHER_CORE",
@@ -3870,7 +4443,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LLC_HIT_OTHER_CORE_HIT",
@@ -3883,7 +4458,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LLC_HIT_OTHER_CORE_HITM",
@@ -3896,7 +4473,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LOCAL_CACHE",
@@ -3909,7 +4488,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LOCAL_CACHE_DRAM",
@@ -3922,7 +4503,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.LOCAL_DRAM",
@@ -3935,7 +4518,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.REMOTE_CACHE",
@@ -3948,7 +4533,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.REMOTE_CACHE_DRAM",
@@ -3961,7 +4548,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.REMOTE_CACHE_HIT",
@@ -3974,7 +4563,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.REMOTE_CACHE_HITM",
@@ -3987,7 +4578,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_DATA.REMOTE_DRAM",
@@ -4000,7 +4593,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.ANY_CACHE_DRAM",
@@ -4013,7 +4608,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.ANY_DRAM",
@@ -4026,7 +4623,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.ANY_LLC_MISS",
@@ -4039,7 +4638,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.ANY_LOCATION",
@@ -4052,7 +4653,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.IO_CSR_MMIO",
@@ -4065,7 +4668,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LLC_HIT_NO_OTHER_CORE",
@@ -4078,7 +4683,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LLC_HIT_OTHER_CORE_HIT",
@@ -4091,7 +4698,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LLC_HIT_OTHER_CORE_HITM",
@@ -4104,7 +4713,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LOCAL_CACHE",
@@ -4117,7 +4728,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LOCAL_CACHE_DRAM",
@@ -4130,7 +4743,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.LOCAL_DRAM",
@@ -4143,7 +4758,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.REMOTE_CACHE",
@@ -4156,7 +4773,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.REMOTE_CACHE_DRAM",
@@ -4169,7 +4788,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.REMOTE_CACHE_HIT",
@@ -4182,7 +4803,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.REMOTE_CACHE_HITM",
@@ -4195,7 +4818,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_IFETCH.REMOTE_DRAM",
@@ -4208,7 +4833,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.ANY_CACHE_DRAM",
@@ -4221,7 +4848,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.ANY_DRAM",
@@ -4234,7 +4863,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.ANY_LLC_MISS",
@@ -4247,7 +4878,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.ANY_LOCATION",
@@ -4260,7 +4893,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.IO_CSR_MMIO",
@@ -4273,7 +4908,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LLC_HIT_NO_OTHER_CORE",
@@ -4286,7 +4923,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LLC_HIT_OTHER_CORE_HIT",
@@ -4299,7 +4938,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LLC_HIT_OTHER_CORE_HITM",
@@ -4312,7 +4953,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LOCAL_CACHE",
@@ -4325,7 +4968,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LOCAL_CACHE_DRAM",
@@ -4338,7 +4983,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.LOCAL_DRAM",
@@ -4351,7 +4998,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.REMOTE_CACHE",
@@ -4364,7 +5013,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.REMOTE_CACHE_DRAM",
@@ -4377,7 +5028,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.REMOTE_CACHE_HIT",
@@ -4390,7 +5043,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.REMOTE_CACHE_HITM",
@@ -4403,7 +5058,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_REQUEST.REMOTE_DRAM",
@@ -4416,7 +5073,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.ANY_CACHE_DRAM",
@@ -4429,7 +5088,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.ANY_DRAM",
@@ -4442,7 +5103,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.ANY_LLC_MISS",
@@ -4455,7 +5118,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.ANY_LOCATION",
@@ -4468,7 +5133,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.IO_CSR_MMIO",
@@ -4481,7 +5148,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LLC_HIT_NO_OTHER_CORE",
@@ -4494,7 +5163,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LLC_HIT_OTHER_CORE_HIT",
@@ -4507,7 +5178,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LLC_HIT_OTHER_CORE_HITM",
@@ -4520,7 +5193,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LOCAL_CACHE",
@@ -4533,7 +5208,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LOCAL_CACHE_DRAM",
@@ -4546,7 +5223,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.LOCAL_DRAM",
@@ -4559,7 +5238,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.REMOTE_CACHE",
@@ -4572,7 +5253,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.REMOTE_CACHE_DRAM",
@@ -4585,7 +5268,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.REMOTE_CACHE_HIT",
@@ -4598,7 +5283,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.REMOTE_CACHE_HITM",
@@ -4611,7 +5298,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.ANY_RFO.REMOTE_DRAM",
@@ -4624,7 +5313,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.ANY_CACHE_DRAM",
@@ -4637,7 +5328,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.ANY_DRAM",
@@ -4650,7 +5343,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.ANY_LLC_MISS",
@@ -4663,7 +5358,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.ANY_LOCATION",
@@ -4676,7 +5373,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.IO_CSR_MMIO",
@@ -4689,7 +5388,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.LLC_HIT_NO_OTHER_CORE",
@@ -4702,7 +5403,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.LLC_HIT_OTHER_CORE_HITM",
@@ -4715,7 +5418,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.LOCAL_CACHE",
@@ -4728,7 +5433,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.LOCAL_CACHE_DRAM",
@@ -4741,7 +5448,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.LOCAL_DRAM",
@@ -4754,7 +5463,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.REMOTE_CACHE",
@@ -4767,7 +5478,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.REMOTE_CACHE_DRAM",
@@ -4780,7 +5493,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.REMOTE_CACHE_HIT",
@@ -4793,7 +5508,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.REMOTE_CACHE_HITM",
@@ -4806,7 +5523,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.COREWB.REMOTE_DRAM",
@@ -4819,7 +5538,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.ANY_CACHE_DRAM",
@@ -4832,7 +5553,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.ANY_DRAM",
@@ -4845,7 +5568,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.ANY_LLC_MISS",
@@ -4858,7 +5583,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.ANY_LOCATION",
@@ -4871,7 +5598,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.IO_CSR_MMIO",
@@ -4884,7 +5613,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LLC_HIT_NO_OTHER_CORE",
@@ -4897,7 +5628,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LLC_HIT_OTHER_CORE_HIT",
@@ -4910,7 +5643,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LLC_HIT_OTHER_CORE_HITM",
@@ -4923,7 +5658,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LOCAL_CACHE",
@@ -4936,7 +5673,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LOCAL_CACHE_DRAM",
@@ -4949,7 +5688,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.LOCAL_DRAM",
@@ -4962,7 +5703,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.REMOTE_CACHE",
@@ -4975,7 +5718,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.REMOTE_CACHE_DRAM",
@@ -4988,7 +5733,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.REMOTE_CACHE_HIT",
@@ -5001,7 +5748,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.REMOTE_CACHE_HITM",
@@ -5014,7 +5763,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IFETCH.REMOTE_DRAM",
@@ -5027,7 +5778,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.ANY_CACHE_DRAM",
@@ -5040,7 +5793,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.ANY_DRAM",
@@ -5053,7 +5808,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.ANY_LLC_MISS",
@@ -5066,7 +5823,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.ANY_LOCATION",
@@ -5079,7 +5838,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.IO_CSR_MMIO",
@@ -5092,7 +5853,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_NO_OTHER_CORE",
@@ -5105,7 +5868,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_OTHER_CORE_HIT",
@@ -5118,7 +5883,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LLC_HIT_OTHER_CORE_HITM",
@@ -5131,7 +5898,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LOCAL_CACHE",
@@ -5144,7 +5913,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LOCAL_CACHE_DRAM",
@@ -5157,7 +5928,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.LOCAL_DRAM",
@@ -5170,7 +5943,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE",
@@ -5183,7 +5958,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE_DRAM",
@@ -5196,7 +5973,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE_HIT",
@@ -5209,7 +5988,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_CACHE_HITM",
@@ -5222,7 +6003,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DATA_IN.REMOTE_DRAM",
@@ -5235,7 +6018,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.ANY_CACHE_DRAM",
@@ -5248,7 +6033,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.ANY_DRAM",
@@ -5261,7 +6048,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.ANY_LLC_MISS",
@@ -5274,7 +6063,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.ANY_LOCATION",
@@ -5287,7 +6078,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.IO_CSR_MMIO",
@@ -5300,7 +6093,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LLC_HIT_NO_OTHER_CORE",
@@ -5313,7 +6108,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LLC_HIT_OTHER_CORE_HIT",
@@ -5326,7 +6123,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LLC_HIT_OTHER_CORE_HITM",
@@ -5339,7 +6138,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LOCAL_CACHE",
@@ -5352,7 +6153,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LOCAL_CACHE_DRAM",
@@ -5365,7 +6168,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.LOCAL_DRAM",
@@ -5378,7 +6183,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.REMOTE_CACHE",
@@ -5391,7 +6198,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.REMOTE_CACHE_DRAM",
@@ -5404,7 +6213,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.REMOTE_CACHE_HIT",
@@ -5417,7 +6228,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.REMOTE_CACHE_HITM",
@@ -5430,7 +6243,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA.REMOTE_DRAM",
@@ -5443,7 +6258,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.ANY_CACHE_DRAM",
@@ -5456,7 +6273,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.ANY_DRAM",
@@ -5469,7 +6288,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.ANY_LLC_MISS",
@@ -5482,7 +6303,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.ANY_LOCATION",
@@ -5495,7 +6318,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.IO_CSR_MMIO",
@@ -5508,7 +6333,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LLC_HIT_NO_OTHER_CORE",
@@ -5521,7 +6348,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LLC_HIT_OTHER_CORE_HIT",
@@ -5534,7 +6363,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LLC_HIT_OTHER_CORE_HITM",
@@ -5547,7 +6378,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LOCAL_CACHE",
@@ -5560,7 +6393,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LOCAL_CACHE_DRAM",
@@ -5573,7 +6408,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.LOCAL_DRAM",
@@ -5586,7 +6423,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.REMOTE_CACHE",
@@ -5599,7 +6438,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.REMOTE_CACHE_DRAM",
@@ -5612,7 +6453,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.REMOTE_CACHE_HIT",
@@ -5625,7 +6468,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.REMOTE_CACHE_HITM",
@@ -5638,7 +6483,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_DATA_RD.REMOTE_DRAM",
@@ -5651,7 +6498,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.ANY_CACHE_DRAM",
@@ -5664,7 +6513,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.ANY_DRAM",
@@ -5677,7 +6528,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.ANY_LLC_MISS",
@@ -5690,7 +6543,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.ANY_LOCATION",
@@ -5703,7 +6558,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.IO_CSR_MMIO",
@@ -5716,7 +6573,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LLC_HIT_NO_OTHER_CORE",
@@ -5729,7 +6588,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LLC_HIT_OTHER_CORE_HIT",
@@ -5742,7 +6603,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LLC_HIT_OTHER_CORE_HITM",
@@ -5755,7 +6618,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LOCAL_CACHE",
@@ -5768,7 +6633,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LOCAL_CACHE_DRAM",
@@ -5781,7 +6648,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.LOCAL_DRAM",
@@ -5794,7 +6663,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.REMOTE_CACHE",
@@ -5807,7 +6678,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.REMOTE_CACHE_DRAM",
@@ -5820,7 +6693,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.REMOTE_CACHE_HIT",
@@ -5833,7 +6708,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.REMOTE_CACHE_HITM",
@@ -5846,7 +6723,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_IFETCH.REMOTE_DRAM",
@@ -5859,7 +6738,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.ANY_CACHE_DRAM",
@@ -5872,7 +6753,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.ANY_DRAM",
@@ -5885,7 +6768,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.ANY_LLC_MISS",
@@ -5898,7 +6783,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.ANY_LOCATION",
@@ -5911,7 +6798,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.IO_CSR_MMIO",
@@ -5924,7 +6813,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LLC_HIT_NO_OTHER_CORE",
@@ -5937,7 +6828,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LLC_HIT_OTHER_CORE_HIT",
@@ -5950,7 +6843,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LLC_HIT_OTHER_CORE_HITM",
@@ -5963,7 +6858,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LOCAL_CACHE",
@@ -5976,7 +6873,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LOCAL_CACHE_DRAM",
@@ -5989,7 +6888,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.LOCAL_DRAM",
@@ -6002,7 +6903,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.REMOTE_CACHE",
@@ -6015,7 +6918,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.REMOTE_CACHE_DRAM",
@@ -6028,7 +6933,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.REMOTE_CACHE_HIT",
@@ -6041,7 +6948,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.REMOTE_CACHE_HITM",
@@ -6054,7 +6963,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.DEMAND_RFO.REMOTE_DRAM",
@@ -6067,7 +6978,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.ANY_CACHE_DRAM",
@@ -6080,7 +6993,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.ANY_DRAM",
@@ -6093,7 +7008,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.ANY_LLC_MISS",
@@ -6106,7 +7023,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.ANY_LOCATION",
@@ -6119,7 +7038,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.IO_CSR_MMIO",
@@ -6132,7 +7053,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.LLC_HIT_NO_OTHER_CORE",
@@ -6145,7 +7068,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.LLC_HIT_OTHER_CORE_HIT",
@@ -6158,7 +7083,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.LLC_HIT_OTHER_CORE_HITM",
@@ -6171,7 +7098,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.LOCAL_CACHE",
@@ -6184,7 +7113,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.LOCAL_CACHE_DRAM",
@@ -6197,7 +7128,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.REMOTE_CACHE",
@@ -6210,7 +7143,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.REMOTE_CACHE_DRAM",
@@ -6223,7 +7158,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.REMOTE_CACHE_HIT",
@@ -6236,7 +7173,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.REMOTE_CACHE_HITM",
@@ -6249,7 +7188,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.OTHER.REMOTE_DRAM",
@@ -6262,7 +7203,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.ANY_CACHE_DRAM",
@@ -6275,7 +7218,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.ANY_DRAM",
@@ -6288,7 +7233,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.ANY_LLC_MISS",
@@ -6301,7 +7248,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.ANY_LOCATION",
@@ -6314,7 +7263,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.IO_CSR_MMIO",
@@ -6327,7 +7278,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LLC_HIT_NO_OTHER_CORE",
@@ -6340,7 +7293,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LLC_HIT_OTHER_CORE_HIT",
@@ -6353,7 +7308,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LLC_HIT_OTHER_CORE_HITM",
@@ -6366,7 +7323,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LOCAL_CACHE",
@@ -6379,7 +7338,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LOCAL_CACHE_DRAM",
@@ -6392,7 +7353,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.LOCAL_DRAM",
@@ -6405,7 +7368,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.REMOTE_CACHE",
@@ -6418,7 +7383,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.REMOTE_CACHE_DRAM",
@@ -6431,7 +7398,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.REMOTE_CACHE_HIT",
@@ -6444,7 +7413,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.REMOTE_CACHE_HITM",
@@ -6457,7 +7428,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA.REMOTE_DRAM",
@@ -6470,7 +7443,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.ANY_CACHE_DRAM",
@@ -6483,7 +7458,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.ANY_DRAM",
@@ -6496,7 +7473,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.ANY_LLC_MISS",
@@ -6509,7 +7488,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.ANY_LOCATION",
@@ -6522,7 +7503,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.IO_CSR_MMIO",
@@ -6535,7 +7518,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LLC_HIT_NO_OTHER_CORE",
@@ -6548,7 +7533,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LLC_HIT_OTHER_CORE_HIT",
@@ -6561,7 +7548,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LLC_HIT_OTHER_CORE_HITM",
@@ -6574,7 +7563,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LOCAL_CACHE",
@@ -6587,7 +7578,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LOCAL_CACHE_DRAM",
@@ -6600,7 +7593,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.LOCAL_DRAM",
@@ -6613,7 +7608,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.REMOTE_CACHE",
@@ -6626,7 +7623,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.REMOTE_CACHE_DRAM",
@@ -6639,7 +7638,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.REMOTE_CACHE_HIT",
@@ -6652,7 +7653,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.REMOTE_CACHE_HITM",
@@ -6665,7 +7668,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_DATA_RD.REMOTE_DRAM",
@@ -6678,7 +7683,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.ANY_CACHE_DRAM",
@@ -6691,7 +7698,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.ANY_DRAM",
@@ -6704,7 +7713,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.ANY_LLC_MISS",
@@ -6717,7 +7728,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.ANY_LOCATION",
@@ -6730,7 +7743,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.IO_CSR_MMIO",
@@ -6743,7 +7758,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LLC_HIT_NO_OTHER_CORE",
@@ -6756,7 +7773,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LLC_HIT_OTHER_CORE_HIT",
@@ -6769,7 +7788,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LLC_HIT_OTHER_CORE_HITM",
@@ -6782,7 +7803,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LOCAL_CACHE",
@@ -6795,7 +7818,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LOCAL_CACHE_DRAM",
@@ -6808,7 +7833,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.LOCAL_DRAM",
@@ -6821,7 +7848,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.REMOTE_CACHE",
@@ -6834,7 +7863,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.REMOTE_CACHE_DRAM",
@@ -6847,7 +7878,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.REMOTE_CACHE_HIT",
@@ -6860,7 +7893,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.REMOTE_CACHE_HITM",
@@ -6873,7 +7908,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_IFETCH.REMOTE_DRAM",
@@ -6886,7 +7923,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.ANY_CACHE_DRAM",
@@ -6899,7 +7938,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.ANY_DRAM",
@@ -6912,7 +7953,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.ANY_LLC_MISS",
@@ -6925,7 +7968,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.ANY_LOCATION",
@@ -6938,7 +7983,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.IO_CSR_MMIO",
@@ -6951,7 +7998,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LLC_HIT_NO_OTHER_CORE",
@@ -6964,7 +8013,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LLC_HIT_OTHER_CORE_HIT",
@@ -6977,7 +8028,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LLC_HIT_OTHER_CORE_HITM",
@@ -6990,7 +8043,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LOCAL_CACHE",
@@ -7003,7 +8058,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LOCAL_CACHE_DRAM",
@@ -7016,7 +8073,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.LOCAL_DRAM",
@@ -7029,7 +8088,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.REMOTE_CACHE",
@@ -7042,7 +8103,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.REMOTE_CACHE_DRAM",
@@ -7055,7 +8118,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.REMOTE_CACHE_HIT",
@@ -7068,7 +8133,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.REMOTE_CACHE_HITM",
@@ -7081,7 +8148,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PF_RFO.REMOTE_DRAM",
@@ -7094,7 +8163,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.ANY_CACHE_DRAM",
@@ -7107,7 +8178,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.ANY_DRAM",
@@ -7120,7 +8193,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.ANY_LLC_MISS",
@@ -7133,7 +8208,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.ANY_LOCATION",
@@ -7146,7 +8223,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.IO_CSR_MMIO",
@@ -7159,7 +8238,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LLC_HIT_NO_OTHER_CORE",
@@ -7172,7 +8253,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LLC_HIT_OTHER_CORE_HIT",
@@ -7185,7 +8268,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LLC_HIT_OTHER_CORE_HITM",
@@ -7198,7 +8283,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LOCAL_CACHE",
@@ -7211,7 +8298,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LOCAL_CACHE_DRAM",
@@ -7224,7 +8313,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.LOCAL_DRAM",
@@ -7237,7 +8328,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.REMOTE_CACHE",
@@ -7250,7 +8343,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.REMOTE_CACHE_DRAM",
@@ -7263,7 +8358,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.REMOTE_CACHE_HIT",
@@ -7276,7 +8373,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.REMOTE_CACHE_HITM",
@@ -7289,7 +8388,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE_0.PREFETCH.REMOTE_DRAM",
@@ -7302,6 +8403,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace nehalemex_core

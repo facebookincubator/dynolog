@@ -12,13 +12,14 @@ namespace facebook::hbt::perf_event::generated {
 namespace cascadelakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from cascadelakex_core.json (2338 events).
+/*
+  Events from cascadelakex_core.json (2338 events).
 
-    Supported SKUs:
-        - Arch: x86, Model: CLX id: 85 Steps: ['5', '6', '7', '8', '9', 'A',
-    'B', 'C', 'D', 'E', 'F']
-  */
+  Supported SKUs:
+      - Arch: x86, Model: CLX id: 85 Steps: ['5', '6', '7', '8', '9', 'A', 'B',
+  'C', 'D', 'E', 'F']
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY",
@@ -31,7 +32,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD",
@@ -44,7 +47,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CPU_CLK_UNHALTED.THREAD_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_ANY",
@@ -62,6 +67,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+  // Event CPU_CLK_UNHALTED.REF_TSC is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_TSC",
@@ -75,6 +81,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.STORE_FORWARD",
@@ -87,7 +94,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.NO_SR",
@@ -100,7 +109,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS_PARTIAL.ADDRESS_ALIAS",
@@ -113,7 +124,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.MISS_CAUSES_A_WALK",
@@ -126,7 +139,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_4K",
@@ -139,7 +154,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_2M_4M",
@@ -152,7 +169,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_1G",
@@ -165,7 +184,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -178,7 +199,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_PENDING",
@@ -191,7 +214,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_ACTIVE",
@@ -204,7 +229,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.STLB_HIT",
@@ -217,7 +244,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.RECOVERY_CYCLES",
@@ -230,7 +259,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event INT_MISC.RECOVERY_CYCLES_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.RECOVERY_CYCLES_ANY",
@@ -248,6 +279,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.CLEARS_COUNT",
@@ -264,7 +296,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.CLEAR_RESTEER_CYCLES",
@@ -277,7 +311,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_ISSUED.ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.ANY",
@@ -291,6 +327,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.STALL_CYCLES",
@@ -307,7 +344,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.VECTOR_WIDTH_MISMATCH",
@@ -320,7 +359,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.SLOW_LEA",
@@ -333,7 +374,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ARITH.DIVIDER_ACTIVE",
@@ -346,7 +389,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.DEMAND_DATA_RD_MISS",
@@ -359,7 +404,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_MISS",
@@ -372,7 +419,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.CODE_RD_MISS",
@@ -385,7 +434,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_MISS",
@@ -398,7 +449,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.PF_MISS",
@@ -411,7 +464,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event L2_RQSTS.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.MISS",
@@ -425,6 +480,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.DEMAND_DATA_RD_HIT",
@@ -437,7 +493,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_HIT",
@@ -450,7 +508,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.CODE_RD_HIT",
@@ -463,7 +523,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.PF_HIT",
@@ -476,7 +538,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_DATA_RD",
@@ -489,7 +553,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_RFO",
@@ -502,7 +568,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_CODE_RD",
@@ -515,7 +583,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_REFERENCES",
@@ -528,7 +598,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_PF",
@@ -541,7 +613,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.REFERENCES",
@@ -554,7 +628,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_POWER.LVL0_TURBO_LICENSE",
@@ -567,7 +643,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_POWER.LVL1_TURBO_LICENSE",
@@ -580,7 +658,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_POWER.LVL2_TURBO_LICENSE",
@@ -593,7 +673,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_POWER.THROTTLE",
@@ -606,7 +688,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event LONGEST_LAT_CACHE.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.MISS",
@@ -619,6 +703,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       R"(SKL057)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.REFERENCE",
@@ -630,7 +715,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL057)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SW_PREFETCH_ACCESS.NTA",
@@ -643,7 +730,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SW_PREFETCH_ACCESS.T0",
@@ -656,7 +745,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SW_PREFETCH_ACCESS.T1_T2",
@@ -669,7 +760,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SW_PREFETCH_ACCESS.PREFETCHW",
@@ -682,7 +775,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P",
@@ -695,7 +790,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CPU_CLK_UNHALTED.THREAD_P_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P_ANY",
@@ -713,6 +810,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.RING0_TRANS",
@@ -729,7 +827,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.REF_XCLK",
@@ -742,7 +842,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.REF_XCLK_ANY",
@@ -759,7 +861,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK",
@@ -772,7 +876,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK_ANY",
@@ -789,7 +895,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.ONE_THREAD_ACTIVE",
@@ -802,7 +910,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.ONE_THREAD_ACTIVE",
@@ -815,7 +925,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING",
@@ -828,7 +940,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING_CYCLES",
@@ -841,7 +955,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING_CYCLES_ANY",
@@ -858,7 +974,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.FB_FULL",
@@ -871,7 +989,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.MISS_CAUSES_A_WALK",
@@ -884,7 +1004,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_4K",
@@ -897,7 +1019,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_2M_4M",
@@ -910,7 +1034,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_1G",
@@ -923,7 +1049,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
@@ -936,7 +1064,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_PENDING",
@@ -949,7 +1079,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_ACTIVE",
@@ -962,7 +1094,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.STLB_HIT",
@@ -975,7 +1109,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_HIT_PRE.SW_PF",
@@ -988,7 +1124,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EPT.WALK_PENDING",
@@ -1001,7 +1139,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.REPLACEMENT",
@@ -1014,7 +1154,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_CONFLICT",
@@ -1027,7 +1169,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_CAPACITY",
@@ -1040,7 +1184,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_STORE_TO_ELIDED_LOCK",
@@ -1053,7 +1199,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_NOT_EMPTY",
@@ -1066,7 +1214,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_MISMATCH",
@@ -1079,7 +1229,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_UNSUPPORTED_ALIGNMENT",
@@ -1092,7 +1244,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.HLE_ELISION_BUFFER_FULL",
@@ -1105,7 +1259,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_DECODED.DECODERS",
@@ -1118,7 +1274,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PARTIAL_RAT_STALLS.SCOREBOARD",
@@ -1131,7 +1289,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC1",
@@ -1144,7 +1304,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC2",
@@ -1157,7 +1319,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC3",
@@ -1170,7 +1334,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC4",
@@ -1183,7 +1349,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC5",
@@ -1196,7 +1364,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RS_EVENTS.EMPTY_CYCLES",
@@ -1209,7 +1379,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RS_EVENTS.EMPTY_END",
@@ -1227,7 +1399,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD",
@@ -1240,7 +1414,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_DATA_RD",
@@ -1253,7 +1429,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD_GE_6",
@@ -1266,7 +1444,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_CODE_RD",
@@ -1279,7 +1459,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_CODE_RD",
@@ -1292,7 +1474,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_RFO",
@@ -1305,7 +1489,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_RFO",
@@ -1318,7 +1504,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD",
@@ -1332,6 +1520,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+  // Event OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD",
@@ -1345,6 +1534,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.L3_MISS_DEMAND_DATA_RD",
@@ -1357,7 +1547,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_L3_MISS_DEMAND_DATA_RD",
@@ -1370,7 +1562,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.L3_MISS_DEMAND_DATA_RD_GE_6",
@@ -1383,7 +1577,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MITE_UOPS",
@@ -1396,7 +1592,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MITE_CYCLES",
@@ -1409,7 +1607,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.DSB_UOPS",
@@ -1422,7 +1622,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.DSB_CYCLES",
@@ -1435,7 +1637,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_CYCLES",
@@ -1448,7 +1652,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_DSB_CYCLES_4_UOPS",
@@ -1461,7 +1667,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_DSB_CYCLES_ANY_UOPS",
@@ -1474,7 +1682,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_MITE_UOPS",
@@ -1487,7 +1697,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_MITE_CYCLES_4_UOPS",
@@ -1500,7 +1712,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_MITE_CYCLES_ANY_UOPS",
@@ -1513,7 +1727,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_CYCLES",
@@ -1526,7 +1742,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_SWITCHES",
@@ -1543,7 +1761,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_UOPS",
@@ -1556,7 +1776,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE_16B.IFDATA_STALL",
@@ -1569,7 +1791,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE_64B.IFTAG_HIT",
@@ -1582,7 +1806,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE_64B.IFTAG_MISS",
@@ -1595,7 +1821,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE_64B.IFTAG_STALL",
@@ -1608,7 +1836,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.MISS_CAUSES_A_WALK",
@@ -1621,7 +1851,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_4K",
@@ -1634,7 +1866,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_2M_4M",
@@ -1647,7 +1881,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_1G",
@@ -1660,7 +1896,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
@@ -1673,7 +1911,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_PENDING",
@@ -1686,7 +1926,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_ACTIVE",
@@ -1699,7 +1941,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.STLB_HIT",
@@ -1712,7 +1956,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.LCP",
@@ -1725,7 +1971,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.INDIRECT",
@@ -1738,7 +1986,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.ALL_BRANCHES",
@@ -1751,7 +2001,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event IDQ_UOPS_NOT_DELIVERED.CORE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CORE",
@@ -1765,6 +2017,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_0_UOPS_DELIV.CORE",
@@ -1777,7 +2030,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_1_UOP_DELIV.CORE",
@@ -1790,7 +2045,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_2_UOP_DELIV.CORE",
@@ -1803,7 +2060,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_3_UOP_DELIV.CORE",
@@ -1816,7 +2075,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_FE_WAS_OK",
@@ -1833,7 +2094,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_0",
@@ -1846,7 +2109,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_1",
@@ -1859,7 +2124,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_2",
@@ -1872,7 +2139,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_3",
@@ -1885,7 +2154,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_4",
@@ -1898,7 +2169,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_5",
@@ -1911,7 +2184,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_6",
@@ -1924,7 +2199,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_7",
@@ -1937,7 +2214,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.ANY",
@@ -1950,7 +2229,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.SB",
@@ -1963,7 +2244,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L2_MISS",
@@ -1976,7 +2259,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L3_MISS",
@@ -1989,7 +2274,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_TOTAL",
@@ -2002,7 +2289,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_L2_MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L2_MISS",
@@ -2016,6 +2305,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L3_MISS",
@@ -2028,7 +2318,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L1D_MISS",
@@ -2041,7 +2333,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_L1D_MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L1D_MISS",
@@ -2055,6 +2349,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_MEM_ANY",
@@ -2067,7 +2362,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_MEM_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_MEM_ANY",
@@ -2081,6 +2378,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.EXE_BOUND_0_PORTS",
@@ -2093,7 +2391,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.1_PORTS_UTIL",
@@ -2106,7 +2406,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.2_PORTS_UTIL",
@@ -2119,7 +2421,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.3_PORTS_UTIL",
@@ -2132,7 +2436,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.4_PORTS_UTIL",
@@ -2145,7 +2451,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EXE_ACTIVITY.BOUND_ON_STORES",
@@ -2158,7 +2466,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.UOPS",
@@ -2171,7 +2481,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.CYCLES_ACTIVE",
@@ -2184,7 +2496,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.CYCLES_4_UOPS",
@@ -2197,7 +2511,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DSB2MITE_SWITCHES.COUNT",
@@ -2211,7 +2527,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DSB2MITE_SWITCHES.PENALTY_CYCLES",
@@ -2224,7 +2542,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB.ITLB_FLUSH",
@@ -2237,7 +2557,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_DATA_RD",
@@ -2250,7 +2572,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
@@ -2263,7 +2587,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_RFO",
@@ -2276,7 +2602,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.ALL_DATA_RD",
@@ -2289,7 +2617,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.L3_MISS_DEMAND_DATA_RD",
@@ -2302,7 +2632,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.ALL_REQUESTS",
@@ -2315,7 +2647,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.THREAD",
@@ -2328,7 +2662,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.STALL_CYCLES",
@@ -2345,7 +2681,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
@@ -2358,7 +2696,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
@@ -2371,7 +2711,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
@@ -2384,7 +2726,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
@@ -2397,7 +2741,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE",
@@ -2410,7 +2756,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_1",
@@ -2423,7 +2771,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_2",
@@ -2436,7 +2786,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_3",
@@ -2449,7 +2801,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_4",
@@ -2462,7 +2816,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_NONE",
@@ -2479,7 +2835,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.X87",
@@ -2492,7 +2850,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_BUFFER.SQ_FULL",
@@ -2505,7 +2865,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TLB_FLUSH.DTLB_THREAD",
@@ -2518,7 +2880,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TLB_FLUSH.STLB_ANY",
@@ -2531,7 +2895,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY_P",
@@ -2543,7 +2909,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL091, SKL044)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.PREC_DIST",
@@ -2555,7 +2923,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(SKL091, SKL044)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.TOTAL_CYCLES_PS",
@@ -2571,7 +2941,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(SKL091, SKL044)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.NOP",
@@ -2583,7 +2955,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091, SKL044)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OTHER_ASSISTS.ANY",
@@ -2596,7 +2970,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_RETIRED.RETIRE_SLOTS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.RETIRE_SLOTS",
@@ -2610,6 +2986,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.STALL_CYCLES",
@@ -2626,7 +3003,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.TOTAL_CYCLES",
@@ -2643,7 +3022,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.MACRO_FUSED",
@@ -2656,7 +3037,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.COUNT",
@@ -2673,7 +3056,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.MEMORY_ORDERING",
@@ -2685,7 +3070,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL089)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.SMC",
@@ -2698,7 +3085,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -2710,7 +3099,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.CONDITIONAL",
@@ -2722,7 +3113,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.COND",
@@ -2734,7 +3127,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_CALL",
@@ -2746,7 +3141,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES_PEBS",
@@ -2758,7 +3155,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_RETURN",
@@ -2770,7 +3169,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NOT_TAKEN",
@@ -2782,7 +3183,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.COND_NTAKEN",
@@ -2794,7 +3197,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_TAKEN",
@@ -2806,7 +3211,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.FAR_BRANCH",
@@ -2818,7 +3225,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event BR_MISP_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.ALL_BRANCHES",
@@ -2832,6 +3241,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.CONDITIONAL",
@@ -2844,7 +3254,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.NEAR_CALL",
@@ -2857,7 +3269,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.ALL_BRANCHES_PEBS",
@@ -2870,7 +3284,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.RET",
@@ -2883,7 +3299,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.NEAR_TAKEN",
@@ -2896,7 +3314,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.DSB_MISS",
@@ -2909,7 +3329,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.L1I_MISS",
@@ -2922,7 +3344,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.L2_MISS",
@@ -2935,7 +3359,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.ITLB_MISS",
@@ -2948,7 +3374,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.STLB_MISS",
@@ -2961,7 +3389,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_2",
@@ -2974,7 +3404,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_2",
@@ -2987,7 +3419,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_4",
@@ -3000,7 +3434,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_8",
@@ -3013,7 +3449,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_16",
@@ -3026,7 +3464,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_32",
@@ -3039,7 +3479,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_64",
@@ -3052,7 +3494,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_128",
@@ -3065,7 +3509,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_256",
@@ -3078,7 +3524,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_512",
@@ -3091,7 +3539,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_1",
@@ -3104,7 +3554,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_3",
@@ -3117,7 +3569,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.LATENCY_GE_1",
@@ -3130,7 +3584,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FRONTEND_RETIRED.ANY_DSB_MISS",
@@ -3143,7 +3599,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.SCALAR_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
@@ -3157,6 +3615,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+  // Event FP_ARITH_INST_RETIRED.SCALAR_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
@@ -3170,6 +3629,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR",
@@ -3182,7 +3642,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
@@ -3196,6 +3658,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
@@ -3208,7 +3671,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
@@ -3222,6 +3687,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.4_FLOPS",
@@ -3234,7 +3700,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.8_FLOPS",
@@ -3247,7 +3715,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
@@ -3260,7 +3730,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.512B_PACKED_DOUBLE",
@@ -3273,7 +3745,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE",
@@ -3286,7 +3760,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.VECTOR",
@@ -3299,7 +3775,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.START",
@@ -3312,7 +3790,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.COMMIT",
@@ -3325,7 +3805,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED",
@@ -3338,7 +3820,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MEM",
@@ -3351,7 +3835,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_TIMER",
@@ -3364,7 +3850,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_UNFRIENDLY",
@@ -3377,7 +3865,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MEMTYPE",
@@ -3390,7 +3880,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_EVENTS",
@@ -3403,7 +3895,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.START",
@@ -3416,7 +3910,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.COMMIT",
@@ -3429,7 +3925,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED",
@@ -3442,7 +3940,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MEM",
@@ -3455,7 +3955,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_TIMER",
@@ -3468,7 +3970,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_UNFRIENDLY",
@@ -3481,7 +3985,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MEMTYPE",
@@ -3494,7 +4000,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_EVENTS",
@@ -3507,7 +4015,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.ANY",
@@ -3520,7 +4030,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HW_INTERRUPTS.RECEIVED",
@@ -3533,7 +4045,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ROB_MISC_EVENTS.LBR_INSERTS",
@@ -3546,7 +4060,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ROB_MISC_EVENTS.PAUSE_INST",
@@ -3559,7 +4075,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
@@ -3572,7 +4090,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_8",
@@ -3585,7 +4105,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
@@ -3598,7 +4120,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
@@ -3611,7 +4135,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
@@ -3624,7 +4150,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
@@ -3637,7 +4165,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
@@ -3650,7 +4180,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
@@ -3663,7 +4195,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED2.128BIT_PACKED_BF16",
@@ -3676,7 +4210,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED2.256BIT_PACKED_BF16",
@@ -3689,7 +4225,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED2.512BIT_PACKED_BF16",
@@ -3702,7 +4240,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.STLB_MISS_LOADS",
@@ -3715,7 +4255,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.STLB_MISS_STORES",
@@ -3729,7 +4271,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.LOCK_LOADS",
@@ -3742,7 +4286,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.SPLIT_LOADS",
@@ -3755,7 +4301,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.SPLIT_STORES",
@@ -3769,7 +4317,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.ALL_LOADS",
@@ -3782,7 +4332,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.ALL_STORES",
@@ -3796,7 +4348,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_INST_RETIRED.ANY",
@@ -3810,7 +4364,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L1_HIT",
@@ -3823,7 +4379,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L2_HIT",
@@ -3836,7 +4394,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L3_HIT",
@@ -3849,7 +4409,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L1_MISS",
@@ -3862,7 +4424,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L2_MISS",
@@ -3875,7 +4439,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.L3_MISS",
@@ -3888,7 +4454,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.FB_HIT",
@@ -3901,7 +4469,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_RETIRED.LOCAL_PMM",
@@ -3914,7 +4484,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .ellc = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_HIT_RETIRED.XSNP_MISS",
@@ -3927,7 +4499,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_HIT_RETIRED.XSNP_HIT",
@@ -3940,7 +4514,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_HIT_RETIRED.XSNP_HITM",
@@ -3953,7 +4529,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_HIT_RETIRED.XSNP_NONE",
@@ -3966,7 +4544,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_MISS_RETIRED.LOCAL_DRAM",
@@ -3979,7 +4559,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_MISS_RETIRED.REMOTE_DRAM",
@@ -3992,7 +4574,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_MISS_RETIRED.REMOTE_HITM",
@@ -4005,7 +4589,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_MISS_RETIRED.REMOTE_FWD",
@@ -4018,7 +4604,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_L3_MISS_RETIRED.REMOTE_PMM",
@@ -4031,7 +4619,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .ellc = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_MISC_RETIRED.UC",
@@ -4044,7 +4634,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEARS.ANY",
@@ -4057,7 +4649,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IHITI",
@@ -4070,7 +4664,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IHITFSE",
@@ -4083,7 +4679,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SHITFSE",
@@ -4096,7 +4694,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SFWDM",
@@ -4109,7 +4709,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IFWDM",
@@ -4122,7 +4724,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_IFWDFE",
@@ -4135,7 +4739,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_SNOOP_RESPONSE.RSP_SFWDFE",
@@ -4148,7 +4754,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.L2_WB",
@@ -4161,7 +4769,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.ALL",
@@ -4174,7 +4784,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.SILENT",
@@ -4187,7 +4799,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.NON_SILENT",
@@ -4200,7 +4814,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.USELESS_HWPF",
@@ -4213,7 +4829,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SQ_MISC.SPLIT_LOCK",
@@ -4226,7 +4844,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDI_MISC.WB_UPGRADE",
@@ -4239,7 +4859,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDI_MISC.WB_DOWNGRADE",
@@ -4252,7 +4874,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -4265,7 +4889,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -4278,7 +4904,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -4291,7 +4919,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -4304,7 +4934,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -4317,7 +4949,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -4333,7 +4967,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -4349,7 +4985,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.SNOOP_NONE",
@@ -4362,7 +5000,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -4375,7 +5015,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.SNOOP_MISS",
@@ -4388,7 +5030,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -4401,7 +5045,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -4414,7 +5060,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -4430,7 +5078,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_M.ANY_SNOOP",
@@ -4446,7 +5096,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.SNOOP_NONE",
@@ -4459,7 +5111,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -4472,7 +5126,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.SNOOP_MISS",
@@ -4485,7 +5141,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -4498,7 +5156,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -4511,7 +5171,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -4527,7 +5189,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_E.ANY_SNOOP",
@@ -4543,7 +5207,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.SNOOP_NONE",
@@ -4556,7 +5222,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -4569,7 +5237,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.SNOOP_MISS",
@@ -4582,7 +5252,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -4595,7 +5267,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -4608,7 +5282,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -4624,7 +5300,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_S.ANY_SNOOP",
@@ -4640,7 +5318,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.SNOOP_NONE",
@@ -4653,7 +5333,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -4666,7 +5348,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.SNOOP_MISS",
@@ -4679,7 +5363,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -4692,7 +5378,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -4705,7 +5393,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -4721,7 +5411,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT_F.ANY_SNOOP",
@@ -4737,7 +5429,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -4750,7 +5444,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -4763,7 +5459,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -4776,7 +5474,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -4789,7 +5489,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -4802,7 +5504,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.HITM_OTHER_CORE",
@@ -4818,7 +5522,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -4834,7 +5540,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -4847,7 +5555,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -4860,7 +5570,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -4873,7 +5585,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -4886,7 +5600,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -4899,7 +5615,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -4915,7 +5633,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -4931,7 +5651,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -4944,7 +5666,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -4957,7 +5681,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -4970,7 +5696,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -4983,7 +5711,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -4996,7 +5726,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -5012,7 +5744,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -5028,7 +5762,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -5041,7 +5777,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -5054,7 +5792,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -5067,7 +5807,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -5080,7 +5822,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -5093,7 +5837,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.HITM_OTHER_CORE",
@@ -5109,7 +5855,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.ANY_SNOOP",
@@ -5125,7 +5873,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -5138,7 +5888,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -5151,7 +5903,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -5164,7 +5918,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -5177,7 +5933,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -5190,7 +5948,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -5206,7 +5966,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -5222,7 +5984,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.SNOOP_NONE",
@@ -5235,7 +5999,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -5248,7 +6014,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.SNOOP_MISS",
@@ -5261,7 +6029,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -5274,7 +6044,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -5287,7 +6059,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.HITM_OTHER_CORE",
@@ -5303,7 +6077,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_M.ANY_SNOOP",
@@ -5319,7 +6095,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.SNOOP_NONE",
@@ -5332,7 +6110,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -5345,7 +6125,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.SNOOP_MISS",
@@ -5358,7 +6140,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -5371,7 +6155,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -5384,7 +6170,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.HITM_OTHER_CORE",
@@ -5400,7 +6188,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_E.ANY_SNOOP",
@@ -5416,7 +6206,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.SNOOP_NONE",
@@ -5429,7 +6221,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -5442,7 +6236,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.SNOOP_MISS",
@@ -5455,7 +6251,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -5468,7 +6266,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -5481,7 +6281,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.HITM_OTHER_CORE",
@@ -5497,7 +6299,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_S.ANY_SNOOP",
@@ -5513,7 +6317,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.SNOOP_NONE",
@@ -5526,7 +6332,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -5539,7 +6347,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.SNOOP_MISS",
@@ -5552,7 +6362,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -5565,7 +6377,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -5578,7 +6392,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.HITM_OTHER_CORE",
@@ -5594,7 +6410,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT_F.ANY_SNOOP",
@@ -5610,7 +6428,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.SNOOP_NONE",
@@ -5623,7 +6443,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.NO_SNOOP_NEEDED",
@@ -5636,7 +6458,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.SNOOP_MISS",
@@ -5649,7 +6473,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -5662,7 +6488,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -5675,7 +6503,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.HITM_OTHER_CORE",
@@ -5691,7 +6521,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.ANY_SNOOP",
@@ -5707,7 +6539,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -5720,7 +6554,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -5733,7 +6569,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -5746,7 +6584,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -5759,7 +6599,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -5772,7 +6614,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -5788,7 +6632,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -5804,7 +6650,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -5817,7 +6665,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -5830,7 +6680,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -5843,7 +6695,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -5856,7 +6710,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -5869,7 +6725,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -5885,7 +6743,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -5901,7 +6761,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.SNOOP_NONE",
@@ -5914,7 +6776,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.NO_SNOOP_NEEDED",
@@ -5927,7 +6791,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.SNOOP_MISS",
@@ -5940,7 +6806,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -5953,7 +6821,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -5966,7 +6836,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.HITM_OTHER_CORE",
@@ -5982,7 +6854,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.ANY_SNOOP",
@@ -5998,7 +6872,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -6011,7 +6887,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -6024,7 +6902,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -6037,7 +6917,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -6050,7 +6932,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -6063,7 +6947,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -6079,7 +6965,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -6095,7 +6983,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.SNOOP_NONE",
@@ -6108,7 +6998,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -6121,7 +7013,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.SNOOP_MISS",
@@ -6134,7 +7028,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -6147,7 +7043,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -6160,7 +7058,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -6176,7 +7076,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_M.ANY_SNOOP",
@@ -6192,7 +7094,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.SNOOP_NONE",
@@ -6205,7 +7109,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -6218,7 +7124,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.SNOOP_MISS",
@@ -6231,7 +7139,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -6244,7 +7154,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -6257,7 +7169,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -6273,7 +7187,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_E.ANY_SNOOP",
@@ -6289,7 +7205,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.SNOOP_NONE",
@@ -6302,7 +7220,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -6315,7 +7235,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.SNOOP_MISS",
@@ -6328,7 +7250,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -6341,7 +7265,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -6354,7 +7280,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -6370,7 +7298,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_S.ANY_SNOOP",
@@ -6386,7 +7316,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.SNOOP_NONE",
@@ -6399,7 +7331,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -6412,7 +7346,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.SNOOP_MISS",
@@ -6425,7 +7361,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -6438,7 +7376,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -6451,7 +7391,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -6467,7 +7409,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT_F.ANY_SNOOP",
@@ -6483,7 +7427,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.SNOOP_NONE",
@@ -6496,7 +7442,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -6509,7 +7457,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.SNOOP_MISS",
@@ -6522,7 +7472,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -6535,7 +7487,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -6548,7 +7502,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.HITM_OTHER_CORE",
@@ -6564,7 +7520,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.ANY_SNOOP",
@@ -6580,7 +7538,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -6593,7 +7553,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -6606,7 +7568,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -6619,7 +7583,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -6632,7 +7598,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -6645,7 +7613,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -6661,7 +7631,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -6677,7 +7649,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -6690,7 +7664,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -6703,7 +7679,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -6716,7 +7694,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -6729,7 +7709,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -6742,7 +7724,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -6758,7 +7742,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -6774,7 +7760,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.SNOOP_NONE",
@@ -6787,7 +7775,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -6800,7 +7790,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.SNOOP_MISS",
@@ -6813,7 +7805,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -6826,7 +7820,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -6839,7 +7835,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.HITM_OTHER_CORE",
@@ -6855,7 +7853,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.ANY_SNOOP",
@@ -6871,7 +7871,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -6884,7 +7886,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -6897,7 +7901,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -6910,7 +7916,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -6923,7 +7931,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -6936,7 +7946,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -6952,7 +7964,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -6968,7 +7982,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.SNOOP_NONE",
@@ -6981,7 +7997,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -6994,7 +8012,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.SNOOP_MISS",
@@ -7007,7 +8027,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -7020,7 +8042,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -7033,7 +8057,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -7049,7 +8075,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_M.ANY_SNOOP",
@@ -7065,7 +8093,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.SNOOP_NONE",
@@ -7078,7 +8108,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -7091,7 +8123,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.SNOOP_MISS",
@@ -7104,7 +8138,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -7117,7 +8153,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -7130,7 +8168,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -7146,7 +8186,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_E.ANY_SNOOP",
@@ -7162,7 +8204,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.SNOOP_NONE",
@@ -7175,7 +8219,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -7188,7 +8234,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.SNOOP_MISS",
@@ -7201,7 +8249,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -7214,7 +8264,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -7227,7 +8279,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -7243,7 +8297,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_S.ANY_SNOOP",
@@ -7259,7 +8315,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.SNOOP_NONE",
@@ -7272,7 +8330,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -7285,7 +8345,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.SNOOP_MISS",
@@ -7298,7 +8360,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -7311,7 +8375,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -7324,7 +8390,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -7340,7 +8408,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT_F.ANY_SNOOP",
@@ -7356,7 +8426,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -7369,7 +8441,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -7382,7 +8456,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -7395,7 +8471,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -7408,7 +8486,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -7421,7 +8501,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.HITM_OTHER_CORE",
@@ -7437,7 +8519,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -7453,7 +8537,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -7466,7 +8552,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -7479,7 +8567,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -7492,7 +8582,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -7505,7 +8597,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -7518,7 +8612,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -7534,7 +8630,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -7550,7 +8648,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -7563,7 +8663,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -7576,7 +8678,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -7589,7 +8693,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -7602,7 +8708,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -7615,7 +8723,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -7631,7 +8741,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -7647,7 +8759,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -7660,7 +8774,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -7673,7 +8789,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -7686,7 +8804,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -7699,7 +8819,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -7712,7 +8834,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.HITM_OTHER_CORE",
@@ -7728,7 +8852,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.ANY_SNOOP",
@@ -7744,7 +8870,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -7757,7 +8885,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -7770,7 +8900,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -7783,7 +8915,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -7796,7 +8930,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -7809,7 +8945,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -7825,7 +8963,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -7841,7 +8981,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.SNOOP_NONE",
@@ -7854,7 +8996,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -7867,7 +9011,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.SNOOP_MISS",
@@ -7880,7 +9026,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -7893,7 +9041,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -7906,7 +9056,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.HITM_OTHER_CORE",
@@ -7922,7 +9074,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_M.ANY_SNOOP",
@@ -7938,7 +9092,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.SNOOP_NONE",
@@ -7951,7 +9107,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -7964,7 +9122,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.SNOOP_MISS",
@@ -7977,7 +9137,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -7990,7 +9152,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -8003,7 +9167,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.HITM_OTHER_CORE",
@@ -8019,7 +9185,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_E.ANY_SNOOP",
@@ -8035,7 +9203,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.SNOOP_NONE",
@@ -8048,7 +9218,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -8061,7 +9233,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.SNOOP_MISS",
@@ -8074,7 +9248,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -8087,7 +9263,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -8100,7 +9278,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.HITM_OTHER_CORE",
@@ -8116,7 +9296,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_S.ANY_SNOOP",
@@ -8132,7 +9314,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.SNOOP_NONE",
@@ -8145,7 +9329,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -8158,7 +9344,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.SNOOP_MISS",
@@ -8171,7 +9359,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -8184,7 +9374,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -8197,7 +9389,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.HITM_OTHER_CORE",
@@ -8213,7 +9407,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT_F.ANY_SNOOP",
@@ -8229,7 +9425,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.SNOOP_NONE",
@@ -8242,7 +9440,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.NO_SNOOP_NEEDED",
@@ -8255,7 +9455,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.SNOOP_MISS",
@@ -8268,7 +9470,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -8281,7 +9485,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -8294,7 +9500,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.HITM_OTHER_CORE",
@@ -8310,7 +9518,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.ANY_SNOOP",
@@ -8326,7 +9536,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -8339,7 +9551,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -8352,7 +9566,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -8365,7 +9581,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -8378,7 +9596,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -8391,7 +9611,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -8407,7 +9629,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -8423,7 +9647,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -8436,7 +9662,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -8449,7 +9677,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -8462,7 +9692,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -8475,7 +9707,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -8488,7 +9722,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -8504,7 +9740,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -8520,7 +9758,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.SNOOP_NONE",
@@ -8533,7 +9773,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.NO_SNOOP_NEEDED",
@@ -8546,7 +9788,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.SNOOP_MISS",
@@ -8559,7 +9803,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -8572,7 +9818,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -8585,7 +9833,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.HITM_OTHER_CORE",
@@ -8601,7 +9851,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.ANY_SNOOP",
@@ -8617,7 +9869,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -8630,7 +9884,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -8643,7 +9899,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -8656,7 +9914,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -8669,7 +9929,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -8682,7 +9944,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -8698,7 +9962,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -8714,7 +9980,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.SNOOP_NONE",
@@ -8727,7 +9995,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -8740,7 +10010,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.SNOOP_MISS",
@@ -8753,7 +10025,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -8766,7 +10040,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -8779,7 +10055,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -8795,7 +10073,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_M.ANY_SNOOP",
@@ -8811,7 +10091,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.SNOOP_NONE",
@@ -8824,7 +10106,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -8837,7 +10121,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.SNOOP_MISS",
@@ -8850,7 +10136,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -8863,7 +10151,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -8876,7 +10166,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -8892,7 +10184,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_E.ANY_SNOOP",
@@ -8908,7 +10202,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.SNOOP_NONE",
@@ -8921,7 +10217,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -8934,7 +10232,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.SNOOP_MISS",
@@ -8947,7 +10247,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -8960,7 +10262,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -8973,7 +10277,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -8989,7 +10295,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_S.ANY_SNOOP",
@@ -9005,7 +10313,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.SNOOP_NONE",
@@ -9018,7 +10328,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -9031,7 +10343,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.SNOOP_MISS",
@@ -9044,7 +10358,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -9057,7 +10373,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -9070,7 +10388,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -9086,7 +10406,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT_F.ANY_SNOOP",
@@ -9102,7 +10424,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -9115,7 +10439,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -9128,7 +10454,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -9141,7 +10469,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -9154,7 +10484,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -9167,7 +10499,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.HITM_OTHER_CORE",
@@ -9183,7 +10517,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -9199,7 +10535,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -9212,7 +10550,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -9225,7 +10565,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -9238,7 +10580,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -9251,7 +10595,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -9264,7 +10610,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -9280,7 +10628,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -9296,7 +10646,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -9309,7 +10661,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -9322,7 +10676,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -9335,7 +10691,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -9348,7 +10706,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -9361,7 +10721,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -9377,7 +10739,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -9393,7 +10757,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -9406,7 +10772,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -9419,7 +10787,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -9432,7 +10802,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -9445,7 +10817,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -9458,7 +10832,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.HITM_OTHER_CORE",
@@ -9474,7 +10850,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.ANY_SNOOP",
@@ -9490,7 +10868,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -9503,7 +10883,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -9516,7 +10898,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -9529,7 +10913,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -9542,7 +10928,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -9555,7 +10943,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -9571,7 +10961,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -9587,7 +10979,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.SNOOP_NONE",
@@ -9600,7 +10994,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -9613,7 +11009,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.SNOOP_MISS",
@@ -9626,7 +11024,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -9639,7 +11039,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -9652,7 +11054,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.HITM_OTHER_CORE",
@@ -9668,7 +11072,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_M.ANY_SNOOP",
@@ -9684,7 +11090,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.SNOOP_NONE",
@@ -9697,7 +11105,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -9710,7 +11120,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.SNOOP_MISS",
@@ -9723,7 +11135,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -9736,7 +11150,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -9749,7 +11165,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.HITM_OTHER_CORE",
@@ -9765,7 +11183,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_E.ANY_SNOOP",
@@ -9781,7 +11201,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.SNOOP_NONE",
@@ -9794,7 +11216,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -9807,7 +11231,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.SNOOP_MISS",
@@ -9820,7 +11246,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -9833,7 +11261,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -9846,7 +11276,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.HITM_OTHER_CORE",
@@ -9862,7 +11294,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_S.ANY_SNOOP",
@@ -9878,7 +11312,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.SNOOP_NONE",
@@ -9891,7 +11327,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -9904,7 +11342,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.SNOOP_MISS",
@@ -9917,7 +11357,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -9930,7 +11372,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -9943,7 +11387,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.HITM_OTHER_CORE",
@@ -9959,7 +11405,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT_F.ANY_SNOOP",
@@ -9975,7 +11423,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.SNOOP_NONE",
@@ -9988,7 +11438,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.NO_SNOOP_NEEDED",
@@ -10001,7 +11453,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.SNOOP_MISS",
@@ -10014,7 +11468,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -10027,7 +11483,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -10040,7 +11498,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.HITM_OTHER_CORE",
@@ -10056,7 +11516,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.ANY_SNOOP",
@@ -10072,7 +11534,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -10085,7 +11549,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -10098,7 +11564,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -10111,7 +11579,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -10124,7 +11594,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -10137,7 +11609,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -10153,7 +11627,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -10169,7 +11645,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -10182,7 +11660,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -10195,7 +11675,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -10208,7 +11690,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -10221,7 +11705,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -10234,7 +11720,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -10250,7 +11738,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -10266,7 +11756,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.SNOOP_NONE",
@@ -10279,7 +11771,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.NO_SNOOP_NEEDED",
@@ -10292,7 +11786,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.SNOOP_MISS",
@@ -10305,7 +11801,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -10318,7 +11816,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -10331,7 +11831,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.HITM_OTHER_CORE",
@@ -10347,7 +11849,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.ANY_SNOOP",
@@ -10363,7 +11867,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.SNOOP_NONE",
@@ -10376,7 +11882,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -10389,7 +11897,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.SNOOP_MISS",
@@ -10402,7 +11912,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -10415,7 +11927,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -10428,7 +11942,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -10444,7 +11960,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.SUPPLIER_NONE.ANY_SNOOP",
@@ -10460,7 +11978,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.SNOOP_NONE",
@@ -10473,7 +11993,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -10486,7 +12008,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.SNOOP_MISS",
@@ -10499,7 +12023,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -10512,7 +12038,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -10525,7 +12053,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.HITM_OTHER_CORE",
@@ -10541,7 +12071,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_M.ANY_SNOOP",
@@ -10557,7 +12089,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.SNOOP_NONE",
@@ -10570,7 +12104,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -10583,7 +12119,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.SNOOP_MISS",
@@ -10596,7 +12134,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -10609,7 +12149,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -10622,7 +12164,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.HITM_OTHER_CORE",
@@ -10638,7 +12182,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_E.ANY_SNOOP",
@@ -10654,7 +12200,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.SNOOP_NONE",
@@ -10667,7 +12215,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -10680,7 +12230,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.SNOOP_MISS",
@@ -10693,7 +12245,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -10706,7 +12260,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -10719,7 +12275,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.HITM_OTHER_CORE",
@@ -10735,7 +12293,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_S.ANY_SNOOP",
@@ -10751,7 +12311,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.SNOOP_NONE",
@@ -10764,7 +12326,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -10777,7 +12341,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.SNOOP_MISS",
@@ -10790,7 +12356,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -10803,7 +12371,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -10816,7 +12386,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.HITM_OTHER_CORE",
@@ -10832,7 +12404,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT_F.ANY_SNOOP",
@@ -10848,7 +12422,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.SNOOP_NONE",
@@ -10861,7 +12437,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.NO_SNOOP_NEEDED",
@@ -10874,7 +12452,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.SNOOP_MISS",
@@ -10887,7 +12467,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -10900,7 +12482,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -10913,7 +12497,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.HITM_OTHER_CORE",
@@ -10929,7 +12515,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.ANY_SNOOP",
@@ -10945,7 +12533,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -10958,7 +12548,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -10971,7 +12563,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -10984,7 +12578,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -10997,7 +12593,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -11010,7 +12608,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -11026,7 +12626,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -11042,7 +12644,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -11055,7 +12659,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -11068,7 +12674,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -11081,7 +12689,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -11094,7 +12704,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -11107,7 +12719,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -11123,7 +12737,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -11139,7 +12755,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.SNOOP_NONE",
@@ -11152,7 +12770,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.NO_SNOOP_NEEDED",
@@ -11165,7 +12785,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.SNOOP_MISS",
@@ -11178,7 +12800,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -11191,7 +12815,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -11204,7 +12830,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.HITM_OTHER_CORE",
@@ -11220,7 +12848,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.ANY_SNOOP",
@@ -11236,7 +12866,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.SNOOP_NONE",
@@ -11249,7 +12881,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -11262,7 +12896,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.SNOOP_MISS",
@@ -11275,7 +12911,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -11288,7 +12926,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -11301,7 +12941,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -11317,7 +12959,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.SUPPLIER_NONE.ANY_SNOOP",
@@ -11333,7 +12977,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.SNOOP_NONE",
@@ -11346,7 +12992,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -11359,7 +13007,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.SNOOP_MISS",
@@ -11372,7 +13022,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -11385,7 +13037,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -11398,7 +13052,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.HITM_OTHER_CORE",
@@ -11414,7 +13070,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_M.ANY_SNOOP",
@@ -11430,7 +13088,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.SNOOP_NONE",
@@ -11443,7 +13103,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -11456,7 +13118,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.SNOOP_MISS",
@@ -11469,7 +13133,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -11482,7 +13148,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -11495,7 +13163,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.HITM_OTHER_CORE",
@@ -11511,7 +13181,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_E.ANY_SNOOP",
@@ -11527,7 +13199,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.SNOOP_NONE",
@@ -11540,7 +13214,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -11553,7 +13229,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.SNOOP_MISS",
@@ -11566,7 +13244,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -11579,7 +13259,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -11592,7 +13274,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.HITM_OTHER_CORE",
@@ -11608,7 +13292,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_S.ANY_SNOOP",
@@ -11624,7 +13310,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.SNOOP_NONE",
@@ -11637,7 +13325,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -11650,7 +13340,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.SNOOP_MISS",
@@ -11663,7 +13355,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -11676,7 +13370,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -11689,7 +13385,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.HITM_OTHER_CORE",
@@ -11705,7 +13403,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT_F.ANY_SNOOP",
@@ -11721,7 +13421,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.SNOOP_NONE",
@@ -11734,7 +13436,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.NO_SNOOP_NEEDED",
@@ -11747,7 +13451,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.SNOOP_MISS",
@@ -11760,7 +13466,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -11773,7 +13481,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -11786,7 +13496,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.HITM_OTHER_CORE",
@@ -11802,7 +13514,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.ANY_SNOOP",
@@ -11818,7 +13532,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -11831,7 +13547,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -11844,7 +13562,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -11857,7 +13577,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -11870,7 +13592,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -11883,7 +13607,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -11899,7 +13625,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -11915,7 +13643,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -11928,7 +13658,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -11941,7 +13673,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -11954,7 +13688,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -11967,7 +13703,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -11980,7 +13718,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -11996,7 +13736,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -12012,7 +13754,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.SNOOP_NONE",
@@ -12025,7 +13769,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.NO_SNOOP_NEEDED",
@@ -12038,7 +13784,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.SNOOP_MISS",
@@ -12051,7 +13799,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -12064,7 +13814,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -12077,7 +13829,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.HITM_OTHER_CORE",
@@ -12093,7 +13847,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.ANY_SNOOP",
@@ -12109,7 +13865,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -12122,7 +13880,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -12135,7 +13895,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -12148,7 +13910,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -12161,7 +13925,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -12174,7 +13940,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -12190,7 +13958,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -12206,7 +13976,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.SNOOP_NONE",
@@ -12219,7 +13991,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -12232,7 +14006,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.SNOOP_MISS",
@@ -12245,7 +14021,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -12258,7 +14036,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -12271,7 +14051,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -12287,7 +14069,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_M.ANY_SNOOP",
@@ -12303,7 +14087,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.SNOOP_NONE",
@@ -12316,7 +14102,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -12329,7 +14117,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.SNOOP_MISS",
@@ -12342,7 +14132,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -12355,7 +14147,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -12368,7 +14162,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -12384,7 +14180,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_E.ANY_SNOOP",
@@ -12400,7 +14198,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.SNOOP_NONE",
@@ -12413,7 +14213,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -12426,7 +14228,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.SNOOP_MISS",
@@ -12439,7 +14243,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -12452,7 +14258,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -12465,7 +14273,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -12481,7 +14291,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_S.ANY_SNOOP",
@@ -12497,7 +14309,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.SNOOP_NONE",
@@ -12510,7 +14324,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -12523,7 +14339,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.SNOOP_MISS",
@@ -12536,7 +14354,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -12549,7 +14369,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -12562,7 +14384,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -12578,7 +14402,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT_F.ANY_SNOOP",
@@ -12594,7 +14420,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -12607,7 +14435,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -12620,7 +14450,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -12633,7 +14465,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -12646,7 +14480,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -12659,7 +14495,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.HITM_OTHER_CORE",
@@ -12675,7 +14513,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -12691,7 +14531,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -12704,7 +14546,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -12717,7 +14561,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -12730,7 +14576,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -12743,7 +14591,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -12756,7 +14606,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -12772,7 +14624,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -12788,7 +14642,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -12801,7 +14657,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -12814,7 +14672,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -12827,7 +14687,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -12840,7 +14702,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -12853,7 +14717,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -12869,7 +14735,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -12885,7 +14753,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -12898,7 +14768,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -12911,7 +14783,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -12924,7 +14798,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -12937,7 +14813,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -12950,7 +14828,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.HITM_OTHER_CORE",
@@ -12966,7 +14846,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.ANY_SNOOP",
@@ -12982,7 +14864,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -12995,7 +14879,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -13008,7 +14894,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -13021,7 +14909,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -13034,7 +14924,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -13047,7 +14939,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -13063,7 +14957,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -13079,7 +14975,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.SNOOP_NONE",
@@ -13092,7 +14990,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -13105,7 +15005,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.SNOOP_MISS",
@@ -13118,7 +15020,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -13131,7 +15035,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -13144,7 +15050,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.HITM_OTHER_CORE",
@@ -13160,7 +15068,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_M.ANY_SNOOP",
@@ -13176,7 +15086,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.SNOOP_NONE",
@@ -13189,7 +15101,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -13202,7 +15116,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.SNOOP_MISS",
@@ -13215,7 +15131,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -13228,7 +15146,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -13241,7 +15161,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.HITM_OTHER_CORE",
@@ -13257,7 +15179,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_E.ANY_SNOOP",
@@ -13273,7 +15197,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.SNOOP_NONE",
@@ -13286,7 +15212,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -13299,7 +15227,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.SNOOP_MISS",
@@ -13312,7 +15242,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -13325,7 +15257,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -13338,7 +15272,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.HITM_OTHER_CORE",
@@ -13354,7 +15290,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_S.ANY_SNOOP",
@@ -13370,7 +15308,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.SNOOP_NONE",
@@ -13383,7 +15323,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -13396,7 +15338,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.SNOOP_MISS",
@@ -13409,7 +15353,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -13422,7 +15368,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -13435,7 +15383,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.HITM_OTHER_CORE",
@@ -13451,7 +15401,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT_F.ANY_SNOOP",
@@ -13467,7 +15419,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.SNOOP_NONE",
@@ -13480,7 +15434,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.NO_SNOOP_NEEDED",
@@ -13493,7 +15449,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.SNOOP_MISS",
@@ -13506,7 +15464,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -13519,7 +15479,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -13532,7 +15494,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.HITM_OTHER_CORE",
@@ -13548,7 +15512,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.ANY_SNOOP",
@@ -13564,7 +15530,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -13577,7 +15545,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -13590,7 +15560,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -13603,7 +15575,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -13616,7 +15590,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -13629,7 +15605,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -13645,7 +15623,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -13661,7 +15641,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -13674,7 +15656,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -13687,7 +15671,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -13700,7 +15686,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -13713,7 +15701,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -13726,7 +15716,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -13742,7 +15734,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -13758,7 +15752,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.SNOOP_NONE",
@@ -13771,7 +15767,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.NO_SNOOP_NEEDED",
@@ -13784,7 +15782,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.SNOOP_MISS",
@@ -13797,7 +15797,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -13810,7 +15812,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -13823,7 +15827,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.HITM_OTHER_CORE",
@@ -13839,7 +15845,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.ANY_SNOOP",
@@ -13855,7 +15863,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -13868,7 +15878,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -13881,7 +15893,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -13894,7 +15908,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -13907,7 +15923,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -13920,7 +15938,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -13936,7 +15956,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -13952,7 +15974,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.SNOOP_NONE",
@@ -13965,7 +15989,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -13978,7 +16004,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.SNOOP_MISS",
@@ -13991,7 +16019,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -14004,7 +16034,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -14017,7 +16049,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.HITM_OTHER_CORE",
@@ -14033,7 +16067,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_M.ANY_SNOOP",
@@ -14049,7 +16085,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.SNOOP_NONE",
@@ -14062,7 +16100,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -14075,7 +16115,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.SNOOP_MISS",
@@ -14088,7 +16130,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -14101,7 +16145,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -14114,7 +16160,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.HITM_OTHER_CORE",
@@ -14130,7 +16178,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_E.ANY_SNOOP",
@@ -14146,7 +16196,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.SNOOP_NONE",
@@ -14159,7 +16211,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -14172,7 +16226,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.SNOOP_MISS",
@@ -14185,7 +16241,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -14198,7 +16256,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -14211,7 +16271,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.HITM_OTHER_CORE",
@@ -14227,7 +16289,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_S.ANY_SNOOP",
@@ -14243,7 +16307,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.SNOOP_NONE",
@@ -14256,7 +16322,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -14269,7 +16337,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.SNOOP_MISS",
@@ -14282,7 +16352,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -14295,7 +16367,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -14308,7 +16382,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.HITM_OTHER_CORE",
@@ -14324,7 +16400,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT_F.ANY_SNOOP",
@@ -14340,7 +16418,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -14353,7 +16433,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.NO_SNOOP_NEEDED",
@@ -14366,7 +16448,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -14379,7 +16463,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -14392,7 +16478,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -14405,7 +16493,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.HITM_OTHER_CORE",
@@ -14421,7 +16511,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -14437,7 +16529,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -14450,7 +16544,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -14463,7 +16559,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -14476,7 +16574,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -14489,7 +16589,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -14502,7 +16604,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -14518,7 +16622,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -14534,7 +16640,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -14547,7 +16655,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -14560,7 +16670,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -14573,7 +16685,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -14586,7 +16700,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -14599,7 +16715,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -14615,7 +16733,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -14631,7 +16751,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -14644,7 +16766,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.NO_SNOOP_NEEDED",
@@ -14657,7 +16781,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -14670,7 +16796,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -14683,7 +16811,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -14696,7 +16826,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.HITM_OTHER_CORE",
@@ -14712,7 +16844,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.ANY_SNOOP",
@@ -14728,7 +16862,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -14741,7 +16877,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -14754,7 +16892,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -14767,7 +16907,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -14780,7 +16922,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -14793,7 +16937,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -14809,7 +16955,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -14825,7 +16973,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.SNOOP_NONE",
@@ -14838,7 +16988,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -14851,7 +17003,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.SNOOP_MISS",
@@ -14864,7 +17018,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -14877,7 +17033,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -14890,7 +17048,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.HITM_OTHER_CORE",
@@ -14906,7 +17066,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_M.ANY_SNOOP",
@@ -14922,7 +17084,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.SNOOP_NONE",
@@ -14935,7 +17099,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -14948,7 +17114,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.SNOOP_MISS",
@@ -14961,7 +17129,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -14974,7 +17144,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -14987,7 +17159,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.HITM_OTHER_CORE",
@@ -15003,7 +17177,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_E.ANY_SNOOP",
@@ -15019,7 +17195,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.SNOOP_NONE",
@@ -15032,7 +17210,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -15045,7 +17225,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.SNOOP_MISS",
@@ -15058,7 +17240,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -15071,7 +17255,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -15084,7 +17270,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.HITM_OTHER_CORE",
@@ -15100,7 +17288,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_S.ANY_SNOOP",
@@ -15116,7 +17306,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.SNOOP_NONE",
@@ -15129,7 +17321,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -15142,7 +17336,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.SNOOP_MISS",
@@ -15155,7 +17351,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -15168,7 +17366,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -15181,7 +17381,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.HITM_OTHER_CORE",
@@ -15197,7 +17399,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT_F.ANY_SNOOP",
@@ -15213,7 +17417,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.SNOOP_NONE",
@@ -15226,7 +17432,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.NO_SNOOP_NEEDED",
@@ -15239,7 +17447,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.SNOOP_MISS",
@@ -15252,7 +17462,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -15265,7 +17477,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -15278,7 +17492,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.HITM_OTHER_CORE",
@@ -15294,7 +17510,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.ANY_SNOOP",
@@ -15310,7 +17528,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -15323,7 +17543,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -15336,7 +17558,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -15349,7 +17573,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -15362,7 +17588,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -15375,7 +17603,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -15391,7 +17621,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -15407,7 +17639,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -15420,7 +17654,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -15433,7 +17669,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -15446,7 +17684,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -15459,7 +17699,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -15472,7 +17714,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -15488,7 +17732,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -15504,7 +17750,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.SNOOP_NONE",
@@ -15517,7 +17765,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.NO_SNOOP_NEEDED",
@@ -15530,7 +17780,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.SNOOP_MISS",
@@ -15543,7 +17795,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -15556,7 +17810,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -15569,7 +17825,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.HITM_OTHER_CORE",
@@ -15585,7 +17843,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.ANY_SNOOP",
@@ -15601,7 +17861,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.SNOOP_NONE",
@@ -15614,7 +17876,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.NO_SNOOP_NEEDED",
@@ -15627,7 +17891,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.SNOOP_MISS",
@@ -15640,7 +17906,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.HIT_OTHER_CORE_NO_FWD",
@@ -15653,7 +17921,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.HIT_OTHER_CORE_FWD",
@@ -15666,7 +17936,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.HITM_OTHER_CORE",
@@ -15682,7 +17954,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.SUPPLIER_NONE.ANY_SNOOP",
@@ -15698,7 +17972,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.SNOOP_NONE",
@@ -15711,7 +17987,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.NO_SNOOP_NEEDED",
@@ -15724,7 +18002,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.SNOOP_MISS",
@@ -15737,7 +18017,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.HIT_OTHER_CORE_NO_FWD",
@@ -15750,7 +18032,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.HIT_OTHER_CORE_FWD",
@@ -15763,7 +18047,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.HITM_OTHER_CORE",
@@ -15779,7 +18065,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_M.ANY_SNOOP",
@@ -15795,7 +18083,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.SNOOP_NONE",
@@ -15808,7 +18098,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.NO_SNOOP_NEEDED",
@@ -15821,7 +18113,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.SNOOP_MISS",
@@ -15834,7 +18128,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.HIT_OTHER_CORE_NO_FWD",
@@ -15847,7 +18143,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.HIT_OTHER_CORE_FWD",
@@ -15860,7 +18158,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.HITM_OTHER_CORE",
@@ -15876,7 +18176,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_E.ANY_SNOOP",
@@ -15892,7 +18194,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.SNOOP_NONE",
@@ -15905,7 +18209,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.NO_SNOOP_NEEDED",
@@ -15918,7 +18224,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.SNOOP_MISS",
@@ -15931,7 +18239,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.HIT_OTHER_CORE_NO_FWD",
@@ -15944,7 +18254,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.HIT_OTHER_CORE_FWD",
@@ -15957,7 +18269,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.HITM_OTHER_CORE",
@@ -15973,7 +18287,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_S.ANY_SNOOP",
@@ -15989,7 +18305,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.SNOOP_NONE",
@@ -16002,7 +18320,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.NO_SNOOP_NEEDED",
@@ -16015,7 +18335,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.SNOOP_MISS",
@@ -16028,7 +18350,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.HIT_OTHER_CORE_NO_FWD",
@@ -16041,7 +18365,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.HIT_OTHER_CORE_FWD",
@@ -16054,7 +18380,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.HITM_OTHER_CORE",
@@ -16070,7 +18398,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT_F.ANY_SNOOP",
@@ -16086,7 +18416,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.SNOOP_NONE",
@@ -16099,7 +18431,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.NO_SNOOP_NEEDED",
@@ -16112,7 +18446,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.SNOOP_MISS",
@@ -16125,7 +18461,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.HIT_OTHER_CORE_NO_FWD",
@@ -16138,7 +18476,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.HIT_OTHER_CORE_FWD",
@@ -16151,7 +18491,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.HITM_OTHER_CORE",
@@ -16167,7 +18509,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.ANY_SNOOP",
@@ -16183,7 +18527,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -16196,7 +18542,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.NO_SNOOP_NEEDED",
@@ -16209,7 +18557,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -16222,7 +18572,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -16235,7 +18587,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.HIT_OTHER_CORE_FWD",
@@ -16248,7 +18602,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.HITM_OTHER_CORE",
@@ -16264,7 +18620,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -16280,7 +18638,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_NONE",
@@ -16293,7 +18653,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.NO_SNOOP_NEEDED",
@@ -16306,7 +18668,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.SNOOP_MISS",
@@ -16319,7 +18683,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_NO_FWD",
@@ -16332,7 +18698,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.HIT_OTHER_CORE_FWD",
@@ -16345,7 +18713,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.HITM_OTHER_CORE",
@@ -16361,7 +18731,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_HOP1_DRAM.ANY_SNOOP",
@@ -16377,7 +18749,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.SNOOP_NONE",
@@ -16390,7 +18764,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.NO_SNOOP_NEEDED",
@@ -16403,7 +18779,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.SNOOP_MISS",
@@ -16416,7 +18794,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -16429,7 +18809,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.HIT_OTHER_CORE_FWD",
@@ -16442,7 +18824,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.HITM_OTHER_CORE",
@@ -16458,7 +18842,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.ANY_SNOOP",
@@ -16474,7 +18860,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.ANY_RESPONSE",
@@ -16487,7 +18875,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16500,7 +18890,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16513,7 +18905,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16526,7 +18920,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.ANY_RESPONSE",
@@ -16539,7 +18935,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16552,7 +18950,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16565,7 +18965,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16578,7 +18980,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.ANY_RESPONSE",
@@ -16591,7 +18995,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16604,7 +19010,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16617,7 +19025,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16630,7 +19040,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.ANY_RESPONSE",
@@ -16643,7 +19055,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16656,7 +19070,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16669,7 +19085,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16682,7 +19100,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.ANY_RESPONSE",
@@ -16695,7 +19115,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16708,7 +19130,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16721,7 +19145,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16734,7 +19160,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.ANY_RESPONSE",
@@ -16747,7 +19175,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16760,7 +19190,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16773,7 +19205,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16786,7 +19220,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.ANY_RESPONSE",
@@ -16799,7 +19235,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16812,7 +19250,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16825,7 +19265,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16838,7 +19280,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.ANY_RESPONSE",
@@ -16851,7 +19295,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16864,7 +19310,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16877,7 +19325,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16890,7 +19340,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.ANY_RESPONSE",
@@ -16903,7 +19355,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16916,7 +19370,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16929,7 +19385,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16942,7 +19400,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.ANY_RESPONSE",
@@ -16955,7 +19415,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16968,7 +19430,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -16981,7 +19445,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -16994,7 +19460,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.ANY_RESPONSE",
@@ -17007,7 +19475,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17020,7 +19490,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17033,7 +19505,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -17046,7 +19520,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.ANY_RESPONSE",
@@ -17059,7 +19535,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17072,7 +19550,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17085,7 +19565,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -17098,7 +19580,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.ANY_RESPONSE",
@@ -17111,7 +19595,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17124,7 +19610,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17137,7 +19625,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -17150,7 +19640,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.ANY_RESPONSE",
@@ -17163,7 +19655,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_REMOTE_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17176,7 +19670,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS_LOCAL_DRAM.SNOOP_MISS_OR_NO_FWD",
@@ -17189,7 +19685,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_HIT.SNOOP_HIT_WITH_FWD",
@@ -17202,7 +19700,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.REMOTE_HITM",
@@ -17218,7 +19718,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.REMOTE_HITM",
@@ -17234,7 +19736,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.REMOTE_HITM",
@@ -17250,7 +19754,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.REMOTE_HITM",
@@ -17266,7 +19772,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.REMOTE_HITM",
@@ -17282,7 +19790,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.REMOTE_HITM",
@@ -17298,7 +19808,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.REMOTE_HITM",
@@ -17314,7 +19826,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.REMOTE_HITM",
@@ -17330,7 +19844,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.REMOTE_HITM",
@@ -17346,7 +19862,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.REMOTE_HITM",
@@ -17362,7 +19880,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.REMOTE_HITM",
@@ -17378,7 +19898,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.REMOTE_HITM",
@@ -17394,7 +19916,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.REMOTE_HITM",
@@ -17410,7 +19934,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.REMOTE_HITM",
@@ -17426,7 +19952,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17439,7 +19967,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17452,7 +19982,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17465,7 +19997,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17478,7 +20012,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17491,7 +20027,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17504,7 +20042,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17517,7 +20057,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17530,7 +20072,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17543,7 +20087,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17556,7 +20102,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17569,7 +20117,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17582,7 +20132,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17595,7 +20147,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.L3_MISS.REMOTE_HIT_FORWARD",
@@ -17608,7 +20162,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17621,7 +20177,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17634,7 +20192,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17647,7 +20207,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17660,7 +20222,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17673,7 +20237,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17686,7 +20252,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17699,7 +20267,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17712,7 +20282,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17725,7 +20297,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17738,7 +20312,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17751,7 +20327,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17764,7 +20342,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17777,7 +20357,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17790,7 +20372,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17803,7 +20387,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17816,7 +20402,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17829,7 +20417,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17842,7 +20432,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17855,7 +20447,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17868,7 +20462,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17881,7 +20477,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17894,7 +20492,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17907,7 +20507,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17920,7 +20522,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17933,7 +20537,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17946,7 +20552,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.PMM_HIT_LOCAL_PMM.SNOOP_NOT_NEEDED",
@@ -17959,7 +20567,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.PMM_HIT_LOCAL_PMM.SNOOP_NONE",
@@ -17972,7 +20582,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_DATA_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -17988,7 +20600,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_RFO.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18004,7 +20618,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.DEMAND_CODE_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18020,7 +20636,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_DATA_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18036,7 +20654,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L2_RFO.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18052,7 +20672,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_DATA_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18068,7 +20690,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L3_RFO.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18084,7 +20708,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.PF_L1D_AND_SW.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18100,7 +20726,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.OTHER.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18116,7 +20744,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_DATA_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18132,7 +20762,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_PF_RFO.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18148,7 +20780,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_DATA_RD.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18164,7 +20798,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_RFO.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18180,7 +20816,9 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OCR.ALL_READS.PMM_HIT_LOCAL_PMM.ANY_SNOOP",
@@ -18196,6 +20834,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace cascadelakex_core

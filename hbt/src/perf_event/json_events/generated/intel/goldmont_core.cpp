@@ -12,13 +12,14 @@ namespace facebook::hbt::perf_event::generated {
 namespace goldmont_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from goldmont_core.json (169 events).
+/*
+  Events from goldmont_core.json (169 events).
 
-    Supported SKUs:
-        - Arch: x86, Model: GLM id: 92
-        - Arch: x86, Model: GLM id: 95
-  */
+  Supported SKUs:
+      - Arch: x86, Model: GLM id: 92
+      - Arch: x86, Model: GLM id: 95
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY",
@@ -30,7 +31,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.CORE",
@@ -42,7 +45,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CPU_CLK_UNHALTED.REF_TSC is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_TSC",
@@ -55,6 +60,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       R"(0)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.DATA_UNKNOWN",
@@ -66,7 +72,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.STORE_FORWARD",
@@ -78,7 +86,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.4K_ALIAS",
@@ -90,7 +100,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.UTLB_MISS",
@@ -102,7 +114,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.ALL_BLOCK",
@@ -114,7 +128,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKS.D_SIDE_CYCLES",
@@ -126,7 +142,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKS.I_SIDE_CYCLES",
@@ -138,7 +156,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKS.CYCLES",
@@ -150,7 +170,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_ISSUED.ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.ANY",
@@ -163,6 +185,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       R"(0)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MISALIGN_MEM_REF.LOAD_PAGE_SPLIT",
@@ -174,7 +197,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MISALIGN_MEM_REF.STORE_PAGE_SPLIT",
@@ -186,7 +211,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event LONGEST_LAT_CACHE.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.MISS",
@@ -199,6 +226,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       R"(0)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.REFERENCE",
@@ -210,7 +238,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_REJECT_XQ.ALL",
@@ -222,7 +252,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CORE_REJECT_L2Q.ALL",
@@ -234,7 +266,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.CORE_P",
@@ -246,7 +280,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF",
@@ -258,7 +294,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DL1.DIRTY_EVICTION",
@@ -270,7 +308,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.HIT",
@@ -282,7 +322,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.MISSES",
@@ -294,7 +336,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.ACCESSES",
@@ -307,7 +351,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB.MISS",
@@ -319,7 +365,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FETCH_STALL.ALL",
@@ -331,7 +379,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FETCH_STALL.ITLB_FILL_PENDING_CYCLES",
@@ -343,7 +393,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FETCH_STALL.ICACHE_FILL_PENDING_CYCLES",
@@ -355,7 +407,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_NOT_DELIVERED.ANY",
@@ -367,7 +421,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event OFFCORE_RESPONSE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE",
@@ -380,6 +436,7 @@ This event counts differently than Intel processors based on Silvermont microarc
       EventDef::IntelFeatures{},
       R"(0)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY_P",
@@ -391,7 +448,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.ANY",
@@ -403,7 +462,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.MS",
@@ -415,7 +476,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.FPDIV",
@@ -427,7 +490,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.IDIV",
@@ -439,7 +504,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.ALL",
@@ -451,7 +518,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.SMC",
@@ -463,7 +532,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.MEMORY_ORDERING",
@@ -475,7 +546,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.FP_ASSIST",
@@ -487,7 +560,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.DISAMBIGUATION",
@@ -499,7 +574,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -511,7 +588,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.JCC",
@@ -523,7 +602,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_TAKEN_BRANCHES",
@@ -535,7 +616,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.FAR_BRANCH",
@@ -547,7 +630,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NON_RETURN_IND",
@@ -559,7 +644,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.RETURN",
@@ -571,7 +658,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.CALL",
@@ -583,7 +672,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.IND_CALL",
@@ -595,7 +686,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.REL_CALL",
@@ -607,7 +700,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.TAKEN_JCC",
@@ -619,7 +714,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event BR_MISP_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.ALL_BRANCHES",
@@ -632,6 +729,7 @@ This event counts differently than Intel processors based on Silvermont microarc
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.JCC",
@@ -643,7 +741,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.NON_RETURN_IND",
@@ -655,7 +755,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.RETURN",
@@ -667,7 +769,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.IND_CALL",
@@ -679,7 +783,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.TAKEN_JCC",
@@ -691,7 +797,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ISSUE_SLOTS_NOT_CONSUMED.ANY",
@@ -703,7 +811,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ISSUE_SLOTS_NOT_CONSUMED.RESOURCE_FULL",
@@ -715,7 +825,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ISSUE_SLOTS_NOT_CONSUMED.RECOVERY",
@@ -727,7 +839,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HW_INTERRUPTS.RECEIVED",
@@ -739,7 +853,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HW_INTERRUPTS.MASKED",
@@ -751,7 +867,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HW_INTERRUPTS.PENDING_AND_MASKED",
@@ -763,7 +881,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLES_DIV_BUSY.ALL",
@@ -775,7 +895,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLES_DIV_BUSY.IDIV",
@@ -787,7 +909,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLES_DIV_BUSY.FPDIV",
@@ -799,7 +923,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.DTLB_MISS_LOADS",
@@ -811,7 +937,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.DTLB_MISS_STORES",
@@ -823,7 +951,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.DTLB_MISS",
@@ -835,7 +965,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.LOCK_LOADS",
@@ -847,7 +979,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.SPLIT_LOADS",
@@ -859,7 +993,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.SPLIT_STORES",
@@ -871,7 +1007,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.SPLIT",
@@ -883,7 +1021,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_LOADS",
@@ -895,7 +1035,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_STORES",
@@ -907,7 +1049,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL",
@@ -919,7 +1063,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L1_HIT",
@@ -931,7 +1077,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L2_HIT",
@@ -943,7 +1091,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L1_MISS",
@@ -955,7 +1105,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L2_MISS",
@@ -967,7 +1119,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.HITM",
@@ -979,7 +1133,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.WCB_HIT",
@@ -991,7 +1147,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.DRAM_HIT",
@@ -1003,7 +1161,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEARS.ALL",
@@ -1015,7 +1175,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEARS.RETURN",
@@ -1027,7 +1189,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEARS.COND",
@@ -1039,7 +1203,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MS_DECODED.MS_ENTRY",
@@ -1051,7 +1217,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DECODE_RESTRICTION.PREDECODE_WRONG",
@@ -1063,7 +1231,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_READ.L2_MISS.ANY",
@@ -1078,7 +1248,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_READ.L2_MISS.HITM_OTHER_CORE",
@@ -1093,7 +1265,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_READ.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1108,7 +1282,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_READ.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1123,7 +1299,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_READ.L2_HIT",
@@ -1138,7 +1316,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_RFO.L2_MISS.ANY",
@@ -1153,7 +1333,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_RFO.L2_MISS.HITM_OTHER_CORE",
@@ -1168,7 +1350,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_RFO.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1183,7 +1367,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_RFO.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1198,7 +1384,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_RFO.L2_HIT",
@@ -1213,7 +1401,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_DATA_RD.L2_MISS.ANY",
@@ -1228,7 +1418,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_DATA_RD.L2_MISS.HITM_OTHER_CORE",
@@ -1243,7 +1435,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_DATA_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1258,7 +1452,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_DATA_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1273,7 +1469,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_DATA_RD.L2_HIT",
@@ -1288,7 +1486,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_PF_DATA_RD.L2_MISS.ANY",
@@ -1303,7 +1503,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_PF_DATA_RD.L2_MISS.HITM_OTHER_CORE",
@@ -1318,7 +1520,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_PF_DATA_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1333,7 +1537,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_PF_DATA_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1348,7 +1554,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_PF_DATA_RD.L2_HIT",
@@ -1363,7 +1571,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_REQUEST.L2_MISS.HITM_OTHER_CORE",
@@ -1378,7 +1588,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_REQUEST.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1393,7 +1605,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_REQUEST.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1408,7 +1622,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_REQUEST.L2_HIT",
@@ -1423,7 +1639,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ANY_REQUEST.ANY_RESPONSE",
@@ -1438,7 +1656,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.STREAMING_STORES.L2_MISS.ANY",
@@ -1453,7 +1673,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.STREAMING_STORES.L2_HIT",
@@ -1468,7 +1690,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_STREAMING_STORES.L2_MISS.ANY",
@@ -1483,7 +1707,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_STREAMING_STORES.L2_MISS.HITM_OTHER_CORE",
@@ -1498,7 +1724,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_STREAMING_STORES.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1513,7 +1741,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_STREAMING_STORES.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1528,7 +1758,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_STREAMING_STORES.L2_HIT",
@@ -1543,7 +1775,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1_DATA_RD.L2_MISS.ANY",
@@ -1558,7 +1792,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1_DATA_RD.L2_MISS.HITM_OTHER_CORE",
@@ -1573,7 +1809,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1_DATA_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1588,7 +1826,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1_DATA_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1603,7 +1843,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L1_DATA_RD.L2_HIT",
@@ -1618,7 +1860,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.SW_PREFETCH.L2_MISS.ANY",
@@ -1633,7 +1877,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.SW_PREFETCH.L2_MISS.HITM_OTHER_CORE",
@@ -1648,7 +1894,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.SW_PREFETCH.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1663,7 +1911,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.SW_PREFETCH.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1678,7 +1928,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.SW_PREFETCH.L2_HIT",
@@ -1693,7 +1945,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.FULL_STREAMING_STORES.L2_MISS.ANY",
@@ -1708,7 +1962,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.FULL_STREAMING_STORES.L2_MISS.HITM_OTHER_CORE",
@@ -1723,7 +1979,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.FULL_STREAMING_STORES.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1738,7 +1996,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.FULL_STREAMING_STORES.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1753,7 +2013,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.FULL_STREAMING_STORES.L2_HIT",
@@ -1768,7 +2030,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.BUS_LOCKS.ANY_RESPONSE",
@@ -1783,7 +2047,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_WRITES.L2_MISS.ANY",
@@ -1798,7 +2064,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PARTIAL_READS.L2_MISS.ANY",
@@ -1813,7 +2081,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L2_MISS.ANY",
@@ -1828,7 +2098,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L2_MISS.HITM_OTHER_CORE",
@@ -1843,7 +2115,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1858,7 +2132,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1873,7 +2149,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L2_HIT",
@@ -1888,7 +2166,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L2_MISS.ANY",
@@ -1903,7 +2183,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L2_MISS.HITM_OTHER_CORE",
@@ -1918,7 +2200,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -1933,7 +2217,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -1948,7 +2234,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L2_HIT",
@@ -1963,7 +2251,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L2_MISS.ANY",
@@ -1978,7 +2268,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L2_MISS.HITM_OTHER_CORE",
@@ -1993,7 +2285,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -2008,7 +2302,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -2023,7 +2319,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L2_HIT",
@@ -2038,7 +2336,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.OUTSTANDING",
@@ -2053,7 +2353,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L2_MISS.ANY",
@@ -2068,7 +2370,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -2083,7 +2387,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -2098,7 +2404,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L2_HIT",
@@ -2113,7 +2421,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.OUTSTANDING",
@@ -2128,7 +2438,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L2_MISS.ANY",
@@ -2143,7 +2455,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L2_MISS.HITM_OTHER_CORE",
@@ -2158,7 +2472,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -2173,7 +2489,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -2188,7 +2506,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L2_HIT",
@@ -2203,7 +2523,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.OUTSTANDING",
@@ -2218,7 +2540,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L2_MISS.ANY",
@@ -2233,7 +2557,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L2_MISS.HITM_OTHER_CORE",
@@ -2248,7 +2574,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L2_MISS.HIT_OTHER_CORE_NO_FWD",
@@ -2263,7 +2591,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L2_MISS.SNOOP_MISS_OR_NO_SNOOP_NEEDED",
@@ -2278,7 +2608,9 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L2_HIT",
@@ -2293,6 +2625,7 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace goldmont_core

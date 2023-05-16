@@ -12,13 +12,14 @@ namespace facebook::hbt::perf_event::generated {
 namespace broadwell_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from broadwell_core.json (744 events).
+/*
+  Events from broadwell_core.json (744 events).
 
-    Supported SKUs:
-        - Arch: x86, Model: BDW id: 61
-        - Arch: x86, Model: BDW id: 71
-  */
+  Supported SKUs:
+      - Arch: x86, Model: BDW id: 61
+      - Arch: x86, Model: BDW id: 71
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY",
@@ -33,7 +34,9 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD",
@@ -46,7 +49,9 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CPU_CLK_UNHALTED.THREAD_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_ANY",
@@ -64,6 +69,7 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       std::nullopt // Errata
       ));
 
+  // Event CPU_CLK_UNHALTED.REF_TSC is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_TSC",
@@ -78,6 +84,7 @@ Note: On all current platforms this event stops counting during 'throttling (TM)
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.STORE_FORWARD",
@@ -98,7 +105,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.NO_SR",
@@ -111,7 +120,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MISALIGN_MEM_REF.LOADS",
@@ -124,7 +135,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MISALIGN_MEM_REF.STORES",
@@ -137,7 +150,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS_PARTIAL.ADDRESS_ALIAS",
@@ -150,7 +165,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.MISS_CAUSES_A_WALK",
@@ -162,7 +179,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_4K",
@@ -174,7 +193,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_2M_4M",
@@ -186,7 +207,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED_1G",
@@ -198,7 +221,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -210,7 +235,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_DURATION",
@@ -222,7 +249,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.STLB_HIT_4K",
@@ -235,7 +264,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.STLB_HIT_2M",
@@ -248,7 +279,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.STLB_HIT",
@@ -261,7 +294,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.RECOVERY_CYCLES",
@@ -274,7 +309,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event INT_MISC.RECOVERY_CYCLES_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.RECOVERY_CYCLES_ANY",
@@ -292,6 +329,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INT_MISC.RAT_STALL_CYCLES",
@@ -304,7 +342,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_ISSUED.ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.ANY",
@@ -318,6 +358,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.STALL_CYCLES",
@@ -334,7 +375,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.FLAGS_MERGE",
@@ -348,7 +391,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.SLOW_LEA",
@@ -361,7 +406,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_ISSUED.SINGLE_MUL",
@@ -374,7 +421,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ARITH.FPU_DIV_ACTIVE",
@@ -387,7 +436,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.DEMAND_DATA_RD_MISS",
@@ -400,7 +451,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_MISS",
@@ -413,7 +466,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.CODE_RD_MISS",
@@ -426,7 +481,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_MISS",
@@ -439,7 +496,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.L2_PF_MISS",
@@ -452,7 +511,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event L2_RQSTS.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.MISS",
@@ -466,6 +527,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.DEMAND_DATA_RD_HIT",
@@ -478,7 +540,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.RFO_HIT",
@@ -491,7 +555,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.CODE_RD_HIT",
@@ -504,7 +570,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.L2_PF_HIT",
@@ -517,7 +585,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_DATA_RD",
@@ -530,7 +600,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_RFO",
@@ -543,7 +615,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_CODE_RD",
@@ -556,7 +630,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_DEMAND_REFERENCES",
@@ -569,7 +645,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_PF",
@@ -582,7 +660,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.REFERENCES",
@@ -595,7 +675,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_DEMAND_RQSTS.WB_HIT",
@@ -608,7 +690,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event LONGEST_LAT_CACHE.MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.MISS",
@@ -622,6 +706,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LONGEST_LAT_CACHE.REFERENCE",
@@ -634,7 +719,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P",
@@ -647,7 +734,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CPU_CLK_UNHALTED.THREAD_P_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P_ANY",
@@ -665,6 +754,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.REF_XCLK",
@@ -677,7 +767,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.REF_XCLK_ANY",
@@ -694,7 +786,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK",
@@ -707,7 +801,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK_ANY",
@@ -724,7 +820,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_THREAD_UNHALTED.ONE_THREAD_ACTIVE",
@@ -737,7 +835,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.ONE_THREAD_ACTIVE",
@@ -750,7 +850,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING",
@@ -764,7 +866,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING_CYCLES",
@@ -777,7 +881,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING_CYCLES_ANY",
@@ -794,7 +900,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.FB_FULL",
@@ -807,7 +915,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.MISS_CAUSES_A_WALK",
@@ -819,7 +929,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_4K",
@@ -831,7 +943,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_2M_4M",
@@ -843,7 +957,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED_1G",
@@ -855,7 +971,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
@@ -867,7 +985,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_DURATION",
@@ -879,7 +999,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.STLB_HIT_4K",
@@ -892,7 +1014,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.STLB_HIT_2M",
@@ -905,7 +1029,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.STLB_HIT",
@@ -918,7 +1044,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_HIT_PRE.SW_PF",
@@ -931,7 +1059,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOAD_HIT_PRE.HW_PF",
@@ -944,7 +1074,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "EPT.WALK_CYCLES",
@@ -957,7 +1089,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.REPLACEMENT",
@@ -970,7 +1104,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_CONFLICT",
@@ -983,7 +1119,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_CAPACITY_WRITE",
@@ -996,7 +1134,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_STORE_TO_ELIDED_LOCK",
@@ -1009,7 +1149,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_NOT_EMPTY",
@@ -1022,7 +1164,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_MISMATCH",
@@ -1035,7 +1179,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.ABORT_HLE_ELISION_BUFFER_UNSUPPORTED_ALIGNMENT",
@@ -1048,7 +1194,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_MEM.HLE_ELISION_BUFFER_FULL",
@@ -1061,7 +1209,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MOVE_ELIMINATION.INT_ELIMINATED",
@@ -1074,7 +1224,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MOVE_ELIMINATION.SIMD_ELIMINATED",
@@ -1087,7 +1239,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MOVE_ELIMINATION.INT_NOT_ELIMINATED",
@@ -1100,7 +1254,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MOVE_ELIMINATION.SIMD_NOT_ELIMINATED",
@@ -1113,7 +1269,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPL_CYCLES.RING0",
@@ -1126,7 +1284,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPL_CYCLES.RING0_TRANS",
@@ -1143,7 +1303,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPL_CYCLES.RING123",
@@ -1156,7 +1318,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC1",
@@ -1169,7 +1333,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC2",
@@ -1182,7 +1348,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC3",
@@ -1195,7 +1363,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC4",
@@ -1208,7 +1378,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TX_EXEC.MISC5",
@@ -1221,7 +1393,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RS_EVENTS.EMPTY_CYCLES",
@@ -1235,7 +1409,9 @@ Note: In ST-mode, not active thread should drive 0. This is usually caused by se
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RS_EVENTS.EMPTY_END",
@@ -1253,7 +1429,9 @@ Note: In ST-mode, not active thread should drive 0. This is usually caused by se
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD",
@@ -1266,7 +1444,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_DATA_RD",
@@ -1278,7 +1458,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD_GE_6",
@@ -1290,7 +1472,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_CODE_RD",
@@ -1302,7 +1486,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_RFO",
@@ -1314,7 +1500,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DEMAND_RFO",
@@ -1326,7 +1514,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM76)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD",
@@ -1339,6 +1529,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       R"(BDM76)"));
 
+  // Event OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD",
@@ -1351,6 +1542,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       R"(BDM76)"));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOCK_CYCLES.SPLIT_LOCK_UC_LOCK_DURATION",
@@ -1363,7 +1555,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LOCK_CYCLES.CACHE_LOCK_DURATION",
@@ -1376,7 +1570,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.EMPTY",
@@ -1389,7 +1585,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MITE_UOPS",
@@ -1402,7 +1600,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MITE_CYCLES",
@@ -1415,7 +1615,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.DSB_UOPS",
@@ -1428,7 +1630,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.DSB_CYCLES",
@@ -1441,7 +1645,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_UOPS",
@@ -1454,7 +1660,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_CYCLES",
@@ -1467,7 +1675,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_OCCUR",
@@ -1484,7 +1694,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_DSB_CYCLES_4_UOPS",
@@ -1497,7 +1709,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_DSB_CYCLES_ANY_UOPS",
@@ -1510,7 +1724,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_MITE_UOPS",
@@ -1523,7 +1739,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_MITE_CYCLES_4_UOPS",
@@ -1536,7 +1754,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.ALL_MITE_CYCLES_ANY_UOPS",
@@ -1549,7 +1769,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_UOPS",
@@ -1562,7 +1784,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_CYCLES",
@@ -1575,7 +1799,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_SWITCHES",
@@ -1592,7 +1818,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MITE_ALL_UOPS",
@@ -1605,7 +1833,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.HIT",
@@ -1618,7 +1848,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.MISSES",
@@ -1631,7 +1863,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event ICACHE.IFDATA_STALL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.IFDATA_STALL",
@@ -1645,6 +1879,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.MISS_CAUSES_A_WALK",
@@ -1656,7 +1891,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_4K",
@@ -1668,7 +1905,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_2M_4M",
@@ -1680,7 +1919,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED_1G",
@@ -1692,7 +1933,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
@@ -1704,7 +1947,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_DURATION",
@@ -1716,7 +1961,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.STLB_HIT_4K",
@@ -1729,7 +1976,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.STLB_HIT_2M",
@@ -1742,7 +1991,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.STLB_HIT",
@@ -1755,7 +2006,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ILD_STALL.LCP",
@@ -1768,7 +2021,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.NONTAKEN_CONDITIONAL",
@@ -1781,7 +2036,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_CONDITIONAL",
@@ -1794,7 +2051,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_DIRECT_JUMP",
@@ -1807,7 +2066,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_INDIRECT_JUMP_NON_CALL_RET",
@@ -1820,7 +2081,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_INDIRECT_NEAR_RETURN",
@@ -1833,7 +2096,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_DIRECT_NEAR_CALL",
@@ -1846,7 +2111,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.TAKEN_INDIRECT_NEAR_CALL",
@@ -1859,7 +2126,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_CONDITIONAL",
@@ -1872,7 +2141,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_DIRECT_JMP",
@@ -1885,7 +2156,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_INDIRECT_JUMP_NON_CALL_RET",
@@ -1898,7 +2171,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_INDIRECT_NEAR_RETURN",
@@ -1911,7 +2186,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_DIRECT_NEAR_CALL",
@@ -1924,7 +2201,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_EXEC.ALL_BRANCHES",
@@ -1937,7 +2216,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.NONTAKEN_CONDITIONAL",
@@ -1950,7 +2231,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.TAKEN_CONDITIONAL",
@@ -1963,7 +2246,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.TAKEN_INDIRECT_JUMP_NON_CALL_RET",
@@ -1976,7 +2261,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.TAKEN_RETURN_NEAR",
@@ -1989,7 +2276,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.TAKEN_INDIRECT_NEAR_CALL",
@@ -2002,7 +2291,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.ALL_CONDITIONAL",
@@ -2015,7 +2306,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.ALL_INDIRECT_JUMP_NON_CALL_RET",
@@ -2028,7 +2321,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.INDIRECT",
@@ -2041,7 +2336,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_EXEC.ALL_BRANCHES",
@@ -2054,7 +2351,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event IDQ_UOPS_NOT_DELIVERED.CORE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CORE",
@@ -2071,6 +2370,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_0_UOPS_DELIV.CORE",
@@ -2083,7 +2383,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_1_UOP_DELIV.CORE",
@@ -2096,7 +2398,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_2_UOP_DELIV.CORE",
@@ -2109,7 +2413,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_3_UOP_DELIV.CORE",
@@ -2122,7 +2428,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ_UOPS_NOT_DELIVERED.CYCLES_FE_WAS_OK",
@@ -2139,7 +2447,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOP_DISPATCHES_CANCELLED.SIMD_PRF",
@@ -2152,7 +2462,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_0",
@@ -2165,7 +2477,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_0_CORE",
@@ -2182,7 +2496,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_0",
@@ -2195,7 +2511,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_1",
@@ -2208,7 +2526,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_1_CORE",
@@ -2225,7 +2545,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_1",
@@ -2238,7 +2560,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_2",
@@ -2251,7 +2575,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_2_CORE",
@@ -2268,7 +2594,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_2",
@@ -2281,7 +2609,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_3",
@@ -2294,7 +2624,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_3_CORE",
@@ -2311,7 +2643,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_3",
@@ -2324,7 +2658,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_4",
@@ -2337,7 +2673,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_4_CORE",
@@ -2354,7 +2692,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_4",
@@ -2367,7 +2707,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_5",
@@ -2380,7 +2722,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_5_CORE",
@@ -2397,7 +2741,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_5",
@@ -2410,7 +2756,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_6",
@@ -2423,7 +2771,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_6_CORE",
@@ -2440,7 +2790,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_6",
@@ -2453,7 +2805,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_DISPATCHED_PORT.PORT_7",
@@ -2466,7 +2820,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_7_CORE",
@@ -2483,7 +2839,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED_PORT.PORT_7",
@@ -2496,7 +2854,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.ANY",
@@ -2509,7 +2869,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.RS",
@@ -2522,7 +2884,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.SB",
@@ -2535,7 +2899,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RESOURCE_STALLS.ROB",
@@ -2548,7 +2914,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L2_PENDING",
@@ -2561,7 +2929,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L2_MISS",
@@ -2574,7 +2944,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_LDM_PENDING",
@@ -2587,7 +2959,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_MEM_ANY",
@@ -2600,7 +2974,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_NO_EXECUTE",
@@ -2613,7 +2989,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_TOTAL",
@@ -2626,7 +3004,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L2_PENDING",
@@ -2639,7 +3019,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_L2_MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L2_MISS",
@@ -2653,6 +3035,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_LDM_PENDING",
@@ -2665,7 +3048,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_MEM_ANY is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_MEM_ANY",
@@ -2679,6 +3064,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L1D_PENDING",
@@ -2691,7 +3077,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L1D_MISS",
@@ -2704,7 +3092,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L1D_PENDING",
@@ -2717,7 +3107,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event CYCLE_ACTIVITY.STALLS_L1D_MISS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L1D_MISS",
@@ -2731,6 +3123,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.UOPS",
@@ -2743,7 +3136,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.CYCLES_4_UOPS",
@@ -2756,7 +3151,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LSD.CYCLES_ACTIVE",
@@ -2769,7 +3166,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DSB2MITE_SWITCHES.PENALTY_CYCLES",
@@ -2784,7 +3183,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB.ITLB_FLUSH",
@@ -2797,7 +3198,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_DATA_RD",
@@ -2810,7 +3213,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
@@ -2823,7 +3228,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_RFO",
@@ -2836,7 +3243,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.ALL_DATA_RD",
@@ -2849,7 +3258,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.ALL_REQUESTS",
@@ -2862,7 +3273,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.THREAD",
@@ -2875,7 +3288,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.STALL_CYCLES",
@@ -2892,7 +3307,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
@@ -2905,7 +3322,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
@@ -2918,7 +3337,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
@@ -2931,7 +3352,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
@@ -2944,7 +3367,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE",
@@ -2957,7 +3382,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_1",
@@ -2970,7 +3397,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_2",
@@ -2983,7 +3412,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_3",
@@ -2996,7 +3427,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_GE_4",
@@ -3009,7 +3442,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_EXECUTED.CORE_CYCLES_NONE",
@@ -3026,7 +3461,9 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS_BUFFER.SQ_FULL",
@@ -3040,7 +3477,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event OFFCORE_RESPONSE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE",
@@ -3054,6 +3493,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.DTLB_L1",
@@ -3065,7 +3505,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.DTLB_L2",
@@ -3077,7 +3519,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.DTLB_L3",
@@ -3089,7 +3533,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.DTLB_MEMORY",
@@ -3101,7 +3547,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.ITLB_L1",
@@ -3113,7 +3561,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.ITLB_L2",
@@ -3125,7 +3575,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "PAGE_WALKER_LOADS.ITLB_L3",
@@ -3137,7 +3589,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69, BDM98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TLB_FLUSH.DTLB_THREAD",
@@ -3150,7 +3604,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "TLB_FLUSH.STLB_ANY",
@@ -3163,7 +3619,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.ANY_P",
@@ -3175,7 +3633,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM61)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.PREC_DIST",
@@ -3187,7 +3647,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(BDM11, BDM55)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "INST_RETIRED.X87",
@@ -3200,7 +3662,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OTHER_ASSISTS.AVX_TO_SSE",
@@ -3212,7 +3676,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM30)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OTHER_ASSISTS.SSE_TO_AVX",
@@ -3224,7 +3690,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM30)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OTHER_ASSISTS.ANY_WB_ASSIST",
@@ -3237,7 +3705,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_RETIRED.ALL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.ALL",
@@ -3251,6 +3721,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.STALL_CYCLES",
@@ -3267,7 +3738,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.TOTAL_CYCLES",
@@ -3284,7 +3757,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event UOPS_RETIRED.RETIRE_SLOTS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "UOPS_RETIRED.RETIRE_SLOTS",
@@ -3298,6 +3773,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.CYCLES",
@@ -3310,7 +3786,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.COUNT",
@@ -3327,7 +3805,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.MEMORY_ORDERING",
@@ -3343,7 +3823,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.SMC",
@@ -3356,7 +3838,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MACHINE_CLEARS.MASKMOV",
@@ -3369,7 +3853,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -3382,7 +3868,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.CONDITIONAL",
@@ -3395,7 +3883,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_CALL",
@@ -3408,7 +3898,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_CALL_R3",
@@ -3421,7 +3913,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES_PEBS",
@@ -3433,7 +3927,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(BDW98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_RETURN",
@@ -3446,7 +3942,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NOT_TAKEN",
@@ -3459,7 +3957,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.NEAR_TAKEN",
@@ -3472,7 +3972,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.FAR_BRANCH",
@@ -3484,7 +3986,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDW98)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event BR_MISP_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.ALL_BRANCHES",
@@ -3498,6 +4002,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.CONDITIONAL",
@@ -3510,7 +4015,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.ALL_BRANCHES_PEBS",
@@ -3523,7 +4030,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.RET",
@@ -3536,7 +4045,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_MISP_RETIRED.NEAR_TAKEN",
@@ -3549,7 +4060,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.SCALAR_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
@@ -3563,6 +4076,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+  // Event FP_ARITH_INST_RETIRED.SCALAR_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
@@ -3576,6 +4090,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR",
@@ -3588,7 +4103,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
@@ -3602,6 +4119,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
@@ -3614,7 +4132,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+  // Event FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
@@ -3628,6 +4148,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.DOUBLE",
@@ -3640,7 +4161,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.4_FLOPS",
@@ -3653,7 +4176,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
@@ -3666,7 +4191,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SINGLE",
@@ -3679,7 +4206,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.PACKED",
@@ -3692,7 +4221,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.VECTOR",
@@ -3705,7 +4236,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.START",
@@ -3719,7 +4252,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.COMMIT",
@@ -3732,7 +4267,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED",
@@ -3745,7 +4282,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MISC1",
@@ -3758,7 +4297,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MISC2",
@@ -3771,7 +4312,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MISC3",
@@ -3784,7 +4327,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MISC4",
@@ -3797,7 +4342,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "HLE_RETIRED.ABORTED_MISC5",
@@ -3810,7 +4357,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.START",
@@ -3824,7 +4373,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.COMMIT",
@@ -3837,7 +4388,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED",
@@ -3850,7 +4403,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MISC1",
@@ -3863,7 +4418,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MISC2",
@@ -3876,7 +4433,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MISC3",
@@ -3889,7 +4448,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MISC4",
@@ -3902,7 +4463,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "RTM_RETIRED.ABORTED_MISC5",
@@ -3915,7 +4478,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.X87_OUTPUT",
@@ -3928,7 +4493,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.X87_INPUT",
@@ -3941,7 +4508,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.SIMD_OUTPUT",
@@ -3954,7 +4523,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.SIMD_INPUT",
@@ -3967,7 +4538,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ASSIST.ANY",
@@ -3980,7 +4553,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ROB_MISC_EVENTS.LBR_INSERTS",
@@ -3993,7 +4568,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
@@ -4005,7 +4582,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_8",
@@ -4017,7 +4596,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
@@ -4029,7 +4610,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
@@ -4041,7 +4624,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
@@ -4053,7 +4638,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
@@ -4065,7 +4652,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
@@ -4077,7 +4666,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
@@ -4089,7 +4680,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.STLB_MISS_LOADS",
@@ -4102,7 +4695,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.STLB_MISS_STORES",
@@ -4116,7 +4711,9 @@ Note: Writeback pending FIFO has six entries.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.LOCK_LOADS",
@@ -4128,7 +4725,9 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.SPLIT_LOADS",
@@ -4141,7 +4740,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.SPLIT_STORES",
@@ -4155,7 +4756,9 @@ Note: Writeback pending FIFO has six entries.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_LOADS",
@@ -4168,7 +4771,9 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_STORES",
@@ -4182,7 +4787,9 @@ Note: Writeback pending FIFO has six entries.)",
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L1_HIT",
@@ -4196,7 +4803,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L2_HIT",
@@ -4208,7 +4817,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM35)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L3_HIT",
@@ -4220,7 +4831,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L1_MISS",
@@ -4233,7 +4846,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L2_MISS",
@@ -4246,7 +4861,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.L3_MISS",
@@ -4258,7 +4875,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100, BDE70)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_RETIRED.HIT_LFB",
@@ -4272,7 +4891,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_MISS",
@@ -4284,7 +4905,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_HIT",
@@ -4296,7 +4919,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_HITM",
@@ -4308,7 +4933,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_NONE",
@@ -4320,7 +4947,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_LOAD_UOPS_L3_MISS_RETIRED.LOCAL_DRAM",
@@ -4332,7 +4961,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
       R"(BDE70, BDM100)"));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BACLEARS.ANY",
@@ -4345,7 +4976,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.DEMAND_DATA_RD",
@@ -4358,7 +4991,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.RFO",
@@ -4371,7 +5006,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.CODE_RD",
@@ -4384,7 +5021,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.ALL_PF",
@@ -4397,7 +5036,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.L1D_WB",
@@ -4410,7 +5051,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.L2_FILL",
@@ -4423,7 +5066,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.L2_WB",
@@ -4436,7 +5081,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_TRANS.ALL_REQUESTS",
@@ -4449,7 +5096,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.I",
@@ -4462,7 +5111,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.S",
@@ -4475,7 +5126,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.E",
@@ -4488,7 +5141,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.ALL",
@@ -4501,7 +5156,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_OUT.DEMAND_CLEAN",
@@ -4514,7 +5171,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "SQ_MISC.SPLIT_LOCK",
@@ -4527,7 +5186,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.ANY_RESPONSE",
@@ -4540,7 +5201,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -4553,7 +5216,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -4566,7 +5231,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -4579,7 +5246,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -4592,7 +5261,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -4608,7 +5279,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -4624,7 +5297,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -4640,7 +5315,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -4653,7 +5330,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -4666,7 +5345,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -4679,7 +5360,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -4692,7 +5375,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HITM",
@@ -4708,7 +5393,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -4724,7 +5411,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -4740,7 +5429,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -4753,7 +5444,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -4766,7 +5459,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -4779,7 +5474,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -4792,7 +5489,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -4808,7 +5507,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -4824,7 +5525,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -4840,7 +5543,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -4853,7 +5558,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -4866,7 +5573,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -4879,7 +5588,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -4892,7 +5603,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.ANY_RESPONSE",
@@ -4905,7 +5618,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NONE",
@@ -4918,7 +5633,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NOT_NEEDED",
@@ -4931,7 +5648,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_MISS",
@@ -4944,7 +5663,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -4957,7 +5678,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HITM",
@@ -4973,7 +5696,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NON_DRAM",
@@ -4989,7 +5714,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.ANY_SNOOP",
@@ -5005,7 +5732,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -5021,7 +5750,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NONE",
@@ -5034,7 +5765,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NOT_NEEDED",
@@ -5047,7 +5780,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_MISS",
@@ -5060,7 +5795,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -5073,7 +5810,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.ANY_RESPONSE",
@@ -5086,7 +5825,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -5099,7 +5840,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -5112,7 +5855,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -5125,7 +5870,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -5138,7 +5885,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -5154,7 +5903,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -5170,7 +5921,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -5186,7 +5939,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NONE",
@@ -5199,7 +5954,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -5212,7 +5969,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_MISS",
@@ -5225,7 +5984,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -5238,7 +5999,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HITM",
@@ -5254,7 +6017,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -5270,7 +6035,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.ANY_SNOOP",
@@ -5286,7 +6053,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -5299,7 +6068,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -5312,7 +6083,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -5325,7 +6098,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -5338,7 +6113,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -5354,7 +6131,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -5370,7 +6149,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -5386,7 +6167,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NONE",
@@ -5399,7 +6182,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -5412,7 +6197,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_MISS",
@@ -5425,7 +6212,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -5438,7 +6227,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.ANY_RESPONSE",
@@ -5451,7 +6242,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_NONE",
@@ -5464,7 +6257,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -5477,7 +6272,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_MISS",
@@ -5490,7 +6287,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -5503,7 +6302,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_HITM",
@@ -5519,7 +6320,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -5535,7 +6338,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.ANY_SNOOP",
@@ -5551,7 +6356,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_NONE",
@@ -5564,7 +6371,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_NOT_NEEDED",
@@ -5577,7 +6386,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_MISS",
@@ -5590,7 +6401,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -5603,7 +6416,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_HITM",
@@ -5619,7 +6434,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_NON_DRAM",
@@ -5635,7 +6452,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.ANY_SNOOP",
@@ -5651,7 +6470,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -5664,7 +6485,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -5677,7 +6500,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -5690,7 +6515,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -5703,7 +6530,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -5719,7 +6548,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -5735,7 +6566,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -5751,7 +6584,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_NONE",
@@ -5764,7 +6599,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_NOT_NEEDED",
@@ -5777,7 +6614,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_MISS",
@@ -5790,7 +6629,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -5803,7 +6644,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.ANY_RESPONSE",
@@ -5816,7 +6659,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -5829,7 +6674,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -5842,7 +6689,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -5855,7 +6704,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -5868,7 +6719,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -5884,7 +6737,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -5900,7 +6755,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -5916,7 +6773,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -5929,7 +6788,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -5942,7 +6803,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -5955,7 +6818,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -5968,7 +6833,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HITM",
@@ -5984,7 +6851,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -6000,7 +6869,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -6016,7 +6887,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -6029,7 +6902,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -6042,7 +6917,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -6055,7 +6932,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -6068,7 +6947,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -6084,7 +6965,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -6100,7 +6983,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -6116,7 +7001,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -6129,7 +7016,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -6142,7 +7031,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -6155,7 +7046,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -6168,7 +7061,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.ANY_RESPONSE",
@@ -6181,7 +7076,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -6194,7 +7091,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -6207,7 +7106,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -6220,7 +7121,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -6233,7 +7136,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_HITM",
@@ -6249,7 +7154,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -6265,7 +7172,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -6281,7 +7190,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_NONE",
@@ -6294,7 +7205,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_NOT_NEEDED",
@@ -6307,7 +7220,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_MISS",
@@ -6320,7 +7235,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -6333,7 +7250,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HITM",
@@ -6349,7 +7268,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_NON_DRAM",
@@ -6365,7 +7286,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.ANY_SNOOP",
@@ -6381,7 +7304,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -6394,7 +7319,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -6407,7 +7334,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -6420,7 +7349,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -6433,7 +7364,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -6449,7 +7382,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -6465,7 +7400,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -6481,7 +7418,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_NONE",
@@ -6494,7 +7433,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_NOT_NEEDED",
@@ -6507,7 +7448,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_MISS",
@@ -6520,7 +7463,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -6533,7 +7478,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.ANY_RESPONSE",
@@ -6546,7 +7493,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -6559,7 +7508,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -6572,7 +7523,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -6585,7 +7538,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -6598,7 +7553,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -6614,7 +7571,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -6630,7 +7589,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -6646,7 +7607,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_NONE",
@@ -6659,7 +7622,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -6672,7 +7637,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_MISS",
@@ -6685,7 +7652,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -6698,7 +7667,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_HITM",
@@ -6714,7 +7685,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -6730,7 +7703,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.ANY_SNOOP",
@@ -6746,7 +7721,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -6759,7 +7736,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -6772,7 +7751,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -6785,7 +7766,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -6798,7 +7781,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -6814,7 +7799,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -6830,7 +7817,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -6846,7 +7835,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_NONE",
@@ -6859,7 +7850,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -6872,7 +7865,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_MISS",
@@ -6885,7 +7880,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -6898,7 +7895,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.ANY_RESPONSE",
@@ -6911,7 +7910,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -6924,7 +7925,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -6937,7 +7940,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -6950,7 +7955,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -6963,7 +7970,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -6979,7 +7988,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -6995,7 +8006,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -7011,7 +8024,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -7024,7 +8039,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -7037,7 +8054,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -7050,7 +8069,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -7063,7 +8084,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HITM",
@@ -7079,7 +8102,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -7095,7 +8120,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -7111,7 +8138,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -7124,7 +8153,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -7137,7 +8168,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -7150,7 +8183,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -7163,7 +8198,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -7179,7 +8216,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -7195,7 +8234,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -7211,7 +8252,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -7224,7 +8267,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -7237,7 +8282,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -7250,7 +8297,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -7263,7 +8312,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.ANY_RESPONSE",
@@ -7276,7 +8327,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -7289,7 +8342,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -7302,7 +8357,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -7315,7 +8372,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -7328,7 +8387,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_HITM",
@@ -7344,7 +8405,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -7360,7 +8423,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -7376,7 +8441,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_NONE",
@@ -7389,7 +8456,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_NOT_NEEDED",
@@ -7402,7 +8471,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_MISS",
@@ -7415,7 +8486,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -7428,7 +8501,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HITM",
@@ -7444,7 +8519,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_NON_DRAM",
@@ -7460,7 +8537,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.ANY_SNOOP",
@@ -7476,7 +8555,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -7489,7 +8570,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -7502,7 +8585,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -7515,7 +8600,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -7528,7 +8615,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -7544,7 +8633,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -7560,7 +8651,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -7576,7 +8669,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_NONE",
@@ -7589,7 +8684,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_NOT_NEEDED",
@@ -7602,7 +8699,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_MISS",
@@ -7615,7 +8714,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -7628,7 +8729,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.ANY_RESPONSE",
@@ -7641,7 +8744,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -7654,7 +8759,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -7667,7 +8774,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -7680,7 +8789,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -7693,7 +8804,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -7709,7 +8822,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -7725,7 +8840,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -7741,7 +8858,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_NONE",
@@ -7754,7 +8873,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -7767,7 +8888,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_MISS",
@@ -7780,7 +8903,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -7793,7 +8918,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_HITM",
@@ -7809,7 +8936,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -7825,7 +8954,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.ANY_SNOOP",
@@ -7841,7 +8972,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -7854,7 +8987,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -7867,7 +9002,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -7880,7 +9017,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -7893,7 +9032,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -7909,7 +9050,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -7925,7 +9068,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -7941,7 +9086,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_NONE",
@@ -7954,7 +9101,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -7967,7 +9116,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_MISS",
@@ -7980,7 +9131,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -7993,7 +9146,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.ANY_RESPONSE",
@@ -8006,7 +9161,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NONE",
@@ -8019,7 +9176,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -8032,7 +9191,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_MISS",
@@ -8045,7 +9206,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -8058,7 +9221,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_HITM",
@@ -8074,7 +9239,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -8090,7 +9257,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.ANY_SNOOP",
@@ -8106,7 +9275,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NONE",
@@ -8119,7 +9290,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NOT_NEEDED",
@@ -8132,7 +9305,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_MISS",
@@ -8145,7 +9320,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -8158,7 +9335,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_HITM",
@@ -8174,7 +9353,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NON_DRAM",
@@ -8190,7 +9371,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.ANY_SNOOP",
@@ -8206,7 +9389,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -8219,7 +9404,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -8232,7 +9419,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -8245,7 +9434,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -8258,7 +9449,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -8274,7 +9467,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -8290,7 +9485,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -8306,7 +9503,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NONE",
@@ -8319,7 +9518,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NOT_NEEDED",
@@ -8332,7 +9533,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_MISS",
@@ -8345,7 +9548,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -8358,7 +9563,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.ANY_RESPONSE",
@@ -8371,7 +9578,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -8384,7 +9593,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -8397,7 +9608,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -8410,7 +9623,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -8423,7 +9638,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -8439,7 +9656,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -8455,7 +9674,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -8471,7 +9692,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -8484,7 +9707,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -8497,7 +9722,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -8510,7 +9737,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -8523,7 +9752,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HITM",
@@ -8539,7 +9770,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -8555,7 +9788,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -8571,7 +9806,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -8584,7 +9821,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -8597,7 +9836,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -8610,7 +9851,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -8623,7 +9866,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -8639,7 +9884,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -8655,7 +9902,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -8671,7 +9920,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -8684,7 +9935,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -8697,7 +9950,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -8710,7 +9965,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -8723,7 +9980,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.ANY_RESPONSE",
@@ -8736,7 +9995,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -8749,7 +10010,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -8762,7 +10025,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -8775,7 +10040,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -8788,7 +10055,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_HITM",
@@ -8804,7 +10073,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -8820,7 +10091,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -8836,7 +10109,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_NONE",
@@ -8849,7 +10124,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_NOT_NEEDED",
@@ -8862,7 +10139,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_MISS",
@@ -8875,7 +10154,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -8888,7 +10169,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HITM",
@@ -8904,7 +10187,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_NON_DRAM",
@@ -8920,7 +10205,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.ANY_SNOOP",
@@ -8936,7 +10223,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -8949,7 +10238,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -8962,7 +10253,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -8975,7 +10268,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -8988,7 +10283,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -9004,7 +10301,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -9020,7 +10319,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -9036,7 +10337,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_NONE",
@@ -9049,7 +10352,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_NOT_NEEDED",
@@ -9062,7 +10367,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_MISS",
@@ -9075,7 +10382,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -9088,7 +10397,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.ANY_RESPONSE",
@@ -9101,7 +10412,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -9114,7 +10427,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -9127,7 +10442,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -9140,7 +10457,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -9153,7 +10472,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -9169,7 +10490,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -9185,7 +10508,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -9201,7 +10526,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_NONE",
@@ -9214,7 +10541,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -9227,7 +10556,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_MISS",
@@ -9240,7 +10571,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -9253,7 +10586,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_HITM",
@@ -9269,7 +10604,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -9285,7 +10622,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.ANY_SNOOP",
@@ -9301,7 +10640,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -9314,7 +10655,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -9327,7 +10670,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -9340,7 +10685,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -9353,7 +10700,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -9369,7 +10718,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -9385,7 +10736,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -9401,7 +10754,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_NONE",
@@ -9414,7 +10769,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -9427,7 +10784,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_MISS",
@@ -9440,7 +10799,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -9453,7 +10814,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.ANY_RESPONSE",
@@ -9466,7 +10829,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
@@ -9479,7 +10844,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -9492,7 +10859,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
@@ -9505,7 +10874,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -9518,7 +10889,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_HITM",
@@ -9534,7 +10907,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -9550,7 +10925,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.ANY_SNOOP",
@@ -9566,7 +10943,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_NONE",
@@ -9579,7 +10958,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
@@ -9592,7 +10973,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_MISS",
@@ -9605,7 +10988,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -9618,7 +11003,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HITM",
@@ -9634,7 +11021,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_NON_DRAM",
@@ -9650,7 +11039,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.ANY_SNOOP",
@@ -9666,7 +11057,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -9679,7 +11072,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -9692,7 +11087,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -9705,7 +11102,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -9718,7 +11117,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -9734,7 +11135,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -9750,7 +11153,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -9766,7 +11171,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_NONE",
@@ -9779,7 +11186,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
@@ -9792,7 +11201,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_MISS",
@@ -9805,7 +11216,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -9818,7 +11231,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.ANY_RESPONSE",
@@ -9831,7 +11246,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_NONE",
@@ -9844,7 +11261,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
@@ -9857,7 +11276,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_MISS",
@@ -9870,7 +11291,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
@@ -9883,7 +11306,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_HITM",
@@ -9899,7 +11324,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_NON_DRAM",
@@ -9915,7 +11342,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.ANY_SNOOP",
@@ -9931,7 +11360,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_NONE",
@@ -9944,7 +11375,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_NOT_NEEDED",
@@ -9957,7 +11390,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_MISS",
@@ -9970,7 +11405,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
@@ -9983,7 +11420,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HITM",
@@ -9999,7 +11438,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_NON_DRAM",
@@ -10015,7 +11456,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.ANY_SNOOP",
@@ -10031,7 +11474,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
@@ -10044,7 +11489,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
@@ -10057,7 +11504,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
@@ -10070,7 +11519,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
@@ -10083,7 +11534,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HITM",
@@ -10099,7 +11552,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NON_DRAM",
@@ -10115,7 +11570,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.ANY_SNOOP",
@@ -10131,7 +11588,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_NONE",
@@ -10144,7 +11603,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_NOT_NEEDED",
@@ -10157,7 +11618,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_MISS",
@@ -10170,7 +11633,9 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
@@ -10183,6 +11648,7 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace broadwell_core
