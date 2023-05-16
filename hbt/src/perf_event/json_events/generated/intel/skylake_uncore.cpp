@@ -192,18 +192,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ncu,
-      "UNC_CLOCK.SOCKET",
-      EventDef::Encoding{.code = 0x0, .umask = 0x01, .cmask = 0},
-      R"(This 48-bit fixed counter counts the UCLK cycles)",
-      R"(This 48-bit fixed counter counts the UCLK cycles.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_OCCUPANCY.ALL",
       EventDef::Encoding{.code = 0x80, .umask = 0x01, .cmask = 0},
@@ -219,8 +207,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_arb,
       "UNC_ARB_TRK_REQUESTS.ALL",
       EventDef::Encoding{.code = 0x81, .umask = 0x01, .cmask = 0},
-      R"(UNC_ARB_TRK_REQUESTS.ALL (Description is auto-generated))",
-      R"(UNC_ARB_TRK_REQUESTS.ALL (Description is auto-generated))",
+      R"(UNC_ARB_TRK_REQUESTS.ALL)",
+      R"(UNC_ARB_TRK_REQUESTS.ALL)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -269,6 +257,18 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x80, .umask = 0x01, .cmask = 1},
       R"(Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.)",
       R"(Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ncu,
+      "UNC_CLOCK.SOCKET",
+      EventDef::Encoding{.code = 0x0, .umask = 0x01, .cmask = 0},
+      R"(This 48-bit fixed counter counts the UCLK cycles)",
+      R"(This 48-bit fixed counter counts the UCLK cycles.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

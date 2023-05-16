@@ -13,7 +13,7 @@ namespace sandybridge_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sandybridge_core.json (406 events).
+    Events from sandybridge_core.json (407 events).
 
     Supported SKUs:
         - Arch: x86, Model: SNB id: 42
@@ -1851,6 +1851,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(0)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,

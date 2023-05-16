@@ -13,7 +13,7 @@ namespace ivybridge_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from ivybridge_core.json (317 events).
+    Events from ivybridge_core.json (318 events).
 
     Supported SKUs:
         - Arch: x86, Model: IVB id: 58
@@ -1643,6 +1643,18 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x88, .umask = 0xD0, .cmask = 0, .msr_values = {0}},
       R"(Speculative and retired direct near calls)",
       R"(Speculative and retired direct near calls.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      R"(0)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

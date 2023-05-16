@@ -13,7 +13,7 @@ namespace skylakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylakex_core.json (455 events).
+    Events from skylakex_core.json (463 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -262,11 +262,41 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "INT_MISC.CLEARS_COUNT",
+      EventDef::Encoding{
+          .code = 0x0D,
+          .umask = 0x01,
+          .edge = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Clears speculative count)",
+      R"(Counts the number of speculative clears due to any type of branch misprediction or machine clears)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "INT_MISC.CLEAR_RESTEER_CYCLES",
       EventDef::Encoding{
           .code = 0x0D, .umask = 0x80, .cmask = 0, .msr_values = {0}},
       R"(Cycles the issue-stage is waiting for front-end to fetch from resteered path following branch misprediction or machine clear events.)",
       R"(Cycles the issue-stage is waiting for front-end to fetch from resteered path following branch misprediction or machine clear events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_ISSUED.ANY",
+      EventDef::Encoding{
+          .code = 0x0E, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Uops that Resource Allocation Table (RAT) issues to Reservation Station (RS))",
+      R"(Counts the number of uops that the Resource Allocation Table (RAT) issues to the Reservation Station (RS).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -284,19 +314,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0}},
       R"(Cycles when Resource Allocation Table (RAT) does not issue Uops to Reservation Station (RS) for the thread)",
       R"(Counts cycles during which the Resource Allocation Table (RAT) does not issue any Uops to the reservation station (RS) for the current thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_ISSUED.ANY",
-      EventDef::Encoding{
-          .code = 0x0E, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Uops that Resource Allocation Table (RAT) issues to Reservation Station (RS))",
-      R"(Counts the number of uops that the Resource Allocation Table (RAT) issues to the Reservation Station (RS).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -757,6 +774,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "CPU_CLK_UNHALTED.REF_XCLK",
+      EventDef::Encoding{
+          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Core crystal clock cycles when the thread is unhalted.)",
+      R"(Core crystal clock cycles when the thread is unhalted.)",
+      25003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK_ANY",
       EventDef::Encoding{
           .code = 0x3C,
@@ -766,19 +796,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0}},
       R"(Core crystal clock cycles when at least one thread on the physical core is unhalted.)",
       R"(Core crystal clock cycles when at least one thread on the physical core is unhalted.)",
-      25003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "CPU_CLK_UNHALTED.REF_XCLK",
-      EventDef::Encoding{
-          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Core crystal clock cycles when the thread is unhalted.)",
-      R"(Core crystal clock cycles when the thread is unhalted.)",
       25003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -813,11 +830,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "L1D_PEND_MISS.PENDING_CYCLES",
+      "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
-          .code = 0x48, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles with L1D load Misses outstanding.)",
-      R"(Counts duration of L1D miss outstanding in cycles.)",
+          .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(L1D miss outstandings duration in cycles)",
+      R"(Counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand from the demand Hit FB, if it is allocated by hardware or software prefetch.Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -826,11 +843,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "L1D_PEND_MISS.PENDING",
+      "L1D_PEND_MISS.PENDING_CYCLES",
       EventDef::Encoding{
-          .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss outstandings duration in cycles)",
-      R"(Counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand from the demand Hit FB, if it is allocated by hardware or software prefetch.Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
+          .code = 0x48, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles with L1D load Misses outstanding.)",
+      R"(Counts duration of L1D miss outstanding in cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1194,6 +1211,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "RS_EVENTS.EMPTY_CYCLES",
+      EventDef::Encoding{
+          .code = 0x5E, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Cycles when Reservation Station (RS) is empty for the thread)",
+      R"(Counts cycles during which the reservation station (RS) is empty for the thread.; Note: In ST-mode, not active thread should drive 0. This is usually caused by severely costly branch mispredictions, or allocator/FE issues.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "RS_EVENTS.EMPTY_END",
       EventDef::Encoding{
           .code = 0x5E,
@@ -1212,11 +1242,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "RS_EVENTS.EMPTY_CYCLES",
+      "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD",
       EventDef::Encoding{
-          .code = 0x5E, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Cycles when Reservation Station (RS) is empty for the thread)",
-      R"(Counts cycles during which the reservation station (RS) is empty for the thread.; Note: In ST-mode, not active thread should drive 0. This is usually caused by severely costly branch mispredictions, or allocator/FE issues.)",
+          .code = 0x60, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Offcore outstanding Demand Data Read transactions in uncore queue.)",
+      R"(Counts the number of offcore outstanding Demand Data Read transactions in the super queue (SQ) every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor. See the corresponding Umask under OFFCORE_REQUESTS.Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1230,19 +1260,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x60, .umask = 0x01, .cmask = 1, .msr_values = {0}},
       R"(Cycles when offcore outstanding Demand Data Read transactions are present in SuperQueue (SQ), queue to uncore)",
       R"(Counts cycles when offcore outstanding Demand Data Read transactions are present in the super queue (SQ). A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor (SQ de-allocation).)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD",
-      EventDef::Encoding{
-          .code = 0x60, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Offcore outstanding Demand Data Read transactions in uncore queue.)",
-      R"(Counts the number of offcore outstanding Demand Data Read transactions in the super queue (SQ) every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor. See the corresponding Umask under OFFCORE_REQUESTS.Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1316,11 +1333,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD",
+      "OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD",
       EventDef::Encoding{
-          .code = 0x60, .umask = 0x08, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when offcore outstanding cacheable Core Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
-      R"(Counts cycles when offcore outstanding cacheable Core Data Read transactions are present in the super queue. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor (SQ de-allocation). See corresponding Umask under OFFCORE_REQUESTS.)",
+          .code = 0x60, .umask = 0x08, .cmask = 0, .msr_values = {0}},
+      R"(Offcore outstanding cacheable Core Data Read transactions in SuperQueue (SQ), queue to uncore)",
+      R"(Counts the number of offcore outstanding cacheable Core Data Read transactions in the super queue every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor (SQ de-allocation). See corresponding Umask under OFFCORE_REQUESTS.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1329,11 +1346,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.ALL_DATA_RD",
+      "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_DATA_RD",
       EventDef::Encoding{
-          .code = 0x60, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Offcore outstanding cacheable Core Data Read transactions in SuperQueue (SQ), queue to uncore)",
-      R"(Counts the number of offcore outstanding cacheable Core Data Read transactions in the super queue every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor (SQ de-allocation). See corresponding Umask under OFFCORE_REQUESTS.)",
+          .code = 0x60, .umask = 0x08, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when offcore outstanding cacheable Core Data Read transactions are present in SuperQueue (SQ), queue to uncore.)",
+      R"(Counts cycles when offcore outstanding cacheable Core Data Read transactions are present in the super queue. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor (SQ de-allocation). See corresponding Umask under OFFCORE_REQUESTS.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1355,19 +1372,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "OFFCORE_REQUESTS_OUTSTANDING.L3_MISS_DEMAND_DATA_RD_GE_6",
-      EventDef::Encoding{
-          .code = 0x60, .umask = 0x10, .cmask = 6, .msr_values = {0x00}},
-      R"(Cycles with at least 6 Demand Data Read requests that miss L3 cache in the superQ.)",
-      R"(Cycles with at least 6 Demand Data Read requests that miss L3 cache in the superQ.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.CYCLES_WITH_L3_MISS_DEMAND_DATA_RD",
       EventDef::Encoding{
           .code = 0x60, .umask = 0x10, .cmask = 1, .msr_values = {0x00}},
@@ -1381,11 +1385,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.MITE_CYCLES",
+      "OFFCORE_REQUESTS_OUTSTANDING.L3_MISS_DEMAND_DATA_RD_GE_6",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x04, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path)",
-      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) from the MITE path. Counting includes uops that may 'bypass' the IDQ.)",
+          .code = 0x60, .umask = 0x10, .cmask = 6, .msr_values = {0x00}},
+      R"(Cycles with at least 6 Demand Data Read requests that miss L3 cache in the superQ.)",
+      R"(Cycles with at least 6 Demand Data Read requests that miss L3 cache in the superQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1407,11 +1411,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.DSB_CYCLES",
+      "IDQ.MITE_CYCLES",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x08, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from Decode Stream Buffer (DSB) path)",
-      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Counting includes uops that may 'bypass' the IDQ.)",
+          .code = 0x79, .umask = 0x04, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from MITE path)",
+      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) from the MITE path. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1433,11 +1437,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.MS_DSB_CYCLES",
+      "IDQ.DSB_CYCLES",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
+          .code = 0x79, .umask = 0x08, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) from Decode Stream Buffer (DSB) path)",
+      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1446,11 +1450,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.ALL_DSB_CYCLES_ANY_UOPS",
+      "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x18, .cmask = 1, .msr_values = {0}},
-      R"(Cycles Decode Stream Buffer (DSB) is delivering any Uop)",
-      R"(Counts the number of cycles uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ.)",
+          .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1472,11 +1476,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.MS_MITE_UOPS",
+      "IDQ.ALL_DSB_CYCLES_ANY_UOPS",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
+          .code = 0x79, .umask = 0x18, .cmask = 1, .msr_values = {0}},
+      R"(Cycles Decode Stream Buffer (DSB) is delivering any Uop)",
+      R"(Counts the number of cycles uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1485,11 +1489,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.ALL_MITE_CYCLES_ANY_UOPS",
+      "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x24, .cmask = 1, .msr_values = {0}},
-      R"(Cycles MITE is delivering any Uop)",
-      R"(Counts the number of cycles uops were delivered to the Instruction Decode Queue (IDQ) from the MITE (legacy decode pipeline) path. Counting includes uops that may 'bypass' the IDQ. During these cycles uops are not being delivered from the Decode Stream Buffer (DSB).)",
+          .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1511,11 +1515,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.MS_CYCLES",
+      "IDQ.ALL_MITE_CYCLES_ANY_UOPS",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+          .code = 0x79, .umask = 0x24, .cmask = 1, .msr_values = {0}},
+      R"(Cycles MITE is delivering any Uop)",
+      R"(Counts the number of cycles uops were delivered to the Instruction Decode Queue (IDQ) from the MITE (legacy decode pipeline) path. Counting includes uops that may 'bypass' the IDQ. During these cycles uops are not being delivered from the Decode Stream Buffer (DSB).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1524,11 +1528,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ.MS_UOPS",
+      "IDQ.MS_CYCLES",
       EventDef::Encoding{
-          .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Counts the total number of uops delivered by the Microcode Sequencer (MS). Any instruction over 4 uops will be delivered by the MS. Some instructions such as transcendentals may additionally generate uops from the MS.)",
+          .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1546,6 +1550,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0}},
       R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer)",
       R"(Number of switches from DSB (Decode Stream Buffer) or MITE (legacy decode pipeline) to the Microcode Sequencer.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.MS_UOPS",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Counts the total number of uops delivered by the Microcode Sequencer (MS). Any instruction over 4 uops will be delivered by the MS. Some instructions such as transcendentals may additionally generate uops from the MS.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1723,16 +1740,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ_UOPS_NOT_DELIVERED.CYCLES_FE_WAS_OK",
+      "BR_MISP_EXEC.INDIRECT",
       EventDef::Encoding{
-          .code = 0x9C,
-          .umask = 0x01,
-          .inv = true,
-          .cmask = 1,
-          .msr_values = {0}},
-      R"(Counts cycles FE delivered 4 uops or Resource Allocation Table (RAT) was stalling FE.)",
-      R"(Counts cycles FE delivered 4 uops or Resource Allocation Table (RAT) was stalling FE.)",
-      2000003,
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -1740,12 +1753,12 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_3_UOP_DELIV.CORE",
+      "BR_MISP_EXEC.ALL_BRANCHES",
       EventDef::Encoding{
-          .code = 0x9C, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles with less than 3 uops delivered by the front end.)",
-      R"(Cycles with less than 3 uops delivered by the front-end.)",
-      2000003,
+          .code = 0x89, .umask = 0xFF, .cmask = 0, .msr_values = {0}},
+      R"(Speculative and retired mispredicted macro conditional branches)",
+      R"(This event counts both taken and not taken speculative and retired mispredicted branch instructions.)",
+      200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -1753,24 +1766,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_2_UOP_DELIV.CORE",
+      "IDQ_UOPS_NOT_DELIVERED.CORE",
       EventDef::Encoding{
-          .code = 0x9C, .umask = 0x01, .cmask = 2, .msr_values = {0}},
-      R"(Cycles with less than 2 uops delivered by the front end.)",
-      R"(Cycles with less than 2 uops delivered by the front-end.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_1_UOP_DELIV.CORE",
-      EventDef::Encoding{
-          .code = 0x9C, .umask = 0x01, .cmask = 3, .msr_values = {0}},
-      R"(Cycles per thread when 3 or more uops are not delivered to Resource Allocation Table (RAT) when backend of the machine is not stalled)",
-      R"(Counts, on the per-thread basis, cycles when less than 1 uop is delivered to Resource Allocation Table (RAT). IDQ_Uops_Not_Delivered.core >= 3.)",
+          .code = 0x9C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Uops not delivered to Resource Allocation Table (RAT) per thread when backend of the machine is not stalled)",
+      R"(Counts the number of uops not delivered to Resource Allocation Table (RAT) per thread adding 4  x when Resource Allocation Table (RAT) is not stalled and Instruction Decode Queue (IDQ) delivers x uops to Resource Allocation Table (RAT) (where x belongs to {0,1,2,3}). Counting does not cover cases when: a. IDQ-Resource Allocation Table (RAT) pipe serves the other thread. b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions).  c. Instruction Decode Queue (IDQ) delivers four uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1792,11 +1792,54 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "IDQ_UOPS_NOT_DELIVERED.CORE",
+      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_1_UOP_DELIV.CORE",
       EventDef::Encoding{
-          .code = 0x9C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Uops not delivered to Resource Allocation Table (RAT) per thread when backend of the machine is not stalled)",
-      R"(Counts the number of uops not delivered to Resource Allocation Table (RAT) per thread adding 4  x when Resource Allocation Table (RAT) is not stalled and Instruction Decode Queue (IDQ) delivers x uops to Resource Allocation Table (RAT) (where x belongs to {0,1,2,3}). Counting does not cover cases when: a. IDQ-Resource Allocation Table (RAT) pipe serves the other thread. b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions).  c. Instruction Decode Queue (IDQ) delivers four uops.)",
+          .code = 0x9C, .umask = 0x01, .cmask = 3, .msr_values = {0}},
+      R"(Cycles per thread when 3 or more uops are not delivered to Resource Allocation Table (RAT) when backend of the machine is not stalled)",
+      R"(Counts, on the per-thread basis, cycles when less than 1 uop is delivered to Resource Allocation Table (RAT). IDQ_Uops_Not_Delivered.core >= 3.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_2_UOP_DELIV.CORE",
+      EventDef::Encoding{
+          .code = 0x9C, .umask = 0x01, .cmask = 2, .msr_values = {0}},
+      R"(Cycles with less than 2 uops delivered by the front end.)",
+      R"(Cycles with less than 2 uops delivered by the front-end.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ_UOPS_NOT_DELIVERED.CYCLES_LE_3_UOP_DELIV.CORE",
+      EventDef::Encoding{
+          .code = 0x9C, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles with less than 3 uops delivered by the front end.)",
+      R"(Cycles with less than 3 uops delivered by the front-end.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ_UOPS_NOT_DELIVERED.CYCLES_FE_WAS_OK",
+      EventDef::Encoding{
+          .code = 0x9C,
+          .umask = 0x01,
+          .inv = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Counts cycles FE delivered 4 uops or Resource Allocation Table (RAT) was stalling FE.)",
+      R"(Counts cycles FE delivered 4 uops or Resource Allocation Table (RAT) was stalling FE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2143,11 +2186,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "LSD.CYCLES_4_UOPS",
+      "LSD.CYCLES_ACTIVE",
       EventDef::Encoding{
-          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0x00}},
-      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
-      R"(Counts the cycles when 4 uops are delivered by the LSD (Loop-stream detector).)",
+          .code = 0xA8, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
+      R"(Counts the cycles when at least one uop is delivered by the LSD (Loop-stream detector).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2156,11 +2199,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "LSD.CYCLES_ACTIVE",
+      "LSD.CYCLES_4_UOPS",
       EventDef::Encoding{
-          .code = 0xA8, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles Uops delivered by the LSD, but didn't come from the decoder.)",
-      R"(Counts the cycles when at least one uop is delivered by the LSD (Loop-stream detector).)",
+          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0x00}},
+      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
+      R"(Counts the cycles when 4 uops are delivered by the LSD (Loop-stream detector).)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2225,7 +2268,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
+      R"(Cacheable and non-cacheable code read requests)",
       R"(Counts both cacheable and non-cacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -2287,50 +2330,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
+      "UOPS_EXECUTED.THREAD",
       EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 4, .msr_values = {0}},
-      R"(Cycles where at least 4 uops were executed per-thread)",
-      R"(Cycles where at least 4 uops were executed per-thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 3, .msr_values = {0}},
-      R"(Cycles where at least 3 uops were executed per-thread)",
-      R"(Cycles where at least 3 uops were executed per-thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 2, .msr_values = {0}},
-      R"(Cycles where at least 2 uops were executed per-thread)",
-      R"(Cycles where at least 2 uops were executed per-thread.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 1, .msr_values = {0}},
-      R"(Cycles where at least 1 uop was executed per-thread)",
-      R"(Cycles where at least 1 uop was executed per-thread.)",
+          .code = 0xB1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of uops to be executed per-thread each cycle.)",
+      R"(Number of uops to be executed per-thread each cycle.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2356,11 +2360,50 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_EXECUTED.THREAD",
+      "UOPS_EXECUTED.CYCLES_GE_1_UOP_EXEC",
       EventDef::Encoding{
-          .code = 0xB1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Counts the number of uops to be executed per-thread each cycle.)",
-      R"(Number of uops to be executed per-thread each cycle.)",
+          .code = 0xB1, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+      R"(Cycles where at least 1 uop was executed per-thread)",
+      R"(Cycles where at least 1 uop was executed per-thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_2_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 2, .msr_values = {0}},
+      R"(Cycles where at least 2 uops were executed per-thread)",
+      R"(Cycles where at least 2 uops were executed per-thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_3_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 3, .msr_values = {0}},
+      R"(Cycles where at least 3 uops were executed per-thread)",
+      R"(Cycles where at least 3 uops were executed per-thread.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CYCLES_GE_4_UOPS_EXEC",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x01, .cmask = 4, .msr_values = {0}},
+      R"(Cycles where at least 4 uops were executed per-thread)",
+      R"(Cycles where at least 4 uops were executed per-thread.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2382,41 +2425,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_NONE",
+      "UOPS_EXECUTED.CORE_CYCLES_GE_1",
       EventDef::Encoding{
-          .code = 0xB1,
-          .umask = 0x02,
-          .inv = true,
-          .cmask = 1,
-          .msr_values = {0}},
-      R"(Cycles with no micro-ops executed from any thread on physical core.)",
-      R"(Cycles with no micro-ops executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_4",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x02, .cmask = 4, .msr_values = {0}},
-      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_3",
-      EventDef::Encoding{
-          .code = 0xB1, .umask = 0x02, .cmask = 3, .msr_values = {0}},
-      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
+          .code = 0xB1, .umask = 0x02, .cmask = 1, .msr_values = {0}},
+      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2438,11 +2451,41 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_EXECUTED.CORE_CYCLES_GE_1",
+      "UOPS_EXECUTED.CORE_CYCLES_GE_3",
       EventDef::Encoding{
-          .code = 0xB1, .umask = 0x02, .cmask = 1, .msr_values = {0}},
-      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
-      R"(Cycles at least 1 micro-op is executed from any thread on physical core.)",
+          .code = 0xB1, .umask = 0x02, .cmask = 3, .msr_values = {0}},
+      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 3 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_GE_4",
+      EventDef::Encoding{
+          .code = 0xB1, .umask = 0x02, .cmask = 4, .msr_values = {0}},
+      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
+      R"(Cycles at least 4 micro-op is executed from any thread on physical core.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "UOPS_EXECUTED.CORE_CYCLES_NONE",
+      EventDef::Encoding{
+          .code = 0xB1,
+          .umask = 0x02,
+          .inv = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Cycles with no micro-ops executed from any thread on physical core.)",
+      R"(Cycles with no micro-ops executed from any thread on physical core.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2581,15 +2624,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_RETIRED.TOTAL_CYCLES",
+      "UOPS_RETIRED.RETIRE_SLOTS",
       EventDef::Encoding{
-          .code = 0xC2,
-          .umask = 0x02,
-          .inv = true,
-          .cmask = 16,
-          .msr_values = {0}},
-      R"(Cycles with less than 10 actually retired uops.)",
-      R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
+          .code = 0xC2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Retirement slots used.)",
+      R"(Counts the retirement slots used.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2615,11 +2654,15 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "UOPS_RETIRED.RETIRE_SLOTS",
+      "UOPS_RETIRED.TOTAL_CYCLES",
       EventDef::Encoding{
-          .code = 0xC2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Retirement slots used.)",
-      R"(Counts the retirement slots used.)",
+          .code = 0xC2,
+          .umask = 0x02,
+          .inv = true,
+          .cmask = 16,
+          .msr_values = {0}},
+      R"(Cycles with less than 10 actually retired uops.)",
+      R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2698,11 +2741,23 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "BR_INST_RETIRED.CONDITIONAL",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Conditional branch instructions retired.)",
-      R"(This event counts conditional branch instructions retired.)",
+      R"(Conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.COND])",
+      R"(This event counts conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.COND])",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
+      R"(SKL091)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_INST_RETIRED.COND",
+      EventDef::Encoding{
+          .code = 0xC4, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.CONDITIONAL])",
+      R"(This event counts conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.CONDITIONAL])",
+      400009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
       R"(SKL091)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2869,76 +2924,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_4",
+      "FRONTEND_RETIRED.DSB_MISS",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400406}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 4 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 4 cycles which was not interrupted by a back-end stall.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_2",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x200206}},
-      R"(Retired instructions that are fetched after an interval where the front-end had at least 2 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end had at least 2 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_2",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400206}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.STLB_MISS",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x15}},
-      R"(Retired Instructions who experienced STLB (2nd level TLB) true miss.)",
-      R"(Counts retired Instructions that experienced STLB (2nd level TLB) true miss. )",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.ITLB_MISS",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x14}},
-      R"(Retired Instructions who experienced iTLB true miss.)",
-      R"(Counts retired Instructions that experienced iTLB (Instruction TLB) true miss.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.L2_MISS",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x13}},
-      R"(Retired Instructions who experienced Instruction L2 Cache true miss.)",
-      R"(Retired Instructions who experienced Instruction L2 Cache true miss.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x11}},
+      R"(Retired Instructions who experienced a critical DSB miss.)",
+      R"(Number of retired Instructions that experienced a critical DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. Critical means stalls were exposed to the back-end as a result of the DSB miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -2960,11 +2950,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.DSB_MISS",
+      "FRONTEND_RETIRED.L2_MISS",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x11}},
-      R"(Retired Instructions who experienced a critical DSB miss.)",
-      R"(Number of retired Instructions that experienced a critical DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. Critical means stalls were exposed to the back-end as a result of the DSB miss.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x13}},
+      R"(Retired Instructions who experienced Instruction L2 Cache true miss.)",
+      R"(Retired Instructions who experienced Instruction L2 Cache true miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -2973,11 +2963,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_3",
+      "FRONTEND_RETIRED.ITLB_MISS",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x300206}},
-      R"(Retired instructions that are fetched after an interval where the front-end had at least 3 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end had at least 3 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x14}},
+      R"(Retired Instructions who experienced iTLB true miss.)",
+      R"(Counts retired Instructions that experienced iTLB (Instruction TLB) true miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -2986,11 +2976,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_1",
+      "FRONTEND_RETIRED.STLB_MISS",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x100206}},
-      R"(Retired instructions that are fetched after an interval where the front-end had at least 1 bubble-slot for a period of 2 cycles which was not interrupted by a back-end stall.)",
-      R"(Counts retired instructions that are delivered to the back-end after the front-end had at least 1 bubble-slot for a period of 2 cycles. A bubble-slot is an empty issue-pipeline slot while there was no RAT stall.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x15}},
+      R"(Retired Instructions who experienced STLB (2nd level TLB) true miss.)",
+      R"(Counts retired Instructions that experienced STLB (2nd level TLB) true miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -2999,11 +2989,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_512",
+      "FRONTEND_RETIRED.LATENCY_GE_2",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x420006}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 512 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 512 cycles which was not interrupted by a back-end stall.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400206}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 2 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 2 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3012,11 +3002,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_256",
+      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_2",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x410006}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 256 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 256 cycles which was not interrupted by a back-end stall.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x200206}},
+      R"(Retired instructions that are fetched after an interval where the front-end had at least 2 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end had at least 2 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3025,11 +3015,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_128",
+      "FRONTEND_RETIRED.LATENCY_GE_4",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x408006}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 128 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 128 cycles which was not interrupted by a back-end stall.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400406}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 4 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 4 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3038,24 +3028,11 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_64",
+      "FRONTEND_RETIRED.LATENCY_GE_8",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x404006}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 64 cycles which was not interrupted by a back-end stall.)",
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 64 cycles which was not interrupted by a back-end stall.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_32",
-      EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x402006}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 32 cycles which was not interrupted by a back-end stall.)",
-      R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 32 cycles. During this period the front-end delivered no uops.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400806}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 8 cycles which was not interrupted by a back-end stall.)",
+      R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 8 cycles. During this period the front-end delivered no uops.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3077,11 +3054,89 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "FRONTEND_RETIRED.LATENCY_GE_8",
+      "FRONTEND_RETIRED.LATENCY_GE_32",
       EventDef::Encoding{
-          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x400806}},
-      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 8 cycles which was not interrupted by a back-end stall.)",
-      R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 8 cycles. During this period the front-end delivered no uops.)",
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x402006}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 32 cycles which was not interrupted by a back-end stall.)",
+      R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 32 cycles. During this period the front-end delivered no uops.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_64",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x404006}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 64 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 64 cycles which was not interrupted by a back-end stall.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_128",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x408006}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 128 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 128 cycles which was not interrupted by a back-end stall.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_256",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x410006}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 256 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 256 cycles which was not interrupted by a back-end stall.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_512",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x420006}},
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 512 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 512 cycles which was not interrupted by a back-end stall.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_1",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x100206}},
+      R"(Retired instructions that are fetched after an interval where the front-end had at least 1 bubble-slot for a period of 2 cycles which was not interrupted by a back-end stall.)",
+      R"(Counts retired instructions that are delivered to the back-end after the front-end had at least 1 bubble-slot for a period of 2 cycles. A bubble-slot is an empty issue-pipeline slot while there was no RAT stall.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.pebs = 1},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FRONTEND_RETIRED.LATENCY_GE_2_BUBBLES_GE_3",
+      EventDef::Encoding{
+          .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x300206}},
+      R"(Retired instructions that are fetched after an interval where the front-end had at least 3 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
+      R"(Retired instructions that are fetched after an interval where the front-end had at least 3 bubble-slots for a period of 2 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3142,6 +3197,19 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.SCALAR",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0x03, .cmask = 0, .msr_values = {0}},
+      R"(Counts once for most SIMD scalar computational floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational single precision and double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
@@ -3174,6 +3242,32 @@ Note: Invoking MITE requires two or three cycles delay.)",
       R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
       R"(Counts once for most SIMD 256-bit packed double computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.8_FLOPS",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 256-bit packed single precision and 512-bit packed double precision  FP instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RSQRT14 RCP RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed single precision and 512-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision and double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RSQRT14 RCP RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -3220,6 +3314,19 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.VECTOR",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0xFC, .cmask = 0, .msr_values = {0}},
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "HLE_RETIRED.START",
       EventDef::Encoding{
           .code = 0xC8, .umask = 0x01, .cmask = 0, .msr_values = {0}},
@@ -3249,7 +3356,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "HLE_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xC8, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times an HLE execution aborted due to any reasons (multiple categories may count as one). )",
+      R"(Number of times an HLE execution aborted due to any reasons (multiple categories may count as one).)",
       R"(Number of times HLE abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -3353,7 +3460,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "RTM_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xC9, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times an RTM execution aborted due to any reasons (multiple categories may count as one). )",
+      R"(Number of times an RTM execution aborted due to any reasons (multiple categories may count as one).)",
       R"(Number of times RTM abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -3480,77 +3587,12 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
       EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 512 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 512 cycles.  Reported latency may be longer than just the memory latency.)",
-      101,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 256 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 256 cycles.  Reported latency may be longer than just the memory latency.)",
-      503,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 128 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 128 cycles.  Reported latency may be longer than just the memory latency.)",
-      1009,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 64 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 64 cycles.  Reported latency may be longer than just the memory latency.)",
-      2003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 32 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 32 cycles.  Reported latency may be longer than just the memory latency.)",
-      100007,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 16 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 16 cycles.  Reported latency may be longer than just the memory latency.)",
-      20011,
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 4 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 4 cycles.  Reported latency may be longer than just the memory latency.)",
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
@@ -3571,12 +3613,77 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
       EventDef::Encoding{
-          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 4 cycles.)",
-      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 4 cycles.  Reported latency may be longer than just the memory latency.)",
-      100003,
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 16 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 16 cycles.  Reported latency may be longer than just the memory latency.)",
+      20011,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
+      EventDef::Encoding{
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 32 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 32 cycles.  Reported latency may be longer than just the memory latency.)",
+      100007,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
+      EventDef::Encoding{
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 64 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 64 cycles.  Reported latency may be longer than just the memory latency.)",
+      2003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
+      EventDef::Encoding{
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 128 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 128 cycles.  Reported latency may be longer than just the memory latency.)",
+      1009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
+      EventDef::Encoding{
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 256 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 256 cycles.  Reported latency may be longer than just the memory latency.)",
+      503,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
+      EventDef::Encoding{
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 512 cycles.)",
+      R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 512 cycles.  Reported latency may be longer than just the memory latency.)",
+      101,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       std::nullopt // Errata
@@ -3654,8 +3761,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "MEM_INST_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load instructions.)",
-      R"(All retired load instructions.)",
+      R"(Retired load instructions.)",
+      R"(Counts all retired load instructions. This event accounts for SW prefetch instructions of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3667,8 +3774,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "MEM_INST_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(All retired store instructions.)",
-      R"(All retired store instructions.)",
+      R"(Retired store instructions.)",
+      R"(Counts all retired store instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -3722,7 +3829,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions with L3 cache hits as data sources)",
-      R"(Counts retired load instructions with at least one uop that hit in the L3 cache. )",
+      R"(Counts retired load instructions with at least one uop that hit in the L3 cache.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3761,7 +3868,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x20, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions missed L3 cache as data sources)",
-      R"(Counts retired load instructions with at least one uop that missed in the L3 cache. )",
+      R"(Counts retired load instructions with at least one uop that missed in the L3 cache.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3774,7 +3881,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions which data sources were load missed L1 but hit FB due to preceding miss to the same cache line with data not ready)",
-      R"(Counts retired load instructions with at least one uop was load missed in L1 but hit FB (Fill Buffers) due to preceding miss to the same cache line with data not ready. )",
+      R"(Counts retired load instructions with at least one uop was load missed in L1 but hit FB (Fill Buffers) due to preceding miss to the same cache line with data not ready.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},

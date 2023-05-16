@@ -21,6 +21,1914 @@ void addEvents(PmuDeviceManager& pmu_manager) {
     'B', 'C', 'D', 'E', 'F']
   */
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.PORT0",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts; Port 0)",
+      R"(PCIe Completion Buffer Inserts; Port 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.PORT1",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts; Port 1)",
+      R"(PCIe Completion Buffer Inserts; Port 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.PORT2",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts; Port 2)",
+      R"(PCIe Completion Buffer Inserts; Port 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_COMP_BUF_INSERTS.PORT3",
+      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
+      R"(PCIe Completion Buffer Inserts; Port 3)",
+      R"(PCIe Completion Buffer Inserts; Port 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_LINK_NUM_CORR_ERR",
+      EventDef::Encoding{.code = 0xF, .umask = 0x0, .msr_values = {0x00}},
+      R"(Num Link  Correctable Errors)",
+      R"(Num Link  Correctable Errors)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_LINK_NUM_RETRIES",
+      EventDef::Encoding{.code = 0xE, .umask = 0x0, .msr_values = {0x00}},
+      R"(Num Link Retries)",
+      R"(Num Link Retries)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH",
+      EventDef::Encoding{.code = 0x21, .umask = 0x0, .msr_values = {0x00}},
+      R"(Number packets that passed the Mask/Match Filter)",
+      R"(Number packets that passed the Mask/Match Filter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.BUS0",
+      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus; Non-PCIE bus)",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.BUS1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus; PCIE bus)",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.BUS0_NOT_BUS1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x4, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus; Non-PCIE bus and !(PCIE bus))",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.BUS0_BUS1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x8, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus; Non-PCIE bus and PCIE bus)",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_BUS1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x10, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus; !(Non-PCIE bus) and PCIE bus)",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_NOT_BUS1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x20, .msr_values = {0x00}},
+      R"(AND Mask/match for debug bus)",
+      R"(Asserted if all bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.BUS0",
+      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; Non-PCIE bus)",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.BUS1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; PCIE bus)",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.BUS0_NOT_BUS1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; Non-PCIE bus and !(PCIE bus))",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.BUS0_BUS1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; Non-PCIE bus and PCIE bus)",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_BUS1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; !(Non-PCIE bus) and PCIE bus)",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_NOT_BUS1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x20, .msr_values = {0x00}},
+      R"(OR Mask/match for debug bus; !(Non-PCIE bus) and !(PCIE bus))",
+      R"(Asserted if any bits specified by mask match)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_NOTHING",
+      EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
+      R"(Counting disabled)",
+      R"(Counting disabled)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_SYMBOL_TIMES",
+      EventDef::Encoding{.code = 0x82, .umask = 0x0, .msr_values = {0x00}},
+      R"(Symbol Times on Link)",
+      R"(Gen1 - increment once every 4nS, Gen2 - increment once every 2nS, Gen3 - increment once every 1nS)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.L4_PAGE_HIT",
+      EventDef::Encoding{.code = 0x41, .umask = 0x1, .msr_values = {0x00}},
+      R"(VTd Access; Vtd hit)",
+      R"(VTd Access; Vtd hit)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.CTXT_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x2, .msr_values = {0x00}},
+      R"(VTd Access; context cache miss)",
+      R"(VTd Access; context cache miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.L1_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x4, .msr_values = {0x00}},
+      R"(VTd Access; L1 miss)",
+      R"(VTd Access; L1 miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.L2_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x8, .msr_values = {0x00}},
+      R"(VTd Access; L2 miss)",
+      R"(VTd Access; L2 miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.L3_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x10, .msr_values = {0x00}},
+      R"(VTd Access; L3 miss)",
+      R"(VTd Access; L3 miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.TLB_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x20, .msr_values = {0x00}},
+      R"(VTd Access; TLB miss)",
+      R"(VTd Access; TLB miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.TLB_FULL",
+      EventDef::Encoding{.code = 0x41, .umask = 0x40, .msr_values = {0x00}},
+      R"(VTd Access; TLB is full)",
+      R"(VTd Access; TLB is full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_ACCESS.TLB1_MISS",
+      EventDef::Encoding{.code = 0x41, .umask = 0x80, .msr_values = {0x00}},
+      R"(VTd Access; TLB miss)",
+      R"(VTd Access; TLB miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_VTD_OCCUPANCY",
+      EventDef::Encoding{.code = 0x40, .umask = 0x0, .msr_values = {0x00}},
+      R"(VTd Occupancy)",
+      R"(VTd Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_CACHE_TOTAL_OCCUPANCY.ANY",
+      EventDef::Encoding{.code = 0xF, .umask = 0x1, .msr_values = {0x00}},
+      R"(Total Write Cache Occupancy; Any Source)",
+      R"(Accumulates the number of reads and writes that are outstanding in the uncore in each cycle.  This is effectively the sum of the READ_OCCUPANCY and WRITE_OCCUPANCY events.; Tracks all requests from any source port.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_CACHE_TOTAL_OCCUPANCY.IV_Q",
+      EventDef::Encoding{.code = 0xF, .umask = 0x2, .msr_values = {0x00}},
+      R"(Total Write Cache Occupancy; Snoops)",
+      R"(Accumulates the number of reads and writes that are outstanding in the uncore in each cycle.  This is effectively the sum of the READ_OCCUPANCY and WRITE_OCCUPANCY events.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x1, .umask = 0x0, .msr_values = {0x00}},
+      R"(IRP Clocks)",
+      R"(IRP Clocks)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.PCIRDCUR",
+      EventDef::Encoding{.code = 0x10, .umask = 0x1, .msr_values = {0x00}},
+      R"(Coherent Ops; PCIRdCur)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.CRD",
+      EventDef::Encoding{.code = 0x10, .umask = 0x2, .msr_values = {0x00}},
+      R"(Coherent Ops; CRd)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.DRD",
+      EventDef::Encoding{.code = 0x10, .umask = 0x4, .msr_values = {0x00}},
+      R"(Coherent Ops; DRd)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.PCIDCAHINT",
+      EventDef::Encoding{.code = 0x10, .umask = 0x20, .msr_values = {0x00}},
+      R"(Coherent Ops; PCIDCAHin5t)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.WBMTOI",
+      EventDef::Encoding{.code = 0x10, .umask = 0x40, .msr_values = {0x00}},
+      R"(Coherent Ops; WbMtoI)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_COHERENT_OPS.CLFLUSH",
+      EventDef::Encoding{.code = 0x10, .umask = 0x80, .msr_values = {0x00}},
+      R"(Coherent Ops; CLFlush)",
+      R"(Counts the number of coherency related operations servied by the IRP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_FAF_FULL",
+      EventDef::Encoding{.code = 0x17, .umask = 0x0, .msr_values = {0x00}},
+      R"(FAF RF full)",
+      R"(FAF RF full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_FAF_TRANSACTIONS",
+      EventDef::Encoding{.code = 0x16, .umask = 0x0, .msr_values = {0x00}},
+      R"(FAF allocation -- sent to ADQ)",
+      R"(FAF allocation -- sent to ADQ)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_IRP_ALL.INBOUND_INSERTS",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x1, .msr_values = {0x00}},
+      R"(All Inserts Inbound (p2p + faf + cset))",
+      R"(All Inserts Inbound (p2p + faf + cset))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_IRP_ALL.OUTBOUND_INSERTS",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x2, .msr_values = {0x00}},
+      R"(All Inserts Outbound (BL, AK, Snoops))",
+      R"(All Inserts Outbound (BL, AK, Snoops))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.FAST_REQ",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x1, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Fastpath Requests)",
+      R"(Misc Events - Set 0; Fastpath Requests)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.FAST_REJ",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x2, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Fastpath Rejects)",
+      R"(Misc Events - Set 0; Fastpath Rejects)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.2ND_RD_INSERT",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x4, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Cache Inserts of Read Transactions as Secondary)",
+      R"(Misc Events - Set 0; Cache Inserts of Read Transactions as Secondary)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.2ND_WR_INSERT",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x8, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Cache Inserts of Write Transactions as Secondary)",
+      R"(Misc Events - Set 0; Cache Inserts of Write Transactions as Secondary)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.2ND_ATOMIC_INSERT",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x10, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Cache Inserts of Atomic Transactions as Secondary)",
+      R"(Misc Events - Set 0; Cache Inserts of Atomic Transactions as Secondary)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.FAST_XFER",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x20, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Fastpath Transfers From Primary to Secondary)",
+      R"(Misc Events - Set 0; Fastpath Transfers From Primary to Secondary)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.PF_ACK_HINT",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x40, .msr_values = {0x00}},
+      R"(Misc Events - Set 0; Prefetch Ack Hints From Primary to Secondary)",
+      R"(Misc Events - Set 0; Prefetch Ack Hints From Primary to Secondary)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.UNKNOWN",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x80, .msr_values = {0x00}},
+      R"(Misc Events - Set 0)",
+      R"(Misc Events - Set 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SLOW_I",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x1, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Slow Transfer of I Line)",
+      R"(Snoop took cacheline ownership before write from data was committed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SLOW_S",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x2, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Slow Transfer of S Line)",
+      R"(Secondary received a transfer that did not have sufficient MESI state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SLOW_E",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x4, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Slow Transfer of E Line)",
+      R"(Secondary received a transfer that did have sufficient MESI state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SLOW_M",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x8, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Slow Transfer of M Line)",
+      R"(Snoop took cacheline ownership before write from data was committed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.LOST_FWD",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x10, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Lost Forward)",
+      R"(Snoop pulled away ownership before a write was committed)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SEC_RCVD_INVLD",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x20, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Received Invalid)",
+      R"(Secondary received a transfer that did not have sufficient MESI state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC1.SEC_RCVD_VLD",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x40, .msr_values = {0x00}},
+      R"(Misc Events - Set 1; Received Valid)",
+      R"(Secondary received a transfer that did have sufficient MESI state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_INSERTS",
+      EventDef::Encoding{.code = 0x14, .umask = 0x0, .msr_values = {0x00}},
+      R"(P2P Requests)",
+      R"(P2P requests from the ITC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_OCCUPANCY",
+      EventDef::Encoding{.code = 0x15, .umask = 0x0, .msr_values = {0x00}},
+      R"(P2P Occupancy)",
+      R"(P2P B & S Queue Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.RD",
+      EventDef::Encoding{.code = 0x13, .umask = 0x1, .msr_values = {0x00}},
+      R"(P2P Transactions; P2P reads)",
+      R"(P2P Transactions; P2P reads)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.WR",
+      EventDef::Encoding{.code = 0x13, .umask = 0x2, .msr_values = {0x00}},
+      R"(P2P Transactions; P2P Writes)",
+      R"(P2P Transactions; P2P Writes)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.MSG",
+      EventDef::Encoding{.code = 0x13, .umask = 0x4, .msr_values = {0x00}},
+      R"(P2P Transactions; P2P Message)",
+      R"(P2P Transactions; P2P Message)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.CMPL",
+      EventDef::Encoding{.code = 0x13, .umask = 0x8, .msr_values = {0x00}},
+      R"(P2P Transactions; P2P completions)",
+      R"(P2P Transactions; P2P completions)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.REM",
+      EventDef::Encoding{.code = 0x13, .umask = 0x10, .msr_values = {0x00}},
+      R"(P2P Transactions; Match if remote only)",
+      R"(P2P Transactions; Match if remote only)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.REM_AND_TGT_MATCH",
+      EventDef::Encoding{.code = 0x13, .umask = 0x20, .msr_values = {0x00}},
+      R"(P2P Transactions; match if remote and target matches)",
+      R"(P2P Transactions; match if remote and target matches)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.LOC",
+      EventDef::Encoding{.code = 0x13, .umask = 0x40, .msr_values = {0x00}},
+      R"(P2P Transactions; match if local only)",
+      R"(P2P Transactions; match if local only)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_P2P_TRANSACTIONS.LOC_AND_TGT_MATCH",
+      EventDef::Encoding{.code = 0x13, .umask = 0x80, .msr_values = {0x00}},
+      R"(P2P Transactions; match if local and target matches)",
+      R"(P2P Transactions; match if local and target matches)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.MISS",
+      EventDef::Encoding{.code = 0x12, .umask = 0x1, .msr_values = {0x00}},
+      R"(Snoop Responses; Miss)",
+      R"(Snoop Responses; Miss)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.HIT_I",
+      EventDef::Encoding{.code = 0x12, .umask = 0x2, .msr_values = {0x00}},
+      R"(Snoop Responses; Hit I)",
+      R"(Snoop Responses; Hit I)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.HIT_ES",
+      EventDef::Encoding{.code = 0x12, .umask = 0x4, .msr_values = {0x00}},
+      R"(Snoop Responses; Hit E or S)",
+      R"(Snoop Responses; Hit E or S)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.HIT_M",
+      EventDef::Encoding{.code = 0x12, .umask = 0x8, .msr_values = {0x00}},
+      R"(Snoop Responses; Hit M)",
+      R"(Snoop Responses; Hit M)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.SNPCODE",
+      EventDef::Encoding{.code = 0x12, .umask = 0x10, .msr_values = {0x00}},
+      R"(Snoop Responses; SnpCode)",
+      R"(Snoop Responses; SnpCode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.SNPDATA",
+      EventDef::Encoding{.code = 0x12, .umask = 0x20, .msr_values = {0x00}},
+      R"(Snoop Responses; SnpData)",
+      R"(Snoop Responses; SnpData)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.SNPINV",
+      EventDef::Encoding{.code = 0x12, .umask = 0x40, .msr_values = {0x00}},
+      R"(Snoop Responses; SnpInv)",
+      R"(Snoop Responses; SnpInv)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.READS",
+      EventDef::Encoding{.code = 0x11, .umask = 0x1, .msr_values = {0x00}},
+      R"(Inbound Transaction Count; Reads)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks only read requests (not including read prefetches).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.WRITES",
+      EventDef::Encoding{.code = 0x11, .umask = 0x2, .msr_values = {0x00}},
+      R"(Inbound Transaction Count; Writes)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Trackes only write requests.  Each write request should have a prefetch, so there is no need to explicitly track these requests.  For writes that are tickled and have to retry, the counter will be incremented for each retry.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.RD_PREF",
+      EventDef::Encoding{.code = 0x11, .umask = 0x4, .msr_values = {0x00}},
+      R"(Inbound Transaction Count; Read Prefetches)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of read prefetches.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.ATOMIC",
+      EventDef::Encoding{.code = 0x11, .umask = 0x10, .msr_values = {0x00}},
+      R"(Inbound Transaction Count; Atomic)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of atomic transactions)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TRANSACTIONS.OTHER",
+      EventDef::Encoding{.code = 0x11, .umask = 0x20, .msr_values = {0x00}},
+      R"(Inbound Transaction Count; Other)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of 'other' kinds of transactions.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxR2_AD_STALL_CREDIT_CYCLES",
+      EventDef::Encoding{.code = 0x1A, .umask = 0x0, .msr_values = {0x00}},
+      R"(No AD Egress Credit Stalls)",
+      R"(Counts the number times when it is not possible to issue a request to the R2PCIe because there are no AD Egress Credits available.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_AK_INSERTS",
+      EventDef::Encoding{.code = 0xB, .umask = 0x0, .msr_values = {0x00}},
+      R"(AK Egress Allocations)",
+      R"(AK Egress Allocations)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_DRS_CYCLES_FULL",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL DRS Egress Cycles Full)",
+      R"(BL DRS Egress Cycles Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_DRS_INSERTS",
+      EventDef::Encoding{.code = 0x2, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL DRS Egress Inserts)",
+      R"(BL DRS Egress Inserts)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_DRS_OCCUPANCY",
+      EventDef::Encoding{.code = 0x8, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL DRS Egress Occupancy)",
+      R"(BL DRS Egress Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCB_CYCLES_FULL",
+      EventDef::Encoding{.code = 0x6, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCB Egress Cycles Full)",
+      R"(BL NCB Egress Cycles Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCB_INSERTS",
+      EventDef::Encoding{.code = 0x3, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCB Egress Inserts)",
+      R"(BL NCB Egress Inserts)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCB_OCCUPANCY",
+      EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCB Egress Occupancy)",
+      R"(BL NCB Egress Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCS_CYCLES_FULL",
+      EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCS Egress Cycles Full)",
+      R"(BL NCS Egress Cycles Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCS_INSERTS",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCS Egress Inserts)",
+      R"(BL NCS Egress Inserts)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxC_BL_NCS_OCCUPANCY",
+      EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
+      R"(BL NCS Egress Occupancy)",
+      R"(BL NCS Egress Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxR2_BL_STALL_CREDIT_CYCLES",
+      EventDef::Encoding{.code = 0x1B, .umask = 0x0, .msr_values = {0x00}},
+      R"(No BL Egress Credit Stalls)",
+      R"(Counts the number times when it is not possible to issue data to the R2PCIe because there are no BL Egress Credits available.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxS_DATA_INSERTS_NCB",
+      EventDef::Encoding{.code = 0xD, .umask = 0x0, .msr_values = {0x00}},
+      R"(Outbound Read Requests)",
+      R"(Counts the number of requests issued to the switch (towards the devices).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxS_DATA_INSERTS_NCS",
+      EventDef::Encoding{.code = 0xE, .umask = 0x0, .msr_values = {0x00}},
+      R"(Outbound Read Requests)",
+      R"(Counts the number of requests issued to the switch (towards the devices).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_TxS_REQUEST_OCCUPANCY",
+      EventDef::Encoding{.code = 0xC, .umask = 0x0, .msr_values = {0x00}},
+      R"(Outbound Request Queue Occupancy)",
+      R"(Accumulates the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjunction with the allocations event in order to calculate average latency of outbound requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0",
+      EventDef::Encoding{.code = 0x18, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1",
+      EventDef::Encoding{.code = 0x18, .umask = 0x02, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2",
+      EventDef::Encoding{.code = 0x18, .umask = 0x04, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0",
+      EventDef::Encoding{.code = 0x18, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0",
+      EventDef::Encoding{.code = 0x18, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2",
+      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2)",
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0)",
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3",
+      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3)",
+      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_BYP_BLOCKED.BGF_CRD",
+      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_BYP_BLOCKED.BGF_CRD)",
+      R"(UNC_UPI_M3_BYP_BLOCKED.BGF_CRD)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK",
+      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK)",
+      R"(UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_CRD_RETURN_BLOCKED",
+      EventDef::Encoding{.code = 0x16, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_CRD_RETURN_BLOCKED)",
+      R"(UNC_UPI_M3_CRD_RETURN_BLOCKED)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2",
+      EventDef::Encoding{.code = 0x15, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH",
+      EventDef::Encoding{.code = 0x15, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0",
+      EventDef::Encoding{.code = 0x15, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH",
+      EventDef::Encoding{.code = 0x15, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3",
+      EventDef::Encoding{.code = 0x15, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD",
+      EventDef::Encoding{.code = 0x15, .umask = 0x20, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK",
+      EventDef::Encoding{.code = 0x15, .umask = 0x40, .msr_values = {0x00}},
+      R"(UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK)",
+      R"(UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_PHY_INIT_CYCLES",
+      EventDef::Encoding{.code = 0x20, .umask = 0x0, .msr_values = {0x00}},
+      R"(Cycles where phy is not in L0, L0c, L0p, L1)",
+      R"(Cycles where phy is not in L0, L0c, L0p, L1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_POWER_L1_NACK",
+      EventDef::Encoding{.code = 0x23, .umask = 0x0, .msr_values = {0x00}},
+      R"(L1 Req Nack)",
+      R"(Counts the number of times a link sends/receives a LinkReqNAck.  When the UPI links would like to change power state, the Tx side initiates a request to the Rx side requesting to change states.  This requests can either be accepted or denied.  If the Rx side replies with an Ack, the power mode will change.  If it replies with NAck, no change will take place.  This can be filtered based on Rx and Tx.  An Rx LinkReqNAck refers to receiving an NAck (meaning this agent's Tx originally requested the power change).  A Tx LinkReqNAck refers to sending this command (meaning the peer agent's Tx originally requested the power change and this agent accepted it).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_POWER_L1_REQ",
+      EventDef::Encoding{.code = 0x22, .umask = 0x0, .msr_values = {0x00}},
+      R"(L1 Req (same as L1 Ack).)",
+      R"(Counts the number of times a link sends/receives a LinkReqAck.  When the UPI links would like to change power state, the Tx side initiates a request to the Rx side requesting to change states.  This requests can either be accepted or denied.  If the Rx side replies with an Ack, the power mode will change.  If it replies with NAck, no change will take place.  This can be filtered based on Rx and Tx.  An Rx LinkReqAck refers to receiving an Ack (meaning this agent's Tx originally requested the power change).  A Tx LinkReqAck refers to sending this command (meaning the peer agent's Tx originally requested the power change and this agent accepted it).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_REQ_SLOT2_FROM_M3.VNA",
+      EventDef::Encoding{.code = 0x46, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VNA)",
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VNA)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_REQ_SLOT2_FROM_M3.VN0",
+      EventDef::Encoding{.code = 0x46, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN0)",
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_REQ_SLOT2_FROM_M3.VN1",
+      EventDef::Encoding{.code = 0x46, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN1)",
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_REQ_SLOT2_FROM_M3.ACK",
+      EventDef::Encoding{.code = 0x46, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.ACK)",
+      R"(UNC_UPI_REQ_SLOT2_FROM_M3.ACK)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL0_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x24, .umask = 0x0, .msr_values = {0x00}},
+      R"(Cycles in L0. Receive side.)",
+      R"(Number of UPI qfclk cycles spent in L0 power mode in the Link Layer.  L0 is the default mode which provides the highest performance with the most power.  Use edge detect to count the number of instances that the link entered L0.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another.  The phy layer  sometimes leaves L0 for training, which will not be captured by this event.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_CREDITS_CONSUMED_VN0",
+      EventDef::Encoding{.code = 0x39, .umask = 0x0, .msr_values = {0x00}},
+      R"(VN0 Credit Consumed)",
+      R"(Counts the number of times that an RxQ VN0 credit was consumed (i.e. message uses a VN0 credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_CREDITS_CONSUMED_VN1",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x0, .msr_values = {0x00}},
+      R"(VN1 Credit Consumed)",
+      R"(Counts the number of times that an RxQ VN1 credit was consumed (i.e. message uses a VN1 credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_CREDITS_CONSUMED_VNA",
+      EventDef::Encoding{.code = 0x38, .umask = 0x0, .msr_values = {0x00}},
+      R"(VNA Credit Consumed)",
+      R"(Counts the number of times that an RxQ VNA credit was consumed (i.e. message uses a VNA credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.SLOT0",
+      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
+      R"(Valid Flits Received; Slot 0)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 0 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.SLOT1",
+      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
+      R"(Valid Flits Received; Slot 1)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 1 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.SLOT2",
+      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
+      R"(Valid Flits Received; Slot 2)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 2 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.DATA",
+      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
+      R"(Valid Flits Received; Data)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Data Flits (which consume all slots), but how much to count is based on Slot0-2 mask, so count can be 0-3 depending on which slots are enabled for counting..)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.LLCRD",
+      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
+      R"(Valid Flits Received; LLCRD Not Empty)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables counting of LLCRD (with non-zero payload). This only applies to slot 2 since LLCRD is only allowed in slot 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.LLCTRL",
+      EventDef::Encoding{.code = 0x3, .umask = 0x40, .msr_values = {0x00}},
+      R"(Valid Flits Received; LLCTRL)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Equivalent to an idle packet.  Enables counting of slot 0 LLCTRL messages.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_OCCUPANCY.SLOT0",
+      EventDef::Encoding{.code = 0x32, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Occupancy - All Packets; Slot 0)",
+      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_OCCUPANCY.SLOT1",
+      EventDef::Encoding{.code = 0x32, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Occupancy - All Packets; Slot 1)",
+      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_OCCUPANCY.SLOT2",
+      EventDef::Encoding{.code = 0x32, .umask = 0x4, .msr_values = {0x00}},
+      R"(RxQ Occupancy - All Packets; Slot 2)",
+      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1",
+      EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2",
+      EventDef::Encoding{.code = 0x33, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0",
+      EventDef::Encoding{.code = 0x33, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2",
+      EventDef::Encoding{.code = 0x33, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0",
+      EventDef::Encoding{.code = 0x33, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1",
+      EventDef::Encoding{.code = 0x33, .umask = 0x20, .msr_values = {0x00}},
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1)",
+      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.TXQ",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.TXQ)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.TXQ)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.RETRY",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x20, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RETRY)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RETRY)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.DFX",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x40, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.DFX)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.DFX)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_CLK_ACTIVE.SPARE",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x80, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.SPARE)",
+      R"(UNC_UPI_TxL0P_CLK_ACTIVE.SPARE)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER",
+      EventDef::Encoding{.code = 0x28, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT",
+      EventDef::Encoding{.code = 0x29, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x26, .umask = 0x0, .msr_values = {0x00}},
+      R"(Cycles in L0. Transmit side.)",
+      R"(Number of UPI qfclk cycles spent in L0 power mode in the Link Layer.  L0 is the default mode which provides the highest performance with the most power.  Use edge detect to count the number of instances that the link entered L0.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another.  The phy layer  sometimes leaves L0 for training, which will not be captured by this event.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.SLOT0",
+      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
+      R"(Valid Flits Sent; Slot 0)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 0 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.SLOT1",
+      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
+      R"(Valid Flits Sent; Slot 1)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 1 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.SLOT2",
+      EventDef::Encoding{.code = 0x2, .umask = 0x4, .msr_values = {0x00}},
+      R"(Valid Flits Sent; Slot 2)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 2 - Other mask bits determine types of headers to count.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.LLCRD",
+      EventDef::Encoding{.code = 0x2, .umask = 0x10, .msr_values = {0x00}},
+      R"(Valid Flits Sent; LLCRD Not Empty)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables counting of LLCRD (with non-zero payload). This only applies to slot 2 since LLCRD is only allowed in slot 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.LLCTRL",
+      EventDef::Encoding{.code = 0x2, .umask = 0x40, .msr_values = {0x00}},
+      R"(Valid Flits Sent; LLCTRL)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Equivalent to an idle packet.  Enables counting of slot 0 LLCTRL messages.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_INSERTS",
+      EventDef::Encoding{.code = 0x40, .umask = 0x0, .msr_values = {0x00}},
+      R"(Tx Flit Buffer Allocations)",
+      R"(Number of allocations into the UPI Tx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the TxQ and pass directly to the link.  However, the TxQ will be used with L0p and when LLR occurs, increasing latency to transfer out to the link.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_OCCUPANCY",
+      EventDef::Encoding{.code = 0x42, .umask = 0x0, .msr_values = {0x00}},
+      R"(Tx Flit Buffer Occupancy)",
+      R"(Accumulates the number of flits in the TxQ.  Generally, when data is transmitted across UPI, it will bypass the TxQ and pass directly to the link.  However, the TxQ will be used with L0p and when LLR occurs, increasing latency to transfer out to the link. This can be used with the cycles not empty event to track average occupancy, or the allocations event to track average lifetime in the TxQ.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01",
+      EventDef::Encoding{.code = 0x45, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01)",
+      R"(UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_VNA_CREDIT_RETURN_OCCUPANCY",
+      EventDef::Encoding{.code = 0x44, .umask = 0x0, .msr_values = {0x00}},
+      R"(VNA Credits Pending Return - Occupancy)",
+      R"(Number of VNA credits in the Rx side that are waitng to be returned back across the link.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_m2m,
       "UNC_M2M_BYPASS_M2M_Egress.TAKEN",
       EventDef::Encoding{.code = 0x22, .umask = 0x1, .msr_values = {0x00}},
@@ -693,11 +2601,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR0",
-      EventDef::Encoding{.code = 0x80, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 0)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
+      R"(pclk Cycles)",
+      R"(The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -705,11 +2613,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR1",
-      EventDef::Encoding{.code = 0x80, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 1)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_CORE_TRANSITION_CYCLES",
+      EventDef::Encoding{.code = 0x60, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_P_CORE_TRANSITION_CYCLES)",
+      R"(UNC_P_CORE_TRANSITION_CYCLES)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -717,11 +2625,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR2",
-      EventDef::Encoding{.code = 0x80, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 2)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_DEMOTIONS",
+      EventDef::Encoding{.code = 0x30, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_P_DEMOTIONS)",
+      R"(UNC_P_DEMOTIONS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -729,11 +2637,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR3",
-      EventDef::Encoding{.code = 0x80, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 3)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_FIVR_PS_PS0_CYCLES",
+      EventDef::Encoding{.code = 0x75, .umask = 0x0, .msr_values = {0x00}},
+      R"(Phase Shed 0 Cycles)",
+      R"(Cycles spent in phase-shedding power state 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -741,11 +2649,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR4",
-      EventDef::Encoding{.code = 0x80, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 4)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_FIVR_PS_PS1_CYCLES",
+      EventDef::Encoding{.code = 0x76, .umask = 0x0, .msr_values = {0x00}},
+      R"(Phase Shed 1 Cycles)",
+      R"(Cycles spent in phase-shedding power state 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -753,11 +2661,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR5",
-      EventDef::Encoding{.code = 0x80, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Acquired; For Transgress 5)",
-      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_FIVR_PS_PS2_CYCLES",
+      EventDef::Encoding{.code = 0x77, .umask = 0x0, .msr_values = {0x00}},
+      R"(Phase Shed 2 Cycles)",
+      R"(Cycles spent in phase-shedding power state 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -765,11 +2673,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR0",
-      EventDef::Encoding{.code = 0x82, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 0)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_FIVR_PS_PS3_CYCLES",
+      EventDef::Encoding{.code = 0x78, .umask = 0x0, .msr_values = {0x00}},
+      R"(Phase Shed 3 Cycles)",
+      R"(Cycles spent in phase-shedding power state 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -777,11 +2685,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR1",
-      EventDef::Encoding{.code = 0x82, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 1)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_MAX_LIMIT_THERMAL_CYCLES",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0, .msr_values = {0x00}},
+      R"(Thermal Strongest Upper Limit Cycles)",
+      R"(Counts the number of cycles when thermal conditions are the upper limit on frequency.  This is related to the THERMAL_THROTTLE CYCLES_ABOVE_TEMP event, which always counts cycles when we are above the thermal temperature.  This event (STRONGEST_UPPER_LIMIT) is sampled at the output of the algorithm that determines the actual frequency, while THERMAL_THROTTLE looks at the input.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -789,11 +2697,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR2",
-      EventDef::Encoding{.code = 0x82, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 2)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_MAX_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0, .msr_values = {0x00}},
+      R"(Power Strongest Upper Limit Cycles)",
+      R"(Counts the number of cycles when power is the upper limit on frequency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -801,11 +2709,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR3",
-      EventDef::Encoding{.code = 0x82, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 3)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_MIN_IO_P_CYCLES",
+      EventDef::Encoding{.code = 0x73, .umask = 0x0, .msr_values = {0x00}},
+      R"(IO P Limit Strongest Lower Limit Cycles)",
+      R"(Counts the number of cycles when IO P Limit is preventing us from dropping the frequency lower.  This algorithm monitors the needs to the IO subsystem on both local and remote sockets and will maintain a frequency high enough to maintain good IO BW.  This is necessary for when all the IA cores on a socket are idle but a user still would like to maintain high IO Bandwidth.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -813,11 +2721,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR4",
-      EventDef::Encoding{.code = 0x82, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 4)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_TRANS_CYCLES",
+      EventDef::Encoding{.code = 0x74, .umask = 0x0, .msr_values = {0x00}},
+      R"(Cycles spent changing Frequency)",
+      R"(Counts the number of cycles when the system is changing frequency.  This can not be filtered by thread ID.  One can also use it with the occupancy counter that monitors number of threads in C0 to estimate the performance impact that frequency transitions had on the system.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -825,11 +2733,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR5",
-      EventDef::Encoding{.code = 0x82, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent0 AD Credits Occupancy; For Transgress 5)",
-      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_MCP_PROCHOT_CYCLES",
+      EventDef::Encoding{.code = 0x6, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_P_MCP_PROCHOT_CYCLES)",
+      R"(UNC_P_MCP_PROCHOT_CYCLES)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -837,11 +2745,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR0",
-      EventDef::Encoding{.code = 0x88, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 0)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_MEMORY_PHASE_SHEDDING_CYCLES",
+      EventDef::Encoding{.code = 0x2F, .umask = 0x0, .msr_values = {0x00}},
+      R"(Memory Phase Shedding Cycles)",
+      R"(Counts the number of cycles that the PCU has triggered memory phase shedding.  This is a mode that can be run in the iMC physicals that saves power at the expense of additional latency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -849,11 +2757,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR1",
-      EventDef::Encoding{.code = 0x88, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 1)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C0_CYCLES",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C0)",
+      R"(Counts the number of cycles when the package was in C0.  This event can be used in conjunction with edge detect to count C0 entrances (or exits using invert).  Residency events do not include transition times.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -861,11 +2769,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR2",
-      EventDef::Encoding{.code = 0x88, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 2)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
+      EventDef::Encoding{.code = 0x2B, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C2E)",
+      R"(Counts the number of cycles when the package was in C2E.  This event can be used in conjunction with edge detect to count C2E entrances (or exits using invert).  Residency events do not include transition times.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -873,11 +2781,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR3",
-      EventDef::Encoding{.code = 0x88, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 3)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C3_CYCLES",
+      EventDef::Encoding{.code = 0x2C, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C3)",
+      R"(Counts the number of cycles when the package was in C3.  This event can be used in conjunction with edge detect to count C3 entrances (or exits using invert).  Residency events do not include transition times.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -885,11 +2793,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR4",
-      EventDef::Encoding{.code = 0x88, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 4)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C6_CYCLES",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C6)",
+      R"(Counts the number of cycles when the package was in C6.  This event can be used in conjunction with edge detect to count C6 entrances (or exits using invert).  Residency events do not include transition times.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -897,11 +2805,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR5",
-      EventDef::Encoding{.code = 0x88, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Acquired; For Transgress 5)",
-      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_PMAX_THROTTLED_CYCLES",
+      EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_P_PMAX_THROTTLED_CYCLES)",
+      R"(UNC_P_PMAX_THROTTLED_CYCLES)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -909,11 +2817,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR0",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 0)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C0",
+      EventDef::Encoding{.code = 0x80, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number of cores in C-State; C0 and C1)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -921,11 +2829,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR1",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 1)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C3",
+      EventDef::Encoding{.code = 0x80, .umask = 0x80, .msr_values = {0x00}},
+      R"(Number of cores in C-State; C3)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -933,11 +2841,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR2",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 2)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C6",
+      EventDef::Encoding{.code = 0x80, .umask = 0xC0, .msr_values = {0x00}},
+      R"(Number of cores in C-State; C6 and C7)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -945,11 +2853,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR3",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 3)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_PROCHOT_EXTERNAL_CYCLES",
+      EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
+      R"(External Prochot)",
+      R"(Counts the number of cycles that we are in external PROCHOT mode.  This mode is triggered when a sensor off the die determines that something off-die (like DRAM) is too hot and must throttle to avoid damaging the chip.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -957,11 +2865,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR4",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 4)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_PROCHOT_INTERNAL_CYCLES",
+      EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
+      R"(Internal Prochot)",
+      R"(Counts the number of cycles that we are in Internal PROCHOT mode.  This mode is triggered when a sensor on the die determines that we are too hot and must throttle to avoid damaging the chip.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -969,11 +2877,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR5",
-      EventDef::Encoding{.code = 0x8A, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent0 BL Credits Occupancy; For Transgress 5)",
-      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
+      PmuType::uncore_pcu,
+      "UNC_P_TOTAL_TRANSITION_CYCLES",
+      EventDef::Encoding{.code = 0x72, .umask = 0x0, .msr_values = {0x00}},
+      R"(Total Core C State Transition Cycles)",
+      R"(Number of cycles spent performing core C state transitions across all cores.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -981,11 +2889,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 0)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_pcu,
+      "UNC_P_VR_HOT_CYCLES",
+      EventDef::Encoding{.code = 0x42, .umask = 0x0, .msr_values = {0x00}},
+      R"(VR Hot)",
+      R"(VR Hot)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -993,11 +2901,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 1)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_ubox,
+      "UNC_U_EVENT_MSG.VLW_RCVD",
+      EventDef::Encoding{.code = 0x42, .umask = 0x1, .msr_values = {0x00}},
+      R"(Message Received; VLW)",
+      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1005,11 +2913,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 2)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_ubox,
+      "UNC_U_EVENT_MSG.MSI_RCVD",
+      EventDef::Encoding{.code = 0x42, .umask = 0x2, .msr_values = {0x00}},
+      R"(Message Received; MSI)",
+      R"(Virtual Logical Wire (legacy) message were received from Uncore.; Message Signaled Interrupts - interrupts sent by devices (including PCIe via IOxAPIC) (Socket Mode only))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1017,11 +2925,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 3)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_ubox,
+      "UNC_U_EVENT_MSG.IPI_RCVD",
+      EventDef::Encoding{.code = 0x42, .umask = 0x4, .msr_values = {0x00}},
+      R"(Message Received; IPI)",
+      R"(Virtual Logical Wire (legacy) message were received from Uncore.; Inter Processor Interrupts)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1029,11 +2937,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR4",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 4)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_ubox,
+      "UNC_U_EVENT_MSG.DOORBELL_RCVD",
+      EventDef::Encoding{.code = 0x42, .umask = 0x8, .msr_values = {0x00}},
+      R"(Message Received)",
+      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1041,11 +2949,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR5",
-      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Acquired; For Transgress 5)",
-      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
+      PmuType::uncore_ubox,
+      "UNC_U_EVENT_MSG.INT_PRIO",
+      EventDef::Encoding{.code = 0x42, .umask = 0x10, .msr_values = {0x00}},
+      R"(Message Received)",
+      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1053,11 +2961,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR0",
-      EventDef::Encoding{.code = 0x86, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 0)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_ubox,
+      "UNC_U_LOCK_CYCLES",
+      EventDef::Encoding{.code = 0x44, .umask = 0x0, .msr_values = {0x00}},
+      R"(IDI Lock/SplitLock Cycles)",
+      R"(Number of times an IDI Lock/SplitLock sequence was started)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1065,11 +2973,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR1",
-      EventDef::Encoding{.code = 0x86, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 1)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_ubox,
+      "UNC_U_PHOLD_CYCLES.ASSERT_TO_ACK",
+      EventDef::Encoding{.code = 0x45, .umask = 0x1, .msr_values = {0x00}},
+      R"(Cycles PHOLD Assert to Ack; Assert to ACK)",
+      R"(PHOLD cycles.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1077,11 +2985,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR2",
-      EventDef::Encoding{.code = 0x86, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 2)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_ubox,
+      "UNC_U_RACU_DRNG.RDRAND",
+      EventDef::Encoding{.code = 0x4C, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_U_RACU_DRNG.RDRAND)",
+      R"(UNC_U_RACU_DRNG.RDRAND)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1089,11 +2997,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR3",
-      EventDef::Encoding{.code = 0x86, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 3)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_ubox,
+      "UNC_U_RACU_DRNG.RDSEED",
+      EventDef::Encoding{.code = 0x4C, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_U_RACU_DRNG.RDSEED)",
+      R"(UNC_U_RACU_DRNG.RDSEED)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1101,11 +3009,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR4",
-      EventDef::Encoding{.code = 0x86, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 4)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      PmuType::uncore_ubox,
+      "UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY",
+      EventDef::Encoding{.code = 0x4C, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY)",
+      R"(UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1113,3707 +3021,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR5",
-      EventDef::Encoding{.code = 0x86, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent1 AD Credits Occupancy; For Transgress 5)",
-      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR0",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 0)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR1",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 1)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR2",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 2)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR3",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 3)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR4",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 4)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR5",
-      EventDef::Encoding{.code = 0x8E, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Occupancy; For Transgress 5)",
-      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR0",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 0)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR1",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 1)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR2",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 2)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR3",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 3)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR4",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 4)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR5",
-      EventDef::Encoding{.code = 0x8C, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Agent1 BL Credits Acquired; For Transgress 5)",
-      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_DN",
-      EventDef::Encoding{.code = 0xAE, .umask = 0x04, .msr_values = {0x00}},
-      R"(Egress Blocking due to Ordering requirements; Down)",
-      R"(Counts number of cycles IV was blocked in the TGR Egress due to SNP/GO Ordering requirements)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_UP",
-      EventDef::Encoding{.code = 0xAE, .umask = 0x01, .msr_values = {0x00}},
-      R"(Egress Blocking due to Ordering requirements; Up)",
-      R"(Counts number of cycles IV was blocked in the TGR Egress due to SNP/GO Ordering requirements)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AD_IN_USE.LEFT_EVEN",
-      EventDef::Encoding{.code = 0xA7, .umask = 0x01, .msr_values = {0x00}},
-      R"(Horizontal AD Ring In Use; Left and Even)",
-      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AD_IN_USE.LEFT_ODD",
-      EventDef::Encoding{.code = 0xA7, .umask = 0x02, .msr_values = {0x00}},
-      R"(Horizontal AD Ring In Use; Left and Odd)",
-      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AD_IN_USE.RIGHT_EVEN",
-      EventDef::Encoding{.code = 0xA7, .umask = 0x04, .msr_values = {0x00}},
-      R"(Horizontal AD Ring In Use; Right and Even)",
-      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AD_IN_USE.RIGHT_ODD",
-      EventDef::Encoding{.code = 0xA7, .umask = 0x08, .msr_values = {0x00}},
-      R"(Horizontal AD Ring In Use; Right and Odd)",
-      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AK_IN_USE.LEFT_EVEN",
-      EventDef::Encoding{.code = 0xA9, .umask = 0x01, .msr_values = {0x00}},
-      R"(Horizontal AK Ring In Use; Left and Even)",
-      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AK_IN_USE.LEFT_ODD",
-      EventDef::Encoding{.code = 0xA9, .umask = 0x02, .msr_values = {0x00}},
-      R"(Horizontal AK Ring In Use; Left and Odd)",
-      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AK_IN_USE.RIGHT_EVEN",
-      EventDef::Encoding{.code = 0xA9, .umask = 0x04, .msr_values = {0x00}},
-      R"(Horizontal AK Ring In Use; Right and Even)",
-      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_AK_IN_USE.RIGHT_ODD",
-      EventDef::Encoding{.code = 0xA9, .umask = 0x08, .msr_values = {0x00}},
-      R"(Horizontal AK Ring In Use; Right and Odd)",
-      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_BL_IN_USE.LEFT_EVEN",
-      EventDef::Encoding{.code = 0xAB, .umask = 0x01, .msr_values = {0x00}},
-      R"(Horizontal BL Ring in Use; Left and Even)",
-      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_BL_IN_USE.LEFT_ODD",
-      EventDef::Encoding{.code = 0xAB, .umask = 0x02, .msr_values = {0x00}},
-      R"(Horizontal BL Ring in Use; Left and Odd)",
-      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_BL_IN_USE.RIGHT_EVEN",
-      EventDef::Encoding{.code = 0xAB, .umask = 0x04, .msr_values = {0x00}},
-      R"(Horizontal BL Ring in Use; Right and Even)",
-      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_BL_IN_USE.RIGHT_ODD",
-      EventDef::Encoding{.code = 0xAB, .umask = 0x08, .msr_values = {0x00}},
-      R"(Horizontal BL Ring in Use; Right and Odd)",
-      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_IV_IN_USE.LEFT",
-      EventDef::Encoding{.code = 0xAD, .umask = 0x01, .msr_values = {0x00}},
-      R"(Horizontal IV Ring in Use; Left)",
-      R"(Counts the number of cycles that the Horizontal IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_HORZ_RING_IV_IN_USE.RIGHT",
-      EventDef::Encoding{.code = 0xAD, .umask = 0x04, .msr_values = {0x00}},
-      R"(Horizontal IV Ring in Use; Right)",
-      R"(Counts the number of cycles that the Horizontal IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_HORZ.AD",
-      EventDef::Encoding{.code = 0xA1, .umask = 0x01, .msr_values = {0x00}},
-      R"(Messages that bounced on the Horizontal Ring.; AD)",
-      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_HORZ.AK",
-      EventDef::Encoding{.code = 0xA1, .umask = 0x02, .msr_values = {0x00}},
-      R"(Messages that bounced on the Horizontal Ring.; AK)",
-      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_HORZ.BL",
-      EventDef::Encoding{.code = 0xA1, .umask = 0x04, .msr_values = {0x00}},
-      R"(Messages that bounced on the Horizontal Ring.; BL)",
-      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_HORZ.IV",
-      EventDef::Encoding{.code = 0xA1, .umask = 0x08, .msr_values = {0x00}},
-      R"(Messages that bounced on the Horizontal Ring.; IV)",
-      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_VERT.AD",
-      EventDef::Encoding{.code = 0xA0, .umask = 0x01, .msr_values = {0x00}},
-      R"(Messages that bounced on the Vertical Ring.; AD)",
-      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_VERT.AK",
-      EventDef::Encoding{.code = 0xA0, .umask = 0x02, .msr_values = {0x00}},
-      R"(Messages that bounced on the Vertical Ring.; Acknowledgements to core)",
-      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_VERT.BL",
-      EventDef::Encoding{.code = 0xA0, .umask = 0x04, .msr_values = {0x00}},
-      R"(Messages that bounced on the Vertical Ring.; Data Responses to core)",
-      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_BOUNCES_VERT.IV",
-      EventDef::Encoding{.code = 0xA0, .umask = 0x08, .msr_values = {0x00}},
-      R"(Messages that bounced on the Vertical Ring.; Snoops of processor's cache.)",
-      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_HORZ.AD",
-      EventDef::Encoding{.code = 0xA3, .umask = 0x01, .msr_values = {0x00}},
-      R"(Sink Starvation on Horizontal Ring; AD)",
-      R"(Sink Starvation on Horizontal Ring; AD)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_HORZ.AK",
-      EventDef::Encoding{.code = 0xA3, .umask = 0x02, .msr_values = {0x00}},
-      R"(Sink Starvation on Horizontal Ring; AK)",
-      R"(Sink Starvation on Horizontal Ring; AK)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_HORZ.AK_AG1",
-      EventDef::Encoding{.code = 0xA3, .umask = 0x20, .msr_values = {0x00}},
-      R"(Sink Starvation on Horizontal Ring; Acknowledgements to Agent 1)",
-      R"(Sink Starvation on Horizontal Ring; Acknowledgements to Agent 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_HORZ.BL",
-      EventDef::Encoding{.code = 0xA3, .umask = 0x04, .msr_values = {0x00}},
-      R"(Sink Starvation on Horizontal Ring; BL)",
-      R"(Sink Starvation on Horizontal Ring; BL)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_HORZ.IV",
-      EventDef::Encoding{.code = 0xA3, .umask = 0x08, .msr_values = {0x00}},
-      R"(Sink Starvation on Horizontal Ring; IV)",
-      R"(Sink Starvation on Horizontal Ring; IV)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_VERT.AD",
-      EventDef::Encoding{.code = 0xA2, .umask = 0x01, .msr_values = {0x00}},
-      R"(Sink Starvation on Vertical Ring; AD)",
-      R"(Sink Starvation on Vertical Ring; AD)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_VERT.AK",
-      EventDef::Encoding{.code = 0xA2, .umask = 0x02, .msr_values = {0x00}},
-      R"(Sink Starvation on Vertical Ring; Acknowledgements to core)",
-      R"(Sink Starvation on Vertical Ring; Acknowledgements to core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_VERT.BL",
-      EventDef::Encoding{.code = 0xA2, .umask = 0x04, .msr_values = {0x00}},
-      R"(Sink Starvation on Vertical Ring; Data Responses to core)",
-      R"(Sink Starvation on Vertical Ring; Data Responses to core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SINK_STARVED_VERT.IV",
-      EventDef::Encoding{.code = 0xA2, .umask = 0x08, .msr_values = {0x00}},
-      R"(Sink Starvation on Vertical Ring; Snoops of processor's cache.)",
-      R"(Sink Starvation on Vertical Ring; Snoops of processor's cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RING_SRC_THRTL",
-      EventDef::Encoding{.code = 0xA4, .umask = 0x00, .msr_values = {0x00}},
-      R"(Source Throttle)",
-      R"(Source Throttle)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxC_AD_CYCLES_FULL",
-      EventDef::Encoding{.code = 0x4, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Ingress (from CMS) Full)",
-      R"(AD Ingress (from CMS) Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxC_AD_CYCLES_NE",
-      EventDef::Encoding{.code = 0x3, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Ingress (from CMS) Not Empty)",
-      R"(AD Ingress (from CMS) Not Empty)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxC_BL_CYCLES_FULL",
-      EventDef::Encoding{.code = 0x8, .umask = 0x00, .msr_values = {0x00}},
-      R"(BL Ingress (from CMS) Full)",
-      R"(BL Ingress (from CMS) Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxC_BL_CYCLES_NE",
-      EventDef::Encoding{.code = 0x7, .umask = 0x00, .msr_values = {0x00}},
-      R"(BL Ingress (from CMS) Not Empty)",
-      R"(BL Ingress (from CMS) Not Empty)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BUSY_STARVED.AD_BNC",
-      EventDef::Encoding{.code = 0xB4, .umask = 0x01, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; AD - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BUSY_STARVED.AD_CRD",
-      EventDef::Encoding{.code = 0xB4, .umask = 0x10, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; AD - Credit)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BUSY_STARVED.BL_BNC",
-      EventDef::Encoding{.code = 0xB4, .umask = 0x04, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; BL - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BUSY_STARVED.BL_CRD",
-      EventDef::Encoding{.code = 0xB4, .umask = 0x40, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; BL - Credit)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.AD_BNC",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x01, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; AD - Bounce)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.AD_CRD",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x10, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; AD - Credit)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.AK_BNC",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x02, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; AK - Bounce)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.BL_BNC",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x04, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; BL - Bounce)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.BL_CRD",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x40, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; BL - Credit)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_BYPASS.IV_BNC",
-      EventDef::Encoding{.code = 0xB2, .umask = 0x08, .msr_values = {0x00}},
-      R"(Transgress Ingress Bypass; IV - Bounce)",
-      R"(Number of packets bypassing the CMS Ingress)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.AD_BNC",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x01, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; AD - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.AD_CRD",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x10, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; AD - Credit)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.AK_BNC",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x02, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; AK - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.BL_BNC",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x04, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; BL - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.BL_CRD",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x40, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; BL - Credit)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.IFV",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x80, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; IFV - Credit)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_CRD_STARVED.IV_BNC",
-      EventDef::Encoding{.code = 0xB3, .umask = 0x08, .msr_values = {0x00}},
-      R"(Transgress Injection Starvation; IV - Bounce)",
-      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.AD_BNC",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x01, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; AD - Bounce)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.AD_CRD",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x10, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; AD - Credit)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.AK_BNC",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x02, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; AK - Bounce)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.BL_BNC",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x04, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; BL - Bounce)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.BL_CRD",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x40, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; BL - Credit)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_INSERTS.IV_BNC",
-      EventDef::Encoding{.code = 0xB1, .umask = 0x08, .msr_values = {0x00}},
-      R"(Transgress Ingress Allocations; IV - Bounce)",
-      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.AD_BNC",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x01, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; AD - Bounce)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.AD_CRD",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x10, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; AD - Credit)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.AK_BNC",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x02, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; AK - Bounce)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.BL_BNC",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x04, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; BL - Bounce)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.BL_CRD",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x40, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; BL - Credit)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RxR_OCCUPANCY.IV_BNC",
-      EventDef::Encoding{.code = 0xB0, .umask = 0x08, .msr_values = {0x00}},
-      R"(Transgress Ingress Occupancy; IV - Bounce)",
-      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR0",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x01, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 0)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR1",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x02, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 1)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR2",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x04, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 2)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR3",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x08, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 3)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR4",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 4)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR5",
-      EventDef::Encoding{.code = 0xD0, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 5)",
-      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR0",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x01, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 0)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR1",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x02, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 1)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR2",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x04, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 2)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR3",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x08, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 3)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR4",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 4)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR5",
-      EventDef::Encoding{.code = 0xD2, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 5)",
-      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR0",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x01, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 0)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR1",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x02, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 1)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR2",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x04, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 2)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR3",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x08, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 3)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR4",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 4)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR5",
-      EventDef::Encoding{.code = 0xD4, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 5)",
-      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR0",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x01, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 0)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR1",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x02, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 1)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR2",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x04, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 2)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR3",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x08, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 3)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR4",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 4)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR5",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 5)",
-      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_CREDIT_OCCUPANCY",
-      EventDef::Encoding{.code = 0xE, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Egress (to CMS) Credits Occupancy)",
-      R"(AD Egress (to CMS) Credits Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_CREDITS_ACQUIRED",
-      EventDef::Encoding{.code = 0xD, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Egress (to CMS) Credit Acquired)",
-      R"(AD Egress (to CMS) Credit Acquired)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_CYCLES_FULL",
-      EventDef::Encoding{.code = 0xC, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Egress (to CMS) Full)",
-      R"(AD Egress (to CMS) Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_CYCLES_NE",
-      EventDef::Encoding{.code = 0xB, .umask = 0x00, .msr_values = {0x00}},
-      R"(AD Egress (to CMS) Not Empty)",
-      R"(AD Egress (to CMS) Not Empty)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_NO_CREDIT_CYCLES",
-      EventDef::Encoding{.code = 0xF, .umask = 0x00, .msr_values = {0x00}},
-      R"(Cycles with No AD Egress (to CMS) Credits)",
-      R"(Cycles with No AD Egress (to CMS) Credits)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AD_NO_CREDIT_STALLED",
-      EventDef::Encoding{.code = 0x10, .umask = 0x00, .msr_values = {0x00}},
-      R"(Cycles Stalled with No AD Egress (to CMS) Credits)",
-      R"(Cycles Stalled with No AD Egress (to CMS) Credits)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK.CRD_CBO",
-      EventDef::Encoding{.code = 0x39, .umask = 0x02, .msr_values = {0x00}},
-      R"(Outbound Ring Transactions on AK; CRD Transactions to Cbo)",
-      R"(Outbound Ring Transactions on AK; CRD Transactions to Cbo)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK.NDR",
-      EventDef::Encoding{.code = 0x39, .umask = 0x01, .msr_values = {0x00}},
-      R"(Outbound Ring Transactions on AK; NDR Transactions)",
-      R"(Outbound Ring Transactions on AK; NDR Transactions)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CREDIT_OCCUPANCY.CMS0",
-      EventDef::Encoding{.code = 0x1E, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CREDIT_OCCUPANCY.CMS1",
-      EventDef::Encoding{.code = 0x1E, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CREDITS_ACQUIRED.CMS0",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CREDITS_ACQUIRED.CMS1",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_NO_CREDIT_CYCLES.CMS0",
-      EventDef::Encoding{.code = 0x1F, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_NO_CREDIT_CYCLES.CMS1",
-      EventDef::Encoding{.code = 0x1F, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_NO_CREDIT_STALLED.CMS0",
-      EventDef::Encoding{.code = 0x20, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_NO_CREDIT_STALLED.CMS1",
-      EventDef::Encoding{.code = 0x20, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL.DRS_CACHE",
-      EventDef::Encoding{.code = 0x40, .umask = 0x01, .msr_values = {0x00}},
-      R"(Outbound DRS Ring Transactions to Cache; Data to Cache)",
-      R"(Outbound DRS Ring Transactions to Cache; Data to Cache)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL.DRS_CORE",
-      EventDef::Encoding{.code = 0x40, .umask = 0x02, .msr_values = {0x00}},
-      R"(Outbound DRS Ring Transactions to Cache; Data to Core)",
-      R"(Outbound DRS Ring Transactions to Cache; Data to Core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CREDIT_OCCUPANCY.CMS0",
-      EventDef::Encoding{.code = 0x1A, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CREDIT_OCCUPANCY.CMS1",
-      EventDef::Encoding{.code = 0x1A, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CREDITS_ACQUIRED.CMS0",
-      EventDef::Encoding{.code = 0x19, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CREDITS_ACQUIRED.CMS1",
-      EventDef::Encoding{.code = 0x19, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_FULL.ALL",
-      EventDef::Encoding{.code = 0x18, .umask = 0x03, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Full; All)",
-      R"(BL Egress (to CMS) Full; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_FULL.CMS0",
-      EventDef::Encoding{.code = 0x18, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Full; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Full; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_FULL.CMS1",
-      EventDef::Encoding{.code = 0x18, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Full; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Full; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x17, .umask = 0x03, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Not Empty; All)",
-      R"(BL Egress (to CMS) Not Empty; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_NE.CMS0",
-      EventDef::Encoding{.code = 0x17, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_CYCLES_NE.CMS1",
-      EventDef::Encoding{.code = 0x17, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_INSERTS.CMS0",
-      EventDef::Encoding{.code = 0x15, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_INSERTS.CMS1",
-      EventDef::Encoding{.code = 0x15, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_NO_CREDIT_CYCLES.CMS0",
-      EventDef::Encoding{.code = 0x1B, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_NO_CREDIT_CYCLES.CMS1",
-      EventDef::Encoding{.code = 0x1B, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_NO_CREDIT_STALLED.CMS0",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_NO_CREDIT_STALLED.CMS1",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_OCCUPANCY.CMS0",
-      EventDef::Encoding{.code = 0x16, .umask = 0x01, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
-      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL_OCCUPANCY.CMS1",
-      EventDef::Encoding{.code = 0x16, .umask = 0x02, .msr_values = {0x00}},
-      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
-      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_ADS_USED.AD_BNC",
-      EventDef::Encoding{.code = 0x9D, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal ADS Used; AD - Bounce)",
-      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_ADS_USED.AD_CRD",
-      EventDef::Encoding{.code = 0x9D, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Horizontal ADS Used; AD - Credit)",
-      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_ADS_USED.AK_BNC",
-      EventDef::Encoding{.code = 0x9D, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal ADS Used; AK - Bounce)",
-      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_ADS_USED.BL_BNC",
-      EventDef::Encoding{.code = 0x9D, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal ADS Used; BL - Bounce)",
-      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_ADS_USED.BL_CRD",
-      EventDef::Encoding{.code = 0x9D, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Horizontal ADS Used; BL - Credit)",
-      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.AD_BNC",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; AD - Bounce)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.AD_CRD",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; AD - Credit)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.AK_BNC",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; AK - Bounce)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.BL_BNC",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; BL - Bounce)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.BL_CRD",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; BL - Credit)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_BYPASS.IV_BNC",
-      EventDef::Encoding{.code = 0x9F, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Horizontal Bypass Used; IV - Bounce)",
-      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AD_BNC",
-      EventDef::Encoding{.code = 0x96, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; AD - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AD_CRD",
-      EventDef::Encoding{.code = 0x96, .umask = 0x10, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; AD - Credit)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AK_BNC",
-      EventDef::Encoding{.code = 0x96, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; AK - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.BL_BNC",
-      EventDef::Encoding{.code = 0x96, .umask = 0x04, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; BL - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.BL_CRD",
-      EventDef::Encoding{.code = 0x96, .umask = 0x40, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; BL - Credit)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_FULL.IV_BNC",
-      EventDef::Encoding{.code = 0x96, .umask = 0x08, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Full; IV - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.AD_BNC",
-      EventDef::Encoding{.code = 0x97, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AD - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.AD_CRD",
-      EventDef::Encoding{.code = 0x97, .umask = 0x10, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AD - Credit)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.AK_BNC",
-      EventDef::Encoding{.code = 0x97, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AK - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.BL_BNC",
-      EventDef::Encoding{.code = 0x97, .umask = 0x04, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; BL - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.BL_CRD",
-      EventDef::Encoding{.code = 0x97, .umask = 0x40, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; BL - Credit)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_CYCLES_NE.IV_BNC",
-      EventDef::Encoding{.code = 0x97, .umask = 0x08, .msr_values = {0x00}},
-      R"(Cycles CMS Horizontal Egress Queue is Not Empty; IV - Bounce)",
-      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.AD_BNC",
-      EventDef::Encoding{.code = 0x95, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; AD - Bounce)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.AD_CRD",
-      EventDef::Encoding{.code = 0x95, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; AD - Credit)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.AK_BNC",
-      EventDef::Encoding{.code = 0x95, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; AK - Bounce)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.BL_BNC",
-      EventDef::Encoding{.code = 0x95, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; BL - Bounce)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.BL_CRD",
-      EventDef::Encoding{.code = 0x95, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; BL - Credit)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_INSERTS.IV_BNC",
-      EventDef::Encoding{.code = 0x95, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Inserts; IV - Bounce)",
-      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.AD_BNC",
-      EventDef::Encoding{.code = 0x99, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; AD - Bounce)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.AD_CRD",
-      EventDef::Encoding{.code = 0x99, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; AD - Credit)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.AK_BNC",
-      EventDef::Encoding{.code = 0x99, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; AK - Bounce)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.BL_BNC",
-      EventDef::Encoding{.code = 0x99, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; BL - Bounce)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.BL_CRD",
-      EventDef::Encoding{.code = 0x99, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; BL - Credit)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_NACK.IV_BNC",
-      EventDef::Encoding{.code = 0x99, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress NACKs; IV - Bounce)",
-      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.AD_BNC",
-      EventDef::Encoding{.code = 0x94, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; AD - Bounce)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.AD_CRD",
-      EventDef::Encoding{.code = 0x94, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; AD - Credit)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.AK_BNC",
-      EventDef::Encoding{.code = 0x94, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; AK - Bounce)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.BL_BNC",
-      EventDef::Encoding{.code = 0x94, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; BL - Bounce)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.BL_CRD",
-      EventDef::Encoding{.code = 0x94, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; BL - Credit)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_OCCUPANCY.IV_BNC",
-      EventDef::Encoding{.code = 0x94, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Occupancy; IV - Bounce)",
-      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_STARVED.AD_BNC",
-      EventDef::Encoding{.code = 0x9B, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Injection Starvation; AD - Bounce)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_STARVED.AK_BNC",
-      EventDef::Encoding{.code = 0x9B, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Injection Starvation; AK - Bounce)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_STARVED.BL_BNC",
-      EventDef::Encoding{.code = 0x9B, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Injection Starvation; BL - Bounce)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_HORZ_STARVED.IV_BNC",
-      EventDef::Encoding{.code = 0x9B, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Horizontal Egress Injection Starvation; IV - Bounce)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.AD_AG0",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AD - Agent 0)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.AD_AG1",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AD - Agent 1)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.AK_AG0",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AK - Agent 0)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.AK_AG1",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AK - Agent 1)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.BL_AG0",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; BL - Agent 0)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_ADS_USED.BL_AG1",
-      EventDef::Encoding{.code = 0x9C, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; BL - Agent 1)",
-      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.AD_AG0",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AD - Agent 0)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.AD_AG1",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AD - Agent 1)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.AK_AG0",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AK - Agent 0)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.AK_AG1",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; AK - Agent 1)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.BL_AG0",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; BL - Agent 0)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.BL_AG1",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; BL - Agent 1)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_BYPASS.IV",
-      EventDef::Encoding{.code = 0x9E, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Vertical ADS Used; IV)",
-      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.AD_AG0",
-      EventDef::Encoding{.code = 0x92, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; AD - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.AD_AG1",
-      EventDef::Encoding{.code = 0x92, .umask = 0x10, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; AD - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.AK_AG0",
-      EventDef::Encoding{.code = 0x92, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; AK - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.AK_AG1",
-      EventDef::Encoding{.code = 0x92, .umask = 0x20, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; AK - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.BL_AG0",
-      EventDef::Encoding{.code = 0x92, .umask = 0x04, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; BL - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.BL_AG1",
-      EventDef::Encoding{.code = 0x92, .umask = 0x40, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; BL - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_FULL.IV",
-      EventDef::Encoding{.code = 0x92, .umask = 0x08, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Full; IV)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.AD_AG0",
-      EventDef::Encoding{.code = 0x93, .umask = 0x01, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AD - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.AD_AG1",
-      EventDef::Encoding{.code = 0x93, .umask = 0x10, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AD - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.AK_AG0",
-      EventDef::Encoding{.code = 0x93, .umask = 0x02, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AK - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.AK_AG1",
-      EventDef::Encoding{.code = 0x93, .umask = 0x20, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AK - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.BL_AG0",
-      EventDef::Encoding{.code = 0x93, .umask = 0x04, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; BL - Agent 0)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.BL_AG1",
-      EventDef::Encoding{.code = 0x93, .umask = 0x40, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; BL - Agent 1)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_CYCLES_NE.IV",
-      EventDef::Encoding{.code = 0x93, .umask = 0x08, .msr_values = {0x00}},
-      R"(Cycles CMS Vertical Egress Queue Is Not Empty; IV)",
-      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.AD_AG0",
-      EventDef::Encoding{.code = 0x91, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; AD - Agent 0)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.AD_AG1",
-      EventDef::Encoding{.code = 0x91, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; AD - Agent 1)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.AK_AG0",
-      EventDef::Encoding{.code = 0x91, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; AK - Agent 0)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.AK_AG1",
-      EventDef::Encoding{.code = 0x91, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; AK - Agent 1)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.BL_AG0",
-      EventDef::Encoding{.code = 0x91, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; BL - Agent 0)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.BL_AG1",
-      EventDef::Encoding{.code = 0x91, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; BL - Agent 1)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_INSERTS.IV",
-      EventDef::Encoding{.code = 0x91, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Vert Egress Allocations; IV)",
-      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.AD_AG0",
-      EventDef::Encoding{.code = 0x98, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; AD - Agent 0)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.AD_AG1",
-      EventDef::Encoding{.code = 0x98, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; AD - Agent 1)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.AK_AG0",
-      EventDef::Encoding{.code = 0x98, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; AK - Agent 0)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.AK_AG1",
-      EventDef::Encoding{.code = 0x98, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; AK - Agent 1)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.BL_AG0",
-      EventDef::Encoding{.code = 0x98, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; BL - Agent 0)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.BL_AG1",
-      EventDef::Encoding{.code = 0x98, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; BL - Agent 1)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.AD_AG0",
-      EventDef::Encoding{.code = 0x90, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; AD - Agent 0)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.AD_AG1",
-      EventDef::Encoding{.code = 0x90, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; AD - Agent 1)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.AK_AG0",
-      EventDef::Encoding{.code = 0x90, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; AK - Agent 0)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.AK_AG1",
-      EventDef::Encoding{.code = 0x90, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; AK - Agent 1)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.BL_AG0",
-      EventDef::Encoding{.code = 0x90, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; BL - Agent 0)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.BL_AG1",
-      EventDef::Encoding{.code = 0x90, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; BL - Agent 1)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_OCCUPANCY.IV",
-      EventDef::Encoding{.code = 0x90, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Vert Egress Occupancy; IV)",
-      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.AD_AG0",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x01, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; AD - Agent 0)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.AD_AG1",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x10, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; AD - Agent 1)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.AK_AG0",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x02, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; AK - Agent 0)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.AK_AG1",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x20, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; AK - Agent 1)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.BL_AG0",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x04, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; BL - Agent 0)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.BL_AG1",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x40, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; BL - Agent 1)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AD_IN_USE.DN_EVEN",
-      EventDef::Encoding{.code = 0xA6, .umask = 0x04, .msr_values = {0x00}},
-      R"(Vertical AD Ring In Use; Down and Even)",
-      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AD_IN_USE.DN_ODD",
-      EventDef::Encoding{.code = 0xA6, .umask = 0x08, .msr_values = {0x00}},
-      R"(Vertical AD Ring In Use; Down and Odd)",
-      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AD_IN_USE.UP_EVEN",
-      EventDef::Encoding{.code = 0xA6, .umask = 0x01, .msr_values = {0x00}},
-      R"(Vertical AD Ring In Use; Up and Even)",
-      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AD_IN_USE.UP_ODD",
-      EventDef::Encoding{.code = 0xA6, .umask = 0x02, .msr_values = {0x00}},
-      R"(Vertical AD Ring In Use; Up and Odd)",
-      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AK_IN_USE.DN_EVEN",
-      EventDef::Encoding{.code = 0xA8, .umask = 0x04, .msr_values = {0x00}},
-      R"(Vertical AK Ring In Use; Down and Even)",
-      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AK_IN_USE.DN_ODD",
-      EventDef::Encoding{.code = 0xA8, .umask = 0x08, .msr_values = {0x00}},
-      R"(Vertical AK Ring In Use; Down and Odd)",
-      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AK_IN_USE.UP_EVEN",
-      EventDef::Encoding{.code = 0xA8, .umask = 0x01, .msr_values = {0x00}},
-      R"(Vertical AK Ring In Use; Up and Even)",
-      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_AK_IN_USE.UP_ODD",
-      EventDef::Encoding{.code = 0xA8, .umask = 0x02, .msr_values = {0x00}},
-      R"(Vertical AK Ring In Use; Up and Odd)",
-      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_BL_IN_USE.DN_EVEN",
-      EventDef::Encoding{.code = 0xAA, .umask = 0x04, .msr_values = {0x00}},
-      R"(Vertical BL Ring in Use; Down and Even)",
-      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_BL_IN_USE.DN_ODD",
-      EventDef::Encoding{.code = 0xAA, .umask = 0x08, .msr_values = {0x00}},
-      R"(Vertical BL Ring in Use; Down and Odd)",
-      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_BL_IN_USE.UP_EVEN",
-      EventDef::Encoding{.code = 0xAA, .umask = 0x01, .msr_values = {0x00}},
-      R"(Vertical BL Ring in Use; Up and Even)",
-      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_BL_IN_USE.UP_ODD",
-      EventDef::Encoding{.code = 0xAA, .umask = 0x02, .msr_values = {0x00}},
-      R"(Vertical BL Ring in Use; Up and Odd)",
-      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_IV_IN_USE.DN",
-      EventDef::Encoding{.code = 0xAC, .umask = 0x04, .msr_values = {0x00}},
-      R"(Vertical IV Ring in Use; Down)",
-      R"(Counts the number of cycles that the Vertical IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_VERT_RING_IV_IN_USE.UP",
-      EventDef::Encoding{.code = 0xAC, .umask = 0x01, .msr_values = {0x00}},
-      R"(Vertical IV Ring in Use; Up)",
-      R"(Counts the number of cycles that the Vertical IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x44, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 0)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x44, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 1)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x44, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 2)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_BL.DRS_UPI",
-      EventDef::Encoding{.code = 0x40, .umask = 0x04, .msr_values = {0x00}},
-      R"(Outbound DRS Ring Transactions to Cache; Data to QPI)",
-      R"(Outbound DRS Ring Transactions to Cache; Data to QPI)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_NACK.IV",
-      EventDef::Encoding{.code = 0x98, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Vertical Egress NACKs; IV)",
-      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxR_VERT_STARVED.IV",
-      EventDef::Encoding{.code = 0x9A, .umask = 0x08, .msr_values = {0x00}},
-      R"(CMS Vertical Egress Injection Starvation; IV)",
-      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x4D, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x4D, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x4D, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_BYPASS_M2M_INGRESS.TAKEN",
-      EventDef::Encoding{.code = 0x21, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M to iMC Bypass; Taken)",
-      R"(M2M to iMC Bypass; Taken)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_BYPASS_M2M_INGRESS.NOT_TAKEN",
-      EventDef::Encoding{.code = 0x21, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M to iMC Bypass; Not Taken)",
-      R"(M2M to iMC Bypass; Not Taken)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_CMS_CLOCKTICKS",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x00, .msr_values = {0x00}},
-      R"(CMS Clockticks)",
-      R"(CMS Clockticks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x4E, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 0)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x4E, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 1)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x4E, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 2)",
-      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_FAST_ASSERTED.VERT",
-      EventDef::Encoding{.code = 0xA5, .umask = 0x01, .msr_values = {0x00}},
-      R"(FaST wire asserted; Vertical)",
-      R"(Counts the number of cycles either the local or incoming distress signals are asserted.  Incoming distress includes up, dn and across.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_FAST_ASSERTED.HORZ",
-      EventDef::Encoding{.code = 0xA5, .umask = 0x02, .msr_values = {0x00}},
-      R"(FaST wire asserted; Horizontal)",
-      R"(Counts the number of cycles either the local or incoming distress signals are asserted.  Incoming distress includes up, dn and across.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x43, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 0)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x43, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 1)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x43, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 2)",
-      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TAG_HIT.NM_RD_HIT_CLEAN",
-      EventDef::Encoding{.code = 0x2C, .umask = 0x01, .msr_values = {0x00}},
-      R"(Clean line read hits(Regular and RFO) to Near Memory(DRAM cache) in Memory Mode and regular reads to DRAM in 1LM)",
-      R"(Tag Hit; Read Hit from NearMem, Clean Line)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.CMS0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Full; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.CMS1",
-      EventDef::Encoding{.code = 0x14, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Full; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.RDCRD0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x08, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Read Credit Request)",
-      R"(AK Egress (to CMS) Full; Read Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCRD0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Write Credit Request)",
-      R"(AK Egress (to CMS) Full; Write Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCMP0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x20, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Write Compare Request)",
-      R"(AK Egress (to CMS) Full; Write Compare Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.RDCRD1",
-      EventDef::Encoding{.code = 0x14, .umask = 0x88, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Read Credit Request)",
-      R"(AK Egress (to CMS) Full; Read Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCRD1",
-      EventDef::Encoding{.code = 0x14, .umask = 0x90, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Write Credit Request)",
-      R"(AK Egress (to CMS) Full; Write Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCMP1",
-      EventDef::Encoding{.code = 0x14, .umask = 0xA0, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; Write Compare Request)",
-      R"(AK Egress (to CMS) Full; Write Compare Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_FULL.ALL",
-      EventDef::Encoding{.code = 0x14, .umask = 0x03, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Full; All)",
-      R"(AK Egress (to CMS) Full; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.CMS0",
-      EventDef::Encoding{.code = 0x13, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.CMS1",
-      EventDef::Encoding{.code = 0x13, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.RDCRD",
-      EventDef::Encoding{.code = 0x13, .umask = 0x08, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; Read Credit Request)",
-      R"(AK Egress (to CMS) Not Empty; Read Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.WRCRD",
-      EventDef::Encoding{.code = 0x13, .umask = 0x10, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; Write Credit Request)",
-      R"(AK Egress (to CMS) Not Empty; Write Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.WRCMP",
-      EventDef::Encoding{.code = 0x13, .umask = 0x20, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; Write Compare Request)",
-      R"(AK Egress (to CMS) Not Empty; Write Compare Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x13, .umask = 0x03, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Not Empty; All)",
-      R"(AK Egress (to CMS) Not Empty; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.CMS0",
-      EventDef::Encoding{.code = 0x11, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.CMS1",
-      EventDef::Encoding{.code = 0x11, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.RDCRD",
-      EventDef::Encoding{.code = 0x11, .umask = 0x08, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Read Credit Request)",
-      R"(AK Egress (to CMS) Allocations; Read Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.WRCRD",
-      EventDef::Encoding{.code = 0x11, .umask = 0x10, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Write Credit Request)",
-      R"(AK Egress (to CMS) Allocations; Write Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.WRCMP",
-      EventDef::Encoding{.code = 0x11, .umask = 0x20, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Write Compare Request)",
-      R"(AK Egress (to CMS) Allocations; Write Compare Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.PREF_RD_CAM_HIT",
-      EventDef::Encoding{.code = 0x11, .umask = 0x40, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; Prefetch Read Cam Hit)",
-      R"(AK Egress (to CMS) Allocations; Prefetch Read Cam Hit)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_INSERTS.ALL",
-      EventDef::Encoding{.code = 0x11, .umask = 0x03, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Allocations; All)",
-      R"(AK Egress (to CMS) Allocations; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.CMS0",
-      EventDef::Encoding{.code = 0x12, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
-      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.CMS1",
-      EventDef::Encoding{.code = 0x12, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
-      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.RDCRD",
-      EventDef::Encoding{.code = 0x12, .umask = 0x08, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; Read Credit Request)",
-      R"(AK Egress (to CMS) Occupancy; Read Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.WRCRD",
-      EventDef::Encoding{.code = 0x12, .umask = 0x10, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; Write Credit Request)",
-      R"(AK Egress (to CMS) Occupancy; Write Credit Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.WRCMP",
-      EventDef::Encoding{.code = 0x12, .umask = 0x20, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; Write Compare Request)",
-      R"(AK Egress (to CMS) Occupancy; Write Compare Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_OCCUPANCY.ALL",
-      EventDef::Encoding{.code = 0x12, .umask = 0x03, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Occupancy; All)",
-      R"(AK Egress (to CMS) Occupancy; All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_SIDEBAND.RD",
-      EventDef::Encoding{.code = 0x6B, .umask = 0x01, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Sideband)",
-      R"(AK Egress (to CMS) Sideband)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_TxC_AK_SIDEBAND.WR",
-      EventDef::Encoding{.code = 0x6B, .umask = 0x02, .msr_values = {0x00}},
-      R"(AK Egress (to CMS) Sideband)",
-      R"(AK Egress (to CMS) Sideband)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x4F, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 0)",
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x4F, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 1)",
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x4F, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 2)",
-      R"(M2M-&gt;iMC RPQ Cycles w/Credits - Regular; Channel 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x51, .umask = 0x01, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 0)",
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x51, .umask = 0x02, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 1)",
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2m,
-      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x51, .umask = 0x04, .msr_values = {0x00}},
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 2)",
-      R"(M2M-&gt;iMC WPQ Cycles w/Credits - Regular; Channel 2)",
+      PmuType::uncore_ubox,
+      "UNC_U_RACU_REQUESTS",
+      EventDef::Encoding{.code = 0x46, .umask = 0x0, .msr_values = {0x00}},
+      R"(RACU Request)",
+      R"(Number outstanding register requests within message channel tracker)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4957,7 +3169,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_ECC_CORRECTABLE_ERRORS",
       EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
       R"(ECC Correctable Errors)",
-      R"(Counts the number of ECC errors detected and corrected by the iMC on this channel.  This counter is only useful with ECC DRAM devices.  This count will increment one time for each correction regardless of the number of bits corrected.  The iMC can correct up to 4 bit errors in independent channel mode and 8 bit erros in lockstep mode.)",
+      R"(Counts the number of ECC errors detected and corrected by the iMC on this channel.  This counter is only useful with ECC DRAM devices.  This count will increment one time for each correction regardless of the number of bits corrected.  The iMC can correct up to 4 bit errors in independent channel mode and 8 bit errors in lockstep mode.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10089,11 +8301,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CLOCKTICKS_F",
-      EventDef::Encoding{.code = 0x00, .umask = 0x01, .msr_values = {0x00}},
-      R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
-      R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3",
+      EventDef::Encoding{.code = 0x18, .umask = 0x80, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10101,11 +8313,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_RPQ_OCCUPANCY.GNT_WAIT",
-      EventDef::Encoding{.code = 0xE0, .umask = 0x4, .msr_values = {0x00}},
-      R"(PMM Occupancy)",
-      R"(PMM Occupancy)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.PROTHDR",
+      EventDef::Encoding{.code = 0x3, .umask = 0x80, .msr_values = {0x00}},
+      R"(Valid Flits Received; Protocol Header)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables count of protocol headers in slot 0,1,2 (depending on slot uMask bits))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10113,11 +8325,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_RPQ_CYCLES_NE",
-      EventDef::Encoding{.code = 0xE1, .umask = 0x0, .msr_values = {0x00}},
-      R"(PMM Read Queue Cycles Not Empty)",
-      R"(PMM Read Queue Cycles Not Empty)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.PROTHDR",
+      EventDef::Encoding{.code = 0x2, .umask = 0x80, .msr_values = {0x00}},
+      R"(Valid Flits Sent; Protocol Header)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables count of protocol headers in slot 0,1,2 (depending on slot uMask bits))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10125,11 +8337,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_RPQ_CYCLES_FULL",
-      EventDef::Encoding{.code = 0xE2, .umask = 0x0, .msr_values = {0x00}},
-      R"(PMM Read Queue Cycles Full)",
-      R"(PMM Read Queue Cycles Full)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR0",
+      EventDef::Encoding{.code = 0x80, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 0)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10137,11 +8349,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD1.RPQ_GNTS",
-      EventDef::Encoding{.code = 0xEA, .umask = 0x10, .msr_values = {0x00}},
-      R"(RPQ GNTs)",
-      R"(RPQ GNTs)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR1",
+      EventDef::Encoding{.code = 0x80, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 1)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10149,11 +8361,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD1.WPQ_GNTS",
-      EventDef::Encoding{.code = 0xEA, .umask = 0x20, .msr_values = {0x00}},
-      R"(Underfill GNTs)",
-      R"(Underfill GNTs)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR2",
+      EventDef::Encoding{.code = 0x80, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 2)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10161,11 +8373,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD1.MISC_GNT",
-      EventDef::Encoding{.code = 0xEA, .umask = 0x40, .msr_values = {0x00}},
-      R"(Misc GNTs)",
-      R"(Misc GNTs)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR3",
+      EventDef::Encoding{.code = 0x80, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 3)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10173,11 +8385,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD1.MISC",
-      EventDef::Encoding{.code = 0xEA, .umask = 0x80, .msr_values = {0x00}},
-      R"(Misc Commands (error, flow ACKs))",
-      R"(Misc Commands (error, flow ACKs))",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR4",
+      EventDef::Encoding{.code = 0x80, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 4)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10185,11 +8397,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.OPP_RD",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x1, .msr_values = {0x00}},
-      R"(Opportunistic Reads)",
-      R"(Opportunistic Reads)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_ACQUIRED.TGR5",
+      EventDef::Encoding{.code = 0x80, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Acquired; For Transgress 5)",
+      R"(Number of CMS Agent 0 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10197,11 +8409,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.NODATA_EXP",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x2, .msr_values = {0x00}},
-      R"(Expected No data packet (ERID matched NDP encoding))",
-      R"(Expected No data packet (ERID matched NDP encoding))",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR0",
+      EventDef::Encoding{.code = 0x82, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 0)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10209,11 +8421,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.NODATA_UNEXP",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x4, .msr_values = {0x00}},
-      R"(Unexpected No data packet (ERID matched a Read, but data was a NDP))",
-      R"(Unexpected No data packet (ERID matched a Read, but data was a NDP))",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR1",
+      EventDef::Encoding{.code = 0x82, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 1)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10221,11 +8433,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.REQS_SLOT0",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x8, .msr_values = {0x00}},
-      R"(Read Requests - Slot 0)",
-      R"(Read Requests - Slot 0)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR2",
+      EventDef::Encoding{.code = 0x82, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 2)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10233,11 +8445,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.REQS_SLOT1",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x10, .msr_values = {0x00}},
-      R"(Read Requests - Slot 1)",
-      R"(Read Requests - Slot 1)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR3",
+      EventDef::Encoding{.code = 0x82, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 3)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10245,11 +8457,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.PMM_ECC_ERROR",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x20, .msr_values = {0x00}},
-      R"(PMM ECC Errors)",
-      R"(PMM ECC Errors)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR4",
+      EventDef::Encoding{.code = 0x82, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 4)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10257,11 +8469,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_CMD2.PMM_ERID_ERROR",
-      EventDef::Encoding{.code = 0xEB, .umask = 0x40, .msr_values = {0x00}},
-      R"(PMM ERID detectable parity error)",
-      R"(PMM ERID detectable parity error)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_AD_CRD_OCCUPANCY.TGR5",
+      EventDef::Encoding{.code = 0x82, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent0 AD Credits Occupancy; For Transgress 5)",
+      R"(Number of CMS Agent 0 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10269,11 +8481,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_MAJMODE1.RD_CYC",
-      EventDef::Encoding{.code = 0xEC, .umask = 0x1, .msr_values = {0x00}},
-      R"(PMM Major Mode; Cycles PMM is in Read Major Mode)",
-      R"(PMM Major Mode; Cycles PMM is in Read Major Mode)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR0",
+      EventDef::Encoding{.code = 0x88, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 0)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10281,11 +8493,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_CYC",
-      EventDef::Encoding{.code = 0xEC, .umask = 0x4, .msr_values = {0x00}},
-      R"(PMM Major Mode; Cycles PMM is in Partial Write Major Mode)",
-      R"(PMM Major Mode; Cycles PMM is in Partial Write Major Mode)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR1",
+      EventDef::Encoding{.code = 0x88, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 1)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10293,11 +8505,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_ENTER",
-      EventDef::Encoding{.code = 0xEC, .umask = 0x20, .msr_values = {0x00}},
-      R"(PMM Major Mode)",
-      R"(PMM Major Mode)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR2",
+      EventDef::Encoding{.code = 0x88, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 2)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10305,11 +8517,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_EXIT",
-      EventDef::Encoding{.code = 0xEC, .umask = 0x40, .msr_values = {0x00}},
-      R"(PMM Major Mode)",
-      R"(PMM Major Mode)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR3",
+      EventDef::Encoding{.code = 0x88, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 3)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10317,11 +8529,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_MAJMODE2.DRAM_CYC",
-      EventDef::Encoding{.code = 0xED, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_M_MAJMODE2.DRAM_CYC)",
-      R"(UNC_M_MAJMODE2.DRAM_CYC)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR4",
+      EventDef::Encoding{.code = 0x88, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 4)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10329,11 +8541,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_MAJMODE2.DRAM_ENTER",
-      EventDef::Encoding{.code = 0xED, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_M_MAJMODE2.DRAM_ENTER)",
-      R"(UNC_M_MAJMODE2.DRAM_ENTER)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_ACQUIRED.TGR5",
+      EventDef::Encoding{.code = 0x88, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Acquired; For Transgress 5)",
+      R"(Number of CMS Agent 0 BL credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10341,11 +8553,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_MAJMODE2.PMM_ENTER",
-      EventDef::Encoding{.code = 0xED, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_M_MAJMODE2.PMM_ENTER)",
-      R"(UNC_M_MAJMODE2.PMM_ENTER)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR0",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 0)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10353,11 +8565,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_CYCLES_FULL",
-      EventDef::Encoding{.code = 0xE6, .umask = 0x0, .msr_values = {0x00}},
-      R"(PMM Write Queue Cycles Full)",
-      R"(PMM Write Queue Cycles Full)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR1",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 1)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10365,11 +8577,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_CYCLES_NE",
-      EventDef::Encoding{.code = 0xE5, .umask = 0x0, .msr_values = {0x00}},
-      R"(PMM Write Queue Cycles Not Empty)",
-      R"(PMM Write Queue Cycles Not Empty)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR2",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 2)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10377,11 +8589,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_OCCUPANCY.CAS",
-      EventDef::Encoding{.code = 0xE4, .umask = 0x2, .msr_values = {0x00}},
-      R"(PMM Occupancy)",
-      R"(PMM Occupancy)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR3",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 3)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10389,11 +8601,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_OCCUPANCY.PWR",
-      EventDef::Encoding{.code = 0xE4, .umask = 0x4, .msr_values = {0x00}},
-      R"(PMM Occupancy)",
-      R"(PMM Occupancy)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR4",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 4)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10401,11 +8613,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_PCOMMIT",
-      EventDef::Encoding{.code = 0xE8, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_M_PMM_WPQ_PCOMMIT)",
-      R"(UNC_M_PMM_WPQ_PCOMMIT)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG0_BL_CRD_OCCUPANCY.TGR5",
+      EventDef::Encoding{.code = 0x8A, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent0 BL Credits Occupancy; For Transgress 5)",
+      R"(Number of CMS Agent 0 BL credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10413,11 +8625,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_WPQ_PCOMMIT_CYC",
-      EventDef::Encoding{.code = 0xE9, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_M_PMM_WPQ_PCOMMIT_CYC)",
-      R"(UNC_M_PMM_WPQ_PCOMMIT_CYC)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 0)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10425,11 +8637,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PMM_MAJMODE1.WR_CYC",
-      EventDef::Encoding{.code = 0xEC, .umask = 0x2, .msr_values = {0x00}},
-      R"(PMM Major Mode; Cycles PMM is in Write Major Mode)",
-      R"(PMM Major Mode; Cycles PMM is in Write Major Mode)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 1)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10437,11 +8649,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_MAJMODE2.PMM_CYC",
-      EventDef::Encoding{.code = 0xED, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_M_MAJMODE2.PMM_CYC)",
-      R"(UNC_M_MAJMODE2.PMM_CYC)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR2",
+      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 2)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10449,11 +8661,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_TAGGED.PMM0_CMP",
-      EventDef::Encoding{.code = 0xDD, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_M_SB_TAGGED.PMM0_CMP)",
-      R"(UNC_M_SB_TAGGED.PMM0_CMP)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR3",
+      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 3)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10461,11 +8673,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_TAGGED.PMM1_CMP",
-      EventDef::Encoding{.code = 0xDD, .umask = 0x20, .msr_values = {0x00}},
-      R"(UNC_M_SB_TAGGED.PMM1_CMP)",
-      R"(UNC_M_SB_TAGGED.PMM1_CMP)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR4",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 4)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10473,11 +8685,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_TAGGED.PMM2_CMP",
-      EventDef::Encoding{.code = 0xDD, .umask = 0x40, .msr_values = {0x00}},
-      R"(UNC_M_SB_TAGGED.PMM2_CMP)",
-      R"(UNC_M_SB_TAGGED.PMM2_CMP)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_ACQUIRED.TGR5",
+      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Acquired; For Transgress 5)",
+      R"(Number of CMS Agent 1 AD credits acquired in a given cycle, per transgress.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10485,11 +8697,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_INSERTS.PMM_WRS",
-      EventDef::Encoding{.code = 0xD6, .umask = 0x08, .msr_values = {0x00}},
-      R"(Scoreboard Inserts; Persistent Mem writes)",
-      R"(Scoreboard Inserts; Persistent Mem writes)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR0",
+      EventDef::Encoding{.code = 0x86, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 0)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10497,11 +8709,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_OCCUPANCY.PMM_WRS",
-      EventDef::Encoding{.code = 0xD5, .umask = 0x08, .msr_values = {0x00}},
-      R"(Scoreboard Occupancy; Persistent Mem writes)",
-      R"(Scoreboard Occupancy; Persistent Mem writes)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR1",
+      EventDef::Encoding{.code = 0x86, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 1)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10509,11 +8721,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_OCCUPANCY.PMM_RDS",
-      EventDef::Encoding{.code = 0xD5, .umask = 0x04, .msr_values = {0x00}},
-      R"(Scoreboard Occupancy; Persistent Mem reads)",
-      R"(Scoreboard Occupancy; Persistent Mem reads)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR2",
+      EventDef::Encoding{.code = 0x86, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 2)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10521,11 +8733,3083 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_SB_INSERTS.PMM_RDS",
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR3",
+      EventDef::Encoding{.code = 0x86, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 3)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR4",
+      EventDef::Encoding{.code = 0x86, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 4)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_AD_CRD_OCCUPANCY.TGR5",
+      EventDef::Encoding{.code = 0x86, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent1 AD Credits Occupancy; For Transgress 5)",
+      R"(Number of CMS Agent 1 AD credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR0",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 0)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR1",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 1)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR2",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 2)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR3",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 3)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR4",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 4)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CRD_OCCUPANCY.TGR5",
+      EventDef::Encoding{.code = 0x8E, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Occupancy; For Transgress 5)",
+      R"(Number of CMS Agent 1 BL credits in use in a given cycle, per transgress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR0",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 0)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR1",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 1)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR2",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 2)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR3",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 3)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR4",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 4)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_AG1_BL_CREDITS_ACQUIRED.TGR5",
+      EventDef::Encoding{.code = 0x8C, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Agent1 BL Credits Acquired; For Transgress 5)",
+      R"(Number of CMS Agent 1 BL credits acquired in a given cycle, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_DN",
+      EventDef::Encoding{.code = 0xAE, .umask = 0x04, .msr_values = {0x00}},
+      R"(Egress Blocking due to Ordering requirements; Down)",
+      R"(Counts number of cycles IV was blocked in the TGR Egress due to SNP/GO Ordering requirements)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_EGRESS_ORDERING.IV_SNOOPGO_UP",
+      EventDef::Encoding{.code = 0xAE, .umask = 0x01, .msr_values = {0x00}},
+      R"(Egress Blocking due to Ordering requirements; Up)",
+      R"(Counts number of cycles IV was blocked in the TGR Egress due to SNP/GO Ordering requirements)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AD_IN_USE.LEFT_EVEN",
+      EventDef::Encoding{.code = 0xA7, .umask = 0x01, .msr_values = {0x00}},
+      R"(Horizontal AD Ring In Use; Left and Even)",
+      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AD_IN_USE.LEFT_ODD",
+      EventDef::Encoding{.code = 0xA7, .umask = 0x02, .msr_values = {0x00}},
+      R"(Horizontal AD Ring In Use; Left and Odd)",
+      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AD_IN_USE.RIGHT_EVEN",
+      EventDef::Encoding{.code = 0xA7, .umask = 0x04, .msr_values = {0x00}},
+      R"(Horizontal AD Ring In Use; Right and Even)",
+      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AD_IN_USE.RIGHT_ODD",
+      EventDef::Encoding{.code = 0xA7, .umask = 0x08, .msr_values = {0x00}},
+      R"(Horizontal AD Ring In Use; Right and Odd)",
+      R"(Counts the number of cycles that the Horizontal AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AK_IN_USE.LEFT_EVEN",
+      EventDef::Encoding{.code = 0xA9, .umask = 0x01, .msr_values = {0x00}},
+      R"(Horizontal AK Ring In Use; Left and Even)",
+      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AK_IN_USE.LEFT_ODD",
+      EventDef::Encoding{.code = 0xA9, .umask = 0x02, .msr_values = {0x00}},
+      R"(Horizontal AK Ring In Use; Left and Odd)",
+      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AK_IN_USE.RIGHT_EVEN",
+      EventDef::Encoding{.code = 0xA9, .umask = 0x04, .msr_values = {0x00}},
+      R"(Horizontal AK Ring In Use; Right and Even)",
+      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_AK_IN_USE.RIGHT_ODD",
+      EventDef::Encoding{.code = 0xA9, .umask = 0x08, .msr_values = {0x00}},
+      R"(Horizontal AK Ring In Use; Right and Odd)",
+      R"(Counts the number of cycles that the Horizontal AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_BL_IN_USE.LEFT_EVEN",
+      EventDef::Encoding{.code = 0xAB, .umask = 0x01, .msr_values = {0x00}},
+      R"(Horizontal BL Ring in Use; Left and Even)",
+      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_BL_IN_USE.LEFT_ODD",
+      EventDef::Encoding{.code = 0xAB, .umask = 0x02, .msr_values = {0x00}},
+      R"(Horizontal BL Ring in Use; Left and Odd)",
+      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_BL_IN_USE.RIGHT_EVEN",
+      EventDef::Encoding{.code = 0xAB, .umask = 0x04, .msr_values = {0x00}},
+      R"(Horizontal BL Ring in Use; Right and Even)",
+      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_BL_IN_USE.RIGHT_ODD",
+      EventDef::Encoding{.code = 0xAB, .umask = 0x08, .msr_values = {0x00}},
+      R"(Horizontal BL Ring in Use; Right and Odd)",
+      R"(Counts the number of cycles that the Horizontal BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_IV_IN_USE.LEFT",
+      EventDef::Encoding{.code = 0xAD, .umask = 0x01, .msr_values = {0x00}},
+      R"(Horizontal IV Ring in Use; Left)",
+      R"(Counts the number of cycles that the Horizontal IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_HORZ_RING_IV_IN_USE.RIGHT",
+      EventDef::Encoding{.code = 0xAD, .umask = 0x04, .msr_values = {0x00}},
+      R"(Horizontal IV Ring in Use; Right)",
+      R"(Counts the number of cycles that the Horizontal IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_HORZ.AD",
+      EventDef::Encoding{.code = 0xA1, .umask = 0x01, .msr_values = {0x00}},
+      R"(Messages that bounced on the Horizontal Ring.; AD)",
+      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_HORZ.AK",
+      EventDef::Encoding{.code = 0xA1, .umask = 0x02, .msr_values = {0x00}},
+      R"(Messages that bounced on the Horizontal Ring.; AK)",
+      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_HORZ.BL",
+      EventDef::Encoding{.code = 0xA1, .umask = 0x04, .msr_values = {0x00}},
+      R"(Messages that bounced on the Horizontal Ring.; BL)",
+      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_HORZ.IV",
+      EventDef::Encoding{.code = 0xA1, .umask = 0x08, .msr_values = {0x00}},
+      R"(Messages that bounced on the Horizontal Ring.; IV)",
+      R"(Number of cycles incoming messages from the Horizontal ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_VERT.AD",
+      EventDef::Encoding{.code = 0xA0, .umask = 0x01, .msr_values = {0x00}},
+      R"(Messages that bounced on the Vertical Ring.; AD)",
+      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_VERT.AK",
+      EventDef::Encoding{.code = 0xA0, .umask = 0x02, .msr_values = {0x00}},
+      R"(Messages that bounced on the Vertical Ring.; Acknowledgements to core)",
+      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_VERT.BL",
+      EventDef::Encoding{.code = 0xA0, .umask = 0x04, .msr_values = {0x00}},
+      R"(Messages that bounced on the Vertical Ring.; Data Responses to core)",
+      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_BOUNCES_VERT.IV",
+      EventDef::Encoding{.code = 0xA0, .umask = 0x08, .msr_values = {0x00}},
+      R"(Messages that bounced on the Vertical Ring.; Snoops of processor's cache.)",
+      R"(Number of cycles incoming messages from the Vertical ring that were bounced, by ring type.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_HORZ.AD",
+      EventDef::Encoding{.code = 0xA3, .umask = 0x01, .msr_values = {0x00}},
+      R"(Sink Starvation on Horizontal Ring; AD)",
+      R"(Sink Starvation on Horizontal Ring; AD)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_HORZ.AK",
+      EventDef::Encoding{.code = 0xA3, .umask = 0x02, .msr_values = {0x00}},
+      R"(Sink Starvation on Horizontal Ring; AK)",
+      R"(Sink Starvation on Horizontal Ring; AK)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_HORZ.AK_AG1",
+      EventDef::Encoding{.code = 0xA3, .umask = 0x20, .msr_values = {0x00}},
+      R"(Sink Starvation on Horizontal Ring; Acknowledgements to Agent 1)",
+      R"(Sink Starvation on Horizontal Ring; Acknowledgements to Agent 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_HORZ.BL",
+      EventDef::Encoding{.code = 0xA3, .umask = 0x04, .msr_values = {0x00}},
+      R"(Sink Starvation on Horizontal Ring; BL)",
+      R"(Sink Starvation on Horizontal Ring; BL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_HORZ.IV",
+      EventDef::Encoding{.code = 0xA3, .umask = 0x08, .msr_values = {0x00}},
+      R"(Sink Starvation on Horizontal Ring; IV)",
+      R"(Sink Starvation on Horizontal Ring; IV)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_VERT.AD",
+      EventDef::Encoding{.code = 0xA2, .umask = 0x01, .msr_values = {0x00}},
+      R"(Sink Starvation on Vertical Ring; AD)",
+      R"(Sink Starvation on Vertical Ring; AD)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_VERT.AK",
+      EventDef::Encoding{.code = 0xA2, .umask = 0x02, .msr_values = {0x00}},
+      R"(Sink Starvation on Vertical Ring; Acknowledgements to core)",
+      R"(Sink Starvation on Vertical Ring; Acknowledgements to core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_VERT.BL",
+      EventDef::Encoding{.code = 0xA2, .umask = 0x04, .msr_values = {0x00}},
+      R"(Sink Starvation on Vertical Ring; Data Responses to core)",
+      R"(Sink Starvation on Vertical Ring; Data Responses to core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SINK_STARVED_VERT.IV",
+      EventDef::Encoding{.code = 0xA2, .umask = 0x08, .msr_values = {0x00}},
+      R"(Sink Starvation on Vertical Ring; Snoops of processor's cache.)",
+      R"(Sink Starvation on Vertical Ring; Snoops of processor's cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RING_SRC_THRTL",
+      EventDef::Encoding{.code = 0xA4, .umask = 0x00, .msr_values = {0x00}},
+      R"(Source Throttle)",
+      R"(Source Throttle)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxC_AD_CYCLES_FULL",
+      EventDef::Encoding{.code = 0x4, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Ingress (from CMS) Full)",
+      R"(AD Ingress (from CMS) Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxC_AD_CYCLES_NE",
+      EventDef::Encoding{.code = 0x3, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Ingress (from CMS) Not Empty)",
+      R"(AD Ingress (from CMS) Not Empty)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxC_BL_CYCLES_FULL",
+      EventDef::Encoding{.code = 0x8, .umask = 0x00, .msr_values = {0x00}},
+      R"(BL Ingress (from CMS) Full)",
+      R"(BL Ingress (from CMS) Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxC_BL_CYCLES_NE",
+      EventDef::Encoding{.code = 0x7, .umask = 0x00, .msr_values = {0x00}},
+      R"(BL Ingress (from CMS) Not Empty)",
+      R"(BL Ingress (from CMS) Not Empty)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BUSY_STARVED.AD_BNC",
+      EventDef::Encoding{.code = 0xB4, .umask = 0x01, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; AD - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BUSY_STARVED.AD_CRD",
+      EventDef::Encoding{.code = 0xB4, .umask = 0x10, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; AD - Credit)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BUSY_STARVED.BL_BNC",
+      EventDef::Encoding{.code = 0xB4, .umask = 0x04, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; BL - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BUSY_STARVED.BL_CRD",
+      EventDef::Encoding{.code = 0xB4, .umask = 0x40, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; BL - Credit)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.AD_BNC",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x01, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; AD - Bounce)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.AD_CRD",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x10, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; AD - Credit)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.AK_BNC",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x02, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; AK - Bounce)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.BL_BNC",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x04, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; BL - Bounce)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.BL_CRD",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x40, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; BL - Credit)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_BYPASS.IV_BNC",
+      EventDef::Encoding{.code = 0xB2, .umask = 0x08, .msr_values = {0x00}},
+      R"(Transgress Ingress Bypass; IV - Bounce)",
+      R"(Number of packets bypassing the CMS Ingress)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.AD_BNC",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x01, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; AD - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.AD_CRD",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x10, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; AD - Credit)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.AK_BNC",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x02, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; AK - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.BL_BNC",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x04, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; BL - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.BL_CRD",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x40, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; BL - Credit)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.IFV",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x80, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; IFV - Credit)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_CRD_STARVED.IV_BNC",
+      EventDef::Encoding{.code = 0xB3, .umask = 0x08, .msr_values = {0x00}},
+      R"(Transgress Injection Starvation; IV - Bounce)",
+      R"(Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, the Ingress is unable to forward to the Egress due to a lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.AD_BNC",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x01, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; AD - Bounce)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.AD_CRD",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x10, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; AD - Credit)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.AK_BNC",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x02, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; AK - Bounce)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.BL_BNC",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x04, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; BL - Bounce)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.BL_CRD",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x40, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; BL - Credit)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_INSERTS.IV_BNC",
+      EventDef::Encoding{.code = 0xB1, .umask = 0x08, .msr_values = {0x00}},
+      R"(Transgress Ingress Allocations; IV - Bounce)",
+      R"(Number of allocations into the CMS Ingress  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.AD_BNC",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x01, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; AD - Bounce)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.AD_CRD",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x10, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; AD - Credit)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.AK_BNC",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x02, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; AK - Bounce)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.BL_BNC",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x04, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; BL - Bounce)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.BL_CRD",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x40, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; BL - Credit)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RxR_OCCUPANCY.IV_BNC",
+      EventDef::Encoding{.code = 0xB0, .umask = 0x08, .msr_values = {0x00}},
+      R"(Transgress Ingress Occupancy; IV - Bounce)",
+      R"(Occupancy event for the Ingress buffers in the CMS  The Ingress is used to queue up requests received from the mesh)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR0",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x01, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 0)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR1",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x02, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 1)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR2",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x04, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 2)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR3",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x08, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 3)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR4",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 4)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG0.TGR5",
+      EventDef::Encoding{.code = 0xD0, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stall on No AD Agent0 Transgress Credits; For Transgress 5)",
+      R"(Number of cycles the AD Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR0",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x01, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 0)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR1",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x02, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 1)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR2",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x04, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 2)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR3",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x08, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 3)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR4",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 4)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_AD_AG1.TGR5",
+      EventDef::Encoding{.code = 0xD2, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stall on No AD Agent1 Transgress Credits; For Transgress 5)",
+      R"(Number of cycles the AD Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR0",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x01, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 0)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR1",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x02, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 1)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR2",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x04, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 2)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR3",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x08, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 3)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR4",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 4)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG0.TGR5",
+      EventDef::Encoding{.code = 0xD4, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stall on No BL Agent0 Transgress Credits; For Transgress 5)",
+      R"(Number of cycles the BL Agent 0 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR0",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x01, .msr_values = {0x00}},
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 0)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR1",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x02, .msr_values = {0x00}},
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 1)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR2",
       EventDef::Encoding{.code = 0xD6, .umask = 0x04, .msr_values = {0x00}},
-      R"(Scoreboard Inserts; Persistent Mem reads)",
-      R"(Scoreboard Inserts; Persistent Mem reads)",
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 2)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR3",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x08, .msr_values = {0x00}},
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 3)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR4",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 4)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_STALL_NO_TxR_HORZ_CRD_BL_AG1.TGR5",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stall on No BL Agent1 Transgress Credits; For Transgress 5)",
+      R"(Number of cycles the BL Agent 1 Egress Buffer is stalled waiting for a TGR credit to become available, per transgress.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_CREDIT_OCCUPANCY",
+      EventDef::Encoding{.code = 0xE, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Egress (to CMS) Credits Occupancy)",
+      R"(AD Egress (to CMS) Credits Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_CREDITS_ACQUIRED",
+      EventDef::Encoding{.code = 0xD, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Egress (to CMS) Credit Acquired)",
+      R"(AD Egress (to CMS) Credit Acquired)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_CYCLES_FULL",
+      EventDef::Encoding{.code = 0xC, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Egress (to CMS) Full)",
+      R"(AD Egress (to CMS) Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_CYCLES_NE",
+      EventDef::Encoding{.code = 0xB, .umask = 0x00, .msr_values = {0x00}},
+      R"(AD Egress (to CMS) Not Empty)",
+      R"(AD Egress (to CMS) Not Empty)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_NO_CREDIT_CYCLES",
+      EventDef::Encoding{.code = 0xF, .umask = 0x00, .msr_values = {0x00}},
+      R"(Cycles with No AD Egress (to CMS) Credits)",
+      R"(Cycles with No AD Egress (to CMS) Credits)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AD_NO_CREDIT_STALLED",
+      EventDef::Encoding{.code = 0x10, .umask = 0x00, .msr_values = {0x00}},
+      R"(Cycles Stalled with No AD Egress (to CMS) Credits)",
+      R"(Cycles Stalled with No AD Egress (to CMS) Credits)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK.CRD_CBO",
+      EventDef::Encoding{.code = 0x39, .umask = 0x02, .msr_values = {0x00}},
+      R"(Outbound Ring Transactions on AK; CRD Transactions to Cbo)",
+      R"(Outbound Ring Transactions on AK; CRD Transactions to Cbo)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK.NDR",
+      EventDef::Encoding{.code = 0x39, .umask = 0x01, .msr_values = {0x00}},
+      R"(Outbound Ring Transactions on AK; NDR Transactions)",
+      R"(Outbound Ring Transactions on AK; NDR Transactions)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CREDIT_OCCUPANCY.CMS0",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CREDIT_OCCUPANCY.CMS1",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CREDITS_ACQUIRED.CMS0",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CREDITS_ACQUIRED.CMS1",
+      EventDef::Encoding{.code = 0x1D, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_NO_CREDIT_CYCLES.CMS0",
+      EventDef::Encoding{.code = 0x1F, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_NO_CREDIT_CYCLES.CMS1",
+      EventDef::Encoding{.code = 0x1F, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      R"(Cycles with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_NO_CREDIT_STALLED.CMS0",
+      EventDef::Encoding{.code = 0x20, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_NO_CREDIT_STALLED.CMS1",
+      EventDef::Encoding{.code = 0x20, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      R"(Cycles Stalled with No AK Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL.DRS_CACHE",
+      EventDef::Encoding{.code = 0x40, .umask = 0x01, .msr_values = {0x00}},
+      R"(Outbound DRS Ring Transactions to Cache; Data to Cache)",
+      R"(Outbound DRS Ring Transactions to Cache; Data to Cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL.DRS_CORE",
+      EventDef::Encoding{.code = 0x40, .umask = 0x02, .msr_values = {0x00}},
+      R"(Outbound DRS Ring Transactions to Cache; Data to Core)",
+      R"(Outbound DRS Ring Transactions to Cache; Data to Core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CREDIT_OCCUPANCY.CMS0",
+      EventDef::Encoding{.code = 0x1A, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CREDIT_OCCUPANCY.CMS1",
+      EventDef::Encoding{.code = 0x1A, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Credits Occupancy; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CREDITS_ACQUIRED.CMS0",
+      EventDef::Encoding{.code = 0x19, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CREDITS_ACQUIRED.CMS1",
+      EventDef::Encoding{.code = 0x19, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Credit Acquired; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_FULL.ALL",
+      EventDef::Encoding{.code = 0x18, .umask = 0x03, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Full; All)",
+      R"(BL Egress (to CMS) Full; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_FULL.CMS0",
+      EventDef::Encoding{.code = 0x18, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Full; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Full; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_FULL.CMS1",
+      EventDef::Encoding{.code = 0x18, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Full; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Full; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x17, .umask = 0x03, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Not Empty; All)",
+      R"(BL Egress (to CMS) Not Empty; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_NE.CMS0",
+      EventDef::Encoding{.code = 0x17, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_CYCLES_NE.CMS1",
+      EventDef::Encoding{.code = 0x17, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_INSERTS.CMS0",
+      EventDef::Encoding{.code = 0x15, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_INSERTS.CMS1",
+      EventDef::Encoding{.code = 0x15, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_NO_CREDIT_CYCLES.CMS0",
+      EventDef::Encoding{.code = 0x1B, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_NO_CREDIT_CYCLES.CMS1",
+      EventDef::Encoding{.code = 0x1B, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      R"(Cycles with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_NO_CREDIT_STALLED.CMS0",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_NO_CREDIT_STALLED.CMS1",
+      EventDef::Encoding{.code = 0x1C, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      R"(Cycles Stalled with No BL Egress (to CMS) Credits; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_OCCUPANCY.CMS0",
+      EventDef::Encoding{.code = 0x16, .umask = 0x01, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
+      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL_OCCUPANCY.CMS1",
+      EventDef::Encoding{.code = 0x16, .umask = 0x02, .msr_values = {0x00}},
+      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
+      R"(BL Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_ADS_USED.AD_BNC",
+      EventDef::Encoding{.code = 0x9D, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal ADS Used; AD - Bounce)",
+      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_ADS_USED.AD_CRD",
+      EventDef::Encoding{.code = 0x9D, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Horizontal ADS Used; AD - Credit)",
+      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_ADS_USED.AK_BNC",
+      EventDef::Encoding{.code = 0x9D, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal ADS Used; AK - Bounce)",
+      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_ADS_USED.BL_BNC",
+      EventDef::Encoding{.code = 0x9D, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal ADS Used; BL - Bounce)",
+      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_ADS_USED.BL_CRD",
+      EventDef::Encoding{.code = 0x9D, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Horizontal ADS Used; BL - Credit)",
+      R"(Number of packets using the Horizontal Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.AD_BNC",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; AD - Bounce)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.AD_CRD",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; AD - Credit)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.AK_BNC",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; AK - Bounce)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.BL_BNC",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; BL - Bounce)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.BL_CRD",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; BL - Credit)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_BYPASS.IV_BNC",
+      EventDef::Encoding{.code = 0x9F, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Horizontal Bypass Used; IV - Bounce)",
+      R"(Number of packets bypassing the Horizontal Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AD_BNC",
+      EventDef::Encoding{.code = 0x96, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; AD - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AD_CRD",
+      EventDef::Encoding{.code = 0x96, .umask = 0x10, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; AD - Credit)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.AK_BNC",
+      EventDef::Encoding{.code = 0x96, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; AK - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.BL_BNC",
+      EventDef::Encoding{.code = 0x96, .umask = 0x04, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; BL - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.BL_CRD",
+      EventDef::Encoding{.code = 0x96, .umask = 0x40, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; BL - Credit)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_FULL.IV_BNC",
+      EventDef::Encoding{.code = 0x96, .umask = 0x08, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Full; IV - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Full.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.AD_BNC",
+      EventDef::Encoding{.code = 0x97, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AD - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.AD_CRD",
+      EventDef::Encoding{.code = 0x97, .umask = 0x10, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AD - Credit)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.AK_BNC",
+      EventDef::Encoding{.code = 0x97, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; AK - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.BL_BNC",
+      EventDef::Encoding{.code = 0x97, .umask = 0x04, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; BL - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.BL_CRD",
+      EventDef::Encoding{.code = 0x97, .umask = 0x40, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; BL - Credit)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_CYCLES_NE.IV_BNC",
+      EventDef::Encoding{.code = 0x97, .umask = 0x08, .msr_values = {0x00}},
+      R"(Cycles CMS Horizontal Egress Queue is Not Empty; IV - Bounce)",
+      R"(Cycles the Transgress buffers in the Common Mesh Stop are Not-Empty.  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.AD_BNC",
+      EventDef::Encoding{.code = 0x95, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; AD - Bounce)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.AD_CRD",
+      EventDef::Encoding{.code = 0x95, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; AD - Credit)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.AK_BNC",
+      EventDef::Encoding{.code = 0x95, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; AK - Bounce)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.BL_BNC",
+      EventDef::Encoding{.code = 0x95, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; BL - Bounce)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.BL_CRD",
+      EventDef::Encoding{.code = 0x95, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; BL - Credit)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_INSERTS.IV_BNC",
+      EventDef::Encoding{.code = 0x95, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Inserts; IV - Bounce)",
+      R"(Number of allocations into the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.AD_BNC",
+      EventDef::Encoding{.code = 0x99, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; AD - Bounce)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.AD_CRD",
+      EventDef::Encoding{.code = 0x99, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; AD - Credit)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.AK_BNC",
+      EventDef::Encoding{.code = 0x99, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; AK - Bounce)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.BL_BNC",
+      EventDef::Encoding{.code = 0x99, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; BL - Bounce)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.BL_CRD",
+      EventDef::Encoding{.code = 0x99, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; BL - Credit)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_NACK.IV_BNC",
+      EventDef::Encoding{.code = 0x99, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress NACKs; IV - Bounce)",
+      R"(Counts number of Egress packets NACK'ed on to the Horizontal Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.AD_BNC",
+      EventDef::Encoding{.code = 0x94, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; AD - Bounce)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.AD_CRD",
+      EventDef::Encoding{.code = 0x94, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; AD - Credit)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.AK_BNC",
+      EventDef::Encoding{.code = 0x94, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; AK - Bounce)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.BL_BNC",
+      EventDef::Encoding{.code = 0x94, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; BL - Bounce)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.BL_CRD",
+      EventDef::Encoding{.code = 0x94, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; BL - Credit)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_OCCUPANCY.IV_BNC",
+      EventDef::Encoding{.code = 0x94, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Occupancy; IV - Bounce)",
+      R"(Occupancy event for the Transgress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Horizontal Ring on the Mesh.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_STARVED.AD_BNC",
+      EventDef::Encoding{.code = 0x9B, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Injection Starvation; AD - Bounce)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_STARVED.AK_BNC",
+      EventDef::Encoding{.code = 0x9B, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Injection Starvation; AK - Bounce)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_STARVED.BL_BNC",
+      EventDef::Encoding{.code = 0x9B, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Injection Starvation; BL - Bounce)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_HORZ_STARVED.IV_BNC",
+      EventDef::Encoding{.code = 0x9B, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Horizontal Egress Injection Starvation; IV - Bounce)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Transgress buffer cannot send a transaction onto the Horizontal ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.AD_AG0",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AD - Agent 0)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.AD_AG1",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AD - Agent 1)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.AK_AG0",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AK - Agent 0)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.AK_AG1",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AK - Agent 1)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.BL_AG0",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; BL - Agent 0)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_ADS_USED.BL_AG1",
+      EventDef::Encoding{.code = 0x9C, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; BL - Agent 1)",
+      R"(Number of packets using the Vertical Anti-Deadlock Slot, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.AD_AG0",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AD - Agent 0)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.AD_AG1",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AD - Agent 1)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.AK_AG0",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AK - Agent 0)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.AK_AG1",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; AK - Agent 1)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.BL_AG0",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; BL - Agent 0)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.BL_AG1",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; BL - Agent 1)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_BYPASS.IV",
+      EventDef::Encoding{.code = 0x9E, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Vertical ADS Used; IV)",
+      R"(Number of packets bypassing the Vertical Egress, broken down by ring type and CMS Agent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.AD_AG0",
+      EventDef::Encoding{.code = 0x92, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; AD - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.AD_AG1",
+      EventDef::Encoding{.code = 0x92, .umask = 0x10, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; AD - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.AK_AG0",
+      EventDef::Encoding{.code = 0x92, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; AK - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.AK_AG1",
+      EventDef::Encoding{.code = 0x92, .umask = 0x20, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; AK - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.BL_AG0",
+      EventDef::Encoding{.code = 0x92, .umask = 0x04, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; BL - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.BL_AG1",
+      EventDef::Encoding{.code = 0x92, .umask = 0x40, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; BL - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_FULL.IV",
+      EventDef::Encoding{.code = 0x92, .umask = 0x08, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Full; IV)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Full.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.AD_AG0",
+      EventDef::Encoding{.code = 0x93, .umask = 0x01, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AD - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.AD_AG1",
+      EventDef::Encoding{.code = 0x93, .umask = 0x10, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AD - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.AK_AG0",
+      EventDef::Encoding{.code = 0x93, .umask = 0x02, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AK - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.AK_AG1",
+      EventDef::Encoding{.code = 0x93, .umask = 0x20, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; AK - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.BL_AG0",
+      EventDef::Encoding{.code = 0x93, .umask = 0x04, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; BL - Agent 0)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.BL_AG1",
+      EventDef::Encoding{.code = 0x93, .umask = 0x40, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; BL - Agent 1)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_CYCLES_NE.IV",
+      EventDef::Encoding{.code = 0x93, .umask = 0x08, .msr_values = {0x00}},
+      R"(Cycles CMS Vertical Egress Queue Is Not Empty; IV)",
+      R"(Number of cycles the Common Mesh Stop Egress was Not Empty.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.AD_AG0",
+      EventDef::Encoding{.code = 0x91, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; AD - Agent 0)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.AD_AG1",
+      EventDef::Encoding{.code = 0x91, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; AD - Agent 1)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.AK_AG0",
+      EventDef::Encoding{.code = 0x91, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; AK - Agent 0)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.AK_AG1",
+      EventDef::Encoding{.code = 0x91, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; AK - Agent 1)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.BL_AG0",
+      EventDef::Encoding{.code = 0x91, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; BL - Agent 0)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.BL_AG1",
+      EventDef::Encoding{.code = 0x91, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; BL - Agent 1)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_INSERTS.IV",
+      EventDef::Encoding{.code = 0x91, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Vert Egress Allocations; IV)",
+      R"(Number of allocations into the Common Mesh Stop Egress.  The Egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.AD_AG0",
+      EventDef::Encoding{.code = 0x98, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; AD - Agent 0)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.AD_AG1",
+      EventDef::Encoding{.code = 0x98, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; AD - Agent 1)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.AK_AG0",
+      EventDef::Encoding{.code = 0x98, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; AK - Agent 0)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.AK_AG1",
+      EventDef::Encoding{.code = 0x98, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; AK - Agent 1)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.BL_AG0",
+      EventDef::Encoding{.code = 0x98, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; BL - Agent 0)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.BL_AG1",
+      EventDef::Encoding{.code = 0x98, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; BL - Agent 1)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.AD_AG0",
+      EventDef::Encoding{.code = 0x90, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; AD - Agent 0)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AD ring.  Some example include outbound requests, snoop requests, and snoop responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.AD_AG1",
+      EventDef::Encoding{.code = 0x90, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; AD - Agent 1)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AD ring.  This is commonly used for outbound requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.AK_AG0",
+      EventDef::Encoding{.code = 0x90, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; AK - Agent 0)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the AK ring.  This is commonly used for credit returns and GO responses.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.AK_AG1",
+      EventDef::Encoding{.code = 0x90, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; AK - Agent 1)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the AK ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.BL_AG0",
+      EventDef::Encoding{.code = 0x90, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; BL - Agent 0)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the BL ring.  This is commonly used to send data from the cache to various destinations.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.BL_AG1",
+      EventDef::Encoding{.code = 0x90, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; BL - Agent 1)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 1 destined for the BL ring.  This is commonly used for transferring writeback data to the cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_OCCUPANCY.IV",
+      EventDef::Encoding{.code = 0x90, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Vert Egress Occupancy; IV)",
+      R"(Occupancy event for the Egress buffers in the Common Mesh Stop  The egress is used to queue up requests destined for the Vertical Ring on the Mesh.; Ring transactions from Agent 0 destined for the IV ring.  This is commonly used for snoops to the cores.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.AD_AG0",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x01, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; AD - Agent 0)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.AD_AG1",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x10, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; AD - Agent 1)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.AK_AG0",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x02, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; AK - Agent 0)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.AK_AG1",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x20, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; AK - Agent 1)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.BL_AG0",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x04, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; BL - Agent 0)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.BL_AG1",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x40, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; BL - Agent 1)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AD_IN_USE.DN_EVEN",
+      EventDef::Encoding{.code = 0xA6, .umask = 0x04, .msr_values = {0x00}},
+      R"(Vertical AD Ring In Use; Down and Even)",
+      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AD_IN_USE.DN_ODD",
+      EventDef::Encoding{.code = 0xA6, .umask = 0x08, .msr_values = {0x00}},
+      R"(Vertical AD Ring In Use; Down and Odd)",
+      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AD_IN_USE.UP_EVEN",
+      EventDef::Encoding{.code = 0xA6, .umask = 0x01, .msr_values = {0x00}},
+      R"(Vertical AD Ring In Use; Up and Even)",
+      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AD_IN_USE.UP_ODD",
+      EventDef::Encoding{.code = 0xA6, .umask = 0x02, .msr_values = {0x00}},
+      R"(Vertical AD Ring In Use; Up and Odd)",
+      R"(Counts the number of cycles that the Vertical AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  We really have two rings  -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AK_IN_USE.DN_EVEN",
+      EventDef::Encoding{.code = 0xA8, .umask = 0x04, .msr_values = {0x00}},
+      R"(Vertical AK Ring In Use; Down and Even)",
+      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AK_IN_USE.DN_ODD",
+      EventDef::Encoding{.code = 0xA8, .umask = 0x08, .msr_values = {0x00}},
+      R"(Vertical AK Ring In Use; Down and Odd)",
+      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AK_IN_USE.UP_EVEN",
+      EventDef::Encoding{.code = 0xA8, .umask = 0x01, .msr_values = {0x00}},
+      R"(Vertical AK Ring In Use; Up and Even)",
+      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_AK_IN_USE.UP_ODD",
+      EventDef::Encoding{.code = 0xA8, .umask = 0x02, .msr_values = {0x00}},
+      R"(Vertical AK Ring In Use; Up and Odd)",
+      R"(Counts the number of cycles that the Vertical AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.We really have two rings in -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_BL_IN_USE.DN_EVEN",
+      EventDef::Encoding{.code = 0xAA, .umask = 0x04, .msr_values = {0x00}},
+      R"(Vertical BL Ring in Use; Down and Even)",
+      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_BL_IN_USE.DN_ODD",
+      EventDef::Encoding{.code = 0xAA, .umask = 0x08, .msr_values = {0x00}},
+      R"(Vertical BL Ring in Use; Down and Odd)",
+      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_BL_IN_USE.UP_EVEN",
+      EventDef::Encoding{.code = 0xAA, .umask = 0x01, .msr_values = {0x00}},
+      R"(Vertical BL Ring in Use; Up and Even)",
+      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_BL_IN_USE.UP_ODD",
+      EventDef::Encoding{.code = 0xAA, .umask = 0x02, .msr_values = {0x00}},
+      R"(Vertical BL Ring in Use; Up and Odd)",
+      R"(Counts the number of cycles that the Vertical BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from  the ring stop.We really have two rings -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_IV_IN_USE.DN",
+      EventDef::Encoding{.code = 0xAC, .umask = 0x04, .msr_values = {0x00}},
+      R"(Vertical IV Ring in Use; Down)",
+      R"(Counts the number of cycles that the Vertical IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_VERT_RING_IV_IN_USE.UP",
+      EventDef::Encoding{.code = 0xAC, .umask = 0x01, .msr_values = {0x00}},
+      R"(Vertical IV Ring in Use; Up)",
+      R"(Counts the number of cycles that the Vertical IV ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.  There is only 1 IV ring.  Therefore, if one wants to monitor the Even ring, they should select both UP_EVEN and DN_EVEN.  To monitor the Odd ring, they should select both UP_ODD and DN_ODD.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1",
+      EventDef::Encoding{.code = 0x18, .umask = 0x20, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2",
+      EventDef::Encoding{.code = 0x18, .umask = 0x40, .msr_values = {0x00}},
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2)",
+      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.IDLE",
+      EventDef::Encoding{.code = 0x3, .umask = 0x47, .msr_values = {0x00}},
+      R"(Valid Flits Received; Idle)",
+      R"(Shows legal flit time (hides impact of L0p and L0c).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10537,7 +11821,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IO",
       EventDef::Encoding{.code = 0x35, .umask = 0x34, .msr_values = {0x00}},
       R"(TOR Inserts; All from Local IO)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; All locally generated IO traffic)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; All locally generated IO traffic)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10549,7 +11833,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.ALL_IO_IA",
       EventDef::Encoding{.code = 0x35, .umask = 0x35, .msr_values = {0x00}},
       R"(TOR Inserts; All from Local iA and IO)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; All locally initiated requests)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; All locally initiated requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10561,7 +11845,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.ALL_HIT",
       EventDef::Encoding{.code = 0x35, .umask = 0x15, .msr_values = {0x00}},
       R"(TOR Inserts; Hits from Local)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10573,7 +11857,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.ALL_MISS",
       EventDef::Encoding{.code = 0x35, .umask = 0x25, .msr_values = {0x00}},
       R"(TOR Inserts; Misses from Local)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10814,6 +12098,174 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x3B, .umask = 0x40, .msr_values = {0x00}},
       R"(UPI Ingress Credits In Use Cycles; BL NCB VN0 Credits)",
       R"(Accumulates the number of UPI credits available in each cycle for either the AD or BL ring.  In order to send snoops, snoop responses, requests, data, etc to the UPI agent on the ring, it is necessary to first acquire a credit for the UPI ingress buffer.  This stat increments by the number of credits that are available each cycle.  This can be used in conjunction with the Credit Acquired event in order to calculate average credit lifetime.  This event supports filtering for the different types of credits that are available.  Note that you must select the link that you would like to monitor using the link select register, and you can only monitor 1 link at a time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VNA",
+      EventDef::Encoding{.code = 0x20, .umask = 0x1, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VNA)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_REQ",
+      EventDef::Encoding{.code = 0x20, .umask = 0x2, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN0 REQ Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_SNP",
+      EventDef::Encoding{.code = 0x20, .umask = 0x4, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN0 SNP Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_RSP",
+      EventDef::Encoding{.code = 0x20, .umask = 0x8, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN0 RSP Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_REQ",
+      EventDef::Encoding{.code = 0x20, .umask = 0x10, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN1 REQ Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_SNP",
+      EventDef::Encoding{.code = 0x20, .umask = 0x20, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN1 SNP Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_RSP",
+      EventDef::Encoding{.code = 0x20, .umask = 0x40, .msr_values = {0x00}},
+      R"(UPI0 AD Credits Empty; VN1 RSP Messages)",
+      R"(No credits available to send to UPIs on the AD Ring)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_RSP",
+      EventDef::Encoding{.code = 0x21, .umask = 0x10, .msr_values = {0x00}},
+      R"(UPI0 BL Credits Empty; VN1 REQ Messages)",
+      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_NCS_NCB",
+      EventDef::Encoding{.code = 0x21, .umask = 0x20, .msr_values = {0x00}},
+      R"(UPI0 BL Credits Empty; VN1 RSP Messages)",
+      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_WB",
+      EventDef::Encoding{.code = 0x21, .umask = 0x40, .msr_values = {0x00}},
+      R"(UPI0 BL Credits Empty; VN1 SNP Messages)",
+      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN0_PEER_UPI0",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x1, .msr_values = {0x00}},
+      R"(Number of Snoop Targets; Peer UPI0 on VN0)",
+      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN0 Snpf to peer UPI0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN0_PEER_UPI1",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x2, .msr_values = {0x00}},
+      R"(Number of Snoop Targets; Peer UPI1 on VN0)",
+      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN0 Snpf to peer UPI1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN1_PEER_UPI0",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x8, .msr_values = {0x00}},
+      R"(Number of Snoop Targets; Peer UPI0 on VN1)",
+      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN1 Snpf to peer UPI0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN1_PEER_UPI1",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number of Snoop Targets; Peer UPI1 on VN1)",
+      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN1 Snpf to peer UPI1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11868,8 +13320,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_HITME_UPDATE.DEALLOCATE",
       EventDef::Encoding{.code = 0x61, .umask = 0x10, .msr_values = {0x00}},
-      R"(Counts the number of Allocate/Update to HitMe Cache; Deallocate HtiME$ on Reads without RspFwdI*)",
-      R"(Counts the number of Allocate/Update to HitMe Cache; Deallocate HtiME$ on Reads without RspFwdI*)",
+      R"(Counts the number of Allocate/Update to HitMe Cache; Deallocate HitME$ on Reads without RspFwdI*)",
+      R"(Counts the number of Allocate/Update to HitMe Cache; Deallocate HitME$ on Reads without RspFwdI*)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12001,7 +13453,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_SNOOP_RESP_LOCAL.RSPSFWD",
       EventDef::Encoding{.code = 0x5D, .umask = 0x08, .msr_values = {0x00}},
       R"(Snoop Responses Received Local; RspSFwd)",
-      R"(Number of snoop responses received for a Local  request; Filters for a snoop response of RspSFwd to local CA requests.  This is returned when a remote caching agent forwards data but holds on to its currentl copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
+      R"(Number of snoop responses received for a Local  request; Filters for a snoop response of RspSFwd to local CA requests.  This is returned when a remote caching agent forwards data but holds on to its current copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12853,7 +14305,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_LLC_LOOKUP.WRITE",
       EventDef::Encoding{.code = 0x34, .umask = 0x05, .msr_values = {0x00}},
       R"(Cache and Snoop Filter Lookups; Write Requests)",
-      R"(Counts the number of times the LLC was accessed - this includes code, data, prefetches and hints coming from L2.  This has numerous filters available.  Note the non-standard filtering equation.  This event will count requests that lookup the cache multiple times with multiple increments.  One must ALWAYS set umask bit 0 and select a state or states to match.  Otherwise, the event will count nothing.   CHAFilter0[24:21,17] bits correspond to [FMESI] state.; Writeback transactions from L2 to the LLC  This includes all write transactions -- both Cachable and UC.)",
+      R"(Counts the number of times the LLC was accessed - this includes code, data, prefetches and hints coming from L2.  This has numerous filters available.  Note the non-standard filtering equation.  This event will count requests that lookup the cache multiple times with multiple increments.  One must ALWAYS set umask bit 0 and select a state or states to match.  Otherwise, the event will count nothing.   CHAFilter0[24:21,17] bits correspond to [FMESI] state.; Writeback transactions from L2 to the LLC  This includes all write transactions -- both Cacheable and UC.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12925,7 +14377,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IRQ",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
       R"(TOR Inserts; IRQ)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12937,7 +14389,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.EVICT",
       EventDef::Encoding{.code = 0x35, .umask = 0x02, .msr_values = {0x00}},
       R"(TOR Inserts; SF/LLC Evictions)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; TOR allocation occurred as a result of SF/LLC evictions (came from the ISMQ))",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; TOR allocation occurred as a result of SF/LLC evictions (came from the ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12949,7 +14401,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.PRQ",
       EventDef::Encoding{.code = 0x35, .umask = 0x04, .msr_values = {0x00}},
       R"(TOR Inserts; PRQ)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12961,7 +14413,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IPQ",
       EventDef::Encoding{.code = 0x35, .umask = 0x08, .msr_values = {0x00}},
       R"(TOR Inserts; IPQ)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12973,7 +14425,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.HIT",
       EventDef::Encoding{.code = 0x35, .umask = 0x10, .msr_values = {0x00}},
       R"(TOR Inserts; Hit (Not a Miss))",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; HITs (hit is defined to be not a miss [see below], as a result for any request allocated into the TOR, one of either HIT or MISS must be true))",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; HITs (hit is defined to be not a miss [see below], as a result for any request allocated into the TOR, one of either HIT or MISS must be true))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12985,7 +14437,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.MISS",
       EventDef::Encoding{.code = 0x35, .umask = 0x20, .msr_values = {0x00}},
       R"(TOR Inserts; Miss)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.; Misses.  (a miss is defined to be any transaction from the IRQ, PRQ, RRQ, IPQ or (in the victim case) the ISMQ, that required the CHA to spawn a new UPI/SMI3 request on the UPI fabric (including UPI snoops and/or any RD/WR to a local memory controller, in the event that the CHA is the home node)).  Basically, if the LLC/SF/MLC complex were not able to service the request without involving another agent...it is a miss.  If only IDI snoops were required, it is not a miss (that means the SF/MLC com)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.; Misses.  (a miss is defined to be any transaction from the IRQ, PRQ, RRQ, IPQ or (in the victim case) the ISMQ, that required the CHA to spawn a new UPI/SMI3 request on the UPI fabric (including UPI snoops and/or any RD/WR to a local memory controller, in the event that the CHA is the home node)).  Basically, if the LLC/SF/MLC complex were not able to service the request without involving another agent...it is a miss.  If only IDI snoops were required, it is not a miss (that means the SF/MLC com)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12997,7 +14449,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.ALL",
       EventDef::Encoding{.code = 0x35, .umask = 0xFF, .msr_values = {0x00}},
       R"(TOR Inserts; All)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match qualifications specified by the subevent.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13080,8 +14532,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.ALL",
       EventDef::Encoding{.code = 0x36, .umask = 0xFF, .msr_values = {0x00}},
-      R"(UNC_CHA_TOR_OCCUPANCY.ALL)",
-      R"(UNC_CHA_TOR_OCCUPANCY.ALL)",
+      R"(TOR Occupancy : All)",
+      R"(TOR Occupancy : All : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -17001,618 +18453,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.LOCAL_M",
-      EventDef::Encoding{.code = 0x37, .umask = 0x21, .msr_values = {0x00}},
-      R"(Lines Victimized; Local - Lines in M State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.LOCAL_E",
-      EventDef::Encoding{.code = 0x37, .umask = 0x22, .msr_values = {0x00}},
-      R"(Lines Victimized; Local - Lines in E State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.LOCAL_S",
-      EventDef::Encoding{.code = 0x37, .umask = 0x24, .msr_values = {0x00}},
-      R"(Lines Victimized; Local - Lines in S State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.LOCAL_F",
-      EventDef::Encoding{.code = 0x37, .umask = 0x28, .msr_values = {0x00}},
-      R"(Lines Victimized; Local - Lines in F State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.REMOTE_M",
-      EventDef::Encoding{.code = 0x37, .umask = 0x81, .msr_values = {0x00}},
-      R"(Lines Victimized; Remote - Lines in M State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.REMOTE_E",
-      EventDef::Encoding{.code = 0x37, .umask = 0x82, .msr_values = {0x00}},
-      R"(Lines Victimized; Remote - Lines in E State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.REMOTE_S",
-      EventDef::Encoding{.code = 0x37, .umask = 0x84, .msr_values = {0x00}},
-      R"(Lines Victimized; Remote - Lines in S State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.REMOTE_F",
-      EventDef::Encoding{.code = 0x37, .umask = 0x88, .msr_values = {0x00}},
-      R"(Lines Victimized; Remote - Lines in F State)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_LLC_VICTIMS.REMOTE_ALL",
-      EventDef::Encoding{.code = 0x37, .umask = 0x8F, .msr_values = {0x00}},
-      R"(Lines Victimized; Remote - All Lines)",
-      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.ALL_FROM_LOC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x37, .msr_values = {0x00}},
-      R"(TOR Occupancy; All from Local)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); All remotely generated requests)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_RDCUR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Inserts; RdCur misses from Local IO)",
-      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO RdCur requests and miss the LLC. A RdCur request is used by IIO to read data without changing state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Inserts; RFO misses from Local IO)",
-      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO RFO requests that miss the LLC. A read for ownership (RFO) requests a cache line to be cached in E state with the intent to modify.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Inserts; ItoM misses from Local IO)",
-      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO ItoM requests that miss the LLC. An ItoM request is used by IIO to request a data write without first reading the data for ownership.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Occupancy;  ITOM Misses from Local IO)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO ItoM requests that miss the LLC. An ItoM is used by IIO to request a data write without first reading the data for ownership.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RDCUR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Occupancy;  RDCUR isses from Local IO)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO RdCur requests that miss the LLC. A RdCur request is used by IIO to read data without changing state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
-      R"(TOR Occupancy;  RFO misses from Local IO)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO RFO requests that miss the LLC. A read for ownership (RFO) requests data to be cached in E state with the intent to modify.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.IODC",
-      EventDef::Encoding{.code = 0x64, .umask = 0x10, .msr_values = {0x00}},
-      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in IODC)",
-      R"(2LM related events; Counts the number of times CHA saw NM Set conflict in IODC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.LLC",
-      EventDef::Encoding{.code = 0x64, .umask = 0x02, .msr_values = {0x00}},
-      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in SF/LLC)",
-      R"(NM evictions due to another read to the same near memory set in the LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.SF",
-      EventDef::Encoding{.code = 0x64, .umask = 0x01, .msr_values = {0x00}},
-      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in SF/LLC)",
-      R"(NM evictions due to another read to the same near memory set in the SF.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.TOR",
-      EventDef::Encoding{.code = 0x64, .umask = 0x04, .msr_values = {0x00}},
-      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in TOR)",
-      R"(No Reject in the CHA due to a pending read to the same near memory set in the TOR.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.TOR_REJECT",
-      EventDef::Encoding{.code = 0x64, .umask = 0x08, .msr_values = {0x00}},
-      R"(Memory mode related events; Counts the number of times CHA saw NM Set conflict in TOR and the transaction was rejected)",
-      R"(Rejects in the CHA due to a pending read to the same near memory set in the TOR.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_COMP_BUF_INSERTS.PORT0",
-      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
-      R"(PCIe Completion Buffer Inserts; Port 0)",
-      R"(PCIe Completion Buffer Inserts; Port 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_COMP_BUF_INSERTS.PORT1",
-      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
-      R"(PCIe Completion Buffer Inserts; Port 1)",
-      R"(PCIe Completion Buffer Inserts; Port 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_COMP_BUF_INSERTS.PORT2",
-      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
-      R"(PCIe Completion Buffer Inserts; Port 2)",
-      R"(PCIe Completion Buffer Inserts; Port 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_COMP_BUF_INSERTS.PORT3",
-      EventDef::Encoding{.code = 0xC2, .umask = 0x04, .msr_values = {0x00}},
-      R"(PCIe Completion Buffer Inserts; Port 3)",
-      R"(PCIe Completion Buffer Inserts; Port 3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_LINK_NUM_CORR_ERR",
-      EventDef::Encoding{.code = 0xF, .umask = 0x0, .msr_values = {0x00}},
-      R"(Num Link  Correctable Errors)",
-      R"(Num Link  Correctable Errors)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_LINK_NUM_RETRIES",
-      EventDef::Encoding{.code = 0xE, .umask = 0x0, .msr_values = {0x00}},
-      R"(Num Link Retries)",
-      R"(Num Link Retries)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH",
-      EventDef::Encoding{.code = 0x21, .umask = 0x0, .msr_values = {0x00}},
-      R"(Number packets that passed the Mask/Match Filter)",
-      R"(Number packets that passed the Mask/Match Filter)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.BUS0",
-      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus; Non-PCIE bus)",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.BUS1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus; PCIE bus)",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.BUS0_NOT_BUS1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x4, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus; Non-PCIE bus and !(PCIE bus))",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.BUS0_BUS1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x8, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus; Non-PCIE bus and PCIE bus)",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_BUS1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x10, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus; !(Non-PCIE bus) and PCIE bus)",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_AND.NOT_BUS0_NOT_BUS1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x20, .msr_values = {0x00}},
-      R"(AND Mask/match for debug bus)",
-      R"(Asserted if all bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.BUS0",
-      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; Non-PCIE bus)",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.BUS1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; PCIE bus)",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.BUS0_NOT_BUS1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; Non-PCIE bus and !(PCIE bus))",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.BUS0_BUS1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; Non-PCIE bus and PCIE bus)",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_BUS1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; !(Non-PCIE bus) and PCIE bus)",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_MASK_MATCH_OR.NOT_BUS0_NOT_BUS1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x20, .msr_values = {0x00}},
-      R"(OR Mask/match for debug bus; !(Non-PCIE bus) and !(PCIE bus))",
-      R"(Asserted if any bits specified by mask match)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_NOTHING",
-      EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_IIO_NOTHING)",
-      R"(UNC_IIO_NOTHING)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_SYMBOL_TIMES",
-      EventDef::Encoding{.code = 0x82, .umask = 0x0, .msr_values = {0x00}},
-      R"(Symbol Times on Link)",
-      R"(Gen1 - increment once every 4nS, Gen2 - increment once every 2nS, Gen3 - increment once every 1nS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.L4_PAGE_HIT",
-      EventDef::Encoding{.code = 0x41, .umask = 0x1, .msr_values = {0x00}},
-      R"(VTd Access; Vtd hit)",
-      R"(VTd Access; Vtd hit)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.CTXT_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x2, .msr_values = {0x00}},
-      R"(VTd Access; context cache miss)",
-      R"(VTd Access; context cache miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.L1_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x4, .msr_values = {0x00}},
-      R"(VTd Access; L1 miss)",
-      R"(VTd Access; L1 miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.L2_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x8, .msr_values = {0x00}},
-      R"(VTd Access; L2 miss)",
-      R"(VTd Access; L2 miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.L3_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x10, .msr_values = {0x00}},
-      R"(VTd Access; L3 miss)",
-      R"(VTd Access; L3 miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.TLB_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x20, .msr_values = {0x00}},
-      R"(VTd Access; TLB miss)",
-      R"(VTd Access; TLB miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.TLB_FULL",
-      EventDef::Encoding{.code = 0x41, .umask = 0x40, .msr_values = {0x00}},
-      R"(VTd Access; TLB is full)",
-      R"(VTd Access; TLB is full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_ACCESS.TLB1_MISS",
-      EventDef::Encoding{.code = 0x41, .umask = 0x80, .msr_values = {0x00}},
-      R"(VTd Access; TLB miss)",
-      R"(VTd Access; TLB miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_VTD_OCCUPANCY",
-      EventDef::Encoding{.code = 0x40, .umask = 0x0, .msr_values = {0x00}},
-      R"(VTd Occupancy)",
-      R"(VTd Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_DATA_REQ_BY_CPU.CFG_WRITE.PART0",
       EventDef::Encoding{.code = 0xC0, .umask = 0x10, .msr_values = {0x00}},
@@ -18662,2562 +19502,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0xC1, .umask = 0x10, .msr_values = {0x00}},
       R"(Number Transactions requested by the CPU; Core writing to Card's PCICFG space)",
       R"(Also known as Outbound.  Number of requests, to the attached device, initiated by the main die.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card writing to DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card writing to DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card writing to another Card (same or different stack))",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card writing to another Card (same or different stack))",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card reading from DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card reading from DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.PEER_READ.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card reading from another Card (same or different stack))",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.PEER_READ.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Card reading from another Card (same or different stack))",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.VTD0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MSG.VTD1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number Transactions requested of the CPU; Messages)",
-      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_CACHE_TOTAL_OCCUPANCY.ANY",
-      EventDef::Encoding{.code = 0xF, .umask = 0x1, .msr_values = {0x00}},
-      R"(Total Write Cache Occupancy; Any Source)",
-      R"(Accumulates the number of reads and writes that are outstanding in the uncore in each cycle.  This is effectively the sum of the READ_OCCUPANCY and WRITE_OCCUPANCY events.; Tracks all requests from any source port.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_CACHE_TOTAL_OCCUPANCY.IV_Q",
-      EventDef::Encoding{.code = 0xF, .umask = 0x2, .msr_values = {0x00}},
-      R"(Total Write Cache Occupancy; Snoops)",
-      R"(Accumulates the number of reads and writes that are outstanding in the uncore in each cycle.  This is effectively the sum of the READ_OCCUPANCY and WRITE_OCCUPANCY events.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x1, .umask = 0x0, .msr_values = {0x00}},
-      R"(IRP Clocks)",
-      R"(IRP Clocks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.PCIRDCUR",
-      EventDef::Encoding{.code = 0x10, .umask = 0x1, .msr_values = {0x00}},
-      R"(Coherent Ops; PCIRdCur)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.CRD",
-      EventDef::Encoding{.code = 0x10, .umask = 0x2, .msr_values = {0x00}},
-      R"(Coherent Ops; CRd)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.DRD",
-      EventDef::Encoding{.code = 0x10, .umask = 0x4, .msr_values = {0x00}},
-      R"(Coherent Ops; DRd)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.PCIDCAHINT",
-      EventDef::Encoding{.code = 0x10, .umask = 0x20, .msr_values = {0x00}},
-      R"(Coherent Ops; PCIDCAHin5t)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.WBMTOI",
-      EventDef::Encoding{.code = 0x10, .umask = 0x40, .msr_values = {0x00}},
-      R"(Coherent Ops; WbMtoI)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_COHERENT_OPS.CLFLUSH",
-      EventDef::Encoding{.code = 0x10, .umask = 0x80, .msr_values = {0x00}},
-      R"(Coherent Ops; CLFlush)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_FAF_FULL",
-      EventDef::Encoding{.code = 0x17, .umask = 0x0, .msr_values = {0x00}},
-      R"(FAF RF full)",
-      R"(FAF RF full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_FAF_TRANSACTIONS",
-      EventDef::Encoding{.code = 0x16, .umask = 0x0, .msr_values = {0x00}},
-      R"(FAF allocation -- sent to ADQ)",
-      R"(FAF allocation -- sent to ADQ)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_IRP_ALL.INBOUND_INSERTS",
-      EventDef::Encoding{.code = 0x1E, .umask = 0x1, .msr_values = {0x00}},
-      R"(All Inserts Inbound (p2p + faf + cset))",
-      R"(All Inserts Inbound (p2p + faf + cset))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_IRP_ALL.OUTBOUND_INSERTS",
-      EventDef::Encoding{.code = 0x1E, .umask = 0x2, .msr_values = {0x00}},
-      R"(All Inserts Outbound (BL, AK, Snoops))",
-      R"(All Inserts Outbound (BL, AK, Snoops))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.FAST_REQ",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x1, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Fastpath Requests)",
-      R"(Misc Events - Set 0; Fastpath Requests)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.FAST_REJ",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x2, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Fastpath Rejects)",
-      R"(Misc Events - Set 0; Fastpath Rejects)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.2ND_RD_INSERT",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x4, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Cache Inserts of Read Transactions as Secondary)",
-      R"(Misc Events - Set 0; Cache Inserts of Read Transactions as Secondary)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.2ND_WR_INSERT",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x8, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Cache Inserts of Write Transactions as Secondary)",
-      R"(Misc Events - Set 0; Cache Inserts of Write Transactions as Secondary)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.2ND_ATOMIC_INSERT",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x10, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Cache Inserts of Atomic Transactions as Secondary)",
-      R"(Misc Events - Set 0; Cache Inserts of Atomic Transactions as Secondary)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.FAST_XFER",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x20, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Fastpath Transfers From Primary to Secondary)",
-      R"(Misc Events - Set 0; Fastpath Transfers From Primary to Secondary)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.PF_ACK_HINT",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x40, .msr_values = {0x00}},
-      R"(Misc Events - Set 0; Prefetch Ack Hints From Primary to Secondary)",
-      R"(Misc Events - Set 0; Prefetch Ack Hints From Primary to Secondary)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC0.UNKNOWN",
-      EventDef::Encoding{.code = 0x1C, .umask = 0x80, .msr_values = {0x00}},
-      R"(Misc Events - Set 0)",
-      R"(Misc Events - Set 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SLOW_I",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x1, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Slow Transfer of I Line)",
-      R"(Snoop took cacheline ownership before write from data was committed.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SLOW_S",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x2, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Slow Transfer of S Line)",
-      R"(Secondary received a transfer that did not have sufficient MESI state)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SLOW_E",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x4, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Slow Transfer of E Line)",
-      R"(Secondary received a transfer that did have sufficient MESI state)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SLOW_M",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x8, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Slow Transfer of M Line)",
-      R"(Snoop took cacheline ownership before write from data was committed.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.LOST_FWD",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x10, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Lost Forward)",
-      R"(Snoop pulled away ownership before a write was committed)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SEC_RCVD_INVLD",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x20, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Received Invalid)",
-      R"(Secondary received a transfer that did not have sufficient MESI state)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_MISC1.SEC_RCVD_VLD",
-      EventDef::Encoding{.code = 0x1D, .umask = 0x40, .msr_values = {0x00}},
-      R"(Misc Events - Set 1; Received Valid)",
-      R"(Secondary received a transfer that did have sufficient MESI state)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_INSERTS",
-      EventDef::Encoding{.code = 0x14, .umask = 0x0, .msr_values = {0x00}},
-      R"(P2P Requests)",
-      R"(P2P requests from the ITC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_OCCUPANCY",
-      EventDef::Encoding{.code = 0x15, .umask = 0x0, .msr_values = {0x00}},
-      R"(P2P Occupancy)",
-      R"(P2P B & S Queue Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.RD",
-      EventDef::Encoding{.code = 0x13, .umask = 0x1, .msr_values = {0x00}},
-      R"(P2P Transactions; P2P reads)",
-      R"(P2P Transactions; P2P reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.WR",
-      EventDef::Encoding{.code = 0x13, .umask = 0x2, .msr_values = {0x00}},
-      R"(P2P Transactions; P2P Writes)",
-      R"(P2P Transactions; P2P Writes)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.MSG",
-      EventDef::Encoding{.code = 0x13, .umask = 0x4, .msr_values = {0x00}},
-      R"(P2P Transactions; P2P Message)",
-      R"(P2P Transactions; P2P Message)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.CMPL",
-      EventDef::Encoding{.code = 0x13, .umask = 0x8, .msr_values = {0x00}},
-      R"(P2P Transactions; P2P completions)",
-      R"(P2P Transactions; P2P completions)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.REM",
-      EventDef::Encoding{.code = 0x13, .umask = 0x10, .msr_values = {0x00}},
-      R"(P2P Transactions; Match if remote only)",
-      R"(P2P Transactions; Match if remote only)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.REM_AND_TGT_MATCH",
-      EventDef::Encoding{.code = 0x13, .umask = 0x20, .msr_values = {0x00}},
-      R"(P2P Transactions; match if remote and target matches)",
-      R"(P2P Transactions; match if remote and target matches)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.LOC",
-      EventDef::Encoding{.code = 0x13, .umask = 0x40, .msr_values = {0x00}},
-      R"(P2P Transactions; match if local only)",
-      R"(P2P Transactions; match if local only)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_P2P_TRANSACTIONS.LOC_AND_TGT_MATCH",
-      EventDef::Encoding{.code = 0x13, .umask = 0x80, .msr_values = {0x00}},
-      R"(P2P Transactions; match if local and target matches)",
-      R"(P2P Transactions; match if local and target matches)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.MISS",
-      EventDef::Encoding{.code = 0x12, .umask = 0x1, .msr_values = {0x00}},
-      R"(Snoop Responses; Miss)",
-      R"(Snoop Responses; Miss)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.HIT_I",
-      EventDef::Encoding{.code = 0x12, .umask = 0x2, .msr_values = {0x00}},
-      R"(Snoop Responses; Hit I)",
-      R"(Snoop Responses; Hit I)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.HIT_ES",
-      EventDef::Encoding{.code = 0x12, .umask = 0x4, .msr_values = {0x00}},
-      R"(Snoop Responses; Hit E or S)",
-      R"(Snoop Responses; Hit E or S)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.HIT_M",
-      EventDef::Encoding{.code = 0x12, .umask = 0x8, .msr_values = {0x00}},
-      R"(Snoop Responses; Hit M)",
-      R"(Snoop Responses; Hit M)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.SNPCODE",
-      EventDef::Encoding{.code = 0x12, .umask = 0x10, .msr_values = {0x00}},
-      R"(Snoop Responses; SnpCode)",
-      R"(Snoop Responses; SnpCode)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.SNPDATA",
-      EventDef::Encoding{.code = 0x12, .umask = 0x20, .msr_values = {0x00}},
-      R"(Snoop Responses; SnpData)",
-      R"(Snoop Responses; SnpData)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.SNPINV",
-      EventDef::Encoding{.code = 0x12, .umask = 0x40, .msr_values = {0x00}},
-      R"(Snoop Responses; SnpInv)",
-      R"(Snoop Responses; SnpInv)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.READS",
-      EventDef::Encoding{.code = 0x11, .umask = 0x1, .msr_values = {0x00}},
-      R"(Inbound Transaction Count; Reads)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks only read requests (not including read prefetches).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.WRITES",
-      EventDef::Encoding{.code = 0x11, .umask = 0x2, .msr_values = {0x00}},
-      R"(Inbound Transaction Count; Writes)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Trackes only write requests.  Each write request should have a prefetch, so there is no need to explicitly track these requests.  For writes that are tickled and have to retry, the counter will be incremented for each retry.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.RD_PREF",
-      EventDef::Encoding{.code = 0x11, .umask = 0x4, .msr_values = {0x00}},
-      R"(Inbound Transaction Count; Read Prefetches)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of read prefetches.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.ATOMIC",
-      EventDef::Encoding{.code = 0x11, .umask = 0x10, .msr_values = {0x00}},
-      R"(Inbound Transaction Count; Atomic)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of atomic transactions)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.OTHER",
-      EventDef::Encoding{.code = 0x11, .umask = 0x20, .msr_values = {0x00}},
-      R"(Inbound Transaction Count; Other)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks the number of 'other' kinds of transactions.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxR2_AD_STALL_CREDIT_CYCLES",
-      EventDef::Encoding{.code = 0x1A, .umask = 0x0, .msr_values = {0x00}},
-      R"(No AD Egress Credit Stalls)",
-      R"(Counts the number times when it is not possible to issue a request to the R2PCIe because there are no AD Egress Credits available.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_AK_INSERTS",
-      EventDef::Encoding{.code = 0xB, .umask = 0x0, .msr_values = {0x00}},
-      R"(AK Egress Allocations)",
-      R"(AK Egress Allocations)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_DRS_CYCLES_FULL",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL DRS Egress Cycles Full)",
-      R"(BL DRS Egress Cycles Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_DRS_INSERTS",
-      EventDef::Encoding{.code = 0x2, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL DRS Egress Inserts)",
-      R"(BL DRS Egress Inserts)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_DRS_OCCUPANCY",
-      EventDef::Encoding{.code = 0x8, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL DRS Egress Occupancy)",
-      R"(BL DRS Egress Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCB_CYCLES_FULL",
-      EventDef::Encoding{.code = 0x6, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCB Egress Cycles Full)",
-      R"(BL NCB Egress Cycles Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCB_INSERTS",
-      EventDef::Encoding{.code = 0x3, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCB Egress Inserts)",
-      R"(BL NCB Egress Inserts)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCB_OCCUPANCY",
-      EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCB Egress Occupancy)",
-      R"(BL NCB Egress Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCS_CYCLES_FULL",
-      EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCS Egress Cycles Full)",
-      R"(BL NCS Egress Cycles Full)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCS_INSERTS",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCS Egress Inserts)",
-      R"(BL NCS Egress Inserts)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxC_BL_NCS_OCCUPANCY",
-      EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
-      R"(BL NCS Egress Occupancy)",
-      R"(BL NCS Egress Occupancy)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxR2_BL_STALL_CREDIT_CYCLES",
-      EventDef::Encoding{.code = 0x1B, .umask = 0x0, .msr_values = {0x00}},
-      R"(No BL Egress Credit Stalls)",
-      R"(Counts the number times when it is not possible to issue data to the R2PCIe because there are no BL Egress Credits available.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxS_DATA_INSERTS_NCB",
-      EventDef::Encoding{.code = 0xD, .umask = 0x0, .msr_values = {0x00}},
-      R"(Outbound Read Requests)",
-      R"(Counts the number of requests issued to the switch (towards the devices).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxS_DATA_INSERTS_NCS",
-      EventDef::Encoding{.code = 0xE, .umask = 0x0, .msr_values = {0x00}},
-      R"(Outbound Read Requests)",
-      R"(Counts the number of requests issued to the switch (towards the devices).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TxS_REQUEST_OCCUPANCY",
-      EventDef::Encoding{.code = 0xC, .umask = 0x0, .msr_values = {0x00}},
-      R"(Outbound Request Queue Occupancy)",
-      R"(Accumultes the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjuection with the allocations event in order to calculate average latency of outbound requests.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.ALL_HIT_I",
-      EventDef::Encoding{.code = 0x12, .umask = 0x72, .msr_values = {0x00}},
-      R"(Responses to snoops of any type that hit I line in the IIO cache)",
-      R"(Responses to snoops of any type (code, data, invalidate) that hit I line in the IIO cache)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.ALL_HIT_ES",
-      EventDef::Encoding{.code = 0x12, .umask = 0x74, .msr_values = {0x00}},
-      R"(Responses to snoops of any type that hit E or S line in the IIO cache)",
-      R"(Responses to snoops of any type (code, data, invalidate) that hit E or S line in the IIO cache)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.ALL_HIT_M",
-      EventDef::Encoding{.code = 0x12, .umask = 0x78, .msr_values = {0x00}},
-      R"(Responses to snoops of any type that hit M line in the IIO cache)",
-      R"(Responses to snoops of any type (code, data, invalidate) that hit M line in the IIO cache)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.ALL_HIT",
-      EventDef::Encoding{.code = 0x12, .umask = 0x7e, .msr_values = {0x00}},
-      R"(Responses to snoops of any type that hit M, E, S or I line in the IIO)",
-      R"(Responses to snoops of any type (code, data, invalidate) that hit M, E, S or I line in the IIO)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_SNOOP_RESP.ALL_MISS",
-      EventDef::Encoding{.code = 0x12, .umask = 0x71, .msr_values = {0x00}},
-      R"(Responses to snoops of any type that miss the IIO cache)",
-      R"(Responses to snoops of any type (code, data, invalidate) that miss the IIO cache)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0",
-      EventDef::Encoding{.code = 0x18, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1",
-      EventDef::Encoding{.code = 0x18, .umask = 0x02, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2",
-      EventDef::Encoding{.code = 0x18, .umask = 0x04, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AD_VNA_EQ2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0",
-      EventDef::Encoding{.code = 0x18, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.BL_VNA_EQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0",
-      EventDef::Encoding{.code = 0x18, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2",
-      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2)",
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AD_VNA_LE2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0)",
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_BL_VNA_EQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3",
-      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3)",
-      R"(UNC_UPI_M3_BYP_BLOCKED.FLOWQ_AK_VNA_LE3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_BYP_BLOCKED.BGF_CRD",
-      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_BYP_BLOCKED.BGF_CRD)",
-      R"(UNC_UPI_M3_BYP_BLOCKED.BGF_CRD)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK",
-      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK)",
-      R"(UNC_UPI_M3_BYP_BLOCKED.GV_BLOCK)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_CRD_RETURN_BLOCKED",
-      EventDef::Encoding{.code = 0x16, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_CRD_RETURN_BLOCKED)",
-      R"(UNC_UPI_M3_CRD_RETURN_BLOCKED)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2",
-      EventDef::Encoding{.code = 0x15, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_LE2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH",
-      EventDef::Encoding{.code = 0x15, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AD_VNA_BTW_2_THRESH)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0",
-      EventDef::Encoding{.code = 0x15, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_EQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH",
-      EventDef::Encoding{.code = 0x15, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_BL_VNA_BTW_0_THRESH)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3",
-      EventDef::Encoding{.code = 0x15, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.FLOWQ_AK_VNA_LE3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD",
-      EventDef::Encoding{.code = 0x15, .umask = 0x20, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.BGF_CRD)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK",
-      EventDef::Encoding{.code = 0x15, .umask = 0x40, .msr_values = {0x00}},
-      R"(UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK)",
-      R"(UNC_UPI_M3_RXQ_BLOCKED.GV_BLOCK)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_PHY_INIT_CYCLES",
-      EventDef::Encoding{.code = 0x20, .umask = 0x0, .msr_values = {0x00}},
-      R"(Cycles where phy is not in L0, L0c, L0p, L1)",
-      R"(Cycles where phy is not in L0, L0c, L0p, L1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_POWER_L1_NACK",
-      EventDef::Encoding{.code = 0x23, .umask = 0x0, .msr_values = {0x00}},
-      R"(L1 Req Nack)",
-      R"(Counts the number of times a link sends/receives a LinkReqNAck.  When the UPI links would like to change power state, the Tx side initiates a request to the Rx side requesting to change states.  This requests can either be accepted or denied.  If the Rx side replies with an Ack, the power mode will change.  If it replies with NAck, no change will take place.  This can be filtered based on Rx and Tx.  An Rx LinkReqNAck refers to receiving an NAck (meaning this agent's Tx originally requested the power change).  A Tx LinkReqNAck refers to sending this command (meaning the peer agent's Tx originally requested the power change and this agent accepted it).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_POWER_L1_REQ",
-      EventDef::Encoding{.code = 0x22, .umask = 0x0, .msr_values = {0x00}},
-      R"(L1 Req (same as L1 Ack).)",
-      R"(Counts the number of times a link sends/receives a LinkReqAck.  When the UPI links would like to change power state, the Tx side initiates a request to the Rx side requesting to change states.  This requests can either be accepted or denied.  If the Rx side replies with an Ack, the power mode will change.  If it replies with NAck, no change will take place.  This can be filtered based on Rx and Tx.  An Rx LinkReqAck refers to receiving an Ack (meaning this agent's Tx originally requested the power change).  A Tx LinkReqAck refers to sending this command (meaning the peer agent's Tx originally requested the power change and this agent accepted it).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_REQ_SLOT2_FROM_M3.VNA",
-      EventDef::Encoding{.code = 0x46, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VNA)",
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VNA)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_REQ_SLOT2_FROM_M3.VN0",
-      EventDef::Encoding{.code = 0x46, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN0)",
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_REQ_SLOT2_FROM_M3.VN1",
-      EventDef::Encoding{.code = 0x46, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN1)",
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.VN1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_REQ_SLOT2_FROM_M3.ACK",
-      EventDef::Encoding{.code = 0x46, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.ACK)",
-      R"(UNC_UPI_REQ_SLOT2_FROM_M3.ACK)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL0_POWER_CYCLES",
-      EventDef::Encoding{.code = 0x24, .umask = 0x0, .msr_values = {0x00}},
-      R"(Cycles in L0. Receive side.)",
-      R"(Number of UPI qfclk cycles spent in L0 power mode in the Link Layer.  L0 is the default mode which provides the highest performance with the most power.  Use edge detect to count the number of instances that the link entered L0.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another.  The phy layer  sometimes leaves L0 for training, which will not be captured by this event.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_CREDITS_CONSUMED_VN0",
-      EventDef::Encoding{.code = 0x39, .umask = 0x0, .msr_values = {0x00}},
-      R"(VN0 Credit Consumed)",
-      R"(Counts the number of times that an RxQ VN0 credit was consumed (i.e. message uses a VN0 credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_CREDITS_CONSUMED_VN1",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x0, .msr_values = {0x00}},
-      R"(VN1 Credit Consumed)",
-      R"(Counts the number of times that an RxQ VN1 credit was consumed (i.e. message uses a VN1 credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_CREDITS_CONSUMED_VNA",
-      EventDef::Encoding{.code = 0x38, .umask = 0x0, .msr_values = {0x00}},
-      R"(VNA Credit Consumed)",
-      R"(Counts the number of times that an RxQ VNA credit was consumed (i.e. message uses a VNA credit for the Rx Buffer).  This includes packets that went through the RxQ and those that were bypasssed.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.SLOT0",
-      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
-      R"(Valid Flits Received; Slot 0)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 0 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.SLOT1",
-      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
-      R"(Valid Flits Received; Slot 1)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 1 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.SLOT2",
-      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
-      R"(Valid Flits Received; Slot 2)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 2 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.DATA",
-      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
-      R"(Valid Flits Received; Data)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Data Flits (which consume all slots), but how much to count is based on Slot0-2 mask, so count can be 0-3 depending on which slots are enabled for counting..)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.LLCRD",
-      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
-      R"(Valid Flits Received; LLCRD Not Empty)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables counting of LLCRD (with non-zero payload). This only applies to slot 2 since LLCRD is only allowed in slot 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.LLCTRL",
-      EventDef::Encoding{.code = 0x3, .umask = 0x40, .msr_values = {0x00}},
-      R"(Valid Flits Received; LLCTRL)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Equivalent to an idle packet.  Enables counting of slot 0 LLCTRL messages.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_OCCUPANCY.SLOT0",
-      EventDef::Encoding{.code = 0x32, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Occupancy - All Packets; Slot 0)",
-      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_OCCUPANCY.SLOT1",
-      EventDef::Encoding{.code = 0x32, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Occupancy - All Packets; Slot 1)",
-      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_OCCUPANCY.SLOT2",
-      EventDef::Encoding{.code = 0x32, .umask = 0x4, .msr_values = {0x00}},
-      R"(RxQ Occupancy - All Packets; Slot 2)",
-      R"(Accumulates the number of elements in the UPI RxQ in each cycle.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Not Empty event to calculate average occupancy, or with the Flit Buffer Allocations event to track average lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1",
-      EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2",
-      EventDef::Encoding{.code = 0x33, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S0_RXQ2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0",
-      EventDef::Encoding{.code = 0x33, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2",
-      EventDef::Encoding{.code = 0x33, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S1_RXQ2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0",
-      EventDef::Encoding{.code = 0x33, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1",
-      EventDef::Encoding{.code = 0x33, .umask = 0x20, .msr_values = {0x00}},
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1)",
-      R"(UNC_UPI_RxL_SLOT_BYPASS.S2_RXQ1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.CFG_CTL)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_BYPASS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RXQ_CRED)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.TXQ",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x10, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.TXQ)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.TXQ)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.RETRY",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x20, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RETRY)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.RETRY)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.DFX",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x40, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.DFX)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.DFX)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_CLK_ACTIVE.SPARE",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x80, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.SPARE)",
-      R"(UNC_UPI_TxL0P_CLK_ACTIVE.SPARE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER",
-      EventDef::Encoding{.code = 0x28, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
-      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT",
-      EventDef::Encoding{.code = 0x29, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
-      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL0_POWER_CYCLES",
-      EventDef::Encoding{.code = 0x26, .umask = 0x0, .msr_values = {0x00}},
-      R"(Cycles in L0. Transmit side.)",
-      R"(Number of UPI qfclk cycles spent in L0 power mode in the Link Layer.  L0 is the default mode which provides the highest performance with the most power.  Use edge detect to count the number of instances that the link entered L0.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another.  The phy layer  sometimes leaves L0 for training, which will not be captured by this event.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.SLOT0",
-      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
-      R"(Valid Flits Sent; Slot 0)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 0 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.SLOT1",
-      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
-      R"(Valid Flits Sent; Slot 1)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 1 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.SLOT2",
-      EventDef::Encoding{.code = 0x2, .umask = 0x4, .msr_values = {0x00}},
-      R"(Valid Flits Sent; Slot 2)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Count Slot 2 - Other mask bits determine types of headers to count.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.LLCRD",
-      EventDef::Encoding{.code = 0x2, .umask = 0x10, .msr_values = {0x00}},
-      R"(Valid Flits Sent; LLCRD Not Empty)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables counting of LLCRD (with non-zero payload). This only applies to slot 2 since LLCRD is only allowed in slot 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.LLCTRL",
-      EventDef::Encoding{.code = 0x2, .umask = 0x40, .msr_values = {0x00}},
-      R"(Valid Flits Sent; LLCTRL)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Equivalent to an idle packet.  Enables counting of slot 0 LLCTRL messages.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_INSERTS",
-      EventDef::Encoding{.code = 0x40, .umask = 0x0, .msr_values = {0x00}},
-      R"(Tx Flit Buffer Allocations)",
-      R"(Number of allocations into the UPI Tx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the TxQ and pass directly to the link.  However, the TxQ will be used with L0p and when LLR occurs, increasing latency to transfer out to the link.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_OCCUPANCY",
-      EventDef::Encoding{.code = 0x42, .umask = 0x0, .msr_values = {0x00}},
-      R"(Tx Flit Buffer Occupancy)",
-      R"(Accumulates the number of flits in the TxQ.  Generally, when data is transmitted across UPI, it will bypass the TxQ and pass directly to the link.  However, the TxQ will be used with L0p and when LLR occurs, increasing latency to transfer out to the link. This can be used with the cycles not empty event to track average occupancy, or the allocations event to track average lifetime in the TxQ.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01",
-      EventDef::Encoding{.code = 0x45, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01)",
-      R"(UNC_UPI_VNA_CREDIT_RETURN_BLOCKED_VN01)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_VNA_CREDIT_RETURN_OCCUPANCY",
-      EventDef::Encoding{.code = 0x44, .umask = 0x0, .msr_values = {0x00}},
-      R"(VNA Credits Pending Return - Occupancy)",
-      R"(Number of VNA credits in the Rx side that are waitng to be returned back across the link.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3",
-      EventDef::Encoding{.code = 0x18, .umask = 0x80, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.PROTHDR",
-      EventDef::Encoding{.code = 0x3, .umask = 0x80, .msr_values = {0x00}},
-      R"(Valid Flits Received; Protocol Header)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables count of protocol headers in slot 0,1,2 (depending on slot uMask bits))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.PROTHDR",
-      EventDef::Encoding{.code = 0x2, .umask = 0x80, .msr_values = {0x00}},
-      R"(Valid Flits Sent; Protocol Header)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).; Enables count of protocol headers in slot 0,1,2 (depending on slot uMask bits))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1",
-      EventDef::Encoding{.code = 0x18, .umask = 0x20, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2",
-      EventDef::Encoding{.code = 0x18, .umask = 0x40, .msr_values = {0x00}},
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2)",
-      R"(UNC_UPI_FLOWQ_NO_VNA_CRD.AK_VNA_EQ2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.IDLE",
-      EventDef::Encoding{.code = 0x3, .umask = 0x47, .msr_values = {0x00}},
-      R"(Valid Flits Received; Idle)",
-      R"(Shows legal flit time (hides impact of L0p and L0c).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ",
-      EventDef::Encoding{.code = 0x5, .umask = 0x08, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Request)",
-      R"(REQ Message Class)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x08, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Request Opcode)",
-      R"(Match REQ Opcodes - Specified in Umask[7:4])",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.SNP",
-      EventDef::Encoding{.code = 0x5, .umask = 0x09, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Snoop)",
-      R"(SNP Message Class)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.SNP_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x09, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Snoop Opcode)",
-      R"(Match SNP Opcodes - Specified in Umask[7:4])",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_NODATA",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0A, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - No Data)",
-      R"(Match Message Class - RSP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_NODATA_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0A, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - No Data)",
-      R"(Match Message Class - RSP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_DATA",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0C, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - Data)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_DATA_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0C, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - Data)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.WB",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0D, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Writeback)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.WB_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0D, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Writeback)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0E, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Non-Coherent Bypass)",
-      R"(Match Message Class - NCB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0E, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Non-Coherent Bypass)",
-      R"(Match Message Class - NCB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0F, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Non-Coherent Standard)",
-      R"(Match Message Class - NCS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS_OPC",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0F, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Non-Coherent Standard)",
-      R"(Match Message Class - NCS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.REQ",
-      EventDef::Encoding{.code = 0x4, .umask = 0x08, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Request)",
-      R"(REQ Message Class)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.REQ_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x08, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Request Opcode)",
-      R"(Match REQ Opcodes - Specified in Umask[7:4])",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.SNP",
-      EventDef::Encoding{.code = 0x4, .umask = 0x09, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Snoop)",
-      R"(SNP Message Class)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.SNP_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x09, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Snoop Opcode)",
-      R"(Match SNP Opcodes - Specified in Umask[7:4])",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_NODATA",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0A, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - No Data)",
-      R"(Match Message Class - RSP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_NODATA_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0A, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - No Data)",
-      R"(Match Message Class - RSP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_DATA",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0C, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - Data)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_DATA_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0C, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - Data)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.WB",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0D, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Writeback)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.WB_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0D, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Writeback)",
-      R"(Match Message Class -WB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0E, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Non-Coherent Bypass)",
-      R"(Match Message Class - NCB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0E, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Non-Coherent Bypass)",
-      R"(Match Message Class - NCB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0F, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Non-Coherent Standard)",
-      R"(Match Message Class - NCS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS_OPC",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0F, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Non-Coherent Standard)",
-      R"(Match Message Class - NCS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSPCNFLT",
-      EventDef::Encoding{.code = 0x5, .umask = 0xAA, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - Conflict)",
-      R"(Matches on Receive path of a UPI Port; Response - Conflict)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSPI",
-      EventDef::Encoding{.code = 0x5, .umask = 0x2A, .msr_values = {0x00}},
-      R"(Matches on Receive path of a UPI Port; Response - Invalid)",
-      R"(Matches on Receive path of a UPI Port; Response - Invalid)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_INSERTS.SLOT0",
-      EventDef::Encoding{.code = 0x30, .umask = 0x01, .msr_values = {0x00}},
-      R"(RxQ Flit Buffer Allocations; Slot 0)",
-      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_INSERTS.SLOT1",
-      EventDef::Encoding{.code = 0x30, .umask = 0x02, .msr_values = {0x00}},
-      R"(RxQ Flit Buffer Allocations; Slot 1)",
-      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_INSERTS.SLOT2",
-      EventDef::Encoding{.code = 0x30, .umask = 0x04, .msr_values = {0x00}},
-      R"(RxQ Flit Buffer Allocations; Slot 2)",
-      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSPCNFLT",
-      EventDef::Encoding{.code = 0x4, .umask = 0xAA, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - Conflict)",
-      R"(Matches on Transmit path of a UPI Port; Response - Conflict)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSPI",
-      EventDef::Encoding{.code = 0x4, .umask = 0x2A, .msr_values = {0x00}},
-      R"(Matches on Transmit path of a UPI Port; Response - Invalid)",
-      R"(Matches on Transmit path of a UPI Port; Response - Invalid)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VNA",
-      EventDef::Encoding{.code = 0x20, .umask = 0x1, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VNA)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_REQ",
-      EventDef::Encoding{.code = 0x20, .umask = 0x2, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN0 REQ Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_SNP",
-      EventDef::Encoding{.code = 0x20, .umask = 0x4, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN0 SNP Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN0_RSP",
-      EventDef::Encoding{.code = 0x20, .umask = 0x8, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN0 RSP Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_REQ",
-      EventDef::Encoding{.code = 0x20, .umask = 0x10, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN1 REQ Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_SNP",
-      EventDef::Encoding{.code = 0x20, .umask = 0x20, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN1 SNP Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_AD_CREDITS_EMPTY.VN1_RSP",
-      EventDef::Encoding{.code = 0x20, .umask = 0x40, .msr_values = {0x00}},
-      R"(UPI0 AD Credits Empty; VN1 RSP Messages)",
-      R"(No credits available to send to UPIs on the AD Ring)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_RSP",
-      EventDef::Encoding{.code = 0x21, .umask = 0x10, .msr_values = {0x00}},
-      R"(UPI0 BL Credits Empty; VN1 REQ Messages)",
-      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_NCS_NCB",
-      EventDef::Encoding{.code = 0x21, .umask = 0x20, .msr_values = {0x00}},
-      R"(UPI0 BL Credits Empty; VN1 RSP Messages)",
-      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_UPI_PEER_BL_CREDITS_EMPTY.VN1_WB",
-      EventDef::Encoding{.code = 0x21, .umask = 0x40, .msr_values = {0x00}},
-      R"(UPI0 BL Credits Empty; VN1 SNP Messages)",
-      R"(No credits available to send to UPI on the BL Ring (diff between non-SMI and SMI mode))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN0_PEER_UPI0",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x1, .msr_values = {0x00}},
-      R"(Number of Snoop Targets; Peer UPI0 on VN0)",
-      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN0 Snpf to peer UPI0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN0_PEER_UPI1",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x2, .msr_values = {0x00}},
-      R"(Number of Snoop Targets; Peer UPI1 on VN0)",
-      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN0 Snpf to peer UPI1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN1_PEER_UPI0",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x8, .msr_values = {0x00}},
-      R"(Number of Snoop Targets; Peer UPI0 on VN1)",
-      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN1 Snpf to peer UPI0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m3upi,
-      "UNC_M3UPI_TxC_AD_SNPF_GRP1_VN1.VN1_PEER_UPI1",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x10, .msr_values = {0x00}},
-      R"(Number of Snoop Targets; Peer UPI1 on VN1)",
-      R"(Number of snpfanout targets and non-idle cycles can be used to calculate average snpfanout latency; Number of VN1 Snpf to peer UPI1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -24649,7 +22933,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M3UPI_RxC_BYPASSED.AD_S0_IDLE",
       EventDef::Encoding{.code = 0x40, .umask = 0x01, .msr_values = {0x00}},
       R"(Ingress Queue Bypasses; AD to Slot 0 on Idle)",
-      R"(Number ot times message is bypassed around the Ingress Queue; AD is taking bypass to slot 0 of independent flit while pipeline is idle)",
+      R"(Number of times message is bypassed around the Ingress Queue; AD is taking bypass to slot 0 of independent flit while pipeline is idle)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -24661,7 +22945,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M3UPI_RxC_BYPASSED.AD_S0_BL_ARB",
       EventDef::Encoding{.code = 0x40, .umask = 0x02, .msr_values = {0x00}},
       R"(Ingress Queue Bypasses; AD to Slot 0 on BL Arb)",
-      R"(Number ot times message is bypassed around the Ingress Queue; AD is taking bypass to slot 0 of independent flit while bl message is in arbitration)",
+      R"(Number of times message is bypassed around the Ingress Queue; AD is taking bypass to slot 0 of independent flit while bl message is in arbitration)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -24673,7 +22957,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M3UPI_RxC_BYPASSED.AD_S1_BL_SLOT",
       EventDef::Encoding{.code = 0x40, .umask = 0x04, .msr_values = {0x00}},
       R"(Ingress Queue Bypasses; AD + BL to Slot 1)",
-      R"(Number ot times message is bypassed around the Ingress Queue; AD is taking bypass to flit slot 1 while merging with bl message in same flit)",
+      R"(Number of times message is bypassed around the Ingress Queue; AD is taking bypass to flit slot 1 while merging with bl message in same flit)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -24685,7 +22969,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M3UPI_RxC_BYPASSED.AD_S2_BL_SLOT",
       EventDef::Encoding{.code = 0x40, .umask = 0x08, .msr_values = {0x00}},
       R"(Ingress Queue Bypasses; AD + BL to Slot 2)",
-      R"(Number ot times message is bypassed around the Ingress Queue; AD is taking bypass to flit slot 2 while merging with bl message in same flit)",
+      R"(Number of times message is bypassed around the Ingress Queue; AD is taking bypass to flit slot 2 while merging with bl message in same flit)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -25416,7 +23700,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_m3upi,
       "UNC_M3UPI_RxC_FLIT_GEN_HDR1.ACCUM",
       EventDef::Encoding{.code = 0x53, .umask = 0x01, .msr_values = {0x00}},
-      R"(Flit Gen - Header 1; Acumullate)",
+      R"(Flit Gen - Header 1; Accumulate)",
       R"(Events related to Header Flit Generation - Set 1; Header flit slotting control state machine is in any accumulate state; multi-message flit may be assembled over multiple cycles)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -28485,11 +26769,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
-      R"(pclk Cycles)",
-      R"(The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ",
+      EventDef::Encoding{.code = 0x5, .umask = 0x08, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Request)",
+      R"(REQ Message Class)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28497,11 +26781,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_CORE_TRANSITION_CYCLES",
-      EventDef::Encoding{.code = 0x60, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_P_CORE_TRANSITION_CYCLES)",
-      R"(UNC_P_CORE_TRANSITION_CYCLES)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x08, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Request Opcode)",
+      R"(Match REQ Opcodes - Specified in Umask[7:4])",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28509,11 +26793,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_DEMOTIONS",
-      EventDef::Encoding{.code = 0x30, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_P_DEMOTIONS)",
-      R"(UNC_P_DEMOTIONS)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.SNP",
+      EventDef::Encoding{.code = 0x5, .umask = 0x09, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Snoop)",
+      R"(SNP Message Class)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28521,11 +26805,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FIVR_PS_PS0_CYCLES",
-      EventDef::Encoding{.code = 0x75, .umask = 0x0, .msr_values = {0x00}},
-      R"(Phase Shed 0 Cycles)",
-      R"(Cycles spent in phase-shedding power state 0)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.SNP_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x09, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Snoop Opcode)",
+      R"(Match SNP Opcodes - Specified in Umask[7:4])",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28533,11 +26817,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FIVR_PS_PS1_CYCLES",
-      EventDef::Encoding{.code = 0x76, .umask = 0x0, .msr_values = {0x00}},
-      R"(Phase Shed 1 Cycles)",
-      R"(Cycles spent in phase-shedding power state 1)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_NODATA",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0A, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - No Data)",
+      R"(Match Message Class - RSP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28545,11 +26829,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FIVR_PS_PS2_CYCLES",
-      EventDef::Encoding{.code = 0x77, .umask = 0x0, .msr_values = {0x00}},
-      R"(Phase Shed 2 Cycles)",
-      R"(Cycles spent in phase-shedding power state 2)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_NODATA_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0A, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - No Data)",
+      R"(Match Message Class - RSP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28557,11 +26841,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FIVR_PS_PS3_CYCLES",
-      EventDef::Encoding{.code = 0x78, .umask = 0x0, .msr_values = {0x00}},
-      R"(Phase Shed 3 Cycles)",
-      R"(Cycles spent in phase-shedding power state 3)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_DATA",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0C, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - Data)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28569,11 +26853,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FREQ_MAX_LIMIT_THERMAL_CYCLES",
-      EventDef::Encoding{.code = 0x4, .umask = 0x0, .msr_values = {0x00}},
-      R"(Thermal Strongest Upper Limit Cycles)",
-      R"(Counts the number of cycles when thermal conditions are the upper limit on frequency.  This is related to the THERMAL_THROTTLE CYCLES_ABOVE_TEMP event, which always counts cycles when we are above the thermal temperature.  This event (STRONGEST_UPPER_LIMIT) is sampled at the output of the algorithm that determines the actual frequency, while THERMAL_THROTTLE looks at the input.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSP_DATA_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0C, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - Data)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28581,11 +26865,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FREQ_MAX_POWER_CYCLES",
-      EventDef::Encoding{.code = 0x5, .umask = 0x0, .msr_values = {0x00}},
-      R"(Power Strongest Upper Limit Cycles)",
-      R"(Counts the number of cycles when power is the upper limit on frequency.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.WB",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0D, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Writeback)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28593,11 +26877,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FREQ_MIN_IO_P_CYCLES",
-      EventDef::Encoding{.code = 0x73, .umask = 0x0, .msr_values = {0x00}},
-      R"(IO P Limit Strongest Lower Limit Cycles)",
-      R"(Counts the number of cycles when IO P Limit is preventing us from dropping the frequency lower.  This algorithm monitors the needs to the IO subsystem on both local and remote sockets and will maintain a frequency high enough to maintain good IO BW.  This is necessary for when all the IA cores on a socket are idle but a user still would like to maintain high IO Bandwidth.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.WB_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0D, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Writeback)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28605,11 +26889,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_FREQ_TRANS_CYCLES",
-      EventDef::Encoding{.code = 0x74, .umask = 0x0, .msr_values = {0x00}},
-      R"(Cycles spent changing Frequency)",
-      R"(Counts the number of cycles when the system is changing frequency.  This can not be filtered by thread ID.  One can also use it with the occupancy counter that monitors number of threads in C0 to estimate the performance impact that frequency transitions had on the system.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0E, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Non-Coherent Bypass)",
+      R"(Match Message Class - NCB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28617,11 +26901,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_MCP_PROCHOT_CYCLES",
-      EventDef::Encoding{.code = 0x6, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_P_MCP_PROCHOT_CYCLES)",
-      R"(UNC_P_MCP_PROCHOT_CYCLES)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCB_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0E, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Non-Coherent Bypass)",
+      R"(Match Message Class - NCB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28629,11 +26913,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_MEMORY_PHASE_SHEDDING_CYCLES",
-      EventDef::Encoding{.code = 0x2F, .umask = 0x0, .msr_values = {0x00}},
-      R"(Memory Phase Shedding Cycles)",
-      R"(Counts the number of cycles that the PCU has triggered memory phase shedding.  This is a mode that can be run in the iMC physicals that saves power at the expense of additional latency.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0F, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Non-Coherent Standard)",
+      R"(Match Message Class - NCS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28641,11 +26925,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C0_CYCLES",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C0)",
-      R"(Counts the number of cycles when the package was in C0.  This event can be used in conjunction with edge detect to count C0 entrances (or exits using invert).  Residency events do not include transition times.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.NCS_OPC",
+      EventDef::Encoding{.code = 0x5, .umask = 0x0F, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Non-Coherent Standard)",
+      R"(Match Message Class - NCS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28653,11 +26937,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
-      EventDef::Encoding{.code = 0x2B, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C2E)",
-      R"(Counts the number of cycles when the package was in C2E.  This event can be used in conjunction with edge detect to count C2E entrances (or exits using invert).  Residency events do not include transition times.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.REQ",
+      EventDef::Encoding{.code = 0x4, .umask = 0x08, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Request)",
+      R"(REQ Message Class)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28665,11 +26949,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C3_CYCLES",
-      EventDef::Encoding{.code = 0x2C, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C3)",
-      R"(Counts the number of cycles when the package was in C3.  This event can be used in conjunction with edge detect to count C3 entrances (or exits using invert).  Residency events do not include transition times.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.REQ_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x08, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Request Opcode)",
+      R"(Match REQ Opcodes - Specified in Umask[7:4])",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28677,11 +26961,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C6_CYCLES",
-      EventDef::Encoding{.code = 0x2D, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C6)",
-      R"(Counts the number of cycles when the package was in C6.  This event can be used in conjunction with edge detect to count C6 entrances (or exits using invert).  Residency events do not include transition times.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.SNP",
+      EventDef::Encoding{.code = 0x4, .umask = 0x09, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Snoop)",
+      R"(SNP Message Class)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28689,11 +26973,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PMAX_THROTTLED_CYCLES",
-      EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
-      R"(UNC_P_PMAX_THROTTLED_CYCLES)",
-      R"(UNC_P_PMAX_THROTTLED_CYCLES)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.SNP_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x09, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Snoop Opcode)",
+      R"(Match SNP Opcodes - Specified in Umask[7:4])",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28701,11 +26985,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C0",
-      EventDef::Encoding{.code = 0x80, .umask = 0x40, .msr_values = {0x00}},
-      R"(Number of cores in C-State; C0 and C1)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_NODATA",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0A, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - No Data)",
+      R"(Match Message Class - RSP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28713,11 +26997,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C3",
-      EventDef::Encoding{.code = 0x80, .umask = 0x80, .msr_values = {0x00}},
-      R"(Number of cores in C-State; C3)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_NODATA_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0A, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - No Data)",
+      R"(Match Message Class - RSP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28725,11 +27009,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_POWER_STATE_OCCUPANCY.CORES_C6",
-      EventDef::Encoding{.code = 0x80, .umask = 0xC0, .msr_values = {0x00}},
-      R"(Number of cores in C-State; C6 and C7)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_DATA",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0C, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - Data)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28737,11 +27021,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PROCHOT_EXTERNAL_CYCLES",
-      EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
-      R"(External Prochot)",
-      R"(Counts the number of cycles that we are in external PROCHOT mode.  This mode is triggered when a sensor off the die determines that something off-die (like DRAM) is too hot and must throttle to avoid damaging the chip.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSP_DATA_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0C, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - Data)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28749,11 +27033,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PROCHOT_INTERNAL_CYCLES",
-      EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
-      R"(Internal Prochot)",
-      R"(Counts the number of cycles that we are in Interal PROCHOT mode.  This mode is triggered when a sensor on the die determines that we are too hot and must throttle to avoid damaging the chip.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.WB",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0D, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Writeback)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28761,11 +27045,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_TOTAL_TRANSITION_CYCLES",
-      EventDef::Encoding{.code = 0x72, .umask = 0x0, .msr_values = {0x00}},
-      R"(Total Core C State Transition Cycles)",
-      R"(Number of cycles spent performing core C state transitions across all cores.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.WB_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0D, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Writeback)",
+      R"(Match Message Class -WB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28773,11 +27057,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_VR_HOT_CYCLES",
-      EventDef::Encoding{.code = 0x42, .umask = 0x0, .msr_values = {0x00}},
-      R"(VR Hot)",
-      R"(VR Hot)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0E, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Non-Coherent Bypass)",
+      R"(Match Message Class - NCB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28785,11 +27069,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_EVENT_MSG.VLW_RCVD",
-      EventDef::Encoding{.code = 0x42, .umask = 0x1, .msr_values = {0x00}},
-      R"(Message Received; VLW)",
-      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCB_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0E, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Non-Coherent Bypass)",
+      R"(Match Message Class - NCB)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28797,11 +27081,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_EVENT_MSG.MSI_RCVD",
-      EventDef::Encoding{.code = 0x42, .umask = 0x2, .msr_values = {0x00}},
-      R"(Message Received; MSI)",
-      R"(Virtual Logical Wire (legacy) message were received from Uncore.; Message Signaled Interrupts - interrupts sent by devices (including PCIe via IOxAPIC) (Socket Mode only))",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0F, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Non-Coherent Standard)",
+      R"(Match Message Class - NCS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28809,11 +27093,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_EVENT_MSG.IPI_RCVD",
-      EventDef::Encoding{.code = 0x42, .umask = 0x4, .msr_values = {0x00}},
-      R"(Message Received; IPI)",
-      R"(Virtual Logical Wire (legacy) message were received from Uncore.; Inter Processor Interrupts)",
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.NCS_OPC",
+      EventDef::Encoding{.code = 0x4, .umask = 0x0F, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Non-Coherent Standard)",
+      R"(Match Message Class - NCS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28821,11 +27105,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_EVENT_MSG.DOORBELL_RCVD",
-      EventDef::Encoding{.code = 0x42, .umask = 0x8, .msr_values = {0x00}},
-      R"(Message Received)",
-      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x44, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 0)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28833,11 +27117,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_EVENT_MSG.INT_PRIO",
-      EventDef::Encoding{.code = 0x42, .umask = 0x10, .msr_values = {0x00}},
-      R"(Message Received)",
-      R"(Virtual Logical Wire (legacy) message were received from Uncore.)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x44, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 1)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28845,11 +27129,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_LOCK_CYCLES",
-      EventDef::Encoding{.code = 0x44, .umask = 0x0, .msr_values = {0x00}},
-      R"(IDI Lock/SplitLock Cycles)",
-      R"(Number of times an IDI Lock/SplitLock sequence was started)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_SPEC_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x44, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 2)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Special; Channel 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28857,11 +27141,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_PHOLD_CYCLES.ASSERT_TO_ACK",
-      EventDef::Encoding{.code = 0x45, .umask = 0x1, .msr_values = {0x00}},
-      R"(Cycles PHOLD Assert to Ack; Assert to ACK)",
-      R"(PHOLD cycles.)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_BL.DRS_UPI",
+      EventDef::Encoding{.code = 0x40, .umask = 0x04, .msr_values = {0x00}},
+      R"(Outbound DRS Ring Transactions to Cache; Data to QPI)",
+      R"(Outbound DRS Ring Transactions to Cache; Data to QPI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28869,11 +27153,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_RACU_DRNG.RDRAND",
-      EventDef::Encoding{.code = 0x4C, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_U_RACU_DRNG.RDRAND)",
-      R"(UNC_U_RACU_DRNG.RDRAND)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_NACK.IV",
+      EventDef::Encoding{.code = 0x98, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Vertical Egress NACKs; IV)",
+      R"(Counts number of Egress packets NACK'ed on to the Vertical Ring)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28881,11 +27165,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_RACU_DRNG.RDSEED",
-      EventDef::Encoding{.code = 0x4C, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_U_RACU_DRNG.RDSEED)",
-      R"(UNC_U_RACU_DRNG.RDSEED)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxR_VERT_STARVED.IV",
+      EventDef::Encoding{.code = 0x9A, .umask = 0x08, .msr_values = {0x00}},
+      R"(CMS Vertical Egress Injection Starvation; IV)",
+      R"(Counts injection starvation.  This starvation is triggered when the CMS Egress cannot send a transaction onto the Vertical ring for a long period of time.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28893,11 +27177,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY",
-      EventDef::Encoding{.code = 0x4C, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY)",
-      R"(UNC_U_RACU_DRNG.PFTCH_BUF_EMPTY)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x4D, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28905,11 +27189,815 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_RACU_REQUESTS",
-      EventDef::Encoding{.code = 0x46, .umask = 0x0, .msr_values = {0x00}},
-      R"(RACU Request)",
-      R"(Number outstanding register requests within message channel tracker)",
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x4D, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_REG_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x4D, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_BYPASS_M2M_INGRESS.TAKEN",
+      EventDef::Encoding{.code = 0x21, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M to iMC Bypass; Taken)",
+      R"(M2M to iMC Bypass; Taken)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_BYPASS_M2M_INGRESS.NOT_TAKEN",
+      EventDef::Encoding{.code = 0x21, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M to iMC Bypass; Not Taken)",
+      R"(M2M to iMC Bypass; Not Taken)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_CMS_CLOCKTICKS",
+      EventDef::Encoding{.code = 0xC0, .umask = 0x00, .msr_values = {0x00}},
+      R"(CMS Clockticks)",
+      R"(CMS Clockticks)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x4E, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 0)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x4E, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 1)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_WPQ_CYCLES_SPEC_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x4E, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 2)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Special; Channel 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_FAST_ASSERTED.VERT",
+      EventDef::Encoding{.code = 0xA5, .umask = 0x01, .msr_values = {0x00}},
+      R"(FaST wire asserted; Vertical)",
+      R"(Counts the number of cycles either the local or incoming distress signals are asserted.  Incoming distress includes up, dn and across.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_FAST_ASSERTED.HORZ",
+      EventDef::Encoding{.code = 0xA5, .umask = 0x02, .msr_values = {0x00}},
+      R"(FaST wire asserted; Horizontal)",
+      R"(Counts the number of cycles either the local or incoming distress signals are asserted.  Incoming distress includes up, dn and across.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x43, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 0)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x43, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 1)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_RPQ_CYCLES_REG_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x43, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 2)",
+      R"(M2M to iMC RPQ Cycles w/Credits - Regular; Channel 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TAG_HIT.NM_RD_HIT_CLEAN",
+      EventDef::Encoding{.code = 0x2C, .umask = 0x01, .msr_values = {0x00}},
+      R"(Clean line read hits(Regular and RFO) to Near Memory(DRAM cache) in Memory Mode and regular reads to DRAM in 1LM)",
+      R"(Tag Hit; Read Hit from NearMem, Clean Line)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.CMS0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Full; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.CMS1",
+      EventDef::Encoding{.code = 0x14, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Full; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.RDCRD0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x08, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Read Credit Request)",
+      R"(AK Egress (to CMS) Full; Read Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCRD0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Write Credit Request)",
+      R"(AK Egress (to CMS) Full; Write Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCMP0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x20, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Write Compare Request)",
+      R"(AK Egress (to CMS) Full; Write Compare Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.RDCRD1",
+      EventDef::Encoding{.code = 0x14, .umask = 0x88, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Read Credit Request)",
+      R"(AK Egress (to CMS) Full; Read Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCRD1",
+      EventDef::Encoding{.code = 0x14, .umask = 0x90, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Write Credit Request)",
+      R"(AK Egress (to CMS) Full; Write Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.WRCMP1",
+      EventDef::Encoding{.code = 0x14, .umask = 0xA0, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; Write Compare Request)",
+      R"(AK Egress (to CMS) Full; Write Compare Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_FULL.ALL",
+      EventDef::Encoding{.code = 0x14, .umask = 0x03, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Full; All)",
+      R"(AK Egress (to CMS) Full; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.CMS0",
+      EventDef::Encoding{.code = 0x13, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.CMS1",
+      EventDef::Encoding{.code = 0x13, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Not Empty; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.RDCRD",
+      EventDef::Encoding{.code = 0x13, .umask = 0x08, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; Read Credit Request)",
+      R"(AK Egress (to CMS) Not Empty; Read Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.WRCRD",
+      EventDef::Encoding{.code = 0x13, .umask = 0x10, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; Write Credit Request)",
+      R"(AK Egress (to CMS) Not Empty; Write Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.WRCMP",
+      EventDef::Encoding{.code = 0x13, .umask = 0x20, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; Write Compare Request)",
+      R"(AK Egress (to CMS) Not Empty; Write Compare Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x13, .umask = 0x03, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Not Empty; All)",
+      R"(AK Egress (to CMS) Not Empty; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.CMS0",
+      EventDef::Encoding{.code = 0x11, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.CMS1",
+      EventDef::Encoding{.code = 0x11, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Allocations; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.RDCRD",
+      EventDef::Encoding{.code = 0x11, .umask = 0x08, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Read Credit Request)",
+      R"(AK Egress (to CMS) Allocations; Read Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.WRCRD",
+      EventDef::Encoding{.code = 0x11, .umask = 0x10, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Write Credit Request)",
+      R"(AK Egress (to CMS) Allocations; Write Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.WRCMP",
+      EventDef::Encoding{.code = 0x11, .umask = 0x20, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Write Compare Request)",
+      R"(AK Egress (to CMS) Allocations; Write Compare Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.PREF_RD_CAM_HIT",
+      EventDef::Encoding{.code = 0x11, .umask = 0x40, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; Prefetch Read Cam Hit)",
+      R"(AK Egress (to CMS) Allocations; Prefetch Read Cam Hit)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_INSERTS.ALL",
+      EventDef::Encoding{.code = 0x11, .umask = 0x03, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Allocations; All)",
+      R"(AK Egress (to CMS) Allocations; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.CMS0",
+      EventDef::Encoding{.code = 0x12, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
+      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Near Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.CMS1",
+      EventDef::Encoding{.code = 0x12, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
+      R"(AK Egress (to CMS) Occupancy; Common Mesh Stop - Far Side)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.RDCRD",
+      EventDef::Encoding{.code = 0x12, .umask = 0x08, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; Read Credit Request)",
+      R"(AK Egress (to CMS) Occupancy; Read Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.WRCRD",
+      EventDef::Encoding{.code = 0x12, .umask = 0x10, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; Write Credit Request)",
+      R"(AK Egress (to CMS) Occupancy; Write Credit Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.WRCMP",
+      EventDef::Encoding{.code = 0x12, .umask = 0x20, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; Write Compare Request)",
+      R"(AK Egress (to CMS) Occupancy; Write Compare Request)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_OCCUPANCY.ALL",
+      EventDef::Encoding{.code = 0x12, .umask = 0x03, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Occupancy; All)",
+      R"(AK Egress (to CMS) Occupancy; All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_SIDEBAND.RD",
+      EventDef::Encoding{.code = 0x6B, .umask = 0x01, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Sideband)",
+      R"(AK Egress (to CMS) Sideband)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TxC_AK_SIDEBAND.WR",
+      EventDef::Encoding{.code = 0x6B, .umask = 0x02, .msr_values = {0x00}},
+      R"(AK Egress (to CMS) Sideband)",
+      R"(AK Egress (to CMS) Sideband)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card writing to DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x01, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card writing to DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card writing to another Card (same or different stack))",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.PEER_WRITE.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x02, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card writing to another Card (same or different stack))",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card reading from DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x04, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card reading from DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.PEER_READ.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card reading from another Card (same or different stack))",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.PEER_READ.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x08, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Card reading from another Card (same or different stack))",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART2",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.PART3",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMIC.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x10, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART2",
+      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.ATOMICCMP.PART3",
+      EventDef::Encoding{.code = 0x84, .umask = 0x20, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Completion of atomic requests targeting DRAM)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x16 card plugged in to stack, Or x8 card plugged in to Lane 0/1, Or x4 card is plugged in to slot 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART2",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x8 card plugged in to Lane 2/3, Or x4 card is plugged in to slot 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.PART3",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; x4 card is plugged in to slot 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.VTD0",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_iio,
+      "UNC_IIO_TXN_REQ_OF_CPU.MSG.VTD1",
+      EventDef::Encoding{.code = 0x84, .umask = 0x40, .msr_values = {0x00}},
+      R"(Number Transactions requested of the CPU; Messages)",
+      R"(Also known as Inbound.  Number of 64 byte cache line requests initiated by the attached device.; VTd - Type 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -28922,6 +28010,918 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x00, .umask = 0x01, .msr_values = {0x00}},
       R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
       R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_CLOCKTICKS_F",
+      EventDef::Encoding{.code = 0x00, .umask = 0x01, .msr_values = {0x00}},
+      R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
+      R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.LOCAL_M",
+      EventDef::Encoding{.code = 0x37, .umask = 0x21, .msr_values = {0x00}},
+      R"(Lines Victimized; Local - Lines in M State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.LOCAL_E",
+      EventDef::Encoding{.code = 0x37, .umask = 0x22, .msr_values = {0x00}},
+      R"(Lines Victimized; Local - Lines in E State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.LOCAL_S",
+      EventDef::Encoding{.code = 0x37, .umask = 0x24, .msr_values = {0x00}},
+      R"(Lines Victimized; Local - Lines in S State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.LOCAL_F",
+      EventDef::Encoding{.code = 0x37, .umask = 0x28, .msr_values = {0x00}},
+      R"(Lines Victimized; Local - Lines in F State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.REMOTE_M",
+      EventDef::Encoding{.code = 0x37, .umask = 0x81, .msr_values = {0x00}},
+      R"(Lines Victimized; Remote - Lines in M State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.REMOTE_E",
+      EventDef::Encoding{.code = 0x37, .umask = 0x82, .msr_values = {0x00}},
+      R"(Lines Victimized; Remote - Lines in E State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.REMOTE_S",
+      EventDef::Encoding{.code = 0x37, .umask = 0x84, .msr_values = {0x00}},
+      R"(Lines Victimized; Remote - Lines in S State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.REMOTE_F",
+      EventDef::Encoding{.code = 0x37, .umask = 0x88, .msr_values = {0x00}},
+      R"(Lines Victimized; Remote - Lines in F State)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_LLC_VICTIMS.REMOTE_ALL",
+      EventDef::Encoding{.code = 0x37, .umask = 0x8F, .msr_values = {0x00}},
+      R"(Lines Victimized; Remote - All Lines)",
+      R"(Counts the number of lines that were victimized on a fill.  This can be filtered by the state that the line was in.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSPCNFLT",
+      EventDef::Encoding{.code = 0x5, .umask = 0xAA, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - Conflict)",
+      R"(Matches on Receive path of a UPI Port; Response - Conflict)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_BASIC_HDR_MATCH.RSPI",
+      EventDef::Encoding{.code = 0x5, .umask = 0x2A, .msr_values = {0x00}},
+      R"(Matches on Receive path of a UPI Port; Response - Invalid)",
+      R"(Matches on Receive path of a UPI Port; Response - Invalid)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_INSERTS.SLOT0",
+      EventDef::Encoding{.code = 0x30, .umask = 0x01, .msr_values = {0x00}},
+      R"(RxQ Flit Buffer Allocations; Slot 0)",
+      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_INSERTS.SLOT1",
+      EventDef::Encoding{.code = 0x30, .umask = 0x02, .msr_values = {0x00}},
+      R"(RxQ Flit Buffer Allocations; Slot 1)",
+      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_INSERTS.SLOT2",
+      EventDef::Encoding{.code = 0x30, .umask = 0x04, .msr_values = {0x00}},
+      R"(RxQ Flit Buffer Allocations; Slot 2)",
+      R"(Number of allocations into the UPI Rx Flit Buffer.  Generally, when data is transmitted across UPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy event in order to calculate the average flit buffer lifetime.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSPCNFLT",
+      EventDef::Encoding{.code = 0x4, .umask = 0xAA, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - Conflict)",
+      R"(Matches on Transmit path of a UPI Port; Response - Conflict)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_BASIC_HDR_MATCH.RSPI",
+      EventDef::Encoding{.code = 0x4, .umask = 0x2A, .msr_values = {0x00}},
+      R"(Matches on Transmit path of a UPI Port; Response - Invalid)",
+      R"(Matches on Transmit path of a UPI Port; Response - Invalid)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.ALL_FROM_LOC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x37, .msr_values = {0x00}},
+      R"(TOR Occupancy; All from Local)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); All remotely generated requests)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_MISS_RDCUR",
+      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Inserts; RdCur misses from Local IO)",
+      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO RdCur requests and miss the LLC. A RdCur request is used by IIO to read data without changing state.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_MISS_RFO",
+      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Inserts; RFO misses from Local IO)",
+      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO RFO requests that miss the LLC. A read for ownership (RFO) requests a cache line to be cached in E state with the intent to modify.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Inserts; ItoM misses from Local IO)",
+      R"(Counts the number of entries successfully inserted into the TOR that are generated from local IO ItoM requests that miss the LLC. An ItoM request is used by IIO to request a data write without first reading the data for ownership.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOM",
+      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Occupancy;  ITOM Misses from Local IO)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO ItoM requests that miss the LLC. An ItoM is used by IIO to request a data write without first reading the data for ownership.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RDCUR",
+      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Occupancy;  RDCUR misses from Local IO)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO RdCur requests that miss the LLC. A RdCur request is used by IIO to read data without changing state.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RFO",
+      EventDef::Encoding{.code = 0x36, .umask = 0x24, .msr_values = {0x00}},
+      R"(TOR Occupancy;  RFO misses from Local IO)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that are generated from local IO RFO requests that miss the LLC. A read for ownership (RFO) requests data to be cached in E state with the intent to modify.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x4F, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 0)",
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x4F, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 1)",
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_RPQ_CYCLES_REG_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x4F, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 2)",
+      R"(M2M->iMC RPQ Cycles w/Credits - Regular; Channel 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x51, .umask = 0x01, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x51, .umask = 0x02, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_PMM_WPQ_CYCLES_REG_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x51, .umask = 0x04, .msr_values = {0x00}},
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
+      R"(M2M->iMC WPQ Cycles w/Credits - Regular; Channel 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_RPQ_OCCUPANCY.GNT_WAIT",
+      EventDef::Encoding{.code = 0xE0, .umask = 0x4, .msr_values = {0x00}},
+      R"(PMM Occupancy)",
+      R"(PMM Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_RPQ_CYCLES_NE",
+      EventDef::Encoding{.code = 0xE1, .umask = 0x0, .msr_values = {0x00}},
+      R"(PMM Read Queue Cycles Not Empty)",
+      R"(PMM Read Queue Cycles Not Empty)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_RPQ_CYCLES_FULL",
+      EventDef::Encoding{.code = 0xE2, .umask = 0x0, .msr_values = {0x00}},
+      R"(PMM Read Queue Cycles Full)",
+      R"(PMM Read Queue Cycles Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.RPQ_GNTS",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x10, .msr_values = {0x00}},
+      R"(RPQ GNTs)",
+      R"(RPQ GNTs)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.WPQ_GNTS",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x20, .msr_values = {0x00}},
+      R"(Underfill GNTs)",
+      R"(Underfill GNTs)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.MISC_GNT",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x40, .msr_values = {0x00}},
+      R"(Misc GNTs)",
+      R"(Misc GNTs)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.MISC",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x80, .msr_values = {0x00}},
+      R"(Misc Commands (error, flow ACKs))",
+      R"(Misc Commands (error, flow ACKs))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.OPP_RD",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x1, .msr_values = {0x00}},
+      R"(Opportunistic Reads)",
+      R"(Opportunistic Reads)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.NODATA_EXP",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x2, .msr_values = {0x00}},
+      R"(Expected No data packet (ERID matched NDP encoding))",
+      R"(Expected No data packet (ERID matched NDP encoding))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.NODATA_UNEXP",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x4, .msr_values = {0x00}},
+      R"(Unexpected No data packet (ERID matched a Read, but data was a NDP))",
+      R"(Unexpected No data packet (ERID matched a Read, but data was a NDP))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.REQS_SLOT0",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x8, .msr_values = {0x00}},
+      R"(Read Requests - Slot 0)",
+      R"(Read Requests - Slot 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.REQS_SLOT1",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x10, .msr_values = {0x00}},
+      R"(Read Requests - Slot 1)",
+      R"(Read Requests - Slot 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.PMM_ECC_ERROR",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x20, .msr_values = {0x00}},
+      R"(PMM ECC Errors)",
+      R"(PMM ECC Errors)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD2.PMM_ERID_ERROR",
+      EventDef::Encoding{.code = 0xEB, .umask = 0x40, .msr_values = {0x00}},
+      R"(PMM ERID detectable parity error)",
+      R"(PMM ERID detectable parity error)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_MAJMODE1.RD_CYC",
+      EventDef::Encoding{.code = 0xEC, .umask = 0x1, .msr_values = {0x00}},
+      R"(PMM Major Mode; Cycles PMM is in Read Major Mode)",
+      R"(PMM Major Mode; Cycles PMM is in Read Major Mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_CYC",
+      EventDef::Encoding{.code = 0xEC, .umask = 0x4, .msr_values = {0x00}},
+      R"(PMM Major Mode; Cycles PMM is in Partial Write Major Mode)",
+      R"(PMM Major Mode; Cycles PMM is in Partial Write Major Mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_ENTER",
+      EventDef::Encoding{.code = 0xEC, .umask = 0x20, .msr_values = {0x00}},
+      R"(PMM Major Mode)",
+      R"(PMM Major Mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_MAJMODE1.PARTIAL_WR_EXIT",
+      EventDef::Encoding{.code = 0xEC, .umask = 0x40, .msr_values = {0x00}},
+      R"(PMM Major Mode)",
+      R"(PMM Major Mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_MAJMODE2.DRAM_CYC",
+      EventDef::Encoding{.code = 0xED, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_M_MAJMODE2.DRAM_CYC)",
+      R"(UNC_M_MAJMODE2.DRAM_CYC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_MAJMODE2.DRAM_ENTER",
+      EventDef::Encoding{.code = 0xED, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_M_MAJMODE2.DRAM_ENTER)",
+      R"(UNC_M_MAJMODE2.DRAM_ENTER)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_MAJMODE2.PMM_ENTER",
+      EventDef::Encoding{.code = 0xED, .umask = 0x4, .msr_values = {0x00}},
+      R"(Major Mode 2 : Entered PMM major mode)",
+      R"(Major Mode 2 : Entered PMM major mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_CYCLES_FULL",
+      EventDef::Encoding{.code = 0xE6, .umask = 0x0, .msr_values = {0x00}},
+      R"(PMM Write Queue Cycles Full)",
+      R"(PMM Write Queue Cycles Full)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_CYCLES_NE",
+      EventDef::Encoding{.code = 0xE5, .umask = 0x0, .msr_values = {0x00}},
+      R"(PMM Write Queue Cycles Not Empty)",
+      R"(PMM Write Queue Cycles Not Empty)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_OCCUPANCY.CAS",
+      EventDef::Encoding{.code = 0xE4, .umask = 0x2, .msr_values = {0x00}},
+      R"(PMM Occupancy)",
+      R"(PMM Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_OCCUPANCY.PWR",
+      EventDef::Encoding{.code = 0xE4, .umask = 0x4, .msr_values = {0x00}},
+      R"(PMM Occupancy)",
+      R"(PMM Occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_PCOMMIT",
+      EventDef::Encoding{.code = 0xE8, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_M_PMM_WPQ_PCOMMIT)",
+      R"(UNC_M_PMM_WPQ_PCOMMIT)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_PCOMMIT_CYC",
+      EventDef::Encoding{.code = 0xE9, .umask = 0x0, .msr_values = {0x00}},
+      R"(UNC_M_PMM_WPQ_PCOMMIT_CYC)",
+      R"(UNC_M_PMM_WPQ_PCOMMIT_CYC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.IODC",
+      EventDef::Encoding{.code = 0x64, .umask = 0x10, .msr_values = {0x00}},
+      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in IODC)",
+      R"(2LM related events; Counts the number of times CHA saw NM Set conflict in IODC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.LLC",
+      EventDef::Encoding{.code = 0x64, .umask = 0x02, .msr_values = {0x00}},
+      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in SF/LLC)",
+      R"(NM evictions due to another read to the same near memory set in the LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.SF",
+      EventDef::Encoding{.code = 0x64, .umask = 0x01, .msr_values = {0x00}},
+      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in SF/LLC)",
+      R"(NM evictions due to another read to the same near memory set in the SF.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.TOR",
+      EventDef::Encoding{.code = 0x64, .umask = 0x04, .msr_values = {0x00}},
+      R"(Memory Mode related events; Counts the number of times CHA saw NM Set conflict in TOR)",
+      R"(No Reject in the CHA due to a pending read to the same near memory set in the TOR.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_PMM_MEMMODE_NM_SETCONFLICTS.TOR_REJECT",
+      EventDef::Encoding{.code = 0x64, .umask = 0x08, .msr_values = {0x00}},
+      R"(Memory mode related events; Counts the number of times CHA saw NM Set conflict in TOR and the transaction was rejected)",
+      R"(Rejects in the CHA due to a pending read to the same near memory set in the TOR.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_MAJMODE1.WR_CYC",
+      EventDef::Encoding{.code = 0xEC, .umask = 0x2, .msr_values = {0x00}},
+      R"(PMM Major Mode; Cycles PMM is in Write Major Mode)",
+      R"(PMM Major Mode; Cycles PMM is in Write Major Mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_MAJMODE2.PMM_CYC",
+      EventDef::Encoding{.code = 0xED, .umask = 0x1, .msr_values = {0x00}},
+      R"(Major Mode 2 : Cycles in PMM major mode)",
+      R"(Major Mode 2 : Cycles in PMM major mode)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_TAGGED.PMM0_CMP",
+      EventDef::Encoding{.code = 0xDD, .umask = 0x10, .msr_values = {0x00}},
+      R"(UNC_M_SB_TAGGED.PMM0_CMP)",
+      R"(UNC_M_SB_TAGGED.PMM0_CMP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_TAGGED.PMM1_CMP",
+      EventDef::Encoding{.code = 0xDD, .umask = 0x20, .msr_values = {0x00}},
+      R"(UNC_M_SB_TAGGED.PMM1_CMP)",
+      R"(UNC_M_SB_TAGGED.PMM1_CMP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_TAGGED.PMM2_CMP",
+      EventDef::Encoding{.code = 0xDD, .umask = 0x40, .msr_values = {0x00}},
+      R"(UNC_M_SB_TAGGED.PMM2_CMP)",
+      R"(UNC_M_SB_TAGGED.PMM2_CMP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_INSERTS.PMM_WRS",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x08, .msr_values = {0x00}},
+      R"(Scoreboard Inserts; Persistent Mem writes)",
+      R"(Scoreboard Inserts; Persistent Mem writes)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_OCCUPANCY.PMM_WRS",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x08, .msr_values = {0x00}},
+      R"(Scoreboard Occupancy; Persistent Mem writes)",
+      R"(Scoreboard Occupancy; Persistent Mem writes)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_OCCUPANCY.PMM_RDS",
+      EventDef::Encoding{.code = 0xD5, .umask = 0x04, .msr_values = {0x00}},
+      R"(Scoreboard Occupancy; Persistent Mem reads)",
+      R"(Scoreboard Occupancy; Persistent Mem reads)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SB_INSERTS.PMM_RDS",
+      EventDef::Encoding{.code = 0xD6, .umask = 0x04, .msr_values = {0x00}},
+      R"(Scoreboard Inserts; Persistent Mem reads)",
+      R"(Scoreboard Inserts; Persistent Mem reads)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_I",
+      EventDef::Encoding{.code = 0x12, .umask = 0x72, .msr_values = {0x00}},
+      R"(Responses to snoops of any type that hit I line in the IIO cache)",
+      R"(Responses to snoops of any type (code, data, invalidate) that hit I line in the IIO cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_ES",
+      EventDef::Encoding{.code = 0x12, .umask = 0x74, .msr_values = {0x00}},
+      R"(Responses to snoops of any type that hit E or S line in the IIO cache)",
+      R"(Responses to snoops of any type (code, data, invalidate) that hit E or S line in the IIO cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_M",
+      EventDef::Encoding{.code = 0x12, .umask = 0x78, .msr_values = {0x00}},
+      R"(Responses to snoops of any type that hit M line in the IIO cache)",
+      R"(Responses to snoops of any type (code, data, invalidate) that hit M line in the IIO cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT",
+      EventDef::Encoding{.code = 0x12, .umask = 0x7e, .msr_values = {0x00}},
+      R"(Responses to snoops of any type that hit M, E, S or I line in the IIO)",
+      R"(Responses to snoops of any type (code, data, invalidate) that hit M, E, S or I line in the IIO)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_MISS",
+      EventDef::Encoding{.code = 0x12, .umask = 0x71, .msr_values = {0x00}},
+      R"(Responses to snoops of any type that miss the IIO cache)",
+      R"(Responses to snoops of any type (code, data, invalidate) that miss the IIO cache)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
