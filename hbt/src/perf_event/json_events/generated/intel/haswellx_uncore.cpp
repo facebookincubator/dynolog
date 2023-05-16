@@ -4018,7 +4018,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.READS_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x4, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local Read Requests)",
+      R"(Tracker Occupancy Accumulator; Local Read Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4030,7 +4030,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.READS_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x8, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote Read Requests)",
+      R"(Tracker Occupancy Accumulator; Remote Read Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4042,7 +4042,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.WRITES_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x10, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local Write Requests)",
+      R"(Tracker Occupancy Accumulator; Local Write Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4054,7 +4054,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.WRITES_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x20, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote Write Requests)",
+      R"(Tracker Occupancy Accumulator; Remote Write Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4066,7 +4066,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.INVITOE_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x40, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local InvItoE Requests)",
+      R"(Tracker Occupancy Accumulator; Local InvItoE Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4078,7 +4078,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.INVITOE_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x80, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote InvItoE Requests)",
+      R"(Tracker Occupancy Accumulator; Remote InvItoE Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4090,7 +4090,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_PENDING_OCCUPANCY.LOCAL",
       EventDef::Encoding{.code = 0x5, .umask = 0x1, .msr_values = {0x00}},
-      R"(Data Pending Occupancy Accumultor; Local Requests)",
+      R"(Data Pending Occupancy Accumulator; Local Requests)",
       R"(Accumulates the number of transactions that have data from the memory controller until they get scheduled to the Egress.  This can be used to calculate the queuing latency for two things.  (1) If the system is waiting for snoops, this will increase.  (2) If the system can't schedule to the Egress because of either (a) Egress Credits or (b) QPI BL IGR credits for remote requests.; This filter includes only requests coming from the local socket.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4102,7 +4102,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_PENDING_OCCUPANCY.REMOTE",
       EventDef::Encoding{.code = 0x5, .umask = 0x2, .msr_values = {0x00}},
-      R"(Data Pending Occupancy Accumultor; Remote Requests)",
+      R"(Data Pending Occupancy Accumulator; Remote Requests)",
       R"(Accumulates the number of transactions that have data from the memory controller until they get scheduled to the Egress.  This can be used to calculate the queuing latency for two things.  (1) If the system is waiting for snoops, this will increase.  (2) If the system can't schedule to the Egress because of either (a) Egress Credits or (b) QPI BL IGR credits for remote requests.; This filter includes only requests coming from remote sockets.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -5255,7 +5255,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_TxR_REQUEST_OCCUPANCY",
       EventDef::Encoding{.code = 0xD, .umask = 0x0, .msr_values = {0x00}},
       R"(Outbound Request Queue Occupancy)",
-      R"(Accumultes the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjuection with the allocations event in order to calculate average latency of outbound requests.)",
+      R"(Accumulates the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjunction with the allocations event in order to calculate average latency of outbound requests.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10151,7 +10151,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_R3_VNA_CREDITS_ACQUIRED.AD",
       EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
       R"(VNA credit Acquisitions; HOM Message Class)",
-      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credts from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
+      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credits from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10163,7 +10163,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_R3_VNA_CREDITS_ACQUIRED.BL",
       EventDef::Encoding{.code = 0x33, .umask = 0x4, .msr_values = {0x00}},
       R"(VNA credit Acquisitions; HOM Message Class)",
-      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credts from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
+      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credits from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

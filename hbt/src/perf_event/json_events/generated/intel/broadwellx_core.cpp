@@ -13,7 +13,7 @@ namespace broadwellx_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwellx_core.json (372 events).
+    Events from broadwellx_core.json (375 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDX id: 79
@@ -755,7 +755,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles)",
+      R"(L1D miss outstandings duration in cycles)",
       R"(This event counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand; from the demand Hit FB, if it is allocated by hardware or software prefetch.
 Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
       2000003,
@@ -799,8 +799,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       "L1D_PEND_MISS.FB_FULL",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1446,7 +1446,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_DSB_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1459,7 +1459,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1476,7 +1476,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1515,8 +1515,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ.)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1554,8 +1554,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1567,8 +1567,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1761,7 +1761,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Stalls caused by changing prefix length of the instruction.)",
-      R"(This event counts stalls occured due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
+      R"(This event counts stalls occurred due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2030,6 +2030,19 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "BR_MISP_EXEC.ALL_BRANCHES",
       EventDef::Encoding{
           .code = 0x89, .umask = 0xFF, .cmask = 0, .msr_values = {0}},
@@ -2161,8 +2174,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 0.)",
-      R"(Cycles per core when uops are exectuted in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2204,8 +2217,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 1.)",
-      R"(Cycles per core when uops are exectuted in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2333,8 +2346,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 4.)",
-      R"(Cycles per core when uops are exectuted in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2376,8 +2389,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 5.)",
-      R"(Cycles per core when uops are exectuted in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2419,8 +2432,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 6.)",
-      R"(Cycles per core when uops are exectuted in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2802,8 +2815,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
-      R"(This event counts both cacheable and noncachaeble code read requests.)",
+      R"(Cacheable and non-cacheable code read requests)",
+      R"(This event counts both cacheable and non-cacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3629,6 +3642,19 @@ Note: Writeback pending FIFO has six entries.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
@@ -3661,6 +3687,19 @@ Note: Writeback pending FIFO has six entries.)",
       R"(Number of SSE/AVX computational packed floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* packed double and single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
       R"(Number of SSE/AVX computational packed floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* packed double and single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
       2000004,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.VECTOR",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0xfc, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -4121,9 +4160,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load uops.)",
-      R"(This event counts load uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event counts AVX-256bit load/store double-pump memory uops as a single uop at retirement. This event also counts SW prefetches.)",
+      R"(Retired load uops.)",
+      R"(Counts all retired load uops. This event accounts for SW prefetch uops of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4135,9 +4173,8 @@ Note: This event counts AVX-256bit load/store double-pump memory uops as a singl
       "MEM_UOPS_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(All retired store uops.)",
-      R"(This event counts store uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event counts AVX-256bit load/store double-pump memory uops as a single uop at retirement.)",
+      R"(Retired store uops.)",
+      R"(Counts all retired store uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{

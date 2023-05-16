@@ -358,19 +358,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "C0_STALLS.LOAD_L2_HIT",
-      EventDef::Encoding{
-          .code = 0x34, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_L2_HIT)",
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_L2_HIT)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "MEM_BOUND_STALLS.LOAD_L2_HIT",
       EventDef::Encoding{
           .code = 0x34, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
@@ -384,37 +371,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "C0_STALLS.LOAD_LLC_HIT",
-      EventDef::Encoding{
-          .code = 0x34, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_LLC_HIT)",
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_LLC_HIT)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "MEM_BOUND_STALLS.LOAD_LLC_HIT",
       EventDef::Encoding{
           .code = 0x34, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of cycles the core is stalled due to a demand load which hit in the LLC or other core with HITE/F/M.)",
       R"(Counts the number of cycles the core is stalled due to a demand load which hit in the Last Level Cache (LLC) or other core with HITE/F/M.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "C0_STALLS.LOAD_DRAM_HIT",
-      EventDef::Encoding{
-          .code = 0x34, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_DRAM_HIT)",
-      R"(This event is deprecated. Refer to new event MEM_BOUND_STALLS.LOAD_DRAM_HIT)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -492,7 +453,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x34, .umask = 0x38, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of cycles the core is stalled due to an instruction cache or TLB miss which hit in the L2, LLC, DRAM or MMIO (Non-DRAM).)",
-      R"(Counts the number of cycles the core is stalled due to an instruction cache or TLB miss which hit in the L2, LLC, DRAM or MMIO (Non-DRAM).)",
+      R"(Counts the number of cycles the core is stalled due to an instruction cache or translation lookaside buffer (TLB) miss which hit in the L2, LLC, DRAM or MMIO (Non-DRAM).)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -722,23 +683,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "BUS_LOCK.ALL",
-      EventDef::Encoding{
-          .code = 0x63,
-          .umask = 0x00,
-          .edge = true,
-          .cmask = 0,
-          .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event BUS_LOCK.SELF_LOCKS)",
-      R"(This event is deprecated. Refer to new event BUS_LOCK.SELF_LOCKS)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "BUS_LOCK.SELF_LOCKS",
       EventDef::Encoding{
           .code = 0x63,
@@ -756,37 +700,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "BUS_LOCK.CYCLES_SELF_BLOCK",
-      EventDef::Encoding{
-          .code = 0x63, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event BUS_LOCK.LOCK_CYCLES)",
-      R"(This event is deprecated. Refer to new event BUS_LOCK.LOCK_CYCLES)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "BUS_LOCK.LOCK_CYCLES",
       EventDef::Encoding{
           .code = 0x63, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of unhalted cycles a core is blocked due to an accepted lock it issued.)",
       R"(Counts the number of unhalted cycles a core is blocked due to an accepted lock it issued. Counts on a per core basis.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "BUS_LOCK.CYCLES_OTHER_BLOCK",
-      EventDef::Encoding{
-          .code = 0x63, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event BUS_LOCK.BLOCK_CYCLES)",
-      R"(This event is deprecated. Refer to new event BUS_LOCK.BLOCK_CYCLES)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -925,19 +843,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "TOPDOWN_BAD_SPECULATION.MONUKE",
-      EventDef::Encoding{
-          .code = 0x73, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. Refer to new event TOPDOWN_BAD_SPECULATION.FASTNUKE)",
-      R"(This event is deprecated. Refer to new event TOPDOWN_BAD_SPECULATION.FASTNUKE)",
-      1000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "TOPDOWN_BAD_SPECULATION.FASTNUKE",
       EventDef::Encoding{
           .code = 0x73, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
@@ -1021,19 +926,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x74, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of issue slots every cycle that were not consumed by the backend due to memory reservation stalls in which a scheduler is not able to accept uops.)",
       R"(Counts the number of issue slots every cycle that were not consumed by the backend due to memory reservation stalls in which a scheduler is not able to accept uops.)",
-      1000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "TOPDOWN_BE_BOUND.STORE_BUFFER",
-      EventDef::Encoding{
-          .code = 0x74, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. )",
-      R"(This event is deprecated. )",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1640,19 +1532,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "CYCLES_DIV_BUSY.ANY",
-      EventDef::Encoding{
-          .code = 0xcd, .umask = 0x00, .cmask = 0, .msr_values = {0x00}},
-      R"(This event is deprecated. )",
-      R"(This event is deprecated. )",
-      2000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "CYCLES_DIV_BUSY.IDIV",
       EventDef::Encoding{
           .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
@@ -1984,74 +1863,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of times a decode restriction reduces the decode throughput due to wrong instruction length prediction.)",
       R"(Counts the number of times a decode restriction reduces the decode throughput due to wrong instruction length prediction.)",
       200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_NOT_NEEDED)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_NOT_NEEDED)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_MISS",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_MISS)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_MISS)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HIT_NO_FWD)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HIT_NO_FWD)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HIT_WITH_FWD)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HITM",
-      EventDef::Encoding{
-          .code = 0XB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x10003C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HITM)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT.SNOOP_HITM)",
-      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -2749,64 +2560,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.ANY_RESPONSE",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.ANY_RESPONSE)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.ANY_RESPONSE)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.OUTSTANDING",
-      EventDef::Encoding{
-          .code = 0XB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x8000000000000001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.OUTSTANDING)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.OUTSTANDING)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.DRAM",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x184000001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.DRAM)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.DRAM)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_MISS",
-      EventDef::Encoding{
-          .code = 0XB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x2184000001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_MISS)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_MISS)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "OCR.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
@@ -3406,19 +3159,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.LOCAL_DRAM",
-      EventDef::Encoding{
-          .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x184000001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.LOCAL_DRAM)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.LOCAL_DRAM)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
       "OCR.DEMAND_RFO.LOCAL_DRAM",
       EventDef::Encoding{
           .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x184000002}},
@@ -3518,22 +3258,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0XB7, .umask = 0x01, .cmask = 0, .msr_values = {0x184000001}},
       R"(Counts cacheable demand data reads, L1 data cache hardware prefetches and software prefetches (except PREFETCHW) that were supplied by DRAM.)",
       R"(Counts cacheable demand data reads, L1 data cache hardware prefetches and software prefetches (except PREFETCHW) that were supplied by DRAM.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_MISS_LOCAL",
-      EventDef::Encoding{
-          .code = 0XB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x2184000001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_MISS_LOCAL)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_MISS_LOCAL)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3974,22 +3698,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0x10003C0477}},
       R"(Counts all data read, code read and RFO requests including demands and prefetches to the core caches (L1 or L2) that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
       R"(Counts all data read, code read and RFO requests including demands and prefetches to the core caches (L1 or L2) that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
-      100003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "OCR.DEMAND_DATA_RD.L3_HIT",
-      EventDef::Encoding{
-          .code = 0XB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x1F803C0001}},
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT)",
-      R"(This event is deprecated. Refer to new event OCR.DEMAND_DATA_AND_L1PF_RD.L3_HIT)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

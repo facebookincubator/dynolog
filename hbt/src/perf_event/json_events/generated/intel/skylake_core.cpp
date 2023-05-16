@@ -13,7 +13,7 @@ namespace skylake_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from skylake_core.json (551 events).
+    Events from skylake_core.json (558 events).
 
     Supported SKUs:
         - Arch: x86, Model: SKL id: 78
@@ -227,8 +227,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MEMORY_DISAMBIGUATION.HISTORY_RESET",
       EventDef::Encoding{
           .code = 0x09, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET (Description is auto-generated))",
-      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET (Description is auto-generated))",
+      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET)",
+      R"(MEMORY_DISAMBIGUATION.HISTORY_RESET)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -259,6 +259,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0}},
       R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke).)",
       R"(Core cycles the allocator was stalled due to recovery from earlier clear event for any thread running on the physical core (e.g. misprediction or memory nuke).)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "INT_MISC.CLEARS_COUNT",
+      EventDef::Encoding{
+          .code = 0x0D,
+          .umask = 0x01,
+          .edge = true,
+          .cmask = 1,
+          .msr_values = {0}},
+      R"(Clears speculative count)",
+      R"(Counts the number of speculative clears due to any type of branch misprediction or machine clears)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1389,7 +1406,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1428,7 +1445,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1467,7 +1484,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may 'bypass' the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1497,7 +1514,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Counts the total number of uops delivered by the Microcode Sequencer (MS). Any instruction over 4 uops will be delivered by the MS. Some instructions such as transcendentals may additionally generate uops from the MS.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1669,6 +1686,32 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Stalls caused by changing prefix length of the instruction.)",
       R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk.)",
       2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.ALL_BRANCHES",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xFF, .cmask = 0, .msr_values = {0}},
+      R"(Speculative and retired mispredicted macro conditional branches)",
+      R"(This event counts both taken and not taken speculative and retired mispredicted branch instructions.)",
+      200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -2178,7 +2221,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
+      R"(Cacheable and non-cacheable code read requests)",
       R"(Counts both cacheable and non-cacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -2651,11 +2694,23 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "BR_INST_RETIRED.CONDITIONAL",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Conditional branch instructions retired.)",
-      R"(This event counts conditional branch instructions retired.)",
+      R"(Conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.COND])",
+      R"(This event counts conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.COND])",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
+      R"(SKL091)"));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_INST_RETIRED.COND",
+      EventDef::Encoding{
+          .code = 0xC4, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.CONDITIONAL])",
+      R"(This event counts conditional branch instructions retired. [This event is alias to BR_INST_RETIRED.CONDITIONAL])",
+      400009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
       R"(SKL091)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2865,7 +2920,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xC6, .umask = 0x01, .cmask = 0, .msr_values = {0x15}},
       R"(Retired Instructions who experienced STLB (2nd level TLB) true miss.)",
-      R"(Counts retired Instructions that experienced STLB (2nd level TLB) true miss. )",
+      R"(Counts retired Instructions that experienced STLB (2nd level TLB) true miss.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3082,6 +3137,19 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.SCALAR",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0x03, .cmask = 0, .msr_values = {0}},
+      R"(Counts once for most SIMD scalar computational floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
+      R"(Counts once for most SIMD scalar computational single precision and double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SIMD scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
@@ -3121,11 +3189,37 @@ Note: Invoking MITE requires two or three cycles delay.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xC7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
       R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired. Counts twice for DPP and FM(N)ADD/SUB instructions retired.)",
       R"(Counts once for most SIMD 256-bit packed single computational precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.VECTOR",
+      EventDef::Encoding{
+          .code = 0xC7, .umask = 0xFC, .cmask = 0, .msr_values = {0}},
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      R"(Number of any Vector retired FP arithmetic instructions)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3163,7 +3257,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "HLE_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xC8, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times an HLE execution aborted due to any reasons (multiple categories may count as one). )",
+      R"(Number of times an HLE execution aborted due to any reasons (multiple categories may count as one).)",
       R"(Number of times HLE abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -3267,7 +3361,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "RTM_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xC9, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times an RTM execution aborted due to any reasons (multiple categories may count as one). )",
+      R"(Number of times an RTM execution aborted due to any reasons (multiple categories may count as one).)",
       R"(Number of times RTM abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -3568,8 +3662,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "MEM_INST_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load instructions.)",
-      R"(All retired load instructions.)",
+      R"(Retired load instructions.)",
+      R"(Counts all retired load instructions. This event accounts for SW prefetch instructions of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3581,8 +3675,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "MEM_INST_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(All retired store instructions.)",
-      R"(All retired store instructions.)",
+      R"(Retired store instructions.)",
+      R"(Counts all retired store instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -3636,7 +3730,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions with L3 cache hits as data sources)",
-      R"(Counts retired load instructions with at least one uop that hit in the L3 cache. )",
+      R"(Counts retired load instructions with at least one uop that hit in the L3 cache.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3675,7 +3769,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x20, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions missed L3 cache as data sources)",
-      R"(Counts retired load instructions with at least one uop that missed in the L3 cache. )",
+      R"(Counts retired load instructions with at least one uop that missed in the L3 cache.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3688,7 +3782,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
       R"(Retired load instructions which data sources were load missed L1 but hit FB due to preceding miss to the same cache line with data not ready)",
-      R"(Counts retired load instructions with at least one uop was load missed in L1 but hit FB (Fill Buffers) due to preceding miss to the same cache line with data not ready. )",
+      R"(Counts retired load instructions with at least one uop was load missed in L1 but hit FB (Fill Buffers) due to preceding miss to the same cache line with data not ready.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -3819,19 +3913,6 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .code = 0xF2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Counts the number of lines that are evicted by L2 cache when triggered by an L2 cache fill. Those lines are in Modified state. Modified lines are written back to L3)",
       R"(Counts the number of lines that are evicted by L2 cache when triggered by an L2 cache fill. Those lines are in Modified state. Modified lines are written back to L3)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_LINES_OUT.USELESS_PREF",
-      EventDef::Encoding{
-          .code = 0xF2, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(This event is deprecated. Refer to new event L2_LINES_OUT.USELESS_HWPF)",
-      R"(This event is deprecated. Refer to new event L2_LINES_OUT.USELESS_HWPF)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4773,8 +4854,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_RESPONSE.OTHER.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x18000}},
-      R"(Counts any other requestshave any response type.)",
-      R"(Counts any other requestshave any response type.)",
+      R"(Counts any other requests have any response type.)",
+      R"(Counts any other requests have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5690,8 +5771,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10004}},
-      R"(Counts all demand code readshave any response type.)",
-      R"(Counts all demand code readshave any response type.)",
+      R"(Counts all demand code reads have any response type.)",
+      R"(Counts all demand code reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6607,8 +6688,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_RESPONSE.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
-      R"(Counts all demand data writes (RFOs)have any response type.)",
-      R"(Counts all demand data writes (RFOs)have any response type.)",
+      R"(Counts all demand data writes (RFOs) have any response type.)",
+      R"(Counts all demand data writes (RFOs) have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7524,8 +7605,8 @@ Note: Invoking MITE requires two or three cycles delay.)",
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10001}},
-      R"(Counts demand data readshave any response type.)",
-      R"(Counts demand data readshave any response type.)",
+      R"(Counts demand data reads have any response type.)",
+      R"(Counts demand data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
