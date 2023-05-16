@@ -13,10 +13,11 @@ namespace sapphirerapids_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sapphirerapids_core.json (375 events).
+    Events from sapphirerapids_core.json (379 events).
 
     Supported SKUs:
         - Arch: x86, Model: SPR id: 143
+        - Arch: x86, Model: SPR id: 207
   */
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -595,8 +596,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_RQSTS.MISS",
       EventDef::Encoding{
           .code = 0x24, .umask = 0x3f, .cmask = 0, .msr_values = {0x00}},
-      R"(Read requests with true-miss in L2 cache.[This event is alias to L2_REQUEST.MISS])",
-      R"(Counts read requests of any type with true-miss in the L2 cache. True-miss excludes L2 misses that were merged with ongoing L2 misses.[This event is alias to L2_REQUEST.MISS])",
+      R"(Read requests with true-miss in L2 cache. [This event is alias to L2_REQUEST.MISS])",
+      R"(Counts read requests of any type with true-miss in the L2 cache. True-miss excludes L2 misses that were merged with ongoing L2 misses. [This event is alias to L2_REQUEST.MISS])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -608,8 +609,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_REQUEST.MISS",
       EventDef::Encoding{
           .code = 0x24, .umask = 0x3f, .cmask = 0, .msr_values = {0x00}},
-      R"(Read requests with true-miss in L2 cache.[This event is alias to L2_RQSTS.MISS])",
-      R"(Counts read requests of any type with true-miss in the L2 cache. True-miss excludes L2 misses that were merged with ongoing L2 misses.[This event is alias to L2_RQSTS.MISS])",
+      R"(Read requests with true-miss in L2 cache. [This event is alias to L2_RQSTS.MISS])",
+      R"(Counts read requests of any type with true-miss in the L2 cache. True-miss excludes L2 misses that were merged with ongoing L2 misses. [This event is alias to L2_RQSTS.MISS])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -738,8 +739,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_RQSTS.REFERENCES",
       EventDef::Encoding{
           .code = 0x24, .umask = 0xff, .cmask = 0, .msr_values = {0x00}},
-      R"(All accesses to L2 cache[This event is alias to L2_REQUEST.ALL])",
-      R"(Counts all requests that were hit or true misses in L2 cache. True-miss excludes misses that were merged with ongoing L2 misses.[This event is alias to L2_REQUEST.ALL])",
+      R"(All accesses to L2 cache [This event is alias to L2_REQUEST.ALL])",
+      R"(Counts all requests that were hit or true misses in L2 cache. True-miss excludes misses that were merged with ongoing L2 misses. [This event is alias to L2_REQUEST.ALL])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -751,8 +752,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_REQUEST.ALL",
       EventDef::Encoding{
           .code = 0x24, .umask = 0xff, .cmask = 0, .msr_values = {0x00}},
-      R"(All accesses to L2 cache[This event is alias to L2_RQSTS.REFERENCES])",
-      R"(Counts all requests that were hit or true misses in L2 cache. True-miss excludes misses that were merged with ongoing L2 misses.[This event is alias to L2_RQSTS.REFERENCES])",
+      R"(All accesses to L2 cache [This event is alias to L2_RQSTS.REFERENCES])",
+      R"(Counts all requests that were hit or true misses in L2 cache. True-miss excludes misses that were merged with ongoing L2 misses. [This event is alias to L2_RQSTS.REFERENCES])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -813,11 +814,24 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "SQ_MISC.BUS_LOCK",
+      EventDef::Encoding{
+          .code = 0x2c, .umask = 0x10, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts bus locks, accounts for cache line split locks and UC locks.)",
+      R"(Counts the more expensive bus lock needed to enforce cache coherency for certain memory accesses that need to be done atomically.  Can be created by issuing an atomic instruction (via the LOCK prefix) which causes a cache line split or accesses uncacheable memory.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "XQ.FULL_CYCLES",
       EventDef::Encoding{
           .code = 0x2d, .umask = 0x01, .cmask = 1, .msr_values = {0x00}},
-      R"(XQ.FULL_CYCLES)",
-      R"(XQ.FULL_CYCLES)",
+      R"(Cycles the uncore cannot take further requests)",
+      R"(number of cycles when the thread is active and the uncore cannot take any further requests (for example prefetches, loads or stores initiated by the Core that miss the L2 cache).)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1011,8 +1025,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MEMORY_ACTIVITY.STALLS_L2_MISS",
       EventDef::Encoding{
           .code = 0x47, .umask = 0x05, .cmask = 5, .msr_values = {0x00}},
-      R"(MEMORY_ACTIVITY.STALLS_L2_MISS)",
-      R"(MEMORY_ACTIVITY.STALLS_L2_MISS)",
+      R"(Execution stalls while L2 cache miss demand cacheable load request is outstanding.)",
+      R"(Execution stalls while L2 cache miss demand cacheable load request is outstanding (will not count for uncacheable demand requests e.g. bus lock).)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1024,8 +1038,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MEMORY_ACTIVITY.STALLS_L3_MISS",
       EventDef::Encoding{
           .code = 0x47, .umask = 0x09, .cmask = 9, .msr_values = {0x00}},
-      R"(MEMORY_ACTIVITY.STALLS_L3_MISS)",
-      R"(MEMORY_ACTIVITY.STALLS_L3_MISS)",
+      R"(Execution stalls while L3 cache miss demand cacheable load request is outstanding.)",
+      R"(Execution stalls while L3 cache miss demand cacheable load request is outstanding (will not count for uncacheable demand requests e.g. bus lock).)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1184,8 +1198,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "BACLEARS.ANY",
       EventDef::Encoding{
           .code = 0x60, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(Counts the total number when the front end is resteered, mainly when the BPU cannot provide a correct prediction and this is corrected by other branch handling mechanisms at the front end.)",
-      R"(Counts the number of times the front-end is resteered when it finds a branch instruction in a fetch line. This occurs for the first time a branch instruction is fetched or when the branch is not tracked by the BPU (Branch Prediction Unit) anymore.)",
+      R"(Clears due to Unknown Branches.)",
+      R"(Number of times the front-end is resteered when it finds a branch instruction in a fetch line. This is called Unknown Branch which occurs for the first time a branch instruction is fetched or when the branch is not tracked by the BPU (Branch Prediction Unit) anymore.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1805,6 +1819,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "INT_MISC.CLEARS_COUNT",
+      EventDef::Encoding{
+          .code = 0xad,
+          .umask = 0x01,
+          .edge = true,
+          .cmask = 1,
+          .msr_values = {0x00}},
+      R"(Clears speculative count)",
+      R"(Counts the number of speculative clears due to any type of branch misprediction or machine clears)",
+      500009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "INT_MISC.UOP_DROPPING",
       EventDef::Encoding{
           .code = 0xad, .umask = 0x10, .cmask = 0, .msr_values = {0x00}},
@@ -1885,7 +1916,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::cpu,
       "ARITH.IDIV_ACTIVE",
       EventDef::Encoding{
-          .code = 0xb0, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
+          .code = 0xb0, .umask = 0x08, .cmask = 1, .msr_values = {0x00}},
       R"(This event counts the cycles the integer divider is busy.)",
       R"(This event counts the cycles the integer divider is busy.)",
       1000003,
@@ -2241,8 +2272,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "INST_RETIRED.REP_ITERATION",
       EventDef::Encoding{
           .code = 0xc0, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
-      R"(INST_RETIRED.REP_ITERATION)",
-      R"(INST_RETIRED.REP_ITERATION)",
+      R"(Iterations of Repeat string retired instructions.)",
+      R"(Number of iterations of Repeat (REP) string retired instructions such as MOVS, CMPS, and SCAS. Each has a byte, word, and doubleword version and string instructions can be repeated using a repetition prefix, REP, that allows their architectural execution to be repeated a number of times as specified by the RCX register. Note the number of iterations is implementation-dependent.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2974,6 +3005,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x18, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x20, .cmask = 0, .msr_values = {0x00}},
@@ -2992,6 +3036,19 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0xc7, .umask = 0x40, .cmask = 0, .msr_values = {0x00}},
       R"(Counts number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
       R"(Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.8_FLOPS",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x60, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational 256-bit packed single precision and 512-bit packed double precision  FP instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RSQRT14 RCP RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed single precision and 512-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision and double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RSQRT14 RCP RCP14 DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3250,8 +3307,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "AMX_OPS_RETIRED.INT8",
       EventDef::Encoding{
           .code = 0xce, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(Number of AMX-based retired arithmetic operations of 8-bit width source operands. Counts TDPB[SS,UU,US,SU]D Integer instructions in GLC. SW should use operation multiplier of 8.)",
-      R"(AMX_OPS_RETIRED.INT8)",
+      R"(AMX retired arithmetic integer 8-bit operations.)",
+      R"(Number of AMX-based retired arithmetic integer operations of 8-bit width source operands. Counts TDPB[SS,UU,US,SU]D instructions. SW should use operation multiplier of 8.)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3263,8 +3320,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "AMX_OPS_RETIRED.BF16",
       EventDef::Encoding{
           .code = 0xce, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
-      R"(Number of AMX-based retired arithmetic operations of 16-bit width source operands. Counts TDPBF16PS FP instructions in GLC. SW should use operation multiplier of 4.)",
-      R"(AMX_OPS_RETIRED.BF16)",
+      R"(AMX retired arithmetic BF16 operations.)",
+      R"(Number of AMX-based retired arithmetic bfloat16 (BF16) floating-point operations. Counts TDPBF16PS FP instructions. SW to use operation multiplier of 4)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3709,8 +3766,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "MISC2_RETIRED.LFENCE",
       EventDef::Encoding{
           .code = 0xe0, .umask = 0x20, .cmask = 0, .msr_values = {0x00}},
-      R"(MISC2_RETIRED.LFENCE)",
-      R"(MISC2_RETIRED.LFENCE)",
+      R"(LFENCE instructions retired)",
+      R"(number of LFENCE retired instructions)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

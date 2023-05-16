@@ -23,7 +23,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_BOUNCE_CONTROL",
       EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
       R"(Bounce Control)",
-      R"(UNC_C_BOUNCE_CONTROL)",
+      R"(Bounce Control)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -35,7 +35,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_CLOCKTICKS",
       EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
       R"(Uncore Clocks)",
-      R"(UNC_C_CLOCKTICKS)",
+      R"(Uncore Clocks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -83,7 +83,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_LLC_LOOKUP.WRITE",
       EventDef::Encoding{.code = 0x34, .umask = 0x5, .msr_values = {0x00}},
       R"(Cache Lookups; Write Requests)",
-      R"(Counts the number of times the LLC was accessed - this includes code, data, prefetches and hints coming from L2.  This has numerous filters available.  Note the non-standard filtering equation.  This event will count requests that lookup the cache multiple times with multiple increments.  One must ALWAYS set umask bit 0 and select a state or states to match.  Otherwise, the event will count nothing.   CBoGlCtrl[22:18] bits correspond to [FMESI] state.; Writeback transactions from L2 to the LLC  This includes all write transactions -- both Cachable and UC.)",
+      R"(Counts the number of times the LLC was accessed - this includes code, data, prefetches and hints coming from L2.  This has numerous filters available.  Note the non-standard filtering equation.  This event will count requests that lookup the cache multiple times with multiple increments.  One must ALWAYS set umask bit 0 and select a state or states to match.  Otherwise, the event will count nothing.   CBoGlCtrl[22:18] bits correspond to [FMESI] state.; Writeback transactions from L2 to the LLC  This includes all write transactions -- both Cacheable and UC.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -539,7 +539,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_RING_BOUNCES.AD",
       EventDef::Encoding{.code = 0x5, .umask = 0x1, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; AD)",
-      R"(UNC_C_RING_BOUNCES.AD)",
+      R"(Number of LLC responses that bounced on the Ring.; AD)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -551,7 +551,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_RING_BOUNCES.AK",
       EventDef::Encoding{.code = 0x5, .umask = 0x2, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; AK)",
-      R"(UNC_C_RING_BOUNCES.AK)",
+      R"(Number of LLC responses that bounced on the Ring.; AK)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -563,7 +563,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_RING_BOUNCES.BL",
       EventDef::Encoding{.code = 0x5, .umask = 0x4, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; BL)",
-      R"(UNC_C_RING_BOUNCES.BL)",
+      R"(Number of LLC responses that bounced on the Ring.; BL)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -575,7 +575,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_RING_BOUNCES.IV",
       EventDef::Encoding{.code = 0x5, .umask = 0x10, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; Snoops of processor's cache.)",
-      R"(UNC_C_RING_BOUNCES.IV)",
+      R"(Number of LLC responses that bounced on the Ring.; Snoops of processor's cache.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -635,7 +635,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_RING_SRC_THRTL",
       EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
       R"(Number of cycles the Cbo is actively throttling traffic onto the Ring in order to limit bounce traffic.)",
-      R"(UNC_C_RING_SRC_THRTL)",
+      R"(Number of cycles the Cbo is actively throttling traffic onto the Ring in order to limit bounce traffic.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1163,7 +1163,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x1, .msr_values = {0x00}},
       R"(TOR Inserts; Opcode Match)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Transactions inserted into the TOR that match an opcode (matched by Cn_MSR_PMON_BOX_FILTER.opc))",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Transactions inserted into the TOR that match an opcode (matched by Cn_MSR_PMON_BOX_FILTER.opc))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1175,7 +1175,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.EVICTION",
       EventDef::Encoding{.code = 0x35, .umask = 0x4, .msr_values = {0x00}},
       R"(TOR Inserts; Evictions)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Eviction transactions inserted into the TOR.  Evictions can be quick, such as when the line is in the F, S, or E states and no core valid bits are set.  They can also be longer if either CV bits are set (so the cores need to be snooped) and/or if there is a HitM (in which case it is necessary to write the request out to memory).)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Eviction transactions inserted into the TOR.  Evictions can be quick, such as when the line is in the F, S, or E states and no core valid bits are set.  They can also be longer if either CV bits are set (so the cores need to be snooped) and/or if there is a HitM (in which case it is necessary to write the request out to memory).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1187,7 +1187,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.ALL",
       EventDef::Encoding{.code = 0x35, .umask = 0x8, .msr_values = {0x00}},
       R"(TOR Inserts; All)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR.    This includes requests that reside in the TOR for a short time, such as LLC Hits that do not need to snoop cores or requests that get rejected and have to be retried through one of the ingress queues.  The TOR is more commonly a bottleneck in skews with smaller core counts, where the ratio of RTIDs to TOR entries is larger.  Note that there are reserved TOR entries for various request types, so it is possible that a given request type be blocked with an occupancy that is less than 20.  Also note that generally requests will not be able to arbitrate into the TOR pipeline if there are no available TOR slots.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR.    This includes requests that reside in the TOR for a short time, such as LLC Hits that do not need to snoop cores or requests that get rejected and have to be retried through one of the ingress queues.  The TOR is more commonly a bottleneck in skews with smaller core counts, where the ratio of RTIDs to TOR entries is larger.  Note that there are reserved TOR entries for various request types, so it is possible that a given request type be blocked with an occupancy that is less than 20.  Also note that generally requests will not be able to arbitrate into the TOR pipeline if there are no available TOR slots.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1199,7 +1199,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.WB",
       EventDef::Encoding{.code = 0x35, .umask = 0x10, .msr_values = {0x00}},
       R"(TOR Inserts; Writebacks)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Write transactions inserted into the TOR.   This does not include RFO, but actual operations that contain data being sent from the core.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Write transactions inserted into the TOR.   This does not include RFO, but actual operations that contain data being sent from the core.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1211,7 +1211,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.MISS_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x3, .msr_values = {0x00}},
       R"(TOR Inserts; Miss Opcode Match)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that match an opcode.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that match an opcode.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1223,7 +1223,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x41, .msr_values = {0x00}},
       R"(TOR Inserts; NID and Opcode Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Transactions inserted into the TOR that match a NID and an opcode.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Transactions inserted into the TOR that match a NID and an opcode.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1235,7 +1235,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_EVICTION",
       EventDef::Encoding{.code = 0x35, .umask = 0x44, .msr_values = {0x00}},
       R"(TOR Inserts; NID Matched Evictions)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; NID matched eviction transactions inserted into the TOR.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; NID matched eviction transactions inserted into the TOR.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1247,7 +1247,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_ALL",
       EventDef::Encoding{.code = 0x35, .umask = 0x48, .msr_values = {0x00}},
       R"(TOR Inserts; NID Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All NID matched (matches an RTID destination) transactions inserted into the TOR.  The NID is programmed in Cn_MSR_PMON_BOX_FILTER.nid.  In conjunction with STATE = I, it is possible to monitor misses to specific NIDs in the system.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All NID matched (matches an RTID destination) transactions inserted into the TOR.  The NID is programmed in Cn_MSR_PMON_BOX_FILTER.nid.  In conjunction with STATE = I, it is possible to monitor misses to specific NIDs in the system.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1259,7 +1259,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_WB",
       EventDef::Encoding{.code = 0x35, .umask = 0x50, .msr_values = {0x00}},
       R"(TOR Inserts; NID Matched Writebacks)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; NID matched write transactions inserted into the TOR.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; NID matched write transactions inserted into the TOR.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1271,7 +1271,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_MISS_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x43, .msr_values = {0x00}},
       R"(TOR Inserts; NID and Opcode Matched Miss)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that match a NID and an opcode.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that match a NID and an opcode.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1283,7 +1283,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.NID_MISS_ALL",
       EventDef::Encoding{.code = 0x35, .umask = 0x4A, .msr_values = {0x00}},
       R"(TOR Inserts; NID Matched Miss All)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All NID matched miss requests that were inserted into the TOR.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All NID matched miss requests that were inserted into the TOR.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1295,7 +1295,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.MISS_LOCAL",
       EventDef::Encoding{.code = 0x35, .umask = 0x2A, .msr_values = {0x00}},
       R"(TOR Inserts; Misses to Local Memory)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that are satisifed by locally HOMed memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1307,7 +1307,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.MISS_REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x8A, .msr_values = {0x00}},
       R"(TOR Inserts; Misses to Remote Memory)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that are satisifed by remote caches or remote memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions inserted into the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1319,7 +1319,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.LOCAL",
       EventDef::Encoding{.code = 0x35, .umask = 0x28, .msr_values = {0x00}},
       R"(TOR Inserts; Local Memory)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR that are satisifed by locally HOMed memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1331,7 +1331,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x88, .msr_values = {0x00}},
       R"(TOR Inserts; Remote Memory)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR that are satisifed by remote caches or remote memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions inserted into the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1343,7 +1343,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.MISS_LOCAL_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x23, .msr_values = {0x00}},
       R"(TOR Inserts; Misses to Local Memory - Opcode Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions, satisifed by an opcode, inserted into the TOR that are satisifed by locally HOMed memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions, satisfied by an opcode, inserted into the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1355,7 +1355,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.MISS_REMOTE_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x83, .msr_values = {0x00}},
       R"(TOR Inserts; Misses to Remote Memory - Opcode Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions, satisifed by an opcode,  inserted into the TOR that are satisifed by remote caches or remote memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; Miss transactions, satisfied by an opcode,  inserted into the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1367,7 +1367,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.LOCAL_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x21, .msr_values = {0x00}},
       R"(TOR Inserts; Local Memory - Opcode Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions, satisifed by an opcode,  inserted into the TOR that are satisifed by locally HOMed memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions, satisfied by an opcode,  inserted into the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1379,7 +1379,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_INSERTS.REMOTE_OPCODE",
       EventDef::Encoding{.code = 0x35, .umask = 0x81, .msr_values = {0x00}},
       R"(TOR Inserts; Remote Memory - Opcode Matched)",
-      R"(Counts the number of entries successfuly inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions, satisifed by an opcode,  inserted into the TOR that are satisifed by remote caches or remote memory.)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent.  There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc  to DRD (0x182).; All transactions, satisfied by an opcode,  inserted into the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1559,7 +1559,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_OCCUPANCY.MISS_LOCAL_OPCODE",
       EventDef::Encoding{.code = 0x36, .umask = 0x23, .msr_values = {0x00}},
       R"(TOR Occupancy; Misses to Local Memory - Opcode Matched)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding Miss transactions, satisifed by an opcode, in the TOR that are satisifed by locally HOMed memory.)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding Miss transactions, satisfied by an opcode, in the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1571,7 +1571,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_OCCUPANCY.MISS_REMOTE_OPCODE",
       EventDef::Encoding{.code = 0x36, .umask = 0x83, .msr_values = {0x00}},
       R"(TOR Occupancy; Misses to Remote Memory - Opcode Matched)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding Miss transactions, satisifed by an opcode, in the TOR that are satisifed by remote caches or remote memory.)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding Miss transactions, satisfied by an opcode, in the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1583,7 +1583,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_OCCUPANCY.LOCAL_OPCODE",
       EventDef::Encoding{.code = 0x36, .umask = 0x21, .msr_values = {0x00}},
       R"(TOR Occupancy; Local Memory - Opcode Matched)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding  transactions, satisifed by an opcode,  in the TOR that are satisifed by locally HOMed memory.)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding  transactions, satisfied by an opcode,  in the TOR that are satisfied by locally HOMed memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1595,7 +1595,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TOR_OCCUPANCY.REMOTE_OPCODE",
       EventDef::Encoding{.code = 0x36, .umask = 0x81, .msr_values = {0x00}},
       R"(TOR Occupancy; Remote Memory - Opcode Matched)",
-      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding  transactions, satisifed by an opcode,  in the TOR that are satisifed by remote caches or remote memory.)",
+      R"(For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.   There are a number of subevent 'filters' but only a subset of the subevent combinations are valid.  Subevents that require an opcode or NID match require the Cn_MSR_PMON_BOX_FILTER.{opc, nid} field to be set.  If, for example, one wanted to count DRD Local Misses, one should select MISS_OPC_MATCH and set Cn_MSR_PMON_BOX_FILTER.opc to DRD (0x182); Number of outstanding  transactions, satisfied by an opcode,  in the TOR that are satisfied by remote caches or remote memory.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1631,7 +1631,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TxR_ADS_USED.AD",
       EventDef::Encoding{.code = 0x4, .umask = 0x1, .msr_values = {0x00}},
       R"(Onto AD Ring)",
-      R"(UNC_C_TxR_ADS_USED.AD)",
+      R"(Onto AD Ring)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1643,7 +1643,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TxR_ADS_USED.AK",
       EventDef::Encoding{.code = 0x4, .umask = 0x2, .msr_values = {0x00}},
       R"(Onto AK Ring)",
-      R"(UNC_C_TxR_ADS_USED.AK)",
+      R"(Onto AK Ring)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1655,7 +1655,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_C_TxR_ADS_USED.BL",
       EventDef::Encoding{.code = 0x4, .umask = 0x4, .msr_values = {0x00}},
       R"(Onto BL Ring)",
-      R"(UNC_C_TxR_ADS_USED.BL)",
+      R"(Onto BL Ring)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1747,227 +1747,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.AGE0",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x1, .msr_values = {0x00}},
-      R"(LRU Queue; LRU Age 0)",
-      R"(How often age was set to 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.AGE1",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x2, .msr_values = {0x00}},
-      R"(LRU Queue; LRU Age 1)",
-      R"(How often age was set to 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.AGE2",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x4, .msr_values = {0x00}},
-      R"(LRU Queue; LRU Age 2)",
-      R"(How often age was set to 2)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.AGE3",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x8, .msr_values = {0x00}},
-      R"(LRU Queue; LRU Age 3)",
-      R"(How often age was set to 3)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.LRU_DECREMENT",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x10, .msr_values = {0x00}},
-      R"(LRU Queue; LRU Bits Decremented)",
-      R"(How often all LRU bits were decremented by 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_QLRU.VICTIM_NON_ZERO",
-      EventDef::Encoding{.code = 0x3C, .umask = 0x20, .msr_values = {0x00}},
-      R"(LRU Queue; Non-0 Aged Victim)",
-      R"(How often we picked a victim that had a non-zero age)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RING_SINK_STARVED.AD",
-      EventDef::Encoding{.code = 0x6, .umask = 0x1, .msr_values = {0x00}},
-      R"(AD)",
-      R"(UNC_C_RING_SINK_STARVED.AD)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RING_SINK_STARVED.AK",
-      EventDef::Encoding{.code = 0x6, .umask = 0x2, .msr_values = {0x00}},
-      R"(AK)",
-      R"(UNC_C_RING_SINK_STARVED.AK)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RING_SINK_STARVED.IV",
-      EventDef::Encoding{.code = 0x6, .umask = 0x8, .msr_values = {0x00}},
-      R"(IV)",
-      R"(UNC_C_RING_SINK_STARVED.IV)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RING_SINK_STARVED.BL",
-      EventDef::Encoding{.code = 0x6, .umask = 0x4, .msr_values = {0x00}},
-      R"(BL)",
-      R"(UNC_C_RING_SINK_STARVED.BL)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RxR_INT_STARVED.IRQ",
-      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
-      R"(Ingress Internal Starvation Cycles; IRQ)",
-      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the IRQ in Internal Starvation.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RxR_INT_STARVED.IPQ",
-      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
-      R"(Ingress Internal Starvation Cycles; IPQ)",
-      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the IPQ in Internal Starvation.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RxR_INT_STARVED.ISMQ",
-      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
-      R"(Ingress Internal Starvation Cycles; ISMQ)",
-      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the ISMQ in Internal Starvation.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_RxR_INT_STARVED.PRQ",
-      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
-      R"(Ingress Internal Starvation Cycles; PRQ)",
-      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_TxR_STARVED.AK_BOTH",
-      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto AK Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that both AK egresses spent in starvation)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_TxR_STARVED.BL_BOTH",
-      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto BL Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that both BL egresses spent in starvation)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_TxR_STARVED.IV",
-      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto IV Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that the cachebo IV egress spent in starvation)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_C_TxR_STARVED.AD_CORE",
-      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto AD Ring (to core))",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that the core AD egress spent in starvation)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ha,
       "UNC_H_ADDR_OPC_MATCH.FILT",
       EventDef::Encoding{.code = 0x20, .umask = 0x3, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; Address & Opcode Match)",
-      R"(UNC_H_ADDR_OPC_MATCH.FILT)",
+      R"(QPI Address/Opcode Match; Address & Opcode Match)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1979,7 +1763,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_ADDR_OPC_MATCH.ADDR",
       EventDef::Encoding{.code = 0x20, .umask = 0x1, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; Address)",
-      R"(UNC_H_ADDR_OPC_MATCH.ADDR)",
+      R"(QPI Address/Opcode Match; Address)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1991,7 +1775,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_ADDR_OPC_MATCH.OPC",
       EventDef::Encoding{.code = 0x20, .umask = 0x2, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; Opcode)",
-      R"(UNC_H_ADDR_OPC_MATCH.OPC)",
+      R"(QPI Address/Opcode Match; Opcode)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2003,7 +1787,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_ADDR_OPC_MATCH.AD",
       EventDef::Encoding{.code = 0x20, .umask = 0x4, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; AD Opcodes)",
-      R"(UNC_H_ADDR_OPC_MATCH.AD)",
+      R"(QPI Address/Opcode Match; AD Opcodes)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2015,7 +1799,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_ADDR_OPC_MATCH.BL",
       EventDef::Encoding{.code = 0x20, .umask = 0x8, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; BL Opcodes)",
-      R"(UNC_H_ADDR_OPC_MATCH.BL)",
+      R"(QPI Address/Opcode Match; BL Opcodes)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2027,7 +1811,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_ADDR_OPC_MATCH.AK",
       EventDef::Encoding{.code = 0x20, .umask = 0x10, .msr_values = {0x00}},
       R"(QPI Address/Opcode Match; AK Opcodes)",
-      R"(UNC_H_ADDR_OPC_MATCH.AK)",
+      R"(QPI Address/Opcode Match; AK Opcodes)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2123,7 +1907,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_DIRECTORY_LAT_OPT",
       EventDef::Encoding{.code = 0x41, .umask = 0x0, .msr_values = {0x00}},
       R"(Directory Lat Opt Return)",
-      R"(Directory Latency Optimization Data Return Path Taken. When directory mode is enabled and the directory retuned for a read is Dir=I, then data can be returned using a faster path if certain conditions are met (credits, free pipeline, etc).)",
+      R"(Directory Latency Optimization Data Return Path Taken. When directory mode is enabled and the directory returned for a read is Dir=I, then data can be returned using a faster path if certain conditions are met (credits, free pipeline, etc).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2195,7 +1979,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.READ_OR_INVITOE",
       EventDef::Encoding{.code = 0x71, .umask = 0x1, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
-      R"(UNC_H_HITME_HIT.READ_OR_INVITOE)",
+      R"(Counts Number of Hits in HitMe Cache; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2207,7 +1991,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.WBMTOI",
       EventDef::Encoding{.code = 0x71, .umask = 0x2, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is WbMtoI)",
-      R"(UNC_H_HITME_HIT.WBMTOI)",
+      R"(Counts Number of Hits in HitMe Cache; op is WbMtoI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2219,7 +2003,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.ACKCNFLTWBI",
       EventDef::Encoding{.code = 0x71, .umask = 0x4, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is AckCnfltWbI)",
-      R"(UNC_H_HITME_HIT.ACKCNFLTWBI)",
+      R"(Counts Number of Hits in HitMe Cache; op is AckCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2231,7 +2015,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.WBMTOE_OR_S",
       EventDef::Encoding{.code = 0x71, .umask = 0x8, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is WbMtoE or WbMtoS)",
-      R"(UNC_H_HITME_HIT.WBMTOE_OR_S)",
+      R"(Counts Number of Hits in HitMe Cache; op is WbMtoE or WbMtoS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2243,7 +2027,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.RSPFWDI_REMOTE",
       EventDef::Encoding{.code = 0x71, .umask = 0x10, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is RspIFwd or RspIFwdWb for a remote request)",
-      R"(UNC_H_HITME_HIT.RSPFWDI_REMOTE)",
+      R"(Counts Number of Hits in HitMe Cache; op is RspIFwd or RspIFwdWb for a remote request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2255,7 +2039,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.RSPFWDI_LOCAL",
       EventDef::Encoding{.code = 0x71, .umask = 0x20, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is RspIFwd or RspIFwdWb for a local request)",
-      R"(UNC_H_HITME_HIT.RSPFWDI_LOCAL)",
+      R"(Counts Number of Hits in HitMe Cache; op is RspIFwd or RspIFwdWb for a local request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2267,7 +2051,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.RSPFWDS",
       EventDef::Encoding{.code = 0x71, .umask = 0x40, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is RsSFwd or RspSFwdWb)",
-      R"(UNC_H_HITME_HIT.RSPFWDS)",
+      R"(Counts Number of Hits in HitMe Cache; op is RsSFwd or RspSFwdWb)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2279,7 +2063,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.RSP",
       EventDef::Encoding{.code = 0x71, .umask = 0x80, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
-      R"(UNC_H_HITME_HIT.RSP)",
+      R"(Counts Number of Hits in HitMe Cache; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2291,7 +2075,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.ALLOCS",
       EventDef::Encoding{.code = 0x71, .umask = 0x70, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; Allocations)",
-      R"(UNC_H_HITME_HIT.ALLOCS)",
+      R"(Counts Number of Hits in HitMe Cache; Allocations)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2303,7 +2087,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.EVICTS",
       EventDef::Encoding{.code = 0x71, .umask = 0x42, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; Allocations)",
-      R"(UNC_H_HITME_HIT.EVICTS)",
+      R"(Counts Number of Hits in HitMe Cache; Allocations)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2315,7 +2099,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.INVALS",
       EventDef::Encoding{.code = 0x71, .umask = 0x26, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; Invalidations)",
-      R"(UNC_H_HITME_HIT.INVALS)",
+      R"(Counts Number of Hits in HitMe Cache; Invalidations)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2327,7 +2111,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.ALL",
       EventDef::Encoding{.code = 0x71, .umask = 0xFF, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; All Requests)",
-      R"(UNC_H_HITME_HIT.ALL)",
+      R"(Counts Number of Hits in HitMe Cache; All Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2339,7 +2123,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT.HOM",
       EventDef::Encoding{.code = 0x71, .umask = 0xF, .msr_values = {0x00}},
       R"(Counts Number of Hits in HitMe Cache; HOM Requests)",
-      R"(UNC_H_HITME_HIT.HOM)",
+      R"(Counts Number of Hits in HitMe Cache; HOM Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2351,7 +2135,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.READ_OR_INVITOE",
       EventDef::Encoding{.code = 0x72, .umask = 0x1, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.READ_OR_INVITOE)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2363,7 +2147,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.WBMTOI",
       EventDef::Encoding{.code = 0x72, .umask = 0x2, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is WbMtoI)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.WBMTOI)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is WbMtoI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2375,7 +2159,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.ACKCNFLTWBI",
       EventDef::Encoding{.code = 0x72, .umask = 0x4, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is AckCnfltWbI)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.ACKCNFLTWBI)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is AckCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2387,7 +2171,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.WBMTOE_OR_S",
       EventDef::Encoding{.code = 0x72, .umask = 0x8, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is WbMtoE or WbMtoS)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.WBMTOE_OR_S)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is WbMtoE or WbMtoS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2399,7 +2183,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDI_REMOTE",
       EventDef::Encoding{.code = 0x72, .umask = 0x10, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspIFwd or RspIFwdWb for a remote request)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDI_REMOTE)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspIFwd or RspIFwdWb for a remote request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2411,7 +2195,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDI_LOCAL",
       EventDef::Encoding{.code = 0x72, .umask = 0x20, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspIFwd or RspIFwdWb for a local request)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDI_LOCAL)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspIFwd or RspIFwdWb for a local request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2423,7 +2207,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDS",
       EventDef::Encoding{.code = 0x72, .umask = 0x40, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RsSFwd or RspSFwdWb)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.RSPFWDS)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RsSFwd or RspSFwdWb)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2435,7 +2219,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.RSP",
       EventDef::Encoding{.code = 0x72, .umask = 0x80, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.RSP)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2447,7 +2231,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.ALL",
       EventDef::Encoding{.code = 0x72, .umask = 0xFF, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; All Requests)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.ALL)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; All Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2459,7 +2243,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_HIT_PV_BITS_SET.HOM",
       EventDef::Encoding{.code = 0x72, .umask = 0xF, .msr_values = {0x00}},
       R"(Accumulates Number of PV bits set on HitMe Cache Hits; HOM Requests)",
-      R"(UNC_H_HITME_HIT_PV_BITS_SET.HOM)",
+      R"(Accumulates Number of PV bits set on HitMe Cache Hits; HOM Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2471,7 +2255,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.READ_OR_INVITOE",
       EventDef::Encoding{.code = 0x70, .umask = 0x1, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
-      R"(UNC_H_HITME_LOOKUP.READ_OR_INVITOE)",
+      R"(Counts Number of times HitMe Cache is accessed; op is RdCode, RdData, RdDataMigratory, RdInvOwn, RdCur or InvItoE)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2483,7 +2267,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.WBMTOI",
       EventDef::Encoding{.code = 0x70, .umask = 0x2, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is WbMtoI)",
-      R"(UNC_H_HITME_LOOKUP.WBMTOI)",
+      R"(Counts Number of times HitMe Cache is accessed; op is WbMtoI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2495,7 +2279,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.ACKCNFLTWBI",
       EventDef::Encoding{.code = 0x70, .umask = 0x4, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is AckCnfltWbI)",
-      R"(UNC_H_HITME_LOOKUP.ACKCNFLTWBI)",
+      R"(Counts Number of times HitMe Cache is accessed; op is AckCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2507,7 +2291,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.WBMTOE_OR_S",
       EventDef::Encoding{.code = 0x70, .umask = 0x8, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is WbMtoE or WbMtoS)",
-      R"(UNC_H_HITME_LOOKUP.WBMTOE_OR_S)",
+      R"(Counts Number of times HitMe Cache is accessed; op is WbMtoE or WbMtoS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2519,7 +2303,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.RSPFWDI_REMOTE",
       EventDef::Encoding{.code = 0x70, .umask = 0x10, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is RspIFwd or RspIFwdWb for a remote request)",
-      R"(UNC_H_HITME_LOOKUP.RSPFWDI_REMOTE)",
+      R"(Counts Number of times HitMe Cache is accessed; op is RspIFwd or RspIFwdWb for a remote request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2531,7 +2315,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.RSPFWDI_LOCAL",
       EventDef::Encoding{.code = 0x70, .umask = 0x20, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is RspIFwd or RspIFwdWb for a local request)",
-      R"(UNC_H_HITME_LOOKUP.RSPFWDI_LOCAL)",
+      R"(Counts Number of times HitMe Cache is accessed; op is RspIFwd or RspIFwdWb for a local request)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2543,7 +2327,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.RSPFWDS",
       EventDef::Encoding{.code = 0x70, .umask = 0x40, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is RsSFwd or RspSFwdWb)",
-      R"(UNC_H_HITME_LOOKUP.RSPFWDS)",
+      R"(Counts Number of times HitMe Cache is accessed; op is RsSFwd or RspSFwdWb)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2555,7 +2339,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.RSP",
       EventDef::Encoding{.code = 0x70, .umask = 0x80, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
-      R"(UNC_H_HITME_LOOKUP.RSP)",
+      R"(Counts Number of times HitMe Cache is accessed; op is RspI, RspIWb, RspS, RspSWb, RspCnflt or RspCnfltWbI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2567,7 +2351,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.ALLOCS",
       EventDef::Encoding{.code = 0x70, .umask = 0x70, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; Allocations)",
-      R"(UNC_H_HITME_LOOKUP.ALLOCS)",
+      R"(Counts Number of times HitMe Cache is accessed; Allocations)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2579,7 +2363,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.INVALS",
       EventDef::Encoding{.code = 0x70, .umask = 0x26, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; Invalidations)",
-      R"(UNC_H_HITME_LOOKUP.INVALS)",
+      R"(Counts Number of times HitMe Cache is accessed; Invalidations)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2591,7 +2375,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.ALL",
       EventDef::Encoding{.code = 0x70, .umask = 0xFF, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; All Requests)",
-      R"(UNC_H_HITME_LOOKUP.ALL)",
+      R"(Counts Number of times HitMe Cache is accessed; All Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2603,7 +2387,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_HITME_LOOKUP.HOM",
       EventDef::Encoding{.code = 0x70, .umask = 0xF, .msr_values = {0x00}},
       R"(Counts Number of times HitMe Cache is accessed; HOM Requests)",
-      R"(UNC_H_HITME_LOOKUP.HOM)",
+      R"(Counts Number of times HitMe Cache is accessed; HOM Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2699,7 +2483,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_IMC_RETRY",
       EventDef::Encoding{.code = 0x1E, .umask = 0x0, .msr_values = {0x00}},
       R"(Retry Events)",
-      R"(UNC_H_IMC_RETRY)",
+      R"(Retry Events)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3479,7 +3263,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_SNOOP_RESP.RSPSFWD",
       EventDef::Encoding{.code = 0x21, .umask = 0x8, .msr_values = {0x00}},
       R"(Snoop Responses Received; RspSFwd)",
-      R"(Counts the total number of RspI snoop responses received.  Whenever a snoops are issued, one or more snoop responses will be returned depending on the topology of the system.   In systems larger than 2s, when multiple snoops are returned this will count all the snoops that are received.  For example, if 3 snoops were issued and returned RspI, RspS, and RspSFwd; then each of these sub-events would increment by 1.; Filters for a snoop response of RspSFwd.  This is returned when a remote caching agent forwards data but holds on to its currentl copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
+      R"(Counts the total number of RspI snoop responses received.  Whenever a snoops are issued, one or more snoop responses will be returned depending on the topology of the system.   In systems larger than 2s, when multiple snoops are returned this will count all the snoops that are received.  For example, if 3 snoops were issued and returned RspI, RspS, and RspSFwd; then each of these sub-events would increment by 1.; Filters for a snoop response of RspSFwd.  This is returned when a remote caching agent forwards data but holds on to its current copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3563,7 +3347,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_H_SNP_RESP_RECV_LOCAL.RSPSFWD",
       EventDef::Encoding{.code = 0x60, .umask = 0x8, .msr_values = {0x00}},
       R"(Snoop Responses Received Local; RspSFwd)",
-      R"(Number of snoop responses received for a Local  request; Filters for a snoop response of RspSFwd.  This is returned when a remote caching agent forwards data but holds on to its currentl copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
+      R"(Number of snoop responses received for a Local  request; Filters for a snoop response of RspSFwd.  This is returned when a remote caching agent forwards data but holds on to its current copy.  This is common for data and code reads that hit in a remote socket in E or F state.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3874,7 +3658,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.READS_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x4, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local Read Requests)",
+      R"(Tracker Occupancy Accumulator; Local Read Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3886,7 +3670,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.READS_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x8, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote Read Requests)",
+      R"(Tracker Occupancy Accumulator; Remote Read Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3898,7 +3682,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.WRITES_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x10, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local Write Requests)",
+      R"(Tracker Occupancy Accumulator; Local Write Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3910,7 +3694,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.WRITES_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x20, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote Write Requests)",
+      R"(Tracker Occupancy Accumulator; Remote Write Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3922,7 +3706,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.INVITOE_LOCAL",
       EventDef::Encoding{.code = 0x4, .umask = 0x40, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Local InvItoE Requests)",
+      R"(Tracker Occupancy Accumulator; Local InvItoE Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3934,7 +3718,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_OCCUPANCY.INVITOE_REMOTE",
       EventDef::Encoding{.code = 0x4, .umask = 0x80, .msr_values = {0x00}},
-      R"(Tracker Occupancy Accumultor; Remote InvItoE Requests)",
+      R"(Tracker Occupancy Accumulator; Remote InvItoE Requests)",
       R"(Accumulates the occupancy of the local HA tracker pool in every cycle.  This can be used in conjection with the not empty stat to calculate average queue occupancy or the allocations stat in order to calculate average queue latency.  HA trackers are allocated as soon as a request enters the HA if a HT (Home Tracker) entry is available and is released after the snoop response and data return (or post in the case of a write) and the response is returned on the ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3946,7 +3730,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_PENDING_OCCUPANCY.LOCAL",
       EventDef::Encoding{.code = 0x5, .umask = 0x1, .msr_values = {0x00}},
-      R"(Data Pending Occupancy Accumultor; Local Requests)",
+      R"(Data Pending Occupancy Accumulator; Local Requests)",
       R"(Accumulates the number of transactions that have data from the memory controller until they get scheduled to the Egress.  This can be used to calculate the queuing latency for two things.  (1) If the system is waiting for snoops, this will increase.  (2) If the system can't schedule to the Egress because of either (a) Egress Credits or (b) QPI BL IGR credits for remote requests.; This filter includes only requests coming from the local socket.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -3958,7 +3742,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ha,
       "UNC_H_TRACKER_PENDING_OCCUPANCY.REMOTE",
       EventDef::Encoding{.code = 0x5, .umask = 0x2, .msr_values = {0x00}},
-      R"(Data Pending Occupancy Accumultor; Remote Requests)",
+      R"(Data Pending Occupancy Accumulator; Remote Requests)",
       R"(Accumulates the number of transactions that have data from the memory controller until they get scheduled to the Egress.  This can be used to calculate the queuing latency for two things.  (1) If the system is waiting for snoops, this will increase.  (2) If the system can't schedule to the Egress because of either (a) Egress Credits or (b) QPI BL IGR credits for remote requests.; This filter includes only requests coming from remote sockets.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -4183,498 +3967,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_BT_TO_HT_NOT_ISSUED.INCOMING_SNP_HAZARD",
-      EventDef::Encoding{.code = 0x51, .umask = 0x2, .msr_values = {0x00}},
-      R"(BT to HT Not Issued; Incoming Snoop Hazard)",
-      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming snoop hazard)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_BT_TO_HT_NOT_ISSUED.INCOMING_BL_HAZARD",
-      EventDef::Encoding{.code = 0x51, .umask = 0x4, .msr_values = {0x00}},
-      R"(BT to HT Not Issued; Incoming Data Hazard)",
-      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_BT_TO_HT_NOT_ISSUED.RSPACKCFLT_HAZARD",
-      EventDef::Encoding{.code = 0x51, .umask = 0x8, .msr_values = {0x00}},
-      R"(BT to HT Not Issued; Incoming Data Hazard)",
-      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_BT_TO_HT_NOT_ISSUED.WBMDATA_HAZARD",
-      EventDef::Encoding{.code = 0x51, .umask = 0x10, .msr_values = {0x00}},
-      R"(BT to HT Not Issued; Incoming Data Hazard)",
-      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_BACKPRESSURE.SAT",
-      EventDef::Encoding{.code = 0x61, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Backpressure)",
-      R"(UNC_H_IOT_BACKPRESSURE.SAT)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_BACKPRESSURE.HUB",
-      EventDef::Encoding{.code = 0x61, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Backpressure)",
-      R"(UNC_H_IOT_BACKPRESSURE.HUB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_EAST_LO.CTS0",
-      EventDef::Encoding{.code = 0x64, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_EAST_LO.CTS1",
-      EventDef::Encoding{.code = 0x64, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_HI.CTS2",
-      EventDef::Encoding{.code = 0x65, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Hi)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_HI.CTS3",
-      EventDef::Encoding{.code = 0x65, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Hi)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_WEST_LO.CTS0",
-      EventDef::Encoding{.code = 0x62, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_IOT_CTS_WEST_LO.CTS1",
-      EventDef::Encoding{.code = 0x62, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x16, .umask = 0x1, .msr_values = {0x00}},
-      R"(iMC RPQ Credits Empty - Special; Channel 0)",
-      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 0 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x16, .umask = 0x2, .msr_values = {0x00}},
-      R"(iMC RPQ Credits Empty - Special; Channel 1)",
-      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 1 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x16, .umask = 0x4, .msr_values = {0x00}},
-      R"(iMC RPQ Credits Empty - Special; Channel 2)",
-      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 2 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN3",
-      EventDef::Encoding{.code = 0x16, .umask = 0x8, .msr_values = {0x00}},
-      R"(iMC RPQ Credits Empty - Special; Channel 3)",
-      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 3 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD.HOM",
-      EventDef::Encoding{.code = 0xF, .umask = 0x4, .msr_values = {0x00}},
-      R"(Outbound NDR Ring Transactions; Non-data Responses)",
-      R"(Counts the number of outbound transactions on the AD ring.  This can be filtered by the NDR and SNP message classes.  See the filter descriptions for more details.; Filter for outbound NDR transactions sent on the AD ring.  NDR stands for non-data response and is generally used for completions that do not include data.  AD NDR is used for transactions to remote sockets.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_CYCLES_NE.SCHED0",
-      EventDef::Encoding{.code = 0x29, .umask = 0x1, .msr_values = {0x00}},
-      R"(AD Egress Not Empty; Scheduler 0)",
-      R"(AD Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_CYCLES_NE.SCHED1",
-      EventDef::Encoding{.code = 0x29, .umask = 0x2, .msr_values = {0x00}},
-      R"(AD Egress Not Empty; Scheduler 1)",
-      R"(AD Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x29, .umask = 0x3, .msr_values = {0x00}},
-      R"(AD Egress Not Empty; All)",
-      R"(AD Egress Not Empty; Cycles full from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_INSERTS.SCHED0",
-      EventDef::Encoding{.code = 0x27, .umask = 0x1, .msr_values = {0x00}},
-      R"(AD Egress Allocations; Scheduler 0)",
-      R"(AD Egress Allocations; Filter for allocations from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_INSERTS.SCHED1",
-      EventDef::Encoding{.code = 0x27, .umask = 0x2, .msr_values = {0x00}},
-      R"(AD Egress Allocations; Scheduler 1)",
-      R"(AD Egress Allocations; Filter for allocations from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AD_INSERTS.ALL",
-      EventDef::Encoding{.code = 0x27, .umask = 0x3, .msr_values = {0x00}},
-      R"(AD Egress Allocations; All)",
-      R"(AD Egress Allocations; Allocations from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_CYCLES_NE.SCHED0",
-      EventDef::Encoding{.code = 0x31, .umask = 0x1, .msr_values = {0x00}},
-      R"(AK Egress Not Empty; Scheduler 0)",
-      R"(AK Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_CYCLES_NE.SCHED1",
-      EventDef::Encoding{.code = 0x31, .umask = 0x2, .msr_values = {0x00}},
-      R"(AK Egress Not Empty; Scheduler 1)",
-      R"(AK Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x31, .umask = 0x3, .msr_values = {0x00}},
-      R"(AK Egress Not Empty; All)",
-      R"(AK Egress Not Empty; Cycles full from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_INSERTS.SCHED0",
-      EventDef::Encoding{.code = 0x2F, .umask = 0x1, .msr_values = {0x00}},
-      R"(AK Egress Allocations; Scheduler 0)",
-      R"(AK Egress Allocations; Filter for allocations from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_INSERTS.SCHED1",
-      EventDef::Encoding{.code = 0x2F, .umask = 0x2, .msr_values = {0x00}},
-      R"(AK Egress Allocations; Scheduler 1)",
-      R"(AK Egress Allocations; Filter for allocations from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_AK_INSERTS.ALL",
-      EventDef::Encoding{.code = 0x2F, .umask = 0x3, .msr_values = {0x00}},
-      R"(AK Egress Allocations; All)",
-      R"(AK Egress Allocations; Allocations from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_CYCLES_NE.SCHED0",
-      EventDef::Encoding{.code = 0x35, .umask = 0x1, .msr_values = {0x00}},
-      R"(BL Egress Not Empty; Scheduler 0)",
-      R"(BL Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_CYCLES_NE.SCHED1",
-      EventDef::Encoding{.code = 0x35, .umask = 0x2, .msr_values = {0x00}},
-      R"(BL Egress Not Empty; Scheduler 1)",
-      R"(BL Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x3, .msr_values = {0x00}},
-      R"(BL Egress Not Empty; All)",
-      R"(BL Egress Not Empty; Cycles full from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_INSERTS.SCHED0",
-      EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
-      R"(BL Egress Allocations; Scheduler 0)",
-      R"(BL Egress Allocations; Filter for allocations from scheduler bank 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_INSERTS.SCHED1",
-      EventDef::Encoding{.code = 0x33, .umask = 0x2, .msr_values = {0x00}},
-      R"(BL Egress Allocations; Scheduler 1)",
-      R"(BL Egress Allocations; Filter for allocations from scheduler bank 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_TxR_BL_INSERTS.ALL",
-      EventDef::Encoding{.code = 0x33, .umask = 0x3, .msr_values = {0x00}},
-      R"(BL Egress Allocations; All)",
-      R"(BL Egress Allocations; Allocations from both schedulers)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN0",
-      EventDef::Encoding{.code = 0x19, .umask = 0x1, .msr_values = {0x00}},
-      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 0)",
-      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 0 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN1",
-      EventDef::Encoding{.code = 0x19, .umask = 0x2, .msr_values = {0x00}},
-      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 1)",
-      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 1 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN2",
-      EventDef::Encoding{.code = 0x19, .umask = 0x4, .msr_values = {0x00}},
-      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 2)",
-      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 2 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN3",
-      EventDef::Encoding{.code = 0x19, .umask = 0x8, .msr_values = {0x00}},
-      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 3)",
-      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 3 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RING_AK_USED.ALL",
-      EventDef::Encoding{.code = 0x3F, .umask = 0xF, .msr_values = {0x00}},
-      R"(HA AK Ring in Use; All)",
-      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ha,
-      "UNC_H_RING_BL_USED.ALL",
-      EventDef::Encoding{.code = 0x40, .umask = 0xF, .msr_values = {0x00}},
-      R"(HA BL Ring in Use; All)",
-      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
       "UNC_I_CACHE_TOTAL_OCCUPANCY.ANY",
       EventDef::Encoding{.code = 0x12, .umask = 0x1, .msr_values = {0x00}},
@@ -4811,7 +4103,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.FAST_REQ",
       EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Fastpath Requests)",
-      R"(UNC_I_MISC0.FAST_REQ)",
+      R"(Counts Timeouts - Set 0 : Fastpath Requests)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4823,7 +4115,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.FAST_REJ",
       EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Fastpath Rejects)",
-      R"(UNC_I_MISC0.FAST_REJ)",
+      R"(Counts Timeouts - Set 0 : Fastpath Rejects)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4835,7 +4127,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.2ND_RD_INSERT",
       EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Cache Inserts of Read Transactions as Secondary)",
-      R"(UNC_I_MISC0.2ND_RD_INSERT)",
+      R"(Counts Timeouts - Set 0 : Cache Inserts of Read Transactions as Secondary)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4847,7 +4139,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.2ND_WR_INSERT",
       EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Cache Inserts of Write Transactions as Secondary)",
-      R"(UNC_I_MISC0.2ND_WR_INSERT)",
+      R"(Counts Timeouts - Set 0 : Cache Inserts of Write Transactions as Secondary)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4859,7 +4151,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.2ND_ATOMIC_INSERT",
       EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Cache Inserts of Atomic Transactions as Secondary)",
-      R"(UNC_I_MISC0.2ND_ATOMIC_INSERT)",
+      R"(Counts Timeouts - Set 0 : Cache Inserts of Atomic Transactions as Secondary)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4871,7 +4163,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.FAST_XFER",
       EventDef::Encoding{.code = 0x14, .umask = 0x20, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Fastpath Transfers From Primary to Secondary)",
-      R"(UNC_I_MISC0.FAST_XFER)",
+      R"(Counts Timeouts - Set 0 : Fastpath Transfers From Primary to Secondary)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4883,7 +4175,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC0.PF_ACK_HINT",
       EventDef::Encoding{.code = 0x14, .umask = 0x40, .msr_values = {0x00}},
       R"(Misc Events - Set 0; Prefetch Ack Hints From Primary to Secondary)",
-      R"(UNC_I_MISC0.PF_ACK_HINT)",
+      R"(Counts Timeouts - Set 0 : Prefetch Ack Hints From Primary to Secondary)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4955,7 +4247,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_MISC1.LOST_FWD",
       EventDef::Encoding{.code = 0x15, .umask = 0x10, .msr_values = {0x00}},
       R"(Misc Events - Set 1)",
-      R"(UNC_I_MISC1.LOST_FWD)",
+      R"(Misc Events - Set 1 : Lost Forward : Snoop pulled away ownership before a write was committed)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5123,7 +4415,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.MISS",
       EventDef::Encoding{.code = 0x17, .umask = 0x1, .msr_values = {0x00}},
       R"(Snoop Responses; Miss)",
-      R"(UNC_I_SNOOP_RESP.MISS)",
+      R"(Snoop Responses : Miss)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5135,7 +4427,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.HIT_I",
       EventDef::Encoding{.code = 0x17, .umask = 0x2, .msr_values = {0x00}},
       R"(Snoop Responses; Hit I)",
-      R"(UNC_I_SNOOP_RESP.HIT_I)",
+      R"(Snoop Responses : Hit I)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5147,7 +4439,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.HIT_ES",
       EventDef::Encoding{.code = 0x17, .umask = 0x4, .msr_values = {0x00}},
       R"(Snoop Responses; Hit E or S)",
-      R"(UNC_I_SNOOP_RESP.HIT_ES)",
+      R"(Snoop Responses : Hit E or S)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5159,7 +4451,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.HIT_M",
       EventDef::Encoding{.code = 0x17, .umask = 0x8, .msr_values = {0x00}},
       R"(Snoop Responses; Hit M)",
-      R"(UNC_I_SNOOP_RESP.HIT_M)",
+      R"(Snoop Responses : Hit M)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5171,7 +4463,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.SNPCODE",
       EventDef::Encoding{.code = 0x17, .umask = 0x10, .msr_values = {0x00}},
       R"(Snoop Responses; SnpCode)",
-      R"(UNC_I_SNOOP_RESP.SNPCODE)",
+      R"(Snoop Responses : SnpCode)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5183,7 +4475,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.SNPDATA",
       EventDef::Encoding{.code = 0x17, .umask = 0x20, .msr_values = {0x00}},
       R"(Snoop Responses; SnpData)",
-      R"(UNC_I_SNOOP_RESP.SNPDATA)",
+      R"(Snoop Responses : SnpData)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5195,7 +4487,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_SNOOP_RESP.SNPINV",
       EventDef::Encoding{.code = 0x17, .umask = 0x40, .msr_values = {0x00}},
       R"(Snoop Responses; SnpInv)",
-      R"(UNC_I_SNOOP_RESP.SNPINV)",
+      R"(Snoop Responses : SnpInv)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5339,7 +4631,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_TxR_REQUEST_OCCUPANCY",
       EventDef::Encoding{.code = 0xD, .umask = 0x0, .msr_values = {0x00}},
       R"(Outbound Request Queue Occupancy)",
-      R"(Accumultes the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjuection with the allocations event in order to calculate average latency of outbound requests.)",
+      R"(Accumulates the number of outstanding outbound requests from the IRP to the switch (towards the devices).  This can be used in conjunction with the allocations event in order to calculate average latency of outbound requests.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5867,7 +5159,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_P_POWER_STATE_OCCUPANCY.CORES_C0",
       EventDef::Encoding{.code = 0x80, .umask = 0x40, .msr_values = {0x00}},
       R"(Number of cores in C-State; C0 and C1)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5879,7 +5171,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_P_POWER_STATE_OCCUPANCY.CORES_C3",
       EventDef::Encoding{.code = 0x80, .umask = 0x80, .msr_values = {0x00}},
       R"(Number of cores in C-State; C3)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5891,7 +5183,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_P_POWER_STATE_OCCUPANCY.CORES_C6",
       EventDef::Encoding{.code = 0x80, .umask = 0xC0, .msr_values = {0x00}},
       R"(Number of cores in C-State; C6 and C7)",
-      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with threshholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      R"(This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5915,7 +5207,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_P_PROCHOT_INTERNAL_CYCLES",
       EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
       R"(Internal Prochot)",
-      R"(Counts the number of cycles that we are in Interal PROCHOT mode.  This mode is triggered when a sensor on the die determines that we are too hot and must throttle to avoid damaging the chip.)",
+      R"(Counts the number of cycles that we are in Internal PROCHOT mode.  This mode is triggered when a sensor on the die determines that we are too hot and must throttle to avoid damaging the chip.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5951,79 +5243,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_P_VR_HOT_CYCLES",
       EventDef::Encoding{.code = 0x42, .umask = 0x0, .msr_values = {0x00}},
       R"(VR Hot)",
-      R"(UNC_P_VR_HOT_CYCLES)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C0_CYCLES",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C0)",
-      R"(Counts the number of cycles when the package was in C0.  This event can be used in conjunction with edge detect to count C0 entrances (or exits using invert).  Residency events do not include transition times.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
-      EventDef::Encoding{.code = 0x2B, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C2E)",
-      R"(Counts the number of cycles when the package was in C2E.  This event can be used in conjunction with edge detect to count C2E entrances (or exits using invert).  Residency events do not include transition times.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C3_CYCLES",
-      EventDef::Encoding{.code = 0x2C, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C3)",
-      R"(Counts the number of cycles when the package was in C3.  This event can be used in conjunction with edge detect to count C3 entrances (or exits using invert).  Residency events do not include transition times.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C6_CYCLES",
-      EventDef::Encoding{.code = 0x2D, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C6)",
-      R"(Counts the number of cycles when the package was in C6.  This event can be used in conjunction with edge detect to count C6 entrances (or exits using invert).  Residency events do not include transition times.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C7_CYCLES",
-      EventDef::Encoding{.code = 0x2E, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C7 State Residency)",
-      R"(Counts the number of cycles when the package was in C7.  This event can be used in conjunction with edge detect to count C7 entrances (or exits using invert).  Residency events do not include transition times.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_PKG_RESIDENCY_C1E_CYCLES",
-      EventDef::Encoding{.code = 0x4E, .umask = 0x0, .msr_values = {0x00}},
-      R"(Package C State Residency - C1E)",
-      R"(Counts the number of cycles when the package was in C1E.  This event can be used in conjunction with edge detect to count C1E entrances (or exits using invert).  Residency events do not include transition times.)",
+      R"(VR Hot : Number of cycles that a CPU SVID VR is hot.  Does not cover DRAM VRs)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6059,7 +5279,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.SUCCESS_RBT_HIT",
       EventDef::Encoding{.code = 0x13, .umask = 0x1, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Success)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn was successful.  There were sufficient credits, the RBT valid bit was set and there was an RBT tag match.  The message was marked to spawn direct2core.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn was successful.  There were sufficient credits, the RBT valid bit was set and there was an RBT tag match.  The message was marked to spawn direct2core.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6071,7 +5291,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_CREDITS",
       EventDef::Encoding{.code = 0x13, .umask = 0x2, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - Egress Credits)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because there were not enough Egress credits.  Had there been enough credits, the spawn would have worked as the RBT bit was set and the RBT tag matched.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because there were not enough Egress credits.  Had there been enough credits, the spawn would have worked as the RBT bit was set and the RBT tag matched.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6083,7 +5303,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_RBT_HIT",
       EventDef::Encoding{.code = 0x13, .umask = 0x4, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - RBT Invalid)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the route-back table (RBT) specified that the transaction should not trigger a direct2core tranaction.  This is common for IO transactions.  There were enough Egress credits and the RBT tag matched but the valid bit was not set.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the route-back table (RBT) specified that the transaction should not trigger a direct2core transaction.  This is common for IO transactions.  There were enough Egress credits and the RBT tag matched but the valid bit was not set.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6095,7 +5315,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_CREDITS_RBT",
       EventDef::Encoding{.code = 0x13, .umask = 0x8, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - Egress and RBT Invalid)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because there were not enough Egress credits AND the RBT bit was not set, but the RBT tag matched.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because there were not enough Egress credits AND the RBT bit was not set, but the RBT tag matched.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6107,7 +5327,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_MISS",
       EventDef::Encoding{.code = 0x13, .umask = 0x10, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - RBT Miss)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match although the valid bit was set and there were enough Egress credits.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match although the valid bit was set and there were enough Egress credits.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6119,7 +5339,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_CREDITS_MISS",
       EventDef::Encoding{.code = 0x13, .umask = 0x20, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - Egress and RBT Miss)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match and there weren't enough Egress credits.   The valid bit was set.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match and there weren't enough Egress credits.   The valid bit was set.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6131,7 +5351,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_RBT_MISS",
       EventDef::Encoding{.code = 0x13, .umask = 0x40, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - RBT Miss and Invalid)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match and the valid bit was not set although there were enough Egress credits.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match and the valid bit was not set although there were enough Egress credits.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6143,7 +5363,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_DIRECT2CORE.FAILURE_CREDITS_RBT_MISS",
       EventDef::Encoding{.code = 0x13, .umask = 0x80, .msr_values = {0x00}},
       R"(Direct 2 Core Spawning; Spawn Failure - Egress and RBT Miss, Invalid)",
-      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exlusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match, the valid bit was not set and there weren't enough Egress credits.)",
+      R"(Counts the number of DRS packets that we attempted to do direct2core on.  There are 4 mutually exclusive filters.  Filter [0] can be used to get successful spawns, while [1:3] provide the different failure cases.  Note that this does not count packets that are not candidates for Direct2Core.  The only candidates for Direct2Core are DRS packets destined for Cbos.; The spawn failed because the RBT tag did not match, the valid bit was not set and there weren't enough Egress credits.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6371,7 +5591,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_RxL_FLITS_G0.IDLE",
       EventDef::Encoding{.code = 0x1, .umask = 0x1, .msr_values = {0x00}},
       R"(Flits Received - Group 0; Idle and Null Flits)",
-      R"(Counts the number of flits received from the QPI Link.  It includes filters for Idle, protocol, and Data Flits.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time (for L0) or 4B instead of 8B for L0p.; Number of flits received over QPI that do not hold protocol payload.  When QPI is not in a power saving state, it continuously transmits flits across the link.  When there are no protocol flits to send, it will send IDLE and NULL flits  across.  These flits sometimes do carry a payload, such as credit returns, but are generall not considered part of the QPI bandwidth.)",
+      R"(Counts the number of flits received from the QPI Link.  It includes filters for Idle, protocol, and Data Flits.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time (for L0) or 4B instead of 8B for L0p.; Number of flits received over QPI that do not hold protocol payload.  When QPI is not in a power saving state, it continuously transmits flits across the link.  When there are no protocol flits to send, it will send IDLE and NULL flits  across.  These flits sometimes do carry a payload, such as credit returns, but are generally not considered part of the QPI bandwidth.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6923,7 +6143,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.SNP",
       EventDef::Encoding{.code = 0x0, .umask = 0x1, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; SNP Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of snoop request flits transmitted over QPI.  These requests are contained in the snoop channel.  This does not include snoop responses, which are transmitted on the home channel.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of snoop request flits transmitted over QPI.  These requests are contained in the snoop channel.  This does not include snoop responses, which are transmitted on the home channel.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6935,7 +6155,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.HOM_REQ",
       EventDef::Encoding{.code = 0x0, .umask = 0x2, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; HOM Request Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of data request transmitted over QPI on the home channel.  This basically counts the number of remote memory requests transmitted over QPI.  In conjunction with the local read count in the Home Agent, one can calculate the number of LLC Misses.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of data request transmitted over QPI on the home channel.  This basically counts the number of remote memory requests transmitted over QPI.  In conjunction with the local read count in the Home Agent, one can calculate the number of LLC Misses.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6947,7 +6167,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.HOM_NONREQ",
       EventDef::Encoding{.code = 0x0, .umask = 0x4, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; HOM Non-Request Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of non-request flits transmitted over QPI on the home channel.  These are most commonly snoop responses, and this event can be used as a proxy for that.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of non-request flits transmitted over QPI on the home channel.  These are most commonly snoop responses, and this event can be used as a proxy for that.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6959,7 +6179,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.HOM",
       EventDef::Encoding{.code = 0x0, .umask = 0x6, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; HOM Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of flits transmitted over QPI on the home channel.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the number of flits transmitted over QPI on the home channel.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6971,7 +6191,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.DRS_DATA",
       EventDef::Encoding{.code = 0x0, .umask = 0x8, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; DRS Data Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of data flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.  This does not count data flits transmitted over the NCB channel which transmits non-coherent data.  This includes only the data flits (not the header).)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of data flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.  This does not count data flits transmitted over the NCB channel which transmits non-coherent data.  This includes only the data flits (not the header).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6983,7 +6203,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.DRS_NONDATA",
       EventDef::Encoding{.code = 0x0, .umask = 0x10, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; DRS Header Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of protocol flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.  This does not count data flits transmitted over the NCB channel which transmits non-coherent data.  This includes only the header flits (not the data).  This includes extended headers.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of protocol flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.  This does not count data flits transmitted over the NCB channel which transmits non-coherent data.  This includes only the header flits (not the data).  This includes extended headers.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6995,7 +6215,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G1.DRS",
       EventDef::Encoding{.code = 0x0, .umask = 0x18, .msr_values = {0x00}},
       R"(Flits Transferred - Group 1; DRS Flits (both Header and Data))",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for SNP, HOM, and DRS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over QPI on the DRS (Data Response) channel.  DRS flits are used to transmit data with coherency.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7007,7 +6227,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NDR_AD",
       EventDef::Encoding{.code = 0x1, .umask = 0x1, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Data Response Tx Flits - AD)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over the NDR (Non-Data Response) channel.  This channel is used to send a variety of protocol flits including grants and completions.  This is only for NDR packets to the local socket which use the AK ring.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over the NDR (Non-Data Response) channel.  This channel is used to send a variety of protocol flits including grants and completions.  This is only for NDR packets to the local socket which use the AK ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7019,7 +6239,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NDR_AK",
       EventDef::Encoding{.code = 0x1, .umask = 0x2, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Data Response Tx Flits - AK)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over the NDR (Non-Data Response) channel.  This channel is used to send a variety of protocol flits including grants and completions.  This is only for NDR packets destined for Route-thru to a remote socket.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Counts the total number of flits transmitted over the NDR (Non-Data Response) channel.  This channel is used to send a variety of protocol flits including grants and completions.  This is only for NDR packets destined for Route-thru to a remote socket.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7031,7 +6251,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NCB_DATA",
       EventDef::Encoding{.code = 0x1, .umask = 0x4, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Coherent data Tx Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass data flits.  These flits are generally used to transmit non-coherent data across QPI.  This does not include a count of the DRS (coherent) data flits.  This only counts the data flits, not te NCB headers.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass data flits.  These flits are generally used to transmit non-coherent data across QPI.  This does not include a count of the DRS (coherent) data flits.  This only counts the data flits, not the NCB headers.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7043,7 +6263,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NCB_NONDATA",
       EventDef::Encoding{.code = 0x1, .umask = 0x8, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Coherent non-data Tx Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass non-data flits.  These packets are generally used to transmit non-coherent data across QPI, and the flits counted here are for headers and other non-data flits.  This includes extended headers.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass non-data flits.  These packets are generally used to transmit non-coherent data across QPI, and the flits counted here are for headers and other non-data flits.  This includes extended headers.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7055,7 +6275,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NCB",
       EventDef::Encoding{.code = 0x1, .umask = 0xC, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Coherent Bypass Tx Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass flits.  These packets are generally used to transmit non-coherent data across QPI.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of Non-Coherent Bypass flits.  These packets are generally used to transmit non-coherent data across QPI.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7067,7 +6287,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxL_FLITS_G2.NCS",
       EventDef::Encoding{.code = 0x1, .umask = 0x10, .msr_values = {0x00}},
       R"(Flits Transferred - Group 2; Non-Coherent standard Tx Flits)",
-      R"(Counts the number of flits trasmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of NCS (non-coherent standard) flits transmitted over QPI.    This includes extended headers.)",
+      R"(Counts the number of flits transmitted across the QPI Link.  This is one of three groups that allow us to track flits.  It includes filters for NDR, NCB, and NCS message classes.  Each flit is made up of 80 bits of information (in addition to some ECC data).  In full-width (L0) mode, flits are made up of four fits, each of which contains 20 bits of data (along with some additional ECC data).   In half-width (L0p) mode, the fits are only 10 bits, and therefore it takes twice as many fits to transmit a flit.  When one talks about QPI speed (for example, 8.0 GT/s), the transfers here refer to fits.  Therefore, in L0, the system will transfer 1 flit at the rate of 1/4th the QPI speed.  One can calculate the bandwidth of the link by taking: flits*80b/time.  Note that this is not the same as data bandwidth.  For example, when we are transferring a 64B cacheline across QPI, we will break it into 9 flits -- 1 with header information and 8 with 64 bits of actual data and an additional 16 bits of other information.  To calculate data bandwidth, one should therefore do: data flits * 8B / time.; Number of NCS (non-coherent standard) flits transmitted over QPI.    This includes extended headers.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7223,7 +6443,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxR_AD_SNP_CREDIT_OCCUPANCY.VN0",
       EventDef::Encoding{.code = 0x23, .umask = 0x1, .msr_values = {0x00}},
       R"(R3QPI Egress Credit Occupancy - AD SNP; for VN0)",
-      R"(Occupancy event that tracks the number of link layer credits into the R3 (for transactions across the BGF) available in each cycle.  Flow Control FIFO fro Snoop messages on AD.)",
+      R"(Occupancy event that tracks the number of link layer credits into the R3 (for transactions across the BGF) available in each cycle.  Flow Control FIFO for Snoop messages on AD.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7235,7 +6455,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_Q_TxR_AD_SNP_CREDIT_OCCUPANCY.VN1",
       EventDef::Encoding{.code = 0x23, .umask = 0x2, .msr_values = {0x00}},
       R"(R3QPI Egress Credit Occupancy - AD SNP; for VN1)",
-      R"(Occupancy event that tracks the number of link layer credits into the R3 (for transactions across the BGF) available in each cycle.  Flow Control FIFO fro Snoop messages on AD.)",
+      R"(Occupancy event that tracks the number of link layer credits into the R3 (for transactions across the BGF) available in each cycle.  Flow Control FIFO for Snoop messages on AD.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -7452,366 +6672,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x1B, .umask = 0x0, .msr_values = {0x00}},
       R"(VNA Credits Pending Return - Occupancy)",
       R"(Number of VNA credits in the Rx side that are waitng to be returned back across the link.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CRC_ERRORS.LINK_INIT",
-      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
-      R"(CRC Errors Detected; LinkInit)",
-      R"(Number of CRC errors detected in the QPI Agent.  Each QPI flit incorporates 8 bits of CRC for error detection.  This counts the number of flits where the CRC was able to detect an error.  After an error has been detected, the QPI agent will send a request to the transmitting socket to resend the flit (as well as any flits that came after it).; CRC errors detected during link initialization.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CRC_ERRORS.NORMAL_OP",
-      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_Q_RxL_CRC_ERRORS.NORMAL_OP)",
-      R"(UNC_Q_RxL_CRC_ERRORS.NORMAL_OP)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_DRS.VN0",
-      EventDef::Encoding{.code = 0xF, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - DRS; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors DRS flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_DRS.VN1",
-      EventDef::Encoding{.code = 0xF, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - DRS; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors DRS flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_HOM.VN0",
-      EventDef::Encoding{.code = 0x12, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - HOM; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors HOM flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_HOM.VN1",
-      EventDef::Encoding{.code = 0x12, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - HOM; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors HOM flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NCB.VN0",
-      EventDef::Encoding{.code = 0x10, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NCB; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCB flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NCB.VN1",
-      EventDef::Encoding{.code = 0x10, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NCB; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCB flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NCS.VN0",
-      EventDef::Encoding{.code = 0x11, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NCS; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCS flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NCS.VN1",
-      EventDef::Encoding{.code = 0x11, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NCS; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCS flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NDR.VN0",
-      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NDR; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NDR flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_NDR.VN1",
-      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - NDR; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NDR flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_SNP.VN0",
-      EventDef::Encoding{.code = 0x13, .umask = 0x1, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - SNP; for VN0)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors SNP flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_CYCLES_NE_SNP.VN1",
-      EventDef::Encoding{.code = 0x13, .umask = 0x2, .msr_values = {0x00}},
-      R"(RxQ Cycles Not Empty - SNP; for VN1)",
-      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors SNP flits only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_DRS",
-      EventDef::Encoding{.code = 0x35, .umask = 0x1, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - HOM)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the HOM message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_NCB",
-      EventDef::Encoding{.code = 0x35, .umask = 0x2, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - SNP)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the SNP message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_NCS",
-      EventDef::Encoding{.code = 0x35, .umask = 0x4, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NDR)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NDR message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_HOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x8, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - DRS)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the DRS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_SNP",
-      EventDef::Encoding{.code = 0x35, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NCB)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NCB message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.BGF_NDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NCS)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NCS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.EGRESS_CREDITS",
-      EventDef::Encoding{.code = 0x35, .umask = 0x40, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; Egress Credits)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet because there were insufficient BGF credits.  For details on a message class granularity, use the Egress Credit Occupancy events.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN0.GV",
-      EventDef::Encoding{.code = 0x35, .umask = 0x80, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN0; GV)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled because a GV transition (frequency transition) was taking place.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_DRS",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x1, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - HOM)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the HOM message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_NCB",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x2, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - SNP)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the SNP message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_NCS",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x4, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NDR)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NDR message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_HOM",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x8, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - DRS)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the DRS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_SNP",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x10, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NCB)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NCB message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_RxL_STALLS_VN1.BGF_NDR",
-      EventDef::Encoding{.code = 0x3A, .umask = 0x20, .msr_values = {0x00}},
-      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NCS)",
-      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NCS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_TxL_CRC_NO_CREDITS.FULL",
-      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
-      R"(Cycles Stalled with no LLR Credits; LLR is full)",
-      R"(Number of cycles when the Tx side ran out of Link Layer Retry credits, causing the Tx to stall.; When LLR is totally full, we are not allowed to send any packets.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_qpi,
-      "UNC_Q_TxL_CRC_NO_CREDITS.ALMOST_FULL",
-      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
-      R"(Cycles Stalled with no LLR Credits; LLR is almost full)",
-      R"(Number of cycles when the Tx side ran out of Link Layer Retry credits, causing the Tx to stall.; When LLR is almost full, we block some but not all packets.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -8424,138 +7284,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x26, .umask = 0x20, .msr_values = {0x00}},
       R"(Egress CCW NACK; BL CW)",
       R"(AD Clockwise Egress Queue)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_ACQUIRED.DRS",
-      EventDef::Encoding{.code = 0x33, .umask = 0x8, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credit Acquired; DRS)",
-      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the DRS message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_ACQUIRED.NCB",
-      EventDef::Encoding{.code = 0x33, .umask = 0x10, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credit Acquired; NCB)",
-      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCB message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_ACQUIRED.NCS",
-      EventDef::Encoding{.code = 0x33, .umask = 0x20, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credit Acquired; NCS)",
-      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCS message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_USED.DRS",
-      EventDef::Encoding{.code = 0x32, .umask = 0x8, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credits in Use; DRS)",
-      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the DRS message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_USED.NCB",
-      EventDef::Encoding{.code = 0x32, .umask = 0x10, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credits in Use; NCB)",
-      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCB message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_IIO_CREDITS_USED.NCS",
-      EventDef::Encoding{.code = 0x32, .umask = 0x20, .msr_values = {0x00}},
-      R"(R2PCIe IIO Credits in Use; NCS)",
-      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCS message class.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_SBO0_CREDIT_OCCUPANCY.AD",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
-      R"(SBo0 Credits Occupancy; For AD Ring)",
-      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_SBO0_CREDIT_OCCUPANCY.BL",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
-      R"(SBo0 Credits Occupancy; For BL Ring)",
-      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_RING_AD_USED.ALL",
-      EventDef::Encoding{.code = 0x7, .umask = 0xF, .msr_values = {0x00}},
-      R"(R2 AD Ring in Use; All)",
-      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_RING_AK_USED.ALL",
-      EventDef::Encoding{.code = 0x8, .umask = 0xF, .msr_values = {0x00}},
-      R"(R2 AK Ring in Use; All)",
-      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r2pcie,
-      "UNC_R2_RING_BL_USED.ALL",
-      EventDef::Encoding{.code = 0x9, .umask = 0xF, .msr_values = {0x00}},
-      R"(R2 BL Ring in Use; All)",
-      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10115,7 +8843,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_R3_VNA_CREDITS_ACQUIRED.AD",
       EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
       R"(VNA credit Acquisitions; HOM Message Class)",
-      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credts from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
+      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credits from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10127,7 +8855,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_R3_VNA_CREDITS_ACQUIRED.BL",
       EventDef::Encoding{.code = 0x33, .umask = 0x4, .msr_values = {0x00}},
       R"(VNA credit Acquisitions; HOM Message Class)",
-      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credts from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
+      R"(Number of QPI VNA Credit acquisitions.  This event can be used in conjunction with the VNA In-Use Accumulator to calculate the average lifetime of a credit holder.  VNA credits are used by all message classes in order to communicate across QPI.  If a packet is unable to acquire credits, it will then attempt to use credits from the VN0 pool.  Note that a single packet may require multiple flit buffers (i.e. when data is being transferred).  Therefore, this event will increment by the number of credits acquired in each cycle.  Filtering based on message class is not provided.  One can count the number of packets transferred in a given message class using an qfclk event.; Filter for the Home (HOM) message class.  HOM is generally used to send requests, request responses, and snoop responses.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10207,167 +8935,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_BACKPRESSURE.SAT",
-      EventDef::Encoding{.code = 0xB, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Backpressure)",
-      R"(UNC_R3_IOT_BACKPRESSURE.SAT)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_BACKPRESSURE.HUB",
-      EventDef::Encoding{.code = 0xB, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Backpressure)",
-      R"(UNC_R3_IOT_BACKPRESSURE.HUB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_CTS_HI.CTS2",
-      EventDef::Encoding{.code = 0xD, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Hi)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_CTS_HI.CTS3",
-      EventDef::Encoding{.code = 0xD, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Hi)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_CTS_LO.CTS0",
-      EventDef::Encoding{.code = 0xC, .umask = 0x1, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_IOT_CTS_LO.CTS1",
-      EventDef::Encoding{.code = 0xC, .umask = 0x2, .msr_values = {0x00}},
-      R"(IOT Common Trigger Sequencer - Lo)",
-      R"(Debug Mask/Match Tie-Ins)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_SBO0_CREDIT_OCCUPANCY.AD",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
-      R"(SBo0 Credits Occupancy; For AD Ring)",
-      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_SBO0_CREDIT_OCCUPANCY.BL",
-      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
-      R"(SBo0 Credits Occupancy; For BL Ring)",
-      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_SBO1_CREDIT_OCCUPANCY.AD",
-      EventDef::Encoding{.code = 0x2B, .umask = 0x1, .msr_values = {0x00}},
-      R"(SBo1 Credits Occupancy; For AD Ring)",
-      R"(Number of Sbo 1 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_SBO1_CREDIT_OCCUPANCY.BL",
-      EventDef::Encoding{.code = 0x2B, .umask = 0x2, .msr_values = {0x00}},
-      R"(SBo1 Credits Occupancy; For BL Ring)",
-      R"(Number of Sbo 1 credits in use in a given cycle, per ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_RING_AD_USED.ALL",
-      EventDef::Encoding{.code = 0x7, .umask = 0xF, .msr_values = {0x00}},
-      R"(R3 AD Ring in Use; All)",
-      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_RING_AK_USED.ALL",
-      EventDef::Encoding{.code = 0x8, .umask = 0xF, .msr_values = {0x00}},
-      R"(R3 AK Ring in Use; All)",
-      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_r3qpi,
-      "UNC_R3_RING_BL_USED.ALL",
-      EventDef::Encoding{.code = 0x9, .umask = 0xF, .msr_values = {0x00}},
-      R"(R3 BL Ring in Use; All)",
-      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_sbox,
       "UNC_S_BOUNCE_CONTROL",
       EventDef::Encoding{.code = 0xA, .umask = 0x0, .msr_values = {0x00}},
       R"(Bounce Control)",
-      R"(UNC_S_BOUNCE_CONTROL)",
+      R"(Bounce Control)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10379,7 +8951,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_S_CLOCKTICKS",
       EventDef::Encoding{.code = 0x0, .umask = 0x0, .msr_values = {0x00}},
       R"(Uncore Clocks)",
-      R"(UNC_S_CLOCKTICKS)",
+      R"(Uncore Clocks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10619,7 +9191,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_S_RING_BOUNCES.AD_CACHE",
       EventDef::Encoding{.code = 0x5, .umask = 0x1, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.)",
-      R"(UNC_S_RING_BOUNCES.AD_CACHE)",
+      R"(Number of LLC responses that bounced on the Ring.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10631,7 +9203,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_S_RING_BOUNCES.AK_CORE",
       EventDef::Encoding{.code = 0x5, .umask = 0x2, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; Acknowledgements to core)",
-      R"(UNC_S_RING_BOUNCES.AK_CORE)",
+      R"(Number of LLC responses that bounced on the Ring.; Acknowledgements to core)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10643,7 +9215,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_S_RING_BOUNCES.BL_CORE",
       EventDef::Encoding{.code = 0x5, .umask = 0x4, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; Data Responses to core)",
-      R"(UNC_S_RING_BOUNCES.BL_CORE)",
+      R"(Number of LLC responses that bounced on the Ring.; Data Responses to core)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -10655,7 +9227,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_S_RING_BOUNCES.IV_CORE",
       EventDef::Encoding{.code = 0x5, .umask = 0x8, .msr_values = {0x00}},
       R"(Number of LLC responses that bounced on the Ring.; Snoops of processor's cache.)",
-      R"(UNC_S_RING_BOUNCES.IV_CORE)",
+      R"(Number of LLC responses that bounced on the Ring.; Snoops of processor's cache.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11083,270 +9655,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_SINK_STARVED.AD_CACHE",
-      EventDef::Encoding{.code = 0x6, .umask = 0x1, .msr_values = {0x00}},
-      R"(UNC_S_RING_SINK_STARVED.AD_CACHE)",
-      R"(UNC_S_RING_SINK_STARVED.AD_CACHE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_SINK_STARVED.AK_CORE",
-      EventDef::Encoding{.code = 0x6, .umask = 0x2, .msr_values = {0x00}},
-      R"(UNC_S_RING_SINK_STARVED.AK_CORE)",
-      R"(UNC_S_RING_SINK_STARVED.AK_CORE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_SINK_STARVED.BL_CORE",
-      EventDef::Encoding{.code = 0x6, .umask = 0x4, .msr_values = {0x00}},
-      R"(UNC_S_RING_SINK_STARVED.BL_CORE)",
-      R"(UNC_S_RING_SINK_STARVED.BL_CORE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_SINK_STARVED.IV_CORE",
-      EventDef::Encoding{.code = 0x6, .umask = 0x8, .msr_values = {0x00}},
-      R"(UNC_S_RING_SINK_STARVED.IV_CORE)",
-      R"(UNC_S_RING_SINK_STARVED.IV_CORE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_BUSY_STARVED.AD_CRD",
-      EventDef::Encoding{.code = 0x15, .umask = 0x1, .msr_values = {0x00}},
-      R"(Injection Starvation; AD - Credits)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_BUSY_STARVED.AD_BNC",
-      EventDef::Encoding{.code = 0x15, .umask = 0x2, .msr_values = {0x00}},
-      R"(Injection Starvation; AD - Bounces)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_BUSY_STARVED.BL_CRD",
-      EventDef::Encoding{.code = 0x15, .umask = 0x4, .msr_values = {0x00}},
-      R"(Injection Starvation; BL - Credits)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_BUSY_STARVED.BL_BNC",
-      EventDef::Encoding{.code = 0x15, .umask = 0x8, .msr_values = {0x00}},
-      R"(Injection Starvation; BL - Bounces)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.AD_CRD",
-      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
-      R"(Injection Starvation; AD - Credits)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.AD_BNC",
-      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
-      R"(Injection Starvation; AD - Bounces)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.BL_CRD",
-      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
-      R"(Injection Starvation; BL - Credits)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.BL_BNC",
-      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
-      R"(Injection Starvation; BL - Bounces)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.AK",
-      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
-      R"(Injection Starvation; AK)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.IV",
-      EventDef::Encoding{.code = 0x14, .umask = 0x20, .msr_values = {0x00}},
-      R"(Injection Starvation; IV)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RxR_CRD_STARVED.IFV",
-      EventDef::Encoding{.code = 0x14, .umask = 0x40, .msr_values = {0x00}},
-      R"(Injection Starvation; IVF Credit)",
-      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_TxR_STARVED.AD",
-      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto AD Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_TxR_STARVED.AK",
-      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto AK Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_TxR_STARVED.BL",
-      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto BL Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_TxR_STARVED.IV",
-      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
-      R"(Injection Starvation; Onto IV Ring)",
-      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_AD_USED.ALL",
-      EventDef::Encoding{.code = 0x1B, .umask = 0xF, .msr_values = {0x00}},
-      R"(AD Ring In Use; All)",
-      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop.  We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_AK_USED.ALL",
-      EventDef::Encoding{.code = 0x1C, .umask = 0xF, .msr_values = {0x00}},
-      R"(AK Ring In Use; All)",
-      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop. We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_sbox,
-      "UNC_S_RING_BL_USED.ALL",
-      EventDef::Encoding{.code = 0x1D, .umask = 0xF, .msr_values = {0x00}},
-      R"(BL Ring in Use; All)",
-      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop. We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
       "UNC_U_EVENT_MSG.DOORBELL_RCVD",
       EventDef::Encoding{.code = 0x42, .umask = 0x8, .msr_values = {0x00}},
@@ -11376,162 +9684,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x46, .umask = 0x0, .msr_values = {0x00}},
       R"(RACU Request)",
       R"(Number outstanding register requests within message channel tracker)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_FILTER_MATCH.ENABLE",
-      EventDef::Encoding{.code = 0x41, .umask = 0x1, .msr_values = {0x00}},
-      R"(Filter Match)",
-      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_FILTER_MATCH.DISABLE",
-      EventDef::Encoding{.code = 0x41, .umask = 0x2, .msr_values = {0x00}},
-      R"(Filter Match)",
-      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_FILTER_MATCH.U2C_ENABLE",
-      EventDef::Encoding{.code = 0x41, .umask = 0x4, .msr_values = {0x00}},
-      R"(Filter Match)",
-      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_FILTER_MATCH.U2C_DISABLE",
-      EventDef::Encoding{.code = 0x41, .umask = 0x8, .msr_values = {0x00}},
-      R"(Filter Match)",
-      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.MONITOR_T0",
-      EventDef::Encoding{.code = 0x43, .umask = 0x1, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Monitor T0)",
-      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.MONITOR_T1",
-      EventDef::Encoding{.code = 0x43, .umask = 0x2, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Monitor T1)",
-      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.LIVELOCK",
-      EventDef::Encoding{.code = 0x43, .umask = 0x4, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Livelock)",
-      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.LTERROR",
-      EventDef::Encoding{.code = 0x43, .umask = 0x8, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; LTError)",
-      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.CMC",
-      EventDef::Encoding{.code = 0x43, .umask = 0x10, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Correctable Machine Check)",
-      R"(Events coming from Uncore can be sent to one or all cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.UMC",
-      EventDef::Encoding{.code = 0x43, .umask = 0x20, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Uncorrectable Machine Check)",
-      R"(Events coming from Uncore can be sent to one or all cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.TRAP",
-      EventDef::Encoding{.code = 0x43, .umask = 0x40, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Trap)",
-      R"(Events coming from Uncore can be sent to one or all cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_U2C_EVENTS.OTHER",
-      EventDef::Encoding{.code = 0x43, .umask = 0x80, .msr_values = {0x00}},
-      R"(Monitor Sent to T0; Other)",
-      R"(Events coming from Uncore can be sent to one or all cores; PREQ, PSMI, P2U, Thermal, PCUSMI, PMI)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ubox,
-      "UNC_U_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x00, .umask = 0x1, .msr_values = {0x00}},
-      R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
-      R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11579,7 +9731,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_BYP_CMDS.ACT",
       EventDef::Encoding{.code = 0xA1, .umask = 0x1, .msr_values = {0x00}},
       R"(ACT command issued by 2 cycle bypass)",
-      R"(UNC_M_BYP_CMDS.ACT)",
+      R"(ACT command issued by 2 cycle bypass)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11591,7 +9743,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_BYP_CMDS.CAS",
       EventDef::Encoding{.code = 0xA1, .umask = 0x2, .msr_values = {0x00}},
       R"(CAS command issued by 2 cycle bypass)",
-      R"(UNC_M_BYP_CMDS.CAS)",
+      R"(CAS command issued by 2 cycle bypass)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11603,7 +9755,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_BYP_CMDS.PRE",
       EventDef::Encoding{.code = 0xA1, .umask = 0x4, .msr_values = {0x00}},
       R"(PRE command issued by 2 cycle bypass)",
-      R"(UNC_M_BYP_CMDS.PRE)",
+      R"(PRE command issued by 2 cycle bypass)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -11771,7 +9923,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_ECC_CORRECTABLE_ERRORS",
       EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
       R"(ECC Correctable Errors)",
-      R"(Counts the number of ECC errors detected and corrected by the iMC on this channel.  This counter is only useful with ECC DRAM devices.  This count will increment one time for each correction regardless of the number of bits corrected.  The iMC can correct up to 4 bit errors in independent channel mode and 8 bit erros in lockstep mode.)",
+      R"(Counts the number of ECC errors detected and corrected by the iMC on this channel.  This counter is only useful with ECC DRAM devices.  This count will increment one time for each correction regardless of the number of bits corrected.  The iMC can correct up to 4 bit errors in independent channel mode and 8 bit errors in lockstep mode.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12167,7 +10319,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_PRIO.LOW",
       EventDef::Encoding{.code = 0xA0, .umask = 0x1, .msr_values = {0x00}},
       R"(Read CAS issued with LOW priority)",
-      R"(UNC_M_RD_CAS_PRIO.LOW)",
+      R"(Read CAS issued with LOW priority)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12179,7 +10331,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_PRIO.MED",
       EventDef::Encoding{.code = 0xA0, .umask = 0x2, .msr_values = {0x00}},
       R"(Read CAS issued with MEDIUM priority)",
-      R"(UNC_M_RD_CAS_PRIO.MED)",
+      R"(Read CAS issued with MEDIUM priority)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12191,7 +10343,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_PRIO.HIGH",
       EventDef::Encoding{.code = 0xA0, .umask = 0x4, .msr_values = {0x00}},
       R"(Read CAS issued with HIGH priority)",
-      R"(UNC_M_RD_CAS_PRIO.HIGH)",
+      R"(Read CAS issued with HIGH priority)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12203,7 +10355,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_PRIO.PANIC",
       EventDef::Encoding{.code = 0xA0, .umask = 0x8, .msr_values = {0x00}},
       R"(Read CAS issued with PANIC NON ISOCH priority (starved))",
-      R"(UNC_M_RD_CAS_PRIO.PANIC)",
+      R"(Read CAS issued with PANIC NON ISOCH priority (starved))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12215,7 +10367,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK1",
       EventDef::Encoding{.code = 0xB0, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK0.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12227,7 +10379,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK2",
       EventDef::Encoding{.code = 0xB0, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK0.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12239,7 +10391,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK4",
       EventDef::Encoding{.code = 0xB0, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK0.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12251,7 +10403,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK8",
       EventDef::Encoding{.code = 0xB0, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK0.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12263,7 +10415,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.ALLBANKS",
       EventDef::Encoding{.code = 0xB0, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; All Banks)",
-      R"(UNC_M_RD_CAS_RANK0.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12275,7 +10427,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK0",
       EventDef::Encoding{.code = 0xB0, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK0.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12287,7 +10439,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK3",
       EventDef::Encoding{.code = 0xB0, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK0.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12299,7 +10451,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK5",
       EventDef::Encoding{.code = 0xB0, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK0.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12311,7 +10463,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK6",
       EventDef::Encoding{.code = 0xB0, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK0.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12323,7 +10475,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK7",
       EventDef::Encoding{.code = 0xB0, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK0.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12335,7 +10487,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK9",
       EventDef::Encoding{.code = 0xB0, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK0.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12347,7 +10499,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK10",
       EventDef::Encoding{.code = 0xB0, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK0.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12359,7 +10511,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK11",
       EventDef::Encoding{.code = 0xB0, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK0.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12371,7 +10523,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK12",
       EventDef::Encoding{.code = 0xB0, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK0.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12383,7 +10535,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK13",
       EventDef::Encoding{.code = 0xB0, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK0.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12395,7 +10547,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK14",
       EventDef::Encoding{.code = 0xB0, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK0.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12407,7 +10559,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANK15",
       EventDef::Encoding{.code = 0xB0, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK0.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12419,7 +10571,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANKG0",
       EventDef::Encoding{.code = 0xB0, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK0.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12431,7 +10583,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANKG1",
       EventDef::Encoding{.code = 0xB0, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK0.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12443,7 +10595,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANKG2",
       EventDef::Encoding{.code = 0xB0, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK0.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12455,7 +10607,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK0.BANKG3",
       EventDef::Encoding{.code = 0xB0, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 0; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK0.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12467,7 +10619,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK1",
       EventDef::Encoding{.code = 0xB1, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK1.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12479,7 +10631,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK2",
       EventDef::Encoding{.code = 0xB1, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK1.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12491,7 +10643,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK4",
       EventDef::Encoding{.code = 0xB1, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK1.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12503,7 +10655,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK8",
       EventDef::Encoding{.code = 0xB1, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK1.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12515,7 +10667,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.ALLBANKS",
       EventDef::Encoding{.code = 0xB1, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; All Banks)",
-      R"(UNC_M_RD_CAS_RANK1.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12527,7 +10679,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK0",
       EventDef::Encoding{.code = 0xB1, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK1.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12539,7 +10691,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK3",
       EventDef::Encoding{.code = 0xB1, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK1.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12551,7 +10703,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK5",
       EventDef::Encoding{.code = 0xB1, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK1.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12563,7 +10715,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK6",
       EventDef::Encoding{.code = 0xB1, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK1.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12575,7 +10727,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK7",
       EventDef::Encoding{.code = 0xB1, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK1.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12587,7 +10739,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK9",
       EventDef::Encoding{.code = 0xB1, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK1.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12599,7 +10751,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK10",
       EventDef::Encoding{.code = 0xB1, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK1.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12611,7 +10763,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK11",
       EventDef::Encoding{.code = 0xB1, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK1.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12623,7 +10775,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK12",
       EventDef::Encoding{.code = 0xB1, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK1.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12635,7 +10787,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK13",
       EventDef::Encoding{.code = 0xB1, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK1.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12647,7 +10799,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK14",
       EventDef::Encoding{.code = 0xB1, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK1.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12659,7 +10811,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANK15",
       EventDef::Encoding{.code = 0xB1, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK1.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12671,7 +10823,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANKG0",
       EventDef::Encoding{.code = 0xB1, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK1.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12683,7 +10835,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANKG1",
       EventDef::Encoding{.code = 0xB1, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK1.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12695,7 +10847,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANKG2",
       EventDef::Encoding{.code = 0xB1, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK1.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12707,7 +10859,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK1.BANKG3",
       EventDef::Encoding{.code = 0xB1, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 1; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK1.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12719,7 +10871,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK2.BANK0",
       EventDef::Encoding{.code = 0xB2, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 2; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK2.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12731,7 +10883,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK1",
       EventDef::Encoding{.code = 0xB4, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK4.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12743,7 +10895,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK2",
       EventDef::Encoding{.code = 0xB4, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK4.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12755,7 +10907,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK4",
       EventDef::Encoding{.code = 0xB4, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK4.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12767,7 +10919,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK8",
       EventDef::Encoding{.code = 0xB4, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK4.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12779,7 +10931,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.ALLBANKS",
       EventDef::Encoding{.code = 0xB4, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; All Banks)",
-      R"(UNC_M_RD_CAS_RANK4.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12791,7 +10943,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK0",
       EventDef::Encoding{.code = 0xB4, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK4.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12803,7 +10955,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK3",
       EventDef::Encoding{.code = 0xB4, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK4.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12815,7 +10967,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK5",
       EventDef::Encoding{.code = 0xB4, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK4.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12827,7 +10979,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK6",
       EventDef::Encoding{.code = 0xB4, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK4.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12839,7 +10991,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK7",
       EventDef::Encoding{.code = 0xB4, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK4.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12851,7 +11003,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK9",
       EventDef::Encoding{.code = 0xB4, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK4.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12863,7 +11015,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK10",
       EventDef::Encoding{.code = 0xB4, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK4.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12875,7 +11027,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK11",
       EventDef::Encoding{.code = 0xB4, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK4.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12887,7 +11039,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK12",
       EventDef::Encoding{.code = 0xB4, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK4.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12899,7 +11051,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK13",
       EventDef::Encoding{.code = 0xB4, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK4.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12911,7 +11063,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK14",
       EventDef::Encoding{.code = 0xB4, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK4.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12923,7 +11075,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANK15",
       EventDef::Encoding{.code = 0xB4, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK4.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12935,7 +11087,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANKG0",
       EventDef::Encoding{.code = 0xB4, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK4.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12947,7 +11099,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANKG1",
       EventDef::Encoding{.code = 0xB4, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK4.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12959,7 +11111,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANKG2",
       EventDef::Encoding{.code = 0xB4, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK4.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12971,7 +11123,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK4.BANKG3",
       EventDef::Encoding{.code = 0xB4, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 4; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK4.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12983,7 +11135,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK1",
       EventDef::Encoding{.code = 0xB5, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK5.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -12995,7 +11147,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK2",
       EventDef::Encoding{.code = 0xB5, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK5.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13007,7 +11159,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK4",
       EventDef::Encoding{.code = 0xB5, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK5.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13019,7 +11171,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK8",
       EventDef::Encoding{.code = 0xB5, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK5.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13031,7 +11183,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.ALLBANKS",
       EventDef::Encoding{.code = 0xB5, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; All Banks)",
-      R"(UNC_M_RD_CAS_RANK5.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13043,7 +11195,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK0",
       EventDef::Encoding{.code = 0xB5, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK5.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13055,7 +11207,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK3",
       EventDef::Encoding{.code = 0xB5, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK5.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13067,7 +11219,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK5",
       EventDef::Encoding{.code = 0xB5, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK5.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13079,7 +11231,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK6",
       EventDef::Encoding{.code = 0xB5, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK5.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13091,7 +11243,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK7",
       EventDef::Encoding{.code = 0xB5, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK5.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13103,7 +11255,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK9",
       EventDef::Encoding{.code = 0xB5, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK5.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13115,7 +11267,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK10",
       EventDef::Encoding{.code = 0xB5, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK5.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13127,7 +11279,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK11",
       EventDef::Encoding{.code = 0xB5, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK5.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13139,7 +11291,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK12",
       EventDef::Encoding{.code = 0xB5, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK5.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13151,7 +11303,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK13",
       EventDef::Encoding{.code = 0xB5, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK5.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13163,7 +11315,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK14",
       EventDef::Encoding{.code = 0xB5, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK5.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13175,7 +11327,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANK15",
       EventDef::Encoding{.code = 0xB5, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK5.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13187,7 +11339,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANKG0",
       EventDef::Encoding{.code = 0xB5, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK5.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13199,7 +11351,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANKG1",
       EventDef::Encoding{.code = 0xB5, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK5.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13211,7 +11363,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANKG2",
       EventDef::Encoding{.code = 0xB5, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK5.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13223,7 +11375,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK5.BANKG3",
       EventDef::Encoding{.code = 0xB5, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 5; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK5.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13235,7 +11387,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK1",
       EventDef::Encoding{.code = 0xB6, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK6.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13247,7 +11399,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK2",
       EventDef::Encoding{.code = 0xB6, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK6.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13259,7 +11411,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK4",
       EventDef::Encoding{.code = 0xB6, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK6.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13271,7 +11423,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK8",
       EventDef::Encoding{.code = 0xB6, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK6.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13283,7 +11435,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.ALLBANKS",
       EventDef::Encoding{.code = 0xB6, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; All Banks)",
-      R"(UNC_M_RD_CAS_RANK6.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13295,7 +11447,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK0",
       EventDef::Encoding{.code = 0xB6, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK6.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13307,7 +11459,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK3",
       EventDef::Encoding{.code = 0xB6, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK6.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13319,7 +11471,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK5",
       EventDef::Encoding{.code = 0xB6, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK6.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13331,7 +11483,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK6",
       EventDef::Encoding{.code = 0xB6, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK6.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13343,7 +11495,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK7",
       EventDef::Encoding{.code = 0xB6, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK6.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13355,7 +11507,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK9",
       EventDef::Encoding{.code = 0xB6, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK6.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13367,7 +11519,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK10",
       EventDef::Encoding{.code = 0xB6, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK6.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13379,7 +11531,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK11",
       EventDef::Encoding{.code = 0xB6, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK6.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13391,7 +11543,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK12",
       EventDef::Encoding{.code = 0xB6, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK6.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13403,7 +11555,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK13",
       EventDef::Encoding{.code = 0xB6, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK6.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13415,7 +11567,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK14",
       EventDef::Encoding{.code = 0xB6, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK6.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13427,7 +11579,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANK15",
       EventDef::Encoding{.code = 0xB6, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK6.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13439,7 +11591,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANKG0",
       EventDef::Encoding{.code = 0xB6, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK6.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13451,7 +11603,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANKG1",
       EventDef::Encoding{.code = 0xB6, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK6.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13463,7 +11615,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANKG2",
       EventDef::Encoding{.code = 0xB6, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK6.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13475,7 +11627,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK6.BANKG3",
       EventDef::Encoding{.code = 0xB6, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 6; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK6.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13487,7 +11639,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK1",
       EventDef::Encoding{.code = 0xB7, .umask = 0x1, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 1)",
-      R"(UNC_M_RD_CAS_RANK7.BANK1)",
+      R"(RD_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13499,7 +11651,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK2",
       EventDef::Encoding{.code = 0xB7, .umask = 0x2, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 2)",
-      R"(UNC_M_RD_CAS_RANK7.BANK2)",
+      R"(RD_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13511,7 +11663,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK4",
       EventDef::Encoding{.code = 0xB7, .umask = 0x4, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 4)",
-      R"(UNC_M_RD_CAS_RANK7.BANK4)",
+      R"(RD_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13523,7 +11675,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK8",
       EventDef::Encoding{.code = 0xB7, .umask = 0x8, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 8)",
-      R"(UNC_M_RD_CAS_RANK7.BANK8)",
+      R"(RD_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13535,7 +11687,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.ALLBANKS",
       EventDef::Encoding{.code = 0xB7, .umask = 0x10, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; All Banks)",
-      R"(UNC_M_RD_CAS_RANK7.ALLBANKS)",
+      R"(RD_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13547,7 +11699,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK0",
       EventDef::Encoding{.code = 0xB7, .umask = 0x0, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 0)",
-      R"(UNC_M_RD_CAS_RANK7.BANK0)",
+      R"(RD_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13559,7 +11711,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK3",
       EventDef::Encoding{.code = 0xB7, .umask = 0x3, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 3)",
-      R"(UNC_M_RD_CAS_RANK7.BANK3)",
+      R"(RD_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13571,7 +11723,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK5",
       EventDef::Encoding{.code = 0xB7, .umask = 0x5, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 5)",
-      R"(UNC_M_RD_CAS_RANK7.BANK5)",
+      R"(RD_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13583,7 +11735,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK6",
       EventDef::Encoding{.code = 0xB7, .umask = 0x6, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 6)",
-      R"(UNC_M_RD_CAS_RANK7.BANK6)",
+      R"(RD_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13595,7 +11747,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK7",
       EventDef::Encoding{.code = 0xB7, .umask = 0x7, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 7)",
-      R"(UNC_M_RD_CAS_RANK7.BANK7)",
+      R"(RD_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13607,7 +11759,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK9",
       EventDef::Encoding{.code = 0xB7, .umask = 0x9, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 9)",
-      R"(UNC_M_RD_CAS_RANK7.BANK9)",
+      R"(RD_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13619,7 +11771,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK10",
       EventDef::Encoding{.code = 0xB7, .umask = 0xA, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 10)",
-      R"(UNC_M_RD_CAS_RANK7.BANK10)",
+      R"(RD_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13631,7 +11783,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK11",
       EventDef::Encoding{.code = 0xB7, .umask = 0xB, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 11)",
-      R"(UNC_M_RD_CAS_RANK7.BANK11)",
+      R"(RD_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13643,7 +11795,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK12",
       EventDef::Encoding{.code = 0xB7, .umask = 0xC, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 12)",
-      R"(UNC_M_RD_CAS_RANK7.BANK12)",
+      R"(RD_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13655,7 +11807,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK13",
       EventDef::Encoding{.code = 0xB7, .umask = 0xD, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 13)",
-      R"(UNC_M_RD_CAS_RANK7.BANK13)",
+      R"(RD_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13667,7 +11819,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK14",
       EventDef::Encoding{.code = 0xB7, .umask = 0xE, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 14)",
-      R"(UNC_M_RD_CAS_RANK7.BANK14)",
+      R"(RD_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13679,7 +11831,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANK15",
       EventDef::Encoding{.code = 0xB7, .umask = 0xF, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank 15)",
-      R"(UNC_M_RD_CAS_RANK7.BANK15)",
+      R"(RD_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13691,7 +11843,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANKG0",
       EventDef::Encoding{.code = 0xB7, .umask = 0x11, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_RD_CAS_RANK7.BANKG0)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13703,7 +11855,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANKG1",
       EventDef::Encoding{.code = 0xB7, .umask = 0x12, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_RD_CAS_RANK7.BANKG1)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13715,7 +11867,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANKG2",
       EventDef::Encoding{.code = 0xB7, .umask = 0x13, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_RD_CAS_RANK7.BANKG2)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13727,7 +11879,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_RD_CAS_RANK7.BANKG3",
       EventDef::Encoding{.code = 0xB7, .umask = 0x14, .msr_values = {0x00}},
       R"(RD_CAS Access to Rank 7; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_RD_CAS_RANK7.BANKG3)",
+      R"(RD_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13763,7 +11915,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_VMSE_MXB_WR_OCCUPANCY",
       EventDef::Encoding{.code = 0x91, .umask = 0x0, .msr_values = {0x00}},
       R"(VMSE MXB write buffer occupancy)",
-      R"(UNC_M_VMSE_MXB_WR_OCCUPANCY)",
+      R"(VMSE MXB write buffer occupancy)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13775,7 +11927,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_VMSE_WR_PUSH.WMM",
       EventDef::Encoding{.code = 0x90, .umask = 0x1, .msr_values = {0x00}},
       R"(VMSE WR PUSH issued; VMSE write PUSH issued in WMM)",
-      R"(UNC_M_VMSE_WR_PUSH.WMM)",
+      R"(VMSE WR PUSH issued; VMSE write PUSH issued in WMM)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13787,7 +11939,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_VMSE_WR_PUSH.RMM",
       EventDef::Encoding{.code = 0x90, .umask = 0x2, .msr_values = {0x00}},
       R"(VMSE WR PUSH issued; VMSE write PUSH issued in RMM)",
-      R"(UNC_M_VMSE_WR_PUSH.RMM)",
+      R"(VMSE WR PUSH issued; VMSE write PUSH issued in RMM)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13799,7 +11951,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WMM_TO_RMM.LOW_THRESH",
       EventDef::Encoding{.code = 0xC0, .umask = 0x1, .msr_values = {0x00}},
       R"(Transition from WMM to RMM because of low threshold; Transition from WMM to RMM because of starve counter)",
-      R"(UNC_M_WMM_TO_RMM.LOW_THRESH)",
+      R"(Transition from WMM to RMM because of low threshold; Transition from WMM to RMM because of starve counter)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13811,7 +11963,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WMM_TO_RMM.STARVE",
       EventDef::Encoding{.code = 0xC0, .umask = 0x2, .msr_values = {0x00}},
       R"(Transition from WMM to RMM because of low threshold)",
-      R"(UNC_M_WMM_TO_RMM.STARVE)",
+      R"(Transition from WMM to RMM because of low threshold)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13823,7 +11975,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WMM_TO_RMM.VMSE_RETRY",
       EventDef::Encoding{.code = 0xC0, .umask = 0x4, .msr_values = {0x00}},
       R"(Transition from WMM to RMM because of low threshold)",
-      R"(UNC_M_WMM_TO_RMM.VMSE_RETRY)",
+      R"(Transition from WMM to RMM because of low threshold)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13883,7 +12035,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WRONG_MM",
       EventDef::Encoding{.code = 0xC1, .umask = 0x0, .msr_values = {0x00}},
       R"(Not getting the requested Major Mode)",
-      R"(UNC_M_WRONG_MM)",
+      R"(Not getting the requested Major Mode)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13895,7 +12047,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK1",
       EventDef::Encoding{.code = 0xB8, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK0.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13907,7 +12059,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK2",
       EventDef::Encoding{.code = 0xB8, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK0.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13919,7 +12071,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK4",
       EventDef::Encoding{.code = 0xB8, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK0.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13931,7 +12083,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK8",
       EventDef::Encoding{.code = 0xB8, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK0.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13943,7 +12095,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.ALLBANKS",
       EventDef::Encoding{.code = 0xB8, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; All Banks)",
-      R"(UNC_M_WR_CAS_RANK0.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13955,7 +12107,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK0",
       EventDef::Encoding{.code = 0xB8, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK0.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13967,7 +12119,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK3",
       EventDef::Encoding{.code = 0xB8, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK0.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13979,7 +12131,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK5",
       EventDef::Encoding{.code = 0xB8, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK0.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -13991,7 +12143,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK6",
       EventDef::Encoding{.code = 0xB8, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK0.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14003,7 +12155,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK7",
       EventDef::Encoding{.code = 0xB8, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK0.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14015,7 +12167,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK9",
       EventDef::Encoding{.code = 0xB8, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK0.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14027,7 +12179,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK10",
       EventDef::Encoding{.code = 0xB8, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK0.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14039,7 +12191,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK11",
       EventDef::Encoding{.code = 0xB8, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK0.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14051,7 +12203,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK12",
       EventDef::Encoding{.code = 0xB8, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK0.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14063,7 +12215,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK13",
       EventDef::Encoding{.code = 0xB8, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK0.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14075,7 +12227,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK14",
       EventDef::Encoding{.code = 0xB8, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK0.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14087,7 +12239,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANK15",
       EventDef::Encoding{.code = 0xB8, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK0.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14099,7 +12251,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANKG0",
       EventDef::Encoding{.code = 0xB8, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK0.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14111,7 +12263,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANKG1",
       EventDef::Encoding{.code = 0xB8, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK0.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14123,7 +12275,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANKG2",
       EventDef::Encoding{.code = 0xB8, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK0.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14135,7 +12287,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK0.BANKG3",
       EventDef::Encoding{.code = 0xB8, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 0; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK0.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14147,7 +12299,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK1",
       EventDef::Encoding{.code = 0xB9, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK1.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14159,7 +12311,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK2",
       EventDef::Encoding{.code = 0xB9, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK1.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14171,7 +12323,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK4",
       EventDef::Encoding{.code = 0xB9, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK1.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14183,7 +12335,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK8",
       EventDef::Encoding{.code = 0xB9, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK1.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14195,7 +12347,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.ALLBANKS",
       EventDef::Encoding{.code = 0xB9, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; All Banks)",
-      R"(UNC_M_WR_CAS_RANK1.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14207,7 +12359,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK0",
       EventDef::Encoding{.code = 0xB9, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK1.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14219,7 +12371,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK3",
       EventDef::Encoding{.code = 0xB9, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK1.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14231,7 +12383,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK5",
       EventDef::Encoding{.code = 0xB9, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK1.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14243,7 +12395,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK6",
       EventDef::Encoding{.code = 0xB9, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK1.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14255,7 +12407,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK7",
       EventDef::Encoding{.code = 0xB9, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK1.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14267,7 +12419,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK9",
       EventDef::Encoding{.code = 0xB9, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK1.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14279,7 +12431,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK10",
       EventDef::Encoding{.code = 0xB9, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK1.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14291,7 +12443,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK11",
       EventDef::Encoding{.code = 0xB9, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK1.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14303,7 +12455,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK12",
       EventDef::Encoding{.code = 0xB9, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK1.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14315,7 +12467,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK13",
       EventDef::Encoding{.code = 0xB9, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK1.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14327,7 +12479,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK14",
       EventDef::Encoding{.code = 0xB9, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK1.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14339,7 +12491,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANK15",
       EventDef::Encoding{.code = 0xB9, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK1.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14351,7 +12503,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANKG0",
       EventDef::Encoding{.code = 0xB9, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK1.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14363,7 +12515,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANKG1",
       EventDef::Encoding{.code = 0xB9, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK1.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14375,7 +12527,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANKG2",
       EventDef::Encoding{.code = 0xB9, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK1.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14387,7 +12539,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK1.BANKG3",
       EventDef::Encoding{.code = 0xB9, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 1; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK1.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14399,7 +12551,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK1",
       EventDef::Encoding{.code = 0xBC, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK4.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14411,7 +12563,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK2",
       EventDef::Encoding{.code = 0xBC, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK4.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14423,7 +12575,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK4",
       EventDef::Encoding{.code = 0xBC, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK4.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14435,7 +12587,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK8",
       EventDef::Encoding{.code = 0xBC, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK4.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14447,7 +12599,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.ALLBANKS",
       EventDef::Encoding{.code = 0xBC, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; All Banks)",
-      R"(UNC_M_WR_CAS_RANK4.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14459,7 +12611,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK0",
       EventDef::Encoding{.code = 0xBC, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK4.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14471,7 +12623,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK3",
       EventDef::Encoding{.code = 0xBC, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK4.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14483,7 +12635,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK5",
       EventDef::Encoding{.code = 0xBC, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK4.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14495,7 +12647,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK6",
       EventDef::Encoding{.code = 0xBC, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK4.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14507,7 +12659,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK7",
       EventDef::Encoding{.code = 0xBC, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK4.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14519,7 +12671,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK9",
       EventDef::Encoding{.code = 0xBC, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK4.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14531,7 +12683,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK10",
       EventDef::Encoding{.code = 0xBC, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK4.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14543,7 +12695,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK11",
       EventDef::Encoding{.code = 0xBC, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK4.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14555,7 +12707,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK12",
       EventDef::Encoding{.code = 0xBC, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK4.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14567,7 +12719,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK13",
       EventDef::Encoding{.code = 0xBC, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK4.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14579,7 +12731,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK14",
       EventDef::Encoding{.code = 0xBC, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK4.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14591,7 +12743,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANK15",
       EventDef::Encoding{.code = 0xBC, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK4.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14603,7 +12755,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANKG0",
       EventDef::Encoding{.code = 0xBC, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK4.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14615,7 +12767,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANKG1",
       EventDef::Encoding{.code = 0xBC, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK4.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14627,7 +12779,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANKG2",
       EventDef::Encoding{.code = 0xBC, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK4.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14639,7 +12791,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK4.BANKG3",
       EventDef::Encoding{.code = 0xBC, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 4; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK4.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14651,7 +12803,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK1",
       EventDef::Encoding{.code = 0xBD, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK5.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14663,7 +12815,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK2",
       EventDef::Encoding{.code = 0xBD, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK5.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14675,7 +12827,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK4",
       EventDef::Encoding{.code = 0xBD, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK5.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14687,7 +12839,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK8",
       EventDef::Encoding{.code = 0xBD, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK5.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14699,7 +12851,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.ALLBANKS",
       EventDef::Encoding{.code = 0xBD, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; All Banks)",
-      R"(UNC_M_WR_CAS_RANK5.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14711,7 +12863,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK0",
       EventDef::Encoding{.code = 0xBD, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK5.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14723,7 +12875,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK3",
       EventDef::Encoding{.code = 0xBD, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK5.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14735,7 +12887,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK5",
       EventDef::Encoding{.code = 0xBD, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK5.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14747,7 +12899,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK6",
       EventDef::Encoding{.code = 0xBD, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK5.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14759,7 +12911,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK7",
       EventDef::Encoding{.code = 0xBD, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK5.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14771,7 +12923,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK9",
       EventDef::Encoding{.code = 0xBD, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK5.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14783,7 +12935,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK10",
       EventDef::Encoding{.code = 0xBD, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK5.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14795,7 +12947,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK11",
       EventDef::Encoding{.code = 0xBD, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK5.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14807,7 +12959,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK12",
       EventDef::Encoding{.code = 0xBD, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK5.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14819,7 +12971,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK13",
       EventDef::Encoding{.code = 0xBD, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK5.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14831,7 +12983,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK14",
       EventDef::Encoding{.code = 0xBD, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK5.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14843,7 +12995,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANK15",
       EventDef::Encoding{.code = 0xBD, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK5.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14855,7 +13007,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANKG0",
       EventDef::Encoding{.code = 0xBD, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK5.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14867,7 +13019,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANKG1",
       EventDef::Encoding{.code = 0xBD, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK5.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14879,7 +13031,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANKG2",
       EventDef::Encoding{.code = 0xBD, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK5.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14891,7 +13043,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK5.BANKG3",
       EventDef::Encoding{.code = 0xBD, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 5; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK5.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14903,7 +13055,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK1",
       EventDef::Encoding{.code = 0xBE, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK6.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14915,7 +13067,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK2",
       EventDef::Encoding{.code = 0xBE, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK6.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14927,7 +13079,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK4",
       EventDef::Encoding{.code = 0xBE, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK6.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14939,7 +13091,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK8",
       EventDef::Encoding{.code = 0xBE, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK6.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14951,7 +13103,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.ALLBANKS",
       EventDef::Encoding{.code = 0xBE, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; All Banks)",
-      R"(UNC_M_WR_CAS_RANK6.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14963,7 +13115,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK0",
       EventDef::Encoding{.code = 0xBE, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK6.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14975,7 +13127,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK3",
       EventDef::Encoding{.code = 0xBE, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK6.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14987,7 +13139,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK5",
       EventDef::Encoding{.code = 0xBE, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK6.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -14999,7 +13151,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK6",
       EventDef::Encoding{.code = 0xBE, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK6.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15011,7 +13163,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK7",
       EventDef::Encoding{.code = 0xBE, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK6.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15023,7 +13175,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK9",
       EventDef::Encoding{.code = 0xBE, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK6.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15035,7 +13187,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK10",
       EventDef::Encoding{.code = 0xBE, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK6.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15047,7 +13199,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK11",
       EventDef::Encoding{.code = 0xBE, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK6.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15059,7 +13211,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK12",
       EventDef::Encoding{.code = 0xBE, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK6.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15071,7 +13223,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK13",
       EventDef::Encoding{.code = 0xBE, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK6.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15083,7 +13235,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK14",
       EventDef::Encoding{.code = 0xBE, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK6.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15095,7 +13247,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANK15",
       EventDef::Encoding{.code = 0xBE, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK6.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15107,7 +13259,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANKG0",
       EventDef::Encoding{.code = 0xBE, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK6.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15119,7 +13271,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANKG1",
       EventDef::Encoding{.code = 0xBE, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK6.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15131,7 +13283,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANKG2",
       EventDef::Encoding{.code = 0xBE, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK6.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15143,7 +13295,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK6.BANKG3",
       EventDef::Encoding{.code = 0xBE, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 6; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK6.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15155,7 +13307,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK1",
       EventDef::Encoding{.code = 0xBF, .umask = 0x1, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 1)",
-      R"(UNC_M_WR_CAS_RANK7.BANK1)",
+      R"(WR_CAS Access to Rank 0 : Bank 1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15167,7 +13319,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK2",
       EventDef::Encoding{.code = 0xBF, .umask = 0x2, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 2)",
-      R"(UNC_M_WR_CAS_RANK7.BANK2)",
+      R"(WR_CAS Access to Rank 0 : Bank 2)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15179,7 +13331,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK4",
       EventDef::Encoding{.code = 0xBF, .umask = 0x4, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 4)",
-      R"(UNC_M_WR_CAS_RANK7.BANK4)",
+      R"(WR_CAS Access to Rank 0 : Bank 4)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15191,7 +13343,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK8",
       EventDef::Encoding{.code = 0xBF, .umask = 0x8, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 8)",
-      R"(UNC_M_WR_CAS_RANK7.BANK8)",
+      R"(WR_CAS Access to Rank 0 : Bank 8)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15203,7 +13355,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.ALLBANKS",
       EventDef::Encoding{.code = 0xBF, .umask = 0x10, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; All Banks)",
-      R"(UNC_M_WR_CAS_RANK7.ALLBANKS)",
+      R"(WR_CAS Access to Rank 0 : All Banks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15215,7 +13367,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK0",
       EventDef::Encoding{.code = 0xBF, .umask = 0x0, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 0)",
-      R"(UNC_M_WR_CAS_RANK7.BANK0)",
+      R"(WR_CAS Access to Rank 0 : Bank 0)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15227,7 +13379,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK3",
       EventDef::Encoding{.code = 0xBF, .umask = 0x3, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 3)",
-      R"(UNC_M_WR_CAS_RANK7.BANK3)",
+      R"(WR_CAS Access to Rank 0 : Bank 3)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15239,7 +13391,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK5",
       EventDef::Encoding{.code = 0xBF, .umask = 0x5, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 5)",
-      R"(UNC_M_WR_CAS_RANK7.BANK5)",
+      R"(WR_CAS Access to Rank 0 : Bank 5)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15251,7 +13403,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK6",
       EventDef::Encoding{.code = 0xBF, .umask = 0x6, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 6)",
-      R"(UNC_M_WR_CAS_RANK7.BANK6)",
+      R"(WR_CAS Access to Rank 0 : Bank 6)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15263,7 +13415,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK7",
       EventDef::Encoding{.code = 0xBF, .umask = 0x7, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 7)",
-      R"(UNC_M_WR_CAS_RANK7.BANK7)",
+      R"(WR_CAS Access to Rank 0 : Bank 7)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15275,7 +13427,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK9",
       EventDef::Encoding{.code = 0xBF, .umask = 0x9, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 9)",
-      R"(UNC_M_WR_CAS_RANK7.BANK9)",
+      R"(WR_CAS Access to Rank 0 : Bank 9)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15287,7 +13439,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK10",
       EventDef::Encoding{.code = 0xBF, .umask = 0xA, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 10)",
-      R"(UNC_M_WR_CAS_RANK7.BANK10)",
+      R"(WR_CAS Access to Rank 0 : Bank 10)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15299,7 +13451,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK11",
       EventDef::Encoding{.code = 0xBF, .umask = 0xB, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 11)",
-      R"(UNC_M_WR_CAS_RANK7.BANK11)",
+      R"(WR_CAS Access to Rank 0 : Bank 11)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15311,7 +13463,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK12",
       EventDef::Encoding{.code = 0xBF, .umask = 0xC, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 12)",
-      R"(UNC_M_WR_CAS_RANK7.BANK12)",
+      R"(WR_CAS Access to Rank 0 : Bank 12)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15323,7 +13475,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK13",
       EventDef::Encoding{.code = 0xBF, .umask = 0xD, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 13)",
-      R"(UNC_M_WR_CAS_RANK7.BANK13)",
+      R"(WR_CAS Access to Rank 0 : Bank 13)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15335,7 +13487,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK14",
       EventDef::Encoding{.code = 0xBF, .umask = 0xE, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 14)",
-      R"(UNC_M_WR_CAS_RANK7.BANK14)",
+      R"(WR_CAS Access to Rank 0 : Bank 14)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15347,7 +13499,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANK15",
       EventDef::Encoding{.code = 0xBF, .umask = 0xF, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank 15)",
-      R"(UNC_M_WR_CAS_RANK7.BANK15)",
+      R"(WR_CAS Access to Rank 0 : Bank 15)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15359,7 +13511,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANKG0",
       EventDef::Encoding{.code = 0xBF, .umask = 0x11, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank Group 0 (Banks 0-3))",
-      R"(UNC_M_WR_CAS_RANK7.BANKG0)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 0 (Banks 0-3))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15371,7 +13523,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANKG1",
       EventDef::Encoding{.code = 0xBF, .umask = 0x12, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank Group 1 (Banks 4-7))",
-      R"(UNC_M_WR_CAS_RANK7.BANKG1)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 1 (Banks 4-7))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15383,7 +13535,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANKG2",
       EventDef::Encoding{.code = 0xBF, .umask = 0x13, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank Group 2 (Banks 8-11))",
-      R"(UNC_M_WR_CAS_RANK7.BANKG2)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 2 (Banks 8-11))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15395,7 +13547,1699 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_WR_CAS_RANK7.BANKG3",
       EventDef::Encoding{.code = 0xBF, .umask = 0x14, .msr_values = {0x00}},
       R"(WR_CAS Access to Rank 7; Bank Group 3 (Banks 12-15))",
-      R"(UNC_M_WR_CAS_RANK7.BANKG3)",
+      R"(WR_CAS Access to Rank 0 : Bank Group 3 (Banks 12-15))",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.AGE0",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x1, .msr_values = {0x00}},
+      R"(LRU Queue; LRU Age 0)",
+      R"(How often age was set to 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.AGE1",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x2, .msr_values = {0x00}},
+      R"(LRU Queue; LRU Age 1)",
+      R"(How often age was set to 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.AGE2",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x4, .msr_values = {0x00}},
+      R"(LRU Queue; LRU Age 2)",
+      R"(How often age was set to 2)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.AGE3",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x8, .msr_values = {0x00}},
+      R"(LRU Queue; LRU Age 3)",
+      R"(How often age was set to 3)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.LRU_DECREMENT",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x10, .msr_values = {0x00}},
+      R"(LRU Queue; LRU Bits Decremented)",
+      R"(How often all LRU bits were decremented by 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_QLRU.VICTIM_NON_ZERO",
+      EventDef::Encoding{.code = 0x3C, .umask = 0x20, .msr_values = {0x00}},
+      R"(LRU Queue; Non-0 Aged Victim)",
+      R"(How often we picked a victim that had a non-zero age)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RING_SINK_STARVED.AD",
+      EventDef::Encoding{.code = 0x6, .umask = 0x1, .msr_values = {0x00}},
+      R"(AD)",
+      R"(AD)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RING_SINK_STARVED.AK",
+      EventDef::Encoding{.code = 0x6, .umask = 0x2, .msr_values = {0x00}},
+      R"(AK)",
+      R"(AK)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RING_SINK_STARVED.IV",
+      EventDef::Encoding{.code = 0x6, .umask = 0x8, .msr_values = {0x00}},
+      R"(IV)",
+      R"(IV)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RING_SINK_STARVED.BL",
+      EventDef::Encoding{.code = 0x6, .umask = 0x4, .msr_values = {0x00}},
+      R"(BL)",
+      R"(BL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RxR_INT_STARVED.IRQ",
+      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
+      R"(Ingress Internal Starvation Cycles; IRQ)",
+      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the IRQ in Internal Starvation.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RxR_INT_STARVED.IPQ",
+      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
+      R"(Ingress Internal Starvation Cycles; IPQ)",
+      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the IPQ in Internal Starvation.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RxR_INT_STARVED.ISMQ",
+      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
+      R"(Ingress Internal Starvation Cycles; ISMQ)",
+      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.; Cycles with the ISMQ in Internal Starvation.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_RxR_INT_STARVED.PRQ",
+      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
+      R"(Ingress Internal Starvation Cycles; PRQ)",
+      R"(Counts cycles in internal starvation.  This occurs when one (or more) of the entries in the ingress queue are being starved out by other entries in that queue.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_TxR_STARVED.AK_BOTH",
+      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto AK Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that both AK egresses spent in starvation)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_TxR_STARVED.BL_BOTH",
+      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto BL Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that both BL egresses spent in starvation)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_TxR_STARVED.IV",
+      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto IV Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that the cachebo IV egress spent in starvation)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cbox,
+      "UNC_C_TxR_STARVED.AD_CORE",
+      EventDef::Encoding{.code = 0x3, .umask = 0x10, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto AD Ring (to core))",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.; cycles that the core AD egress spent in starvation)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_BT_TO_HT_NOT_ISSUED.INCOMING_SNP_HAZARD",
+      EventDef::Encoding{.code = 0x51, .umask = 0x2, .msr_values = {0x00}},
+      R"(BT to HT Not Issued; Incoming Snoop Hazard)",
+      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming snoop hazard)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_BT_TO_HT_NOT_ISSUED.INCOMING_BL_HAZARD",
+      EventDef::Encoding{.code = 0x51, .umask = 0x4, .msr_values = {0x00}},
+      R"(BT to HT Not Issued; Incoming Data Hazard)",
+      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_BT_TO_HT_NOT_ISSUED.RSPACKCFLT_HAZARD",
+      EventDef::Encoding{.code = 0x51, .umask = 0x8, .msr_values = {0x00}},
+      R"(BT to HT Not Issued; Incoming Data Hazard)",
+      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_BT_TO_HT_NOT_ISSUED.WBMDATA_HAZARD",
+      EventDef::Encoding{.code = 0x51, .umask = 0x10, .msr_values = {0x00}},
+      R"(BT to HT Not Issued; Incoming Data Hazard)",
+      R"(Counts the number of cycles when the HA does not issue transaction from BT to HT.; Cycles unable to issue from BT due to incoming BL data hazard)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_BACKPRESSURE.SAT",
+      EventDef::Encoding{.code = 0x61, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Backpressure)",
+      R"(IOT Backpressure)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_BACKPRESSURE.HUB",
+      EventDef::Encoding{.code = 0x61, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Backpressure)",
+      R"(IOT Backpressure)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_EAST_LO.CTS0",
+      EventDef::Encoding{.code = 0x64, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_EAST_LO.CTS1",
+      EventDef::Encoding{.code = 0x64, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_HI.CTS2",
+      EventDef::Encoding{.code = 0x65, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Hi)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_HI.CTS3",
+      EventDef::Encoding{.code = 0x65, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Hi)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_WEST_LO.CTS0",
+      EventDef::Encoding{.code = 0x62, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_IOT_CTS_WEST_LO.CTS1",
+      EventDef::Encoding{.code = 0x62, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x16, .umask = 0x1, .msr_values = {0x00}},
+      R"(iMC RPQ Credits Empty - Special; Channel 0)",
+      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 0 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x16, .umask = 0x2, .msr_values = {0x00}},
+      R"(iMC RPQ Credits Empty - Special; Channel 1)",
+      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 1 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x16, .umask = 0x4, .msr_values = {0x00}},
+      R"(iMC RPQ Credits Empty - Special; Channel 2)",
+      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 2 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RPQ_CYCLES_NO_SPEC_CREDITS.CHN3",
+      EventDef::Encoding{.code = 0x16, .umask = 0x8, .msr_values = {0x00}},
+      R"(iMC RPQ Credits Empty - Special; Channel 3)",
+      R"(Counts the number of cycles when there are no special credits available for posting reads from the HA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's RPQ (read pending queue).  This queue is broken into regular credits/buffers that are used by general reads, and special requests such as ISOCH reads.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 3 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD.HOM",
+      EventDef::Encoding{.code = 0xF, .umask = 0x4, .msr_values = {0x00}},
+      R"(Outbound NDR Ring Transactions; Non-data Responses)",
+      R"(Counts the number of outbound transactions on the AD ring.  This can be filtered by the NDR and SNP message classes.  See the filter descriptions for more details.; Filter for outbound NDR transactions sent on the AD ring.  NDR stands for non-data response and is generally used for completions that do not include data.  AD NDR is used for transactions to remote sockets.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_CYCLES_NE.SCHED0",
+      EventDef::Encoding{.code = 0x29, .umask = 0x1, .msr_values = {0x00}},
+      R"(AD Egress Not Empty; Scheduler 0)",
+      R"(AD Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_CYCLES_NE.SCHED1",
+      EventDef::Encoding{.code = 0x29, .umask = 0x2, .msr_values = {0x00}},
+      R"(AD Egress Not Empty; Scheduler 1)",
+      R"(AD Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x29, .umask = 0x3, .msr_values = {0x00}},
+      R"(AD Egress Not Empty; All)",
+      R"(AD Egress Not Empty; Cycles full from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_INSERTS.SCHED0",
+      EventDef::Encoding{.code = 0x27, .umask = 0x1, .msr_values = {0x00}},
+      R"(AD Egress Allocations; Scheduler 0)",
+      R"(AD Egress Allocations; Filter for allocations from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_INSERTS.SCHED1",
+      EventDef::Encoding{.code = 0x27, .umask = 0x2, .msr_values = {0x00}},
+      R"(AD Egress Allocations; Scheduler 1)",
+      R"(AD Egress Allocations; Filter for allocations from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AD_INSERTS.ALL",
+      EventDef::Encoding{.code = 0x27, .umask = 0x3, .msr_values = {0x00}},
+      R"(AD Egress Allocations; All)",
+      R"(AD Egress Allocations; Allocations from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_CYCLES_NE.SCHED0",
+      EventDef::Encoding{.code = 0x31, .umask = 0x1, .msr_values = {0x00}},
+      R"(AK Egress Not Empty; Scheduler 0)",
+      R"(AK Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_CYCLES_NE.SCHED1",
+      EventDef::Encoding{.code = 0x31, .umask = 0x2, .msr_values = {0x00}},
+      R"(AK Egress Not Empty; Scheduler 1)",
+      R"(AK Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x31, .umask = 0x3, .msr_values = {0x00}},
+      R"(AK Egress Not Empty; All)",
+      R"(AK Egress Not Empty; Cycles full from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_INSERTS.SCHED0",
+      EventDef::Encoding{.code = 0x2F, .umask = 0x1, .msr_values = {0x00}},
+      R"(AK Egress Allocations; Scheduler 0)",
+      R"(AK Egress Allocations; Filter for allocations from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_INSERTS.SCHED1",
+      EventDef::Encoding{.code = 0x2F, .umask = 0x2, .msr_values = {0x00}},
+      R"(AK Egress Allocations; Scheduler 1)",
+      R"(AK Egress Allocations; Filter for allocations from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_AK_INSERTS.ALL",
+      EventDef::Encoding{.code = 0x2F, .umask = 0x3, .msr_values = {0x00}},
+      R"(AK Egress Allocations; All)",
+      R"(AK Egress Allocations; Allocations from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_CYCLES_NE.SCHED0",
+      EventDef::Encoding{.code = 0x35, .umask = 0x1, .msr_values = {0x00}},
+      R"(BL Egress Not Empty; Scheduler 0)",
+      R"(BL Egress Not Empty; Filter for cycles not empty  from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_CYCLES_NE.SCHED1",
+      EventDef::Encoding{.code = 0x35, .umask = 0x2, .msr_values = {0x00}},
+      R"(BL Egress Not Empty; Scheduler 1)",
+      R"(BL Egress Not Empty; Filter for cycles not empty from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x3, .msr_values = {0x00}},
+      R"(BL Egress Not Empty; All)",
+      R"(BL Egress Not Empty; Cycles full from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_INSERTS.SCHED0",
+      EventDef::Encoding{.code = 0x33, .umask = 0x1, .msr_values = {0x00}},
+      R"(BL Egress Allocations; Scheduler 0)",
+      R"(BL Egress Allocations; Filter for allocations from scheduler bank 0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_INSERTS.SCHED1",
+      EventDef::Encoding{.code = 0x33, .umask = 0x2, .msr_values = {0x00}},
+      R"(BL Egress Allocations; Scheduler 1)",
+      R"(BL Egress Allocations; Filter for allocations from scheduler bank 1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_TxR_BL_INSERTS.ALL",
+      EventDef::Encoding{.code = 0x33, .umask = 0x3, .msr_values = {0x00}},
+      R"(BL Egress Allocations; All)",
+      R"(BL Egress Allocations; Allocations from both schedulers)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN0",
+      EventDef::Encoding{.code = 0x19, .umask = 0x1, .msr_values = {0x00}},
+      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 0)",
+      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 0 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN1",
+      EventDef::Encoding{.code = 0x19, .umask = 0x2, .msr_values = {0x00}},
+      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 1)",
+      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 1 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN2",
+      EventDef::Encoding{.code = 0x19, .umask = 0x4, .msr_values = {0x00}},
+      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 2)",
+      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 2 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_WPQ_CYCLES_NO_SPEC_CREDITS.CHN3",
+      EventDef::Encoding{.code = 0x19, .umask = 0x8, .msr_values = {0x00}},
+      R"(HA iMC CHN0 WPQ Credits Empty - Special; Channel 3)",
+      R"(Counts the number of cycles when there are no special credits available for posting writes from the HA into the iMC.  In order to send writes into the memory controller, the HA must first acquire a credit for the iMC's WPQ (write pending queue).  This queue is broken into regular credits/buffers that are used by general writes, and special requests such as ISOCH writes.  This count only tracks the special credits.  This statistic is generally not interesting for general IA workloads, but may be of interest for understanding the characteristics of systems using ISOCH.  One can filter based on the memory controller channel.  One or more channels can be tracked at a given time.; Filter for memory controller channel 3 only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C0_CYCLES",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C0)",
+      R"(Counts the number of cycles when the package was in C0.  This event can be used in conjunction with edge detect to count C0 entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
+      EventDef::Encoding{.code = 0x2B, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C2E)",
+      R"(Counts the number of cycles when the package was in C2E.  This event can be used in conjunction with edge detect to count C2E entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C3_CYCLES",
+      EventDef::Encoding{.code = 0x2C, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C3)",
+      R"(Counts the number of cycles when the package was in C3.  This event can be used in conjunction with edge detect to count C3 entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C6_CYCLES",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C6)",
+      R"(Counts the number of cycles when the package was in C6.  This event can be used in conjunction with edge detect to count C6 entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C7_CYCLES",
+      EventDef::Encoding{.code = 0x2E, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C7 State Residency)",
+      R"(Counts the number of cycles when the package was in C7.  This event can be used in conjunction with edge detect to count C7 entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CRC_ERRORS.LINK_INIT",
+      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
+      R"(CRC Errors Detected; LinkInit)",
+      R"(Number of CRC errors detected in the QPI Agent.  Each QPI flit incorporates 8 bits of CRC for error detection.  This counts the number of flits where the CRC was able to detect an error.  After an error has been detected, the QPI agent will send a request to the transmitting socket to resend the flit (as well as any flits that came after it).; CRC errors detected during link initialization.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CRC_ERRORS.NORMAL_OP",
+      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_Q_RxL_CRC_ERRORS.NORMAL_OP)",
+      R"(UNC_Q_RxL_CRC_ERRORS.NORMAL_OP)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_DRS.VN0",
+      EventDef::Encoding{.code = 0xF, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - DRS; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors DRS flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_DRS.VN1",
+      EventDef::Encoding{.code = 0xF, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - DRS; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors DRS flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_HOM.VN0",
+      EventDef::Encoding{.code = 0x12, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - HOM; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors HOM flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_HOM.VN1",
+      EventDef::Encoding{.code = 0x12, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - HOM; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors HOM flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NCB.VN0",
+      EventDef::Encoding{.code = 0x10, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NCB; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCB flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NCB.VN1",
+      EventDef::Encoding{.code = 0x10, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NCB; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCB flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NCS.VN0",
+      EventDef::Encoding{.code = 0x11, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NCS; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCS flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NCS.VN1",
+      EventDef::Encoding{.code = 0x11, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NCS; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NCS flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NDR.VN0",
+      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NDR; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NDR flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_NDR.VN1",
+      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - NDR; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors NDR flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_SNP.VN0",
+      EventDef::Encoding{.code = 0x13, .umask = 0x1, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - SNP; for VN0)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors SNP flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_CYCLES_NE_SNP.VN1",
+      EventDef::Encoding{.code = 0x13, .umask = 0x2, .msr_values = {0x00}},
+      R"(RxQ Cycles Not Empty - SNP; for VN1)",
+      R"(Counts the number of cycles that the QPI RxQ was not empty.  Generally, when data is transmitted across QPI, it will bypass the RxQ and pass directly to the ring interface.  If things back up getting transmitted onto the ring, however, it may need to allocate into this buffer, thus increasing the latency.  This event can be used in conjunction with the Flit Buffer Occupancy Accumulator event to calculate the average occupancy.  This monitors SNP flits only.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_DRS",
+      EventDef::Encoding{.code = 0x35, .umask = 0x1, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - HOM)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the HOM message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_NCB",
+      EventDef::Encoding{.code = 0x35, .umask = 0x2, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - SNP)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the SNP message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_NCS",
+      EventDef::Encoding{.code = 0x35, .umask = 0x4, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NDR)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NDR message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_HOM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x8, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - DRS)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the DRS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_SNP",
+      EventDef::Encoding{.code = 0x35, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NCB)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NCB message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.BGF_NDR",
+      EventDef::Encoding{.code = 0x35, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; BGF Stall - NCS)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet from the NCS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.EGRESS_CREDITS",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; Egress Credits)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled a packet because there were insufficient BGF credits.  For details on a message class granularity, use the Egress Credit Occupancy events.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN0.GV",
+      EventDef::Encoding{.code = 0x35, .umask = 0x80, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN0; GV)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 0; Stalled because a GV transition (frequency transition) was taking place.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_DRS",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x1, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - HOM)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the HOM message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_NCB",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x2, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - SNP)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the SNP message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_NCS",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x4, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NDR)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NDR message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_HOM",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x8, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - DRS)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the DRS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_SNP",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x10, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NCB)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NCB message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_RxL_STALLS_VN1.BGF_NDR",
+      EventDef::Encoding{.code = 0x3A, .umask = 0x20, .msr_values = {0x00}},
+      R"(Stalls Sending to R3QPI on VN1; BGF Stall - NCS)",
+      R"(Number of stalls trying to send to R3QPI on Virtual Network 1.; Stalled a packet from the NCS message class because there were not enough BGF credits.  In bypass mode, we will stall on the packet boundary, while in RxQ mode we will stall on the flit boundary.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_TxL_CRC_NO_CREDITS.FULL",
+      EventDef::Encoding{.code = 0x2, .umask = 0x1, .msr_values = {0x00}},
+      R"(Cycles Stalled with no LLR Credits; LLR is full)",
+      R"(Number of cycles when the Tx side ran out of Link Layer Retry credits, causing the Tx to stall.; When LLR is totally full, we are not allowed to send any packets.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_qpi,
+      "UNC_Q_TxL_CRC_NO_CREDITS.ALMOST_FULL",
+      EventDef::Encoding{.code = 0x2, .umask = 0x2, .msr_values = {0x00}},
+      R"(Cycles Stalled with no LLR Credits; LLR is almost full)",
+      R"(Number of cycles when the Tx side ran out of Link Layer Retry credits, causing the Tx to stall.; When LLR is almost full, we block some but not all packets.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_ACQUIRED.DRS",
+      EventDef::Encoding{.code = 0x33, .umask = 0x8, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credit Acquired; DRS)",
+      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the DRS message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_ACQUIRED.NCB",
+      EventDef::Encoding{.code = 0x33, .umask = 0x10, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credit Acquired; NCB)",
+      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCB message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_ACQUIRED.NCS",
+      EventDef::Encoding{.code = 0x33, .umask = 0x20, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credit Acquired; NCS)",
+      R"(Counts the number of credits that are acquired in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCS message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_USED.DRS",
+      EventDef::Encoding{.code = 0x32, .umask = 0x8, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credits in Use; DRS)",
+      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the DRS message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_USED.NCB",
+      EventDef::Encoding{.code = 0x32, .umask = 0x10, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credits in Use; NCB)",
+      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCB message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_IIO_CREDITS_USED.NCS",
+      EventDef::Encoding{.code = 0x32, .umask = 0x20, .msr_values = {0x00}},
+      R"(R2PCIe IIO Credits in Use; NCS)",
+      R"(Counts the number of cycles when one or more credits in the R2PCIe agent for sending transactions into the IIO on either NCB or NCS are in use.  Transactions from the BL ring going into the IIO Agent must first acquire a credit.  These credits are for either the NCB or NCS message classes.  NCB, or non-coherent bypass messages are used to transmit data without coherency (and are common).  NCS is used for reads to PCIe (and should be used sparingly).; Credits to the IIO for the NCS message class.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_SBO0_CREDIT_OCCUPANCY.AD",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
+      R"(SBo0 Credits Occupancy; For AD Ring)",
+      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_SBO0_CREDIT_OCCUPANCY.BL",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
+      R"(SBo0 Credits Occupancy; For BL Ring)",
+      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_BACKPRESSURE.SAT",
+      EventDef::Encoding{.code = 0xB, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Backpressure)",
+      R"(IOT Backpressure)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_BACKPRESSURE.HUB",
+      EventDef::Encoding{.code = 0xB, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Backpressure)",
+      R"(IOT Backpressure)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_CTS_HI.CTS2",
+      EventDef::Encoding{.code = 0xD, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Hi)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_CTS_HI.CTS3",
+      EventDef::Encoding{.code = 0xD, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Hi)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_CTS_LO.CTS0",
+      EventDef::Encoding{.code = 0xC, .umask = 0x1, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_IOT_CTS_LO.CTS1",
+      EventDef::Encoding{.code = 0xC, .umask = 0x2, .msr_values = {0x00}},
+      R"(IOT Common Trigger Sequencer - Lo)",
+      R"(Debug Mask/Match Tie-Ins)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_SBO0_CREDIT_OCCUPANCY.AD",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x1, .msr_values = {0x00}},
+      R"(SBo0 Credits Occupancy; For AD Ring)",
+      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_SBO0_CREDIT_OCCUPANCY.BL",
+      EventDef::Encoding{.code = 0x2A, .umask = 0x2, .msr_values = {0x00}},
+      R"(SBo0 Credits Occupancy; For BL Ring)",
+      R"(Number of Sbo 0 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_SBO1_CREDIT_OCCUPANCY.AD",
+      EventDef::Encoding{.code = 0x2B, .umask = 0x1, .msr_values = {0x00}},
+      R"(SBo1 Credits Occupancy; For AD Ring)",
+      R"(Number of Sbo 1 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_SBO1_CREDIT_OCCUPANCY.BL",
+      EventDef::Encoding{.code = 0x2B, .umask = 0x2, .msr_values = {0x00}},
+      R"(SBo1 Credits Occupancy; For BL Ring)",
+      R"(Number of Sbo 1 credits in use in a given cycle, per ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_SINK_STARVED.AD_CACHE",
+      EventDef::Encoding{.code = 0x6, .umask = 0x1, .msr_values = {0x00}},
+      R"(UNC_S_RING_SINK_STARVED.AD_CACHE)",
+      R"(UNC_S_RING_SINK_STARVED.AD_CACHE)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_SINK_STARVED.AK_CORE",
+      EventDef::Encoding{.code = 0x6, .umask = 0x2, .msr_values = {0x00}},
+      R"(UNC_S_RING_SINK_STARVED.AK_CORE)",
+      R"(UNC_S_RING_SINK_STARVED.AK_CORE)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_SINK_STARVED.BL_CORE",
+      EventDef::Encoding{.code = 0x6, .umask = 0x4, .msr_values = {0x00}},
+      R"(UNC_S_RING_SINK_STARVED.BL_CORE)",
+      R"(UNC_S_RING_SINK_STARVED.BL_CORE)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_SINK_STARVED.IV_CORE",
+      EventDef::Encoding{.code = 0x6, .umask = 0x8, .msr_values = {0x00}},
+      R"(UNC_S_RING_SINK_STARVED.IV_CORE)",
+      R"(UNC_S_RING_SINK_STARVED.IV_CORE)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_BUSY_STARVED.AD_CRD",
+      EventDef::Encoding{.code = 0x15, .umask = 0x1, .msr_values = {0x00}},
+      R"(Injection Starvation; AD - Credits)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_BUSY_STARVED.AD_BNC",
+      EventDef::Encoding{.code = 0x15, .umask = 0x2, .msr_values = {0x00}},
+      R"(Injection Starvation; AD - Bounces)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_BUSY_STARVED.BL_CRD",
+      EventDef::Encoding{.code = 0x15, .umask = 0x4, .msr_values = {0x00}},
+      R"(Injection Starvation; BL - Credits)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_BUSY_STARVED.BL_BNC",
+      EventDef::Encoding{.code = 0x15, .umask = 0x8, .msr_values = {0x00}},
+      R"(Injection Starvation; BL - Bounces)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress because a message (credited/bounceable) is  being sent.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.AD_CRD",
+      EventDef::Encoding{.code = 0x14, .umask = 0x1, .msr_values = {0x00}},
+      R"(Injection Starvation; AD - Credits)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.AD_BNC",
+      EventDef::Encoding{.code = 0x14, .umask = 0x2, .msr_values = {0x00}},
+      R"(Injection Starvation; AD - Bounces)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.BL_CRD",
+      EventDef::Encoding{.code = 0x14, .umask = 0x4, .msr_values = {0x00}},
+      R"(Injection Starvation; BL - Credits)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.BL_BNC",
+      EventDef::Encoding{.code = 0x14, .umask = 0x8, .msr_values = {0x00}},
+      R"(Injection Starvation; BL - Bounces)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.AK",
+      EventDef::Encoding{.code = 0x14, .umask = 0x10, .msr_values = {0x00}},
+      R"(Injection Starvation; AK)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.IV",
+      EventDef::Encoding{.code = 0x14, .umask = 0x20, .msr_values = {0x00}},
+      R"(Injection Starvation; IV)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RxR_CRD_STARVED.IFV",
+      EventDef::Encoding{.code = 0x14, .umask = 0x40, .msr_values = {0x00}},
+      R"(Injection Starvation; IVF Credit)",
+      R"(Counts injection starvation.  This starvation is triggered when the Ingress cannot send a transaction onto the ring for a long period of time.  In this case, the Ingress but unable to forward to Egress due to lack of credit.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_TxR_STARVED.AD",
+      EventDef::Encoding{.code = 0x3, .umask = 0x1, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto AD Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_TxR_STARVED.AK",
+      EventDef::Encoding{.code = 0x3, .umask = 0x2, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto AK Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_TxR_STARVED.BL",
+      EventDef::Encoding{.code = 0x3, .umask = 0x4, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto BL Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_TxR_STARVED.IV",
+      EventDef::Encoding{.code = 0x3, .umask = 0x8, .msr_values = {0x00}},
+      R"(Injection Starvation; Onto IV Ring)",
+      R"(Counts injection starvation.  This starvation is triggered when the Egress cannot send a transaction onto the ring for a long period of time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_FILTER_MATCH.ENABLE",
+      EventDef::Encoding{.code = 0x41, .umask = 0x1, .msr_values = {0x00}},
+      R"(Filter Match)",
+      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_FILTER_MATCH.DISABLE",
+      EventDef::Encoding{.code = 0x41, .umask = 0x2, .msr_values = {0x00}},
+      R"(Filter Match)",
+      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_FILTER_MATCH.U2C_ENABLE",
+      EventDef::Encoding{.code = 0x41, .umask = 0x4, .msr_values = {0x00}},
+      R"(Filter Match)",
+      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_FILTER_MATCH.U2C_DISABLE",
+      EventDef::Encoding{.code = 0x41, .umask = 0x8, .msr_values = {0x00}},
+      R"(Filter Match)",
+      R"(Filter match per thread (w/ or w/o Filter Enable).  Specify the thread to filter on using NCUPMONCTRLGLCTR.ThreadID.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.MONITOR_T0",
+      EventDef::Encoding{.code = 0x43, .umask = 0x1, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Monitor T0)",
+      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.MONITOR_T1",
+      EventDef::Encoding{.code = 0x43, .umask = 0x2, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Monitor T1)",
+      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.LIVELOCK",
+      EventDef::Encoding{.code = 0x43, .umask = 0x4, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Livelock)",
+      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.LTERROR",
+      EventDef::Encoding{.code = 0x43, .umask = 0x8, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; LTError)",
+      R"(Events coming from Uncore can be sent to one or all cores; Filter by core)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.CMC",
+      EventDef::Encoding{.code = 0x43, .umask = 0x10, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Correctable Machine Check)",
+      R"(Events coming from Uncore can be sent to one or all cores)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.UMC",
+      EventDef::Encoding{.code = 0x43, .umask = 0x20, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Uncorrectable Machine Check)",
+      R"(Events coming from Uncore can be sent to one or all cores)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.TRAP",
+      EventDef::Encoding{.code = 0x43, .umask = 0x40, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Trap)",
+      R"(Events coming from Uncore can be sent to one or all cores)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_U2C_EVENTS.OTHER",
+      EventDef::Encoding{.code = 0x43, .umask = 0x80, .msr_values = {0x00}},
+      R"(Monitor Sent to T0; Other)",
+      R"(Events coming from Uncore can be sent to one or all cores; PREQ, PSMI, P2U, Thermal, PCUSMI, PMI)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15415,11 +15259,167 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C1E_CYCLES",
+      EventDef::Encoding{.code = 0x4E, .umask = 0x0, .msr_values = {0x00}},
+      R"(Package C State Residency - C1E)",
+      R"(Counts the number of cycles when the package was in C1E.  This event can be used in conjunction with edge detect to count C1E entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RING_AK_USED.ALL",
+      EventDef::Encoding{.code = 0x3F, .umask = 0xF, .msr_values = {0x00}},
+      R"(HA AK Ring in Use; All)",
+      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ha,
+      "UNC_H_RING_BL_USED.ALL",
+      EventDef::Encoding{.code = 0x40, .umask = 0xF, .msr_values = {0x00}},
+      R"(HA BL Ring in Use; All)",
+      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_RING_AD_USED.ALL",
+      EventDef::Encoding{.code = 0x7, .umask = 0xF, .msr_values = {0x00}},
+      R"(R2 AD Ring in Use; All)",
+      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_RING_AK_USED.ALL",
+      EventDef::Encoding{.code = 0x8, .umask = 0xF, .msr_values = {0x00}},
+      R"(R2 AK Ring in Use; All)",
+      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r2pcie,
+      "UNC_R2_RING_BL_USED.ALL",
+      EventDef::Encoding{.code = 0x9, .umask = 0xF, .msr_values = {0x00}},
+      R"(R2 BL Ring in Use; All)",
+      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_RING_AD_USED.ALL",
+      EventDef::Encoding{.code = 0x7, .umask = 0xF, .msr_values = {0x00}},
+      R"(R3 AD Ring in Use; All)",
+      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_RING_AK_USED.ALL",
+      EventDef::Encoding{.code = 0x8, .umask = 0xF, .msr_values = {0x00}},
+      R"(R3 AK Ring in Use; All)",
+      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_r3qpi,
+      "UNC_R3_RING_BL_USED.ALL",
+      EventDef::Encoding{.code = 0x9, .umask = 0xF, .msr_values = {0x00}},
+      R"(R3 BL Ring in Use; All)",
+      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sunk, but does not include when packets are being sent from the ring stop.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_AD_USED.ALL",
+      EventDef::Encoding{.code = 0x1B, .umask = 0xF, .msr_values = {0x00}},
+      R"(AD Ring In Use; All)",
+      R"(Counts the number of cycles that the AD ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop.  We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_AK_USED.ALL",
+      EventDef::Encoding{.code = 0x1C, .umask = 0xF, .msr_values = {0x00}},
+      R"(AK Ring In Use; All)",
+      R"(Counts the number of cycles that the AK ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop. We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_sbox,
+      "UNC_S_RING_BL_USED.ALL",
+      EventDef::Encoding{.code = 0x1D, .umask = 0xF, .msr_values = {0x00}},
+      R"(BL Ring in Use; All)",
+      R"(Counts the number of cycles that the BL ring is being used at this ring stop.  This includes when packets are passing by and when packets are being sent, but does not include when packets are being sunk into the ring stop. We really have two rings in BDX -- a clockwise ring and a counter-clockwise ring.  On the left side of the ring, the UP direction is on the clockwise ring and DN is on the counter-clockwise ring.  On the right side of the ring, this is reversed.  The first half of the CBos are on the left side of the ring, and the 2nd half are on the right side of the ring.  In other words (for example), in a 4c part, Cbo 0 UP AD is NOT the same ring as CBo 2 UP AD because they are on opposite sides of the ring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CLOCKTICKS",
       EventDef::Encoding{.code = 0x00, .umask = 0x1, .msr_values = {0x00}},
       R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
       R"(Clockticks in the Memory Controller using a dedicated 48-bit Fixed Counter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_ubox,
+      "UNC_U_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x00, .umask = 0x1, .msr_values = {0x00}},
+      R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
+      R"(Clockticks in the UBOX using a dedicated 48-bit Fixed Counter)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

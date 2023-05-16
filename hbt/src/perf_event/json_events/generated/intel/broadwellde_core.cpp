@@ -13,7 +13,7 @@ namespace broadwellde_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwellde_core.json (340 events).
+    Events from broadwellde_core.json (344 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW-DE id: 86
@@ -469,9 +469,9 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "L2_RQSTS.DEMAND_DATA_RD_HIT",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0x41, .cmask = 0, .msr_values = {0}},
+          .code = 0x24, .umask = 0xc1, .cmask = 0, .msr_values = {0}},
       R"(Demand Data Read requests that hit L2 cache)",
-      R"(This event counts the number of demand Data Read requests that hit L2 cache. Only not rejected loads are counted.)",
+      R"(Counts the number of demand Data Read requests, initiated by load instructions, that hit L2 cache.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -482,7 +482,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "L2_RQSTS.RFO_HIT",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0x42, .cmask = 0, .msr_values = {0}},
+          .code = 0x24, .umask = 0xc2, .cmask = 0, .msr_values = {0}},
       R"(RFO requests that hit L2 cache.)",
       R"(RFO requests that hit L2 cache.)",
       200003,
@@ -495,7 +495,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "L2_RQSTS.CODE_RD_HIT",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0x44, .cmask = 0, .msr_values = {0}},
+          .code = 0x24, .umask = 0xc4, .cmask = 0, .msr_values = {0}},
       R"(L2 cache hits when fetching instructions, code reads.)",
       R"(L2 cache hits when fetching instructions, code reads.)",
       200003,
@@ -508,7 +508,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "L2_RQSTS.L2_PF_HIT",
       EventDef::Encoding{
-          .code = 0x24, .umask = 0x50, .cmask = 0, .msr_values = {0}},
+          .code = 0x24, .umask = 0xd0, .cmask = 0, .msr_values = {0}},
       R"(L2 prefetch requests that hit L2 cache)",
       R"(This event counts the number of requests from the L2 hardware prefetchers that hit L2 cache. L3 prefetch new types.)",
       200003,
@@ -671,7 +671,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
           .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate))",
       R"(This is a fixed-frequency event programmed to general counters. It counts when the core is unhalted at 100 Mhz.)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -688,7 +688,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
           .msr_values = {0}},
       R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
       R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -698,10 +698,10 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "CPU_CLK_UNHALTED.REF_XCLK",
       EventDef::Encoding{
-          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+          .code = 0x3C, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
       R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate))",
       R"(Reference cycles when the thread is unhalted (counts at 100 MHz rate).)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -715,10 +715,10 @@ See the table of not supported store forwards in the Optimization Guide.)",
           .umask = 0x01,
           .any = true,
           .cmask = 0,
-          .msr_values = {0}},
+          .msr_values = {0x00}},
       R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
       R"(Reference cycles when the at least one thread on the physical core is unhalted (counts at 100 MHz rate).)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -731,7 +731,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
           .code = 0x3c, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -741,10 +741,10 @@ See the table of not supported store forwards in the Optimization Guide.)",
       PmuType::cpu,
       "CPU_CLK_UNHALTED.ONE_THREAD_ACTIVE",
       EventDef::Encoding{
-          .code = 0x3C, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+          .code = 0x3C, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
       R"(Count XClk pulses when this thread is unhalted and the other thread is halted.)",
-      2000003,
+      100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -755,7 +755,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles)",
+      R"(L1D miss outstandings duration in cycles)",
       R"(This event counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand; from the demand Hit FB, if it is allocated by hardware or software prefetch.
 Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
       2000003,
@@ -785,7 +785,7 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
           .umask = 0x01,
           .any = true,
           .cmask = 1,
-          .msr_values = {0}},
+          .msr_values = {0x00}},
       R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
       R"(Cycles with L1D load Misses outstanding from any thread on physical core.)",
       2000003,
@@ -798,9 +798,9 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       PmuType::cpu,
       "L1D_PEND_MISS.FB_FULL",
       EventDef::Encoding{
-          .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+          .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1282,7 +1282,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       PmuType::cpu,
       "OFFCORE_REQUESTS_OUTSTANDING.DEMAND_DATA_RD_GE_6",
       EventDef::Encoding{
-          .code = 0x60, .umask = 0x01, .cmask = 6, .msr_values = {0}},
+          .code = 0x60, .umask = 0x01, .cmask = 6, .msr_values = {0x00}},
       R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
       R"(Cycles with at least 6 offcore outstanding Demand Data Read transactions in uncore queue.)",
       2000003,
@@ -1446,7 +1446,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_DSB_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1459,7 +1459,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1476,7 +1476,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1515,8 +1515,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ.)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1554,8 +1554,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1567,8 +1567,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1761,7 +1761,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Stalls caused by changing prefix length of the instruction.)",
-      R"(This event counts stalls occured due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
+      R"(This event counts stalls occurred due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2030,6 +2030,19 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "BR_MISP_EXEC.ALL_BRANCHES",
       EventDef::Encoding{
           .code = 0x89, .umask = 0xFF, .cmask = 0, .msr_values = {0}},
@@ -2130,7 +2143,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       PmuType::cpu,
       "UOP_DISPATCHES_CANCELLED.SIMD_PRF",
       EventDef::Encoding{
-          .code = 0xA0, .umask = 0x03, .cmask = 0, .msr_values = {0}},
+          .code = 0xA0, .umask = 0x03, .cmask = 0, .msr_values = {0x00}},
       R"(Micro-op dispatches cancelled due to insufficient SIMD physical register file read ports)",
       R"(This event counts the number of micro-operations cancelled after they were dispatched from the scheduler to the execution units when the total number of physical register read ports across all dispatch ports exceeds the read bandwidth of the physical register file.  The SIMD_PRF subevent applies to the following instructions: VDPPS, DPPS, VPCMPESTRI, PCMPESTRI, VPCMPESTRM, PCMPESTRM, VFMADD*, VFMADDSUB*, VFMSUB*, VMSUBADD*, VFNMADD*, VFNMSUB*.  See the Broadwell Optimization Guide for more information.)",
       2000003,
@@ -2161,8 +2174,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 0.)",
-      R"(Cycles per core when uops are exectuted in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2204,8 +2217,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 1.)",
-      R"(Cycles per core when uops are exectuted in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2333,8 +2346,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 4.)",
-      R"(Cycles per core when uops are exectuted in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2376,8 +2389,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 5.)",
-      R"(Cycles per core when uops are exectuted in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2419,8 +2432,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 6.)",
-      R"(Cycles per core when uops are exectuted in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2487,13 +2500,9 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       PmuType::cpu,
       "RESOURCE_STALLS.ANY",
       EventDef::Encoding{
-          .code = 0xA2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+          .code = 0xa2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Resource-related stall cycles)",
-      R"(This event counts resource-related stall cycles. Reasons for stalls can be as follows:
- - *any* u-arch structure got full (LB, SB, RS, ROB, BOB, LM, Physical Register Reclaim Table (PRRT), or Physical History Table (PHT) slots)
- - *any* u-arch structure got empty (like INT/SIMD FreeLists)
- - FPU control word (FPCW), MXCSR
-and others. This counts cycles that the pipeline backend blocked uop delivery from the front end.)",
+      R"(This event counts resource-related stall cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2556,7 +2565,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L2_MISS",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x01, .cmask = 1, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x01, .cmask = 1, .msr_values = {0x00}},
       R"(Cycles while L2 cache miss demand load is outstanding.)",
       R"(Cycles while L2 cache miss demand load is outstanding.)",
       2000003,
@@ -2582,7 +2591,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_MEM_ANY",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x02, .cmask = 2, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x02, .cmask = 2, .msr_values = {0x00}},
       R"(Cycles while memory subsystem has an outstanding load.)",
       R"(Cycles while memory subsystem has an outstanding load.)",
       2000003,
@@ -2608,7 +2617,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_TOTAL",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x04, .cmask = 4, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x04, .cmask = 4, .msr_values = {0x00}},
       R"(Total execution stalls.)",
       R"(Total execution stalls.)",
       2000003,
@@ -2634,7 +2643,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L2_MISS",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x05, .cmask = 5, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x05, .cmask = 5, .msr_values = {0x00}},
       R"(Execution stalls while L2 cache miss demand load is outstanding.)",
       R"(Execution stalls while L2 cache miss demand load is outstanding.)",
       2000003,
@@ -2660,7 +2669,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_MEM_ANY",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x06, .cmask = 6, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x06, .cmask = 6, .msr_values = {0x00}},
       R"(Execution stalls while memory subsystem has an outstanding load.)",
       R"(Execution stalls while memory subsystem has an outstanding load.)",
       2000003,
@@ -2686,7 +2695,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.CYCLES_L1D_MISS",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x08, .cmask = 8, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x08, .cmask = 8, .msr_values = {0x00}},
       R"(Cycles while L1 cache miss demand load is outstanding.)",
       R"(Cycles while L1 cache miss demand load is outstanding.)",
       2000003,
@@ -2712,7 +2721,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "CYCLE_ACTIVITY.STALLS_L1D_MISS",
       EventDef::Encoding{
-          .code = 0xA3, .umask = 0x0C, .cmask = 12, .msr_values = {0}},
+          .code = 0xA3, .umask = 0x0C, .cmask = 12, .msr_values = {0x00}},
       R"(Execution stalls while L1 cache miss demand load is outstanding.)",
       R"(Execution stalls while L1 cache miss demand load is outstanding.)",
       2000003,
@@ -2738,7 +2747,7 @@ and others. This counts cycles that the pipeline backend blocked uop delivery fr
       PmuType::cpu,
       "LSD.CYCLES_4_UOPS",
       EventDef::Encoding{
-          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0}},
+          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0x00}},
       R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
       R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
       2000003,
@@ -2806,8 +2815,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
-      R"(This event counts both cacheable and noncachaeble code read requests.)",
+      R"(Cacheable and non-cacheable code read requests)",
+      R"(This event counts both cacheable and non-cacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2834,6 +2843,19 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
           .code = 0xB0, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Demand and prefetch data reads)",
       R"(This event counts the demand and prefetch data reads. All Core Data Reads include cacheable Demands and L2 prefetchers (not L3 prefetchers). Counting also covers reads due to page walks resulted from any request type.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_REQUESTS.ALL_REQUESTS",
+      EventDef::Encoding{
+          .code = 0xb0, .umask = 0x80, .cmask = 0, .msr_values = {0}},
+      R"(Any memory transaction that reached the SQ.)",
+      R"(This event counts memory transactions reached the super queue including requests initiated by the core, all L3 prefetches, page walks, and so on.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3220,11 +3242,11 @@ Note: Writeback pending FIFO has six entries.)",
       "UOPS_RETIRED.ALL",
       EventDef::Encoding{
           .code = 0xC2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Actually retired uops. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts all actually retired uops. Counting increments by two for micro-fused uops, and by one for macro-fused and other uops. Maximal increment value for one cycle is eight.)",
+      R"(Actually retired uops.)",
+      R"(This event counts all actually retired uops. Counting increments by two for micro-fused uops, and by one for macro-fused and other uops. Maximal increment value for one cycle is eight.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
 
@@ -3252,7 +3274,7 @@ Note: Writeback pending FIFO has six entries.)",
           .code = 0xC2,
           .umask = 0x01,
           .inv = true,
-          .cmask = 10,
+          .cmask = 16,
           .msr_values = {0}},
       R"(Cycles with less than 10 actually retired uops.)",
       R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
@@ -3267,8 +3289,8 @@ Note: Writeback pending FIFO has six entries.)",
       "UOPS_RETIRED.RETIRE_SLOTS",
       EventDef::Encoding{
           .code = 0xC2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Retirement slots used. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts the number of retirement slots used.)",
+      R"(Retirement slots used.)",
+      R"(This event counts the number of retirement slots used.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3296,7 +3318,7 @@ Note: Writeback pending FIFO has six entries.)",
           .umask = 0x01,
           .edge = true,
           .cmask = 1,
-          .msr_values = {0}},
+          .msr_values = {0x00}},
       R"(Number of machine clears (nukes) of any type.)",
       R"(Number of machine clears (nukes) of any type.)",
       100003,
@@ -3365,8 +3387,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_INST_RETIRED.CONDITIONAL",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Conditional branch instructions retired. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts conditional branch instructions retired.)",
+      R"(Conditional branch instructions retired.)",
+      R"(This event counts conditional branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3378,8 +3400,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_INST_RETIRED.NEAR_CALL",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Direct and indirect near call instructions retired. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts both direct and indirect near call instructions retired.)",
+      R"(Direct and indirect near call instructions retired.)",
+      R"(This event counts both direct and indirect near call instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3391,8 +3413,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_INST_RETIRED.NEAR_CALL_R3",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Direct and indirect macro near call instructions retired (captured in ring 3). (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts both direct and indirect macro near call instructions retired (captured in ring 3).)",
+      R"(Direct and indirect macro near call instructions retired (captured in ring 3).)",
+      R"(This event counts both direct and indirect macro near call instructions retired (captured in ring 3).)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3416,8 +3438,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_INST_RETIRED.NEAR_RETURN",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Return instructions retired. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts return instructions retired.)",
+      R"(Return instructions retired.)",
+      R"(This event counts return instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3442,8 +3464,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_INST_RETIRED.NEAR_TAKEN",
       EventDef::Encoding{
           .code = 0xC4, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Taken branch instructions retired. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts taken branch instructions retired.)",
+      R"(Taken branch instructions retired.)",
+      R"(This event counts taken branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3480,8 +3502,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_MISP_RETIRED.CONDITIONAL",
       EventDef::Encoding{
           .code = 0xC5, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Mispredicted conditional branch instructions retired. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts mispredicted conditional branch instructions retired.)",
+      R"(Mispredicted conditional branch instructions retired.)",
+      R"(This event counts mispredicted conditional branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3506,8 +3528,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_MISP_RETIRED.RET",
       EventDef::Encoding{
           .code = 0xC5, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(This event counts the number of mispredicted ret instructions retired.(Precise Event))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts mispredicted return instructions retired.)",
+      R"(This event counts the number of mispredicted ret instructions retired. Non PEBS)",
+      R"(This event counts mispredicted return instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3519,8 +3541,8 @@ Note: Writeback pending FIFO has six entries.)",
       "BR_MISP_RETIRED.NEAR_TAKEN",
       EventDef::Encoding{
           .code = 0xC5, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(number of near branch instructions retired that were mispredicted and taken. (Precise Event - PEBS).)",
-      R"(Number of near branch instructions retired that were mispredicted and taken. (Precise Event - PEBS).)",
+      R"(number of near branch instructions retired that were mispredicted and taken.)",
+      R"(Number of near branch instructions retired that were mispredicted and taken.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3531,9 +3553,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired.  Each count represents 1 computation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired.  Each count represents 1 computation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3544,9 +3566,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired.  Each count represents 1 computation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired.  Each count represents 1 computation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x02, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3557,9 +3579,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SCALAR",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x03, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational scalar floating-point instructions retired. Applies to SSE* and AVX* scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RSQRT RCP SQRT FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar floating-point instructions retired. Applies to SSE* and AVX* scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RSQRT RCP SQRT FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x03, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational scalar floating-point instructions retired; some instructions will count twice as noted below. Each count represents 1 computation operation.   Applies to SSE* and AVX* scalar double and single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar single precision and double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3570,9 +3592,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired.  Each count represents 2 computations. Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired.  Each count represents 2 computations. Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3583,9 +3605,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired.  Each count represents 4 computations. Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired.  Each count represents 4 computations. Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x08, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3596,9 +3618,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired.  Each count represents 4 computations. Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired.  Each count represents 4 computations. Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x10, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3609,10 +3631,23 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.DOUBLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x15, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational double precision floating-point instructions retired. Applies to SSE* and AVX*scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.  ?.)",
-      R"(Number of SSE/AVX computational double precision floating-point instructions retired. Applies to SSE* and AVX*scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.  ?.)",
+          .code = 0xc7, .umask = 0x15, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational double precision floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* scalar and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational double precision floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* scalar and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
       2000006,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -3623,8 +3658,8 @@ Note: Writeback pending FIFO has six entries.)",
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired.  Each count represents 8 computations. Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired.  Each count represents 8 computations. Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 8 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3635,9 +3670,9 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.SINGLE",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x2A, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational single precision floating-point instructions retired. Applies to SSE* and AVX*scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element. ?.)",
-      R"(Number of SSE/AVX computational single precision floating-point instructions retired. Applies to SSE* and AVX*scalar, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RCP RSQRT SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element. ?.)",
+          .code = 0xc7, .umask = 0x2a, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational single precision floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* scalar and packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational single precision floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* scalar and packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
       2000005,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3648,10 +3683,23 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.PACKED",
       EventDef::Encoding{
-          .code = 0xC7, .umask = 0x3C, .cmask = 0, .msr_values = {0}},
-      R"(Number of SSE/AVX computational packed floating-point instructions retired. Applies to SSE* and AVX*, packed, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RSQRT RCP SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational packed floating-point instructions retired. Applies to SSE* and AVX*, packed, double and single precision floating-point: ADD SUB MUL DIV MIN MAX RSQRT RCP SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+          .code = 0xc7, .umask = 0x3c, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of SSE/AVX computational packed floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* packed double and single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational packed floating-point instructions retired; some instructions will count twice as noted below. Applies to SSE* and AVX* packed double and single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
       2000004,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.VECTOR",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0xFC, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -3689,8 +3737,8 @@ Note: Writeback pending FIFO has six entries.)",
       "HLE_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xc8, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times HLE abort was triggered (PEBS))",
-      R"(Number of times HLE abort was triggered (PEBS).)",
+      R"(Number of times HLE abort was triggered)",
+      R"(Number of times HLE abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3794,8 +3842,8 @@ Note: Writeback pending FIFO has six entries.)",
       "RTM_RETIRED.ABORTED",
       EventDef::Encoding{
           .code = 0xc9, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Number of times RTM abort was triggered (PEBS))",
-      R"(Number of times RTM abort was triggered (PEBS).)",
+      R"(Number of times RTM abort was triggered)",
+      R"(Number of times RTM abort was triggered .)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3949,96 +3997,96 @@ Note: Writeback pending FIFO has six entries.)",
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
-      R"(Loads with latency value being above 4)",
-      R"(This event counts loads with latency value being above four.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x4}},
+      R"(Randomly selected loads with latency value being above 4)",
+      R"(Counts randomly selected loads with latency value being above four.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_8",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
-      R"(Loads with latency value being above 8)",
-      R"(This event counts loads with latency value being above eight.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x8}},
+      R"(Randomly selected loads with latency value being above 8)",
+      R"(Counts randomly selected loads with latency value being above eight.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
-      R"(Loads with latency value being above 16)",
-      R"(This event counts loads with latency value being above 16.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x10}},
+      R"(Randomly selected loads with latency value being above 16)",
+      R"(Counts randomly selected loads with latency value being above 16.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_32",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
-      R"(Loads with latency value being above 32)",
-      R"(This event counts loads with latency value being above 32.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x20}},
+      R"(Randomly selected loads with latency value being above 32)",
+      R"(Counts randomly selected loads with latency value being above 32.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
-      R"(Loads with latency value being above 64)",
-      R"(This event counts loads with latency value being above 64.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x40}},
+      R"(Randomly selected loads with latency value being above 64)",
+      R"(Counts randomly selected loads with latency value being above 64.)",
       2003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_128",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
-      R"(Loads with latency value being above 128)",
-      R"(This event counts loads with latency value being above 128.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x80}},
+      R"(Randomly selected loads with latency value being above 128)",
+      R"(Counts randomly selected loads with latency value being above 128.)",
       1009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
-      R"(Loads with latency value being above 256)",
-      R"(This event counts loads with latency value being above 256.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x100}},
+      R"(Randomly selected loads with latency value being above 256)",
+      R"(Counts randomly selected loads with latency value being above 256.)",
       503,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_TRANS_RETIRED.LOAD_LATENCY_GT_512",
       EventDef::Encoding{
-          .code = 0xCD, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
-      R"(Loads with latency value being above 512)",
-      R"(This event counts loads with latency value being above 512.)",
+          .code = 0xcd, .umask = 0x01, .cmask = 0, .msr_values = {0x200}},
+      R"(Randomly selected loads with latency value being above 512)",
+      R"(Counts randomly selected loads with latency value being above 512.)",
       101,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
       R"(BDM100, BDM35)"));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -4046,8 +4094,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.STLB_MISS_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x11, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops that miss the STLB. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts load uops with true STLB miss retired to the architected path. True STLB miss is an uop triggering page walk that gets completed without blocks, and later gets retired. This page walk can end up with or without a fault.)",
+      R"(Retired load uops that miss the STLB.)",
+      R"(This event counts load uops with true STLB miss retired to the architected path. True STLB miss is an uop triggering page walk that gets completed without blocks, and later gets retired. This page walk can end up with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4059,8 +4107,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.STLB_MISS_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x12, .cmask = 0, .msr_values = {0}},
-      R"(Retired store uops that miss the STLB. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts store uops true STLB miss retired to the architected path. True STLB miss is an uop triggering page walk that gets completed without blocks, and later gets retired. This page walk can end up with or without a fault.)",
+      R"(Retired store uops that miss the STLB.)",
+      R"(This event counts store uops with true STLB miss retired to the architected path. True STLB miss is an uop triggering page walk that gets completed without blocks, and later gets retired. This page walk can end up with or without a fault.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -4073,8 +4121,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.LOCK_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x21, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops with locked access. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts load uops with locked access retired to the architected path.)",
+      R"(Retired load uops with locked access.)",
+      R"(This event counts load uops with locked access retired to the architected path.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4085,8 +4133,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.SPLIT_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x41, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops that split across a cacheline boundary.(Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(Retired load uops that split across a cacheline boundary.)",
+      R"(This event counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4098,8 +4146,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.SPLIT_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x42, .cmask = 0, .msr_values = {0}},
-      R"(Retired store uops that split across a cacheline boundary. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
+      R"(Retired store uops that split across a cacheline boundary.)",
+      R"(This event counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -4112,9 +4160,8 @@ Note: Writeback pending FIFO has six entries.)",
       "MEM_UOPS_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load uops. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts load uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event ?ounts AVX-256bit load/store double-pump memory uops as a single uop at retirement. This event also counts SW prefetches.)",
+      R"(Retired load uops.)",
+      R"(Counts all retired load uops. This event accounts for SW prefetch uops of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4126,9 +4173,8 @@ Note: This event ?ounts AVX-256bit load/store double-pump memory uops as a singl
       "MEM_UOPS_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(Retired store uops that split across a cacheline boundary. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts store uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event ?ounts AVX-256bit load/store double-pump memory uops as a single uop at retirement.)",
+      R"(Retired store uops.)",
+      R"(Counts all retired store uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
@@ -4141,8 +4187,8 @@ Note: This event ?ounts AVX-256bit load/store double-pump memory uops as a singl
       "MEM_LOAD_UOPS_RETIRED.L1_HIT",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops with L1 cache hits as data sources. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data source were hits in the nearest-level (L1) cache.
+      R"(Retired load uops with L1 cache hits as data sources.)",
+      R"(This event counts retired load uops which data sources were hits in the nearest-level (L1) cache.
 Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load. This event also counts SW prefetches independent of the actual data source.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -4155,8 +4201,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.L2_HIT",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops with L2 cache hits as data sources. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were hits in the mid-level (L2) cache.)",
+      R"(Retired load uops with L2 cache hits as data sources.)",
+      R"(This event counts retired load uops which data sources were hits in the mid-level (L2) cache.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4167,8 +4213,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.L3_HIT",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Hit in last-level (L3) cache. Excludes Unknown data-source. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were data hits in the last-level (L3) cache without snoops required.)",
+      R"(Retired load uops which data sources were data hits in L3 without snoops required.)",
+      R"(This event counts retired load uops which data sources were data hits in the last-level (L3) cache without snoops required.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4179,8 +4225,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.L1_MISS",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops misses in L1 cache as data sources. Uses PEBS.)",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were misses in the nearest-level (L1) cache. Counting excludes unknown and UC data source.)",
+      R"(Retired load uops misses in L1 cache as data sources.)",
+      R"(This event counts retired load uops which data sources were misses in the nearest-level (L1) cache. Counting excludes unknown and UC data source.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4192,8 +4238,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.L2_MISS",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops with L2 cache misses as data sources. Uses PEBS.)",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were misses in the mid-level (L2) cache. Counting excludes unknown and UC data source.)",
+      R"(Miss in mid-level (L2) cache. Excludes Unknown data-source.)",
+      R"(This event counts retired load uops which data sources were misses in the mid-level (L2) cache. Counting excludes unknown and UC data source.)",
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4205,8 +4251,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.L3_MISS",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Miss in last-level (L3) cache. Excludes Unknown data-source. (Precise Event - PEBS).)",
-      R"(Miss in last-level (L3) cache. Excludes Unknown data-source. (Precise Event - PEBS).)",
+      R"(Miss in last-level (L3) cache. Excludes Unknown data-source.)",
+      R"(Miss in last-level (L3) cache. Excludes Unknown data-source.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4217,8 +4263,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_RETIRED.HIT_LFB",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops which data sources were load uops missed L1 but hit FB due to preceding miss to the same cache line with data not ready. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were load uops missed L1 but hit a fill buffer due to a preceding miss to the same cache line with the data not ready.
+      R"(Retired load uops which data sources were load uops missed L1 but hit FB due to preceding miss to the same cache line with data not ready.)",
+      R"(This event counts retired load uops which data sources were load uops missed L1 but hit a fill buffer due to a preceding miss to the same cache line with the data not ready.
 Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load.)",
       100003,
       std::nullopt, // ScaleUnit
@@ -4231,8 +4277,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_MISS",
       EventDef::Encoding{
           .code = 0xD2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops which data sources were L3 hit and cross-core snoop missed in on-pkg core cache. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were L3 Hit and a cross-core snoop missed in the on-pkg core cache.)",
+      R"(Retired load uops which data sources were L3 hit and cross-core snoop missed in on-pkg core cache.)",
+      R"(This event counts retired load uops which data sources were L3 Hit and a cross-core snoop missed in the on-pkg core cache.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4243,8 +4289,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_HIT",
       EventDef::Encoding{
           .code = 0xD2, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops which data sources were L3 and cross-core snoop hits in on-pkg core cache. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were L3 hit and a cross-core snoop hit in the on-pkg core cache.)",
+      R"(Retired load uops which data sources were L3 and cross-core snoop hits in on-pkg core cache.)",
+      R"(This event counts retired load uops which data sources were L3 hit and a cross-core snoop hit in the on-pkg core cache.)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4255,8 +4301,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_HITM",
       EventDef::Encoding{
           .code = 0xD2, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops which data sources were HitM responses from shared L3. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were HitM responses from a core on same socket (shared L3).)",
+      R"(Retired load uops which data sources were HitM responses from shared L3.)",
+      R"(This event counts retired load uops which data sources were HitM responses from a core on same socket (shared L3).)",
       20011,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4267,8 +4313,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_HIT_RETIRED.XSNP_NONE",
       EventDef::Encoding{
           .code = 0xD2, .umask = 0x08, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uops which data sources were hits in L3 without snoops required. (Precise Event - PEBS))",
-      R"(This is a precise version (that is, uses PEBS) of the event that counts retired load uops which data sources were hits in the last-level (L3) cache without snoops required.)",
+      R"(Retired load uops which data sources were hits in L3 without snoops required.)",
+      R"(This event counts retired load uops which data sources were hits in the last-level (L3) cache without snoops required.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4279,8 +4325,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_MISS_RETIRED.LOCAL_DRAM",
       EventDef::Encoding{
           .code = 0xD3, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(MEM_LOAD_UOPS_L3_MISS_RETIRED.LOCAL_DRAM (Description is auto-generated))",
-      R"(This event counts retired load uops where the data came from local DRAM. This does not include hardware prefetches. This is a precise event.)",
+      R"(Data from local DRAM either Snoop not needed or Snoop Miss (RspI))",
+      R"(Retired load uop whose Data Source was: local DRAM either Snoop not needed or Snoop Miss (RspI).)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4291,8 +4337,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_MISS_RETIRED.REMOTE_DRAM",
       EventDef::Encoding{
           .code = 0xD3, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uop whose Data Source was: remote DRAM either Snoop not needed or Snoop Miss (RspI) (Precise Event))",
-      R"(Retired load uop whose Data Source was: remote DRAM either Snoop not needed or Snoop Miss (RspI) (Precise Event))",
+      R"(Retired load uop whose Data Source was: remote DRAM either Snoop not needed or Snoop Miss (RspI))",
+      R"(Retired load uop whose Data Source was: remote DRAM either Snoop not needed or Snoop Miss (RspI))",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4303,8 +4349,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_MISS_RETIRED.REMOTE_HITM",
       EventDef::Encoding{
           .code = 0xD3, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uop whose Data Source was: Remote cache HITM (Precise Event))",
-      R"(Retired load uop whose Data Source was: Remote cache HITM (Precise Event))",
+      R"(Retired load uop whose Data Source was: Remote cache HITM)",
+      R"(Retired load uop whose Data Source was: Remote cache HITM)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4315,8 +4361,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       "MEM_LOAD_UOPS_L3_MISS_RETIRED.REMOTE_FWD",
       EventDef::Encoding{
           .code = 0xD3, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Retired load uop whose Data Source was: forwarded from remote cache (Precise Event))",
-      R"(Retired load uop whose Data Source was: forwarded from remote cache (Precise Event))",
+      R"(Retired load uop whose Data Source was: forwarded from remote cache)",
+      R"(Retired load uop whose Data Source was: forwarded from remote cache)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},

@@ -13,7 +13,7 @@ namespace broadwell_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from broadwell_core.json (741 events).
+    Events from broadwell_core.json (744 events).
 
     Supported SKUs:
         - Arch: x86, Model: BDW id: 61
@@ -31,7 +31,8 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -43,7 +44,8 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -59,7 +61,8 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -72,7 +75,8 @@ Note: On all current platforms this event stops counting during 'throttling (TM)
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -92,7 +96,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -104,7 +109,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -116,7 +122,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -128,7 +135,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -140,7 +148,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -224,7 +233,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -236,7 +246,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -248,7 +259,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -260,7 +272,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -276,7 +289,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -288,7 +302,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -300,7 +315,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -316,7 +332,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -329,7 +346,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -341,7 +359,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -353,7 +372,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -365,7 +385,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -377,7 +398,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -389,7 +411,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -401,7 +424,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -413,7 +437,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -425,7 +450,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -437,7 +463,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -449,7 +476,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -461,7 +489,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -473,7 +502,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -485,7 +515,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -497,7 +528,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -509,7 +541,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -521,7 +554,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -533,7 +567,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -545,7 +580,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -557,7 +593,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -569,7 +606,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -581,7 +619,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -593,7 +632,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -605,7 +645,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -621,7 +662,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -633,7 +675,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -649,7 +692,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -661,7 +705,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -677,7 +722,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -689,7 +735,8 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -701,20 +748,22 @@ See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles)",
+      R"(L1D miss outstandings duration in cycles)",
       R"(This event counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand; from the demand Hit FB, if it is allocated by hardware or software prefetch.
 Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -726,7 +775,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -742,19 +792,21 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D_PEND_MISS.FB_FULL",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -838,7 +890,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -850,7 +903,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -862,7 +916,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -874,7 +929,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -886,7 +942,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -898,7 +955,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -910,7 +968,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -922,7 +981,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -934,7 +994,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -946,7 +1007,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -958,7 +1020,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -970,7 +1033,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -982,7 +1046,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -994,7 +1059,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1006,7 +1072,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1018,7 +1085,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1030,7 +1098,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1042,7 +1111,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1054,7 +1124,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1070,7 +1141,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1082,7 +1154,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1094,7 +1167,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1106,7 +1180,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1118,7 +1193,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1130,7 +1206,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1142,7 +1219,8 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1155,7 +1233,8 @@ Note: In ST-mode, not active thread should drive 0. This is usually caused by se
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1172,7 +1251,8 @@ Note: In ST-mode, not active thread should drive 0. This is usually caused by se
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1281,7 +1361,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1293,7 +1374,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1305,7 +1387,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1317,7 +1400,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1329,7 +1413,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1341,7 +1426,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1353,31 +1439,34 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(This event counts cycles during which uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1388,12 +1477,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy)",
       R"(This event counts the number of deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1405,7 +1495,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1417,19 +1508,21 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ.)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the number of uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1441,7 +1534,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1453,31 +1547,34 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts the total number of uops delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequenser (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(This event counts cycles during which uops are being delivered to Instruction Decode Queue (IDQ) while the Microcode Sequencer (MS) is busy. Counting includes uops that may bypass the IDQ. Uops maybe initiated by Decode Stream Buffer (DSB) or MITE.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1493,7 +1590,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1505,7 +1603,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1517,7 +1616,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1529,7 +1629,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1541,7 +1642,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1625,7 +1727,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1637,7 +1740,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1649,7 +1753,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1657,11 +1762,12 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Stalls caused by changing prefix length of the instruction.)",
-      R"(This event counts stalls occured due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
+      R"(This event counts stalls occurred due to changing prefix length (66, 67 or REX.W when they change the length of the decoded instruction). Occurrences counting is proportional to the number of prefixes in a 16B-line. This may result in the following penalties: three-cycle penalty for each LCP in a 16-byte chunk.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1673,7 +1779,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1685,7 +1792,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1697,7 +1805,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1709,7 +1818,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1721,7 +1831,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1733,7 +1844,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1745,7 +1857,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1757,7 +1870,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1769,7 +1883,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1781,7 +1896,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1793,7 +1909,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1805,7 +1922,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1817,7 +1935,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1829,7 +1948,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1841,7 +1961,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1853,7 +1974,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1865,7 +1987,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1877,7 +2000,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1889,7 +2013,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1901,7 +2026,21 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "BR_MISP_EXEC.INDIRECT",
+      EventDef::Encoding{
+          .code = 0x89, .umask = 0xe4, .cmask = 0, .msr_values = {0}},
+      R"(Speculative mispredicted indirect branches)",
+      R"(Counts speculatively miss-predicted indirect branches at execution time. Counts for indirect near CALL or JMP instructions (RET excluded).)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1913,7 +2052,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1928,7 +2068,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1940,7 +2081,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1952,7 +2094,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1964,7 +2107,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1976,7 +2120,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -1992,7 +2137,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2004,7 +2150,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2016,7 +2163,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2027,12 +2175,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 0.)",
-      R"(Cycles per core when uops are exectuted in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
+      R"(Cycles per core when uops are executed in port 0.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2044,7 +2193,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2056,7 +2206,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2067,12 +2218,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 1.)",
-      R"(Cycles per core when uops are exectuted in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
+      R"(Cycles per core when uops are executed in port 1.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2084,7 +2236,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2096,7 +2249,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2112,7 +2266,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2124,7 +2279,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2136,7 +2292,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2152,7 +2309,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2164,7 +2322,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2176,7 +2335,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2187,12 +2347,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 4.)",
-      R"(Cycles per core when uops are exectuted in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
+      R"(Cycles per core when uops are executed in port 4.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2204,7 +2365,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2216,7 +2378,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2227,12 +2390,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 5.)",
-      R"(Cycles per core when uops are exectuted in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
+      R"(Cycles per core when uops are executed in port 5.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2244,7 +2408,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2256,7 +2421,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2267,12 +2433,13 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
           .any = true,
           .cmask = 0,
           .msr_values = {0}},
-      R"(Cycles per core when uops are exectuted in port 6.)",
-      R"(Cycles per core when uops are exectuted in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
+      R"(Cycles per core when uops are executed in port 6.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2284,7 +2451,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2296,7 +2464,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2312,7 +2481,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2324,7 +2494,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2336,7 +2507,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2348,7 +2520,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2360,7 +2533,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2372,7 +2546,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2384,7 +2559,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2396,7 +2572,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2408,7 +2585,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2420,7 +2598,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2432,7 +2611,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2444,7 +2624,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2456,7 +2637,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2468,7 +2650,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2480,7 +2663,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2492,7 +2676,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2504,7 +2689,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2516,7 +2702,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2528,7 +2715,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2540,7 +2728,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2552,7 +2741,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2564,7 +2754,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2576,7 +2767,8 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2590,7 +2782,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2602,7 +2795,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2614,19 +2808,21 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
-      R"(This event counts both cacheable and noncachaeble code read requests.)",
+      R"(Cacheable and non-cacheable code read requests)",
+      R"(This event counts both cacheable and non-cacheable code read requests.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2638,7 +2834,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2650,7 +2847,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2662,7 +2860,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2674,7 +2873,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2690,7 +2890,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2702,7 +2903,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2714,7 +2916,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2726,7 +2929,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2738,7 +2942,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2750,7 +2955,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2762,7 +2968,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2774,7 +2981,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2786,7 +2994,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2798,7 +3007,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2814,7 +3024,8 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2827,7 +3038,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2936,7 +3148,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2948,7 +3161,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -2984,7 +3198,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3020,7 +3235,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3032,7 +3248,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3048,7 +3265,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3057,14 +3275,15 @@ Note: Writeback pending FIFO has six entries.)",
           .code = 0xC2,
           .umask = 0x01,
           .inv = true,
-          .cmask = 10,
+          .cmask = 16,
           .msr_values = {0}},
       R"(Cycles with less than 10 actually retired uops.)",
       R"(Number of cycles using always true condition (uops_ret < 16) applied to non PEBS uops retired event.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3076,7 +3295,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3088,7 +3308,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3104,7 +3325,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3119,7 +3341,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3131,7 +3354,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3143,7 +3367,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3155,7 +3380,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3167,7 +3393,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3179,7 +3406,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3191,7 +3419,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3215,7 +3444,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3227,7 +3457,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3239,7 +3470,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3263,7 +3495,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3275,7 +3508,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3287,7 +3521,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3299,7 +3534,8 @@ Note: Writeback pending FIFO has six entries.)",
       100007,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3311,7 +3547,8 @@ Note: Writeback pending FIFO has six entries.)",
       400009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3319,11 +3556,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3331,11 +3569,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3343,11 +3582,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x03, .cmask = 0, .msr_values = {0x00}},
       R"(Number of SSE/AVX computational scalar floating-point instructions retired; some instructions will count twice as noted below. Each count represents 1 computation operation.   Applies to SSE* and AVX* scalar double and single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
-      R"(Number of SSE/AVX computational scalar floating-point instructions retired; some instructions will count twice as noted below. Each count represents 1 computation operation.   Applies to SSE* and AVX* scalar double and single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform multiple calculations per element.)",
+      R"(Number of SSE/AVX computational scalar single precision and double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3355,11 +3595,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x04, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3367,11 +3608,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
-      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3379,11 +3621,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x10, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 4 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3395,7 +3638,21 @@ Note: Writeback pending FIFO has six entries.)",
       2000006,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.4_FLOPS",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x18, .cmask = 0, .msr_values = {0}},
+      R"(Number of SSE/AVX computational 128-bit packed single and 256-bit packed double precision FP instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, 1 for each element.  Applies to SSE* and AVX* packed single precision and packed double precision FP instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB count twice as they perform 2 calculations per element.)",
+      R"(Number of SSE/AVX computational 128-bit packed single precision and 256-bit packed double precision  floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 or/and 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point and packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3403,11 +3660,12 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc7, .umask = 0x20, .cmask = 0, .msr_values = {0}},
       R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 8 calculations per element.)",
-      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 8 calculations per element.)",
+      R"(Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3419,7 +3677,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000005,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3431,7 +3690,21 @@ Note: Writeback pending FIFO has six entries.)",
       2000004,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
+
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_ARITH_INST_RETIRED.VECTOR",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0xfc, .cmask = 0, .msr_values = {0x00}},
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      R"(Number of any Vector retired FP arithmetic instructions)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3444,7 +3717,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3456,7 +3730,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3468,7 +3743,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3480,7 +3756,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3492,7 +3769,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3504,7 +3782,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3516,7 +3795,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3528,7 +3808,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3541,7 +3822,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3553,7 +3835,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3565,7 +3848,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3577,7 +3861,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3589,7 +3874,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3601,7 +3887,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3613,7 +3900,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3625,7 +3913,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3637,7 +3926,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3649,7 +3939,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3661,7 +3952,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3673,7 +3965,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3685,7 +3978,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3697,7 +3991,8 @@ Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3805,7 +4100,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3818,7 +4114,8 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3842,7 +4139,8 @@ Note: Writeback pending FIFO has six entries.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3855,34 +4153,35 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_LOADS",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x81, .cmask = 0, .msr_values = {0}},
-      R"(All retired load uops.)",
-      R"(This event counts load uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event counts AVX-256bit load/store double-pump memory uops as a single uop at retirement. This event also counts SW prefetches.)",
+      R"(Retired load uops.)",
+      R"(Counts all retired load uops. This event accounts for SW prefetch uops of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "MEM_UOPS_RETIRED.ALL_STORES",
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x82, .cmask = 0, .msr_values = {0}},
-      R"(All retired store uops.)",
-      R"(This event counts store uops retired to the architected path with a filter on bits 0 and 1 applied.
-Note: This event counts AVX-256bit load/store double-pump memory uops as a single uop at retirement.)",
+      R"(Retired store uops.)",
+      R"(Counts all retired store uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{
           .data_la = true, .l1_hit_indication = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3895,7 +4194,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3931,7 +4231,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3943,7 +4244,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       50021,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -3968,7 +4270,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4040,7 +4343,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4052,7 +4356,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4064,7 +4369,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4076,7 +4382,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4088,7 +4395,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4100,7 +4408,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4112,7 +4421,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4124,7 +4434,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4136,7 +4447,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4148,7 +4460,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4160,7 +4473,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4172,7 +4486,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4184,7 +4499,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4196,7 +4512,8 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4208,82 +4525,73 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010001}},
-      R"(Counts demand data reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10001}},
+      R"(Counts demand data reads have any response type.)",
       R"(Counts demand data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4293,12 +4601,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4308,12 +4617,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4323,72 +4633,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4398,12 +4701,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4413,12 +4717,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4428,72 +4733,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4503,12 +4801,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4518,12 +4817,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4533,147 +4833,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000001}},
-      R"(Counts demand data reads )",
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000001}},
-      R"(Counts demand data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000001}},
+      R"(Counts demand data reads)",
       R"(Counts demand data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010002}},
-      R"(Counts all demand data writes (RFOs) have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
+      R"(Counts all demand data writes (RFOs) have any response type.)",
       R"(Counts all demand data writes (RFOs) have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4683,12 +4966,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4698,12 +4982,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4713,12 +4998,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4728,147 +5014,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000002}},
-      R"(Counts all demand data writes (RFOs) )",
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000002}},
-      R"(Counts all demand data writes (RFOs) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000002}},
+      R"(Counts all demand data writes (RFOs))",
       R"(Counts all demand data writes (RFOs))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010004}},
-      R"(Counts all demand code reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10004}},
+      R"(Counts all demand code reads have any response type.)",
       R"(Counts all demand code reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4878,12 +5147,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4893,12 +5163,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4908,72 +5179,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4983,12 +5247,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -4998,12 +5263,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5013,72 +5279,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5088,12 +5347,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5103,12 +5363,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5118,147 +5379,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000004}},
-      R"(Counts all demand code reads )",
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.DEMAND_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000004}},
-      R"(Counts all demand code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000004}},
+      R"(Counts all demand code reads)",
       R"(Counts all demand code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010008}},
-      R"(Counts writebacks (modified to exclusive) have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10008}},
+      R"(Counts writebacks (modified to exclusive) have any response type.)",
       R"(Counts writebacks (modified to exclusive) have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5268,12 +5512,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5283,12 +5528,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5298,72 +5544,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5373,12 +5612,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5388,12 +5628,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5403,72 +5644,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5478,12 +5712,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5493,12 +5728,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5508,147 +5744,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.COREWB.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000008}},
-      R"(Counts writebacks (modified to exclusive) )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000008}},
+      R"(Counts writebacks (modified to exclusive))",
       R"(Counts writebacks (modified to exclusive))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010010}},
-      R"(Counts prefetch (that bring data to L2) data reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10010}},
+      R"(Counts prefetch (that bring data to L2) data reads have any response type.)",
       R"(Counts prefetch (that bring data to L2) data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5658,12 +5877,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5673,12 +5893,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5688,72 +5909,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5763,12 +5977,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5778,12 +5993,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5793,72 +6009,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5868,12 +6077,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5883,12 +6093,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -5898,147 +6109,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000010}},
-      R"(Counts prefetch (that bring data to L2) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000010}},
+      R"(Counts prefetch (that bring data to L2) data reads)",
       R"(Counts prefetch (that bring data to L2) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs have any response type.)",
       R"(Counts all prefetch (that bring data to L2) RFOs have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6048,12 +6242,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6063,12 +6258,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6078,72 +6274,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6153,12 +6342,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6168,12 +6358,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6183,72 +6374,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6258,12 +6442,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6273,12 +6458,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6288,147 +6474,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000020}},
-      R"(Counts all prefetch (that bring data to L2) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000020}},
+      R"(Counts all prefetch (that bring data to L2) RFOs)",
       R"(Counts all prefetch (that bring data to L2) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads have any response type.)",
       R"(Counts all prefetch (that bring data to LLC only) code reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6438,12 +6607,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6453,12 +6623,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6468,72 +6639,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6543,12 +6707,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6558,12 +6723,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6573,72 +6739,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6648,12 +6807,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6663,12 +6823,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6678,147 +6839,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L2_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000040}},
-      R"(Counts all prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000040}},
+      R"(Counts all prefetch (that bring data to LLC only) code reads)",
       R"(Counts all prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads have any response type.)",
       R"(Counts all prefetch (that bring data to LLC only) data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6828,12 +6972,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6843,12 +6988,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6858,72 +7004,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6933,12 +7072,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6948,12 +7088,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -6963,72 +7104,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7038,12 +7172,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7053,12 +7188,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7068,147 +7204,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000080}},
-      R"(Counts all prefetch (that bring data to LLC only) data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000080}},
+      R"(Counts all prefetch (that bring data to LLC only) data reads)",
       R"(Counts all prefetch (that bring data to LLC only) data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs have any response type.)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7218,12 +7337,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7233,12 +7353,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7248,72 +7369,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7323,12 +7437,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7338,12 +7453,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7353,72 +7469,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7428,12 +7537,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7443,12 +7553,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7458,147 +7569,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000100}},
-      R"(Counts all prefetch (that bring data to LLC only) RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000100}},
+      R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       R"(Counts all prefetch (that bring data to LLC only) RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads have any response type.)",
       R"(Counts prefetch (that bring data to LLC only) code reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7608,12 +7702,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7623,12 +7718,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7638,72 +7734,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7713,12 +7802,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7728,12 +7818,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7743,72 +7834,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7818,12 +7902,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7833,12 +7918,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7848,147 +7934,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.PF_L3_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000200}},
-      R"(Counts prefetch (that bring data to LLC only) code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000200}},
+      R"(Counts prefetch (that bring data to LLC only) code reads)",
       R"(Counts prefetch (that bring data to LLC only) code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000018000}},
-      R"(Counts any other requests have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x18000}},
+      R"(Counts any other requests have any response type.)",
       R"(Counts any other requests have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400028000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400028000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -7998,12 +8067,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8013,12 +8083,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8028,72 +8099,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80028000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C8000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C8000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8103,12 +8167,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8118,12 +8183,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8133,72 +8199,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C8000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8208,12 +8267,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8223,12 +8283,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8238,147 +8299,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84008000}},
-      R"(Counts any other requests )",
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.OTHER.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C008000}},
-      R"(Counts any other requests )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C008000}},
+      R"(Counts any other requests)",
       R"(Counts any other requests)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010090}},
-      R"(Counts all prefetch data reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10090}},
+      R"(Counts all prefetch data reads have any response type.)",
       R"(Counts all prefetch data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8388,12 +8432,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8403,12 +8448,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8418,72 +8464,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8493,12 +8532,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8508,12 +8548,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8523,72 +8564,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8598,12 +8632,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8613,12 +8648,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8628,147 +8664,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000090}},
-      R"(Counts all prefetch data reads )",
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000090}},
-      R"(Counts all prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000090}},
+      R"(Counts all prefetch data reads)",
       R"(Counts all prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010120}},
-      R"(Counts prefetch RFOs have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10120}},
+      R"(Counts prefetch RFOs have any response type.)",
       R"(Counts prefetch RFOs have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8778,12 +8797,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8793,12 +8813,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8808,72 +8829,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8883,12 +8897,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8898,12 +8913,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8913,72 +8929,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -8988,12 +8997,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9003,12 +9013,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9018,147 +9029,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000120}},
-      R"(Counts prefetch RFOs )",
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000120}},
-      R"(Counts prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000120}},
+      R"(Counts prefetch RFOs)",
       R"(Counts prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010240}},
-      R"(Counts all prefetch code reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10240}},
+      R"(Counts all prefetch code reads have any response type.)",
       R"(Counts all prefetch code reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9168,12 +9162,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9183,12 +9178,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9198,72 +9194,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9273,12 +9262,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9288,12 +9278,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9303,72 +9294,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9378,12 +9362,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9393,12 +9378,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9408,147 +9394,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000240}},
-      R"(Counts all prefetch code reads )",
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_PF_CODE_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000240}},
-      R"(Counts all prefetch code reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000240}},
+      R"(Counts all prefetch code reads)",
       R"(Counts all prefetch code reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010091}},
-      R"(Counts all demand & prefetch data reads have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10091}},
+      R"(Counts all demand & prefetch data reads have any response type.)",
       R"(Counts all demand & prefetch data reads have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9558,12 +9527,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9573,12 +9543,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9588,72 +9559,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9663,12 +9627,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9678,12 +9643,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9693,72 +9659,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9768,12 +9727,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9783,12 +9743,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9798,147 +9759,130 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000091}},
-      R"(Counts all demand & prefetch data reads )",
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_DATA_RD.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000091}},
-      R"(Counts all demand & prefetch data reads )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000091}},
+      R"(Counts all demand & prefetch data reads)",
       R"(Counts all demand & prefetch data reads)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.ANY_RESPONSE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0000010122}},
-      R"(Counts all demand & prefetch RFOs have any response type. )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10122}},
+      R"(Counts all demand & prefetch RFOs have any response type.)",
       R"(Counts all demand & prefetch RFOs have any response type.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0080020122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x80020122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0100020122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x100020122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0200020122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x200020122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.SUPPLIER_NONE.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0400020122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x400020122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9948,12 +9892,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1000020122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9963,12 +9908,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2000020122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -9978,72 +9924,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F80020122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00803C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x803C0122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x01003C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x1003C0122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x02003C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x2003C0122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x04003C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x4003C0122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10053,12 +9992,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x10003C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10068,12 +10008,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x20003C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10083,72 +10024,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F803C0122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0084000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x84000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0104000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x104000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0204000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x204000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS_LOCAL_DRAM.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x0404000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x404000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10158,12 +10092,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x1004000122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10173,12 +10108,13 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x2004000122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -10188,72 +10124,65 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
           .umask = 0x01,
           .cmask = 0,
           .msr_values = {0x3F84000122}},
-      R"(Counts all demand & prefetch RFOs )",
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_NONE",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x00BC000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0xBC000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_NOT_NEEDED",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x013C000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x13C000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_MISS",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x023C000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x23C000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "OFFCORE_RESPONSE.ALL_RFO.L3_MISS.SNOOP_HIT_NO_FWD",
       EventDef::Encoding{
-          .code = 0xB7,
-          .umask = 0x01,
-          .cmask = 0,
-          .msr_values = {0x043C000122}},
-      R"(Counts all demand & prefetch RFOs )",
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x43C000122}},
+      R"(Counts all demand & prefetch RFOs)",
       R"(Counts all demand & prefetch RFOs)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
-      R"(0)"));
+      std::nullopt // Errata
+      ));
 }
 
 } // namespace broadwell_core
