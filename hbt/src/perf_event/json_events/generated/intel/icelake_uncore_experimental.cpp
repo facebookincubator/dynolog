@@ -12,14 +12,15 @@ namespace facebook::hbt::perf_event::generated {
 namespace icelake_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from icelake_uncore_experimental.json (7 experimental events).
+/*
+  Events from icelake_uncore_experimental.json (7 experimental events).
 
-    Supported SKUs:
-        - Arch: x86, Model: ICL id: 125
-        - Arch: x86, Model: ICL id: 126
-        - Arch: x86, Model: ICL id: 167
-  */
+  Supported SKUs:
+      - Arch: x86, Model: ICL id: 125
+      - Arch: x86, Model: ICL id: 126
+      - Arch: x86, Model: ICL id: 167
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_REQ_TRK_OCCUPANCY.DRD",
@@ -31,7 +32,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_REQ_TRK_REQUEST.DRD",
@@ -43,7 +46,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_DAT_OCCUPANCY.ALL",
@@ -55,7 +60,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_DAT_OCCUPANCY.RD",
@@ -67,7 +74,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_REQUESTS.RD",
@@ -79,7 +88,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_OCCUPANCY.RD",
@@ -91,7 +102,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_OCCUPANCY.ALL",
@@ -103,6 +116,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace icelake_uncore_experimental

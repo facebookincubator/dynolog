@@ -12,14 +12,15 @@ namespace facebook::hbt::perf_event::generated {
 namespace icelake_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from icelake_uncore.json (3 events).
+/*
+  Events from icelake_uncore.json (3 events).
 
-    Supported SKUs:
-        - Arch: x86, Model: ICL id: 125
-        - Arch: x86, Model: ICL id: 126
-        - Arch: x86, Model: ICL id: 167
-  */
+  Supported SKUs:
+      - Arch: x86, Model: ICL id: 125
+      - Arch: x86, Model: ICL id: 126
+      - Arch: x86, Model: ICL id: 167
+*/
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_TRK_REQUESTS.ALL",
@@ -31,7 +32,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_arb,
       "UNC_ARB_COH_TRK_REQUESTS.ALL",
@@ -43,7 +46,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ncu,
       "UNC_CLOCK.SOCKET",
@@ -55,6 +60,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
 } // namespace icelake_uncore

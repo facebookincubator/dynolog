@@ -322,7 +322,8 @@ TEST_F(BuiltinMetricsTest, LibPfm4) {
   auto cpu_pmu = pmu_manager->findPmuDeviceByName("cpu");
   EXPECT_TRUE(cpu_pmu != nullptr);
   auto raw_events = cpu_pmu->makeLibPfm4Groups();
-  EXPECT_GT(raw_events->size(), 60);
+  // Lightweight version of json events has smaller number of event groups
+  EXPECT_GT(raw_events->size(), 10);
 }
 
 TEST_F(BuiltinMetricsTest, IntelPtPmu) {
