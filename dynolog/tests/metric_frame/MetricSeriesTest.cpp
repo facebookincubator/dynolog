@@ -117,3 +117,14 @@ TEST(MetricSeriesTest, testDiff) {
   EXPECT_EQ(t.diff(t.begin(), t.end() - 1), 12);
   EXPECT_EQ(t.diff(t.begin() + 1, t.end()), -4);
 }
+
+TEST(MetricSeriesTest, testLast) {
+  MetricSeries<int> t(3, "test_metric", "this is a test metric in unittest");
+  t.addSample(0);
+  EXPECT_EQ(t.last(), 0);
+  t.addSample(12);
+  EXPECT_EQ(t.last(), 12);
+  t.addSample(8);
+  t.addSample(7);
+  EXPECT_EQ(t.last(), 7);
+}

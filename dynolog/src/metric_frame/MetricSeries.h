@@ -230,6 +230,10 @@ class MetricSeries final {
     return *(end_ - 1) - *begin_;
   }
 
+  T last() const {
+    return *(end() - 1);
+  }
+
  private:
   template <typename R>
   static R rate(
