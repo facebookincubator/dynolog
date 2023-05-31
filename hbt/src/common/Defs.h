@@ -18,25 +18,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-// gettid was not part of glibc until glibc 2.30
-// ( see https://sourceware.org/bugzilla/show_bug.cgi?id=6399 )
-//
-// Define here if it's missing.
-
-#ifndef gettid
-
-#include <sys/syscall.h>
-
-inline pid_t gettid() noexcept {
-  return static_cast<pid_t>(syscall(SYS_gettid));
-}
-
-inline pid_t getpid() noexcept {
-  return static_cast<pid_t>(syscall(SYS_gettid));
-}
-
-#endif
-
 // A metric could define a function to reduce multiple event values.
 // ReducerFunc type is used as the reducer functor for these values.
 // - note that events will always be uint64_t as that is the type
@@ -50,7 +31,7 @@ using ReducerFunc =
 
 template <class TStream>
 TStream& LogCtxt(TStream& oss) {
-  oss << "pid: " << gettid() << " on ";
+  oss << "pid: " << ::getpid() << " on ";
   // Put date and time.
   auto p = std::chrono::high_resolution_clock::now();
   auto t_c = std::chrono::system_clock::to_time_t(p);
