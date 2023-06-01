@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 debian:latest AS debian_build_x86
+FROM --platform=linux/amd64 amd64/ubuntu:20.04 AS ubuntu_build_x86
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         ca-certificates \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ninja-build \
         tini \
         tree \
+        vim \
     && rm -rf /var/lib/apt/lists/*
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s - -y
 ENV PATH /root/.cargo/bin:$PATH
@@ -31,7 +32,8 @@ RUN yum update -y && \
         rpmdevtools.noarch \
         rpmlint.noarch \
         systemd-rpm-macros \
-        tree
+        tree \
+        vim
 RUN dnf --enablerepo=crb install -y ninja-build
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s - -y
 ENV PATH /root/.cargo/bin:$PATH
