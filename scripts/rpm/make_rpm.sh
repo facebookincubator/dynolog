@@ -74,13 +74,14 @@ rpmbuild -bb SPECS/dynolog.spec
 
 # Test results
 tree .
-rpm -qi "RPMS/x86_64/dynolog-${VERSION}-1.el8.x86_64.rpm"
+rpmfile=`ls $RPMDIR/RPMS/x86_64/dynolog-*rpm`
+rpm -qi "$rpmfile"
 
 {
 echo
 echo "---------------------------------------------------------------"
-echo "RPM generated at $RPMDIR/RPMS/x86_64/dynolog-${VERSION}-1.el8.x86_64.rpm"
+echo "RPM generated at $rpmfile"
 echo "To install you can use --nodeps flag "
-echo "rpm -i $RPMDIR/RPMS/x86_64/dynolog-${VERSION}-1.el8.x86_64.rpm"
+echo "rpm -i $rpmfile"
 echo "---------------------------------------------------------------"
 } 2> /dev/null
