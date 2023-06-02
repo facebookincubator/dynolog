@@ -61,6 +61,6 @@ docker cp 01382d91b91b:/root/rpmbuild/RPMS/x86_64/dynolog-0.2.2-1.el9.x86_64.rpm
 ```
 
 ## Notes
-Currently, the docker file fixes the platform for deployment to 'linux/amd64'. We can also build packages for ARM or other architecutres, the build scripts do harcode the package file names as amd64 and that needs to be fixed.
+Currently, the docker file fixes the platform for deployment to 'linux/amd64'. We can also build packages for ARM or other architectures, the build scripts do hard-code the package file names as amd64 and that needs to be fixed.
 
 Also, anupamb has shared a great [cheatsheet](https://gist.github.com/anupambhatnagar/07ebff374bc45e4b63eb42893cca7e87) for docker commands.
