@@ -11,7 +11,7 @@ set -eux -o pipefail
 
 # Check dependencies
 cmake --version || echo "Please install cmake for your platform using dnf/apt-get etc."
-ninja-build --version || echo "Please install ninja for your platform using dnf/apt-get etc."
+ninja --version || echo "Please install ninja for your platform using dnf/apt-get etc."
 rustc --version || echo "Please install Rust and Cargo - see https://www.rust-lang.org/tools/install"
 cargo --version || echo "Please install Rust and Cargo - see https://www.rust-lang.org/tools/install"
 
