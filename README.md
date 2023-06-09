@@ -71,7 +71,7 @@ ar x dynolog_0.2.1-0-amd64.deb; tar xvf data.tar.xz
 # binaries should now be available in ./usr/local/bin, you can add this directory to your $PATH.
 ```
 
-Alternatively, you can [build dynolog from source](#building-dynolog). The binaries should be present in the `build/bin` directory.
+Alternatively, you can [build dynolog from source](#building-from-source). The binaries should be present in the `build/bin` directory.
 The packages provides systemd support to run the server as a daemon. You can however still run dynolog server directly in a separate terminal.
 
 ### Running dynolog<!-- {#running-dynolog} -->
@@ -167,7 +167,7 @@ I20221208 15:29:34.731652 3345417 Logger.cpp:55] Logging : 2 values
 I20221208 15:29:34.731690 3345417 Logger.cpp:56] time = 1969-12-31T16:00:00.000Z data = {"mega_cycles_per_second":"514.156","mips":"479.397"}
 
 ```
-## Building from source<!-- {#building-dynolog} -->
+## Building from source<!-- {#building-from-source} -->
 
 Dynolog consists of two binaries - 1) dynolog server and 2) dyno command line tool.
 To build from source please check out the project and initialize submodules.
