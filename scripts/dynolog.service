@@ -18,6 +18,12 @@ StandardError=file:/var/log/dynolog.log
 # Syslog for versions of systemd pre 236
 # SyslogIdentifier=dynolog
 
+# Limit CPU usage to 1 CPU core
+CPUQuota=100%
+
+# Limit Memory usage to 1 GB, beyond that the process will be OOM killed
+MemoryMax=1G
+
 Restart=always
 
 [Install]
