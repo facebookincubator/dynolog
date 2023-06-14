@@ -23,9 +23,7 @@ class BPerfCountReader {
   using ReadValues = GroupReadValues<mode::Counting>;
 
   BPerfCountReader(
-      const std::string& bpf_map_name,
-      std::shared_ptr<const MetricDesc> metric_desc_in,
-      std::shared_ptr<const PmuDeviceManager> pmu_manager_in,
+      std::shared_ptr<BPerfEventsGroup> bperf_eg_in,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper);
 
   size_t getNumEvents() const;
@@ -44,8 +42,7 @@ class BPerfCountReader {
 
   std::ostream& printStatus(std::ostream& os);
 
-  const std::shared_ptr<const PmuDeviceManager> pmu_manager;
-  const std::shared_ptr<const MetricDesc> metric_desc;
+  BPerfEventsGroup* getBPerfEventsGroup() const;
 
   ~BPerfCountReader();
 
@@ -53,7 +50,11 @@ class BPerfCountReader {
   // Use raw pointer because BPerfEventsGroup is only a forward declaration
   // here, as we don't want to include BPerfEventsGroup due to different
   // compilation flags.
-  BPerfEventsGroup* bperf_eg_;
+  std::shared_ptr<BPerfEventsGroup> bperf_eg_;
+
+  std::shared_ptr<FdWrapper> cgroup_fd_wrapper_;
+
+  bool cgroup_tracking_ = false;
 };
 
 } // namespace facebook::hbt::perf_event
