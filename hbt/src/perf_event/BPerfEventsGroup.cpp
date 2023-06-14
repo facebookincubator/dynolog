@@ -10,7 +10,9 @@
 #include <unistd.h>
 #include <algorithm>
 #include <optional>
+#include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
+#include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 
 namespace facebook::hbt::perf_event {
 
@@ -49,19 +51,12 @@ static inline __u32 bpf_map_get_id(int fd) {
 }
 
 /// name: Path of ebpf map
-/// id: inode id. Zero if BPerfEventType == SystemWide.
 BPerfEventsGroup::BPerfEventsGroup(
     const std::string& name,
-    const EventConfs& confs,
-    BPerfEventType type,
-    __u64 id)
-    : name_(name), confs_(confs), type_(type), id_(id) {
-  if (type == BPerfEventType::SystemWide) {
-    HBT_ARG_CHECK_EQ(id, 0) << "SystemWide mode requires zero id (inode)";
-  }
+    const EventConfs& confs)
+    : name_(name), confs_(confs) {
   HBT_ARG_CHECK_LE(name.length(), BPERF_METRIC_NAME_SIZE)
       << "bpf map name is too long, max size is " << BPERF_METRIC_NAME_SIZE;
-
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
         .size = sizeof(attr),
@@ -76,6 +71,11 @@ BPerfEventsGroup::BPerfEventsGroup(
   cpu_cnt_ = ::libbpf_num_possible_cpus();
 }
 
+BPerfEventsGroup::BPerfEventsGroup(
+    const std::string& name,
+    const MetricDesc& metric,
+    const PmuDeviceManager& pmu_manager)
+    : BPerfEventsGroup(name, metric.makeNoCpuTopologyConfs(pmu_manager)) {}
 inline auto mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
@@ -84,24 +84,8 @@ inline auto mapFdWrapperPtrIntoInode(
   return fd_wrapper->getInode();
 }
 
-BPerfEventsGroup::BPerfEventsGroup(
-    const std::string& name,
-    const EventConfs& confs,
-    std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-    : BPerfEventsGroup{
-          name,
-          confs,
-          cgroup_fd_wrapper == nullptr ? BPerfEventType::SystemWide
-                                       : BPerfEventType::Cgroup,
-          mapFdWrapperPtrIntoInode(cgroup_fd_wrapper)} {}
-
 BPerfEventsGroup::~BPerfEventsGroup() {
-  close(leader_link_fd_);
-  close(leader_prog_fd_);
-  close(output_fd_);
-  for (auto& fd : pe_fds_) {
-    ::close(fd);
-  }
+  this->close();
 }
 
 std::string BPerfEventsGroup::attrMapPath() {
@@ -112,6 +96,7 @@ std::string BPerfEventsGroup::attrMapPath() {
   return ss.str();
 }
 
+// TODO: deprecate attr map?
 bperf_attr_map_key::bperf_attr_map_key(std::string n, int s) : size(s) {
   ::memset(name, 0, BPERF_METRIC_NAME_SIZE);
   ::memcpy(
@@ -120,9 +105,46 @@ bperf_attr_map_key::bperf_attr_map_key(std::string n, int s) : size(s) {
       std::min(static_cast<int>(n.size()), BPERF_METRIC_NAME_SIZE - 1));
 }
 
+size_t BPerfEventsGroup::getNumEvents() const {
+  return attrs_.size();
+}
+
+bool BPerfEventsGroup::addCgroup(std::shared_ptr<hbt::FdWrapper> fd) {
+  auto id = fd->getInode();
+  if (cgroup_fds_.count(id)) {
+    HBT_LOG_WARNING() << "Cgroup " << id << " is already being monitored";
+    return false;
+  }
+  std::vector<bpf_perf_event_value> val(
+      (size_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE, (struct bpf_perf_event_value){});
+  auto err = ::bpf_map_update_elem(cgroup_output_fd_, &id, val.data(), BPF_ANY);
+  if (err) {
+    HBT_LOG_ERROR() << "Failed to initlize map elem: " << err;
+    return false;
+  }
+
+  cgroup_fds_.insert({id, std::move(fd)});
+  return true;
+}
+
+bool BPerfEventsGroup::removeCgroup(__u64 id) {
+  if (!cgroup_fds_.count(id)) {
+    HBT_LOG_WARNING() << "Cgroup " << id << " is not being tracked";
+    return false;
+  }
+  auto err = ::bpf_map_delete_elem(cgroup_output_fd_, &id);
+  if (err) {
+    HBT_LOG_ERROR() << "Failed to delete cgroup: " << err;
+    return false;
+  }
+
+  cgroup_fds_.erase(id);
+  return true;
+}
+
 bool BPerfEventsGroup::disable() {
   syncGlobal_();
-  close(leader_link_fd_);
+  ::close(leader_link_fd_);
   leader_link_fd_ = -1;
   for (auto& fd : pe_fds_) {
     ::ioctl(fd, PERF_EVENT_IOC_DISABLE, 0);
@@ -131,115 +153,66 @@ bool BPerfEventsGroup::disable() {
   return true;
 }
 
-bool BPerfEventsGroup::reenable_() {
-  if (leader_prog_fd_ < 0) {
+bool BPerfEventsGroup::open() {
+  if (opened_) {
+    HBT_LOG_WARNING() << "BPerfEventsGroup is already opened";
+    return true;
+  }
+  HBT_LOG_INFO() << "Loading leader program.";
+  struct bperf_attr_map_elem entry = {};
+  int err = reloadSkel_(&entry);
+  if (err < 0) {
+    HBT_LOG_ERROR() << "Failed to load leader program.";
     return false;
   }
+  leader_prog_fd_ =
+      ::bpf_prog_get_fd_by_id(bpf_link_get_prog_id(leader_link_fd_));
+  HBT_DCHECK(leader_link_fd_ >= 0);
+  HBT_DCHECK(global_output_fd_ >= 0);
+  HBT_DCHECK(cgroup_output_fd_ >= 0);
+  HBT_DCHECK(leader_prog_fd_ >= 0);
+  opened_ = true;
+  return true;
+}
 
+void BPerfEventsGroup::close() {
+  ::close(leader_link_fd_);
+  leader_link_fd_ = -1;
+  ::close(leader_prog_fd_);
+  leader_prog_fd_ = -1;
+  ::close(cgroup_output_fd_);
+  cgroup_output_fd_ = -1;
+  ::close(global_output_fd_);
+  global_output_fd_ = -1;
+  for (auto& fd : pe_fds_) {
+    ::close(fd);
+    fd = -1;
+  }
+  opened_ = false;
+}
+bool BPerfEventsGroup::isOpen() const {
+  return opened_;
+}
+
+[[nodiscard]] bool BPerfEventsGroup::enable() {
+  if (enabled_) {
+    HBT_LOG_WARNING() << "BPerfEventsGroup is already enabled.";
+    return true;
+  }
   for (auto& fd : pe_fds_) {
     ::ioctl(fd, PERF_EVENT_IOC_ENABLE, 0);
   }
 
-  leader_link_fd_ = bpf_raw_tracepoint_open("sched_switch", leader_prog_fd_);
   if (leader_link_fd_ < 0) {
-    HBT_LOG_ERROR() << "Failed to re-enable BPerfEventsGroup ";
-    return false;
-  }
-
-  syncGlobal_();
-  read(offsets_, true);
-  enabled_ = true;
-  return true;
-}
-
-[[nodiscard]] bool BPerfEventsGroup::enable() {
-  int attr_map_fd, err;
-  bool success = false;
-  struct bperf_attr_map_elem entry = {};
-  std::vector<bpf_perf_event_value> val(
-      (size_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE, (struct bpf_perf_event_value){});
-
-  if (enabled_) {
-    HBT_LOG_WARNING() << "BPerfEventsGroup is already enabled";
-    return true;
-  }
-
-  // try re-enable, if success, we are done here.
-  if (reenable_()) {
-    return true;
-  }
-
-  attr_map_fd = lockAttrMap_();
-
-  if (attr_map_fd < 0) {
-    HBT_LOG_ERROR() << "Failed to lock attribute map: "
-                    << BPerfEventsGroup::attrMapPath() << "."
-                    << " Error: " << toErrorCode(-attr_map_fd).message();
-    return false;
-  }
-
-  // ensure we have the attribute in the attr_map
-  auto key = bperf_attr_map_key(name_, confs_.size());
-
-  err = ::bpf_map_lookup_elem(attr_map_fd, &key, &entry);
-  if (err) {
-    HBT_LOG_INFO() << "Updating attribute map: "
-                   << BPerfEventsGroup::attrMapPath();
-    err = ::bpf_map_update_elem(attr_map_fd, &key, &entry, BPF_ANY);
-    if (err) {
-      HBT_LOG_ERROR() << "Failed to update attribute map "
-                      << BPerfEventsGroup::attrMapPath() << " with error "
-                      << err;
-      goto out;
-    }
-  }
-
-  // ensure the perf_events, BPF programs and maps of this attr is loaded.
-  leader_link_fd_ = ::bpf_link_get_fd_by_id(entry.leader_prog_link_id);
-  if (leader_link_fd_ < 0) {
-    HBT_LOG_INFO() << "Loading leader program.";
-    err = reloadSkel_(attr_map_fd, &entry);
-    if (err < 0) {
-      HBT_LOG_ERROR() << "Failed to load leader program.";
-      goto out;
-    }
-  }
-
-  leader_prog_fd_ =
-      ::bpf_prog_get_fd_by_id(bpf_link_get_prog_id(leader_link_fd_));
-
-  // hook up output
-  switch (type_) {
-    case BPerfEventType::SystemWide:
-      output_fd_ = ::bpf_map_get_fd_by_id(entry.global_output_map_id);
-      break;
-    case BPerfEventType::Cgroup:
-      output_fd_ = ::bpf_map_get_fd_by_id(entry.cgroup_output_map_id);
-      err = ::bpf_map_lookup_elem(output_fd_, &id_, val.data());
-      if (err) {
-        err = ::bpf_map_update_elem(output_fd_, &id_, val.data(), BPF_ANY);
-        if (err) {
-          HBT_LOG_ERROR() << "Failed to initlize map elem: " << err;
-          goto out;
-        }
-      }
-
-      break;
+    leader_link_fd_ = bpf_raw_tracepoint_open("sched_switch", leader_prog_fd_);
   }
 
   HBT_DCHECK(leader_link_fd_ >= 0);
-  HBT_DCHECK(output_fd_ >= 0);
-
   // set proper offset_
   ::memset(offsets_, 0, sizeof(offsets_));
+  readGlobal(offsets_, true);
   enabled_ = true;
-  read(offsets_, true);
-  success = true;
-
-out:
-  ::flock(attr_map_fd, LOCK_UN);
-  ::close(attr_map_fd);
-  return success;
+  return true;
 }
 
 // trigger the BPF program on a given CPU, so that value the counter is
@@ -253,7 +226,6 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
       .flags = BPF_F_TEST_RUN_ON_CPU,
       .cpu = cpu,
       .retval = 0, );
-
   return ::bpf_prog_test_run_opts(leader_fd, &opts);
 }
 
@@ -286,7 +258,6 @@ void bperf_attr_map_elem::loadFromSkelLink(
 }
 
 [[nodiscard]] int BPerfEventsGroup::reloadSkel_(
-    int attr_map_fd,
     struct bperf_attr_map_elem* entry) {
   struct bperf_leader_cgroup* skel = bperf_leader_cgroup__open();
   int event_cnt = confs_.size();
@@ -316,12 +287,16 @@ void bperf_attr_map_elem::loadFromSkelLink(
   // fill the attr build map
   entry->loadFromSkelLink(skel, link);
 
-  err = ::bpf_map_update_elem(attr_map_fd, &attrs_[0], entry, BPF_ANY);
-
   // open another fd to the link and the output map, so we can destroy the skel
   leader_link_fd_ = ::bpf_link_get_fd_by_id(entry->leader_prog_link_id);
+  global_output_fd_ = ::bpf_map_get_fd_by_id(entry->global_output_map_id);
+  cgroup_output_fd_ = ::bpf_map_get_fd_by_id(entry->cgroup_output_map_id);
 
   err = loadPerfEvent_(skel);
+  if (err != 0) {
+    HBT_LOG_ERROR() << "Failed to load perf events";
+  }
+
 out:
   bperf_leader_cgroup__destroy(skel);
   ::bpf_link__destroy(link);
@@ -352,8 +327,10 @@ out:
   return err;
 }
 
-[[nodiscard]] int BPerfEventsGroup::read(
+int BPerfEventsGroup::read(
     struct bpf_perf_event_value* output,
+    int fd,
+    __u64 id,
     bool skip_offset) {
   auto event_cnt = confs_.size();
   std::vector<struct bpf_perf_event_value> values(
@@ -364,8 +341,8 @@ out:
   }
 
   syncGlobal_();
-  if (int ret = ::bpf_map_lookup_elem(output_fd_, &id_, values.data()); ret) {
-    HBT_LOG_ERROR() << "cannot look up key " << id_
+  if (int ret = ::bpf_map_lookup_elem(fd, &id, values.data()); ret) {
+    HBT_LOG_ERROR() << "cannot look up key " << id
                     << " from output map. Return value: " << ret;
     return -1;
   }
@@ -388,33 +365,38 @@ out:
   return event_cnt;
 }
 
-[[nodiscard]] bool BPerfEventsGroup::read(ReadValues& rv, bool skip_offset) {
+int BPerfEventsGroup::readGlobal(
+    struct bpf_perf_event_value* output,
+    bool skip_offset) {
+  return read(output, global_output_fd_, 0, skip_offset);
+}
+
+bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) {
   const auto num_events = rv.getNumEvents();
   HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
   struct bpf_perf_event_value values[BPERF_MAX_GROUP_SIZE];
+  if (readGlobal(values, skip_offset) == num_events) {
+    toReadValues(rv, values);
+    return true;
+  } else {
+    return false;
+  }
+}
 
-  if (BPerfEventsGroup::read(values, skip_offset) == num_events) {
-    // BPerf does not really create groups in the sense perf_event does.
-    // There is no simultaneous enable and disable of events, therefore,
-    // the enabled (and running) time of events in the same group may be
-    // slightly different (usually by a few nanoseconds).
-    // We abstract this detail by averaging the times for all events
-    // in the group, providing a close enough approximation.
-    uint64_t sum_time_enabled = 0;
-    uint64_t sum_time_running = 0;
+int BPerfEventsGroup::readCgroup(
+    struct bpf_perf_event_value* output,
+    __u64 id) {
+  return read(output, cgroup_output_fd_, id, true /* skip_offset */);
+}
 
-    for (auto e = 0; e < num_events; e++) {
-      // 64 bits unsigned value will not overflow in several years.
-      sum_time_enabled += values[e].enabled;
-      sum_time_running += values[e].running;
+bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
+  const auto num_events = rv.getNumEvents();
+  HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
-      rv.t->count[e] = values[e].counter;
-    }
-    // Integer round-up division to get the average time enabled/running.
-    rv.t->time_enabled = (sum_time_enabled + num_events - 1) / num_events;
-    rv.t->time_running = (sum_time_running + num_events - 1) / num_events;
-
+  struct bpf_perf_event_value values[BPERF_MAX_GROUP_SIZE];
+  if (readCgroup(values, id) == num_events) {
+    toReadValues(rv, values);
     return true;
   } else {
     return false;
@@ -457,6 +439,31 @@ out:
   ::flock(map_fd, LOCK_EX);
 
   return map_fd;
+}
+
+void BPerfEventsGroup::toReadValues(
+    ReadValues& rv,
+    struct bpf_perf_event_value* values) {
+  // BPerf does not really create groups in the sense perf_event does.
+  // There is no simultaneous enable and disable of events, therefore,
+  // the enabled (and running) time of events in the same group may be
+  // slightly different (usually by a few nanoseconds).
+  // We abstract this detail by averaging the times for all events
+  // in the group, providing a close enough approximation.
+  const auto num_events = rv.getNumEvents();
+  uint64_t sum_time_enabled = 0;
+  uint64_t sum_time_running = 0;
+
+  for (auto e = 0; e < num_events; e++) {
+    // 64 bits unsigned value will not overflow in several years.
+    sum_time_enabled += values[e].enabled;
+    sum_time_running += values[e].running;
+
+    rv.t->count[e] = values[e].counter;
+  }
+  // Integer round-up division to get the average time enabled/running.
+  rv.t->time_enabled = (sum_time_enabled + num_events - 1) / num_events;
+  rv.t->time_running = (sum_time_running + num_events - 1) / num_events;
 }
 
 } // namespace facebook::hbt::perf_event

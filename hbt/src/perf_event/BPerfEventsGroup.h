@@ -5,18 +5,19 @@
 
 #pragma once
 
+#include <bpf/libbpf.h>
+#include <errno.h>
+#include <stdlib.h>
+
 #include "hbt/src/perf_event/CpuEventsGroup.h"
+#include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
-#include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 #include "hbt/src/perf_event/bpf/bperf.h"
 
-namespace facebook::hbt::perf_event {
+struct bperf_leader_cgroup;
 
-enum class BPerfEventType {
-  SystemWide = 1,
-  Cgroup = 2,
-};
+namespace facebook::hbt::perf_event {
 
 #define BPERF_METRIC_NAME_SIZE 16
 
@@ -51,43 +52,51 @@ class BPerfEventsGroup {
   ///
   ///  - name: Name for eBPF maps.
   ///  - confs: Event Confs for group.
-  ///  - type: the type of event.
-  ///  - id:
-  BPerfEventsGroup(
-      const std::string& name,
-      const EventConfs& confs,
-      BPerfEventType type,
-      __u64 id);
 
+  BPerfEventsGroup(const std::string& name, const EventConfs& confs);
   BPerfEventsGroup(
       const std::string& name,
-      const EventConfs& confs,
-      std::shared_ptr<FdWrapper> cgroup_fd_wrapper);
+      const MetricDesc& metric,
+      const PmuDeviceManager& pmu_manager);
 
   ~BPerfEventsGroup();
   static std::string attrMapPath();
+
+  size_t getNumEvents() const;
+  bool open();
+  void close();
+  bool isOpen() const;
   bool enable();
   bool disable();
   bool isEnabled() const {
     return enabled_;
   }
 
-  // eBPF like interface to read counters from all CPUs and accumulate them.
-  int read(struct bpf_perf_event_value* output, bool skip_offset = false);
+  bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd);
+  bool removeCgroup(__u64 id);
 
-  bool read(ReadValues& rv, bool skip_offset = false);
+  // eBPF like interface to read counters from all CPUs and accumulate them.
+  int readGlobal(struct bpf_perf_event_value* output, bool skip_offset = false);
+  bool readGlobal(ReadValues& rv, bool skip_offset = false);
+
+  int readCgroup(struct bpf_perf_event_value* output, __u64 id);
+  bool readCgroup(ReadValues& rv, __u64 id);
 
  protected:
   const std::string name_;
   const EventConfs confs_;
-  const enum BPerfEventType type_;
-  const __u64 id_;
+
+  // set of cgrup inodes that the BPerfEventsGroup is monitoring
+  // inode # => fd wrapper
+  std::map<__u64, std::shared_ptr<hbt::FdWrapper>> cgroup_fds_;
 
   std::vector<struct perf_event_attr> attrs_;
   int leader_link_fd_ = -1;
   int leader_prog_fd_ = -1;
-  int output_fd_ = -1;
+  int global_output_fd_ = -1;
+  int cgroup_output_fd_ = -1;
 
+  bool opened_ = false;
   bool enabled_ = false;
   int cpu_cnt_;
   std::vector<int> pe_fds_;
@@ -118,13 +127,19 @@ class BPerfEventsGroup {
   //     read(&offset_);
   struct bpf_perf_event_value offsets_[BPERF_MAX_GROUP_SIZE];
 
+  int read(
+      struct bpf_perf_event_value* output,
+      int fd,
+      __u64 id,
+      bool skip_offset = false);
+
   int lockAttrMap_();
-  int reloadSkel_(int attr_map_fd, struct bperf_attr_map_elem* entry);
+  int reloadSkel_(struct bperf_attr_map_elem* entry);
   int loadPerfEvent_(struct bperf_leader_cgroup* skel);
 
   static int syncCpu_(__u32 cpu, int leader_pd);
+  static void toReadValues(ReadValues& rv, struct bpf_perf_event_value*);
   void syncGlobal_();
-  bool reenable_();
 };
 
 } // namespace facebook::hbt::perf_event

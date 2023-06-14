@@ -21,9 +21,18 @@
 
 #ifdef HBT_ENABLE_BPERF
 #include "hbt/src/perf_event/BPerfCountReader.h"
+#include "hbt/src/perf_event/BPerfEventsGroup.h"
 #endif // HBT_ENABLE_BPERF
 
 namespace facebook::hbt::mon {
+
+template <class MuxGroupIdType>
+struct ManagedBPerfEventInfo {
+  explicit ManagedBPerfEventInfo(MuxGroupIdType muxId)
+      : muxId{std::move(muxId)}, refCount{1} {}
+  MuxGroupIdType muxId;
+  size_t refCount;
+};
 
 /// Class to consolidate initialization, polling,  processing
 /// and lifetime of TraceMonitor, CountReaders, and BPerfCountReaders.
@@ -50,6 +59,7 @@ class Monitor {
   using TCountReader = perf_event::PerCpuCountReader;
 #ifdef HBT_ENABLE_BPERF
   using TBPerfCountReader = perf_event::BPerfCountReader;
+  using TBPerfEventsGroup = perf_event::BPerfEventsGroup;
 #endif // HBT_ENABLE_BPERF
 
   using ElemId = ElemIdType;
@@ -349,32 +359,56 @@ class Monitor {
     return std::nullopt;
   }
 
-  /// Create and register a new BPerfCountReader, it returns a shared ptr to
-  /// newly created TraceMonitor, but it can also be retrieved later using
-  /// the elem_id. Note that the state of this BPerfCountReader will be managed
-  /// by Monitor.
   std::shared_ptr<TBPerfCountReader> emplaceBPerfCountReader(
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id,
-      const std::string& bpf_map_name,
-      std::shared_ptr<const perf_event::MetricDesc> metric_desc,
-      std::shared_ptr<const perf_event::PmuDeviceManager> pmu_manager,
+      std::shared_ptr<perf_event::BPerfEventsGroup> bperf_eg,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper) {
     std::lock_guard<std::mutex> lock{mutex_};
-
     // Check for key before creating new count generator.
     HBT_ARG_CHECK_EQ(bperf_count_readers_.count(elem_id), 0)
         << "There is already a BPerfCountReader  with key: \"" << elem_id
         << "\"";
-
+    HBT_ARG_CHECK_NE(bperf_eg, nullptr);
+    // Check if BPerfEventsGroup exists with a different mux group id
+    HBT_ARG_CHECK_TRUE(
+        !mux_bperf_event_map_.count(mux_group_id) ||
+        mux_bperf_event_map_[mux_group_id] == bperf_eg.get())
+        << "The provided BPerfEventsGroup has been used by another BPerfCountReader"
+        << " under a different mux group id. The same BPerfEventsGroup should have the"
+        << " same mux group id.";
+    auto bperf_cnt_reader = std::make_unique<Monitor::TBPerfCountReader>(
+        std::move(bperf_eg), cgroup_fd_wrapper);
+    if (!bperf_cnt_reader->enable()) {
+      return nullptr;
+    }
+    // Add mux entry as other Readers.
+    // But Monitor will multiplex BPerfEventsGroup rather than BPerfCountReader.
+    // This is specially handled during sync_().
     addMuxEntry_(mux_group_id, elem_id);
+    // emplace BPerfCountReader
+    auto [it, emplaced] =
+        bperf_count_readers_.emplace(elem_id, std::move(bperf_cnt_reader));
+    auto bperf_eg_ptr = it->second->getBPerfEventsGroup();
 
-    auto [it, emplaced] = bperf_count_readers_.emplace(
-        elem_id,
-        std::make_unique<Monitor::TBPerfCountReader>(
-            bpf_map_name, metric_desc, pmu_manager, cgroup_fd_wrapper));
+    // maintain managed_bperf_events_
+    auto bperf_event_info_it = managed_bperf_events_.find(bperf_eg_ptr);
+    if (bperf_event_info_it == managed_bperf_events_.end()) {
+      bperf_event_info_it =
+          managed_bperf_events_
+              .insert(
+                  {bperf_eg_ptr,
+                   ManagedBPerfEventInfo<MuxGroupIdType>(mux_group_id)})
+              .first;
+    }
+    auto& bperf_event_info = bperf_event_info_it->second;
+    bperf_event_info.refCount++;
 
-    // Transition newly emplaced BPerfCountReader to Monitor's state.
+    // maintain mux_bperf_event_map_
+    mux_bperf_event_map_[mux_group_id] = bperf_eg_ptr;
+
+    // Transition newly emplaced BPerfCountReader and BPerfEventsGroup to
+    // Monitor's state.
     sync_();
     return it->second;
   }
@@ -383,8 +417,21 @@ class Monitor {
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id) {
     std::lock_guard<std::mutex> lock{mutex_};
-    if (!bperf_count_readers_.count(elem_id)) {
+    auto bperf_count_reader_it = bperf_count_readers_.find(elem_id);
+    if (bperf_count_reader_it == bperf_count_readers_.end()) {
       return false;
+    }
+    // maintain managed_bperf_events_
+    auto bperf_event_info_it = managed_bperf_events_.find(
+        bperf_count_reader_it->second->getBPerfEventsGroup());
+    HBT_THROW_ASSERT_IF(bperf_event_info_it == managed_bperf_events_.end())
+        << "Internl state inconsistent: a BPerfEventsGroup is owned by an "
+        << "existing BPerfCountReader but is missing in managed_bperf_events_.";
+    auto& bperf_event_info = bperf_event_info_it->second;
+    bperf_event_info.refCount--;
+    if (bperf_event_info.refCount == 0) {
+      mux_bperf_event_map_.erase(bperf_event_info.muxId);
+      managed_bperf_events_.erase(bperf_event_info_it);
     }
     if (!removeMuxEntry_(mux_group_id, elem_id)) {
       return false;
@@ -482,6 +529,14 @@ class Monitor {
 #ifdef HBT_ENABLE_BPERF
   std::unordered_map<ElemId, std::shared_ptr<TBPerfCountReader>>
       bperf_count_readers_;
+  // a ref count to BPerfEventsGroup shared by the BPerfCountReaders above
+  // BPerfEventsGroup is owned by any BPerfCountReader that takes a shared
+  // pointer to it bperf_count_readers_ doesn't own the object and need to
+  // synchronize with insert/erase of BPerfCountReader to make sure the stored
+  // raw pointer is always valid.
+  std::unordered_map<TBPerfEventsGroup*, ManagedBPerfEventInfo<MuxGroupIdType>>
+      managed_bperf_events_;
+  std::unordered_map<MuxGroupId, TBPerfEventsGroup*> mux_bperf_event_map_;
 #endif // HBT_ENABLE_BPERF
 
   /// Mapping from MuxGroupId to MuxGroup. Each MuxGroup contains
@@ -514,7 +569,10 @@ class Monitor {
   // Transition all elements in container.
   template <class TContainer>
   void syncElems_(TContainer& elems_container);
-
+#ifdef HBT_ENABLE_BPERF
+  void syncElems_(
+      std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events);
+#endif
   void addMuxEntry_(const MuxGroupId& mux_group_id, const ElemId& elem_id) {
     auto& g = mux_groups_[mux_group_id];
     if (g.empty()) {
@@ -647,19 +705,11 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
 
 template <class TMonitor, class TGen, class... Args>
 void tryOpen_(TGen& gen, Args&&... args) {
-  // BPerfCountReader does not define open method.
+  // BPerfEventsGroup does not define open method.
   // It's only enable and disable.
-#ifdef HBT_ENABLE_BPERF
-  if constexpr (!std::is_same_v<TGen, typename TMonitor::TBPerfCountReader>) {
-    if (!gen.isOpen()) {
-      gen.open(std::forward<Args>(args)...);
-    }
-  }
-#else
   if (!gen.isOpen()) {
     gen.open(std::forward<Args>(args)...);
   }
-#endif // HBT_ENABLE_BPERF
 }
 
 template <class TGen>
@@ -671,15 +721,9 @@ void tryEnable_(TGen& gen) {
 
 template <class TMonitor, class TGen>
 void tryClose_(TGen& gen) {
-  // BPerfCountReader does not define open method.
-  // It's only enable and disable.
-#ifdef HBT_ENABLE_BPERF
-  if constexpr (!std::is_same_v<TGen, typename TMonitor::TBPerfCountReader>) {
-    if (gen.isOpen()) {
-      gen.close();
-    }
+  if (gen.isOpen()) {
+    gen.close();
   }
-#endif // HBT_ENABLE_BPERF
 }
 
 template <class TGen>
@@ -689,13 +733,43 @@ void tryDisable_(TGen& gen) {
   }
 }
 
+#ifdef HBT_ENABLE_BPERF
+template <class MuxGroupId, class ElemId>
+void Monitor<MuxGroupId, ElemId>::syncElems_(
+    std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events) {
+  using TMonitor = std::decay_t<decltype(*this)>;
+  auto active_mux_id = mux_queue_.front();
+  for (auto& [mux, bperf_events_group] : bperf_events) {
+    switch (state_) {
+      case State::Closed:
+        tryDisable_(*bperf_events_group);
+        tryClose_<TMonitor>(*bperf_events_group);
+        break;
+      case State::Open:
+        tryDisable_(*bperf_events_group);
+        tryOpen_<TMonitor>(*bperf_events_group);
+        break;
+      case State::Enabled:
+        tryOpen_<TMonitor>(*bperf_events_group);
+        HBT_DCHECK_GT(mux_queue_.size(), 0);
+        // Only enable if it's at front of its multiplexing queue.
+        if (mux == active_mux_id) {
+          tryEnable_(*bperf_events_group);
+        } else {
+          tryDisable_(*bperf_events_group);
+        }
+        break;
+    }
+  }
+}
+#endif
+
 /// Transition all elements (TraceMonitors, PerCpuCountReaders,
 /// and BPerfCountReaders) inside elems_container to state.
 template <class MuxGroupId, class ElemId>
 template <class TContainer>
 void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
   using TMonitor = std::decay_t<decltype(*this)>;
-
   for (auto& [k, elem_ptr] : elems_container) {
     HBT_THROW_ASSERT_IF(elem_ptr == nullptr);
     auto& elem = *elem_ptr;
@@ -737,7 +811,7 @@ void Monitor<MuxGroupId, ElemId>::sync_() {
 #endif // HBT_ENABLE_TRACING
   syncElems_(count_readers_);
 #ifdef HBT_ENABLE_BPERF
-  syncElems_(bperf_count_readers_);
+  syncElems_(mux_bperf_event_map_);
 #endif // HBT_ENABLE_BPERF
   syncElems_(ipt_monitors_);
 }

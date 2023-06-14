@@ -11,26 +11,13 @@
 namespace facebook::hbt::perf_event {
 
 BPerfCountReader::BPerfCountReader(
-    const std::string& bpf_map_name,
-    std::shared_ptr<const MetricDesc> metric_desc_in,
-    std::shared_ptr<const PmuDeviceManager> pmu_manager_in,
+    std::shared_ptr<BPerfEventsGroup> bperf_eg_in,
     std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-    : pmu_manager{pmu_manager_in}, metric_desc{metric_desc_in} {
-  HBT_DCHECK(pmu_manager != nullptr);
-  HBT_DCHECK(metric_desc != nullptr);
-
-  bperf_eg_ = new BPerfEventsGroup(
-      bpf_map_name,
-      metric_desc_in->makeNoCpuTopologyConfs(*pmu_manager_in),
-      cgroup_fd_wrapper);
-}
+    : bperf_eg_{std::move(bperf_eg_in)},
+      cgroup_fd_wrapper_{std::move(cgroup_fd_wrapper)} {}
 
 size_t BPerfCountReader::getNumEvents() const {
-  auto opt_num_events =
-      this->metric_desc->getNumEvents(pmu_manager->cpuInfo.cpu_arch);
-  HBT_DCHECK(opt_num_events.has_value())
-      << "Must have been checked at construction";
-  return opt_num_events.value_or(0);
+  return bperf_eg_->getNumEvents();
 }
 
 BPerfCountReader::ReadValues BPerfCountReader::makeReadValues() const {
@@ -38,23 +25,41 @@ BPerfCountReader::ReadValues BPerfCountReader::makeReadValues() const {
 }
 
 bool BPerfCountReader::enable() {
-  return bperf_eg_->enable();
+  if (cgroup_fd_wrapper_) {
+    if (bperf_eg_->addCgroup(cgroup_fd_wrapper_)) {
+      cgroup_tracking_ = true;
+    }
+    return cgroup_tracking_;
+  } else {
+    return bperf_eg_->enable();
+  }
 }
 
 bool BPerfCountReader::disable() {
-  return bperf_eg_->disable();
+  if (cgroup_fd_wrapper_) {
+    if (bperf_eg_->removeCgroup(cgroup_fd_wrapper_->getInode())) {
+      cgroup_tracking_ = false;
+    }
+    return !cgroup_tracking_;
+  } else {
+    return bperf_eg_->disable();
+  }
 }
 
 bool BPerfCountReader::read(
     BPerfCountReader::ReadValues& rv,
     bool skip_offset) {
-  return bperf_eg_->read(rv, skip_offset);
+  if (cgroup_fd_wrapper_) {
+    return bperf_eg_->readCgroup(rv, cgroup_fd_wrapper_->getInode());
+  } else {
+    return bperf_eg_->readGlobal(rv, skip_offset);
+  }
 }
 
 std::optional<BPerfCountReader::ReadValues> BPerfCountReader::read(
     bool skip_offset) {
   auto rv = makeReadValues();
-  if (bperf_eg_->read(rv, skip_offset)) {
+  if (read(rv, skip_offset)) {
     return std::make_optional(rv);
   } else {
     return std::nullopt;
@@ -62,11 +67,20 @@ std::optional<BPerfCountReader::ReadValues> BPerfCountReader::read(
 }
 
 bool BPerfCountReader::isEnabled() const {
-  return bperf_eg_->isEnabled();
+  // if BPerfCountRedaer is open for a certain cgroup
+  // check if underlying BPerfEventsGroup is enabled and if cgroup is being
+  // tracked as well
+  return bperf_eg_->isEnabled() && (cgroup_tracking_ || !cgroup_fd_wrapper_);
 }
 
 std::ostream& BPerfCountReader::printStatus(std::ostream& os) {
-  os << "BPerfCounterReader for \"" << metric_desc->id << "\"";
+  os << "BPerfCounterReader for ";
+  if (cgroup_fd_wrapper_) {
+    os << "cgroup " << cgroup_fd_wrapper_->getInode();
+  } else {
+    os << " global";
+  }
+  os << "\n";
   if (this->isEnabled()) {
     auto val = this->read(false);
     if (val.has_value()) {
@@ -78,9 +92,12 @@ std::ostream& BPerfCountReader::printStatus(std::ostream& os) {
   return os << " is inactive.\n";
 }
 
+BPerfEventsGroup* BPerfCountReader::getBPerfEventsGroup() const {
+  return bperf_eg_.get();
+}
+
 BPerfCountReader::~BPerfCountReader() {
   HBT_DCHECK(bperf_eg_ != nullptr);
-  delete bperf_eg_;
 }
 
 } // namespace facebook::hbt::perf_event

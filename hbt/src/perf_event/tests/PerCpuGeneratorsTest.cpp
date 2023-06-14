@@ -6,6 +6,7 @@
 #include "hbt/src/common/System.h"
 #include "hbt/src/intel_pt/IptEventBuilder.h"
 #include "hbt/src/perf_event/BPerfCountReader.h"
+#include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/PerCpuCountReader.h"
 #include "hbt/src/perf_event/PerCpuCountSampleGenerator.h"
@@ -270,14 +271,15 @@ TEST(BPerfCountReader, SmokeTest) {
   // User's slice.
   auto cgroup_path = "/sys/fs/cgroup/user.slice";
 
+  auto eg =
+      std::make_shared<BPerfEventsGroup>("myperfunittest", *m, *pmu_manager);
+  if (!eg->open() || !eg->enable()) {
+    GTEST_SKIP()
+        << "Failed to open global perf events. Something is wrong with BPerfEventsGroup"
+        << "or we don't have do we have CAP_PERFMON cap";
+  }
   HBT_LOG_INFO() << cgroup_path;
-  BPerfCountReader g(
-      "myperfunittest",
-      m,
-      pmu_manager,
-      // cgroup for current tid.
-      std::make_unique<FdWrapper>(cgroup_path));
-
+  BPerfCountReader g(eg, std::make_unique<FdWrapper>(cgroup_path));
   g.enable();
   ASSERT_TRUE(g.isEnabled());
 
