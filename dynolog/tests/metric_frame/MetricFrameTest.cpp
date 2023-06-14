@@ -176,12 +176,14 @@ TEST(MetricSeriesSliceTest, metricFrameVectorSmokeTest) {
   EXPECT_NEAR(seriesSlice1->rate<double>(1s), 0.01667, 1e-3);
   EXPECT_EQ(seriesSlice1->rate<int>(1min), 1);
   EXPECT_EQ(seriesSlice1->diff(), 5);
+  EXPECT_EQ(seriesSlice1->last(), 52);
 
   EXPECT_NEAR(seriesSlice2->avg<double>(), 28.4, 1e-3);
   EXPECT_NEAR(seriesSlice2->percentile(0.4), 27.9, 1e-3);
   EXPECT_NEAR(seriesSlice2->rate<double>(1s), 0.01667, 1e-3);
   EXPECT_EQ(seriesSlice2->rate<int>(1min), 1);
   EXPECT_NEAR(seriesSlice2->diff(), 5, 1e-3);
+  EXPECT_NEAR(seriesSlice2->last(), 33.9, 1e-3);
 }
 
 TEST(MetricSeriesSliceTest, perfReadValuesCompabilityTest) {

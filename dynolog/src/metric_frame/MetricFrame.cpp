@@ -8,6 +8,8 @@
 
 #include <stdexcept>
 
+#include <iostream>
+
 namespace facebook::dynolog {
 
 MetricFrameMap::MetricFrameMap(

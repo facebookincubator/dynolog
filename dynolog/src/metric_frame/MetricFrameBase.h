@@ -95,6 +95,9 @@ class MetricSeriesSlice {
         series_.begin() + range_.start.offset,
         series_.begin() + range_.end.offset + 1);
   }
+  T last() const {
+    return series_.last();
+  }
 
  protected:
   MetricSeriesSlice(
