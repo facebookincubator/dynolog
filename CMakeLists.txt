@@ -23,6 +23,8 @@ set(DYNOLOG_GIT_REV "\"${DYNOLOG_GIT_REV}\"")
 message("Dynolog version = ${DYNOLOG_VERSION}")
 message("Dynolog git rev = ${DYNOLOG_GIT_REV}")
 
+set(USE_ODS_GRAPH_API 1)
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_CXX_STANDARD 17)
