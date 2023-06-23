@@ -117,3 +117,30 @@ TEST(MetricSeriesTest, testDiff) {
   EXPECT_EQ(t.diff(t.begin(), t.end() - 1), 12);
   EXPECT_EQ(t.diff(t.begin() + 1, t.end()), -4);
 }
+
+TEST(MetricSeriesTest, testIncFromLastSample) {
+  MetricSeries<int> t(3, "test_metric", "this is a test metric in unittest");
+  t.incFromLastSample(3);
+  t.incFromLastSample(2);
+  t.incFromLastSample(4);
+
+  EXPECT_EQ(t.at(0), 3);
+  EXPECT_EQ(t.at(1), 5);
+  EXPECT_EQ(t.at(2), 9);
+
+  t.incFromLastSample(3);
+  EXPECT_EQ(t[2], 12);
+
+  MetricSeries<PerfReadValues> t2(
+      3, "test_metric", "this is a test metric in unittest");
+  t2.incFromLastSample(
+      PerfReadValues{.timeEnabled = 2, .timeRunning = 1, .count = 3});
+  t2.incFromLastSample(
+      PerfReadValues{.timeEnabled = 3, .timeRunning = 3, .count = 4});
+  t2.incFromLastSample(
+      PerfReadValues{.timeEnabled = 1, .timeRunning = 1, .count = 1});
+
+  EXPECT_EQ(t2.at(2).count, 8);
+  EXPECT_EQ(t2.at(2).timeEnabled, 6);
+  EXPECT_EQ(t2.at(2).timeRunning, 5);
+}

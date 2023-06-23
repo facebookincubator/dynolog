@@ -35,6 +35,14 @@ struct PerfReadValues {
     return res;
   }
 
+  PerfReadValues operator+(const PerfReadValues& other) const {
+    PerfReadValues res;
+    res.timeEnabled = timeEnabled + other.timeEnabled;
+    res.timeRunning = timeRunning + other.timeRunning;
+    res.count = count + other.count;
+    return res;
+  }
+
   template <typename R>
   R getCount() const {
     if (timeRunning == 0) {

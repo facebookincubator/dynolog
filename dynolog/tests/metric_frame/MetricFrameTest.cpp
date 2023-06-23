@@ -226,3 +226,41 @@ TEST(MetricSeriesSliceTest, perfReadValuesCompabilityTest) {
   rate = seriesSlice3->rate<double>(1s);
   EXPECT_NEAR(rate, 1, 1e-3);
 }
+
+TEST(MetricSeriesSliceTest, incFromLastSampleTest) {
+  auto now = std::chrono::steady_clock::now();
+  auto ts = std::make_shared<MetricFrameTsUnitFixInterval>(
+      std::chrono::seconds{10}, 10);
+  MetricFrameMap frame(10, "test", "test metric frame", std::move(ts));
+  auto series = std::make_shared<MetricSeries<int64_t>>(
+      10, "m1", "test bump from last sample");
+  frame.addSeries(series->name(), series);
+
+  frame.incFromLastSample({{"m1", 16}}, now);
+  frame.incFromLastSample({{"m1", 16}}, now + 10s);
+  frame.incFromLastSample({{"m1", 16}}, now + 20s);
+
+  EXPECT_EQ(frame.length(), 3);
+  auto slice = frame.slice(now, now + 20s).value();
+  EXPECT_EQ(slice.length(), 3);
+  EXPECT_EQ(slice.duration(), 20s);
+  EXPECT_EQ(slice.series<int64_t>("m1")->rate<int64_t>(1s), 32 / 20);
+
+  ts = std::make_shared<MetricFrameTsUnitFixInterval>(
+      std::chrono::seconds{10}, 10);
+  MetricFrameVector frameVector(
+      {std::make_shared<MetricSeries<int64_t>>(
+          10, "m1", "test bump from last sample")},
+      "test",
+      "test metric frame",
+      std::move(ts));
+  frameVector.incFromLastSample({16}, now);
+  frameVector.incFromLastSample({16}, now + 10s);
+  frameVector.incFromLastSample({16}, now + 20s);
+
+  EXPECT_EQ(frameVector.length(), 3);
+  auto vectorSlice = frameVector.slice(now, now + 20s).value();
+  EXPECT_EQ(vectorSlice.length(), 3);
+  EXPECT_EQ(vectorSlice.duration(), 20s);
+  EXPECT_EQ(vectorSlice.series<int64_t>(0)->rate<int64_t>(1s), 32 / 20);
+}

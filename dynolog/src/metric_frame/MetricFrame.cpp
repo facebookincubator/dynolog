@@ -47,7 +47,24 @@ bool MetricFrameMap::addSamples(const MapSamplesT& samples, TimePoint time) {
   for (const auto& [name, sampleVar] : samples) {
     auto seriesIt = series_.find(name);
     auto& seriesVar = seriesIt->second;
-    addSample(sampleVar, seriesVar);
+    MetricFrameBase::addSample(sampleVar, seriesVar);
+  }
+  ts_->addSample(time);
+  return true;
+}
+
+bool MetricFrameMap::incFromLastSample(
+    const MapSamplesT& delta,
+    TimePoint time) {
+  for (const auto& [name, deltaVar] : delta) {
+    if (!series_.count(name)) {
+      return false;
+    }
+  }
+  for (const auto& [name, deltaVar] : delta) {
+    auto seriesIt = series_.find(name);
+    auto& seriesVar = seriesIt->second;
+    MetricFrameBase::incFromLastSample(deltaVar, seriesVar);
   }
   ts_->addSample(time);
   return true;
@@ -87,7 +104,22 @@ bool MetricFrameVector::addSamples(
   for (size_t idx = 0; idx < series_.size(); idx++) {
     auto& series = series_[idx];
     auto& sample = samples[idx];
-    addSample(sample, series);
+    MetricFrameBase::addSample(sample, series);
+  }
+  ts_->addSample(time);
+  return true;
+}
+
+bool MetricFrameVector::incFromLastSample(
+    const VectorSamplesT& delta,
+    TimePoint time) {
+  if (delta.size() != width()) {
+    return false;
+  }
+  for (size_t idx = 0; idx < series_.size(); idx++) {
+    auto& series = series_[idx];
+    auto& sample = delta[idx];
+    MetricFrameBase::incFromLastSample(sample, series);
   }
   ts_->addSample(time);
   return true;

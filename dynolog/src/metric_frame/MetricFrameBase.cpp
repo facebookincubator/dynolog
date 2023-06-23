@@ -76,6 +76,25 @@ void MetricFrameBase::addSample(
       seriesVar);
 }
 
+void MetricFrameBase::incFromLastSample(
+    const SampleVarT& deltaVar,
+    MetricSeriesVar& seriesVar) {
+  std::visit(
+      [&deltaVar](auto&& arg) {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (std::is_same_v<MetricSeriesInt64Ptr, T>) {
+          arg->incFromLastSample(std::get<int64_t>(deltaVar));
+        } else if constexpr (std::is_same_v<T, MetricSeriesDoublePtr>) {
+          arg->incFromLastSample(std::get<double>(deltaVar));
+        } else if constexpr (std::is_same_v<T, MetricSeriesPerfReadValuePtr>) {
+          arg->incFromLastSample(std::get<PerfReadValues>(deltaVar));
+        } else {
+          unknown_type_assert();
+        }
+      },
+      seriesVar);
+}
+
 MetricFrameSlice::MetricFrameSlice(
     const MetricFrameBase& frame,
     MetricFrameRange range)

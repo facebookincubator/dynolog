@@ -11,6 +11,7 @@
 namespace facebook::dynolog {
 
 using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
+using TimeDuration = decltype(TimePoint() - TimePoint());
 
 enum class MATCH_POLICY {
   CLOSEST, // use the closest sample

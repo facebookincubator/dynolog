@@ -30,6 +30,8 @@ class MetricFrameMap : public MetricFrameBase {
   bool addSeries(const std::string& key, MetricSeriesVar seriesVar);
   bool eraseSeries(const std::string& name);
   bool addSamples(const MapSamplesT& samples, TimePoint time);
+  // add a new sample with value = valueOfLastSample + delta
+  bool incFromLastSample(const MapSamplesT& samples, TimePoint time);
   size_t width() const override;
   std::optional<MetricSeriesVar> series(const std::string& name) const override;
   std::optional<MetricSeriesVar> series(int name) const override;
@@ -48,6 +50,8 @@ class MetricFrameVector : public MetricFrameBase {
       std::string description,
       std::shared_ptr<MetricFrameTsUnitInterface> ts);
   bool addSamples(const VectorSamplesT& samples, TimePoint time);
+  // add a new sample with value = valueOfLastSample + delta
+  bool incFromLastSample(const VectorSamplesT& delta, TimePoint time);
   size_t width() const override;
   std::optional<MetricSeriesVar> series(const std::string& name) const override;
   std::optional<MetricSeriesVar> series(int name) const override;
