@@ -3,6 +3,9 @@
 cmake_minimum_required(VERSION 3.16)
 add_definitions(-DDYNOLOG_VERSION=${DYNOLOG_VERSION} -DDYNOLOG_GIT_REV=${DYNOLOG_GIT_REV})
 
+message("Use Prometheus = ${USE_PROMETHEUS}")
+message("Use ODS Graph API = ${USE_ODS_GRAPH_API}")
+
 # our build script will first create a src/ dir where all source code will exist
 file (GLOB dynolog_src "*.h" "*.cpp")
 
@@ -12,6 +15,12 @@ add_library(dynolog_lib ${dynolog_src})
 
 if(USE_ODS_GRAPH_API)
   target_compile_options(dynolog_lib PUBLIC "-DUSE_GRAPH_ENDPOINT")
+endif()
+
+if(USE_PROMETHEUS)
+  find_package(prometheus-cpp CONFIG REQUIRED)
+  add_definitions(-DUSE_PROMETHEUS)
+  target_link_libraries(dynolog_lib PRIVATE prometheus-cpp::pull)
 endif()
 
 target_link_libraries(dynolog_lib PUBLIC Monitor)

@@ -8,6 +8,13 @@ OFF)
 option(USE_JSON_GENERATED_PERF_EVENTS "Add performance events generated using
 Intel json spec, see hbt/src/perf_event/json_events/intel"
 OFF)
+option(USE_PROMETHEUS "Enable logging to prometheus, this requires
+prometheus-cpp to be installed on the system"
+OFF)
+
+if(USE_PROMETHEUS)
+  find_package(prometheus-cpp CONFIG REQUIRED)
+endif()
 
 file(READ "version.txt" DYNOLOG_VERSION)
 string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)

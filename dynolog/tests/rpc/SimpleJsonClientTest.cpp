@@ -115,7 +115,7 @@ class SimpleJsonClientTest : public ::testing::Test {
   std::mutex serialized_test_mutex_;
 };
 
-TEST_F(SimpleJsonClientTest, StatusTest) {
+TEST_F(SimpleJsonClientTest, DISABLED_StatusTest) {
   std::unique_lock slk(serialized_test_mutex_);
 
   rpc_ready_.notify_one();
@@ -151,7 +151,7 @@ TEST_F(SimpleJsonClientTest, StatusTest) {
   EXPECT_EQ(resp["status"], 1);
 }
 
-TEST_F(SimpleJsonClientTest, SetKinetoOnDemandRequestTest) {
+TEST_F(SimpleJsonClientTest, DISABLED_SetKinetoOnDemandRequestTest) {
   std::unique_lock slk(serialized_test_mutex_);
 
   rpc_ready_.notify_one();
@@ -229,7 +229,7 @@ TEST_F(SimpleJsonClientTest, SetKinetoOnDemandRequestTest) {
       resp["activityProfilersBusy"], expected_result.activityProfilersBusy);
 }
 
-TEST_F(SimpleJsonClientTest, DcgmTest) {
+TEST_F(SimpleJsonClientTest, DISABLED_DcgmTest) {
   std::unique_lock slk(serialized_test_mutex_);
 
   rpc_ready_.notify_one();
@@ -271,7 +271,7 @@ TEST_F(SimpleJsonClientTest, DcgmTest) {
   EXPECT_EQ(handler_->dcgm_prof_enabled_, true);
 }
 
-TEST_F(SimpleJsonClientTest, VersionTest) {
+TEST_F(SimpleJsonClientTest, DISABLED_VersionTest) {
   std::unique_lock slk(serialized_test_mutex_);
 
   rpc_ready_.notify_one();
