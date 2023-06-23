@@ -3,12 +3,13 @@
 2. Create a new branch from main, say `release-vX.Y.Z` where X.Y.Z is the new release number.
 3. Bump the version in `version.txt`. Versions must adhere to [Semantic Versioning](https://semver.org/).
 4. Make a tag, `git tag vX.Y.Z`.
-5. Merge the release branch along **with the tag** into main through a PR `git push --tags -u origin
+5. Add and commit the change of `version.txt` to the local repo with `git add` and `git commit`.
+6. Merge the release branch along **with the tag** into main through a PR `git push --tags -u origin
    [branch_name]`
-6. Create a new release on [this
+7. Create a new release on [this
   page](https://github.com/facebookincubator/dynolog/releases) on Github.
-7. Build rpm and debian packages. You can use Docker for this, details provided below.
-7. Upload the rpm and debian packages to the [release page](https://github.com/facebookincubator/dynolog/releases) or by running [gh cli](https://cli.github.com/manual/gh_release_upload)
+8. Build rpm and debian packages. You can use Docker for this, details provided below.
+9. Upload the rpm and debian packages to the [release page](https://github.com/facebookincubator/dynolog/releases) or by running [gh cli](https://cli.github.com/manual/gh_release_upload)
 
 # Building Release Packages using Docker
 
