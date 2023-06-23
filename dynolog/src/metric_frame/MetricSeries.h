@@ -160,6 +160,14 @@ class MetricSeries final {
     }
   }
 
+  void incFromLastSample(const T& delta) {
+    T lastSample = {};
+    if (size_ > 0) {
+      lastSample = at(size_ - 1);
+    }
+    addSample(lastSample + delta);
+  }
+
   const T& at(size_t idx) {
     return *(begin() + idx);
   }
@@ -178,10 +186,6 @@ class MetricSeries final {
 
   size_t maxLength() {
     return data_.size();
-  }
-
-  T& operator[](const size_t idx) {
-    return *(begin() + idx);
   }
 
   const T& operator[](const size_t idx) const {

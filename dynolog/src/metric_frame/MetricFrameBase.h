@@ -51,7 +51,10 @@ class MetricFrameBase {
   virtual std::optional<MetricSeriesVar> series(int name) const = 0;
 
  protected:
-  void addSample(const SampleVarT& sample, MetricSeriesVar& seriesVar);
+  void addSample(const SampleVarT& sampleVar, MetricSeriesVar& seriesVar);
+  void incFromLastSample(
+      const SampleVarT& deltaVar,
+      MetricSeriesVar& seriesVar);
   std::string name_;
   std::string description_;
   std::shared_ptr<MetricFrameTsUnitInterface> ts_;
@@ -124,6 +127,14 @@ class MetricFrameSlice {
       return std::nullopt;
     }
     return getSeriesFromVar<T>(seriesVar.value(), range_);
+  }
+
+  size_t length() const {
+    return range_.end.offset - range_.start.offset + 1;
+  }
+
+  TimeDuration duration() const {
+    return range_.end.time - range_.start.time;
   }
 
  protected:
