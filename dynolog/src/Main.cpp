@@ -24,11 +24,22 @@
 #include "dynolog/src/tracing/IPCMonitor.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
+#ifdef USE_PROMETHEUS
+#include "dynolog/src/PrometheusLogger.h"
+#endif
+
 using namespace dynolog;
 using json = nlohmann::json;
 namespace hbt = facebook::hbt;
 
-DEFINE_int32(port, 1778, "Port for listening RPC requests : FUTURE");
+DEFINE_int32(port, 1778, "Port for listening RPC requests.");
+DEFINE_bool(use_JSON, false, "Emit metrics to JSON file through JSON logger");
+#ifdef USE_PROMETHEUS
+DEFINE_bool(use_prometheus, false, "Emit metrics to Prometheus");
+#endif
+DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
+DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
+DEFINE_bool(use_scuba, false, "Emit metrics to Scuba through Scuba logger");
 DEFINE_int32(
     kernel_monitor_reporting_interval_s,
     60,
@@ -41,14 +52,10 @@ DEFINE_int32(
     dcgm_reporting_interval_s,
     10,
     "Duration in seconds to read and report metrics for DCGM");
-DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
 DEFINE_bool(
     enable_ipc_monitor,
     false,
     "Enabled IPC monitor for on system tracing requests.");
-DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
-DEFINE_bool(use_JSON, false, "Emit metrics to JSON file through JSON logger");
-DEFINE_bool(use_scuba, false, "Emit metrics to Scuba through Scuba logger");
 DEFINE_bool(
     enable_gpu_monitor,
     false,
@@ -57,6 +64,11 @@ DEFINE_bool(enable_perf_monitor, false, "Enable heartbeat perf monitoring.");
 
 std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
   std::vector<std::unique_ptr<Logger>> loggers;
+#ifdef USE_PROMETHEUS
+  if (FLAGS_use_prometheus) {
+    loggers.push_back(std::make_unique<PrometheusLogger>());
+  }
+#endif
   if (FLAGS_use_fbrelay) {
     loggers.push_back(std::make_unique<FBRelayLogger>());
   }
