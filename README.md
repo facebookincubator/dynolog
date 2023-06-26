@@ -201,12 +201,6 @@ We have tested dynolog works with the following versions of C++ and Rust toolcha
    <td>Rust 1.58.1 (1.56+ required for clap dependency)
    </td>
   </tr>
-  <tr>
-   <td>PyTorch
-   </td>
-   <td>2.0+
-   </td>
-  </tr>
 </table>
 
 
