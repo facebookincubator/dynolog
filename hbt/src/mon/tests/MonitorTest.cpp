@@ -3,8 +3,10 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include "hbt/src/mon/Monitor.h"
+#include <sys/file.h>
+
 #include <gtest/gtest.h>
+#include "hbt/src/mon/Monitor.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <chrono>
@@ -248,7 +250,24 @@ TEST(PerCpuSlicer, TwoCpusNoZeroCpu) {
 };
 #endif // HBT_ENABLE_TRACING
 
-TEST(IntelPTMonitor, SystemWideTraceCollection) {
+class IntelPTMonitorTest : public testing::Test {
+  void SetUp() override {
+    fd = ::open("/sys/devices/intel_pt", O_RDONLY);
+    if (fd < 0 || ::flock(fd, LOCK_EX) != 0) {
+      ::close(fd);
+      fd = -1;
+      GTEST_SKIP()
+          << "Failed to setup flock for preventing intel pt device contention";
+    }
+  }
+  void TearDown() override {
+    ::flock(fd, LOCK_UN);
+    ::close(fd);
+  }
+  int fd;
+};
+
+TEST_F(IntelPTMonitorTest, SystemWideTraceCollection) {
   auto cpus = CpuSet::makeAllOnline();
 
   auto pmu_manager = makePmuDeviceManager();
@@ -314,7 +333,7 @@ TEST(IntelPTMonitor, SystemWideTraceCollection) {
 // This test focuses on testing the onCpusTraceBufferRead() function,
 // specifically, it validates that the (pointer,size) combos passed to the
 // OnRbRead are correct.
-TEST(IntelPTMonitor, SystemWideTraceCopy) {
+TEST_F(IntelPTMonitorTest, SystemWideTraceCopy) {
   auto cpus = CpuSet::makeAllOnline();
 
   auto pmu_manager = makePmuDeviceManager();
