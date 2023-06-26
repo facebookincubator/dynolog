@@ -35,6 +35,7 @@ class MetricFrameMap : public MetricFrameBase {
   size_t width() const override;
   std::optional<MetricSeriesVar> series(const std::string& name) const override;
   std::optional<MetricSeriesVar> series(int name) const override;
+  void show(std::ostream& s) const override;
 
  protected:
   std::map<std::string, MetricSeriesVar> series_;
@@ -55,6 +56,7 @@ class MetricFrameVector : public MetricFrameBase {
   size_t width() const override;
   std::optional<MetricSeriesVar> series(const std::string& name) const override;
   std::optional<MetricSeriesVar> series(int name) const override;
+  void show(std::ostream& s) const override;
 
  protected:
   VectorSeriesDefList series_;

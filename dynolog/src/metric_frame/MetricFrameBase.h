@@ -7,7 +7,9 @@
 
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
+#include "dynolog/src/metric_frame/TextTable.h"
 
+#include <chrono>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -49,12 +51,43 @@ class MetricFrameBase {
   virtual std::optional<MetricSeriesVar> series(
       const std::string& name) const = 0;
   virtual std::optional<MetricSeriesVar> series(int name) const = 0;
+  virtual void show(std::ostream& s) const = 0;
 
  protected:
   void addSample(const SampleVarT& sampleVar, MetricSeriesVar& seriesVar);
   void incFromLastSample(
       const SampleVarT& deltaVar,
       MetricSeriesVar& seriesVar);
+  template <typename It>
+  static void show(
+      It begin,
+      It end,
+      const MetricFrameTsUnitInterface& ts,
+      std::ostream& s) {
+    std::vector<std::vector<std::string>> textTable;
+    auto tsVector = ts.getTimeVector();
+    textTable.emplace_back(ts.length() + 1);
+    for (size_t i = 0; i < tsVector.size(); i++) {
+      textTable.back()[i + 1] =
+          std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                             tsVector[i].time_since_epoch())
+                             .count());
+    }
+    for (auto it = begin; it != end; it++) {
+      textTable.emplace_back();
+      const MetricSeriesVar& metricSeriesVar = *it;
+      std::visit(
+          [&textTable](auto&& metricSeriesPtr) {
+            textTable.back().push_back(metricSeriesPtr->name());
+            for (auto sample : *metricSeriesPtr) {
+              textTable.back().push_back(std::to_string(sample));
+            }
+          },
+          metricSeriesVar);
+    }
+    TextTable table(std::move(textTable));
+    table.show(s);
+  }
   std::string name_;
   std::string description_;
   std::shared_ptr<MetricFrameTsUnitInterface> ts_;
@@ -157,5 +190,7 @@ class MetricFrameSlice {
 
   friend class MetricFrameBase;
 };
+
+std::ostream& operator<<(std::ostream& s, const MetricFrameBase& frame);
 
 } // namespace facebook::dynolog

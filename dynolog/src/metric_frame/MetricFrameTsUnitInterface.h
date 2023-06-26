@@ -7,6 +7,7 @@
 
 #include <chrono>
 #include <optional>
+#include <vector>
 
 namespace facebook::dynolog {
 
@@ -35,6 +36,7 @@ class MetricFrameTsUnitInterface {
   virtual void addSample(TimePoint time) = 0;
   virtual std::optional<TimePoint> firstSampleTime() const = 0;
   virtual std::optional<TimePoint> lastSampleTime() const = 0;
+  virtual std::vector<TimePoint> getTimeVector() const = 0;
   virtual size_t length() const = 0;
   virtual size_t maxLength() const = 0;
   virtual std::optional<MetricFrameRange> getRange(

@@ -1,4 +1,7 @@
 # (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+dynolog_add_test(TextTableTest TextTableTest.cpp)
+target_link_libraries(TextTableTest PRIVATE text_table)
+
 dynolog_add_test(MetricSeriesTest MetricSeriesTest.cpp)
 target_link_libraries(MetricSeriesTest PRIVATE metric_series)
 
