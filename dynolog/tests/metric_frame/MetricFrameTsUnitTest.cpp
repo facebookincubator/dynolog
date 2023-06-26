@@ -42,6 +42,12 @@ TEST(MetricFrameTsUnitTest, smokeTest) {
   EXPECT_EQ(res.start.time, now - 120s);
   EXPECT_EQ(res.end.offset, 2);
   EXPECT_EQ(res.end.time, now);
+
+  auto timeVector = i.getTimeVector();
+  EXPECT_EQ(timeVector.size(), 3);
+  EXPECT_EQ(timeVector[0], now - 120s);
+  EXPECT_EQ(timeVector[1], now - 60s);
+  EXPECT_EQ(timeVector[2], now);
 }
 
 TEST(MetricFrameTsUnitTest, emptyFrame) {
