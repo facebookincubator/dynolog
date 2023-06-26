@@ -87,6 +87,19 @@ std::optional<MetricSeriesVar> MetricFrameMap::series(const int) const {
   return std::nullopt;
 }
 
+void MetricFrameMap::show(std::ostream& s) const {
+  std::vector<MetricSeriesVar> series;
+  std::transform(
+      series_.begin(),
+      series_.end(),
+      std::back_inserter(series),
+      [](const auto& kv) { return kv.second; });
+  s << name() << std::endl;
+  s << description() << std::endl;
+  MetricFrameBase::show<decltype(series.begin())>(
+      series.begin(), series.end(), *ts_, s);
+}
+
 MetricFrameVector::MetricFrameVector(
     VectorSeriesDefList defs,
     std::string name,
@@ -139,6 +152,13 @@ std::optional<MetricSeriesVar> MetricFrameVector::series(int idx) const {
     return std::nullopt;
   }
   return series_[idx];
+}
+
+void MetricFrameVector::show(std::ostream& s) const {
+  s << name() << std::endl;
+  s << description() << std::endl;
+  MetricFrameBase::show<decltype(series_.begin())>(
+      series_.begin(), series_.end(), *ts_, s);
 }
 
 } // namespace facebook::dynolog

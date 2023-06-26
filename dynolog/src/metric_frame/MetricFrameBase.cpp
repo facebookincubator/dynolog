@@ -95,6 +95,11 @@ void MetricFrameBase::incFromLastSample(
       seriesVar);
 }
 
+std::ostream& operator<<(std::ostream& s, const MetricFrameBase& frame) {
+  frame.show(s);
+  return s;
+}
+
 MetricFrameSlice::MetricFrameSlice(
     const MetricFrameBase& frame,
     MetricFrameRange range)

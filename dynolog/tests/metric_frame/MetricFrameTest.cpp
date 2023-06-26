@@ -4,6 +4,7 @@
 // LICENSE file in the root directory of this source tree.
 
 #include <gtest/gtest.h>
+#include <chrono>
 #include <cstdint>
 
 #include "dynolog/src/metric_frame/MetricFrame.h"
@@ -236,9 +237,9 @@ TEST(MetricSeriesSliceTest, incFromLastSampleTest) {
       10, "m1", "test bump from last sample");
   frame.addSeries(series->name(), series);
 
-  frame.incFromLastSample({{"m1", 16}}, now);
-  frame.incFromLastSample({{"m1", 16}}, now + 10s);
-  frame.incFromLastSample({{"m1", 16}}, now + 20s);
+  frame.incFromLastSample({{"m1", 16l}}, now);
+  frame.incFromLastSample({{"m1", 16l}}, now + 10s);
+  frame.incFromLastSample({{"m1", 16l}}, now + 20s);
 
   EXPECT_EQ(frame.length(), 3);
   auto slice = frame.slice(now, now + 20s).value();
@@ -254,13 +255,36 @@ TEST(MetricSeriesSliceTest, incFromLastSampleTest) {
       "test",
       "test metric frame",
       std::move(ts));
-  frameVector.incFromLastSample({16}, now);
-  frameVector.incFromLastSample({16}, now + 10s);
-  frameVector.incFromLastSample({16}, now + 20s);
+  frameVector.incFromLastSample({16l}, now);
+  frameVector.incFromLastSample({16l}, now + 10s);
+  frameVector.incFromLastSample({16l}, now + 20s);
 
   EXPECT_EQ(frameVector.length(), 3);
   auto vectorSlice = frameVector.slice(now, now + 20s).value();
   EXPECT_EQ(vectorSlice.length(), 3);
   EXPECT_EQ(vectorSlice.duration(), 20s);
   EXPECT_EQ(vectorSlice.series<int64_t>(0)->rate<int64_t>(1s), 32 / 20);
+}
+
+TEST(MetricFrameTest, showTest) {
+  std::chrono::steady_clock::time_point start;
+  auto ts = std::make_shared<MetricFrameTsUnitFixInterval>(
+      std::chrono::seconds{60}, 3);
+  MetricFrameMap frame(3, "test", "test show() function", std::move(ts));
+  auto series1 =
+      std::make_shared<MetricSeries<int64_t>>(3, "metric1", "metric1");
+  auto series2 =
+      std::make_shared<MetricSeries<int64_t>>(3, "metric2", "metric2");
+  frame.addSeries("metric1", std::move(series1));
+  frame.addSeries("metric2", std::move(series2));
+
+  frame.addSamples({{"metric1", 12l}, {"metric2", 17423l}}, start);
+  frame.addSamples({{"metric1", 21l}, {"metric2", 992l}}, start + 60s);
+  frame.addSamples({{"metric1", 38l}, {"metric2", 157l}}, start + 120s);
+
+  std::stringstream ss;
+  frame.show(ss);
+  EXPECT_FALSE(ss.str().empty());
+
+  std::cout << frame;
 }

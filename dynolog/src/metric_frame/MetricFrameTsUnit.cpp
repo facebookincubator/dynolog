@@ -39,6 +39,14 @@ std::optional<TimePoint> MetricFrameTsUnitFixInterval::lastSampleTime() const {
   return lastSampleTime_;
 }
 
+std::vector<TimePoint> MetricFrameTsUnitFixInterval::getTimeVector() const {
+  std::vector<TimePoint> res(length());
+  for (size_t i = 0; i < length(); i++) {
+    res[i] = lastSampleTime_ - (length() - i - 1) * interval_;
+  }
+  return res;
+}
+
 size_t MetricFrameTsUnitFixInterval::length() const {
   return sampleCount_;
 }

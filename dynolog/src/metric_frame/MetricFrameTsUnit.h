@@ -19,6 +19,7 @@ class MetricFrameTsUnitFixInterval : public MetricFrameTsUnitInterface {
   virtual void addSample(TimePoint time) override;
   virtual std::optional<TimePoint> firstSampleTime() const override;
   virtual std::optional<TimePoint> lastSampleTime() const override;
+  virtual std::vector<TimePoint> getTimeVector() const override;
   virtual size_t length() const override;
   virtual size_t maxLength() const override;
   virtual std::optional<MetricFrameRange> getRange(
