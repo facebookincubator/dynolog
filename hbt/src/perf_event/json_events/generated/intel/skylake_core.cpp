@@ -3616,7 +3616,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       std::nullopt // Errata
       ));
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
@@ -3629,7 +3629,6 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
   // Event FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -3660,7 +3659,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
@@ -3673,7 +3672,6 @@ Note: Invoking MITE requires two or three cycles delay.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
