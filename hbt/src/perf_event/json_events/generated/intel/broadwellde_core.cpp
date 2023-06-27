@@ -4118,7 +4118,7 @@ Note: Writeback pending FIFO has six entries.)",
       std::nullopt // Errata
       ));
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
@@ -4131,7 +4131,6 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
   // Event FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -4177,7 +4176,7 @@ Note: Writeback pending FIFO has six entries.)",
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
@@ -4190,7 +4189,6 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(

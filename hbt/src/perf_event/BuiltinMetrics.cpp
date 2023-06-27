@@ -722,19 +722,19 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                EventRef{
                    "instr_sp_128b_packed",
                    PmuType::cpu,
-                   "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
+                   "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
                    EventExtraAttr{},
                    {}},
                EventRef{
                    "instr_sp_256b_packed",
                    PmuType::cpu,
-                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
                    EventExtraAttr{},
                    {}},
                EventRef{
                    "instr_sp_512b_packed",
                    PmuType::cpu,
-                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   "FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE",
                    EventExtraAttr{},
                    {}}}}},
       100'000'000,
@@ -772,7 +772,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                EventRef{
                    "instr_dp_512b_packed",
                    PmuType::cpu,
-                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   "FP_ARITH_INST_RETIRED.512B_PACKED_DOUBLE",
                    EventExtraAttr{},
                    {}}}}},
       100'000'000,
