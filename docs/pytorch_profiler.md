@@ -16,6 +16,7 @@ The following instructions walk through:
 > Note that these instructions continue to evolve as we add more features to PyTorch profiler and Dynolog.
 
 Please use the latest [PyTorch 2.0 release](https://pytorch.org/get-started/pytorch-2.0/). For more information on obtaining PyTorch nightly see [here](https://pytorch.org/get-started/locally/).
+Older versions of PyTorch (< 2.0) are currently not supported.
 
 ## On-demand tracing locally
 On a local machine you can run Dynolog and use the command line tool to trace your application.
