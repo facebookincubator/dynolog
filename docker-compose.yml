@@ -1,6 +1,7 @@
 services:
   docker-dynolog:
     container_name: dynolog
+    command: --use_prometheus true
     build:
       context: ./
       target: docker_dynolog
