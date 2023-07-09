@@ -2,6 +2,7 @@ services:
   docker-dynolog:
     container_name: dynolog
     command: --use_prometheus true
+    network_mode: host
     build:
       context: ./
       target: docker_dynolog
