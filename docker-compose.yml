@@ -1,0 +1,15 @@
+services:
+  docker-dynolog:
+    container_name: dynolog
+    build:
+      context: ./
+      target: docker_dynolog
+      args:
+        - USE_PROMETHEUS=ON
+    volumes:
+      - /proc:/proc
+
+
+
+
+
