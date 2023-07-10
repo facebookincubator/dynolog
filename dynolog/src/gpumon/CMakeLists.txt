@@ -14,8 +14,10 @@ add_library(dynolog_dcgm_lib
 target_include_directories(dynolog_dcgm_lib
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 )
-target_include_directories(dynolog_dcgm_lib PUBLIC
+if(NOT USE_SYSTEM_PFS)
+    target_include_directories(dynolog_dcgm_lib PUBLIC
                             ${PROJECT_SOURCE_DIR}/third_party/pfs/include)
+endif()
 target_link_libraries(dynolog_dcgm_lib PUBLIC gflags::gflags)
 target_link_libraries(dynolog_dcgm_lib PUBLIC glog::glog)
 target_link_libraries(dynolog_dcgm_lib PUBLIC nlohmann_json::nlohmann_json)

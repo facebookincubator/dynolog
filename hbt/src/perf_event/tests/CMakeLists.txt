@@ -2,7 +2,9 @@
 
 add_compile_options("-Wconversion")
 
-include_directories(${PROJECT_SOURCE_DIR}/third_party/googletest/googletest/include)
+if(NOT USE_SYSTEM_GOOGLETEST)
+  include_directories(${PROJECT_SOURCE_DIR}/third_party/googletest/googletest/include)
+endif()
 
 add_executable(CpuEventsGroupTest CpuEventsGroupTest.cpp)
 target_link_libraries(CpuEventsGroupTest PRIVATE gtest gmock gtest_main)
