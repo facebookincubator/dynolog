@@ -6,7 +6,7 @@
 #pragma once
 
 #include "hbt/src/common/Defs.h"
-#include "hbt/src/perf_event/json_events/generated/CpuArch.h"
+#include "hbt/src/perf_event/CpuArch.h"
 
 #include <fmt/core.h>
 #include <fmt/ostream.h>
