@@ -427,8 +427,8 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   }
 
   // Add generic PMUs that are not advertised dynamically.
-
-  if (pmu_manager->getPmuGroupSize(PmuType::cpu)) {
+  if (pmu_manager->getPmuGroupSize(PmuType::cpu) ||
+      pmu_manager->getPmuGroupSize(PmuType::armv8_pmuv3)) {
     // Some systems will not have CPU PMU (like VMs).
     // Those ones neither support hw and hw_cache generic events.
     // NOTE: Currently we need to manually add 'generic' AMD events (see
