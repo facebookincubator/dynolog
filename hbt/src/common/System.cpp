@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <cinttypes>
+#include <cstdio>
 
 #include <cstring>
 #include <fstream>
@@ -18,6 +20,9 @@
 #include <thread>
 
 namespace facebook::hbt {
+
+constexpr const char* kArmMidrFile =
+    "/sys/devices/system/cpu/cpu0/regs/identification/midr_el1";
 
 std::string tstampToStr(TimeStamp ts) {
   if (ts == kInvalidTimeStamp) {
@@ -355,7 +360,54 @@ CpuInfo readCpu(std::ifstream& s) {
   return CpuInfo(vendor_id, cpu_family, cpu_model, cpu_step);
 }
 
+CpuInfo readCpuArm() {
+  std::string vendor_id;
+  uint32_t cpu_family = 0, cpu_model = 0, cpu_step = 0;
+
+  // Read ARM MIDR register
+  if (0 != ::access(kArmMidrFile, R_OK)) {
+    HBT_LOG_WARNING() << "Cannot access ARM MIDR file = " << kArmMidrFile;
+    return CpuInfo(vendor_id, cpu_family, cpu_model, cpu_step);
+  }
+
+  std::ifstream s(kArmMidrFile);
+  // MIDR is a 64 bit register-> 16 hex digits
+  std::array<char, 20> midrStr; // some space for 0x and null term
+  s.getline(&midrStr[0], 20);
+
+  HBT_LOG_INFO() << "ARM MIDR = " << std::string{&midrStr[0]};
+
+  uint64_t midr = 0;
+  uint32_t implementor = 0, variant = 0, revision = 0;
+
+  // SCNx64 is the format specifier for hex 64 bit numbers
+  sscanf(&midrStr[0], "0x%" SCNx64, &midr);
+
+  implementor = (midr >> 24) & 0xff; // Implementor : Bits[31:24]
+  variant = (midr >> 20) & 0xf; // Variant : Bits[23:20]
+  cpu_model = (midr >> 4) & 0xfff; // PartNum : Bits[15:4]
+  revision = midr & 0xf; // Revision : Bits[3:0]
+
+  HBT_LOG_INFO() << "Implementor = " << implementor
+                 << " cpu_model = " << cpu_model << " step r" << variant << "p"
+                 << revision;
+
+  // ARM saves revisions in rMpN format (example r0p3)
+  // since M and N are only 4 bit unsigned numbers, just merge them
+  cpu_step = (variant << 4) + revision;
+
+  vendor_id = perf_event::armVendorIDFromInt(implementor);
+
+  return CpuInfo(vendor_id, cpu_family, cpu_model, cpu_step, implementor);
+}
+
 CpuInfo CpuInfo::load() {
+  // /proc/cpuinfo format only has reasonable information
+  // on x86 architectures.
+#if defined(__aarch64__)
+  return readCpuArm();
+#endif
+
   std::ifstream s("/proc/cpuinfo");
 
   // Only read CPU 0.
