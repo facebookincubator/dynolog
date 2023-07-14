@@ -27,7 +27,13 @@ inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
 }
 
 // Create CpuFamily enumeration from integer.
-inline CpuFamily makeCpuFamily(uint32_t cpu_family) {
+inline CpuFamily makeCpuFamily(
+#if defined(__x86_64__)
+    uint32_t cpu_family
+#else
+    uint32_t /* cpu_family */
+#endif
+) {
 #if defined(__x86_64__)
   switch (cpu_family) {
     case 6:
