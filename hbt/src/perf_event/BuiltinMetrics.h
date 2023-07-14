@@ -5,8 +5,8 @@
 
 #pragma once
 
+#include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
-#include "hbt/src/perf_event/json_events/generated/CpuArch.h"
 
 namespace facebook::hbt::perf_event {
 
