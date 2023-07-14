@@ -10,10 +10,10 @@
 #include "hbt/src/intel_pt/IptEventBuilder.h"
 #include "hbt/src/perf_event/AmdEvents.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
+#include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
-#include "hbt/src/perf_event/json_events/generated/CpuArch.h"
 #ifdef USE_JSON_GENERATED_PERF_EVENTS
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 #endif // USE_JSON_GENERATED_PERF_EVENTS
