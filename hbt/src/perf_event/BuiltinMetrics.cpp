@@ -465,7 +465,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
 
   if (cpu_info.cpu_family == CpuFamily::AMD) {
     addAmdEvents(cpu_info, *pmu_manager);
-  } else {
+  } else if (cpu_info.cpu_family == CpuFamily::INTEL) {
     //
     // Add Intel generated events
     //
@@ -478,6 +478,10 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
                       << e.what() << "\"";
     }
 #endif // USE_JSON_GENERATED_PERF_EVENTS
+  } else if (cpu_info.cpu_family == CpuFamily::ARM) {
+    /* TODO */
+  } else {
+    HBT_LOG_ERROR() << "Unknown CPU family\n";
   }
 
   // Add predefined offcore events
