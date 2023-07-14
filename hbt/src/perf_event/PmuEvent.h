@@ -73,6 +73,9 @@ enum class PmuType : uint16_t {
   // HBM Memory Controller
   // XXX: Need to test them?
   uncore_mchbm,
+
+  // Arm
+  armv8_pmuv3,
 };
 
 std::string PmuTypeToStr(PmuType);

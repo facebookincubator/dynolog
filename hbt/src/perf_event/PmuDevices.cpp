@@ -86,6 +86,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(intel_pt);
 
     CASE_PMU_TYPE(uncore_mchbm);
+
+    CASE_PMU_TYPE(armv8_pmuv3);
   };
 }
 
@@ -134,6 +136,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, intel_pt);
 
   IF_PMU_TYPE(str, uncore_mchbm);
+
+  IF_PMU_TYPE(str, armv8_pmuv3);
 
   HBT_THROW_EINVAL() << "Unrecognized PmuType string: \"" + str + "\"";
   __builtin_unreachable();
