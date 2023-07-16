@@ -29,7 +29,7 @@ namespace facebook::hbt::mon {
 template <class MuxGroupIdType>
 struct ManagedBPerfEventInfo {
   explicit ManagedBPerfEventInfo(MuxGroupIdType muxId)
-      : muxId{std::move(muxId)}, refCount{1} {}
+      : muxId{std::move(muxId)}, refCount{0} {}
   MuxGroupIdType muxId;
   size_t refCount;
 };
