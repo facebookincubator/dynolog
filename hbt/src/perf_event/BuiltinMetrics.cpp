@@ -10,10 +10,10 @@
 #include "hbt/src/intel_pt/IptEventBuilder.h"
 #include "hbt/src/perf_event/AmdEvents.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
+#include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
-#include "hbt/src/perf_event/json_events/generated/CpuArch.h"
 #ifdef USE_JSON_GENERATED_PERF_EVENTS
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 #endif // USE_JSON_GENERATED_PERF_EVENTS
@@ -427,8 +427,8 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   }
 
   // Add generic PMUs that are not advertised dynamically.
-
-  if (pmu_manager->getPmuGroupSize(PmuType::cpu)) {
+  if (pmu_manager->getPmuGroupSize(PmuType::cpu) ||
+      pmu_manager->getPmuGroupSize(PmuType::armv8_pmuv3)) {
     // Some systems will not have CPU PMU (like VMs).
     // Those ones neither support hw and hw_cache generic events.
     // NOTE: Currently we need to manually add 'generic' AMD events (see
@@ -465,7 +465,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
 
   if (cpu_info.cpu_family == CpuFamily::AMD) {
     addAmdEvents(cpu_info, *pmu_manager);
-  } else {
+  } else if (cpu_info.cpu_family == CpuFamily::INTEL) {
     //
     // Add Intel generated events
     //
@@ -478,6 +478,10 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
                       << e.what() << "\"";
     }
 #endif // USE_JSON_GENERATED_PERF_EVENTS
+  } else if (cpu_info.cpu_family == CpuFamily::ARM) {
+    /* TODO */
+  } else {
+    HBT_LOG_ERROR() << "Unknown CPU family\n";
   }
 
   // Add predefined offcore events

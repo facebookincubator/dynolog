@@ -280,3 +280,8 @@ TEST(Pow2, log2NextPow2) {
   EXPECT_EQ(log2NextPow2((uint64_t)6), 3);
   EXPECT_EQ(log2NextPow2((uint64_t)8), 3);
 }
+
+TEST(SystemTest, CpuInfoTest) {
+  auto cpu_info = CpuInfo::load();
+  HBT_LOG_INFO() << "CpuInfo = " << cpu_info;
+}

@@ -10,6 +10,10 @@ add_subdirectory(tests)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
+add_library(CpuArch CpuArch.h)
+set_target_properties(CpuArch PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(CpuArch PUBLIC CpuArchGen)
+
 add_library(PmuEvent PmuEvent.h PmuEvent.cpp)
 target_link_libraries(PmuEvent PUBLIC System)
 

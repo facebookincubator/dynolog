@@ -9,32 +9,13 @@
 
 namespace facebook::hbt::perf_event {
 
-enum class CpuFamily { AMD, INTEL, UNKNOWN };
-
-inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
-  switch (f) {
-    case CpuFamily::AMD:
-      return os << "AMD";
-    case CpuFamily::INTEL:
-      return os << "INTEL";
-    case CpuFamily::UNKNOWN:
-      return os << "UNKNOWN";
-  }
-}
-// Create CpuFamily enumeration from integer.
-inline CpuFamily makeCpuFamily(uint32_t cpu_family) {
-  switch (cpu_family) {
-    case 6:
-      return CpuFamily::INTEL;
-    case 25:
-      return CpuFamily::AMD;
-    // Not recognized CPU model.
-    default:
-      return CpuFamily::UNKNOWN;
-  }
-}
-
 enum class CpuArch {
+  // ARM Architectures
+  NEOVERSE_N1,
+  NEOVERSE_N2,
+  NEOVERSE_V2,
+  AMPERE_ONE,
+
   // AMD Architectures
   MILAN,
   GENOA,
@@ -62,8 +43,20 @@ enum class CpuArch {
 
 inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
   switch (ev) {
+    case CpuArch::NEOVERSE_N1:
+      return os << "NEOVERSE_N1";
+    case CpuArch::NEOVERSE_N2:
+      return os << "NEOVERSE_N2";
+    case CpuArch::NEOVERSE_V2:
+      return os << "NEOVERSE_V2";
+    case CpuArch::AMPERE_ONE:
+      return os << "AMPERE_ONE";
     case CpuArch::MILAN:
       return os << "MILAN";
+    case CpuArch::GENOA:
+      return os << "GENOA";
+    case CpuArch::BERGAMO:
+      return os << "BERGAMO";
     case CpuArch::BDW:
       return os << "BDW";
     case CpuArch::BDW_DE:
@@ -102,7 +95,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
 }
 
 // Create CpuArch from CPU information in integers.
-inline CpuArch makeCpuArch(
+inline CpuArch makeCpuArchX86(
+    uint32_t /*vendor_id*/,
     uint32_t cpu_family_num,
     uint32_t cpu_model_num,
     uint32_t cpu_step_num) {
@@ -111,6 +105,10 @@ inline CpuArch makeCpuArch(
     switch (cpu_model_num) {
       case 1:
         return CpuArch::MILAN;
+      case 17:
+        return CpuArch::GENOA;
+      case 160:
+        return CpuArch::BERGAMO;
     }
   } else if (cpu_family == CpuFamily::INTEL) {
     switch (cpu_model_num) {
