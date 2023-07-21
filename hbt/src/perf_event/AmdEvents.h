@@ -248,60 +248,113 @@ constexpr PmuMsr kL3Zen4FillRdRespSmpl{
         .threadMask = 0x3}};
 
 // DF counters (Zen 4)
-constexpr PmuMsr kDfZen4UmcAReadReqs{
+constexpr PmuMsr kDfZen4UmcAReadReqsLocal{
     .amdDfZen4 = {
         .event = 0x1F,
         .unitMask = 0xFE,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x0}};
-constexpr PmuMsr kDfZen4UmcDReadReqs{
+constexpr PmuMsr kDfZen4UmcDReadReqsLocal{
     .amdDfZen4 = {
         .event = 0xDF,
         .unitMask = 0xFE,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x0,
     }};
-constexpr PmuMsr kDfZen4UmcGReadReqs{
+constexpr PmuMsr kDfZen4UmcGReadReqsLocal{
     .amdDfZen4 = {
         .event = 0x9F,
         .unitMask = 0xFE,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x1,
     }};
-constexpr PmuMsr kDfZen4UmcJReadReqs{
+constexpr PmuMsr kDfZen4UmcJReadReqsLocal{
     .amdDfZen4 = {
         .event = 0x5F,
         .unitMask = 0xFE,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x2,
     }};
-constexpr PmuMsr kDfZen4UmcAWriteReqs{
+constexpr PmuMsr kDfZen4UmcAWriteReqsLocal{
     .amdDfZen4 = {
         .event = 0x1F,
         .unitMask = 0xFF,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x0,
     }};
-constexpr PmuMsr kDfZen4UmcDWriteReqs{
+constexpr PmuMsr kDfZen4UmcDWriteReqsLocal{
     .amdDfZen4 = {
         .event = 0xDF,
         .unitMask = 0xFF,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x0,
     }};
-constexpr PmuMsr kDfZen4UmcGWriteReqs{
+constexpr PmuMsr kDfZen4UmcGWriteReqsLocal{
     .amdDfZen4 = {
         .event = 0x9F,
         .unitMask = 0xFF,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x1}};
-constexpr PmuMsr kDfZen4UmcJWriteReqs{
+constexpr PmuMsr kDfZen4UmcJWriteReqsLocal{
     .amdDfZen4 = {
         .event = 0x5F,
         .unitMask = 0xFF,
         .unitMask_11_8 = 0x7,
         .event_13_8 = 0x2}};
 
+constexpr PmuMsr kDfZen4UmcAReadReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x0}};
+constexpr PmuMsr kDfZen4UmcDReadReqsRemote{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcGReadReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x1,
+    }};
+constexpr PmuMsr kDfZen4UmcJReadReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x2,
+    }};
+constexpr PmuMsr kDfZen4UmcAWriteReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcDWriteReqsRemote{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x0,
+    }};
+constexpr PmuMsr kDfZen4UmcGWriteReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x1}};
+constexpr PmuMsr kDfZen4UmcJWriteReqsRemote{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFF,
+        .unitMask_11_8 = 0xB,
+        .event_13_8 = 0x2}};
 } // namespace amd_msr
 
 namespace milan {
