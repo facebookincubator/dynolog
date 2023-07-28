@@ -11,6 +11,7 @@
 #include "hbt/src/perf_event/PerCpuBase.h"
 
 #include <memory>
+#include <vector>
 
 namespace facebook::hbt::perf_event {
 
@@ -113,6 +114,15 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
   std::optional<ReadValues> read() const {
     auto rv = makeReadValues();
     if (TBase::read(rv)) {
+      return std::make_optional(rv);
+    } else {
+      return std::nullopt;
+    }
+  }
+
+  std::optional<std::vector<ReadValues>> readPerCpu() const {
+    std::vector<ReadValues> rv;
+    if (TBase::readPerCpu(rv, getNumEvents())) {
       return std::make_optional(rv);
     } else {
       return std::nullopt;

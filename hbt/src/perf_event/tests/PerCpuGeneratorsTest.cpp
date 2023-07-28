@@ -17,6 +17,7 @@
 #include <gtest/gtest.h>
 #include <sched.h>
 #include <chrono>
+#include <optional>
 
 using namespace facebook::hbt;
 using namespace facebook::hbt::perf_event;
@@ -207,6 +208,19 @@ TEST(PerCpuCountReader, SmokeTest) {
   ASSERT_GT(rv.getCount(cycles_ev_idx), total_count_cycles);
   ASSERT_GT(rv.getTimeRunning(), total_time_running);
   ASSERT_GT(rv.getTimeEnabled(), total_time_enabled);
+
+  // Read per CPUs
+  auto rv_percpu = g.readPerCpu();
+  ASSERT_NE(rv_percpu, std::nullopt);
+  for (auto& grv : *rv_percpu) {
+    if (grv.getTimeRunning() == 0) {
+      continue;
+    }
+    ASSERT_GT(grv.getCount(inst_ev_idx), 0);
+    ASSERT_GT(grv.getCount(cycles_ev_idx), 0);
+    ASSERT_GT(grv.getTimeRunning(), 0);
+    ASSERT_GT(grv.getTimeEnabled(), 0);
+  }
 
   // Reducer computes the ratio of instructions per cycle
   auto ipc = rv.getReducedCount(m->reducer);

@@ -118,6 +118,26 @@ class PerCpuBase {
     return true;
   }
 
+  // Read all events from all monitored CPUs.
+  // The indexes of the vector does not correspond to actual CPU ids.
+  template <class T = typename TCpuBase::TMode>
+  mode::enable_if_counting_or_sampling<T, bool> readPerCpu(
+      std::vector<GroupReadValues<T>>& rv,
+      size_t numEvents) const {
+    if (!isOpen()) {
+      return false;
+    }
+    rv.reserve(this->getMonCpus().numCpus());
+    GroupReadValues<T> aux(numEvents);
+    for_each_cpu(cpu, this->getMonCpus()) {
+      if (!this->getCpuGenerator(cpu).read(aux)) {
+        return false;
+      }
+      rv.push_back(aux);
+    }
+    return true;
+  }
+
  protected:
   CpuSet mon_cpus_;
   std::shared_ptr<FdWrapper> cgroup_fd_wrapper_;
