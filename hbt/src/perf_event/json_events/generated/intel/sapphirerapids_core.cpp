@@ -1861,7 +1861,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xa4, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
       R"(TMA slots wasted due to incorrect speculation by branch mispredictions)",
-      R"(Number of TMA slots that were wasted due to incorrect speculation by (any type of) branch mispredictions. This event estimates number of specualtive operations that were issued but not retired as well as the out-of-order engine recovery past a branch misprediction.)",
+      R"(Number of TMA slots that were wasted due to incorrect speculation by (any type of) branch mispredictions. This event estimates number of speculative operations that were issued but not retired as well as the out-of-order engine recovery past a branch misprediction.)",
       10000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

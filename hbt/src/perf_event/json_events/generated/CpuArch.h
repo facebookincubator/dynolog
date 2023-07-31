@@ -37,6 +37,7 @@ enum class CpuArch {
   SNB,
   SNR,
   SPR,
+  SRF,
   // Not recognized CPU model.
   UNKNOWN
 };
@@ -89,6 +90,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "SNR";
     case CpuArch::SPR:
       return os << "SPR";
+    case CpuArch::SRF:
+      return os << "SRF";
     default:
       return os << "<UnknownCPU>";
   }
@@ -193,8 +196,8 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::SKL;
       case 166:
         return CpuArch::SKL;
-      case 167:
-        return CpuArch::ICL;
+      case 175:
+        return CpuArch::SRF;
       case 207:
         return CpuArch::SPR;
       default:

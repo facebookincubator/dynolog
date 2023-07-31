@@ -13,12 +13,11 @@ namespace icelake_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from icelake_core.json (336 events).
+  Events from icelake_core.json (339 events).
 
   Supported SKUs:
       - Arch: x86, Model: ICL id: 125
       - Arch: x86, Model: ICL id: 126
-      - Arch: x86, Model: ICL id: 167
 */
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -446,20 +445,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-  // Event L2_RQSTS.MISS is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.MISS",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0x3f, .cmask = 0, .msr_values = {0x00}},
-      R"(All requests that miss L2 cache. This event is not supported on ICL and ICX products, only supported on RKL products.)",
-      R"(Counts all requests that miss L2 cache. This event is not supported on ICL and ICX products, only supported on RKL products.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
@@ -573,21 +558,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x24, .umask = 0xE7, .cmask = 0, .msr_values = {0x00}},
       R"(Demand requests to L2 cache)",
       R"(Counts demand requests to L2 cache.)",
-      200003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "L2_RQSTS.REFERENCES",
-      EventDef::Encoding{
-          .code = 0x24, .umask = 0xff, .cmask = 0, .msr_values = {0x00}},
-      R"(All L2 requests. This event is not supported on ICL and ICX products, only supported on RKL products.)",
-      R"(Counts all L2 requests. This event is not supported on ICL and ICX products, only supported on RKL products.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1421,8 +1391,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ICACHE_16B.IFDATA_STALL",
       EventDef::Encoding{
           .code = 0x80, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
-      R"(Cycles where a code fetch is stalled due to L1 instruction cache miss.)",
-      R"(Counts cycles where a code line fetch is stalled due to an L1 instruction cache miss. The legacy decode pipeline works at a 16 Byte granularity.)",
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache miss. [This event is alias to ICACHE_DATA.STALLS])",
+      R"(Counts cycles where a code line fetch is stalled due to an L1 instruction cache miss. The legacy decode pipeline works at a 16 Byte granularity. [This event is alias to ICACHE_DATA.STALLS])",
+      500009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ICACHE_DATA.STALLS",
+      EventDef::Encoding{
+          .code = 0x80, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache miss. [This event is alias to ICACHE_16B.IFDATA_STALL])",
+      R"(Counts cycles where a code line fetch is stalled due to an L1 instruction cache miss. The legacy decode pipeline works at a 16 Byte granularity. [This event is alias to ICACHE_16B.IFDATA_STALL])",
       500009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1466,8 +1451,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ICACHE_64B.IFTAG_STALL",
       EventDef::Encoding{
           .code = 0x83, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
-      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss.)",
-      R"(Counts cycles where a code fetch is stalled due to L1 instruction cache tag miss.)",
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_TAG.STALLS])",
+      R"(Counts cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_TAG.STALLS])",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ICACHE_TAG.STALLS",
+      EventDef::Encoding{
+          .code = 0x83, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_64B.IFTAG_STALL])",
+      R"(Counts cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_64B.IFTAG_STALL])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1571,8 +1571,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ILD_STALL.LCP",
       EventDef::Encoding{
           .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(Stalls caused by changing prefix length of the instruction.)",
-      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk.)",
+      R"(Stalls caused by changing prefix length of the instruction. [This event is alias to DECODE.LCP])",
+      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk. [This event is alias to DECODE.LCP])",
+      500009,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DECODE.LCP",
+      EventDef::Encoding{
+          .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
+      R"(Stalls caused by changing prefix length of the instruction. [This event is alias to ILD_STALL.LCP])",
+      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk. [This event is alias to ILD_STALL.LCP])",
       500009,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1932,7 +1947,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xa4, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
       R"(TMA slots wasted due to incorrect speculation by branch mispredictions)",
-      R"(Number of TMA slots that were wasted due to incorrect speculation by branch mispredictions. This event estimates number of operations that were issued but not retired from the specualtive path as well as the out-of-order engine recovery past a branch misprediction.)",
+      R"(Number of TMA slots that were wasted due to incorrect speculation by branch mispredictions. This event estimates number of operations that were issued but not retired from the speculative path as well as the out-of-order engine recovery past a branch misprediction.)",
       10000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

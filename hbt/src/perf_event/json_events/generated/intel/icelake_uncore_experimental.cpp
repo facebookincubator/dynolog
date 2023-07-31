@@ -18,7 +18,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   Supported SKUs:
       - Arch: x86, Model: ICL id: 125
       - Arch: x86, Model: ICL id: 126
-      - Arch: x86, Model: ICL id: 167
 */
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(

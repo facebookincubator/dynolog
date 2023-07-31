@@ -13,7 +13,7 @@ namespace skylakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from skylakex_core.json (463 events).
+  Events from skylakex_core.json (468 events).
 
   Supported SKUs:
       - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -1674,8 +1674,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.ALL_DSB_CYCLES_4_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x18, .cmask = 4, .msr_values = {0}},
-      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 Uops)",
-      R"(Counts the number of cycles 4 uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ.)",
+      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 Uops [This event is alias to IDQ.DSB_CYCLES_OK])",
+      R"(Counts the number of cycles 4 uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.DSB_CYCLES_OK])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1689,8 +1689,38 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.ALL_DSB_CYCLES_ANY_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x18, .cmask = 1, .msr_values = {0}},
-      R"(Cycles Decode Stream Buffer (DSB) is delivering any Uop)",
-      R"(Counts the number of cycles uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ.)",
+      R"(Cycles Decode Stream Buffer (DSB) is delivering any Uop [This event is alias to IDQ.DSB_CYCLES_ANY])",
+      R"(Counts the number of cycles uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.DSB_CYCLES_ANY])",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.DSB_CYCLES_OK",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x18, .cmask = 4, .msr_values = {0}},
+      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 Uops [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
+      R"(Counts the number of cycles 4 uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "IDQ.DSB_CYCLES_ANY",
+      EventDef::Encoding{
+          .code = 0x79, .umask = 0x18, .cmask = 1, .msr_values = {0}},
+      R"(Cycles Decode Stream Buffer (DSB) is delivering any Uop [This event is alias to IDQ.ALL_DSB_CYCLES_ANY_UOPS])",
+      R"(Counts the number of cycles uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.ALL_DSB_CYCLES_ANY_UOPS])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1843,8 +1873,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ICACHE_64B.IFTAG_STALL",
       EventDef::Encoding{
           .code = 0x83, .umask = 0x04, .cmask = 0, .msr_values = {0}},
-      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss.)",
-      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss.)",
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_TAG.STALLS])",
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_TAG.STALLS])",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ICACHE_TAG.STALLS",
+      EventDef::Encoding{
+          .code = 0x83, .umask = 0x04, .cmask = 0, .msr_values = {0}},
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_64B.IFTAG_STALL])",
+      R"(Cycles where a code fetch is stalled due to L1 instruction cache tag miss. [This event is alias to ICACHE_64B.IFTAG_STALL])",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1978,8 +2023,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ILD_STALL.LCP",
       EventDef::Encoding{
           .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Stalls caused by changing prefix length of the instruction.)",
-      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk.)",
+      R"(Stalls caused by changing prefix length of the instruction. [This event is alias to DECODE.LCP])",
+      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk. [This event is alias to DECODE.LCP])",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "DECODE.LCP",
+      EventDef::Encoding{
+          .code = 0x87, .umask = 0x01, .cmask = 0, .msr_values = {0}},
+      R"(Stalls caused by changing prefix length of the instruction. [This event is alias to ILD_STALL.LCP])",
+      R"(Counts cycles that the Instruction Length decoder (ILD) stalls occurred due to dynamically changing prefix length of the decoded instruction (by operand size prefix instruction 0x66, address size prefix instruction 0x67 or REX.W for Intel64). Count is proportional to the number of prefixes in a 16B-line. This may result in a three-cycle penalty for each LCP (Length changing prefix) in a 16-byte chunk. [This event is alias to ILD_STALL.LCP])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2518,8 +2578,23 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "LSD.CYCLES_4_UOPS",
       EventDef::Encoding{
           .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0x00}},
-      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder.)",
-      R"(Counts the cycles when 4 uops are delivered by the LSD (Loop-stream detector).)",
+      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder. [This event is alias to LSD.CYCLES_OK])",
+      R"(Counts the cycles when 4 uops are delivered by the LSD (Loop-stream detector). [This event is alias to LSD.CYCLES_OK])",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "LSD.CYCLES_OK",
+      EventDef::Encoding{
+          .code = 0xA8, .umask = 0x01, .cmask = 4, .msr_values = {0x00}},
+      R"(Cycles 4 Uops delivered by the LSD, but didn't come from the decoder. [This event is alias to LSD.CYCLES_4_UOPS])",
+      R"(Counts the cycles when 4 uops are delivered by the LSD (Loop-stream detector). [This event is alias to LSD.CYCLES_4_UOPS])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

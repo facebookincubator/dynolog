@@ -27282,7 +27282,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M3UPI_RxC_HELD.PARALLEL_SUCCESS",
       EventDef::Encoding{.code = 0x52, .umask = 0x08, .msr_values = {0x00}},
       R"(Message Held; Parallel Success)",
-      R"(ad and bl messages were actually slotted into the same flit in paralle)",
+      R"(ad and bl messages were actually slotted into the same flit in parallel)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

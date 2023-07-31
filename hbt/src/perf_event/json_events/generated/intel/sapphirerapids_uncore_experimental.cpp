@@ -13,7 +13,7 @@ namespace sapphirerapids_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from sapphirerapids_uncore_experimental.json (1976 experimental
+  Events from sapphirerapids_uncore_experimental.json (2012 experimental
   events).
 
   Supported SKUs:
@@ -19673,7 +19673,7 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       "UNC_M3UPI_RxC_HELD.PARALLEL_SUCCESS",
       EventDef::Encoding{.code = 0x50, .umask = 0x08, .msr_values = {0x00}},
       R"(Message Held : Parallel Success)",
-      R"(Message Held : Parallel Success : ad and bl messages were actually slotted into the same flit in paralle)",
+      R"(Message Held : Parallel Success : ad and bl messages were actually slotted into the same flit in parallel)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -24150,6 +24150,230 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
+      R"(TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(DRds issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
+      R"(DRds issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      R"(TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
+      R"(All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
+      R"(All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
+      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
+      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
+      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFOMORPH_CXL_ACC",
       EventDef::Encoding{.code = 0x36, .umask = 0x01, .msr_values = {0x00}},
       R"(TOR Occupancy for RFO and L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
@@ -24476,6 +24700,286 @@ Note: If Message Class is disabled, we expect opcode to also be disabled.)",
       EventDef::Encoding{.code = 0x24, .umask = 0x00, .msr_values = {0x00}},
       R"(Write Pending Queue CAM Match)",
       R"(Counts the number of times a request hits in the WPQ (write-pending queue).  The iMC allows writes and reads to pass up other writes to different addresses.  Before a read or a write is issued, it will first CAM the WPQ to see if there is a write pending to that address.  When reads hit, they are able to directly pull their data from the WPQ instead of going to memory.  Writes that hit will overwrite the existing data.  Partial writes that hit will not need to do underfill reads and will simply update their relevant sections.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .msr_values = {0x00}},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC_LOCAL)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

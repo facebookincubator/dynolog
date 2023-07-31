@@ -393,7 +393,7 @@ void populatePredefinedEventsOffcore(
               .umask = offcoreEventDef->encoding.umask,
               .msr_values = {0x3fbfc001b3}},
           "DynoPerfCounter::DRAM_ACCESS_READS on BDW/BDW_DE/BDX host",
-          "This event is copy from DynoPerfCounter DRAM_ACCESS_READS event. This even is meant to be used by BDW/BDW_DE CPU only"));
+          "This event is copy from DynoPerfCounter DRAM_ACCESS_READS event. This event is meant to be used by BDW/BDW_DE CPU only"));
       break;
     case CpuArch::SKL:
     case CpuArch::SKX:
@@ -406,7 +406,7 @@ void populatePredefinedEventsOffcore(
               .umask = offcoreEventDef->encoding.umask,
               .msr_values = {0x3fbfc005b3}},
           "DynoPerfCounter::DRAM_ACCESS_READS on SKL/SKX host",
-          "This event is copy from DynoPerfCounter DRAM_ACCESS_READS event. This even is meant to be used by SKL/SKX CPU only"));
+          "This event is copy from DynoPerfCounter DRAM_ACCESS_READS event. This event is meant to be used by SKL/SKX CPU only"));
       break;
     default:
       break;
