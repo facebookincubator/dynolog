@@ -11,6 +11,9 @@ use clap::Parser;
 
 // Make all the command modules accessible to this file.
 mod commands;
+use commands::gputrace::GpuTraceConfig;
+use commands::gputrace::GpuTraceOptions;
+use commands::gputrace::GpuTraceTriggerConfig;
 use commands::*;
 
 /// Instructions on adding a new Dyno CLI command:
@@ -73,6 +76,21 @@ enum Command {
         /// Max number of processes to profile
         #[clap(long, default_value_t = 3)]
         process_limit: u32,
+        /// Record PyTorch operator input shapes and types
+        #[clap(long, action)]
+        record_shapes: bool,
+        /// Profile PyTorch memory
+        #[clap(long, action)]
+        profile_memory: bool,
+        /// Capture Python stacks in traces
+        #[clap(long, action)]
+        with_stacks: bool,
+        /// Annotate operators with analytical flops
+        #[clap(long, action)]
+        with_flops: bool,
+        /// Capture PyTorch operator modules in traces
+        #[clap(long, action)]
+        with_modules: bool,
     },
     /// Pause dcgm profiling. This enables running tools like Nsight compute and avoids conflicts.
     DcgmPause {
@@ -116,17 +134,37 @@ fn main() -> Result<()> {
             profile_start_time,
             profile_start_iteration_roundup,
             process_limit,
-        } => gputrace::run_gputrace(
-            dyno_client,
-            job_id,
-            &pids,
-            duration_ms,
-            iterations,
-            &log_file,
-            profile_start_time,
-            profile_start_iteration_roundup,
-            process_limit,
-        ),
+            record_shapes,
+            profile_memory,
+            with_stacks,
+            with_flops,
+            with_modules,
+        } => {
+            let trigger_config = if iterations > 0 {
+                GpuTraceTriggerConfig::IterationBased {
+                    profile_start_iteration_roundup,
+                    iterations,
+                }
+            } else {
+                GpuTraceTriggerConfig::DurationBased {
+                    profile_start_time,
+                    duration_ms,
+                }
+            };
+            let trace_options = GpuTraceOptions {
+                record_shapes,
+                profile_memory,
+                with_stacks,
+                with_flops,
+                with_modules,
+            };
+            let trace_config = GpuTraceConfig {
+                log_file,
+                trigger_config,
+                trace_options,
+            };
+            gputrace::run_gputrace(dyno_client, job_id, &pids, process_limit, trace_config)
+        }
         Command::DcgmPause { duration_s } => dcgm::run_dcgm_pause(dyno_client, duration_s),
         Command::DcgmResume => dcgm::run_dcgm_resume(dyno_client),
         // ... add new commands here
