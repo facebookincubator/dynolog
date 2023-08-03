@@ -1,0 +1,16 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/doublify/pre-commit-rust
+    rev: v1.0
+    hooks:
+    -   id: fmt
+        args: ['--manifest-path', 'cli/Cargo.toml']
+        pass_filenames: false
+    -   id: cargo-check
+        args: ['--manifest-path', 'cli/Cargo.toml']

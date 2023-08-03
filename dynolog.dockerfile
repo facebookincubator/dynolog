@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 amd64/ubuntu:20.04 AS ubuntu_build_x86
 # This required to avoid interactive build for tzdata
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         ca-certificates \
@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         git \
         libssl-dev \
+        python3-pip \
         ninja-build \
         tini \
         tree \
