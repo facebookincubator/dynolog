@@ -1,3 +1,6 @@
+# To build the docker image use the following command:
+# docker build -f /path/to/dynolog_hta.dockerfile -t dynohta:latest .
+
 FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
 RUN apt update
 
