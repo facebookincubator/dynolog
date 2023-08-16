@@ -24,6 +24,7 @@
 #include <fmt/core.h>
 #include <fmt/ranges.h>
 #include <iostream>
+#include <utility>
 #include <vector>
 
 // If this version of linux/perf_event.h does not provide,
