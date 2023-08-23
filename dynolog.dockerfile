@@ -22,7 +22,7 @@ WORKDIR /workspace/dynolog
 COPY . .
 
 # Run the rust build directly
-RUN cd cli && /root/.cargo/bin/cargo +nightly build --release -Z sparse-registry --target-dir build
+# RUN cd cli && /root/.cargo/bin/cargo +nightly build --release -Z sparse-registry --target-dir build
 
 RUN ./scripts/build.sh 2>&1 | tee build.log
 
