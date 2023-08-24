@@ -97,6 +97,7 @@ BPerfEventsGroup* BPerfCountReader::getBPerfEventsGroup() const {
 }
 
 BPerfCountReader::~BPerfCountReader() {
+  disable();
   HBT_DCHECK(bperf_eg_ != nullptr);
 }
 
