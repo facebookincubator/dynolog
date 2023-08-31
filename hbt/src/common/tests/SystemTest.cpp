@@ -285,3 +285,9 @@ TEST(SystemTest, CpuInfoTest) {
   auto cpu_info = CpuInfo::load();
   HBT_LOG_INFO() << "CpuInfo = " << cpu_info;
 }
+
+TEST(SystemTest, GetHostNameTest) {
+  auto hostname = getHostName();
+  EXPECT_GT(hostname.size(), 0);
+  HBT_LOG_INFO() << "hostname = " << hostname;
+}
