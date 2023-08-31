@@ -569,9 +569,11 @@ inline int readIntFromFile(std::string filepath) {
 
 /// Wrapper for gethostname
 inline std::string getHostName() {
-  char b[HOST_NAME_MAX];
-  int ret = ::gethostname(b, HOST_NAME_MAX);
+  char b[HOST_NAME_MAX + 1];
+  int ret = ::gethostname(b, HOST_NAME_MAX + 1);
   HBT_THROW_SYSTEM_IF(0 > ret, errno);
+  // null terminate to truncate the name if required
+  b[HOST_NAME_MAX] = '\0';
   return std::string{b};
 }
 
