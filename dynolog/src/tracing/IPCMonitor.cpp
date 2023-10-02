@@ -46,9 +46,18 @@ void IPCMonitor::processMsg(std::unique_ptr<ipcfabric::Message> msg) {
     LOG(ERROR) << "Fabric Manager not initialized";
     return;
   }
-  if (memcmp(msg->metadata.type, kLibkinetoContext.c_str(), 4) == 0) {
+  // sizeof(msg->metadata.type) = 32, well above the size of the constant
+  // strings we are comparing against. memcmp is safe
+  if (memcmp( // NOLINT(facebook-security-vulnerable-memcmp)
+          msg->metadata.type,
+          kLibkinetoContext.data(),
+          kLibkinetoContext.size()) == 0) {
     registerLibkinetoContext(std::move(msg));
-  } else if (memcmp(msg->metadata.type, kLibkinetoRequest.c_str(), 3) == 0) {
+  } else if (
+      memcmp( // NOLINT(facebook-security-vulnerable-memcmp)
+          msg->metadata.type,
+          kLibkinetoRequest.data(),
+          kLibkinetoRequest.size()) == 0) {
     getLibkinetoOnDemandRequest(std::move(msg));
   } else {
     LOG(ERROR) << "TYPE UNKOWN: " << msg->metadata.type;
