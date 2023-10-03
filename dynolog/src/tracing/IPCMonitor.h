@@ -15,7 +15,7 @@ class IPCMonitor {
  public:
   using FabricManager = dynolog::ipcfabric::FabricManager;
   IPCMonitor(const std::string& ipc_fabric_name = "dynolog");
-  virtual ~IPCMonitor(){};
+  virtual ~IPCMonitor() {}
 
   void loop();
 
