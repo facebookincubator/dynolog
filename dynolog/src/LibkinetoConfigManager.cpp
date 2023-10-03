@@ -253,17 +253,20 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   bool traceAllPids = nPids == 0 || (nPids == 1 && *pids.begin() == 0);
   {
     std::lock_guard<std::mutex> guard(mutex_);
-    auto& processes = jobs_[jobId];
-    for (auto& pair : processes) {
-      for (const auto& pid : pair.first) {
-        // Trace the process if we find a match or target pids is empty.
-        if (traceAllPids || pids.find(pid) != pids.end()) {
-          auto& process = pair.second;
-          setOnDemandConfigForProcess(res, process, config, configType, limit);
-          // the user could provide multiple pids that belong to the same the
-          // LibkientoProcess object, so we break after the first match for
-          // the LibkinetoProcess.
-          break;
+    if (auto it = jobs_.find(jobId); it != jobs_.end()) {
+      auto& processes = it->second;
+      for (auto& pair : processes) {
+        for (const auto& pid : pair.first) {
+          // Trace the process if we find a match or target pids is empty.
+          if (traceAllPids || pids.find(pid) != pids.end()) {
+            auto& process = pair.second;
+            setOnDemandConfigForProcess(
+                res, process, config, configType, limit);
+            // the user could provide multiple pids that belong to the same the
+            // LibkientoProcess object, so we break after the first match for
+            // the LibkinetoProcess.
+            break;
+          }
         }
       }
       if (res.activityProfilersTriggered.size() > 0) {
@@ -284,7 +287,6 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
               << res.activityProfilersTriggered.size() << " process(es) "
               << "(" << res.activityProfilersBusy << " busy)";
   }
-
   return res;
 }
 
