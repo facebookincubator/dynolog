@@ -1,3 +1,4 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
 FROM --platform=linux/amd64 amd64/ubuntu:20.04 AS ubuntu_build_x86
 # This required to avoid interactive build for tzdata
 ENV DEBIAN_FRONTEND=noninteractive
