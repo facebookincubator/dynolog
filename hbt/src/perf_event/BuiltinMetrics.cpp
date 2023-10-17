@@ -1328,4 +1328,294 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
   return metrics;
 }
 
+void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_ICACHE_MISSES",
+      "L2 code requests",
+      "Counts the total number of L2 code requests.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "icache_misses",
+               PmuType::cpu,
+               "L2_RQSTS.ALL_CODE_RD",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  // Generic cache events defined in populateGenericEventsHardwareCache()
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_ICACHE_MISSES_PERF",
+      "Level 1 instruction cache load operation misses",
+      "Level 1 instruction cache load operation misses",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "icache_misses_perf",
+               PmuType::generic_hw_cache,
+               "l1_icache_load_misses",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_DCACHE_MISSES",
+      "Counts the number of cache lines replaced in L1 data cache.",
+      "Counts L1D data line replacements including opportunistic replacements, and replacements that require stall-for-replace or block-for-replace.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "dcache_misses",
+               PmuType::cpu,
+               "L1D.REPLACEMENT",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_ITLB_MISSES",
+      "Code miss in all TLB levels causes a page walk that completes. (All page sizes)",
+      "Counts completed page walks (all page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "itlb_misses",
+               PmuType::cpu,
+               "ITLB_MISSES.WALK_COMPLETED",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_L2_MISSES",
+      "L2 cache lines filling L2",
+      "Counts the number of L2 cache lines filling the L2. Counting does not cover rejects.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "core_l2_misses",
+               PmuType::cpu,
+               "L2_LINES_IN.ALL",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_LLC_MISSES",
+      "Core-originated cacheable requests that missed L3  (Except hardware prefetches to the L3)",
+      "Counts core-originated cacheable requests that miss the L3 cache (Longest Latency cache). Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches to the L1 and L2.  It does not include hardware prefetches to the L3, and may not count other types of requests to the L3.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "llc_misses",
+               PmuType::cpu,
+               "LONGEST_LAT_CACHE.MISS",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_BRANCH_MISSES",
+      "All mispredicted branch instructions retired.",
+      "Counts all the retired branch instructions that were mispredicted by the processor. A branch misprediction occurs when the processor incorrectly predicts the destination of the branch.  When the misprediction is discovered at execution, all the instructions executed in the wrong (speculative) path must be discarded, and the processor must start fetching from the correct path.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "branch_misses",
+               PmuType::cpu,
+               "BR_MISP_RETIRED.ALL_BRANCHES",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_BRANCH_INSTRUCTIONS",
+      "All branch instructions retired.",
+      "Counts all branch instructions retired.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "branch_misses",
+               PmuType::cpu,
+               "BR_INST_RETIRED.ALL_BRANCHES",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_L2_PREFETCH_HITS",
+      "SW prefetch requests that hit L2 cache.",
+      "Counts Software prefetch requests that hit the L2 cache. Accounts for PREFETCHNTA and PREFETCHT0/1/2 instructions when FB is not full.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "prefetch_hits",
+               PmuType::cpu,
+               "L2_RQSTS.SWPF_HIT",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_L2_PREFETCH_MISSES",
+      "SW prefetch requests that miss L2 cache.",
+      "Counts Software prefetch requests that miss the L2 cache. Accounts for PREFETCHNTA and PREFETCHT0/1/2 instructions when FB is not full.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "prefetch_misses",
+               PmuType::cpu,
+               "L2_RQSTS.SWPF_MISS",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_DP_SCALAR",
+      "Counts number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_dp_scalar",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_SP_SCALAR",
+      "Counts number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_sp_scalar",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_DP_SSE",
+      "Counts number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_dp_sse",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_SP_SSE",
+      "Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_sp_sse",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_DP_AVX",
+      "Counts number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_dp_avx",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_SP_AVX",
+      "Counts number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_sp_avx",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_DP_AVX2",
+      "Counts number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_dp_avx2",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.512B_PACKED_DOUBLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_FLOPS_SP_AVX2",
+      "Counts number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
+      "Number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "flops_sp_avx2",
+               PmuType::cpu,
+               "FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+}
 } // namespace facebook::hbt::perf_event

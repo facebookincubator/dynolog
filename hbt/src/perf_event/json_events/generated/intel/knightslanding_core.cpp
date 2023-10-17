@@ -12,14 +12,14 @@ namespace facebook::hbt::perf_event::generated {
 namespace knightslanding_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-/*
-  Events from KnightsLanding_core.json (374 events).
+  /*
+    Events from KnightsLanding_core.json (374 events).
 
-  Supported SKUs:
-      - Arch: x86, Model: KNL id: 87
-      - Arch: x86, Model: KNM id: 133
-*/
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+    Supported SKUs:
+        - Arch: x86, Model: KNL id: 87
+        - Arch: x86, Model: KNM id: 133
+  */
+  // Event BR_INST_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -32,7 +32,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
