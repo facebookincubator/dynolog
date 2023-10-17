@@ -576,7 +576,7 @@ This event counts differently than Intel processors based on Silvermont microarc
       R"(0)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event BR_INST_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -588,7 +588,6 @@ This event counts differently than Intel processors based on Silvermont microarc
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 2},
       R"(0)"));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(

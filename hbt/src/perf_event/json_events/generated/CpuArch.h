@@ -15,7 +15,6 @@ enum class CpuArch {
   NEOVERSE_N2,
   NEOVERSE_V2,
   AMPERE_ONE,
-
   // AMD Architectures
   MILAN,
   GENOA,

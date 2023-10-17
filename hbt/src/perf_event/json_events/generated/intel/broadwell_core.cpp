@@ -26,8 +26,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x00, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Instructions retired from execution.)",
-      R"(This event counts the number of instructions retired from execution. For instructions that consist of multiple micro-ops, this event counts the retirement of the last micro-op of the instruction. Counting continues during hardware interrupts, traps, and inside interrupt handlers.
-Notes: INST_RETIRED.ANY is counted by a designated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. INST_RETIRED.ANY_P is counted by a programmable counter and it is an architectural performance event.
+      R"(This event counts the number of instructions retired from execution. For instructions that consist of multiple micro-ops, this event counts the retirement of the last micro-op of the instruction. Counting continues during hardware interrupts, traps, and inside interrupt handlers. 
+Notes: INST_RETIRED.ANY is counted by a designated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. INST_RETIRED.ANY_P is counted by a programmable counter and it is an architectural performance event. 
 Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as retired instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -76,7 +76,7 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       EventDef::Encoding{
           .code = 0x00, .umask = 0x03, .cmask = 0, .msr_values = {0}},
       R"(Reference cycles when the core is not in halt state.)",
-      R"(This event counts the number of reference cycles when the core is not in a halt state. The core enters the halt state when it is running the HLT instruction or the MWAIT instruction. This event is not affected by core frequency changes (for example, P states, TM2 transitions) but has the same incrementing frequency as the time stamp counter. This event can approximate elapsed time while the core was not in a halt state. This event has a constant ratio with the CPU_CLK_UNHALTED.REF_XCLK event. It is counted on a dedicated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events.
+      R"(This event counts the number of reference cycles when the core is not in a halt state. The core enters the halt state when it is running the HLT instruction or the MWAIT instruction. This event is not affected by core frequency changes (for example, P states, TM2 transitions) but has the same incrementing frequency as the time stamp counter. This event can approximate elapsed time while the core was not in a halt state. This event has a constant ratio with the CPU_CLK_UNHALTED.REF_XCLK event. It is counted on a dedicated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. 
 Note: On all current platforms this event stops counting during 'throttling (TM)' states duty off periods the processor is 'halted'.  This event is clocked by base clock (100 Mhz) on Sandy Bridge. The counter update is done at a lower clock rate then the core clock the overflow status bit for this counter may appear 'sticky'.  After the counter has overflowed and software clears the overflow status bit and resets the counter to less than MAX. The reset value to the counter is not clocked immediately so the overflow status bit will flip 'high (1)' and generate another PMI (if enabled) after which the reset value gets clocked into the counter. Therefore, software will get the interrupt, read the overflow status bit '1 for bit 34 while the counter value is less than MAX. Software should ignore this case.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -617,7 +617,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event L2_RQSTS.ALL_CODE_RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_RQSTS.ALL_CODE_RD",
@@ -630,7 +630,6 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -1091,7 +1090,7 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event L1D.REPLACEMENT is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L1D.REPLACEMENT",
@@ -1104,7 +1103,6 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -1935,7 +1933,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       R"(BDM69)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event ITLB_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ITLB_MISSES.WALK_COMPLETED",
@@ -1947,7 +1945,6 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2362,7 +2359,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       R"(Uops not delivered to Resource Allocation Table (RAT) per thread when backend of the machine is not stalled)",
       R"(This event counts the number of uops not delivered to Resource Allocation Table (RAT) per thread adding 4  x when Resource Allocation Table (RAT) is not stalled and Instruction Decode Queue (IDQ) delivers x uops to Resource Allocation Table (RAT) (where x belongs to {0,1,2,3}). Counting does not cover cases when:
  a. IDQ-Resource Allocation Table (RAT) pipe serves the other thread;
- b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions);
+ b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions); 
  c. Instruction Decode Queue (IDQ) delivers four uops.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -3175,7 +3172,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0xAB, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles.)",
-      R"(This event counts Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles. These cycles do not include uops routed through because of the switch itself, for example, when Instruction Decode Queue (IDQ) pre-allocation is unavailable, or Instruction Decode Queue (IDQ) is full. SBD-to-MITE switch true penalty cycles happen after the merge mux (MM) receives Decode Stream Buffer (DSB) Sync-indication until receiving the first MITE uop.
+      R"(This event counts Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles. These cycles do not include uops routed through because of the switch itself, for example, when Instruction Decode Queue (IDQ) pre-allocation is unavailable, or Instruction Decode Queue (IDQ) is full. SBD-to-MITE switch true penalty cycles happen after the merge mux (MM) receives Decode Stream Buffer (DSB) Sync-indication until receiving the first MITE uop. 
 MM is placed before Instruction Decode Queue (IDQ) to merge uops being fed from the MITE and Decode Stream Buffer (DSB) paths. Decode Stream Buffer (DSB) inserts the Sync-indication whenever a Decode Stream Buffer (DSB)-to-MITE switch occurs.
 Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DSB) miss can cost up to six cycles in which no uops are delivered to the IDQ. Most often, such switches from the Decode Stream Buffer (DSB) to the legacy pipeline cost 02 cycles.)",
       2000003,
@@ -3855,7 +3852,7 @@ Note: Writeback pending FIFO has six entries.)",
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event BR_INST_RETIRED.ALL_BRANCHES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "BR_INST_RETIRED.ALL_BRANCHES",
@@ -3868,7 +3865,6 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -5141,7 +5137,7 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event L2_LINES_IN.ALL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "L2_LINES_IN.ALL",
@@ -5154,7 +5150,6 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
