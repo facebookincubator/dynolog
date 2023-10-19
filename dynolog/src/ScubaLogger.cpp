@@ -5,6 +5,7 @@
 
 #include "dynolog/src/ScubaLogger.h"
 #include <string>
+#include "hbt/src/common/System.h"
 #ifdef USE_GRAPH_ENDPOINT
 #include <cpr/cpr.h> // @manual
 #include <curl/curl.h> // @manual
@@ -24,11 +25,8 @@ DEFINE_string(
     "The scribe category name for scuba logging");
 
 ScubaLogger::ScubaLogger(const std::string& scribe_category)
-    : scribe_category_(scribe_category) {
-  char hostname[HOSTNAME_MAX] = "";
-  gethostname(hostname, HOSTNAME_MAX);
-  hostname_ = std::string(hostname);
-}
+    : scribe_category_(scribe_category),
+      hostname_(facebook::hbt::getHostName()) {}
 
 void ScubaLogger::logInt(const std::string& key, int64_t val) {
   metrics_int_[key] = val;

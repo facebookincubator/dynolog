@@ -5,6 +5,7 @@
 
 #include "dynolog/src/PrometheusLogger.h"
 #include "dynolog/src/Metrics.h"
+#include "hbt/src/common/System.h"
 
 #include <fmt/format.h>
 #include <glog/logging.h>
@@ -30,11 +31,13 @@ PrometheusManager::PrometheusManager()
 
   // setup registry
   registry_ = std::make_shared<Registry>();
+  const std::string hostname = facebook::hbt::getHostName();
 
   // setup counters and gauges
   for (const auto& m : getAllMetrics()) {
     // all metric types fit with Gauges so far.
-    auto& g = buildGaugeFromMetric(m, *registry_).Add({{"host_name", "test"}});
+    auto& g =
+        buildGaugeFromMetric(m, *registry_).Add({{"host_name", hostname}});
     gauges_[m.name] = &g;
   }
 
