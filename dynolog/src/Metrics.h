@@ -23,6 +23,6 @@ struct MetricDesc {
   std::string desc;
 };
 
-const std::vector<MetricDesc>& getAllMetrics();
+const std::vector<MetricDesc> getAllMetrics();
 
 } // namespace dynolog

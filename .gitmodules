@@ -22,3 +22,7 @@
 [submodule "third_party/DCGM"]
 	path = third_party/DCGM
 	url = https://github.com/NVIDIA/DCGM.git
+[submodule "third_party/prometheus-cpp"]
+	path = third_party/prometheus-cpp
+	url = https://github.com/jupp0r/prometheus-cpp.git
+	branch = v1.0.2

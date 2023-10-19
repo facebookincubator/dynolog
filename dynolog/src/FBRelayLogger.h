@@ -43,6 +43,7 @@ class FBRelayLogger : public JsonLogger {
   void initSocket();
 
   std::unique_ptr<SocketWrapper> socket;
+  std::string hostname_;
 };
 
 } // namespace dynolog

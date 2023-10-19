@@ -11,8 +11,8 @@
 #include <nlohmann/json.hpp>
 #include <stdio.h>
 #include <sys/socket.h>
-#include <unistd.h>
 #include <cerrno>
+#include "hbt/src/common/System.h"
 
 using json = nlohmann::json;
 
@@ -23,18 +23,6 @@ DEFINE_string(
     "IP Address of FBRelate to connect to.");
 
 namespace dynolog {
-
-namespace {
-
-std::string hostname = []() {
-  static std::string hostname;
-  char buf[1024];
-  gethostname(buf, sizeof(buf));
-  hostname = buf;
-  return hostname;
-}();
-
-};
 
 int setup_ipv4_socket(const std::string& addr, int port) {
   int sock_fd, domain = AF_INET;
@@ -139,7 +127,7 @@ void FBRelayLogger::initSocket() {
       FLAGS_fbrelay_address, FLAGS_fbrelay_port);
 }
 
-FBRelayLogger::FBRelayLogger() {
+FBRelayLogger::FBRelayLogger() : hostname_(facebook::hbt::getHostName()) {
   initSocket();
 }
 
@@ -167,8 +155,8 @@ void FBRelayLogger::finalize() {
       {"@timestamp", timestampStr()},
       {"agent",
        {
-           {"hostname", hostname},
-           {"name", hostname},
+           {"hostname", hostname_},
+           {"name", hostname_},
            {"type", entity},
            {"version", "0.1.0"},
        }},
