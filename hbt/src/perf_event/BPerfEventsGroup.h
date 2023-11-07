@@ -52,7 +52,6 @@ class BPerfEventsGroup {
   ///
   ///  - name: Name for eBPF maps.
   ///  - confs: Event Confs for group.
-
   BPerfEventsGroup(const std::string& name, const EventConfs& confs);
   BPerfEventsGroup(
       const std::string& name,
