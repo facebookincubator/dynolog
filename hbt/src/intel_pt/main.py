@@ -10,7 +10,7 @@ import time
 from hbt.intel_pt.tracer import Tracer
 
 
-if __name__ == "__main__":
+def main() -> None:
     parser = argparse.ArgumentParser(description="Intel PT tracer.")
     parser.add_argument("pid", type=int, default=None, help="PIDs to filter on.")
     parser.add_argument(
@@ -32,3 +32,7 @@ if __name__ == "__main__":
         for p in t.read():
             print(f"Event at iteration {i}: {p}")
     t.stop()
+
+
+if __name__ == "__main__":
+    main()  # pragma: no cover
