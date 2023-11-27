@@ -198,8 +198,6 @@ class MetricSeries final {
       std::chrono::steady_clock::duration duration,
       std::optional<Iterator> beginMaybe = std::nullopt,
       std::optional<Iterator> endMaybe = std::nullopt) const {
-    auto begin_ = beginMaybe.value_or(begin());
-    auto end_ = endMaybe.value_or(end());
     auto value = diff(beginMaybe, endMaybe);
     return rate<R>(value, period, duration);
   }
