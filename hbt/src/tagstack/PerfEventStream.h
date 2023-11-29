@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "hbt/src/perf_event/CpuEventsGroup.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/ringbuffer/Consumer.h"
 #include "hbt/src/tagstack/Event.h"
 

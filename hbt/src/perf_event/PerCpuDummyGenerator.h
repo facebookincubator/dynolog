@@ -6,9 +6,9 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerCpuSampleGeneratorBase.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <functional>
 #include <memory>
@@ -24,9 +24,9 @@ namespace facebook::hbt::perf_event {
 // in perf_event mmap page.
 //
 class CpuDummyGenerator final
-    : public CpuEventsGroup<CpuDummyGenerator, mode::Dummy> {
+    : public PerfEventsGroup<CpuDummyGenerator, mode::Dummy> {
  public:
-  using TBase = CpuEventsGroup<CpuDummyGenerator, mode::Dummy>;
+  using TBase = PerfEventsGroup<CpuDummyGenerator, mode::Dummy>;
 
   inline static const EventConfs event_confs = {EventConf{
       .id = "sw_dummy",
@@ -57,13 +57,14 @@ class PerCpuDummyGenerator : public TBasePerCpuDummyGenerator {
   PerCpuDummyGenerator(const CpuSet& mon_cpus)
       : TBasePerCpuDummyGenerator{mon_cpus, nullptr} {
     for_each_cpu(cpu, mon_cpus) {
-      this->cpu_generators_[cpu] = std::make_shared<CpuDummyGenerator>(cpu);
+      this->generators_[static_cast<int>(cpu)] =
+          std::make_shared<CpuDummyGenerator>(cpu);
     }
   }
 
   void open() {
-    for_each_cpu(cpu, this->getMonCpus()) {
-      this->getCpuGenerator(cpu).open();
+    for (const auto& [_, gen] : this->generators_) {
+      gen->open();
     }
   }
 };
