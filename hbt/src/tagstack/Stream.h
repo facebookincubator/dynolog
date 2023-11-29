@@ -87,7 +87,6 @@ class RingBufferStream : protected ringbuffer::Consumer<TExtraData> {
     HBT_THROW_SYSTEM_CODE_IF(0 > ret, toErrorCode(-ret))
         << "RingBuffer read failed due to unexpected causes: "
         << toErrorCode(-ret).message();
-    ;
     HBT_THROW_ASSERT_IF(event == nullptr);
     HBT_THROW_ASSERT_IF(
         next_event_ != nullptr && event->happenedBefore(*next_event_));
