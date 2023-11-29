@@ -159,7 +159,6 @@ class PerCpuRingBuffer final {
 
   size_t usedSizeWeak(CpuId cpu) const {
     return this->getCpuRingBuffer(cpu)->usedSizeWeak();
-    ;
   }
 
   auto getHeader() {
