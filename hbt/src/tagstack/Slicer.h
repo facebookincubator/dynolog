@@ -489,7 +489,7 @@ class Slicer {
       stats->emplace(ss.stats.stack_id, ss.stats);
     }
     return stats;
-  };
+  }
 
   auto getStats() const {
     return stats_;
