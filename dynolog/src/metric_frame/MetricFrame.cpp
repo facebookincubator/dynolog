@@ -72,7 +72,7 @@ bool MetricFrameMap::incFromLastSample(
 
 size_t MetricFrameMap::width() const {
   return series_.size();
-};
+}
 
 std::optional<MetricSeriesVar> MetricFrameMap::series(
     const std::string& name) const {
