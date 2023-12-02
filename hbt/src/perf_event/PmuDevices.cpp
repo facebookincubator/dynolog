@@ -88,7 +88,7 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(uncore_mchbm);
 
     CASE_PMU_TYPE(armv8_pmuv3);
-  };
+  }
 }
 
 /// Macro to generate "if" statements for PMU string names.
