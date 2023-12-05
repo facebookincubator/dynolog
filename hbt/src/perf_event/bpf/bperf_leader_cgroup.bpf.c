@@ -51,6 +51,8 @@ int cpu_cnt = 0;
 
 #define PF_IDLE 0x00000002
 
+void *bpf_rdonly_cast(void *, __u32) __ksym __weak;
+
 static void update_cgroup_output(struct bpf_perf_event_value* diff_val) {
   struct task_struct* task = bpf_get_current_task_btf();
   struct cgroup* cgrp;
@@ -64,13 +66,14 @@ static void update_cgroup_output(struct bpf_perf_event_value* diff_val) {
   if (task->flags & PF_IDLE)
     return;
 
-  cgrp = BPF_CORE_READ(task, cgroups, dfl_cgrp);
+  cgrp = task->cgroups->dfl_cgrp;
 
   for (level = 0; level < MAX_CGROUP_LEVELS; level++) {
-    __u64 id = BPF_CORE_READ(cgrp, kn, id);
+    __u64 id = cgrp->kn->id;
     struct bpf_perf_event_value* val;
 
-    cgrp = (struct cgroup*)BPF_CORE_READ(cgrp, self.parent);
+    cgrp = bpf_rdonly_cast(cgrp->self.parent,
+                           bpf_core_type_id_kernel(struct cgroup));
     if (cgrp == NULL)
       break;
 
