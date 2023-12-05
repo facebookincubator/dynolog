@@ -49,10 +49,22 @@ struct {
 int event_cnt = 0;
 int cpu_cnt = 0;
 
+#define PF_IDLE 0x00000002
+
 static void update_cgroup_output(struct bpf_perf_event_value* diff_val) {
   struct task_struct* task = bpf_get_current_task_btf();
-  struct cgroup* cgrp = BPF_CORE_READ(task, cgroups, dfl_cgrp);
+  struct cgroup* cgrp;
   __u32 i, level;
+
+  /* sched_switch tracepoint is triggered before current task is updated.
+   * If current task is idle (PF_IDLE), it means we are switching _from_
+   * idle to non-idle task, and current "slice" of counts belongs to idle.
+   * It is ok to skip cgroup walk for idle task.
+   */
+  if (task->flags & PF_IDLE)
+    return;
+
+  cgrp = BPF_CORE_READ(task, cgroups, dfl_cgrp);
 
   for (level = 0; level < MAX_CGROUP_LEVELS; level++) {
     __u64 id = BPF_CORE_READ(cgrp, kn, id);
