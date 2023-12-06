@@ -41,6 +41,8 @@ struct bperf_attr_map_elem {
   __u32 global_output_map_id;
   __u32 cgroup_output_map_id;
 
+  __u32 trigger_prog_id;
+
   void loadFromSkelLink(
       struct bperf_leader_cgroup* skel,
       struct bpf_link* link);
@@ -92,6 +94,7 @@ class BPerfEventsGroup {
   std::vector<struct perf_event_attr> attrs_;
   int leader_link_fd_ = -1;
   int leader_prog_fd_ = -1;
+  int trigger_prog_fd_ = -1;
   int global_output_fd_ = -1;
   int cgroup_output_fd_ = -1;
 

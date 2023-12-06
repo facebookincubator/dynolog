@@ -50,6 +50,16 @@ static inline __u32 bpf_map_get_id(int fd) {
   return map_info.id;
 }
 
+static inline __u32 bpf_prog_get_id(int fd) {
+  struct bpf_prog_info prog_info = {
+      .id = 0,
+  };
+  __u32 prog_info_len = sizeof(prog_info);
+
+  bpf_obj_get_info_by_fd(fd, &prog_info, &prog_info_len);
+  return prog_info.id;
+}
+
 /// name: Path of ebpf map
 BPerfEventsGroup::BPerfEventsGroup(
     const std::string& name,
@@ -180,6 +190,8 @@ void BPerfEventsGroup::close() {
   leader_link_fd_ = -1;
   ::close(leader_prog_fd_);
   leader_prog_fd_ = -1;
+  ::close(trigger_prog_fd_);
+  trigger_prog_fd_ = -1;
   ::close(cgroup_output_fd_);
   cgroup_output_fd_ = -1;
   ::close(global_output_fd_);
@@ -204,7 +216,8 @@ bool BPerfEventsGroup::isOpen() const {
   }
 
   if (leader_link_fd_ < 0) {
-    leader_link_fd_ = bpf_raw_tracepoint_open("sched_switch", leader_prog_fd_);
+    leader_link_fd_ =
+        bpf_link_create(leader_prog_fd_, 0, BPF_TRACE_RAW_TP, nullptr);
   }
 
   HBT_DCHECK(leader_link_fd_ >= 0);
@@ -233,7 +246,7 @@ void BPerfEventsGroup::syncGlobal_() {
   int err;
 
   for (int cpu = 0; cpu < cpu_cnt_; cpu++) {
-    err = syncCpu_(cpu, leader_prog_fd_);
+    err = syncCpu_(cpu, trigger_prog_fd_);
 
     if (err) {
       HBT_LOG_WARNING() << "Failed to sync event on cpu " << cpu;
@@ -255,6 +268,8 @@ void bperf_attr_map_elem::loadFromSkelLink(
   global_output_map_id = bpf_map_get_id(fd);
   fd = ::bpf_map__fd(skel->maps.cgroup_output);
   cgroup_output_map_id = bpf_map_get_id(fd);
+  fd = ::bpf_program__fd(skel->progs.bperf_read_trigger);
+  trigger_prog_id = bpf_prog_get_id(fd);
 }
 
 [[nodiscard]] int BPerfEventsGroup::reloadSkel_(
@@ -277,7 +292,7 @@ void bperf_attr_map_elem::loadFromSkelLink(
 
   skel->bss->cpu_cnt = cpu_cnt_;
   skel->bss->event_cnt = event_cnt;
-  link = ::bpf_program__attach(skel->progs.on_switch);
+  link = ::bpf_program__attach(skel->progs.bperf_on_sched_switch);
   if (!link) {
     HBT_LOG_ERROR() << "Failed to attach leader program";
     err = -1;
@@ -289,6 +304,7 @@ void bperf_attr_map_elem::loadFromSkelLink(
 
   // open another fd to the link and the output map, so we can destroy the skel
   leader_link_fd_ = ::bpf_link_get_fd_by_id(entry->leader_prog_link_id);
+  trigger_prog_fd_ = ::bpf_prog_get_fd_by_id(entry->trigger_prog_id);
   global_output_fd_ = ::bpf_map_get_fd_by_id(entry->global_output_map_id);
   cgroup_output_fd_ = ::bpf_map_get_fd_by_id(entry->cgroup_output_map_id);
 
