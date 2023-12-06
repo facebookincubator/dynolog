@@ -53,18 +53,10 @@ int cpu_cnt = 0;
 
 void *bpf_rdonly_cast(void *, __u32) __ksym __weak;
 
-static void update_cgroup_output(struct bpf_perf_event_value* diff_val) {
-  struct task_struct* task = bpf_get_current_task_btf();
+static __always_inline void update_cgroup_output(struct bpf_perf_event_value* diff_val,
+                                                 struct task_struct *task) {
   struct cgroup* cgrp;
   __u32 i, level;
-
-  /* sched_switch tracepoint is triggered before current task is updated.
-   * If current task is idle (PF_IDLE), it means we are switching _from_
-   * idle to non-idle task, and current "slice" of counts belongs to idle.
-   * It is ok to skip cgroup walk for idle task.
-   */
-  if (task->flags & PF_IDLE)
-    return;
 
   cgrp = task->cgroups->dfl_cgrp;
 
@@ -92,8 +84,7 @@ static void update_cgroup_output(struct bpf_perf_event_value* diff_val) {
   }
 }
 
-SEC("raw_tp/sched_switch")
-int BPF_PROG(on_switch) {
+static __always_inline int bperf_leader_prog(struct task_struct *prev) {
   struct bpf_perf_event_value val, *prev_val, *diff_val, *sys_val;
   __u32 key = bpf_get_smp_processor_id();
   __u32 zero = 0, i;
@@ -130,8 +121,36 @@ int BPF_PROG(on_switch) {
     sys_val[i].enabled += diff_val[i].enabled;
     sys_val[i].running += diff_val[i].running;
   }
-  update_cgroup_output(diff_val);
+
+  /* If previous task is idle (PF_IDLE), it means we are switching _from_
+   * idle to non-idle task, and current "slice" of counts belongs to idle.
+   * It is ok to skip cgroup walk for idle task.
+   */
+  if (prev->flags & PF_IDLE)
+    return 0;
+
+  update_cgroup_output(diff_val, prev);
   return 0;
+}
+
+/* This is triggered on context switch */
+SEC("tp_btf/sched_switch")
+int BPF_PROG(bperf_on_sched_switch, bool preempt, struct task_struct *prev,
+            struct task_struct *next) {
+  return bperf_leader_prog(prev);
+}
+
+/* This program is NOT attached. Instead, this is only triggered by user
+ * space via BPF_PROG_TEST_RUN before reading the output. This is need to
+ * gather current running data to the output maps.
+ * We need a separate program because BPF_PROG_TEST_RUN does not work on
+ * tp_btf program (bperf_on_sched_switch). tp_btf program is slightly
+ * faster.
+ */
+SEC("raw_tp/sched_switch")
+int BPF_PROG(bperf_read_trigger) {
+  /* Account for current task */
+  return bperf_leader_prog(bpf_get_current_task_btf());
 }
 
 char _license[] SEC("license") = "GPL";
