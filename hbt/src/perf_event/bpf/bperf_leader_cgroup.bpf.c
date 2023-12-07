@@ -48,39 +48,28 @@ struct {
 
 int event_cnt = 0;
 int cpu_cnt = 0;
+int cgroup_update_level = 0;
 
 #define PF_IDLE 0x00000002
 
-void *bpf_rdonly_cast(void *, __u32) __ksym __weak;
+static void update_cgroup_output(struct bpf_perf_event_value* diff_val,
+                                 struct task_struct *task) {
+  struct bpf_perf_event_value* val;
+  __u64 id;
+  __u32 i;
 
-static __always_inline void update_cgroup_output(struct bpf_perf_event_value* diff_val,
-                                                 struct task_struct *task) {
-  struct cgroup* cgrp;
-  __u32 i, level;
+  id  = bpf_get_current_ancestor_cgroup_id(cgroup_update_level);
+  val = bpf_map_lookup_elem(&cgroup_output, &id);
+  if (!val)
+    return;
 
-  cgrp = task->cgroups->dfl_cgrp;
-
-  for (level = 0; level < MAX_CGROUP_LEVELS; level++) {
-    __u64 id = cgrp->kn->id;
-    struct bpf_perf_event_value* val;
-
-    cgrp = bpf_rdonly_cast(cgrp->self.parent,
-                           bpf_core_type_id_kernel(struct cgroup));
-    if (cgrp == NULL)
+  for (i = 0; i < BPERF_MAX_GROUP_SIZE; i++) {
+    if (i >= event_cnt)
       break;
 
-    val = bpf_map_lookup_elem(&cgroup_output, &id);
-    if (!val)
-      continue;
-
-    for (i = 0; i < BPERF_MAX_GROUP_SIZE; i++) {
-      if (i >= event_cnt)
-        break;
-
-      val[i].counter += diff_val[i].counter;
-      val[i].enabled += diff_val[i].enabled;
-      val[i].running += diff_val[i].running;
-    }
+    val[i].counter += diff_val[i].counter;
+    val[i].enabled += diff_val[i].enabled;
+    val[i].running += diff_val[i].running;
   }
 }
 

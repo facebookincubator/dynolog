@@ -24,7 +24,8 @@ class BPerfCountReader {
 
   BPerfCountReader(
       std::shared_ptr<BPerfEventsGroup> bperf_eg_in,
-      std::shared_ptr<FdWrapper> cgroup_fd_wrapper);
+      std::shared_ptr<FdWrapper> cgroup_fd_wrapper,
+      int cgroup_update_level);
 
   size_t getNumEvents() const;
 
@@ -53,6 +54,7 @@ class BPerfCountReader {
   std::shared_ptr<BPerfEventsGroup> bperf_eg_;
 
   std::shared_ptr<FdWrapper> cgroup_fd_wrapper_;
+  int cgroup_update_level_;
 
   bool cgroup_tracking_ = false;
 };

@@ -377,7 +377,8 @@ class Monitor {
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id,
       std::shared_ptr<perf_event::BPerfEventsGroup> bperf_eg,
-      std::shared_ptr<FdWrapper> cgroup_fd_wrapper) {
+      std::shared_ptr<FdWrapper> cgroup_fd_wrapper,
+      int cgroup_update_level) {
     std::lock_guard<std::mutex> lock{mutex_};
     // Check for key before creating new count generator.
     HBT_ARG_CHECK_EQ(bperf_count_readers_.count(elem_id), 0)
@@ -392,7 +393,7 @@ class Monitor {
         << " under a different mux group id. The same BPerfEventsGroup should have the"
         << " same mux group id.";
     auto bperf_cnt_reader = std::make_unique<Monitor::TBPerfCountReader>(
-        std::move(bperf_eg), cgroup_fd_wrapper);
+        std::move(bperf_eg), cgroup_fd_wrapper, cgroup_update_level);
     if (!bperf_cnt_reader->enable()) {
       return nullptr;
     }

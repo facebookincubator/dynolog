@@ -63,8 +63,9 @@ static inline __u32 bpf_prog_get_id(int fd) {
 /// name: Path of ebpf map
 BPerfEventsGroup::BPerfEventsGroup(
     const std::string& name,
-    const EventConfs& confs)
-    : name_(name), confs_(confs) {
+    const EventConfs& confs,
+    int cgroup_update_level)
+    : name_(name), confs_(confs), cgroup_update_level_(cgroup_update_level) {
   HBT_ARG_CHECK_LE(name.length(), BPERF_METRIC_NAME_SIZE)
       << "bpf map name is too long, max size is " << BPERF_METRIC_NAME_SIZE;
   for (const auto& conf : confs_) {
@@ -84,8 +85,12 @@ BPerfEventsGroup::BPerfEventsGroup(
 BPerfEventsGroup::BPerfEventsGroup(
     const std::string& name,
     const MetricDesc& metric,
-    const PmuDeviceManager& pmu_manager)
-    : BPerfEventsGroup(name, metric.makeNoCpuTopologyConfs(pmu_manager)) {}
+    const PmuDeviceManager& pmu_manager,
+    int cgroup_update_level)
+    : BPerfEventsGroup(
+          name,
+          metric.makeNoCpuTopologyConfs(pmu_manager),
+          cgroup_update_level) {}
 inline auto mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
@@ -119,7 +124,16 @@ size_t BPerfEventsGroup::getNumEvents() const {
   return attrs_.size();
 }
 
-bool BPerfEventsGroup::addCgroup(std::shared_ptr<hbt::FdWrapper> fd) {
+bool BPerfEventsGroup::addCgroup(
+    std::shared_ptr<hbt::FdWrapper> fd,
+    int cgroup_update_level) {
+  if (cgroup_update_level != cgroup_update_level_) {
+    HBT_LOG_ERROR() << "BPerfEventsGroup will only track cgroups at level "
+                    << cgroup_update_level_
+                    << ", but addCgroup() ask to add a cgroup at level "
+                    << cgroup_update_level;
+    return false;
+  }
   auto id = fd->getInode();
   if (cgroup_fds_.count(id)) {
     HBT_LOG_WARNING() << "Cgroup " << id << " is already being monitored";
@@ -292,6 +306,7 @@ void bperf_attr_map_elem::loadFromSkelLink(
 
   skel->bss->cpu_cnt = cpu_cnt_;
   skel->bss->event_cnt = event_cnt;
+  skel->bss->cgroup_update_level = cgroup_update_level_;
   link = ::bpf_program__attach(skel->progs.bperf_on_sched_switch);
   if (!link) {
     HBT_LOG_ERROR() << "Failed to attach leader program";
