@@ -54,11 +54,15 @@ class BPerfEventsGroup {
   ///
   ///  - name: Name for eBPF maps.
   ///  - confs: Event Confs for group.
-  BPerfEventsGroup(const std::string& name, const EventConfs& confs);
+  BPerfEventsGroup(
+      const std::string& name,
+      const EventConfs& confs,
+      int cgroup_update_level);
   BPerfEventsGroup(
       const std::string& name,
       const MetricDesc& metric,
-      const PmuDeviceManager& pmu_manager);
+      const PmuDeviceManager& pmu_manager,
+      int cgroup_update_level);
 
   ~BPerfEventsGroup();
   static std::string attrMapPath();
@@ -73,7 +77,7 @@ class BPerfEventsGroup {
     return enabled_;
   }
 
-  bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd);
+  bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd, int cgroup_update_level);
   bool removeCgroup(__u64 id);
 
   // eBPF like interface to read counters from all CPUs and accumulate them.
@@ -102,6 +106,7 @@ class BPerfEventsGroup {
   bool enabled_ = false;
   int cpu_cnt_;
   std::vector<int> pe_fds_;
+  int cgroup_update_level_;
 
   // There could be multiple users of a given metric, e.g., global cycles.
   // To make them work in parallel, the BPF side never stop counting. Each

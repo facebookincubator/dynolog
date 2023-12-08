@@ -12,9 +12,11 @@ namespace facebook::hbt::perf_event {
 
 BPerfCountReader::BPerfCountReader(
     std::shared_ptr<BPerfEventsGroup> bperf_eg_in,
-    std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
+    std::shared_ptr<FdWrapper> cgroup_fd_wrapper,
+    int cgroup_update_level)
     : bperf_eg_{std::move(bperf_eg_in)},
-      cgroup_fd_wrapper_{std::move(cgroup_fd_wrapper)} {}
+      cgroup_fd_wrapper_{std::move(cgroup_fd_wrapper)},
+      cgroup_update_level_{cgroup_update_level} {}
 
 size_t BPerfCountReader::getNumEvents() const {
   return bperf_eg_->getNumEvents();
@@ -26,7 +28,7 @@ BPerfCountReader::ReadValues BPerfCountReader::makeReadValues() const {
 
 bool BPerfCountReader::enable() {
   if (cgroup_fd_wrapper_) {
-    if (bperf_eg_->addCgroup(cgroup_fd_wrapper_)) {
+    if (bperf_eg_->addCgroup(cgroup_fd_wrapper_, cgroup_update_level_)) {
       cgroup_tracking_ = true;
     }
     return cgroup_tracking_;

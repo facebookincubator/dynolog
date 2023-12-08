@@ -48,7 +48,7 @@ TEST(BPerfEventsGroupTest, RunSystemWide) {
   auto ev_conf =
       pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
 
-  auto system = BPerfEventsGroup("cycles", EventConfs({ev_conf}));
+  auto system = BPerfEventsGroup("cycles", EventConfs({ev_conf}), 0);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE];
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
   if (!system.open() || !system.enable()) {
@@ -77,7 +77,7 @@ TEST(BPerfEventsGroupTest, RunCgroup) {
       instructions_def->id, EventExtraAttr(), EventValueTransforms());
   auto cgrpFdPtr = std::make_shared<FdWrapper>("/sys/fs/cgroup/system.slice/");
   auto cgrp =
-      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}));
+      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 1);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE];
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
 
@@ -85,7 +85,7 @@ TEST(BPerfEventsGroupTest, RunCgroup) {
     GTEST_SKIP() << "Skip RunCgroup test, do we have CAP_PERFMON?";
   }
 
-  cgrp.addCgroup(cgrpFdPtr);
+  cgrp.addCgroup(cgrpFdPtr, 1);
 
   cgrp.disable();
   std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -136,7 +136,7 @@ TEST(BPerfEventsGroupTest, MetricConstructor) {
       std::vector<std::string>{} // No post-processing dives
   );
 
-  auto eg = BPerfEventsGroup("ipc", *m, *pmu_manager);
+  auto eg = BPerfEventsGroup("ipc", *m, *pmu_manager, 0);
   if (!eg.open() || !eg.enable()) {
     GTEST_SKIP() << "Skip RunSystemWide test, do we have CAP_PERFMON?";
   }
@@ -164,7 +164,7 @@ TEST(BPerfEventsGroupTest, EnableDisable) {
   auto instructions_conf = pmu->makeConf(
       instructions_def->id, EventExtraAttr(), EventValueTransforms());
   auto eg =
-      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}));
+      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 0);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE] = {};
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
 
@@ -183,4 +183,28 @@ TEST(BPerfEventsGroupTest, EnableDisable) {
   EXPECT_EQ(prev[0].counter, val[0].counter);
   EXPECT_EQ(prev[0].enabled, val[0].enabled);
   EXPECT_EQ(prev[0].running, val[0].running);
+}
+
+TEST(BPerfEventsGroupTest, cgroup_update_level) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
+  auto cycles_def = pmu_manager->findEventDef("cycles");
+  auto instructions_def = pmu_manager->findEventDef("instructions");
+  if (!cycles_def || !instructions_def) {
+    GTEST_SKIP() << "Cannot find event cycles/instructions";
+  }
+  auto cycles_conf =
+      pmu->makeConf(cycles_def->id, EventExtraAttr(), EventValueTransforms());
+  auto instructions_conf = pmu->makeConf(
+      instructions_def->id, EventExtraAttr(), EventValueTransforms());
+  auto cgrpFdPtr = std::make_shared<FdWrapper>("/sys/fs/cgroup/system.slice/");
+  auto cgrp =
+      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 2);
+
+  if (!cgrp.open() || !cgrp.enable()) {
+    GTEST_SKIP() << "Skip RunCgroup test, do we have CAP_PERFMON?";
+  }
+
+  EXPECT_FALSE(cgrp.addCgroup(cgrpFdPtr, 1))
+      << "BPerfEvents should only be able to track cgroup at level 3";
 }
