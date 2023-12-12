@@ -400,7 +400,6 @@ class Slicer {
       //
 
       Slice::TransitionType sw_type = eventToTransitionType_(ev);
-      ;
       // HBT_LOG_INFO() << "sw_type: " << sw_type;
 
       auto* last_state = active_states_[group_idx];
@@ -871,7 +870,6 @@ class Slicer {
       resetState_();
       ++stats_.num_processed;
       return true;
-      ;
       // XXX: Keeps stats of failures like these.
     }
     return false;
