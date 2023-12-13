@@ -39,7 +39,7 @@ void TraceCollector::emplaceThreadGenerator(
           nullptr,
           TraceCollector::kTidLevel,
           params.thread_switch_aux_rb_min_num_events));
-};
+}
 
 void TraceCollector::emplaceTagStackGeneratorFromRbs(
     std::shared_ptr<TPhasesPerCpuRingBuffer> phases_per_cpu_rb,
