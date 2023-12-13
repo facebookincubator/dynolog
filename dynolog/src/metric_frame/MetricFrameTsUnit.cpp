@@ -30,7 +30,7 @@ std::optional<TimePoint> MetricFrameTsUnitFixInterval::firstSampleTime() const {
     return std::nullopt;
   }
   return lastSampleTime_ - (sampleCount_ - 1) * interval_;
-};
+}
 
 std::optional<TimePoint> MetricFrameTsUnitFixInterval::lastSampleTime() const {
   if (sampleCount_ == 0) {
