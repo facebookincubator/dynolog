@@ -141,7 +141,7 @@ class TraceCollector {
     HBT_DCHECK(dummy_gen_.isOpen());
     // A functor to call <now>.
     return TimeStampNsConverter::makeFromNow(
-        [=]() { return dummy_gen_.now(); });
+        [=, this]() { return dummy_gen_.now(); });
   }
 
   std::unique_ptr<tagstack::slice::TagStackStatsDump> getTagStackStatsDump()
