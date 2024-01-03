@@ -301,7 +301,7 @@ void PmuDeviceManager::loadSysFsPmus() {
     }
     try {
       parseSysFsPmu_(dentry, *this);
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument&) {
       // HBT_LOG_INFO()
       //    << "Ignoring unrecognized /sys/devices entry: \""
       //    << e.what() << "\"";
@@ -354,7 +354,7 @@ PmuDeviceManager::listTracepointEvents(const std::string& category) {
 
       try {
         tp.second = readIntFromFile((dentry.path() / "id").string());
-      } catch (const std::invalid_argument& e) {
+      } catch (const std::invalid_argument&) {
         // HBT_LOG_INFO()
         //    << "Ignoring tracepoint : \""
         //    << dentry.path.string()

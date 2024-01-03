@@ -24,7 +24,7 @@ class ModuleCollectionTest : public ::testing::Test {
 
     try {
       std::filesystem::create_directory(TEST_MODULES_DIR);
-    } catch (const std::filesystem::filesystem_error& ex) {
+    } catch (const std::filesystem::filesystem_error&) {
       FAIL() << "Unable to create test file directory: " << TEST_MODULES_DIR;
     }
 
