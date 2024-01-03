@@ -107,7 +107,7 @@ std::shared_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
     unsigned short field_id;
     try {
       field_id = (unsigned short)std::stoi(field);
-    } catch (std::invalid_argument& e) {
+    } catch (std::invalid_argument&) {
       LOG(ERROR) << "Field id must be number, instead got: " << field;
       continue;
     }
