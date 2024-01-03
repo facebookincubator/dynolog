@@ -38,7 +38,7 @@ nlohmann::json toJson(const std::string& message) {
   }
   try {
     result = json::parse(message);
-  } catch (json::parse_error& ex) {
+  } catch (json::parse_error&) {
     LOG(ERROR) << "Error parsing message = " << message;
     return result;
   }
