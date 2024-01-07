@@ -14,6 +14,7 @@
 
 #include <pfs/procfs.hpp>
 #include <mutex>
+#include <unordered_map>
 
 #ifdef HBT_ENABLE_TRACING
 #include "hbt/src/mon/TraceMonitor.h"
@@ -200,13 +201,13 @@ class Monitor {
   /// Read counts for all events opened in sampling mode
   /// in all TraceCollectors.
   auto readSamplingCounts() const {
-    using TraceCollectorReadValues = std::map<
+    using TraceCollectorReadValues = std::unordered_map<
         std::string,
         std::optional<TraceCollector::TPerCpuCountSampleGenerator::ReadValues>>;
 
     std::lock_guard<std::mutex> lock{mutex_};
 
-    std::map<ElemId, TraceCollectorReadValues> rvs;
+    std::unordered_map<ElemId, TraceCollectorReadValues> rvs;
 
     for (auto& [k, tm] : trace_monitors_) {
       HBT_THROW_ASSERT_IF(tm == nullptr);
@@ -220,10 +221,10 @@ class Monitor {
 
   /// Read counts for all events opened in counting mode
   /// in all PerCpuCountReaders.
-  std::map<ElemId, std::optional<TCountReader::ReadValues>> readAllCounts()
+  std::unordered_map<ElemId, std::optional<TCountReader::ReadValues>> readAllCounts()
       const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<TCountReader::ReadValues>> rvs;
+    std::unordered_map<ElemId, std::optional<TCountReader::ReadValues>> rvs;
 
     for (auto& [k, cr] : count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
@@ -234,10 +235,10 @@ class Monitor {
 
   /// Read counts for all events opened in counting mode
   /// in all PerCpuCountReaders.
-  std::map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>>
+  std::unordered_map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>>
   readAllCountsPerCpu() const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>> rvs;
+    std::unordered_map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>> rvs;
 
     for (auto& [k, cr] : count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
@@ -343,10 +344,10 @@ class Monitor {
 #ifdef HBT_ENABLE_BPERF
   /// Read counts for all events opened in counting mode
   /// in all BPerfCountReaders.
-  std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>>
+  std::unordered_map<ElemId, std::optional<TBPerfCountReader::ReadValues>>
   readAllBPerfCounts(bool skip_offset = false) const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<TBPerfCountReader::ReadValues>> rvs;
+    std::unordered_map<ElemId, std::optional<TBPerfCountReader::ReadValues>> rvs;
 
     for (auto& [k, cr] : bperf_count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);

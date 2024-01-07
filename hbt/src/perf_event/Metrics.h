@@ -9,8 +9,8 @@
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
 
-#include <map>
 #include <memory>
+#include <unordered_map>
 #include <variant>
 
 namespace facebook::hbt::perf_event {
@@ -46,7 +46,7 @@ struct MetricDesc {
   MetricId id;
   std::string brief_desc;
   std::string full_desc;
-  std::map<TOptCpuArch, EventRefs> event_refs_by_arch;
+  std::unordered_map<TOptCpuArch, EventRefs> event_refs_by_arch;
   uint64_t default_sampling_period;
   System::Permissions req_permissions;
   std::vector<std::string> dives;
@@ -56,7 +56,7 @@ struct MetricDesc {
       MetricId id,
       const std::string& brief_desc,
       const std::string& full_desc,
-      const std::map<TOptCpuArch, EventRefs>& event_refs_by_arch,
+      const std::unordered_map<TOptCpuArch, EventRefs>& event_refs_by_arch,
       uint64_t default_sampling_period,
       const System::Permissions& req_permissions,
       const std::vector<std::string>& dives,
@@ -223,7 +223,7 @@ class Metrics {
   }
 
  protected:
-  std::map<std::string, std::shared_ptr<const MetricDesc>> metric_descs_;
+  std::unordered_map<std::string, std::shared_ptr<const MetricDesc>> metric_descs_;
 };
 
 } // namespace facebook::hbt::perf_event

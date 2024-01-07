@@ -12,6 +12,7 @@
 #include <chrono>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 DEFINE_bool(
@@ -110,7 +111,7 @@ void KernelCollectorBase::readCpuStats() {
 void KernelCollectorBase::readNetworkStats() {
   auto devices = pfs_.get_net().get_dev();
 
-  std::map<std::string, struct RxTx> rxtxNew_;
+  std::unordered_map<std::string, struct RxTx> rxtxNew_;
 
   size_t nicDevCount = 0;
   for (const auto& device : devices) {
@@ -168,7 +169,7 @@ bool KernelCollectorBase::isMonitoringInterfaceActive(std::string interface) {
 }
 
 void KernelCollectorBase::updateNetworkStatsDelta(
-    const std::map<std::string, struct RxTx>& rxtxNew) {
+    const std::unordered_map<std::string, struct RxTx>& rxtxNew) {
   rxtxDelta_.clear();
   for (const auto& [devName, devRxtxNew] : rxtxNew) {
     if (rxtx_.find(devName) == rxtx_.end()) {

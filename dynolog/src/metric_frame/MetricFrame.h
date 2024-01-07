@@ -10,8 +10,8 @@
 #include "dynolog/src/metric_frame/MetricSeries.h"
 
 #include <cmath>
-#include <map>
 #include <memory>
+#include <unordered_map>
 #include <variant>
 #include <vector>
 
@@ -38,7 +38,7 @@ class MetricFrameMap : public MetricFrameBase {
   void show(std::ostream& s) const override;
 
  protected:
-  std::map<std::string, MetricSeriesVar> series_;
+  std::unordered_map<std::string, MetricSeriesVar> series_;
 };
 
 using VectorSeriesDefList = std::vector<MetricSeriesVar>;

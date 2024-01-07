@@ -18,8 +18,8 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 #endif // USE_JSON_GENERATED_PERF_EVENTS
 
-#include <map>
 #include <memory>
+#include <unordered_map>
 
 namespace facebook::hbt::perf_event {
 
@@ -522,7 +522,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "instructions",
       "Number of CPU instructions retired since the counter is enabled.",
       "Number of CPU instructions retired since the counter is enabled.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "instructions",
@@ -539,7 +539,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "cycles",
       "Number of CPU clock cycles since the counter is enabled.",
       "Number of CPU clock cycles since the counter is enabled.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "cycles",
@@ -555,7 +555,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "instructions_per_cycle",
       "Average number of instructions executed each clock cycle.",
       "Average number of instructions executed each clock cycle.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -583,7 +583,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
         "Core-originated cacheable demand requests missed L2",
         "Counts core-originated cacheable requests that miss the L2 cache. "
         "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L1 and L2. ",
-        std::map<TOptCpuArch, EventRefs>{
+        std::unordered_map<TOptCpuArch, EventRefs>{
             {std::nullopt,
              EventRefs{EventRef{
                  "l2_cache_misses",
@@ -600,7 +600,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
         "Core-originated cacheable demand requests missed L2",
         "Counts core-originated cacheable requests that miss the L2 cache. "
         "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L2. ",
-        std::map<TOptCpuArch, EventRefs>{
+        std::unordered_map<TOptCpuArch, EventRefs>{
             {std::nullopt,
              EventRefs{
                  EventRef{
@@ -634,7 +634,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L1 and L2. "
       "It does not include all misses to the L3."
       "Also count number of instructions in the same period to calculate l3 misses per instruction.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -659,7 +659,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "dram_access_reads",
       "Memory bandwidth used for read events.",
       "Memory bandwidth used for read events. The value is inferred from Intel offcore counters.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::BDW,
            EventRefs{EventRef{
                "dram_access_reads",
@@ -714,7 +714,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       " executed by AVX vector instruction set."
       "Each instruction can be converted to operations by multipying the count"
       " with 1, 4, 8, 16 respectively.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -752,7 +752,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       " executed by AVX vector instruction set."
       "Each instruction can be converted to operations by multipying the count"
       " with 1, 2, 4, 8 respectively.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -787,7 +787,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "cpu_clock",
       "High-resolution sys and user CPU clock",
       "High-resolution sys and user CPU clock",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -810,7 +810,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "generic_sw",
       "All generic software events every context switch",
       "All generic software events. They are never multiplexed.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -863,7 +863,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "page_faults",
       "Software Page faults",
       "Major and minor page faults",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -893,7 +893,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "system_calls",
       "System calls Tracepoint",
       "System calls Tracepoint Event",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -917,7 +917,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "dqos",
       "System-derived estimation of Dyno QoS",
       "IPC and Scheduler stats. Requires root. Make sure /proc/sys/kernel/sched_schedstats is set.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -1002,7 +1002,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "ipc",
       "IPC including user, kernel, and hypervisor.",
       "Intructions-per-Cycle (IPC) including user, kernel, and hypervisor. ",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -1025,7 +1025,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "cs_ipc",
       "Context switch-based IPC including user, kernel, and hypervisor.",
       "Context switch-based Intructions-per-Cycle (IPC) including user, kernel, and hypervisor. ",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -1054,7 +1054,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "cycles_breakdown",
       "Cycles in user, kernel and idle.",
       "Time (ref-cycles) and cycles spent in user (ring 3) or kernel (ring 0)",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{
                EventRef{
@@ -1084,7 +1084,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "topdown_l4_mem",
       "External memory (DRAM) bandwidth and latency",
       "External memory (DRAM) bandwidth and latency.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::BDX,
            EventRefs{
                EventRef{
@@ -1122,7 +1122,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "topdown_l3_icache",
       "Fraction of cycles the CPU was stalled due to instruction cache misses",
       "Fraction of cycles the CPU was stalled due to instruction cache misses.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::BDX,
            EventRefs{
                EventRef{
@@ -1146,7 +1146,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "topdown_l3_L1_bound",
       "Fraction of cycles the CPU was stalled due to L1 data cache misses",
       "Fraction of cycles the CPU was stalled due to L1 data cache misses.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::BDX,
            EventRefs{
                EventRef{
@@ -1176,7 +1176,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "topdown_l3_L2_bound",
       "Estimates how often the CPU was stalled due to L2 cache accesses by loads.",
       "Estimates how often the CPU was stalled due to L2 cache accesses by loads.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::BDX,
            EventRefs{
                EventRef{
@@ -1220,7 +1220,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       "Provides how many CPU is halted, how much is spent in kernel and user space "
       " and a breakdown of how many pipeline slots are wasted due "
       "to each hardware bottleneck.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {CpuArch::SKX,
            EventRefs{
                // Note: There are two events for CPU_CLK_UNHALTED:
@@ -1333,7 +1333,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_ICACHE_MISSES",
       "L2 code requests",
       "Counts the total number of L2 code requests.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "icache_misses",
@@ -1350,7 +1350,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_ICACHE_MISSES_PERF",
       "Level 1 instruction cache load operation misses",
       "Level 1 instruction cache load operation misses",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "icache_misses_perf",
@@ -1366,7 +1366,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_DCACHE_MISSES",
       "Counts the number of cache lines replaced in L1 data cache.",
       "Counts L1D data line replacements including opportunistic replacements, and replacements that require stall-for-replace or block-for-replace.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "dcache_misses",
@@ -1382,7 +1382,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_ITLB_MISSES",
       "Code miss in all TLB levels causes a page walk that completes. (All page sizes)",
       "Counts completed page walks (all page sizes) caused by a code fetch. This implies it missed in the ITLB (Instruction TLB) and further levels of TLB. The page walk can end with or without a fault.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "itlb_misses",
@@ -1398,7 +1398,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_L2_MISSES",
       "L2 cache lines filling L2",
       "Counts the number of L2 cache lines filling the L2. Counting does not cover rejects.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "core_l2_misses",
@@ -1414,7 +1414,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_LLC_MISSES",
       "Core-originated cacheable requests that missed L3  (Except hardware prefetches to the L3)",
       "Counts core-originated cacheable requests that miss the L3 cache (Longest Latency cache). Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches to the L1 and L2.  It does not include hardware prefetches to the L3, and may not count other types of requests to the L3.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "llc_misses",
@@ -1430,7 +1430,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_BRANCH_MISSES",
       "All mispredicted branch instructions retired.",
       "Counts all the retired branch instructions that were mispredicted by the processor. A branch misprediction occurs when the processor incorrectly predicts the destination of the branch.  When the misprediction is discovered at execution, all the instructions executed in the wrong (speculative) path must be discarded, and the processor must start fetching from the correct path.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "branch_misses",
@@ -1446,7 +1446,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_BRANCH_INSTRUCTIONS",
       "All branch instructions retired.",
       "Counts all branch instructions retired.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "branch_misses",
@@ -1462,7 +1462,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_L2_PREFETCH_HITS",
       "SW prefetch requests that hit L2 cache.",
       "Counts Software prefetch requests that hit the L2 cache. Accounts for PREFETCHNTA and PREFETCHT0/1/2 instructions when FB is not full.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "prefetch_hits",
@@ -1478,7 +1478,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_L2_PREFETCH_MISSES",
       "SW prefetch requests that miss L2 cache.",
       "Counts Software prefetch requests that miss the L2 cache. Accounts for PREFETCHNTA and PREFETCHT0/1/2 instructions when FB is not full.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "prefetch_misses",
@@ -1494,7 +1494,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_DP_SCALAR",
       "Counts number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_dp_scalar",
@@ -1510,7 +1510,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_SP_SCALAR",
       "Counts number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational scalar single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT RCP FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_sp_scalar",
@@ -1526,7 +1526,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_DP_SSE",
       "Counts number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 128-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 2 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_dp_sse",
@@ -1542,7 +1542,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_SP_SSE",
       "Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX RCP14 RSQRT14 SQRT DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 128-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_sp_sse",
@@ -1558,7 +1558,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_DP_AVX",
       "Counts number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 256-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 4 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_dp_avx",
@@ -1574,7 +1574,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_SP_AVX",
       "Counts number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 256-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB HADD HSUB SUBADD MUL DIV MIN MAX SQRT RSQRT RCP DPP FM(N)ADD/SUB.  DPP and FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_sp_avx",
@@ -1590,7 +1590,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_DP_AVX2",
       "Counts number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 512-bit packed double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 8 computation operations, one for each element.  Applies to SSE* and AVX* packed double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_dp_avx2",
@@ -1606,7 +1606,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "HW_CORE_FLOPS_SP_AVX2",
       "Counts number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational 512-bit packed single precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 16 computation operations, one for each element.  Applies to SSE* and AVX* packed single precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT RSQRT14 RCP14 FM(N)ADD/SUB. FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
-      std::map<TOptCpuArch, EventRefs>{
+      std::unordered_map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
                "flops_sp_avx2",

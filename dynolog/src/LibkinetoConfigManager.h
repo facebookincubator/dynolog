@@ -15,6 +15,7 @@
 #include <set>
 #include <string>
 #include <thread>
+#include <unordered_map>
 #include <vector>
 #include "dynolog/src/LibkinetoTypes.h"
 
@@ -69,12 +70,12 @@ class LibkinetoConfigManager {
 
   // Map of pid ancestry -> LibkinetoProcess
   using ProcessMap = std::map<std::set<int32_t>, LibkinetoProcess>;
-  std::map<std::string, ProcessMap> jobs_;
+  std::unordered_map<std::string, ProcessMap> jobs_;
 
   // Map of gpu id -> pids
-  using InstancesPerGpuMap = std::map<int32_t, std::set<int32_t>>;
+  using InstancesPerGpuMap = std::unordered_map<int32_t, std::set<int32_t>>;
   // Job id -> InstancesPerGpu
-  std::map<std::string, InstancesPerGpuMap> jobInstancesPerGpu_;
+  std::unordered_map<std::string, InstancesPerGpuMap> jobInstancesPerGpu_;
   mutable std::mutex mutex_;
 
   void setOnDemandConfigForProcess(
