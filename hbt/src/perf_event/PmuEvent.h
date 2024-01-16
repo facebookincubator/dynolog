@@ -357,7 +357,7 @@ struct EventDef {
   /// Create perf_event_attr config field,
   /// as done in kernel's
   /// linux/arch/x86/include/asm/perf_event.h macro X86_RAW_EVENT_MASK.
-  EventConfigs makeConfigs(uint32_t new_pmu_type) const {
+  EventConfigs makeConfigs(uint32_t new_pmu_type_2) const {
     uint64_t config = (encoding.cmask << 24) |
         (((uint64_t)encoding.inv) << 23) | (((uint64_t)encoding.any) << 21) |
         (((uint64_t)encoding.edge) << 18) | (encoding.umask << 8u) |
@@ -376,7 +376,7 @@ struct EventDef {
       }
     }
     return EventConfigs{
-        .type = new_pmu_type,
+        .type = new_pmu_type_2,
         .config = config,
         .config1 = config1,
         .config2 = config2};
