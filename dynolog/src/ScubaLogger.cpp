@@ -17,8 +17,10 @@
 #include <chrono>
 
 namespace dynolog {
-constexpr int HOSTNAME_MAX = 50;
+#ifdef USE_GRAPH_ENDPOINT
 constexpr char kScubaUrl[] = "http://graph.facebook.com/v2.2/scribe_logs";
+#endif
+
 DEFINE_string(
     scribe_category,
     "perfpipe_fair_cluster_gpu_stats",
