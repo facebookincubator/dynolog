@@ -18,7 +18,6 @@ namespace facebook::hbt::perf_event {
 
 constexpr auto kAttrMapVersion = 1;
 constexpr auto kAttrMapSize = 16;
-constexpr auto kMaxAttrPerMetric = 8;
 
 static inline __u32 bpf_link_get_id(int fd) {
   struct bpf_link_info link_info = {
