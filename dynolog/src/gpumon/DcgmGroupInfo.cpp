@@ -30,7 +30,6 @@ constexpr double maxKeepAgeSec = 2;
 constexpr int maxKeepSamples = 2;
 const std::string groupName = "DcgmGroupInfo";
 const std::string fieldGroupName = "DcgmFieldGroup";
-constexpr int kDcgmBlankValueError = 2;
 
 // fieldId -> metricName in metric cache
 std::unordered_map<unsigned short, std::string> FieldIdToName{
