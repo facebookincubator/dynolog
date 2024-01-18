@@ -18,7 +18,10 @@ DEFINE_string(category_id, "", "The category id of the ODS endpoint");
 DEFINE_string(ods_entity_prefix, "", "The prefix for ODS entity name");
 
 namespace dynolog {
+
+#ifdef USE_GRAPH_ENDPOINT
 constexpr char kODSUrl[] = "https://graph.facebook.com/v2.2/ods_metrics";
+#endif
 
 ODSJsonLogger::ODSJsonLogger() : hostname_(facebook::hbt::getHostName()) {}
 
