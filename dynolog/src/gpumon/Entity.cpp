@@ -41,6 +41,39 @@ bool Entity::operator==(const Entity& other) const {
       m_entityId == other.m_entityId;
 }
 
+int getLatestDcgmValueCB(
+    dcgm_field_entity_group_t entityGroupId,
+    dcgm_field_eid_t entityId,
+    dcgmFieldValue_v1* values,
+    int numValues,
+    void* userData) {
+  if (userData == nullptr) {
+    return DCGM_ST_BADPARAM;
+  }
+
+  cbData* data = (cbData*)userData;
+
+  /**
+   * If there's no data yet, status of the first record will be
+   * DCGM_ST_NO_DATA
+   */
+  if (values[0].status == DCGM_ST_NO_DATA) {
+    return DCGM_ST_OK;
+  } else if (values[0].status != DCGM_ST_OK) {
+    return DCGM_ST_OK;
+  }
+
+  dcgmGroupEntityPair_t entity;
+
+  entity.entityGroupId = entityGroupId;
+  entity.entityId = entityId;
+
+  data->m_values[entity].insert(
+      data->m_values[entity].end(), values, values + numValues);
+
+  return DCGM_ST_OK;
+}
+
 std::ostream& operator<<(std::ostream& os, const Entity& entity) {
   os << "EntityGroupId: " << entity.m_entityGroupId;
   os << " EntityId: " << entity.m_entityId;
