@@ -143,8 +143,10 @@ constexpr PmuMsr kL1AndL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0xff}};
 // Flops
 constexpr PmuMsr kRetiredX87Flops{.amdCore = {.event = 0x2, .unitMask = 0x7}};
-constexpr PmuMsr kRetiredSseAvxFlops{
+constexpr PmuMsr kZen3RetiredSseAvxFlops{
     .amdCore = {.event = 0x3, .unitMask = 0xf}};
+constexpr PmuMsr kZen4RetiredSseAvxFlops{
+    .amdCore = {.event = 0x3, .unitMask = 0x1f}};
 
 // Branches
 constexpr PmuMsr kRetiredBranchInstructions{.amdCore = {.event = 0xc2}};
