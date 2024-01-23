@@ -784,6 +784,112 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       std::vector<std::string>{}));
 
   metrics->add(std::make_shared<MetricDesc>(
+      "fp_ops_all",
+      "Total floating points operations",
+      "Counts number of floating points operations of single precision type, double precision type, and bfloat types "
+      "executed by the processor. "
+      "For AMD, each event counts the # retired floating point operations. "
+      "For Intel, each event counts the # retired instructions "
+      "Multiply # of instructions by # of operations packed inside an instruction to calculate # operations.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::MILAN,
+           EventRefs{
+               EventRef{
+                   "flops_scalar",
+                   PmuType::cpu,
+                   "zen3/4::fp_ret_x87_fp_ops.all",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "flops_vector",
+                   PmuType::cpu,
+                   "zen3::fp_ret_sse_avx_ops.all",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::BERGAMO,
+           EventRefs{
+               EventRef{
+                   "flops_scalar",
+                   PmuType::cpu,
+                   "zen3/4::fp_ret_x87_fp_ops.all",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "flops_vector",
+                   PmuType::cpu,
+                   "zen4::fp_ret_sse_avx_ops.all",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::GENOA,
+           EventRefs{
+               EventRef{
+                   "flops_scalar",
+                   PmuType::cpu,
+                   "zen3/4::fp_ret_x87_fp_ops.all",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "flops_vector",
+                   PmuType::cpu,
+                   "zen4::fp_ret_sse_avx_ops.all",
+                   EventExtraAttr{},
+                   {}}}},
+          // Intel by default
+          {std::nullopt,
+           EventRefs{
+               EventRef{
+                   "instr_dp_scalar",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.SCALAR_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_128b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.128B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_256b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_dp_512b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.512B_PACKED_DOUBLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_scalar",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.SCALAR_SINGLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_128b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.128B_PACKED_SINGLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_256b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.256B_PACKED_SINGLE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "instr_sp_512b_packed",
+                   PmuType::cpu,
+                   "FP_ARITH_INST_RETIRED.512B_PACKED_SINGLE",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
       "cpu_clock",
       "High-resolution sys and user CPU clock",
       "High-resolution sys and user CPU clock",

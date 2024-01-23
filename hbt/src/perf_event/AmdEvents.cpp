@@ -65,6 +65,32 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "L3 Cache misses",
           "L3 Cache misses"),
       std::vector<EventId>({"l3-cache-misses"}));
+
+  // FLOPs events for AMD Zen3/Zen4
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen3/4::fp_ret_x87_fp_ops.all",
+          EventDef::Encoding{.code = amd_msr::kRetiredX87Flops.val},
+          "Retired x87 floating-point ops of all types.",
+          "The number of all x87 floating-point Ops that have retired."),
+      std::vector<EventId>({"zen3/4-ret-x87-fp-ops-all"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen3::fp_ret_sse_avx_ops.all",
+          EventDef::Encoding{.code = amd_msr::kZen3RetiredSseAvxFlops.val},
+          "Retired SSE and AVX floating-point ops of all types.",
+          "The number of all SSE/AVX floating-point Ops that have retired."),
+      std::vector<EventId>({"zen3-ret-sse-avx-fp-ops-all"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen4::fp_ret_sse_avx_ops.all",
+          EventDef::Encoding{.code = amd_msr::kZen4RetiredSseAvxFlops.val},
+          "Retired SSE and AVX floating-point ops of all types.",
+          "The number of all SSE/AVX floating-point Ops that have retired."),
+      std::vector<EventId>({"zen4-ret-sse-avx-fp-ops-all"}));
 }
 } // namespace milan
 
