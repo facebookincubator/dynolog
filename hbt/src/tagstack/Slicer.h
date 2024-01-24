@@ -793,7 +793,6 @@ class Slicer {
   }
 
   inline auto eventToTransitionType_(const Event* ev) const {
-    Slice::TransitionType sw_type;
     switch (ev->type) {
       case Event::Type::Start:
       case Event::Type::End:
