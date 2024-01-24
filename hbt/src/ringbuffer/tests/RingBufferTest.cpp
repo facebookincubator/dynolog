@@ -637,8 +637,8 @@ TEST(RingBuffer, InTx) {
   }
 
   {
-    auto [size, d_ptr] = c.readInTxWithSize<uint8_t>();
-    EXPECT_EQ(size, 4u);
+    auto [size_2, d_ptr] = c.readInTxWithSize<uint8_t>();
+    EXPECT_EQ(size_2, 4u);
     EXPECT_TRUE(memcmp(d_ptr, "hola", 4u) == 0);
   }
 
@@ -675,8 +675,8 @@ TEST(RingBuffer, InTx) {
   }
 
   {
-    auto [size, d_ptr] = c.readInTxWithSize<uint8_t>();
-    EXPECT_EQ(size, 4u);
+    auto [size_2, d_ptr] = c.readInTxWithSize<uint8_t>();
+    EXPECT_EQ(size_2, 4u);
     EXPECT_TRUE(memcmp(d_ptr, "hola", 4u) == 0);
   }
 
@@ -687,23 +687,23 @@ TEST(RingBuffer, InTx) {
   }
 
   {
-    auto [ret, d_ptr] = c.readInTx<uint16_t>();
-    EXPECT_EQ(ret, 2);
+    auto [ret_2, d_ptr] = c.readInTx<uint16_t>();
+    EXPECT_EQ(ret_2, 2);
     EXPECT_EQ(*d_ptr, 8u);
   }
   {
-    auto [ret, d_ptr] = c.readInTx<uint16_t>();
-    EXPECT_EQ(ret, 2);
+    auto [ret_2, d_ptr] = c.readInTx<uint16_t>();
+    EXPECT_EQ(ret_2, 2);
     EXPECT_EQ(*d_ptr, 9u);
   }
   {
-    auto [ret, d_ptr] = c.readInTx<uint16_t>();
-    EXPECT_EQ(ret, 2);
+    auto [ret_2, d_ptr] = c.readInTx<uint16_t>();
+    EXPECT_EQ(ret_2, 2);
     EXPECT_EQ(*d_ptr, 9u);
   }
   {
-    auto [ret, d_ptr] = c.readInTxWithSize<uint8_t>();
-    EXPECT_EQ(ret, -ENODATA);
+    auto [ret_2, d_ptr] = c.readInTxWithSize<uint8_t>();
+    EXPECT_EQ(ret_2, -ENODATA);
   }
 
   ret = c.commitTx();
