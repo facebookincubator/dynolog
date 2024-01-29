@@ -420,7 +420,7 @@ void PmuDevice::addAliases(
     const EventId& ev_id,
     const std::vector<EventId>& aliases) {
   for (const auto& alias : aliases) {
-    auto [_, added] = aliases_.emplace(alias, ev_id);
+    aliases_.emplace(alias, ev_id);
   }
 }
 
