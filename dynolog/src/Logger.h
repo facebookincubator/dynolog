@@ -44,6 +44,12 @@ class Logger {
   virtual void finalize() = 0;
 };
 
+struct KeyParts {
+  std::string metric;
+  std::string entity;
+};
+KeyParts splitKey(const std::string& full_key);
+
 class JsonLogger : public Logger {
  public:
   void setTimestamp(Timestamp ts) override {

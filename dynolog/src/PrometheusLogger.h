@@ -33,6 +33,10 @@ class PrometheusManager {
 
   PrometheusManager();
 
+  // Add dynamic metrics if required
+  // returns true if a key was added
+  bool ensureDynamicKey(const std::string& key);
+
   // Note that this method is not thread-safe and so
   // should only be used with the LoggingGuard in scope
   void log(const std::string& key, double val);
@@ -40,6 +44,7 @@ class PrometheusManager {
   static LoggingGuard singleton();
 
  private:
+  using GaugeFamily = prometheus::Family<prometheus::Gauge>;
   std::lock_guard<std::mutex> lock() {
     return std::lock_guard{mutex_};
   }
@@ -50,6 +55,9 @@ class PrometheusManager {
 
   // only store a reference to Gauge because copying is not allowed
   std::unordered_map<std::string, prometheus::Gauge*> gauges_;
+
+  // metric families that need dynamic dimensions
+  std::unordered_map<std::string, GaugeFamily*> dynamic_metrics_;
 
   // Should match googletest/include/gtest/gtest_prod.h
   // friend class test_case_name##_##test_name##_Test

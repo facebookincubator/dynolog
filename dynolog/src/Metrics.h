@@ -25,4 +25,6 @@ struct MetricDesc {
 
 const std::vector<MetricDesc> getAllMetrics();
 
+const std::vector<MetricDesc> getNetworkMetrics();
+
 } // namespace dynolog

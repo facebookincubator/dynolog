@@ -68,14 +68,14 @@ void KernelCollector::log(Logger& log) {
   }
 
   for (const auto& [devName, devRxtx] : rxtxDelta_) {
-    log.logUint(fmt::format("rx_bytes_{}", devName), devRxtx.rxBytes);
-    log.logUint(fmt::format("rx_packets_{}", devName), devRxtx.rxPackets);
-    log.logUint(fmt::format("rx_errors_{}", devName), devRxtx.rxErrors);
-    log.logUint(fmt::format("rx_drops_{}", devName), devRxtx.rxDrops);
-    log.logUint(fmt::format("tx_bytes_{}", devName), devRxtx.txBytes);
-    log.logUint(fmt::format("tx_packets_{}", devName), devRxtx.txPackets);
-    log.logUint(fmt::format("tx_errors_{}", devName), devRxtx.txErrors);
-    log.logUint(fmt::format("tx_drops_{}", devName), devRxtx.txDrops);
+    log.logUint(fmt::format("rx_bytes.{}", devName), devRxtx.rxBytes);
+    log.logUint(fmt::format("rx_packets.{}", devName), devRxtx.rxPackets);
+    log.logUint(fmt::format("rx_errors.{}", devName), devRxtx.rxErrors);
+    log.logUint(fmt::format("rx_drops.{}", devName), devRxtx.rxDrops);
+    log.logUint(fmt::format("tx_bytes.{}", devName), devRxtx.txBytes);
+    log.logUint(fmt::format("tx_packets.{}", devName), devRxtx.txPackets);
+    log.logUint(fmt::format("tx_errors.{}", devName), devRxtx.txErrors);
+    log.logUint(fmt::format("tx_drops.{}", devName), devRxtx.txDrops);
   }
 
   log.setTimestamp();

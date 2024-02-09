@@ -41,14 +41,50 @@ PrometheusManager::PrometheusManager()
     gauges_[m.name] = &g;
   }
 
+  // setup dynamic counters
+  for (const auto& m : getNetworkMetrics()) {
+    // creates metric families
+    auto& mf = buildGaugeFromMetric(m, *registry_);
+    dynamic_metrics_[m.name] = &mf;
+  }
+
   // setup registry
   exposer_.RegisterCollectable(registry_);
 }
 
+bool PrometheusManager::ensureDynamicKey(const std::string& key) {
+  if (key.find('.') == std::string::npos) {
+    return false;
+  }
+  auto parts = splitKey(key);
+
+  auto it = dynamic_metrics_.find(parts.metric);
+  if (it == dynamic_metrics_.end()) {
+    return false;
+  }
+
+  // Currently only kind of dynamic metrics include network metrics
+  const std::string hostname = facebook::hbt::getHostName();
+  auto& g = it->second->Add({{"host_name", hostname}, {"net", parts.entity}});
+
+  DLOG(INFO) << "Adding dynamic metric " << parts.metric
+             << " for entity = " << parts.entity << " overall key = " << key;
+
+  gauges_[key] = &g;
+  return true;
+}
+
 void PrometheusManager::log(const std::string& key, double val) {
+  // First let's check if a gauge metric exists
   auto it = gauges_.find(key);
   if (it == gauges_.end()) {
-    return;
+    // Try to setup a dynamic metric on the fly
+    if (ensureDynamicKey(key)) {
+      // find it again
+      it = gauges_.find(key);
+    } else {
+      return;
+    }
   }
   auto g = it->second;
   if (!g) {

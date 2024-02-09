@@ -20,10 +20,10 @@ A metric is generally associated with a scope that describes the space/dimension
 | cpu_u, cpu_s | Fraction of total CPU time spent in user and system mode respectively| Activity of the system CPU in user/system mode. | Ratio | - | 60s |
 | cpu_i| Fraction of total CPU time that the CPU was in idle mode.| Overall inactivity of the system CPU. | Ratio | - | 60s |
 | cpu_u/s/n/w/x/y_ms| Total CPU time in milliseconds spent in various modes: user, system, nice, iowait etc. For more details please see man page for [/proc/stat](https://man7.org/linux/man-pages/man5/proc.5.html) | Activity of the system CPU in various modes. | Delta | ms | 60s |
-| rx/tx_bytes_`<devname>` | Total bytes transmitted/received over the specific network device.| Network transfer statistics. | Delta | Bytes | 60s |
-| rx/tx_packets_`<devname>` | Total packets transmitted/received over the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
-| rx/tx_errors_`<devname>` | Total transmit/receive errors on the specific network device.| Network transfer statistics. | Delta | Errors | 60s |
-| rx/tx_drops_`<devname>` | Total transmit/receive packet drops on the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
+| rx/tx_bytes.`<devname>` | Total bytes transmitted/received over the specific network device.| Network transfer statistics. | Delta | Bytes | 60s |
+| rx/tx_packets.`<devname>` | Total packets transmitted/received over the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
+| rx/tx_errors.`<devname>` | Total transmit/receive errors on the specific network device.| Network transfer statistics. | Delta | Errors | 60s |
+| rx/tx_drops.`<devname>` | Total transmit/receive packet drops on the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
 | mips | Number of million instructions executed per second. | Overall rate of instructions per second the CPU executed. | Rate | Million / sec | 60s |
 | mega_cycles_per_second | Number of active CPU clock cycles per second. | Overall rate of the CPU clock cycle. | Rate | MHz | 60s |
 

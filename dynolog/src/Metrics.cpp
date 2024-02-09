@@ -59,4 +59,41 @@ const std::vector<MetricDesc> getAllMetrics() {
   return metrics;
 }
 
+// These metrics are dynamic per network drive
+const std::vector<MetricDesc> getNetworkMetrics() {
+  static std::vector<MetricDesc> metrics_ = {
+      {.name = "tx_bytes",
+       .type = MetricType::Delta,
+       .desc =
+           "Total bytes transmitted/received over the specific network device."},
+      {.name = "rx_bytes",
+       .type = MetricType::Delta,
+       .desc =
+           "Total bytes transmitted/received over the specific network device."},
+      {.name = "tx_packets",
+       .type = MetricType::Delta,
+       .desc =
+           "Total packets transmitted/received over the specific network device."},
+      {.name = "rx_packets",
+       .type = MetricType::Delta,
+       .desc =
+           "Total packets transmitted/received over the specific network device."},
+      {.name = "tx_errors",
+       .type = MetricType::Delta,
+       .desc = "Total transmit/receive errors on the specific network device."},
+      {.name = "rx_errors",
+       .type = MetricType::Delta,
+       .desc = "Total transmit/receive errors on the specific network device."},
+      {.name = "tx_drops",
+       .type = MetricType::Delta,
+       .desc =
+           "Total transmit/receive packet drops on the specific network device."},
+      {.name = "rx_drops",
+       .type = MetricType::Delta,
+       .desc =
+           "Total transmit/receive packet drops on the specific network device."},
+  };
+  return metrics_;
+}
+
 } // namespace dynolog
