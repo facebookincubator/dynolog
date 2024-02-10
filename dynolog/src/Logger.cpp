@@ -57,4 +57,18 @@ void JsonLogger::finalize() {
   json_.clear();
 }
 
+KeyParts splitKey(const std::string& full_key) {
+  // Splits "metric.entity"
+  KeyParts ret;
+  size_t pos = full_key.find('.');
+  if (pos == std::string::npos) {
+    ret.metric = full_key;
+    return ret;
+  }
+
+  ret.metric = full_key.substr(0, pos);
+  ret.entity = full_key.substr(pos + 1);
+  return ret;
+}
+
 } // namespace dynolog
