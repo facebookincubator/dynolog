@@ -65,6 +65,8 @@ void MetricFrameBase::addSample(
         using T = std::decay_t<decltype(arg)>;
         if constexpr (std::is_same_v<MetricSeriesInt64Ptr, T>) {
           arg->addSample(std::get<int64_t>(sampleVar));
+        } else if constexpr (std::is_same_v<MetricSeriesUint64Ptr, T>) {
+          arg->addSample(std::get<uint64_t>(sampleVar));
         } else if constexpr (std::is_same_v<T, MetricSeriesDoublePtr>) {
           arg->addSample(std::get<double>(sampleVar));
         } else if constexpr (std::is_same_v<T, MetricSeriesPerfReadValuePtr>) {
@@ -84,6 +86,8 @@ void MetricFrameBase::incFromLastSample(
         using T = std::decay_t<decltype(arg)>;
         if constexpr (std::is_same_v<MetricSeriesInt64Ptr, T>) {
           arg->incFromLastSample(std::get<int64_t>(deltaVar));
+        } else if constexpr (std::is_same_v<MetricSeriesUint64Ptr, T>) {
+          arg->incFromLastSample(std::get<uint64_t>(deltaVar));
         } else if constexpr (std::is_same_v<T, MetricSeriesDoublePtr>) {
           arg->incFromLastSample(std::get<double>(deltaVar));
         } else if constexpr (std::is_same_v<T, MetricSeriesPerfReadValuePtr>) {

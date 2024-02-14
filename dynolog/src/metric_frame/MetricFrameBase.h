@@ -17,13 +17,15 @@
 
 namespace facebook::dynolog {
 
-using SampleVarT = std::variant<int64_t, double, PerfReadValues>;
+using SampleVarT = std::variant<int64_t, uint64_t, double, PerfReadValues>;
 using MetricSeriesInt64Ptr = std::shared_ptr<MetricSeries<int64_t>>;
+using MetricSeriesUint64Ptr = std::shared_ptr<MetricSeries<uint64_t>>;
 using MetricSeriesDoublePtr = std::shared_ptr<MetricSeries<double>>;
 using MetricSeriesPerfReadValuePtr =
     std::shared_ptr<MetricSeries<PerfReadValues>>;
 using MetricSeriesVar = std::variant<
     MetricSeriesInt64Ptr,
+    MetricSeriesUint64Ptr,
     MetricSeriesDoublePtr,
     MetricSeriesPerfReadValuePtr>;
 
