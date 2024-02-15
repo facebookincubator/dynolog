@@ -69,31 +69,40 @@ TEST(MetricSeriesSliceTest, metricFrameMapSmokeTest) {
 
   std::string series1Key = "metric1";
   std::string series2Key = "metric2";
+  std::string series3Key = "metric3";
 
   auto series1 =
       std::make_shared<MetricSeries<int64_t>>(10, series1Key, "test metric 1");
   auto series2 =
       std::make_shared<MetricSeries<double>>(10, series2Key, "test metric 2");
+  auto series3 =
+      std::make_shared<MetricSeries<uint64_t>>(10, series3Key, "test metric 3");
 
   frameMap.addSeries(series1Key, std::move(series1));
   frameMap.addSeries(series2Key, std::move(series2));
+  frameMap.addSeries(series3Key, std::move(series3));
 
   EXPECT_EQ(frameMap.length(), 0);
   EXPECT_EQ(frameMap.maxLength(), 10);
-  EXPECT_EQ(frameMap.width(), 2);
+  EXPECT_EQ(frameMap.width(), 3);
 
   auto now = std::chrono::steady_clock::now();
 
-  frameMap.addSamples({{"metric1", 42l}, {"metric2", 23.9f}}, now);
+  frameMap.addSamples(
+      {{"metric1", 42l}, {"metric2", 23.9f}, {"metric3", (uint64_t)42}}, now);
   EXPECT_EQ(frameMap.length(), 1);
   EXPECT_EQ(frameMap.maxLength(), 10);
   for (int i = 1; i <= 10; i++) {
     frameMap.addSamples(
-        {{"metric1", 42l + i}, {"metric2", 23.9f + i}}, now + 60s * i);
+        {{"metric1", 42l + i},
+         {"metric2", 23.9f + i},
+         {"metric3", (uint64_t)(42 + i)}},
+        now + 60s * i);
   }
   // |  60s | 120s | 180s | 240s | 300s | 360s | 420s | 480s | 540s | 600s |
   // |  43  |  44  |  45  |  46  |  47  |  48  |  49  |  50  |  51  | 52   |
   // | 24.9 | 25.9 | 26.9 | 27.9 | 28.9 | 29.9 | 30.9 | 31.9 | 32.9 | 33.9 |
+  // |  43  |  44  |  45  |  46  |  47  |  48  |  49  |  50  |  51  | 52   |
   //           |-----------------------------------|
   EXPECT_EQ(frameMap.length(), 10);
   EXPECT_EQ(frameMap.maxLength(), 10);
@@ -105,8 +114,10 @@ TEST(MetricSeriesSliceTest, metricFrameMapSmokeTest) {
 
   auto seriesSlice1 = frameSlice.series<int64_t>("metric1");
   auto seriesSlice2 = frameSlice.series<double>("metric2");
+  auto seriesSlice3 = frameSlice.series<uint64_t>("metric3");
   ASSERT_TRUE(seriesSlice1.has_value());
   ASSERT_TRUE(seriesSlice2.has_value());
+  ASSERT_TRUE(seriesSlice3.has_value());
   EXPECT_FALSE(frameSlice.series<int64_t>("not_exist").has_value());
 
   EXPECT_EQ(seriesSlice1->avg<int>(), 46);
@@ -122,40 +133,57 @@ TEST(MetricSeriesSliceTest, metricFrameMapSmokeTest) {
   EXPECT_EQ(seriesSlice2->rate<int>(1min), 1);
   EXPECT_NEAR(seriesSlice2->diff(), 5.0, 1e-3);
 
+  EXPECT_EQ(seriesSlice3->avg<int>(), 46);
+  EXPECT_NEAR(seriesSlice3->avg<double>(), 46.5, 1e-3);
+  EXPECT_EQ(seriesSlice3->percentile(0.2), 45);
+  EXPECT_NEAR(seriesSlice3->rate<double>(1s), 0.01667, 1e-3);
+  EXPECT_EQ(seriesSlice3->rate<int>(1min), 1);
+  EXPECT_EQ(seriesSlice3->diff(), 5);
+
   EXPECT_TRUE(frameMap.eraseSeries(series1Key));
   EXPECT_FALSE(frameMap.eraseSeries("not_exist"));
   EXPECT_FALSE(
       frameMap.slice(now, now + 140s)->series<int64_t>(series1Key).has_value());
   EXPECT_FALSE(frameMap.series(series1Key));
+
+  EXPECT_TRUE(frameMap.eraseSeries(series3Key));
+  EXPECT_FALSE(
+      frameMap.slice(now, now + 140s)->series<int64_t>(series3Key).has_value());
+  EXPECT_FALSE(frameMap.series(series3Key));
 }
 
 TEST(MetricSeriesSliceTest, metricFrameVectorSmokeTest) {
   std::string series1Key = "metric1";
   std::string series2Key = "metric2";
+  std::string series3Key = "metric3";
 
   auto ts = std::make_shared<MetricFrameTsUnitFixInterval>(
       std::chrono::seconds{60}, 10);
   MetricFrameVector frameVector(
       {std::make_shared<MetricSeries<int64_t>>(10, series1Key, "test metric 1"),
-       std::make_shared<MetricSeries<double>>(10, series2Key, "test metric 2")},
+       std::make_shared<MetricSeries<double>>(10, series2Key, "test metric 2"),
+       std::make_shared<MetricSeries<uint64_t>>(
+           10, series3Key, "test metric 3")},
       "test",
       "test metric frame",
       std::move(ts));
 
   EXPECT_EQ(frameVector.length(), 0);
   EXPECT_EQ(frameVector.maxLength(), 10);
-  EXPECT_EQ(frameVector.width(), 2);
+  EXPECT_EQ(frameVector.width(), 3);
 
   auto now = std::chrono::steady_clock::now();
-  frameVector.addSamples({42l, 23.9f}, now);
+  frameVector.addSamples({42l, 23.9f, (uint64_t)42}, now);
   EXPECT_EQ(frameVector.length(), 1);
   EXPECT_EQ(frameVector.maxLength(), 10);
   for (int i = 1; i <= 10; i++) {
-    frameVector.addSamples({42l + i, 23.9f + i}, now + 60s * i);
+    frameVector.addSamples(
+        {42l + i, 23.9f + i, (uint64_t)(42 + i)}, now + 60s * i);
   }
   // |  60s | 120s | 180s | 240s | 300s | 360s | 420s | 480s | 540s | 600s |
   // |  43  |  44  |  45  |  46  |  47  |  48  |  49  |  50  |  51  | 52   |
   // | 24.9 | 25.9 | 26.9 | 27.9 | 28.9 | 29.9 | 30.9 | 31.9 | 32.9 | 33.9 |
+  // |  43  |  44  |  45  |  46  |  47  |  48  |  49  |  50  |  51  | 52   |
   //           |-----------------------------------|
   EXPECT_EQ(frameVector.length(), 10);
   EXPECT_EQ(frameVector.maxLength(), 10);
@@ -167,8 +195,10 @@ TEST(MetricSeriesSliceTest, metricFrameVectorSmokeTest) {
 
   auto seriesSlice1 = frameSlice.series<int64_t>(0);
   auto seriesSlice2 = frameSlice.series<double>(1);
+  auto seriesSlice3 = frameSlice.series<uint64_t>(2);
   ASSERT_TRUE(seriesSlice1.has_value());
   ASSERT_TRUE(seriesSlice2.has_value());
+  ASSERT_TRUE(seriesSlice3.has_value());
   EXPECT_FALSE(frameSlice.series<int64_t>(10).has_value());
 
   EXPECT_EQ(seriesSlice1->avg<int>(), 46);
@@ -183,6 +213,13 @@ TEST(MetricSeriesSliceTest, metricFrameVectorSmokeTest) {
   EXPECT_NEAR(seriesSlice2->rate<double>(1s), 0.01667, 1e-3);
   EXPECT_EQ(seriesSlice2->rate<int>(1min), 1);
   EXPECT_NEAR(seriesSlice2->diff(), 5, 1e-3);
+
+  EXPECT_EQ(seriesSlice3->avg<int>(), 46);
+  EXPECT_NEAR(seriesSlice3->avg<double>(), 46.5, 1e-3);
+  EXPECT_EQ(seriesSlice3->percentile(0.2), 45);
+  EXPECT_NEAR(seriesSlice3->rate<double>(1s), 0.01667, 1e-3);
+  EXPECT_EQ(seriesSlice3->rate<int>(1min), 1);
+  EXPECT_EQ(seriesSlice3->diff(), 5);
 }
 
 TEST(MetricSeriesSliceTest, perfReadValuesCompabilityTest) {
