@@ -43,6 +43,11 @@
 namespace dynolog {
 namespace ipcfabric {
 
+[[noreturn]] inline void terminate_with_message(const std::string& message) {
+  std::fputs(message.c_str(), stderr);
+  std::terminate();
+}
+
 // Define a type for fds to improve readibility.
 using fd_t = int;
 
@@ -157,7 +162,8 @@ class EndPoint final {
       return false;
     }
 
-    throw std::runtime_error(std::strerror(errno));
+    terminate_with_message(
+        "tryRcvMsg() got " + std::string(std::strerror(errno)));
   }
 
   [[nodiscard]] bool tryPeekMsg(TCtxt& ctxt) noexcept {
@@ -171,7 +177,8 @@ class EndPoint final {
     if (errno == EAGAIN || errno == EWOULDBLOCK) {
       return false;
     }
-    throw std::runtime_error(std::strerror(errno));
+    terminate_with_message(
+        "tryPeekMsg() got " + std::string(std::strerror(errno)));
   }
 
   const char* getName(TCtxt const& ctxt) const noexcept {
@@ -182,14 +189,14 @@ class EndPoint final {
       if (strncmp(socket_dir, ctxt.msg_name.sun_path, socket_dirname_len) !=
               0 ||
           ctxt.msg_name.sun_path[socket_dirname_len] != '/') {
-        throw std::invalid_argument(
+        terminate_with_message(
             "Unexpected socket name: " + std::string(ctxt.msg_name.sun_path) +
             ". Expected to start with " + std::string(socket_dir));
       }
       return ctxt.msg_name.sun_path + socket_dirname_len + 1;
     } else {
       if (ctxt.msg_name.sun_path[0] != '\0') {
-        throw std::invalid_argument(
+        terminate_with_message(
             "Expected abstract socket, got " +
             std::string(ctxt.msg_name.sun_path));
       }
