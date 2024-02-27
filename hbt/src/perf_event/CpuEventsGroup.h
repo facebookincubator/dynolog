@@ -1149,7 +1149,7 @@ int CpuEventsGroup<TImpl, TMode>::mmap_(int fd) {
   size_t mmap_size = page_size_ * (1 + num_data_pages_);
   // XXX: Try to use Huge Pages.
   void* base =
-      ::mmap(NULL, mmap_size, PROT_WRITE | PROT_READ, MAP_SHARED, fd, 0);
+      ::mmap(nullptr, mmap_size, PROT_WRITE | PROT_READ, MAP_SHARED, fd, 0);
   // HBT_LOG_INFO() << "Mmap perf_event buffer with " << num_data_pages_
   //               << " data pages and total size of " << mmap_size << " bytes";
   if (base == MAP_FAILED) {
