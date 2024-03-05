@@ -6,7 +6,7 @@
 #include "dynolog/src/Metrics.h"
 
 #include <fmt/format.h>
-#include <map>
+#include <unordered_map>
 
 namespace dynolog {
 
@@ -34,7 +34,7 @@ const std::vector<MetricDesc> getAllMetrics() {
        .type = MetricType::Instant,
        .desc = "How long the system has been running in seconds."},
   };
-  static std::map<std::string, std::string> cpustats = {
+  static std::unordered_map<std::string, std::string> cpustats = {
       {"cpu_u_ms", "user"},
       {"cpu_s_ms", "system"},
       {"cpu_n_ms", "nice"},

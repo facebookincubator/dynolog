@@ -9,6 +9,8 @@
 #include "hbt/src/mon/Monitor.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
+#include <unordered_map>
+
 namespace hbt = facebook::hbt;
 
 namespace dynolog {
@@ -39,8 +41,8 @@ class PerfMonitor {
   const hbt::CpuSet& monCpus_;
   std::shared_ptr<hbt::perf_event::PmuDeviceManager> pmuDeviceManager_;
   const MuxGroupId defaultMuxGroupId_;
-  std::map<ElemId, std::optional<TCountReader::ReadValues>> readValues_;
-  std::map<ElemId, std::shared_ptr<TCountReader>> countReaders_;
+  std::unordered_map<ElemId, std::optional<TCountReader::ReadValues>> readValues_;
+  std::unordered_map<ElemId, std::shared_ptr<TCountReader>> countReaders_;
 };
 
 // singleton object for default Metrics and PmuDeviceManager

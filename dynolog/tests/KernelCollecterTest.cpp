@@ -109,8 +109,8 @@ TEST(KernelCollecterTest, NetworkStatsTest) {
 }
 
 TEST(KernelCollecterTest, UpdateNetworkStatsDeltaTest) {
-  std::map<std::string, struct RxTx> oneDevice;
-  std::map<std::string, struct RxTx> twoDevices;
+  std::unordered_map<std::string, struct RxTx> oneDevice;
+  std::unordered_map<std::string, struct RxTx> twoDevices;
 
   KernelCollectorBase kb{get_test_root()};
 

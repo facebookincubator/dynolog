@@ -7,7 +7,7 @@
 
 #include <time.h>
 #include <array>
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include "dynolog/src/Types.h"
 #include "pfs/procfs.hpp"
@@ -47,10 +47,10 @@ class KernelCollectorBase {
   std::vector<CpuTime> perCoreCpuTime_;
 
   // Save more recent net device stats
-  std::map<std::string, struct RxTx> rxtx_, rxtxDelta_;
+  std::unordered_map<std::string, struct RxTx> rxtx_, rxtxDelta_;
 
   void updateNetworkStatsDelta(
-      const std::map<std::string, struct RxTx>& rxtxNew);
+      const std::unordered_map<std::string, struct RxTx>& rxtxNew);
   bool isMonitoringInterfaceActive(std::string interface);
 
   // Should match googletest/include/gtest/gtest_prod.h

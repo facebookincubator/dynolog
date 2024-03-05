@@ -12,6 +12,7 @@
 #include <map>
 #include <memory>
 #include <numeric>
+#include <unordered_map>
 #include <variant>
 #include <vector>
 
@@ -59,7 +60,7 @@ struct LibPfm4EventGroup {
   }
 };
 
-using LibPfm4EventGroups = std::map<std::string, LibPfm4EventGroup>;
+using LibPfm4EventGroups = std::unordered_map<std::string, LibPfm4EventGroup>;
 
 /// An instance representing a system's PMU (a Performance Monitoring Unit).
 /// It can be statically enumerated PMU or a dynamic one.
@@ -136,8 +137,8 @@ class PmuDevice {
     uint8_t len;
   };
 
-  using SysFsDeviceCaps = std::map<std::string, std::string>;
-  using SysFsDeviceFormat = std::map<std::string, FormatAttr>;
+  using SysFsDeviceCaps = std::unordered_map<std::string, std::string>;
+  using SysFsDeviceFormat = std::unordered_map<std::string, FormatAttr>;
 
   // Entries in format subfolder
   // (/sys/devices/<pmu_name>/format).
@@ -256,8 +257,8 @@ class PmuDevice {
   bool in_sysfs_;
 
   // Alias as key, original event ID as value.
-  std::map<EventId, std::shared_ptr<EventDef>> event_defs_;
-  std::map<EventId, EventId> aliases_;
+  std::unordered_map<EventId, std::shared_ptr<EventDef>> event_defs_;
+  std::unordered_map<EventId, EventId> aliases_;
 
   // PMUs that are not per-core can be opened for any
   // CPU within a CPU group. In uncore PMUs, this is
@@ -273,7 +274,7 @@ class PmuDevice {
   }
 };
 
-using PerCpuEventConfs = std::map<CpuId, EventConfs>;
+using PerCpuEventConfs = std::unordered_map<CpuId, EventConfs>;
 
 /// Container for all types and instances of PMUs in the system.
 class PmuDeviceManager {
