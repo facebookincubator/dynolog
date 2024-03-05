@@ -5,7 +5,7 @@
 
 [Unit]
 Description=Dynolog performance monitoring daemon
-Documentation=Dynolog provides system observability for heterogenous platforms. Please find the output logs in /var/logs/dynolog.log
+Documentation=https://github.com/facebookincubator/dynolog
 
 [Service]
 ExecStartPre=/usr/bin/touch /etc/dynolog.gflags
