@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <cstdint>
 #include <sstream>
 
 namespace facebook::hbt::perf_event {
