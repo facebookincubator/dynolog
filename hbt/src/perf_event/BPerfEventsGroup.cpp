@@ -90,10 +90,10 @@ BPerfEventsGroup::BPerfEventsGroup(
           name,
           metric.makeNoCpuTopologyConfs(pmu_manager),
           cgroup_update_level) {}
-inline auto mapFdWrapperPtrIntoInode(
+inline ino_t mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
-    return 0ull;
+    return (ino_t)0;
   }
   return fd_wrapper->getInode();
 }
