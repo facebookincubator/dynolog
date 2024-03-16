@@ -51,7 +51,7 @@ struct FdWrapper {
     close_on_destruction = true;
   }
 
-  __u64 getInode() {
+  ino_t getInode() {
     struct stat s = {};
     int err = ::fstat(fd, &s);
     HBT_THROW_SYSTEM_IF(0 != err, errno)
