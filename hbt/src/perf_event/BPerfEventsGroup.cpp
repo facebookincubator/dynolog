@@ -9,6 +9,7 @@
 #include <sys/file.h>
 #include <unistd.h>
 #include <algorithm>
+#include <memory>
 #include <optional>
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
@@ -93,7 +94,7 @@ BPerfEventsGroup::BPerfEventsGroup(
 inline ino_t mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
-    return (ino_t)0;
+    return static_cast<ino_t>(0);
   }
   return fd_wrapper->getInode();
 }
