@@ -247,7 +247,7 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
   DECLARE_LIBBPF_OPTS(
       bpf_test_run_opts,
       opts,
-      .ctx_in = NULL,
+      .ctx_in = nullptr,
       .ctx_size_in = 0,
       .flags = BPF_F_TEST_RUN_ON_CPU,
       .cpu = cpu,
