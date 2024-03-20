@@ -47,7 +47,7 @@ void expectExistsEqual(
   EXPECT_EQ(it->first, exp_stack);
   EXPECT_EQ(it->second.stats.stack, exp_stack);
   EXPECT_EQ(it->second.stats.stack_id, stack_id) << "stack: " << exp_stack;
-};
+}
 
 TEST(SliceMapTest, Lifetime) {
   SlicesMap m;
