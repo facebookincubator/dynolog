@@ -248,6 +248,47 @@ void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
   }
 }
 
+std::optional<cpu_set_t> parseSysFsPmuCpuMask_(fs::directory_entry dentry) {
+  auto cpu_mask_path = dentry.path() / "cpumask";
+  if (!fs::is_regular_file(cpu_mask_path)) {
+    // not all pmu devices have cpumask file
+    return std::nullopt;
+  }
+  auto is = std::ifstream(cpu_mask_path, std::ifstream::in);
+  std::string cpu_mask_str;
+  is >> cpu_mask_str;
+  if (is.fail() || is.eof()) {
+    HBT_LOG_ERROR() << "CpuMask entry " << cpu_mask_path
+                    << " contains invalid character or is empty";
+    return std::nullopt;
+  }
+  cpu_set_t res;
+  CPU_ZERO(&res);
+  // parse cpumask string to cpu_set_t
+  // string format is expected to be ^\d+(,\d+)*$
+  size_t start_pos = 0;
+  while (true) {
+    auto end_pos = cpu_mask_str.find(',', start_pos);
+    size_t len = end_pos == std::string::npos ? cpu_mask_str.size() - start_pos
+                                              : end_pos - start_pos;
+    size_t cpu_idx;
+    try {
+      cpu_idx = std::stoul(cpu_mask_str.substr(start_pos, len));
+    } catch (const std::logic_error& e) {
+      HBT_LOG_ERROR() << "Failed to parse cpu mask string " << cpu_mask_str
+                      << "(" << cpu_mask_str.substr(start_pos, len) << ") from "
+                      << cpu_mask_path << " because " << e.what();
+      return std::nullopt;
+    }
+    CPU_SET(cpu_idx, &res);
+    start_pos = end_pos + 1;
+    if (end_pos >= cpu_mask_str.size()) {
+      break;
+    }
+  }
+  return res;
+}
+
 /// Parse string published by kernel in /sys/devices to a pair of
 /// PmuType and device id.
 std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
@@ -285,8 +326,11 @@ void parseSysFsPmu_(fs::directory_entry dentry, PmuDeviceManager& pmu_manager) {
   uint32_t pmu_id;
   is >> pmu_id;
 
-  auto pmu_device =
-      std::make_shared<PmuDevice>(p, pmu_type, pmu_idx, pmu_id, p, true);
+  // Read cpumask
+  auto cpu_mask = parseSysFsPmuCpuMask_(dentry);
+
+  auto pmu_device = std::make_shared<PmuDevice>(
+      p, pmu_type, pmu_idx, pmu_id, p, true, cpu_mask);
   parseSysFsPmuFormat_(dentry, *pmu_device);
   parseSysFsPmuCaps_(dentry, *pmu_device);
 
