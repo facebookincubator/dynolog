@@ -19,7 +19,7 @@ PerfMonitor::PerfMonitor(
   for (ElemId id : metricIds) {
     countReaders_.emplace(
         id,
-        hbtMon_.emplaceCountReader(
+        hbtMon_.emplaceCpuCountReader(
             defaultMuxGroupId_,
             id,
             availableMetrics->getMetricDesc(id),
@@ -32,7 +32,7 @@ PerfMonitor::PerfMonitor(
 }
 
 void PerfMonitor::step() {
-  readValues_ = hbtMon_.readAllCounts();
+  readValues_ = hbtMon_.readAllCpuCounts();
 }
 
 void PerfMonitor::log(Logger& logger) {

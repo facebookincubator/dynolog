@@ -6,14 +6,14 @@
 #pragma once
 
 #include <hbt/src/common/Defs.h>
+#include <pfs/procfs.hpp>
+#include <mutex>
 #include "hbt/src/common/Defaults.h"
 #include "hbt/src/common/System.h"
 #include "hbt/src/mon/IntelPTMonitor.h"
 #include "hbt/src/mon/MonData.h"
 #include "hbt/src/perf_event/PerCpuCountReader.h"
-
-#include <pfs/procfs.hpp>
-#include <mutex>
+#include "hbt/src/perf_event/PerUncoreCountReader.h"
 
 #ifdef HBT_ENABLE_TRACING
 #include "hbt/src/mon/TraceMonitor.h"
@@ -56,7 +56,8 @@ class Monitor {
   };
 
  public:
-  using TCountReader = perf_event::PerCpuCountReader;
+  using TCpuCountReader = perf_event::PerCpuCountReader;
+  using TUncoreCountReader = perf_event::PerUncoreCountReader;
 #ifdef HBT_ENABLE_BPERF
   using TBPerfCountReader = perf_event::BPerfCountReader;
   using TBPerfEventsGroup = perf_event::BPerfEventsGroup;
@@ -218,42 +219,72 @@ class Monitor {
   }
 #endif // HBT_ENABLE_TRACING
 
-  /// Read counts for all events opened in counting mode
+  /// Read counts for all cpu events opened in counting mode
   /// in all PerCpuCountReaders.
-  std::map<ElemId, std::optional<TCountReader::ReadValues>> readAllCounts()
-      const {
+  std::map<ElemId, std::optional<TCpuCountReader::ReadValues>>
+  readAllCpuCounts() const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<TCountReader::ReadValues>> rvs;
+    std::map<ElemId, std::optional<TCpuCountReader::ReadValues>> rvs;
 
-    for (auto& [k, cr] : count_readers_) {
+    for (auto& [k, cr] : cpu_count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
       rvs.emplace(k, cr->read());
     }
     return rvs;
   }
 
-  /// Read counts for all events opened in counting mode
+  /// Read counts for all cpu events opened in counting mode
   /// in all PerCpuCountReaders.
-  std::map<ElemId, std::optional<std::map<int, TCountReader::ReadValues>>>
-  readAllCountsPerCpu() const {
+  std::map<ElemId, std::optional<std::map<int, TCpuCountReader::ReadValues>>>
+  readAllCpuCountsPerCpu() const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<std::map<int, TCountReader::ReadValues>>>
+    std::map<ElemId, std::optional<std::map<int, TCpuCountReader::ReadValues>>>
         rvs;
 
-    for (auto& [k, cr] : count_readers_) {
+    for (auto& [k, cr] : cpu_count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
       rvs.emplace(k, cr->readPerCpu());
     }
     return rvs;
   }
 
-  /// Read counts for all events opened in counting mode
+  /// Read counts for all cpu events opened in counting mode
   /// in PerCpuCountReader given by elem_id.
-  std::optional<TCountReader::ReadValues> readCounts(
+  std::optional<TCpuCountReader::ReadValues> readCpuCounts(
       const ElemId& elem_id) const {
     std::lock_guard<std::mutex> lock{mutex_};
 
-    if (auto it = count_readers_.find(elem_id); it != count_readers_.end()) {
+    if (auto it = cpu_count_readers_.find(elem_id);
+        it != cpu_count_readers_.end()) {
+      HBT_THROW_ASSERT_IF(it->second == nullptr);
+      return it->second->read();
+    }
+    HBT_LOG_WARNING() << fmt::format("No CountReader with id {}", elem_id);
+    return std::nullopt;
+  }
+
+  /// Read counts for all uncore events opened in counting mode
+  /// in all PerUncoreCountReaders.
+  std::map<ElemId, std::optional<TUncoreCountReader::ReadValues>>
+  readAllUncoreCounts() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    std::map<ElemId, std::optional<TUncoreCountReader::ReadValues>> rvs;
+
+    for (auto& [k, cr] : uncore_count_readers_) {
+      HBT_THROW_ASSERT_IF(cr == nullptr);
+      rvs.emplace(k, cr->read());
+    }
+    return rvs;
+  }
+
+  /// Read counts for all uncore events opened in counting mode
+  /// in PerUncoreCountReader given by elem_id.
+  std::optional<TUncoreCountReader::ReadValues> readUncoreCounts(
+      const ElemId& elem_id) const {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    if (auto it = uncore_count_readers_.find(elem_id);
+        it != uncore_count_readers_.end()) {
       HBT_THROW_ASSERT_IF(it->second == nullptr);
       return it->second->read();
     }
@@ -299,11 +330,11 @@ class Monitor {
   }
 #endif // HBT_ENABLE_TRACING
 
-  /// Create and register a new CountReader, it returns a shared ptr to
-  /// newly created TraceMonitor, but it can also be retrieved later using
-  /// the elem_id. Note that the state of this CountReader will be managed
+  /// Create and register a new PerCpuCountReader, it returns a shared ptr to
+  /// newly created PerCpuCountReader, but it can also be retrieved later using
+  /// the elem_id. Note that the state of this PerCpuCountReader will be managed
   /// by Monitor.
-  std::shared_ptr<TCountReader> emplaceCountReader(
+  std::shared_ptr<TCpuCountReader> emplaceCpuCountReader(
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id,
       std::shared_ptr<const perf_event::MetricDesc> metric_desc,
@@ -313,14 +344,14 @@ class Monitor {
     std::lock_guard<std::mutex> lock{mutex_};
 
     // Check for key before creating new count generator.
-    HBT_ARG_CHECK_EQ(count_readers_.count(elem_id), 0)
+    HBT_ARG_CHECK_EQ(cpu_count_readers_.count(elem_id), 0)
         << "There is already an interval source with key: \"" << elem_id
         << "\"";
 
     addMuxEntry_(mux_group_id, elem_id);
-    auto [it, emplaced] = count_readers_.emplace(
+    auto [it, emplaced] = cpu_count_readers_.emplace(
         elem_id,
-        std::make_unique<Monitor::TCountReader>(
+        std::make_unique<Monitor::TCpuCountReader>(
             mon_cpus, metric_desc, pmu_manager, cgroup_fd_wrapper));
 
     // Transition newly emplaced PerCpuCountReader to Monitor's state.
@@ -328,15 +359,60 @@ class Monitor {
     return it->second;
   }
 
-  bool eraseCountReader(const MuxGroupId& mux_group_id, const ElemId& elem_id) {
+  bool eraseCpuCountReader(
+      const MuxGroupId& mux_group_id,
+      const ElemId& elem_id) {
     std::lock_guard<std::mutex> lock{mutex_};
-    if (!count_readers_.count(elem_id)) {
+    if (!cpu_count_readers_.count(elem_id)) {
       return false;
     }
     if (!removeMuxEntry_(mux_group_id, elem_id)) {
       return false;
     }
-    count_readers_.erase(elem_id);
+    cpu_count_readers_.erase(elem_id);
+    sync_();
+    return true;
+  }
+
+  /// Create and register a new PerUncoreCountReader, it returns a shared ptr to
+  /// newly created PerUncoreCountReader, but it can also be retrieved later
+  /// using the elem_id. Note that the state of this PerUncoreCountReader will
+  /// be managed by Monitor.
+  std::shared_ptr<TUncoreCountReader> emplaceUncoreCountReader(
+      const MuxGroupId& mux_group_id,
+      const ElemId& elem_id,
+      std::shared_ptr<const perf_event::MetricDesc> metric_desc,
+      std::shared_ptr<const perf_event::PmuDeviceManager> pmu_manager,
+      perf_event::uncore_scope::Scope scope) {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    // Check for key before creating new count generator.
+    HBT_ARG_CHECK_EQ(uncore_count_readers_.count(elem_id), 0)
+        << "There is already an interval source with key: \"" << elem_id
+        << "\"";
+
+    addMuxEntry_(mux_group_id, elem_id);
+    auto [it, emplaced] = uncore_count_readers_.emplace(
+        elem_id,
+        std::make_unique<Monitor::TUncoreCountReader>(
+            scope, metric_desc, pmu_manager));
+
+    // Transition newly emplaced PerUncoreCountReader to Monitor's state.
+    sync_();
+    return it->second;
+  }
+
+  bool eraseUncoreCountReader(
+      const MuxGroupId& mux_group_id,
+      const ElemId& elem_id) {
+    std::lock_guard<std::mutex> lock{mutex_};
+    if (!uncore_count_readers_.count(elem_id)) {
+      return false;
+    }
+    if (!removeMuxEntry_(mux_group_id, elem_id)) {
+      return false;
+    }
+    uncore_count_readers_.erase(elem_id);
     sync_();
     return true;
   }
@@ -496,8 +572,11 @@ class Monitor {
       std::ostream& os,
       const cpu_set_t& cpus) const;
 
-  std::ostream& printCountReadersStatus(std::ostream& os, const cpu_set_t& cpus)
-      const;
+  std::ostream& printCpuCountReadersStatus(
+      std::ostream& os,
+      const cpu_set_t& cpus) const;
+
+  std::ostream& printUncoreCountReadersStatus(std::ostream& os) const;
 
   std::ostream& printBPerfCountReadersStatus(std::ostream& os) const;
 
@@ -509,8 +588,9 @@ class Monitor {
     auto cpuset = cpus.cpu_set;
     printMuxQueueStatus(os);
     printTraceMonitorsStatus(os, cpuset);
-    printCountReadersStatus(os, cpuset);
+    printCpuCountReadersStatus(os, cpuset);
     printBPerfCountReadersStatus(os);
+    printUncoreCountReadersStatus(os);
     return os.str();
   }
 
@@ -521,9 +601,14 @@ class Monitor {
   }
 #endif // HBT_ENABLE_TRACING
 
-  size_t numCountReaders() const {
+  size_t numCpuCountReaders() const {
     std::lock_guard<std::mutex> lock{mutex_};
-    return count_readers_.size();
+    return cpu_count_readers_.size();
+  }
+
+  size_t numUncoreCountReaders() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    return uncore_count_readers_.size();
   }
 
 #ifdef HBT_ENABLE_BPERF
@@ -540,7 +625,10 @@ class Monitor {
   std::unordered_map<ElemId, std::shared_ptr<TraceMonitor>> trace_monitors_;
 #endif // HBT_ENABLE_TRACING
 
-  std::unordered_map<ElemId, std::shared_ptr<TCountReader>> count_readers_;
+  std::unordered_map<ElemId, std::shared_ptr<TCpuCountReader>>
+      cpu_count_readers_;
+  std::unordered_map<ElemId, std::shared_ptr<TUncoreCountReader>>
+      uncore_count_readers_;
 
 #ifdef HBT_ENABLE_BPERF
   std::unordered_map<ElemId, std::shared_ptr<TBPerfCountReader>>
@@ -641,16 +729,16 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printTraceMonitorsStatus(
 #endif // HBT_ENABLE_TRACING
 
 template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printCountReadersStatus(
+std::ostream& Monitor<MuxGroupId, ElemId>::printCpuCountReadersStatus(
     std::ostream& os,
     const cpu_set_t& cpus) const {
   std::lock_guard<std::mutex> lock{mutex_};
-  if (count_readers_.size() == 0) {
-    os << "\nNo Count Readers\n";
+  if (cpu_count_readers_.size() == 0) {
+    os << "\nNo Cpu Count Readers\n";
     return os;
   }
   os << "\n<PerCpuCountReaders>\n";
-  for (const auto& [k, cr] : count_readers_) {
+  for (const auto& [k, cr] : cpu_count_readers_) {
     if (cr == nullptr) {
       os << "No status for: " << k << "\n";
     } else {
@@ -660,6 +748,28 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printCountReadersStatus(
     }
   }
   os << "<End of PerCpuCountReaders>\n";
+  return os;
+}
+
+template <class MuxGroupId, class ElemId>
+std::ostream& Monitor<MuxGroupId, ElemId>::printUncoreCountReadersStatus(
+    std::ostream& os) const {
+  std::lock_guard<std::mutex> lock{mutex_};
+  if (uncore_count_readers_.size() == 0) {
+    os << "\nNo Uncore Count Readers\n";
+    return os;
+  }
+  os << "\n<PerUncoreCountReaders>\n";
+  for (const auto& [k, cr] : uncore_count_readers_) {
+    if (cr == nullptr) {
+      os << "No status for: " << k << "\n";
+    } else {
+      os << fmt::format("PerUncoreCountReader {}\n", k);
+      cr->printStatus(os);
+      os << "\n";
+    }
+  }
+  os << "<End of PerUncoreCountReaders>\n";
   return os;
 }
 
@@ -825,7 +935,8 @@ void Monitor<MuxGroupId, ElemId>::sync_() {
 #ifdef HBT_ENABLE_TRACING
   syncElems_(trace_monitors_);
 #endif // HBT_ENABLE_TRACING
-  syncElems_(count_readers_);
+  syncElems_(cpu_count_readers_);
+  syncElems_(uncore_count_readers_);
 #ifdef HBT_ENABLE_BPERF
   syncElems_(mux_bperf_event_map_);
 #endif // HBT_ENABLE_BPERF

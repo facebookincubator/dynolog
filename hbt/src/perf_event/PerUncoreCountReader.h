@@ -123,6 +123,23 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     }
   }
 
+  std::ostream& printStatus(std::ostream& os) const {
+    os << "Uncore Count Reader \"" << metric_desc->id;
+    if (this->isEnabled()) {
+      os << "\" active.\n";
+      auto val = this->read();
+      if (val.has_value()) {
+        os << "*val"
+           << "\n";
+      } else {
+        os << " Failed to read\n";
+      }
+    } else {
+      os << "\" inactive.\n";
+    }
+    return os;
+  }
+
   const std::shared_ptr<const PmuDeviceManager> pmu_manager;
   const std::shared_ptr<const MetricDesc> metric_desc;
 };
