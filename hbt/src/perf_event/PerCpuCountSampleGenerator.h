@@ -6,9 +6,9 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerCpuSampleGeneratorBase.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/ringbuffer/Producer.h"
 #include "hbt/src/ringbuffer/RingBuffer.h"
 #include "hbt/src/tagstack/Event.h"
@@ -25,9 +25,9 @@ namespace facebook::hbt::perf_event {
 // It relies on perf_events opened on sampling mode.
 //
 class CpuCountSampleGenerator final
-    : public CpuEventsGroup<CpuCountSampleGenerator, mode::Sampling> {
+    : public PerfEventsGroup<CpuCountSampleGenerator, mode::Sampling> {
  public:
-  using TBase = CpuEventsGroup<CpuCountSampleGenerator, mode::Sampling>;
+  using TBase = PerfEventsGroup<CpuCountSampleGenerator, mode::Sampling>;
 
   struct RbExtraData {};
 
@@ -261,13 +261,14 @@ class PerCpuCountSampleGenerator
     }
     for_each_cpu(cpu, mon_cpus) {
       HBT_DCHECK_EQ(per_cpu_event_confs.count(cpu), 1);
-      this->cpu_generators_[cpu] = std::make_shared<TCpuGenerator>(
-          getEventNicknames(),
-          cpu,
-          cgroup_fd,
-          per_cpu_event_confs.at(cpu),
-          rb_min_num_entries,
-          num_counts_drop_if_full);
+      this->generators_[static_cast<int>(cpu)] =
+          std::make_shared<TCpuGenerator>(
+              getEventNicknames(),
+              cpu,
+              cgroup_fd,
+              per_cpu_event_confs.at(cpu),
+              rb_min_num_entries,
+              num_counts_drop_if_full);
     }
     HBT_ARG_CHECK_GT(getNumEvents(), 0)
         << "No events in metric_desc for architecture";
@@ -279,8 +280,8 @@ class PerCpuCountSampleGenerator
       bool pinned = false) {
     uint64_t p = sampling_period.value_or(metric_desc->default_sampling_period);
     try {
-      for_each_cpu(cpu, this->getMonCpus()) {
-        this->getCpuGenerator(cpu).open(num_pages, p, pinned);
+      for (const auto& [cpu, gen] : this->generators_) {
+        gen->open(num_pages, p, pinned);
       }
     } catch (...) {
       close();
