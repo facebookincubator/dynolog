@@ -2,8 +2,9 @@
 //
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
-
-// Generated file. Do not modify.
+//
+// Auto generated for hbt. Do not manually edit.
+// @generated
 
 #include <stdexcept>
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
@@ -3704,7 +3705,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x41, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops that split across a cacheline boundary. (Precise Event - PEBS).)",
-      R"(This event counts line-split load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
+      R"(This event counts line-splitted load uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -3718,7 +3719,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xD0, .umask = 0x42, .cmask = 0, .msr_values = {0}},
       R"(Retired store uops that split across a cacheline boundary. (Precise Event - PEBS).)",
-      R"(This event counts line-split store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
+      R"(This event counts line-splitted store uops retired to the architected path. A line split is across 64B cache-line which includes a page split (4K). (Precise Event - PEBS))",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
