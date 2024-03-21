@@ -5,8 +5,8 @@
 
 #include "hbt/src/perf_event/BPerfCountReader.h"
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
-#include "hbt/src/perf_event/Metrics.h"
+
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 namespace facebook::hbt::perf_event {
 

@@ -212,7 +212,7 @@ TEST(PerCpuCountReader, SmokeTest) {
   // Read per CPUs
   auto rv_percpu = g.readPerCpu();
   ASSERT_NE(rv_percpu, std::nullopt);
-  for (auto& grv : *rv_percpu) {
+  for (auto& [_, grv] : *rv_percpu) {
     if (grv.getTimeRunning() == 0) {
       continue;
     }

@@ -4,10 +4,10 @@ add_compile_options("-Wconversion")
 
 include_directories(${PROJECT_SOURCE_DIR}/third_party/googletest/googletest/include)
 
-add_executable(CpuEventsGroupTest CpuEventsGroupTest.cpp)
-target_link_libraries(CpuEventsGroupTest PRIVATE gtest gmock gtest_main)
-target_link_libraries(CpuEventsGroupTest PUBLIC stdc++fs)
-target_link_libraries(CpuEventsGroupTest PUBLIC CpuEventsGroup)
+add_executable(PerfEventsGroupTest PerfEventsGroupTest.cpp)
+target_link_libraries(PerfEventsGroupTest PRIVATE gtest gmock gtest_main)
+target_link_libraries(PerfEventsGroupTest PUBLIC stdc++fs)
+target_link_libraries(PerfEventsGroupTest PUBLIC PerfEventsGroup)
 
 # add_executable(PmuDevicesTest PmuDevicesTest.cpp)
 # target_link_libraries(PmuDevicesTest PRIVATE gtest gmock gtest_main)
