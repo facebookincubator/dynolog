@@ -586,21 +586,21 @@ static_assert(std::is_pod_v<GroupReadValues<mode::Sampling>::T>);
 /// Must implement a handleRecord* for each record type support in <TMode>.
 
 template <class TImpl, class TMode_>
-class CpuEventsGroupBase {
+class PerfEventsGroupBase {
  public:
   using TMode = TMode_;
 
   static constexpr size_t kPerfEventAttrSize = sizeof(perf_event_attr);
 
-  CpuEventsGroupBase(const CpuEventsGroupBase&) = delete;
+  PerfEventsGroupBase(const PerfEventsGroupBase&) = delete;
 
-  CpuEventsGroupBase(
+  PerfEventsGroupBase(
       CpuId cpu,
       pid_t pid,
       int cgroup_fd,
       const EventConfs& confs);
 
-  virtual ~CpuEventsGroupBase();
+  virtual ~PerfEventsGroupBase();
 
   void close();
 
@@ -681,7 +681,7 @@ class CpuEventsGroupBase {
 /// Must implement a handleRecord* for each record type support in <TMode>.
 
 template <class TImpl, class TMode_>
-class CpuEventsGroup : public CpuEventsGroupBase<TImpl, TMode_> {
+class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
  public:
   using TMode = TMode_;
   using TSampleId = typename TMode::sample_id_t;
@@ -697,11 +697,11 @@ class CpuEventsGroup : public CpuEventsGroupBase<TImpl, TMode_> {
 
   static constexpr size_t kPerfEventAttrSize = sizeof(perf_event_attr);
 
-  CpuEventsGroup(const CpuEventsGroup&) = delete;
+  PerfEventsGroup(const PerfEventsGroup&) = delete;
 
-  using CpuEventsGroupBase<TImpl, TMode_>::CpuEventsGroupBase;
+  using PerfEventsGroupBase<TImpl, TMode_>::PerfEventsGroupBase;
 
-  virtual ~CpuEventsGroup() {}
+  virtual ~PerfEventsGroup() {}
 
   void close();
 
@@ -892,7 +892,7 @@ inline void writeDataTail(
 }
 
 template <class TImpl, class TMode>
-CpuEventsGroupBase<TImpl, TMode>::CpuEventsGroupBase(
+PerfEventsGroupBase<TImpl, TMode>::PerfEventsGroupBase(
     CpuId cpu,
     pid_t pid,
     int cgroup_fd,
@@ -906,14 +906,14 @@ CpuEventsGroupBase<TImpl, TMode>::CpuEventsGroupBase(
 }
 
 template <class TImpl, class TMode>
-CpuEventsGroupBase<TImpl, TMode>::~CpuEventsGroupBase() {
+PerfEventsGroupBase<TImpl, TMode>::~PerfEventsGroupBase() {
   if (isOpen()) {
     close();
   }
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::init_perf_event_attrs(
+void PerfEventsGroupBase<TImpl, TMode>::init_perf_event_attrs(
     const EventConfs& confs,
     uint64_t sample_period,
     struct perf_event_attr* attrs,
@@ -992,7 +992,7 @@ void CpuEventsGroupBase<TImpl, TMode>::init_perf_event_attrs(
 /// head page info, such as clocks.
 ///
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::open_counting_(
+void PerfEventsGroupBase<TImpl, TMode>::open_counting_(
     uint64_t sample_period,
     bool pinned,
     bool thread) {
@@ -1087,7 +1087,7 @@ void CpuEventsGroupBase<TImpl, TMode>::open_counting_(
 /// head page info, such as clocks.
 ///
 template <class TImpl, class TMode>
-void CpuEventsGroup<TImpl, TMode>::open_(
+void PerfEventsGroup<TImpl, TMode>::open_(
     size_t num_data_pages,
     uint64_t sample_period,
     bool pinned,
@@ -1143,7 +1143,7 @@ void CpuEventsGroup<TImpl, TMode>::open_(
 }
 
 template <class TImpl, class TMode>
-int CpuEventsGroup<TImpl, TMode>::mmap_(int fd) {
+int PerfEventsGroup<TImpl, TMode>::mmap_(int fd) {
   HBT_DCHECK_GT(fd, 0);
   // Mmap sampling buffer for leader event.
   size_t mmap_size = page_size_ * (1 + num_data_pages_);
@@ -1202,7 +1202,7 @@ int CpuEventsGroup<TImpl, TMode>::mmap_(int fd) {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::closeEvents_() {
+void PerfEventsGroupBase<TImpl, TMode>::closeEvents_() {
   HBT_THROW_ASSERT_IF(!isOpen());
 
   // Reverse order to delete leader last.
@@ -1221,7 +1221,7 @@ void CpuEventsGroupBase<TImpl, TMode>::closeEvents_() {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::close() {
+void PerfEventsGroupBase<TImpl, TMode>::close() {
   if (!isOpen()) {
     return;
   }
@@ -1232,7 +1232,7 @@ void CpuEventsGroupBase<TImpl, TMode>::close() {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroup<TImpl, TMode>::close() {
+void PerfEventsGroup<TImpl, TMode>::close() {
   if (!this->isOpen()) {
     return;
   }
@@ -1274,7 +1274,7 @@ void CpuEventsGroup<TImpl, TMode>::close() {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::enable(bool reset) {
+void PerfEventsGroupBase<TImpl, TMode>::enable(bool reset) {
   HBT_ARG_CHECK(isOpen()) << "Cannot enable events that are not open";
 
   if (enabled_) {
@@ -1318,7 +1318,7 @@ void CpuEventsGroupBase<TImpl, TMode>::enable(bool reset) {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroupBase<TImpl, TMode>::disable() {
+void PerfEventsGroupBase<TImpl, TMode>::disable() {
   HBT_ARG_CHECK(isOpen()) << "Cannot disable events that are not open";
 
   if (!enabled_)
@@ -1332,7 +1332,7 @@ void CpuEventsGroupBase<TImpl, TMode>::disable() {
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroup<TImpl, TMode>::changeSamplePeriod(
+void PerfEventsGroup<TImpl, TMode>::changeSamplePeriod(
     uint64_t new_sample_period) {
   if (this->sample_period_ == new_sample_period)
     return;
@@ -1345,7 +1345,7 @@ void CpuEventsGroup<TImpl, TMode>::changeSamplePeriod(
 }
 
 template <class TImpl, class TMode>
-void* CpuEventsGroup<TImpl, TMode>::enlargeAuxBuffer(size_t size) {
+void* PerfEventsGroup<TImpl, TMode>::enlargeAuxBuffer(size_t size) {
   if (aux_buffer_.size < size) {
     aux_buffer_.base = ::realloc(aux_buffer_.base, size);
     aux_buffer_.size = size;
@@ -1362,9 +1362,9 @@ void* CpuEventsGroup<TImpl, TMode>::enlargeAuxBuffer(size_t size) {
 /// of actually collected events. If an error, it will return a
 /// negative value with error number.
 template <class TImpl, class TMode>
-ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
+ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
   HBT_ARG_CHECK(this->isOpen())
-      << "CpuEventsGroup must be open for events to be consumed "
+      << "PerfEventsGroup must be open for events to be consumed "
       << " (event fd must be valid). Did you mean to only disable it?";
 
   ssize_t err = 0;
@@ -1548,7 +1548,7 @@ ssize_t CpuEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
 
 exit:
   HBT_DCHECK_GE(max_num_records, num_records);
-  // HBT_LOG_INFO() << "CpuEventsGroup::consume err: " << err
+  // HBT_LOG_INFO() << "PerfEventsGroup::consume err: " << err
   //    << " data_head: " << data_head << " data_tail: " << data_tail
   //    << " num_records: " << num_records
   //    << " max_num_records: " << max_num_records;
@@ -1560,11 +1560,11 @@ exit:
 }
 
 template <class TImpl, class TMode>
-void CpuEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
+void PerfEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
     OnRbReadCallback callback,
     bool consume) {
   HBT_ARG_CHECK(this->isOpen())
-      << "CpuEventsGroup must be open for events to be consumed "
+      << "PerfEventsGroup must be open for events to be consumed "
       << " (event fd must be valid). Did you mean to only disable it?";
 
   auto mmap_header =
@@ -1613,10 +1613,10 @@ void CpuEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
 
 /// Convert TSC to kernel time (reference bus-cycles to nanoseconds since boot).
 template <class TImpl, class TMode>
-uint64_t CpuEventsGroup<TImpl, TMode>::kernelTimeFromTsc(
+uint64_t PerfEventsGroup<TImpl, TMode>::kernelTimeFromTsc(
     uint64_t tsc_cycles) const {
   HBT_DCHECK(mmap_base_ != nullptr)
-      << "Cannot call kernelTimeFromTsc in closed CpuEventsGroup "
+      << "Cannot call kernelTimeFromTsc in closed PerfEventsGroup "
       << "because perf_event mmap page is not available";
   auto mmap_header =
       static_cast<volatile struct perf_event_mmap_page*>(mmap_base_);
@@ -1630,9 +1630,10 @@ uint64_t CpuEventsGroup<TImpl, TMode>::kernelTimeFromTsc(
 
 /// Convert kernel time to TSC (nanoseconds since boot to reference bus-cycles).
 template <class TImpl, class TMode>
-uint64_t CpuEventsGroup<TImpl, TMode>::tscFromKernelTime(uint64_t ktime) const {
+uint64_t PerfEventsGroup<TImpl, TMode>::tscFromKernelTime(
+    uint64_t ktime) const {
   HBT_THROW_ASSERT_IF(mmap_base_ == nullptr)
-      << "Cannot call tscFromKernelTimec in closed CpuEventsGroup "
+      << "Cannot call tscFromKernelTimec in closed PerfEventsGroup "
          "because perf_event mmap page is not available";
 
   // XXX: It's likely that time_mult is usually a hardware division friendly

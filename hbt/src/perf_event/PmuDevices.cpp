@@ -4,8 +4,8 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/perf_event/PmuDevices.h"
-
 #include <hbt/src/perf_event/PmuEvent.h>
+#include <cstdint>
 #include <string>
 
 #include <filesystem>
@@ -88,6 +88,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(uncore_mchbm);
 
     CASE_PMU_TYPE(armv8_pmuv3);
+
+    CASE_PMU_TYPE(nvidia_scf_pmu);
   }
 }
 
@@ -138,6 +140,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, uncore_mchbm);
 
   IF_PMU_TYPE(str, armv8_pmuv3);
+
+  IF_PMU_TYPE(str, nvidia_scf_pmu);
 
   HBT_THROW_EINVAL() << "Unrecognized PmuType string: \"" + str + "\"";
   __builtin_unreachable();
@@ -248,6 +252,47 @@ void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
   }
 }
 
+std::optional<cpu_set_t> parseSysFsPmuCpuMask_(fs::directory_entry dentry) {
+  auto cpu_mask_path = dentry.path() / "cpumask";
+  if (!fs::is_regular_file(cpu_mask_path)) {
+    // not all pmu devices have cpumask file
+    return std::nullopt;
+  }
+  auto is = std::ifstream(cpu_mask_path, std::ifstream::in);
+  std::string cpu_mask_str;
+  is >> cpu_mask_str;
+  if (is.fail() || is.eof()) {
+    HBT_LOG_ERROR() << "CpuMask entry " << cpu_mask_path
+                    << " contains invalid character or is empty";
+    return std::nullopt;
+  }
+  cpu_set_t res;
+  CPU_ZERO(&res);
+  // parse cpumask string to cpu_set_t
+  // string format is expected to be ^\d+(,\d+)*$
+  size_t start_pos = 0;
+  while (true) {
+    auto end_pos = cpu_mask_str.find(',', start_pos);
+    size_t len = end_pos == std::string::npos ? cpu_mask_str.size() - start_pos
+                                              : end_pos - start_pos;
+    size_t cpu_idx;
+    try {
+      cpu_idx = std::stoul(cpu_mask_str.substr(start_pos, len));
+    } catch (const std::logic_error& e) {
+      HBT_LOG_ERROR() << "Failed to parse cpu mask string " << cpu_mask_str
+                      << "(" << cpu_mask_str.substr(start_pos, len) << ") from "
+                      << cpu_mask_path << " because " << e.what();
+      return std::nullopt;
+    }
+    CPU_SET(cpu_idx, &res);
+    start_pos = end_pos + 1;
+    if (end_pos >= cpu_mask_str.size()) {
+      break;
+    }
+  }
+  return res;
+}
+
 /// Parse string published by kernel in /sys/devices to a pair of
 /// PmuType and device id.
 std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
@@ -285,8 +330,11 @@ void parseSysFsPmu_(fs::directory_entry dentry, PmuDeviceManager& pmu_manager) {
   uint32_t pmu_id;
   is >> pmu_id;
 
-  auto pmu_device =
-      std::make_shared<PmuDevice>(p, pmu_type, pmu_idx, pmu_id, p, true);
+  // Read cpumask
+  auto cpu_mask = parseSysFsPmuCpuMask_(dentry);
+
+  auto pmu_device = std::make_shared<PmuDevice>(
+      p, pmu_type, pmu_idx, pmu_id, p, true, cpu_mask);
   parseSysFsPmuFormat_(dentry, *pmu_device);
   parseSysFsPmuCaps_(dentry, *pmu_device);
 
@@ -446,6 +494,22 @@ void PmuDeviceManager::makePerCpuConfs(
   }
 }
 
+void PmuDeviceManager::makePerUncoreConfs(
+    PmuType pmu_type,
+    EventId ev_id,
+    EventExtraAttr extra_attrs,
+    EventValueTransforms transforms,
+    uncore_scope::Scope scope,
+    PerUncoreEventConfs& per_uncore_confs) const {
+  std::vector<TPerfPmuDevice> perf_pmu_group =
+      getPerfPmuGroupByScope(pmu_type, scope);
+
+  for (const auto& perf_pmu : perf_pmu_group) {
+    auto& confs = per_uncore_confs[perf_pmu];
+    confs.push_back(perf_pmu.second->makeConf(ev_id, extra_attrs, transforms));
+  }
+}
+
 EventConf PmuDeviceManager::makeNoCpuTopologyConf(
     PmuType pmu_type,
     EventId ev_id,
@@ -476,6 +540,29 @@ std::set<std::string> PmuDeviceManager::getPmuNames() const {
     }
   }
   return pmu_ids;
+}
+
+std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
+    PmuType pmu_type,
+    uncore_scope::Scope scope) const {
+  HBT_ARG_CHECK(std::holds_alternative<uncore_scope::Host>(scope))
+      << "Only Host scope supported";
+  auto it = pmu_groups_.find(pmu_type);
+  HBT_ARG_CHECK(it != pmu_groups_.end())
+      << "Invalid pmu_type: " + PmuTypeToStr(pmu_type);
+  std::vector<TPerfPmuDevice> perf_pmu_group;
+  // Get all PmuDevices of this type (e.g one per package).
+  for (const auto& [dev_idx, device] : it->second) {
+    if (device->getCpuMask() == std::nullopt) {
+      HBT_LOG_ERROR() << "Cannot find cpu mask info from pmu device "
+                      << device->getName() << ". Ignore this device.";
+      continue;
+    }
+    for_each_cpu_set_t(cpu, device->getCpuMask().value()) {
+      perf_pmu_group.push_back(TPerfPmuDevice{cpu, device});
+    }
+  }
+  return perf_pmu_group;
 }
 
 std::shared_ptr<PmuDevice> PmuDeviceManager::findPmuDeviceByName(

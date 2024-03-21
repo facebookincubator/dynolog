@@ -9,6 +9,8 @@
 #include "hbt/src/perf_event/PmuEvent.h"
 
 #include <bitset>
+#include <cstdint>
+#include <limits>
 #include <map>
 #include <memory>
 #include <numeric>
@@ -16,6 +18,11 @@
 #include <vector>
 
 namespace facebook::hbt::perf_event {
+
+namespace uncore_scope {
+struct Host {};
+using Scope = std::variant<Host>;
+} // namespace uncore_scope
 
 inline std::string toCanonicalEventId(EventId ev_id) {
   transform(ev_id.begin(), ev_id.end(), ev_id.begin(), ::tolower);
@@ -71,13 +78,15 @@ class PmuDevice {
       std::optional<unsigned> pmu_device_enumeration,
       uint32_t perf_pmu_id,
       const std::string& desc,
-      bool in_sysfs)
+      bool in_sysfs,
+      std::optional<cpu_set_t> cpu_mask = std::nullopt)
       : pmu_name_{pmu_name},
         pmu_type_{pmu_type},
         pmu_device_enumeration_{pmu_device_enumeration},
         perf_pmu_id_{perf_pmu_id},
         desc_{desc},
-        in_sysfs_{in_sysfs} {}
+        in_sysfs_{in_sysfs},
+        cpu_mask_{cpu_mask} {}
 
   PmuDevice(const PmuDevice&) = delete;
   PmuDevice(PmuDevice&&) = delete;
@@ -273,7 +282,11 @@ class PmuDevice {
   }
 };
 
+/// CpuId and PmuDevice info can uniquely identify a PMU device in perf.
+using TPerfPmuDevice = std::pair<CpuId, std::shared_ptr<PmuDevice>>;
+
 using PerCpuEventConfs = std::map<CpuId, EventConfs>;
+using PerUncoreEventConfs = std::map<TPerfPmuDevice, EventConfs>;
 
 /// Container for all types and instances of PMUs in the system.
 class PmuDeviceManager {
@@ -342,6 +355,10 @@ class PmuDeviceManager {
 
   std::set<std::string> getPmuNames() const;
 
+  std::vector<TPerfPmuDevice> getPerfPmuGroupByScope(
+      PmuType type,
+      uncore_scope::Scope scope) const;
+
   /// Some PMUs are package-wide (or another domain).
   /// Those require events to be opened in only one CPU in domain.
   /// Also, some PMU types have multiple devices and one event
@@ -358,6 +375,18 @@ class PmuDeviceManager {
       EventValueTransforms transforms,
       cpu_set_t mon_cpus,
       PerCpuEventConfs& per_cpu_confs) const;
+
+  /// Events from different PMU devices cannot be grouped.
+  /// Also, we need some way other than mon_cpus to specify which PMU device
+  /// should be included for uncore PMU devices.
+  /// So create makePerUncoreConfs to handle above problems.
+  void makePerUncoreConfs(
+      PmuType pmu_type,
+      EventId ev_id,
+      EventExtraAttr extra_attrs,
+      EventValueTransforms transforms,
+      uncore_scope::Scope scope,
+      PerUncoreEventConfs& per_uncore_confs) const;
 
   /// Utility method to simplify initialization
   /// of events that do not change with CPU ID
