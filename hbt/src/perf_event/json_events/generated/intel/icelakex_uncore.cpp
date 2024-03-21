@@ -10,15 +10,128 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace snowridgex_uncore {
+namespace icelakex_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from snowridgex_uncore.json (207 events).
+  Events from icelakex_uncore.json (269 events).
 
   Supported SKUs:
-      - Arch: x86, Model: SNR id: 134
+      - Arch: x86, Model: ICX id: 106
+      - Arch: x86, Model: ICX id: 108
 */
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_DIR_UPDATE.HA",
+      EventDef::Encoding{.code = 0x54, .umask = 0x01},
+      R"(Multi-socket cacheline directory state updates; memory write due to directory update from the home agent (HA) pipe)",
+      R"(Counts only multi-socket cacheline directory state updates memory writes issued from the home agent (HA) pipe. This does not include memory write requests which are for I (Invalid) or E (Exclusive) cachelines.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_DIR_UPDATE.TOR",
+      EventDef::Encoding{.code = 0x54, .umask = 0x02},
+      R"(Multi-socket cacheline directory state updates; memory write due to directory update from (table of requests) TOR pipe)",
+      R"(Counts only multi-socket cacheline directory state updates due to memory writes issued from the table of requests (TOR) pipe which are the result of remote transaction hitting the SF/LLC and returning data Core2Core. This does not include memory write requests which are for I (Invalid) or E (Exclusive) cachelines.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.INVITOE_LOCAL",
+      EventDef::Encoding{.code = 0x50, .umask = 0x10},
+      R"(Local INVITOE requests (exclusive ownership of a cache line without receiving data) that miss the SF/LLC and are sent to the CHA's home agent)",
+      R"(Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.INVITOE_REMOTE",
+      EventDef::Encoding{.code = 0x50, .umask = 0x20},
+      R"(Remote INVITOE requests (exclusive ownership of a cache line without receiving data) sent to the CHA's home agent)",
+      R"(Counts the total number of requests coming from a remote socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.READS_LOCAL",
+      EventDef::Encoding{.code = 0x50, .umask = 0x01},
+      R"(Local read requests that miss the SF/LLC and are sent to the CHA's home agent)",
+      R"(Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.READS_REMOTE",
+      EventDef::Encoding{.code = 0x50, .umask = 0x02},
+      R"(Remote read requests sent to the CHA's home agent)",
+      R"(Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.WRITES_LOCAL",
+      EventDef::Encoding{.code = 0x50, .umask = 0x04},
+      R"(Local write requests that miss the SF/LLC and are sent to the CHA's home agent)",
+      R"(Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.WRITES_REMOTE",
+      EventDef::Encoding{.code = 0x50, .umask = 0x08},
+      R"(Remote write requests sent to the CHA's home agent)",
+      R"(Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
@@ -190,6 +303,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores that Hit the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores that Hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFRFO",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_HIT_RFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
       R"(TOR Inserts : RFOs issued by iA Cores that Hit the LLC)",
@@ -222,6 +363,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
       R"(TOR Inserts : CRds issued by iA Cores that Missed the LLC)",
       R"(TOR Inserts : CRds issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -344,6 +513,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01},
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC)",
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO",
       EventDef::Encoding{.code = 0x36, .umask = 0x01},
       R"(TOR Occupancy : RFOs issued by iA Cores that Missed the LLC)",
@@ -417,7 +600,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_IIO_CLOCKTICKS",
       EventDef::Encoding{.code = 0x01, .umask = 0x00},
       R"(Clockticks of the integrated IO (IIO) traffic controller)",
-      R"(Clockticks of the integrated IO (IIO) traffic controller)",
+      R"(Clockticks of the integrated IO (IIO) traffic controller : Increments counter once every Traffic Controller clock, the LSCLK (500MHz))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1030,6 +1213,76 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
+      "UNC_M_TAGCHK.HIT",
+      EventDef::Encoding{.code = 0xD3, .umask = 0x01},
+      R"(2LM Tag Check : Hit in Near Memory Cache)",
+      R"(2LM Tag Check : Hit in Near Memory Cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_TAGCHK.MISS_CLEAN",
+      EventDef::Encoding{.code = 0xD3, .umask = 0x02},
+      R"(2LM Tag Check : Miss, no data in this line)",
+      R"(2LM Tag Check : Miss, no data in this line)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_TAGCHK.MISS_DIRTY",
+      EventDef::Encoding{.code = 0xD3, .umask = 0x04},
+      R"(2LM Tag Check : Miss, existing data may be evicted to Far Memory)",
+      R"(2LM Tag Check : Miss, existing data may be evicted to Far Memory)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_TAGCHK.NM_RD_HIT",
+      EventDef::Encoding{.code = 0xD3, .umask = 0x08},
+      R"(2LM Tag Check : Read Hit in Near Memory Cache)",
+      R"(2LM Tag Check : Read Hit in Near Memory Cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_TAGCHK.NM_WR_HIT",
+      EventDef::Encoding{.code = 0xD3, .umask = 0x10},
+      R"(2LM Tag Check : Write Hit in Near Memory Cache)",
+      R"(2LM Tag Check : Write Hit in Near Memory Cache)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
       "UNC_M_PRE_COUNT.RD",
       EventDef::Encoding{.code = 0x02, .umask = 0x04},
       R"(DRAM Precharge commands. : Precharge due to read)",
@@ -1090,6 +1343,104 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x04, .umask = 0x3f},
       R"(All DRAM CAS commands issued)",
       R"(Counts the total number of DRAM CAS commands issued on this channel.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_DIRECTORY_LOOKUP.ANY",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x01},
+      R"(Multi-socket cacheline Directory Lookups : Found in any state)",
+      R"(Multi-socket cacheline Directory Lookups : Found in any state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_DIRECTORY_LOOKUP.STATE_A",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x08},
+      R"(Multi-socket cacheline Directory Lookups : Found in A state)",
+      R"(Multi-socket cacheline Directory Lookups : Found in A state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_DIRECTORY_LOOKUP.STATE_I",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x02},
+      R"(Multi-socket cacheline Directory Lookups : Found in I state)",
+      R"(Multi-socket cacheline Directory Lookups : Found in I state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_DIRECTORY_LOOKUP.STATE_S",
+      EventDef::Encoding{.code = 0x2D, .umask = 0x04},
+      R"(Multi-socket cacheline Directory Lookups : Found in S state)",
+      R"(Multi-socket cacheline Directory Lookups : Found in S state)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_DIRECTORY_UPDATE.ANY",
+      EventDef::Encoding{.code = 0x2e, .umask = 0x01},
+      R"(Multi-socket cacheline Directory Updates : From/to any state. Note: event counts are incorrect in 2LM mode.)",
+      R"(Multi-socket cacheline Directory Updates : From/to any state. Note: event counts are incorrect in 2LM mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TAG_HIT.NM_RD_HIT_CLEAN",
+      EventDef::Encoding{.code = 0x2C, .umask = 0x01},
+      R"(Tag Hit : Clean NearMem Read Hit)",
+      R"(Tag Hit : Clean NearMem Read Hit : Tag Hit indicates when a request sent to the iMC hit in Near Memory. : Counts clean full line read hits (reads and RFOs).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_TAG_HIT.NM_RD_HIT_DIRTY",
+      EventDef::Encoding{.code = 0x2C, .umask = 0x02},
+      R"(Tag Hit : Dirty NearMem Read Hit)",
+      R"(Tag Hit : Dirty NearMem Read Hit : Tag Hit indicates when a request sent to the iMC hit in Near Memory. : Counts dirty full line read hits (reads and RFOs).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1729,6 +2080,62 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.ALL_DATA",
+      EventDef::Encoding{.code = 0x03, .umask = 0x0F},
+      R"(Valid Flits Received : All Data)",
+      R"(Valid Flits Received : All Data : Shows legal flit time (hides impact of L0p and L0c).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.NON_DATA",
+      EventDef::Encoding{.code = 0x03, .umask = 0x97},
+      R"(Valid Flits Received : All Non Data)",
+      R"(Valid Flits Received : All Non Data : Shows legal flit time (hides impact of L0p and L0c).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.ALL_DATA",
+      EventDef::Encoding{.code = 0x02, .umask = 0x0F},
+      R"(Valid Flits Sent : All Data)",
+      R"(Valid Flits Sent : All Data : Shows legal flit time (hides impact of L0p and L0c).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.NON_DATA",
+      EventDef::Encoding{.code = 0x02, .umask = 0x97},
+      R"(Valid Flits Sent : All Non Data)",
+      R"(Valid Flits Sent : All Non Data : Shows legal flit time (hides impact of L0p and L0c).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_DRAM_REFRESH.OPPORTUNISTIC",
       EventDef::Encoding{.code = 0x45, .umask = 0x01},
@@ -1943,7 +2350,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M2P_CLOCKTICKS",
       EventDef::Encoding{.code = 0x01, .umask = 0x00},
       R"(Clockticks of the mesh to PCI (M2P))",
-      R"(Clockticks of the mesh to PCI (M2P))",
+      R"(Clockticks of the mesh to PCI (M2P) : Counts the number of uclks in the M3 uclk domain.  This could be slightly different than the count in the Ubox because of enable/freeze delays.  However, because the M3 is close to the Ubox, they generally should not diverge by more than a handful of cycles.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1967,11 +2374,67 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m3upi,
+      "UNC_M3UPI_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x01, .umask = 0x00},
+      R"(Clockticks of the mesh to UPI (M3UPI))",
+      R"(Clockticks of the mesh to UPI (M3UPI) : Counts the number of uclks in the M3 uclk domain.  This could be slightly different than the count in the Ubox because of enable/freeze delays.  However, because the M3 is close to the Ubox, they generally should not diverge by more than a handful of cycles.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_pcu,
       "UNC_P_CLOCKTICKS",
       EventDef::Encoding{.code = 0x00, .umask = 0x00},
       R"(Clockticks of the power control unit (PCU))",
-      R"(Clockticks of the power control unit (PCU))",
+      R"(Clockticks of the power control unit (PCU) : The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x01, .umask = 0x00},
+      R"(Number of kfclks)",
+      R"(Number of kfclks : Counts the number of clocks in the UPI LL.  This clock runs at 1/8th the GT/s speed of the UPI link.  For example, a 8GT/s link will have qfclk or 1GHz.  Current products do not support dynamic link speeds, so this frequency is fixed.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_L1_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x21, .umask = 0x00},
+      R"(Cycles in L1)",
+      R"(Cycles in L1 : Number of UPI qfclk cycles spent in L1 power mode.  L1 is a mode that totally shuts down a UPI link.  Use edge detect to count the number of instances when the UPI link entered L1.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another. Because L1 totally shuts down the link, it takes a good amount of time to exit this mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x27, .umask = 0x00},
+      R"(Cycles in L0p)",
+      R"(Cycles in L0p : Number of UPI qfclk cycles spent in L0p power mode.  L0p is a mode where we disable 1/2 of the UPI lanes, decreasing our bandwidth in order to save power.  It increases snoop and data transfer latencies and decreases overall bandwidth.  This mode can be very useful in NUMA optimized workloads that largely only utilize UPI for snoops and their responses.  Use edge detect to count the number of instances when the UPI link entered L0p.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1985,7 +2448,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_M_CLOCKTICKS",
       EventDef::Encoding{.code = 0x00, .umask = 0x00},
       R"(DRAM Clockticks)",
-      R"(Clockticks of the integrated memory controller (IMC))",
+      R"(DRAM Clockticks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2010,24 +2473,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT",
+      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_PREF",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opts issued by iA Cores that hit the LLC)",
-      R"(TOR Inserts : DRd_Opts issued by iA Cores that hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores that Hit the LLC)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores that Hit the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2066,24 +2515,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opt issued by iA Cores that missed the LLC)",
-      R"(TOR Inserts : DRd_Opt issued by iA Cores that missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores that Missed the LLC)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2098,48 +2533,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
       R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC)",
       R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01},
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC)",
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01},
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01},
-      R"(TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC)",
-      R"(TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2234,10 +2627,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_DRD_OPT",
+      "UNC_CHA_TOR_INSERTS.IA_LLCPREFRFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opts issued by iA Cores)",
-      R"(TOR Inserts : DRd_Opts issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores)",
+      R"(TOR Inserts : LLCPrefRFO issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2248,10 +2641,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_DRD_OPT_PREF",
+      "UNC_CHA_TOR_INSERTS.IA_DRD_PREF",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores)",
+      R"(TOR Inserts : DRd_Prefs issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2290,24 +2683,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_DRD_OPT",
+      "UNC_CHA_TOR_OCCUPANCY.IA_DRD",
       EventDef::Encoding{.code = 0x36, .umask = 0x01},
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores)",
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01},
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Occupancy : DRds issued by iA Cores)",
+      R"(TOR Occupancy : DRds issued by iA Cores : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2322,6 +2701,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x36, .umask = 0x01},
       R"(TOR Occupancy : CRDs issued by iA Cores)",
       R"(TOR Occupancy : CRDs issued by iA Cores : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL_FLITS.ALL_NULL",
+      EventDef::Encoding{.code = 0x02, .umask = 0x27},
+      R"(Valid Flits Sent : Null FLITs transmitted to any slot)",
+      R"(Valid Flits Sent : Null FLITs transmitted to any slot : Shows legal flit time (hides impact of L0p and L0c).)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_RxL_FLITS.ALL_NULL",
+      EventDef::Encoding{.code = 0x03, .umask = 0x27},
+      R"(Valid Flits Received : Null FLITs received from any slot)",
+      R"(Valid Flits Received : Null FLITs received from any slot : Shows legal flit time (hides impact of L0p and L0c).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2416,10 +2823,164 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01},
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC - HOMed locally)",
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC - HOMed locally : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01},
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC - HOMed remotely)",
+      R"(TOR Occupancy : DRds issued by iA Cores that Missed the LLC - HOMed remotely : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC - HOMed locally)",
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC - HOMed locally : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC - HOMed remotely)",
+      R"(TOR Inserts : DRds issued by iA Cores that Missed the LLC - HOMed remotely : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts; DRd Pref misses from local IA)",
+      R"(TOR Inserts; Data read prefetch from local IA that misses in the snoop filter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts; DRd Pref misses from local IA)",
+      R"(TOR Inserts; Data read prefetch from remote IA that misses in the snoop filter)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed locally)",
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed locally : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed remotely)",
+      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed remotely : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
+      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
+      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_CLFLUSH",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
       R"(TOR Inserts : CLFlushes issued by iA Cores)",
       R"(TOR Inserts : CLFlushes issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_SPECITOM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : SpecItoMs issued by iA Cores)",
+      R"(TOR Inserts : SpecItoMs issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2472,6 +3033,48 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PMM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL_PMM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC - HOMed locally)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC - HOMed locally : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE_PMM",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC - HOMed remotely)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting PMM Mem that Missed the LLC - HOMed remotely : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_FULL_STREAMING_WR",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
       R"(TOR Inserts; WCiLF misses from local IA)",
@@ -2499,6 +3102,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PMM",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01},
+      R"(TOR Occupancy : DRds issued by iA Cores targeting PMM Mem that Missed the LLC)",
+      R"(TOR Occupancy : DRds issued by iA Cores targeting PMM Mem that Missed the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_CLOCKTICKS_FREERUN",
       EventDef::Encoding{.code = 0x00, .umask = 0x00},
@@ -2513,11 +3130,137 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : WCiLs issued by iA Cores that Missed the LLC)",
-      R"(TOR Inserts : WCiLs issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      PmuType::uncore_imc,
+      "UNC_M_PMM_RPQ_OCCUPANCY.ALL",
+      EventDef::Encoding{.code = 0xE0, .umask = 0x01},
+      R"(PMM Read Pending Queue Occupancy)",
+      R"(PMM Read Pending Queue Occupancy : Accumulates the per cycle occupancy of the PMM Read Pending Queue.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_RPQ_INSERTS",
+      EventDef::Encoding{.code = 0xE3, .umask = 0x00},
+      R"(PMM Read Queue Inserts)",
+      R"(PMM Read Queue Inserts : Counts number of read requests allocated in the PMM Read Pending Queue.   This includes both ISOCH and non-ISOCH requests.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_INSERTS",
+      EventDef::Encoding{.code = 0xE7, .umask = 0x00},
+      R"(PMM Write Queue Inserts)",
+      R"(PMM Write Queue Inserts : Counts number of  write requests allocated in the PMM Write Pending Queue.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.ALL",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x01},
+      R"(PMM Commands : All)",
+      R"(PMM Commands : All : Counts all commands issued to PMM)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.RD",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x02},
+      R"(PMM Commands : Reads - RPQ)",
+      R"(PMM Commands : Reads - RPQ : Counts read requests issued to the PMM RPQ)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.WR",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x04},
+      R"(PMM Commands : Writes)",
+      R"(PMM Commands : Writes : Counts write commands issued to PMM)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_CMD1.UFILL_RD",
+      EventDef::Encoding{.code = 0xEA, .umask = 0x08},
+      R"(PMM Commands : Underfill reads)",
+      R"(PMM Commands : Underfill reads : Counts underfill read commands, due to a partial write, issued to PMM)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_PMM_WPQ_OCCUPANCY.ALL",
+      EventDef::Encoding{.code = 0xE4, .umask = 0x01},
+      R"(PMM Write Pending Queue Occupancy)",
+      R"(PMM Write Pending Queue Occupancy : Accumulates the per cycle occupancy of the PMM Write Pending Queue.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_IMC_READS.TO_PMM",
+      EventDef::Encoding{.code = 0x37, .umask = 0x20},
+      R"(M2M Reads Issued to iMC : PMM - All Channels)",
+      R"(M2M Reads Issued to iMC : PMM - All Channels)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2m,
+      "UNC_M2M_IMC_WRITES.TO_PMM",
+      EventDef::Encoding{.code = 0x38, .umask = 0x80},
+      R"(M2M Writes Issued to iMC : PMM - All Channels)",
+      R"(M2M Writes Issued to iMC : PMM - All Channels)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2528,24 +3271,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WIL",
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA",
       EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : WiLs issued by iA Cores that Missed LLC)",
-      R"(TOR Inserts : WiLs issued by iA Cores that Missed LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_UCRDF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : UCRdFs issued by iA Cores that Missed LLC)",
-      R"(TOR Inserts : UCRdFs issued by iA Cores that Missed LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      R"(TOR Inserts : LLCPrefData issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : LLCPrefData issued by iA Cores that missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2584,6 +3313,62 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_DDR",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL_DDR",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC - HOMed locally)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC - HOMed locally : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE_DDR",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC - HOMed remotely)",
+      R"(TOR Inserts : DRds issued by iA Cores targeting DDR Mem that Missed the LLC - HOMed remotely : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_DDR",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01},
+      R"(TOR Occupancy : DRds issued by iA Cores targeting DDR Mem that Missed the LLC)",
+      R"(TOR Occupancy : DRds issued by iA Cores targeting DDR Mem that Missed the LLC : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IO_HIT_PCIRDCUR",
       EventDef::Encoding{.code = 0x35, .umask = 0x04},
       R"(TOR Inserts : PCIRdCurs issued by IO Devices that hit the LLC)",
@@ -2612,10 +3397,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_PCIRDCUR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04},
-      R"(TOR Occupancy : PCIRdCurs issued by IO Devices)",
-      R"(TOR Occupancy : PCIRdCurs issued by IO Devices : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
+      "UNC_CHA_TOR_INSERTS.IA_LLCPREFDATA",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01},
+      R"(TOR Inserts : LLCPrefData issued by iA Cores)",
+      R"(TOR Inserts : LLCPrefData issued by iA Cores : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2626,10 +3411,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01},
-      R"(TOR Inserts : WCiLF issued by iA Cores that Missed the LLC)",
-      R"(TOR Inserts : WCiLF issued by iA Cores that Missed the LLC : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      "UNC_CHA_TOR_OCCUPANCY.IO_PCIRDCUR",
+      EventDef::Encoding{.code = 0x36, .umask = 0x04},
+      R"(TOR Occupancy : PCIRdCurs issued by IO Devices)",
+      R"(TOR Occupancy : PCIRdCurs issued by IO Devices : For each cycle, this event accumulates the number of valid entries in the TOR that match qualifications specified by the subevent.     Does not include addressless requests such as locks and interrupts.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2916,7 +3701,91 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_ITOM_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(TOR Inserts : ItoMs issued by IO Devices to locally HOMed memory)",
+      R"(TOR Inserts : ItoMs issued by IO Devices : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_ITOM_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(TOR Inserts : ItoMs issued by IO Devices to remotely HOMed memory)",
+      R"(TOR Inserts : ItoMs issued by IO Devices : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices to locally HOMed memory)",
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices to remotely HOMed memory)",
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on a remote socket)",
+      R"(TOR Inserts : PCIRdCurs issued by IO Devices and targets remote memory : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04},
+      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on the local socket)",
+      R"(TOR Inserts : PCIRdCurs issued by IO Devices and targets local memory : Counts the number of entries successfully inserted into the TOR that match qualifications specified by the subevent.   Does not include addressless requests such as locks and interrupts.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
-} // namespace snowridgex_uncore
+} // namespace icelakex_uncore
 } // namespace facebook::hbt::perf_event::generated

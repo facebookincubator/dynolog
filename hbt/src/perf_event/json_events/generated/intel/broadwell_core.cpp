@@ -4395,7 +4395,7 @@ Note: Writeback pending FIFO has six entries.)",
       R"(Number of times RTM abort was triggered .)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS

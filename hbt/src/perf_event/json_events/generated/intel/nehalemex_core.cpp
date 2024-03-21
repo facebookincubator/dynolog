@@ -783,8 +783,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "FP_ASSIST.INPUT",
       EventDef::Encoding{
           .code = 0xF7, .umask = 0x4, .cmask = 0, .msr_values = {0}},
-      R"(X87 Floating poiint assists for invalid input value (Precise Event))",
-      R"(X87 Floating poiint assists for invalid input value (Precise Event))",
+      R"(X87 Floating point assists for invalid input value (Precise Event))",
+      R"(X87 Floating point assists for invalid input value (Precise Event))",
       20000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.pebs = 1},
@@ -1896,8 +1896,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_LINES_IN.ANY",
       EventDef::Encoding{
           .code = 0xF1, .umask = 0x7, .cmask = 0, .msr_values = {0}},
-      R"(L2 lines alloacated)",
-      R"(L2 lines alloacated)",
+      R"(L2 lines allocated)",
+      R"(L2 lines allocated)",
       100000,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

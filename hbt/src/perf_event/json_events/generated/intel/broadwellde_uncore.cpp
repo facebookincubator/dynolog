@@ -5849,7 +5849,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_DRS_CYCLES_FULL",
       EventDef::Encoding{.code = 0x4, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_DRS_CYCLES_FULL)",
-      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5863,7 +5863,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_DRS_INSERTS",
       EventDef::Encoding{.code = 0x1, .umask = 0x0, .msr_values = {0x00}},
       R"(BL Ingress Occupancy - DRS)",
-      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5877,7 +5877,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_DRS_OCCUPANCY",
       EventDef::Encoding{.code = 0x7, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_DRS_OCCUPANCY)",
-      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5891,7 +5891,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCB_CYCLES_FULL",
       EventDef::Encoding{.code = 0x5, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_NCB_CYCLES_FULL)",
-      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5905,7 +5905,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCB_INSERTS",
       EventDef::Encoding{.code = 0x2, .umask = 0x0, .msr_values = {0x00}},
       R"(BL Ingress Occupancy - NCB)",
-      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5919,7 +5919,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCB_OCCUPANCY",
       EventDef::Encoding{.code = 0x8, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_NCB_OCCUPANCY)",
-      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5933,7 +5933,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCS_CYCLES_FULL",
       EventDef::Encoding{.code = 0x6, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_NCS_CYCLES_FULL)",
-      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of cycles when the BL Ingress is full.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5947,7 +5947,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCS_INSERTS",
       EventDef::Encoding{.code = 0x3, .umask = 0x0, .msr_values = {0x00}},
       R"(BL Ingress Occupancy - NCS)",
-      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Counts the number of allocations into the BL Ingress.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -5961,7 +5961,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_RxR_BL_NCS_OCCUPANCY",
       EventDef::Encoding{.code = 0x9, .umask = 0x0, .msr_values = {0x00}},
       R"(UNC_I_RxR_BL_NCS_OCCUPANCY)",
-      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requets as well as outbound MMIO writes.)",
+      R"(Accumulates the occupancy of the BL Ingress in each cycles.  This queue is where the IRP receives data from R2PCIe (the ring).  It is used for data returns from read requests as well as outbound MMIO writes.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
