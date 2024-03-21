@@ -167,9 +167,9 @@ inline std::ostream& operator<<(std::ostream& os, const ThreadInfo& info) {
 // creation/destruction.
 //
 class CpuThreadSwitchGenerator final
-    : public CpuEventsGroup<CpuThreadSwitchGenerator, mode::ContextSwitch> {
+    : public PerfEventsGroup<CpuThreadSwitchGenerator, mode::ContextSwitch> {
  public:
-  using TBase = CpuEventsGroup<CpuThreadSwitchGenerator, mode::ContextSwitch>;
+  using TBase = PerfEventsGroup<CpuThreadSwitchGenerator, mode::ContextSwitch>;
   using TMode = typename TBase::TMode;
 
   struct RbExtraData {};
@@ -465,15 +465,16 @@ class PerCpuThreadSwitchGenerator
     }
 
     for_each_cpu(cpu, mon_cpus) {
-      this->cpu_generators_[cpu] = std::make_shared<TCpuGenerator>(
-          cpu, cgroup_fd, tid_level, thread_stats_, rb_min_num_events);
+      this->generators_[static_cast<int>(cpu)] =
+          std::make_shared<TCpuGenerator>(
+              cpu, cgroup_fd, tid_level, thread_stats_, rb_min_num_events);
     }
   }
 
   void open(size_t num_pages) {
     try {
-      for_each_cpu(cpu, this->mon_cpus_) {
-        this->cpu_generators_.at(cpu)->open(num_pages);
+      for (const auto& [cpu, gen] : this->generators_) {
+        gen->open(num_pages);
       }
     } catch (...) {
       close();
@@ -486,8 +487,8 @@ class PerCpuThreadSwitchGenerator
   }
 
   void onCpusThreadSwitchBufferRead(OnRbReadCallback callback, bool consume) {
-    for_each_cpu(cpu, this->mon_cpus_) {
-      this->cpu_generators_.at(cpu)->onCpuDataBufferRead(callback, consume);
+    for (const auto& [cpu, gen] : this->generators_) {
+      gen->onCpuDataBufferRead(callback, consume);
     }
   }
 
