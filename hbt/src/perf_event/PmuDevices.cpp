@@ -62,6 +62,7 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(uncore_cbox);
     CASE_PMU_TYPE(uncore_cha);
     CASE_PMU_TYPE(uncore_ha);
+    CASE_PMU_TYPE(uncore_chacms);
     CASE_PMU_TYPE(uncore_imc);
     CASE_PMU_TYPE(uncore_iio);
     CASE_PMU_TYPE(uncore_irp);
