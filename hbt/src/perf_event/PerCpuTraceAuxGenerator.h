@@ -6,8 +6,8 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/PerCpuSampleGeneratorBase.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/perf_event/PmuEvent.h"
 
 #include <optional>
@@ -69,9 +69,9 @@ struct AuxSpaceData {
 //
 
 class CpuTraceAuxGenerator final
-    : public CpuEventsGroup<CpuTraceAuxGenerator, mode::AUXSpace> {
+    : public PerfEventsGroup<CpuTraceAuxGenerator, mode::AUXSpace> {
  public:
-  using TBase = CpuEventsGroup<CpuTraceAuxGenerator, mode::AUXSpace>;
+  using TBase = PerfEventsGroup<CpuTraceAuxGenerator, mode::AUXSpace>;
 
   enum class AUXBufferMode {
     // new tracing data will automatically overwrite old data.
@@ -194,8 +194,12 @@ class PerCpuTraceAuxGenerator
             mon_cpus,
             cgroup_fd_wrapper} {
     for_each_cpu(cpu, mon_cpus) {
-      this->cpu_generators_[cpu] = std::make_shared<TCpuGenerator>(
-          cpu, pid, cgroup_fd_wrapper ? cgroup_fd_wrapper->fd : -1, event_conf);
+      this->generators_[static_cast<int>(cpu)] =
+          std::make_shared<TCpuGenerator>(
+              cpu,
+              pid,
+              cgroup_fd_wrapper ? cgroup_fd_wrapper->fd : -1,
+              event_conf);
     }
   }
 
@@ -209,18 +213,18 @@ class PerCpuTraceAuxGenerator
       CpuTraceAuxGenerator::AUXBufferMode mode) {
     HBT_ARG_CHECK(mode == CpuTraceAuxGenerator::AUXBufferMode::OVERWRITABLE)
         << "Only support AUXBufferMode::OVERWRITABLE currently.";
-    for_each_cpu(cpu, mon_cpus_) {
-      this->cpu_generators_.at(cpu)->open(num_data_pages, num_aux_pages, mode);
+    for (const auto& [cpu, gen] : this->generators_) {
+      gen->open(num_data_pages, num_aux_pages, mode);
     }
   }
   void onCpusAuxBufferRead(OnRbReadCallback callback) {
-    for_each_cpu(cpu, mon_cpus_) {
-      this->cpu_generators_.at(cpu)->onCpuAuxBufferRead(callback);
+    for (const auto& [cpu, gen] : this->generators_) {
+      gen->onCpuAuxBufferRead(callback);
     }
   }
 
   std::optional<AuxSpaceData> readAuxSpaceData(CpuId cpu) {
-    return this->cpu_generators_.at(cpu)->readAuxSpaceData();
+    return this->generators_.at(static_cast<int>(cpu))->readAuxSpaceData();
   }
 };
 
