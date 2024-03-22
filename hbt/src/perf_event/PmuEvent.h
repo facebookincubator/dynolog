@@ -37,10 +37,14 @@ enum class PmuType : uint16_t {
   uprobe,
   power,
 
-  // Intel Uncore
+  // Intel Uncore caching
   uncore_cbox,
   uncore_cha,
   uncore_ha,
+  // In SRF, there is a Converged/Common Mesh Stop attached to each CHA
+  uncore_chacms,
+
+  // Intel Uncore
   uncore_imc,
   uncore_iio,
   uncore_irp,
