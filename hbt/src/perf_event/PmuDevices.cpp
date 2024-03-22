@@ -4,8 +4,8 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/perf_event/PmuDevices.h"
-
 #include <hbt/src/perf_event/PmuEvent.h>
+#include <cstdint>
 #include <string>
 
 #include <filesystem>
@@ -491,6 +491,22 @@ void PmuDeviceManager::makePerCpuConfs(
   }
 }
 
+void PmuDeviceManager::makePerUncoreConfs(
+    PmuType pmu_type,
+    EventId ev_id,
+    EventExtraAttr extra_attrs,
+    EventValueTransforms transforms,
+    uncore_scope::Scope scope,
+    PerUncoreEventConfs& per_uncore_confs) const {
+  std::vector<TPerfPmuDevice> perf_pmu_group =
+      getPerfPmuGroupByScope(pmu_type, scope);
+
+  for (const auto& perf_pmu : perf_pmu_group) {
+    auto& confs = per_uncore_confs[perf_pmu];
+    confs.push_back(perf_pmu.second->makeConf(ev_id, extra_attrs, transforms));
+  }
+}
+
 EventConf PmuDeviceManager::makeNoCpuTopologyConf(
     PmuType pmu_type,
     EventId ev_id,
@@ -521,6 +537,26 @@ std::set<std::string> PmuDeviceManager::getPmuNames() const {
     }
   }
   return pmu_ids;
+}
+
+std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
+    PmuType pmu_type,
+    uncore_scope::Scope scope) const {
+  HBT_ARG_CHECK(std::holds_alternative<uncore_scope::Host>(scope))
+      << "Only Host scope supported";
+  auto it = pmu_groups_.find(pmu_type);
+  HBT_ARG_CHECK(it != pmu_groups_.end())
+      << "Invalid pmu_type: " + PmuTypeToStr(pmu_type);
+  std::vector<TPerfPmuDevice> perf_pmu_group;
+  // Get all PmuDevices of this type (e.g one per package).
+  for (const auto& [dev_idx, device] : it->second) {
+    HBT_THROW_ASSERT_IF(device->getCpuMask() == std::nullopt)
+        << "Cannot find cpu mask info from pmu device " << device->getName();
+    for_each_cpu_set_t(cpu, device->getCpuMask().value()) {
+      perf_pmu_group.push_back(TPerfPmuDevice{cpu, device});
+    }
+  }
+  return perf_pmu_group;
 }
 
 std::shared_ptr<PmuDevice> PmuDeviceManager::findPmuDeviceByName(
