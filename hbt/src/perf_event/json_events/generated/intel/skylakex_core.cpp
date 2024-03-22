@@ -14,7 +14,7 @@ namespace skylakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from skylakex_core.json (468 events).
+  Events from skylakex_core.json (469 events).
 
   Supported SKUs:
       - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -681,7 +681,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x28, .umask = 0x20, .cmask = 0, .msr_values = {0}},
       R"(Core cycles where the core was running in a manner where Turbo may be clipped to the AVX512 turbo schedule.)",
-      R"(Core cycles where the core was running with power-delivery for license level 2 (introduced in Skylake Server michroarchtecture).  This includes high current AVX 512-bit instructions.)",
+      R"(Core cycles where the core was running with power-delivery for license level 2 (introduced in Skylake Server microarchitecture).  This includes high current AVX 512-bit instructions.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1673,8 +1673,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.ALL_DSB_CYCLES_4_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x18, .cmask = 4, .msr_values = {0}},
-      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 Uops [This event is alias to IDQ.DSB_CYCLES_OK])",
-      R"(Counts the number of cycles 4 uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.DSB_CYCLES_OK])",
+      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 or more Uops [This event is alias to IDQ.DSB_CYCLES_OK])",
+      R"(Counts the number of cycles 4 or more uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.DSB_CYCLES_OK])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1703,8 +1703,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.DSB_CYCLES_OK",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x18, .cmask = 4, .msr_values = {0}},
-      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 Uops [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
-      R"(Counts the number of cycles 4 uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
+      R"(Cycles Decode Stream Buffer (DSB) is delivering 4 or more Uops [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
+      R"(Counts the number of cycles 4 or more uops were delivered to Instruction Decode Queue (IDQ) from the Decode Stream Buffer (DSB) path. Count includes uops that may 'bypass' the IDQ. [This event is alias to IDQ.ALL_DSB_CYCLES_4_UOPS])",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1977,7 +1977,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x85, .umask = 0x10, .cmask = 0, .msr_values = {0}},
       R"(Counts 1 per cycle for each PMH that is busy with a page walk for an instruction fetch request. EPT page walk duration are excluded in Skylake.)",
-      R"(Counts 1 per cycle for each PMH (Page Miss Handler) that is busy with a page walk for an instruction fetch request. EPT page walk duration are excluded in Skylake michroarchitecture.)",
+      R"(Counts 1 per cycle for each PMH (Page Miss Handler) that is busy with a page walk for an instruction fetch request. EPT page walk duration are excluded in Skylake microarchitecture.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2607,8 +2607,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0xAB, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Decode Stream Buffer (DSB)-to-MITE switches)",
-      R"(This event counts the number of the Decode Stream Buffer (DSB)-to-MITE switches including all misses because of missing Decode Stream Buffer (DSB) cache and u-arch forced misses.
-Note: Invoking MITE requires two or three cycles delay.)",
+      R"(This event counts the number of the Decode Stream Buffer (DSB)-to-MITE switches including all misses because of missing Decode Stream Buffer (DSB) cache and u-arch forced misses. Note: Invoking MITE requires two or three cycles delay.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3054,7 +3053,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       R"(Number of all retired NOP instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{.pebs = 2},
       R"(SKL091, SKL044)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
@@ -4033,7 +4032,7 @@ Note: Invoking MITE requires two or three cycles delay.)",
       R"(Number of times RTM abort was triggered.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{.pebs = 2},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -7193,6 +7192,21 @@ Note: Invoking MITE requires two or three cycles delay.)",
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0122}},
       R"(OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
       R"(OFFCORE_RESPONSE.ALL_RFO.L3_HIT.SNOOP_HIT_WITH_FWD)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OFFCORE_RESPONSE.ALL_READS.L3_HIT.HIT_OTHER_CORE_FWD",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C07F7}},
+      R"(OFFCORE_RESPONSE.ALL_READS.L3_HIT.HIT_OTHER_CORE_FWD hit in the L3 and the snoop to one of the sibling cores hits the line in E/S/F state and the line is forwarded.)",
+      R"(OFFCORE_RESPONSE.ALL_READS.L3_HIT.HIT_OTHER_CORE_FWD hit in the L3 and the snoop to one of the sibling cores hits the line in E/S/F state and the line is forwarded.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

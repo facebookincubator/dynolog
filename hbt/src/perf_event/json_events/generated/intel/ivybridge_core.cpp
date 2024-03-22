@@ -350,7 +350,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "FP_COMP_OPS_EXE.X87",
       EventDef::Encoding{
           .code = 0x10, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULsand IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s)",
+      R"(Number of FP Computational Uops Executed this cycle. The number of FADD, FSUB, FCOM, FMULs, integer MULs and IMULs, FDIVs, FPREMs, FSQRTS, integer DIVs, and IDIVs. This event does not distinguish an FADD used in the middle of a transcendental flow from a s)",
       R"(Counts number of X87 uops executed.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -881,7 +881,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L1D_PEND_MISS.PENDING",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
-      R"(L1D miss oustandings duration in cycles)",
+      R"(L1D miss outstanding duration in cycles)",
       R"(Increments the number of outstanding L1D misses every cycle. Set Cmask = 1 and Edge =1 to count occurrences.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -927,8 +927,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L1D_PEND_MISS.FB_FULL",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x02, .cmask = 1, .msr_values = {0x00}},
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability)",
-      R"(Cycles a demand request was blocked due to Fill Buffers inavailability.)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability)",
+      R"(Cycles a demand request was blocked due to Fill Buffers unavailability.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1423,7 +1423,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_DSB_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by Decode Stream Buffer (DSB) that are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Increment each cycle # of uops delivered to IDQ when MS_busy by DSB. Set Cmask = 1 to count cycles. Add Edge=1 to count # of delivery.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1437,8 +1437,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_DSB_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x10, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Cycles when uops initiated by Decode Stream Buffer (DSB) are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1455,8 +1455,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .edge = true,
           .cmask = 1,
           .msr_values = {0}},
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy)",
-      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequenser (MS) is busy.)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy)",
+      R"(Deliveries to Instruction Decode Queue (IDQ) initiated by Decode Stream Buffer (DSB) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1497,7 +1497,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_MITE_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x20, .cmask = 0, .msr_values = {0}},
-      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops initiated by MITE and delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Increment each cycle # of uops delivered to IDQ when MS_busy by MITE. Set Cmask = 1 to count cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1539,7 +1539,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_UOPS",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 0, .msr_values = {0}},
-      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
+      R"(Uops delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
       R"(Increment each cycle # of uops delivered to IDQ from MS by either DSB or MITE. Set Cmask = 1 to count cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
@@ -1553,8 +1553,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "IDQ.MS_CYCLES",
       EventDef::Encoding{
           .code = 0x79, .umask = 0x30, .cmask = 1, .msr_values = {0}},
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy)",
-      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequenser (MS) is busy.)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy)",
+      R"(Cycles when uops are being delivered to Instruction Decode Queue (IDQ) while Microcode Sequencer (MS) is busy.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2686,7 +2686,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "OFFCORE_REQUESTS.DEMAND_CODE_RD",
       EventDef::Encoding{
           .code = 0xB0, .umask = 0x02, .cmask = 0, .msr_values = {0}},
-      R"(Cacheable and noncachaeble code read requests)",
+      R"(Cacheable and noncacheable code read requests)",
       R"(Demand code read requests sent to uncore.)",
       100003,
       std::nullopt, // ScaleUnit

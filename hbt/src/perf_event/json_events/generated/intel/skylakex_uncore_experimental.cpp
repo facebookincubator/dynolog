@@ -14,7 +14,7 @@ namespace skylakex_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from skylakex_uncore_experimental.json (3040 experimental events).
+  Events from skylakex_uncore_experimental.json (3039 experimental events).
 
   Supported SKUs:
       - Arch: x86, Model: SKX id: 85 Steps: ['0', '1', '2', '3', '4']
@@ -487,7 +487,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.PCIRDCUR",
       EventDef::Encoding{.code = 0x10, .umask = 0x1, .msr_values = {0x00}},
       R"(Coherent Ops; PCIRdCur)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -501,7 +501,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.CRD",
       EventDef::Encoding{.code = 0x10, .umask = 0x2, .msr_values = {0x00}},
       R"(Coherent Ops; CRd)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -515,7 +515,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.DRD",
       EventDef::Encoding{.code = 0x10, .umask = 0x4, .msr_values = {0x00}},
       R"(Coherent Ops; DRd)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -529,7 +529,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.PCIDCAHINT",
       EventDef::Encoding{.code = 0x10, .umask = 0x20, .msr_values = {0x00}},
       R"(Coherent Ops; PCIDCAHin5t)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -543,7 +543,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.WBMTOI",
       EventDef::Encoding{.code = 0x10, .umask = 0x40, .msr_values = {0x00}},
       R"(Coherent Ops; WbMtoI)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -557,7 +557,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_COHERENT_OPS.CLFLUSH",
       EventDef::Encoding{.code = 0x10, .umask = 0x80, .msr_values = {0x00}},
       R"(Coherent Ops; CLFlush)",
-      R"(Counts the number of coherency related operations servied by the IRP)",
+      R"(Counts the number of coherency related operations serviced by the IRP)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1089,7 +1089,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_I_TRANSACTIONS.WRITES",
       EventDef::Encoding{.code = 0x11, .umask = 0x2, .msr_values = {0x00}},
       R"(Inbound Transaction Count; Writes)",
-      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Trackes only write requests.  Each write request should have a prefetch, so there is no need to explicitly track these requests.  For writes that are tickled and have to retry, the counter will be incremented for each retry.)",
+      R"(Counts the number of Inbound transactions from the IRP to the Uncore.  This can be filtered based on request type in addition to the source queue.  Note the special filtering equation.  We do OR-reduction on the request type.  If the SOURCE bit is set, then we also do AND qualification based on the source portID.; Tracks only write requests.  Each write request should have a prefetch, so there is no need to explicitly track these requests.  For writes that are tickled and have to retry, the counter will be incremented for each retry.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -15874,20 +15874,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x58, .umask = 0x20, .msr_values = {0x00}},
       R"(CHA iMC CHNx READ Credits Empty; EDC3_SMI5)",
       R"(Counts the number of times when there are no credits available for sending reads from the CHA into the iMC.  In order to send reads into the memory controller, the HA must first acquire a credit for the iMC's AD Ingress queue.; Filter for memory controller 5 only.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.WRITES_REMOTE",
-      EventDef::Encoding{.code = 0x50, .umask = 0x08, .msr_values = {0x00}},
-      R"(Read and Write Requests; Writes Remote)",
-      R"(Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

@@ -28,9 +28,9 @@ enum class CpuArch {
   GLM,
   HSX,
   ICL,
+  ICX,
   IVB,
   KNL,
-  KNM,
   NHM_EX,
   SKL,
   SKX,
@@ -72,12 +72,12 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "HSX";
     case CpuArch::ICL:
       return os << "ICL";
+    case CpuArch::ICX:
+      return os << "ICX";
     case CpuArch::IVB:
       return os << "IVB";
     case CpuArch::KNL:
       return os << "KNL";
-    case CpuArch::KNM:
-      return os << "KNM";
     case CpuArch::NHM_EX:
       return os << "NHM-EX";
     case CpuArch::SKL:
@@ -178,12 +178,16 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::SKL;
       case 95:
         return CpuArch::GLM;
+      case 106:
+        return CpuArch::ICX;
+      case 108:
+        return CpuArch::ICX;
       case 125:
         return CpuArch::ICL;
       case 126:
         return CpuArch::ICL;
       case 133:
-        return CpuArch::KNM;
+        return CpuArch::KNL;
       case 134:
         return CpuArch::SNR;
       case 142:
@@ -198,8 +202,6 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::SKL;
       case 175:
         return CpuArch::SRF;
-      case 207:
-        return CpuArch::SPR;
       default:
         return CpuArch::UNKNOWN;
     } // End of model switch case

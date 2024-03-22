@@ -14,7 +14,7 @@ namespace icelake_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from icelake_core.json (339 events).
+  Events from icelake_core.json (338 events).
 
   Supported SKUs:
       - Arch: x86, Model: ICL id: 125
@@ -600,7 +600,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x28, .umask = 0x20, .cmask = 0, .msr_values = {0x00}},
       R"(Core cycles where the core was running in a manner where Turbo may be clipped to the AVX512 turbo schedule.)",
-      R"(Core cycles where the core was running with power-delivery for license level 2 (introduced in Skylake Server microarchtecture).  This includes high current AVX 512-bit instructions.)",
+      R"(Core cycles where the core was running with power-delivery for license level 2 (introduced in Skylake Server microarchitecture).  This includes high current AVX 512-bit instructions.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1127,7 +1127,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x5e, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
       R"(Cycles when Reservation Station (RS) is empty for the thread)",
-      R"(Counts cycles during which the reservation station (RS) is empty for this logical processor. This is usually caused when the front-end pipeline runs into stravation periods (e.g. branch mispredictions or i-cache misses))",
+      R"(Counts cycles during which the reservation station (RS) is empty for this logical processor. This is usually caused when the front-end pipeline runs into starvation periods (e.g. branch mispredictions or i-cache misses))",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1929,21 +1929,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0xa4, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
       R"(TMA slots where no uops were being issued due to lack of back-end resources.)",
       R"(Counts the number of Top-down Microarchitecture Analysis (TMA) method's  slots where no micro-operations were being issued from front-end to back-end of the machine due to lack of back-end resources.)",
-      10000003,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::cpu,
-      "TOPDOWN.BR_MISPREDICT_SLOTS",
-      EventDef::Encoding{
-          .code = 0xa4, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
-      R"(TMA slots wasted due to incorrect speculation by branch mispredictions)",
-      R"(Number of TMA slots that were wasted due to incorrect speculation by branch mispredictions. This event estimates number of operations that were issued but not retired from the speculative path as well as the out-of-order engine recovery past a branch misprediction.)",
       10000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3385,7 +3370,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of times RTM abort was triggered.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
+      EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS

@@ -14,7 +14,7 @@ namespace cascadelakex_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from cascadelakex_uncore.json (284 events).
+  Events from cascadelakex_uncore.json (285 events).
 
   Supported SKUs:
       - Arch: x86, Model: CLX id: 85 Steps: ['5', '6', '7', '8', '9', 'A', 'B',
@@ -1385,6 +1385,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x50, .umask = 0x04, .msr_values = {0x00}},
       R"(Write Requests from a unit on this socket)",
       R"(Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_REQUESTS.WRITES_REMOTE",
+      EventDef::Encoding{.code = 0x50, .umask = 0x08, .msr_values = {0x00}},
+      R"(Read and Write Requests; Writes Remote)",
+      R"(Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

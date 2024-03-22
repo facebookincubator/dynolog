@@ -143,9 +143,29 @@ namespace sapphirerapids_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace sapphirerapids_uncore_experimental
 
+namespace icelakex_core {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace icelakex_core
+
+namespace icelakex_uncore {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace icelakex_uncore
+
+namespace icelakex_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace icelakex_uncore_experimental
+
 namespace sierraforest_core {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace sierraforest_core
+
+namespace sierraforest_uncore {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace sierraforest_uncore
+
+namespace sierraforest_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace sierraforest_uncore_experimental
 
 // Make a key by combining cpu_model ond cpu_step
 constexpr uint64_t toCpuKey(uint32_t cpu_model, uint32_t cpu_step) {
@@ -402,9 +422,9 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(87, 0x13): // fall-through
     case toCpuKey(87, 0x14): // fall-through
     case toCpuKey(87, 0x15): // fall-through
-      // from KnightsLanding_core.json
+      // from knightslanding_core.json
       knightslanding_core::addEvents(pmu_manager);
-      // from KnightsLanding_uncore.json
+      // from knightslanding_uncore.json
       knightslanding_uncore::addEvents(pmu_manager);
       break;
 
@@ -468,6 +488,54 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(95, 0x15): // fall-through
       // from goldmont_core.json
       goldmont_core::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(106, 0x0): // fall-through
+    case toCpuKey(106, 0x1): // fall-through
+    case toCpuKey(106, 0x2): // fall-through
+    case toCpuKey(106, 0x3): // fall-through
+    case toCpuKey(106, 0x4): // fall-through
+    case toCpuKey(106, 0x5): // fall-through
+    case toCpuKey(106, 0x6): // fall-through
+    case toCpuKey(106, 0x7): // fall-through
+    case toCpuKey(106, 0x8): // fall-through
+    case toCpuKey(106, 0x9): // fall-through
+    case toCpuKey(106, 0x10): // fall-through
+    case toCpuKey(106, 0x11): // fall-through
+    case toCpuKey(106, 0x12): // fall-through
+    case toCpuKey(106, 0x13): // fall-through
+    case toCpuKey(106, 0x14): // fall-through
+    case toCpuKey(106, 0x15): // fall-through
+      // from icelakex_core.json
+      icelakex_core::addEvents(pmu_manager);
+      // from icelakex_uncore.json
+      icelakex_uncore::addEvents(pmu_manager);
+      // from icelakex_uncore_experimental.json
+      icelakex_uncore_experimental::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(108, 0x0): // fall-through
+    case toCpuKey(108, 0x1): // fall-through
+    case toCpuKey(108, 0x2): // fall-through
+    case toCpuKey(108, 0x3): // fall-through
+    case toCpuKey(108, 0x4): // fall-through
+    case toCpuKey(108, 0x5): // fall-through
+    case toCpuKey(108, 0x6): // fall-through
+    case toCpuKey(108, 0x7): // fall-through
+    case toCpuKey(108, 0x8): // fall-through
+    case toCpuKey(108, 0x9): // fall-through
+    case toCpuKey(108, 0x10): // fall-through
+    case toCpuKey(108, 0x11): // fall-through
+    case toCpuKey(108, 0x12): // fall-through
+    case toCpuKey(108, 0x13): // fall-through
+    case toCpuKey(108, 0x14): // fall-through
+    case toCpuKey(108, 0x15): // fall-through
+      // from icelakex_core.json
+      icelakex_core::addEvents(pmu_manager);
+      // from icelakex_uncore.json
+      icelakex_uncore::addEvents(pmu_manager);
+      // from icelakex_uncore_experimental.json
+      icelakex_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(125, 0x0): // fall-through
@@ -534,9 +602,9 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(133, 0x13): // fall-through
     case toCpuKey(133, 0x14): // fall-through
     case toCpuKey(133, 0x15): // fall-through
-      // from KnightsLanding_core.json
+      // from knightslanding_core.json
       knightslanding_core::addEvents(pmu_manager);
-      // from KnightsLanding_uncore.json
+      // from knightslanding_uncore.json
       knightslanding_uncore::addEvents(pmu_manager);
       break;
 
@@ -694,26 +762,10 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(175, 0x15): // fall-through
       // from sierraforest_core.json
       sierraforest_core::addEvents(pmu_manager);
-      break;
-
-    case toCpuKey(207, 0x0): // fall-through
-    case toCpuKey(207, 0x1): // fall-through
-    case toCpuKey(207, 0x2): // fall-through
-    case toCpuKey(207, 0x3): // fall-through
-    case toCpuKey(207, 0x4): // fall-through
-    case toCpuKey(207, 0x5): // fall-through
-    case toCpuKey(207, 0x6): // fall-through
-    case toCpuKey(207, 0x7): // fall-through
-    case toCpuKey(207, 0x8): // fall-through
-    case toCpuKey(207, 0x9): // fall-through
-    case toCpuKey(207, 0x10): // fall-through
-    case toCpuKey(207, 0x11): // fall-through
-    case toCpuKey(207, 0x12): // fall-through
-    case toCpuKey(207, 0x13): // fall-through
-    case toCpuKey(207, 0x14): // fall-through
-    case toCpuKey(207, 0x15): // fall-through
-      // from sapphirerapids_core.json
-      sapphirerapids_core::addEvents(pmu_manager);
+      // from sierraforest_uncore.json
+      sierraforest_uncore::addEvents(pmu_manager);
+      // from sierraforest_uncore_experimental.json
+      sierraforest_uncore_experimental::addEvents(pmu_manager);
       break;
 
     default:

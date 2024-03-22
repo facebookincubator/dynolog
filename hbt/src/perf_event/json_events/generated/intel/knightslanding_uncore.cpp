@@ -14,208 +14,12 @@ namespace knightslanding_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from KnightsLanding_uncore.json (459 events).
+  Events from knightslanding_uncore.json (459 events).
 
   Supported SKUs:
       - Arch: x86, Model: KNL id: 87
-      - Arch: x86, Model: KNM id: 133
+      - Arch: x86, Model: KNL id: 133
 */
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_U_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x00, .umask = 0x00},
-      R"(UCLK count)",
-      R"(UCLK count)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_EDC_ACCESS.HIT_CLEAN",
-      EventDef::Encoding{.code = 0x02, .umask = 0x01},
-      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_EDC_ACCESS.HIT_DIRTY",
-      EventDef::Encoding{.code = 0x02, .umask = 0x02},
-      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode. )",
-      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode. )",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_EDC_ACCESS.MISS_CLEAN",
-      EventDef::Encoding{.code = 0x02, .umask = 0x04},
-      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_EDC_ACCESS.MISS_DIRTY",
-      EventDef::Encoding{.code = 0x02, .umask = 0x08},
-      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_uclk,
-      "UNC_E_EDC_ACCESS.MISS_INVALID",
-      EventDef::Encoding{.code = 0x02, .umask = 0x10},
-      R"(Number of EDC Hits or Misses. Miss I)",
-      R"(Number of EDC Hits or Misses. Miss I)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_eclk,
-      "UNC_E_E_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x00, .umask = 0x00},
-      R"(ECLK count)",
-      R"(ECLK count)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_eclk,
-      "UNC_E_RPQ_INSERTS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x01},
-      R"(Counts the number of read requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all read requests as well as streaming stores that hit or miss in the MCDRAM cache. )",
-      R"(Counts the number of read requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all read requests as well as streaming stores that hit or miss in the MCDRAM cache. )",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_edc_eclk,
-      "UNC_E_WPQ_INSERTS",
-      EventDef::Encoding{.code = 0x02, .umask = 0x01},
-      R"(Counts the number of write requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all streaming stores, writebacks and, read requests that miss in MCDRAM cache.)",
-      R"(Counts the number of write requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all streaming stores, writebacks and, read requests that miss in MCDRAM cache.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc_uclk,
-      "UNC_M_U_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x00, .umask = 0x00},
-      R"(UCLK count)",
-      R"(UCLK count)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc_dclk,
-      "UNC_M_D_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x00, .umask = 0x00},
-      R"(DCLK count)",
-      R"(DCLK count)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc_dclk,
-      "UNC_M_CAS_COUNT.RD",
-      EventDef::Encoding{.code = 0x03, .umask = 0x01},
-      R"(CAS Reads)",
-      R"(CAS Reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc_dclk,
-      "UNC_M_CAS_COUNT.WR",
-      EventDef::Encoding{.code = 0x03, .umask = 0x02},
-      R"(CAS Writes)",
-      R"(CAS Writes)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc_dclk,
-      "UNC_M_CAS_COUNT.ALL",
-      EventDef::Encoding{.code = 0x03, .umask = 0x03},
-      R"(CAS All)",
-      R"(CAS All)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
@@ -1089,8 +893,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.AD_REQ_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x01},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1103,8 +907,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.AD_RSP_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x02},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1117,8 +921,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.BL_RSP_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x04},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1131,8 +935,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.BL_WB_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x08},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1145,8 +949,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.BL_NCB_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x10},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1159,8 +963,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.BL_NCS_VN0",
       EventDef::Encoding{.code = 0x2A, .umask = 0x20},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1173,8 +977,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.AK_NON_UPI",
       EventDef::Encoding{.code = 0x2A, .umask = 0x40},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1187,8 +991,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q0_RETRY.IV_NON_UPI",
       EventDef::Encoding{.code = 0x2A, .umask = 0x80},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1201,8 +1005,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q1_RETRY.ANY_REJECT_IRQ0",
       EventDef::Encoding{.code = 0x2B, .umask = 0x01},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1215,8 +1019,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q1_RETRY.SF_VICTIM",
       EventDef::Encoding{.code = 0x2B, .umask = 0x08},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1229,8 +1033,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q1_RETRY.SF_WAY",
       EventDef::Encoding{.code = 0x2B, .umask = 0x20},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1243,8 +1047,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q1_RETRY.ALLOW_SNP",
       EventDef::Encoding{.code = 0x2B, .umask = 0x40},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1257,8 +1061,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_H_INGRESS_RETRY_REQ_Q1_RETRY.PA_MATCH",
       EventDef::Encoding{.code = 0x2B, .umask = 0x80},
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
-      R"(REQUESTQ'' includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
+      R"(REQUESTQ includes:  IRQ, PRQ, IPQ, RRQ, WBQ (everything except for ISMQ))",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1940,342 +1744,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_INGRESS_CYCLES_NE.CBO_IDI",
-      EventDef::Encoding{.code = 0x10, .umask = 0x01},
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_IDI)",
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_IDI)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_INGRESS_CYCLES_NE.CBO_NCB",
-      EventDef::Encoding{.code = 0x10, .umask = 0x02},
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCB)",
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCB)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_INGRESS_CYCLES_NE.CBO_NCS",
-      EventDef::Encoding{.code = 0x10, .umask = 0x04},
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCS)",
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_INGRESS_CYCLES_NE.ALL",
-      EventDef::Encoding{.code = 0x10, .umask = 0x80},
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.ALL)",
-      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.ALL)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.AD_0",
-      EventDef::Encoding{.code = 0x23, .umask = 0x01},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_0)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.AK_0",
-      EventDef::Encoding{.code = 0x23, .umask = 0x02},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_0)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.BL_0",
-      EventDef::Encoding{.code = 0x23, .umask = 0x04},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_0)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.AD_1",
-      EventDef::Encoding{.code = 0x23, .umask = 0x08},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_1)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.AK_1",
-      EventDef::Encoding{.code = 0x23, .umask = 0x10},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_1)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_NE.BL_1",
-      EventDef::Encoding{.code = 0x23, .umask = 0x20},
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_1)",
-      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AD_0",
-      EventDef::Encoding{.code = 0x24, .umask = 0x01},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_0)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AK_0",
-      EventDef::Encoding{.code = 0x24, .umask = 0x02},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_0)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.BL_0",
-      EventDef::Encoding{.code = 0x24, .umask = 0x04},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_0)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AK_CRD_0",
-      EventDef::Encoding{.code = 0x24, .umask = 0x08},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_0)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AD_1",
-      EventDef::Encoding{.code = 0x24, .umask = 0x10},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_1)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AK_1",
-      EventDef::Encoding{.code = 0x24, .umask = 0x20},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_1)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.BL_1",
-      EventDef::Encoding{.code = 0x24, .umask = 0x40},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_1)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_INSERTS.AK_CRD_1",
-      EventDef::Encoding{.code = 0x24, .umask = 0x80},
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_1)",
-      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.AD_0",
-      EventDef::Encoding{.code = 0x25, .umask = 0x01},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_0)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.AK_0",
-      EventDef::Encoding{.code = 0x25, .umask = 0x02},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_0)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.BL_0",
-      EventDef::Encoding{.code = 0x25, .umask = 0x04},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_0)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.AD_1",
-      EventDef::Encoding{.code = 0x25, .umask = 0x08},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_1)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.AK_1",
-      EventDef::Encoding{.code = 0x25, .umask = 0x10},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_1)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_m2pcie,
-      "UNC_M2P_EGRESS_CYCLES_FULL.BL_1",
-      EventDef::Encoding{.code = 0x25, .umask = 0x20},
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_1)",
-      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_C_TOR_INSERTS.IRQ_HIT",
       EventDef::Encoding{.code = 0x35, .umask = 0x11},
@@ -2293,8 +1761,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_C_TOR_INSERTS.IRQ_MISS",
       EventDef::Encoding{.code = 0x35, .umask = 0x21},
-      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent -IRQ )",
-      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent -IRQ )",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent -IRQ)",
+      R"(Counts the number of entries successfully inserted into the TOR that match  qualifications specified by the subevent -IRQ)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -6439,6 +5907,538 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0xB4, .umask = 0x40},
       R"(Transgress Injection Starvation. Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
       R"(Transgress Injection Starvation. Counts cycles under injection starvation mode.  This starvation is triggered when the CMS Ingress cannot send a transaction onto the mesh for a long period of time.  In this case, because a message from the other queue has higher priority)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_eclk,
+      "UNC_E_E_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x00, .umask = 0x00},
+      R"(ECLK count)",
+      R"(ECLK count)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_eclk,
+      "UNC_E_RPQ_INSERTS",
+      EventDef::Encoding{.code = 0x01, .umask = 0x01},
+      R"(Counts the number of read requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all read requests as well as streaming stores that hit or miss in the MCDRAM cache.)",
+      R"(Counts the number of read requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all read requests as well as streaming stores that hit or miss in the MCDRAM cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_eclk,
+      "UNC_E_WPQ_INSERTS",
+      EventDef::Encoding{.code = 0x02, .umask = 0x01},
+      R"(Counts the number of write requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all streaming stores, writebacks and, read requests that miss in MCDRAM cache.)",
+      R"(Counts the number of write requests received by the MCDRAM controller. This event is valid in all three memory modes: flat, cache and hybrid. In cache and hybrid memory mode, this event counts all streaming stores, writebacks and, read requests that miss in MCDRAM cache.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_U_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x00, .umask = 0x00},
+      R"(UCLK count)",
+      R"(UCLK count)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_EDC_ACCESS.HIT_CLEAN",
+      EventDef::Encoding{.code = 0x02, .umask = 0x01},
+      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_EDC_ACCESS.HIT_DIRTY",
+      EventDef::Encoding{.code = 0x02, .umask = 0x02},
+      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      R"(Counts the number of read requests and streaming stores that hit in MCDRAM cache and the data in MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_EDC_ACCESS.MISS_CLEAN",
+      EventDef::Encoding{.code = 0x02, .umask = 0x04},
+      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is clean with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_EDC_ACCESS.MISS_DIRTY",
+      EventDef::Encoding{.code = 0x02, .umask = 0x08},
+      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      R"(Counts the number of read requests and streaming stores that miss in MCDRAM cache and the data evicted from the MCDRAM is dirty with respect to DDR. This event is only valid in cache and hybrid memory mode.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_edc_uclk,
+      "UNC_E_EDC_ACCESS.MISS_INVALID",
+      EventDef::Encoding{.code = 0x02, .umask = 0x10},
+      R"(Number of EDC Hits or Misses. Miss I)",
+      R"(Number of EDC Hits or Misses. Miss I)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc_dclk,
+      "UNC_M_D_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x00, .umask = 0x00},
+      R"(DCLK count)",
+      R"(DCLK count)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc_dclk,
+      "UNC_M_CAS_COUNT.RD",
+      EventDef::Encoding{.code = 0x03, .umask = 0x01},
+      R"(CAS Reads)",
+      R"(CAS Reads)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc_dclk,
+      "UNC_M_CAS_COUNT.WR",
+      EventDef::Encoding{.code = 0x03, .umask = 0x02},
+      R"(CAS Writes)",
+      R"(CAS Writes)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc_dclk,
+      "UNC_M_CAS_COUNT.ALL",
+      EventDef::Encoding{.code = 0x03, .umask = 0x03},
+      R"(CAS All)",
+      R"(CAS All)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc_uclk,
+      "UNC_M_U_CLOCKTICKS",
+      EventDef::Encoding{.code = 0x00, .umask = 0x00},
+      R"(UCLK count)",
+      R"(UCLK count)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_INGRESS_CYCLES_NE.CBO_IDI",
+      EventDef::Encoding{.code = 0x10, .umask = 0x01},
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_IDI)",
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_IDI)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_INGRESS_CYCLES_NE.CBO_NCB",
+      EventDef::Encoding{.code = 0x10, .umask = 0x02},
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCB)",
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCB)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_INGRESS_CYCLES_NE.CBO_NCS",
+      EventDef::Encoding{.code = 0x10, .umask = 0x04},
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCS)",
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.CBO_NCS)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_INGRESS_CYCLES_NE.ALL",
+      EventDef::Encoding{.code = 0x10, .umask = 0x80},
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.ALL)",
+      R"(Ingress Queue Cycles Not Empty. Counts the number of cycles when the M2PCIe Ingress is not empty.ALL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.AD_0",
+      EventDef::Encoding{.code = 0x23, .umask = 0x01},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_0)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.AK_0",
+      EventDef::Encoding{.code = 0x23, .umask = 0x02},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_0)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.BL_0",
+      EventDef::Encoding{.code = 0x23, .umask = 0x04},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_0)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.AD_1",
+      EventDef::Encoding{.code = 0x23, .umask = 0x08},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_1)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AD_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.AK_1",
+      EventDef::Encoding{.code = 0x23, .umask = 0x10},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_1)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  AK_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_NE.BL_1",
+      EventDef::Encoding{.code = 0x23, .umask = 0x20},
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_1)",
+      R"(Egress (to CMS) Cycles Not Empty. Counts the number of cycles when the M2PCIe Egress is not empty.  BL_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AD_0",
+      EventDef::Encoding{.code = 0x24, .umask = 0x01},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_0)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AK_0",
+      EventDef::Encoding{.code = 0x24, .umask = 0x02},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_0)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.BL_0",
+      EventDef::Encoding{.code = 0x24, .umask = 0x04},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_0)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AK_CRD_0",
+      EventDef::Encoding{.code = 0x24, .umask = 0x08},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_0)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AD_1",
+      EventDef::Encoding{.code = 0x24, .umask = 0x10},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_1)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AD_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AK_1",
+      EventDef::Encoding{.code = 0x24, .umask = 0x20},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_1)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.BL_1",
+      EventDef::Encoding{.code = 0x24, .umask = 0x40},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_1)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. BL_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_INSERTS.AK_CRD_1",
+      EventDef::Encoding{.code = 0x24, .umask = 0x80},
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_1)",
+      R"(Egress (to CMS) Ingress. Counts the number of number of messages inserted into the  the M2PCIe Egress queue. AK_CRD_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.AD_0",
+      EventDef::Encoding{.code = 0x25, .umask = 0x01},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_0)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.AK_0",
+      EventDef::Encoding{.code = 0x25, .umask = 0x02},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_0)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.BL_0",
+      EventDef::Encoding{.code = 0x25, .umask = 0x04},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_0)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_0)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.AD_1",
+      EventDef::Encoding{.code = 0x25, .umask = 0x08},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_1)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AD_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.AK_1",
+      EventDef::Encoding{.code = 0x25, .umask = 0x10},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_1)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  AK_1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_m2pcie,
+      "UNC_M2P_EGRESS_CYCLES_FULL.BL_1",
+      EventDef::Encoding{.code = 0x25, .umask = 0x20},
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_1)",
+      R"(Egress (to CMS) Cycles Full. Counts the number of cycles when the M2PCIe Egress is full.  BL_1)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
