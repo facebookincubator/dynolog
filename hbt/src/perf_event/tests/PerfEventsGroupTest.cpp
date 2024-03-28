@@ -3,7 +3,7 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include "hbt/src/perf_event/CpuEventsGroup.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <gtest/gtest.h>
 #include <filesystem>
@@ -55,9 +55,9 @@ EventConfs constructIntelPTEventConfs() {
 }
 
 // Create a CRTP implementation for test purposes.
-class SamplingEvents : public CpuEventsGroup<SamplingEvents, mode::Sampling> {
+class SamplingEvents : public PerfEventsGroup<SamplingEvents, mode::Sampling> {
  public:
-  using TBase = CpuEventsGroup<SamplingEvents, mode::Sampling>;
+  using TBase = PerfEventsGroup<SamplingEvents, mode::Sampling>;
   using TMode = TBase::TMode;
 
   SamplingEvents(CpuId cpu, const EventConfs& confs)
@@ -89,9 +89,9 @@ class SamplingEvents : public CpuEventsGroup<SamplingEvents, mode::Sampling> {
 
 // Create a CRTP implementation for test purposes.
 class ContextSwitchEvents
-    : public CpuEventsGroup<ContextSwitchEvents, mode::ContextSwitch> {
+    : public PerfEventsGroup<ContextSwitchEvents, mode::ContextSwitch> {
  public:
-  using TBase = CpuEventsGroup<ContextSwitchEvents, mode::ContextSwitch>;
+  using TBase = PerfEventsGroup<ContextSwitchEvents, mode::ContextSwitch>;
   using TMode = TBase::TMode;
 
   ContextSwitchEvents(CpuId cpu, const EventConfs& confs)
@@ -131,9 +131,9 @@ class ContextSwitchEvents
   }
 };
 
-class IntelPTEvents : public CpuEventsGroup<IntelPTEvents, mode::AUXSpace> {
+class IntelPTEvents : public PerfEventsGroup<IntelPTEvents, mode::AUXSpace> {
  public:
-  using TBase = CpuEventsGroup<IntelPTEvents, mode::AUXSpace>;
+  using TBase = PerfEventsGroup<IntelPTEvents, mode::AUXSpace>;
   using TMode = TBase::TMode;
 
   IntelPTEvents(CpuId cpu, pid_t pid, const EventConfs& confs)
@@ -339,7 +339,7 @@ TEST(IntelPTEvents, SmokeTest_IntelPT) {
 TEST(ContextSwitchEvents, SmokeTest_IntelPTSpecificProcess) {
   /*
    * XXX: Temporarily comment because this test requires
-   * IntelPT availablity that is not always available in SandCastle.
+   * IntelPT availability that is not always available in SandCastle.
   // Fork a new process for testing
   auto pid = fork();
   ASSERT_NE(pid, -1);

@@ -37,14 +37,12 @@ class PerCpuSampleGeneratorBase : public PerCpuBase<TCpuGenerator> {
 
   /// Convert TSC timestamp to kernel's high resolution clock.
   TimeStamp tstampFromTsc(TimeStamp tsc) const {
-    return this->getCpuGenerator(this->mon_cpus_.cpu_first_set())
-        .kernelTimeFromTsc(tsc);
+    return this->getFirstGenerator().kernelTimeFromTsc(tsc);
   }
 
   /// Convert kernel's high resolution clock to TSC timestamp.
   TimeStamp tscFromTimeStamp(TimeStamp tstamp) const {
-    return this->getCpuGenerator(this->mon_cpus_.cpu_first_set())
-        .tscFromKernelTime(tstamp);
+    return this->getFirstGenerator().tscFromKernelTime(tstamp);
   }
 
   /// Current timestamp in kernel's scheduler high resolution clock (nanoseconds
@@ -52,7 +50,7 @@ class PerCpuSampleGeneratorBase : public PerCpuBase<TCpuGenerator> {
   /// converting it into nanoseconds since boot using kernel provided scaling
   /// and offset. See CpuEventsGroup::now() for more details.
   TimeStamp now() const noexcept {
-    return this->getCpuGenerator(this->mon_cpus_.cpu_first_set()).now();
+    return this->getFirstGenerator().now();
   }
 
   /// Build a TimeStampNsConverter to convert between TSC and kernel time
@@ -70,11 +68,10 @@ class PerCpuSampleGeneratorBase : public PerCpuBase<TCpuGenerator> {
   unsigned accumUntil(unsigned batch_size, TimeStamp stop_ts) {
     HBT_ARG_CHECK_GT(batch_size, 0);
     unsigned num_done = 0;
-    for_each_cpu(cpu, this->getMonCpus()) {
+    for (const auto& [cpu, gen] : this->generators_) {
       ssize_t ret = 0;
-      auto& gen = this->getCpuGenerator(cpu);
-      while (gen.getLastTimeStamp() <= stop_ts) {
-        ret = gen.consume(batch_size);
+      while (gen->getLastTimeStamp() <= stop_ts) {
+        ret = gen->consume(batch_size);
         HBT_THROW_ASSERT_IF(
             0 > ret && ret != -ENODATA && ret != -EAGAIN && ret != EBUSY)
             << "Unexpected error processing batch: " << ret << " "
