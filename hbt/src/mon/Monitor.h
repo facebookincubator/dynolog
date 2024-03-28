@@ -263,6 +263,17 @@ class Monitor {
     return std::nullopt;
   }
 
+  std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>
+  readAllUncoreCountsPerPerfEvent() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>> rvs;
+    for (const auto& [k, cr] : uncore_count_readers_) {
+      HBT_THROW_ASSERT_IF(cr == nullptr);
+      rvs.emplace(k, cr->readPerPerfEventsGroup());
+    }
+    return rvs;
+  }
+
   /// Read counts for all uncore events opened in counting mode
   /// in all PerUncoreCountReaders.
   std::map<ElemId, std::optional<TUncoreCountReader::ReadValues>>
