@@ -20,12 +20,12 @@ target_link_libraries(PmuEvent PUBLIC System)
 add_library(AmdEvents AmdEvents.h AmdEvents.cpp)
 target_link_libraries(AmdEvents PUBLIC PmuDevices)
 
-add_library(CpuEventsGroup CpuEventsGroup.h)
-target_link_libraries(CpuEventsGroup PUBLIC System)
-target_link_libraries(CpuEventsGroup PUBLIC PmuEvent)
+add_library(PerfEventsGroup PerfEventsGroup.h)
+target_link_libraries(PerfEventsGroup PUBLIC System)
+target_link_libraries(PerfEventsGroup PUBLIC PmuEvent)
 
 add_library(PmuDevices PmuDevices.h PmuDevices.cpp)
-target_link_libraries(PmuDevices PUBLIC CpuEventsGroup)
+target_link_libraries(PmuDevices PUBLIC PerfEventsGroup)
 target_link_libraries(PmuDevices PUBLIC stdc++fs)
 target_link_libraries(PmuDevices PUBLIC PmuEvent)
 target_link_libraries(PmuDevices PUBLIC CpuArch)
@@ -46,15 +46,18 @@ if(USE_JSON_GENERATED_PERF_EVENTS)
   target_link_libraries(BuiltinMetrics PUBLIC JsonEvents)
 endif()
 
+add_library(PerPerfEventsGroupBase PerPerfEventsGroupBase.h)
+target_link_libraries(PerPerfEventsGroupBase PUBLIC PerfEventsGroup)
+target_link_libraries(PerPerfEventsGroupBase PUBLIC Metrics)
+
 add_library(PerCpuBase PerCpuBase.h)
-target_link_libraries(PerCpuBase PUBLIC CpuEventsGroup)
-target_link_libraries(PerCpuBase PUBLIC Metrics)
+target_link_libraries(PerCpuBase PerPerfEventsGroupBase)
 
 add_library(PerCpuCountReader PerCpuCountReader.h)
 target_link_libraries(PerCpuCountReader PUBLIC PerCpuBase)
 
 add_library(ThreadCountReader ThreadCountReader.h)
-target_link_libraries(ThreadCountReader PUBLIC CpuEventsGroup)
+target_link_libraries(ThreadCountReader PUBLIC PerfEventsGroup)
 target_link_libraries(ThreadCountReader PUBLIC Metrics)
 
 add_library(PerCpuSampleGeneratorBase PerCpuSampleGeneratorBase.h)

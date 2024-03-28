@@ -6,9 +6,9 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerCpuBase.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <memory>
 #include <vector>
@@ -22,9 +22,9 @@ namespace facebook::hbt::perf_event {
 // It relies on perf_events opened on counting mode.
 //
 class CpuCountReader final
-    : public CpuEventsGroupBase<CpuCountReader, mode::Counting> {
+    : public PerfEventsGroupBase<CpuCountReader, mode::Counting> {
  public:
-  using TBase = CpuEventsGroupBase<CpuCountReader, mode::Counting>;
+  using TBase = PerfEventsGroupBase<CpuCountReader, mode::Counting>;
 
   /// Convenience type definition to create structure to store read values.
   using ReadValues = GroupReadValues<mode::Counting>;
@@ -80,18 +80,19 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
     }
     for_each_cpu(cpu, mon_cpus) {
       HBT_DCHECK_EQ(per_cpu_event_confs.count(cpu), 1);
-      this->cpu_generators_[cpu] = std::make_shared<CpuCountReader>(
-          metric_desc->eventNicknames(pmu_manager->cpuInfo.cpu_arch),
-          cpu,
-          cgroup_fd,
-          per_cpu_event_confs.at(cpu));
+      this->generators_[static_cast<int>(cpu)] =
+          std::make_shared<CpuCountReader>(
+              metric_desc->eventNicknames(pmu_manager->cpuInfo.cpu_arch),
+              cpu,
+              cgroup_fd,
+              per_cpu_event_confs.at(cpu));
     }
   }
 
   void open(bool pinned = false) {
     try {
-      for_each_cpu(cpu, this->getMonCpus()) {
-        this->getCpuGenerator(cpu).open(pinned);
+      for (const auto& [cpu, gen] : this->generators_) {
+        gen->open(pinned);
       }
     } catch (...) {
       close();
@@ -120,9 +121,9 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
     }
   }
 
-  std::optional<std::vector<ReadValues>> readPerCpu() const {
-    std::vector<ReadValues> rv;
-    if (TBase::readPerCpu(rv, getNumEvents())) {
+  std::optional<std::map<int, ReadValues>> readPerCpu() const {
+    std::map<int, ReadValues> rv;
+    if (TBase::readPerPerfEventsGroup(rv, getNumEvents())) {
       return std::make_optional(rv);
     } else {
       return std::nullopt;

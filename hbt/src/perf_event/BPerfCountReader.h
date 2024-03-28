@@ -6,8 +6,8 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 namespace facebook::hbt::perf_event {
 
