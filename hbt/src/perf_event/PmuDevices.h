@@ -71,13 +71,15 @@ class PmuDevice {
       std::optional<unsigned> pmu_device_enumeration,
       uint32_t perf_pmu_id,
       const std::string& desc,
-      bool in_sysfs)
+      bool in_sysfs,
+      std::optional<cpu_set_t> cpu_mask = std::nullopt)
       : pmu_name_{pmu_name},
         pmu_type_{pmu_type},
         pmu_device_enumeration_{pmu_device_enumeration},
         perf_pmu_id_{perf_pmu_id},
         desc_{desc},
-        in_sysfs_{in_sysfs} {}
+        in_sysfs_{in_sysfs},
+        cpu_mask_{cpu_mask} {}
 
   PmuDevice(const PmuDevice&) = delete;
   PmuDevice(PmuDevice&&) = delete;
