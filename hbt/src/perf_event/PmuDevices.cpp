@@ -556,8 +556,11 @@ std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
   std::vector<TPerfPmuDevice> perf_pmu_group;
   // Get all PmuDevices of this type (e.g one per package).
   for (const auto& [dev_idx, device] : it->second) {
-    HBT_THROW_ASSERT_IF(device->getCpuMask() == std::nullopt)
-        << "Cannot find cpu mask info from pmu device " << device->getName();
+    if (device->getCpuMask() == std::nullopt) {
+      HBT_LOG_ERROR() << "Cannot find cpu mask info from pmu device "
+                      << device->getName() << ". Ignore this device.";
+      continue;
+    }
     for_each_cpu_set_t(cpu, device->getCpuMask().value()) {
       perf_pmu_group.push_back(TPerfPmuDevice{cpu, device});
     }
