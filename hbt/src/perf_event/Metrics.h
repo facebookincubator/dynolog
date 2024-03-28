@@ -121,6 +121,29 @@ struct MetricDesc {
     return per_cpu_confs;
   }
 
+  /// Make EventConfs for each uncore PMU device given a scope
+  PerUncoreEventConfs makePerUncoreConfs(
+      uncore_scope::Scope scope,
+      const PmuDeviceManager& pmu_manager) const {
+    PerUncoreEventConfs per_uncore_confs;
+
+    const auto& event_refs = getEventRefs(pmu_manager.cpuInfo.cpu_arch);
+    HBT_ARG_CHECK(event_refs.has_value())
+        << "No EventRefs for CPU " << pmu_manager.cpuInfo.cpu_arch
+        << " in metric: " << id;
+
+    for (const auto& ev_ref : *event_refs) {
+      pmu_manager.makePerUncoreConfs(
+          ev_ref.pmu_type,
+          ev_ref.event_id,
+          ev_ref.extra_attr,
+          ev_ref.transforms,
+          scope,
+          per_uncore_confs);
+    }
+    return per_uncore_confs;
+  }
+
   // List nicknames for all events for the provided CPU architecture.
   auto eventNicknames(TOptCpuArch cpu_arch) const {
     const auto& event_refs = getEventRefs(cpu_arch);
