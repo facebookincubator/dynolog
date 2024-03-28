@@ -234,10 +234,11 @@ class Monitor {
 
   /// Read counts for all events opened in counting mode
   /// in all PerCpuCountReaders.
-  std::map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>>
+  std::map<ElemId, std::optional<std::map<int, TCountReader::ReadValues>>>
   readAllCountsPerCpu() const {
     std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::optional<std::vector<TCountReader::ReadValues>>> rvs;
+    std::map<ElemId, std::optional<std::map<int, TCountReader::ReadValues>>>
+        rvs;
 
     for (auto& [k, cr] : count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
