@@ -80,6 +80,9 @@ enum class PmuType : uint16_t {
 
   // Arm
   armv8_pmuv3,
+
+  // Nvidia Uncore
+  nvidia_scf_pmu,
 };
 
 std::string PmuTypeToStr(PmuType);
