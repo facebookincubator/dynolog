@@ -388,6 +388,63 @@ TEST_F(IntelPTMonitorTest, SystemWideTraceCopy) {
   mon.close();
 }
 
+TEST(CpuCountReader, SystemWideCountRead) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto metrics = makeAvailableMetrics();
+  Monitor mon;
+  Monitor<>::ElemId kInstruction = "instruction";
+
+  auto cpu_set = CpuSet::makeAllOnline();
+
+  auto& reader = *mon.emplaceCpuCountReader(
+      std::nullopt,
+      kInstruction,
+      metrics->getMetricDesc("instructions"),
+      std::move(pmu_manager),
+      cpu_set,
+      nullptr);
+
+  EXPECT_TRUE(mon.open());
+  EXPECT_TRUE(mon.enable());
+
+  auto vals = mon.readAllCpuCounts();
+  EXPECT_EQ(vals.count(kInstruction), 1);
+  EXPECT_TRUE(vals.at(kInstruction).has_value());
+}
+
+TEST(CpuCountReader, Multiplexing) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto metrics = makeAvailableMetrics();
+  Monitor mon;
+  Monitor<>::ElemId kInstruction = "instructions";
+  Monitor<>::ElemId kCycles = "cycles";
+
+  auto cpu_set = CpuSet::makeAllOnline();
+
+  auto& instructionsReader = *mon.emplaceCpuCountReader(
+      kInstruction,
+      kInstruction,
+      metrics->getMetricDesc("instructions"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+  auto& cyclesReader = *mon.emplaceCpuCountReader(
+      kCycles,
+      kCycles,
+      metrics->getMetricDesc("cycles"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+  EXPECT_TRUE(mon.open());
+  EXPECT_TRUE(mon.enable());
+
+  EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
+  mon.muxRotate();
+  EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
+  mon.muxRotate();
+  EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
+}
+
 #ifdef HBT_ENABLE_TRACING
 TEST(ContextSwitch, CopyToSink) {
   Monitor mon;

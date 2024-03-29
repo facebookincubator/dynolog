@@ -19,7 +19,7 @@ namespace dynolog {
  */
 
 using MuxGroupId = hbt::mon::Monitor<>::MuxGroupId;
-using TCountReader = hbt::mon::Monitor<>::TCountReader;
+using TCpuCountReader = hbt::mon::Monitor<>::TCpuCountReader;
 using ElemId = hbt::mon::Monitor<>::ElemId;
 
 class PerfMonitor {
@@ -39,8 +39,8 @@ class PerfMonitor {
   const hbt::CpuSet& monCpus_;
   std::shared_ptr<hbt::perf_event::PmuDeviceManager> pmuDeviceManager_;
   const MuxGroupId defaultMuxGroupId_;
-  std::map<ElemId, std::optional<TCountReader::ReadValues>> readValues_;
-  std::map<ElemId, std::shared_ptr<TCountReader>> countReaders_;
+  std::map<ElemId, std::optional<TCpuCountReader::ReadValues>> readValues_;
+  std::map<ElemId, std::shared_ptr<TCpuCountReader>> countReaders_;
 };
 
 // singleton object for default Metrics and PmuDeviceManager
