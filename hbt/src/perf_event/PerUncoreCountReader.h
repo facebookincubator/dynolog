@@ -123,6 +123,16 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     }
   }
 
+  std::vector<ReadValues> readPerPerfEventsGroup() const {
+    std::vector<ReadValues> rvs;
+    std::map<int, GroupReadValues<mode::Counting>> res;
+    TBase::readPerPerfEventsGroup(res, getNumEvents());
+    for (const auto& [_, val] : res) {
+      rvs.push_back(val);
+    }
+    return rvs;
+  }
+
   std::ostream& printStatus(std::ostream& os) const {
     os << "Uncore Count Reader \"" << metric_desc->id;
     if (this->isEnabled()) {

@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "hbt/src/common/Defs.h"
 #include "hbt/src/common/System.h"
 #include "hbt/src/perf_event/PerfEventsGroup.h"
 
@@ -113,6 +114,10 @@ class PerPerfEventsGroupBase {
       }
       rv.accum(aux);
     }
+    HBT_LOG_WARNING()
+        << "read() function will return the sum of accumulated time_enabled, time_running, and raw_value "
+           "of all events. This is not the same as the sum of the kernel multiplexing adjusted values of "
+           "those events. Often this is not the expected behavior.";
     return true;
   }
 
