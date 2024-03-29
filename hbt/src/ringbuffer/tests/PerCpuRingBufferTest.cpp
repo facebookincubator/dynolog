@@ -61,4 +61,4 @@ TEST(PerCpuRingBuffer, ReadWriteTest) {
     EXPECT_EQ(ret, -ENODATA);
     EXPECT_FALSE(opt_str.has_value());
   }
-};
+}

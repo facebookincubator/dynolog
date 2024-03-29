@@ -13,7 +13,7 @@ using namespace facebook::hbt::mon;
 
 TEST(MonData, ContDataCreation) {
   CountData cd{{"event1", "event2"}};
-};
+}
 
 class ModuleCollectionTest : public ::testing::Test {
  protected:
