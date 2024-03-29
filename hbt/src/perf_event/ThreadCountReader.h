@@ -6,8 +6,8 @@
 #pragma once
 
 #include "hbt/src/common/System.h"
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <memory>
 
@@ -21,9 +21,9 @@ namespace facebook::hbt::perf_event {
 //
 
 class ThreadCountReaderImpl
-    : public CpuEventsGroupBase<ThreadCountReaderImpl, mode::Counting> {
+    : public PerfEventsGroupBase<ThreadCountReaderImpl, mode::Counting> {
  public:
-  using TBase = CpuEventsGroupBase<ThreadCountReaderImpl, mode::Counting>;
+  using TBase = PerfEventsGroupBase<ThreadCountReaderImpl, mode::Counting>;
 
   /// Convenience type definition to create structure to store read values.
   using ReadValues = GroupReadValues<mode::Counting>;

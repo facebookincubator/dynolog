@@ -9,8 +9,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "hbt/src/perf_event/CpuEventsGroup.h"
 #include "hbt/src/perf_event/Metrics.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/perf_event/PmuDevices.h"
 #include "hbt/src/perf_event/PmuEvent.h"
 #include "hbt/src/perf_event/bpf/bperf.h"
