@@ -74,7 +74,7 @@ TEST(ShmPerCpuRingBuffer, SameProducerConsumer) {
 
   // All done. Unlink to cleanup.
   ringbuffer::shm::unlink<TPerCpuRingBuffer>(name_id);
-};
+}
 
 TEST(ShmPerCpuRingBuffer, SingleProducer_SingleConsumer) {
   // Make unique file name for shared memory
@@ -168,4 +168,4 @@ TEST(ShmPerCpuRingBuffer, SingleProducer_SingleConsumer) {
     wait(nullptr);
     HBT_LOG_INFO() << "Finished wait for children";
   }
-};
+}
