@@ -189,7 +189,7 @@ constexpr PmuMsr kIcMabRequestsPrefetch{
 constexpr PmuMsr kIcMabRequestsDemad{
     .amdCore = {.event = 0x85, .event_11_8 = 0x2}};
 
-// L3 counters
+// L3 counters (Zen 3 and 4)
 constexpr PmuMsr kL3CacheAccess{
     .amdL3 = {
         .event = 0x04,
@@ -208,7 +208,9 @@ constexpr PmuMsr kL3CacheMisses{
         .enAllCores = 0x1,
         .sliceId = 0x0,
         .threadMask = 0x3}};
-constexpr PmuMsr kL3FillRdRespLat{
+
+// L3 counters (Zen 3)
+constexpr PmuMsr kL3Zen3FillRdRespLat{
     .amdL3 = {
         .event = 0x90,
         .unitMask = 0x00,
@@ -217,7 +219,7 @@ constexpr PmuMsr kL3FillRdRespLat{
         .enAllCores = 0x1,
         .sliceId = 0x0,
         .threadMask = 0x3}};
-constexpr PmuMsr kL3FillRdCnt{
+constexpr PmuMsr kL3Zen3FillRdCnt{
     .amdL3 = {
         .event = 0x9A,
         .unitMask = 0x1F,
@@ -228,8 +230,6 @@ constexpr PmuMsr kL3FillRdCnt{
         .threadMask = 0x3}};
 
 // L3 counters (Zen 4)
-constexpr PmuMsr kL3Zen4CacheAccess = kL3CacheAccess;
-constexpr PmuMsr kL3Zen4CacheMisses = kL3CacheMisses;
 constexpr PmuMsr kL3Zen4FillRdRespCnt{
     .amdL3 = {
         .event = 0xAC,
