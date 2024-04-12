@@ -34,7 +34,6 @@ void KernelCollector::log(Logger& log) {
   }
 
   float total_ticks = cpuDelta_.total();
-  auto cpuMs = ticksToMs(cpuDelta_.total());
 
   // Relative utilization in percentage
   log.logFloat("cpu_u", cpuDelta_.u / total_ticks * 100.0);
