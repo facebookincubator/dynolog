@@ -201,8 +201,6 @@ void SimpleJsonServerBase::loop() noexcept {
 }
 
 void SimpleJsonServerBase::processOne() noexcept {
-  int ret, flag;
-
   /* Wait for incoming connections, the accept call is blocking*/
   LOG(INFO) << "Waiting for connection.";
   ClientSocketWrapper client;
