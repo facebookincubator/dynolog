@@ -13,8 +13,6 @@ using namespace facebook::hbt;
 using namespace facebook::hbt::ringbuffer;
 using namespace facebook::hbt::tagstack;
 
-const auto maxTimeStamp = std::numeric_limits<facebook::hbt::TimeStamp>::max();
-
 struct MockRingBufferExtraData {};
 
 using TRingBuffer = RingBuffer<MockRingBufferExtraData>;
