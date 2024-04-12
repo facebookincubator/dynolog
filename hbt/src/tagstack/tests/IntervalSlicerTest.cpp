@@ -254,7 +254,7 @@ TEST(IntervalSlicer, MultipleSlicerInSequence) {
   }
 
   {
-    auto s2_exp = Slice::makeSlice(
+    [[maybe_unused]] auto s2_exp = Slice::makeSlice(
         99,
         1,
         1,
