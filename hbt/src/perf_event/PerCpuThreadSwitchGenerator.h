@@ -143,9 +143,8 @@ inline std::ostream& operator<<(
 }
 
 inline std::ostream& operator<<(std::ostream& os, const ThreadInfo& info) {
-  os << "<ThreadInfo "
-     << " ppid: " << info.ppid << " ptid: " << info.ptid << " pid: " << info.pid
-     << " tid: " << info.tid
+  os << "<ThreadInfo " << " ppid: " << info.ppid << " ptid: " << info.ptid
+     << " pid: " << info.pid << " tid: " << info.tid
      << " fork_timestamp: " << tstampToStr(info.fork_timestamp)
      << " end_timestamp: " << tstampToStr(info.end_timestamp);
   if (info.cmdline.has_value()) {

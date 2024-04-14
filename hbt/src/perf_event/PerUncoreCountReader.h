@@ -139,8 +139,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
       os << "\" active.\n";
       auto val = this->read();
       if (val.has_value()) {
-        os << "*val"
-           << "\n";
+        os << "*val" << "\n";
       } else {
         os << " Failed to read\n";
       }

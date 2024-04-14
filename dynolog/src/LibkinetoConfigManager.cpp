@@ -279,13 +279,13 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
             << " matching processes";
   if (configType & int(LibkinetoConfigType::EVENTS)) {
     LOG(INFO) << "Installed event profiler config for "
-              << res.eventProfilersTriggered.size() << " process(es) "
-              << "(" << res.eventProfilersBusy << " busy)";
+              << res.eventProfilersTriggered.size() << " process(es) " << "("
+              << res.eventProfilersBusy << " busy)";
   }
   if (configType & int(LibkinetoConfigType::ACTIVITIES)) {
     LOG(INFO) << "Installed activity profiler config for "
-              << res.activityProfilersTriggered.size() << " process(es) "
-              << "(" << res.activityProfilersBusy << " busy)";
+              << res.activityProfilersTriggered.size() << " process(es) " << "("
+              << res.activityProfilersBusy << " busy)";
   }
   return res;
 }

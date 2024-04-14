@@ -50,8 +50,7 @@ struct SliceFreq {
 };
 
 inline std::ostream& operator<<(std::ostream& os, const SliceFreq& freq) {
-  os << "<SliceFreq"
-     << " duration: " << tstampToStr(freq.duration)
+  os << "<SliceFreq" << " duration: " << tstampToStr(freq.duration)
      << " num_obs: " << freq.num_obs << " num_intervals: " << freq.num_intervals
      << ">\n";
   return os;

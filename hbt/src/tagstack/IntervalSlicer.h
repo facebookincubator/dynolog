@@ -128,9 +128,9 @@ class IntervalSlicer {
         HBT_DCHECK_GE(err, 0);
       }
     }
-    HBT_LOG_ERROR_IF(0 > ret) << "Failed to write slice after retrying "
-                              << kMaxNumRetries << " times. "
-                              << "\"" << toErrorCode(-ret).message() << "\"";
+    HBT_LOG_ERROR_IF(0 > ret)
+        << "Failed to write slice after retrying " << kMaxNumRetries
+        << " times. " << "\"" << toErrorCode(-ret).message() << "\"";
     return ret;
   }
 

@@ -244,17 +244,17 @@ class PerCpuSliceGeneratorConstNumCpus {
            << (used * 100) / header.kDataPoolByteSize << "%)\n";
       }
 
-      os << "\t\tNumber Record (Fork, Comm, Exit): "
-         << "(" << gen.getNumRecordFork() << ", " << gen.getNumRecordComm()
-         << ", " << gen.getNumRecordExit() << ")\n";
+      os << "\t\tNumber Record (Fork, Comm, Exit): " << "("
+         << gen.getNumRecordFork() << ", " << gen.getNumRecordComm() << ", "
+         << gen.getNumRecordExit() << ")\n";
 
-      os << "\t\tNumber Record (Lost, Throttle, Unthrottle): "
-         << "(" << gen.getNumRecordLost() << ", " << gen.getNumRecordThrottle()
-         << ", " << gen.getNumRecordUnThrottle() << ")\n";
+      os << "\t\tNumber Record (Lost, Throttle, Unthrottle): " << "("
+         << gen.getNumRecordLost() << ", " << gen.getNumRecordThrottle() << ", "
+         << gen.getNumRecordUnThrottle() << ")\n";
 
-      os << "\t\tNumber Record (Sample, SwitchCpuWide): "
-         << "(" << gen.getNumRecordSample() << ", "
-         << gen.getNumRecordSwitchCpuWide() << ")\n";
+      os << "\t\tNumber Record (Sample, SwitchCpuWide): " << "("
+         << gen.getNumRecordSample() << ", " << gen.getNumRecordSwitchCpuWide()
+         << ")\n";
     }
 
     os << "\nPhase:\n";

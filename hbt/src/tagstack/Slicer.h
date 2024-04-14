@@ -266,8 +266,7 @@ struct TagStackState : public boost_intrusive_list_autounlink_hook {
 };
 
 inline std::ostream& operator<<(std::ostream& os, const TagStackStats& ss) {
-  return os << "<TagStackStats"
-            << " stack_id: " << ss.stack_id
+  return os << "<TagStackStats" << " stack_id: " << ss.stack_id
             << " parent_stack_id: " << ss.parent_stack_id
             << " stack: " << ss.stack
             << " cum_active_time: " << ss.cum_active_time
@@ -856,11 +855,10 @@ class Slicer {
 
       std::ostringstream oss;
 
-      oss << "Unexpected TagStack event. "
-          << "Attempt to switch in tag: \"" << tagToStr(ev->tag)
-          << "\" when tag \"" << tagToStr(old_tag) << "\" is active."
-          << " Last stack: " << last_stack << " Event: " << *ev
-          << ". Reseting state.";
+      oss << "Unexpected TagStack event. " << "Attempt to switch in tag: \""
+          << tagToStr(ev->tag) << "\" when tag \"" << tagToStr(old_tag)
+          << "\" is active." << " Last stack: " << last_stack
+          << " Event: " << *ev << ". Reseting state.";
 
       HBT_LOG_ERROR() << oss.str();
 
