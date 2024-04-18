@@ -248,6 +248,78 @@ constexpr PmuMsr kL3Zen4FillRdRespSmpl{
         .enAllCores = 0x1,
         .sliceId = 0x3,
         .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatDRamNear{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x01,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqDRamNear{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x01,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatDRamFar{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x02,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqDRamFar{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x02,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatCCXNear{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x04,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqCCXNear{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x04,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatCCXFar{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x08,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqCCXFar{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x08,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
 
 // DF counters (Zen 4)
 constexpr PmuMsr kDfZen4UmcAReadReqsLocal{

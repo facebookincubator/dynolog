@@ -83,6 +83,9 @@ enum class PmuType : uint16_t {
 
   // Nvidia Uncore
   nvidia_scf_pmu,
+
+  // AMD L3
+  amd_l3,
 };
 
 std::string PmuTypeToStr(PmuType);

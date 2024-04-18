@@ -91,6 +91,77 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "Retired SSE and AVX floating-point ops of all types.",
           "The number of all SSE/AVX floating-point Ops that have retired."),
       std::vector<EventId>({"zen4-ret-sse-avx-fp-ops-all"}));
+
+  // Sampled memory latency for AMD Zen4. The latency is measured from the L3
+  // cache to near/far data sources (DRAM, CXL, CCX cache) and back in
+  // nano-seconds.
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_dram_latency.near",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatDRamNear.val},
+          "Sampled latency of requests that target the same NUMA node and return from DRAM.",
+          "Dram_Near. Read-write. Sampled latency of requests that target the same NUMA node and return from DRAM."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-dram-latency-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_dram_latency_requests.near",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatReqDRamNear.val},
+          "L3 cache fill requests sourced from the same NUMA node and return from DRAM.",
+          "Dram_Near. Read-write. The number of sampled L3 cache fill requests from the same NUMA node and return from DRAM."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-dram-latency-requests-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_dram_latency.far",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatDRamFar.val},
+          "Sampled latency of requests that target another NUMA node and return from DRAM.",
+          "Dram_Near. Read-write. Sampled latency of requests that target another NUMA node and return from DRAM."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-dram-latency-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_dram_latency_requests.far",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatReqDRamFar.val},
+          "L3 cache fill requests sourced from another NUMA node and return from DRAM.",
+          "Dram_Near. Read-write. The number of sampled L3 cache fill requests from another NUMA node and return from DRAM."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-dram-latency-requests-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ccx_latency.near",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatCCXNear.val},
+          "Sampled latency of requests that target the same NUMA node and return from another CCX's cache.",
+          "Dram_Near. Read-write. Sampled latency of requests that target the same NUMA node and return from another CCX's cache."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ccx-latency-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ccx_latency_requests.near",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatReqCCXNear.val},
+          "L3 cache fill requests sourced from the same NUMA node and return from another CCX's cache.",
+          "Dram_Near. Read-write. The number of sampled L3 cache fill requests from the same NUMA node and return from another CCX's cache."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ccx-latency-requests-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ccx_latency.far",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatCCXFar.val},
+          "Sampled latency of requests that target another NUMA node and return from another CCX's cache.",
+          "Dram_Near. Read-write. Sampled latency of requests that target another NUMA node and return from another CCX's cache."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ccx-latency-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ccx_latency_requests.far",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatReqCCXFar.val},
+          "L3 cache fill requests sourced from another NUMA node and return from another CCX's cache.",
+          "Dram_Near. Read-write. The number of sampled L3 cache fill requests from another NUMA node and return from another CCX's cache."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ccx-latency-requests-far"}));
 }
 } // namespace milan
 
