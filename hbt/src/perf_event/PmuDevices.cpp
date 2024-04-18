@@ -91,6 +91,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(armv8_pmuv3);
 
     CASE_PMU_TYPE(nvidia_scf_pmu);
+
+    CASE_PMU_TYPE(amd_l3);
   }
 }
 
@@ -143,6 +145,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, armv8_pmuv3);
 
   IF_PMU_TYPE(str, nvidia_scf_pmu);
+
+  IF_PMU_TYPE(str, amd_l3);
 
   HBT_THROW_EINVAL() << "Unrecognized PmuType string: \"" + str + "\"";
   __builtin_unreachable();
