@@ -14,7 +14,7 @@ namespace icelakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from icelakex_core.json (360 events).
+  Events from icelakex_core.json (361 events).
 
   Supported SKUs:
       - Arch: x86, Model: ICX id: 106
@@ -690,6 +690,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x32, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
       R"(Number of PREFETCHW instructions executed.)",
       R"(Counts the number of PREFETCHW instructions executed.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "SW_PREFETCH_ACCESS.ANY",
+      EventDef::Encoding{
+          .code = 0x32, .umask = 0x0F, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

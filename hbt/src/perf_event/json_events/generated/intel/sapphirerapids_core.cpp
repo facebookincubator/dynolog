@@ -14,7 +14,7 @@ namespace sapphirerapids_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from sapphirerapids_core.json (385 events).
+  Events from sapphirerapids_core.json (388 events).
 
   Supported SKUs:
       - Arch: x86, Model: SPR id: 143
@@ -1108,6 +1108,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "SW_PREFETCH_ACCESS.ANY",
+      EventDef::Encoding{
+          .code = 0x40, .umask = 0xF, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "MEM_LOAD_COMPLETED.L1_MISS_ANY",
       EventDef::Encoding{
           .code = 0x43, .umask = 0xfd, .cmask = 0, .msr_values = {0x00}},
@@ -1930,6 +1945,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "RS.EMPTY_RESOURCE",
+      EventDef::Encoding{
+          .code = 0xa5, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
+      R"(Cycles when Reservation Station (RS) is empty due to a resource in the back-end)",
+      R"(Cycles when Reservation Station (RS) is empty due to a resource in the back-end)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "RS.EMPTY",
       EventDef::Encoding{
           .code = 0xa5, .umask = 0x07, .cmask = 0, .msr_values = {0x00}},
@@ -2061,6 +2091,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Cycles no uop executed while RS was not empty, the SB was not full and there was no outstanding load.)",
       R"(Number of cycles total of 0 uops executed on all ports, Reservation Station (RS) was not empty, the Store Buffer (SB) was not full and there was no outstanding load.)",
       1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "EXE_ACTIVITY.2_3_PORTS_UTIL",
+      EventDef::Encoding{
+          .code = 0xa6, .umask = 0xC, .cmask = 0, .msr_values = {0x00}},
+      R"(Cycles total of 2 or 3 uops are executed on all ports and Reservation Station (RS) was not empty.)",
+      R"(Cycles total of 2 or 3 uops are executed on all ports and Reservation Station (RS) was not empty.)",
+      2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata

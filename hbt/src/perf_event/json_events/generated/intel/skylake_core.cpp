@@ -14,7 +14,7 @@ namespace skylake_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from skylake_core.json (563 events).
+  Events from skylake_core.json (564 events).
 
   Supported SKUs:
       - Arch: x86, Model: SKL id: 78
@@ -729,6 +729,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0x32, .umask = 0x08, .cmask = 0, .msr_values = {0}},
       R"(Number of PREFETCHW instructions executed.)",
       R"(Number of PREFETCHW instructions executed.)",
+      2000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "SW_PREFETCH_ACCESS.ANY",
+      EventDef::Encoding{
+          .code = 0x32, .umask = 0x0F, .cmask = 0, .msr_values = {0}},
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
+      R"(Counts the number of PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or PREFETCHT2 instructions executed.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2998,7 +3013,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Number of all retired NOP instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.pebs = 1},
       R"(SKL091, SKL044)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
