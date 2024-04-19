@@ -640,8 +640,26 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
   }
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(
+      "l3_cache_misses",
+      "Core-originated cacheable demand requests missed L3.",
+      "Counts core-originated cacheable requests that miss the L3 cache (Longest Latency cache). "
+      "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L1 and L2. "
+      "It does not include all misses to the L3.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "l3_cache_misses",
+               PmuType::cpu,
+               "LONGEST_LAT_CACHE.MISS",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{},
+      getRateReducer()));
+  metrics->add(std::make_shared<MetricDesc>(
       "l3_cache_misses_per_instruction",
-      "Core-originated cacheable demand requests missed L3 per instruction.",
+      "Core-originated cacheable demand requests missed L3 normalized by number of instructions.",
       "Counts core-originated cacheable requests that miss the L3 cache (Longest Latency cache). "
       "Requests include data and code reads, Reads-for-Ownership (RFOs), speculative accesses and hardware prefetches from L1 and L2. "
       "It does not include all misses to the L3."
