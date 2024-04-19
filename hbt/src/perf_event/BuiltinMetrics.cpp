@@ -374,6 +374,18 @@ void populatePredefinedEventsOffcore(
     const CpuInfo& cpu_info) {
   auto offcoreEventDef = pmu_manager->findEventDef("OFFCORE_RESPONSE");
   if (!offcoreEventDef) {
+    // CLX doesn't have a general OFFCORE_RESPONSE event defined.
+    // So we use OCR.ALL_PF_RFO.L3_MISS.ANY_SNOOP event instead, which has the
+    // same code and umask but different msr.
+    // This doesn't make any difference as we only use code and umask from the
+    // generated event.
+    offcoreEventDef =
+        pmu_manager->findEventDef("OCR.ALL_PF_RFO.L3_MISS.ANY_SNOOP");
+  }
+  if (!offcoreEventDef) {
+    HBT_LOG_ERROR()
+        << "cannot find code and umask for offcore response event on architecture"
+        << cpu_info.cpu_arch;
     return;
   }
   // define equivalent event to replace DynoPerfCounter::DRAM_ACCESS_READS
