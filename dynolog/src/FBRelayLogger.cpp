@@ -157,7 +157,7 @@ void FBRelayLogger::finalize() {
        {
            {"hostname", hostname_},
            {"name", hostname_},
-           {"type", entity},
+           {"type", "dyno"},
            {"version", "0.1.0"},
        }},
       {"event", {{"module", entity}}},
@@ -172,6 +172,9 @@ void FBRelayLogger::finalize() {
   // try send
   if (!socket->send(data.dump())) {
     LOG(WARNING) << "Failed to send socket data";
+
+    // Re-init socket
+    initSocket();
   }
 }
 
