@@ -81,8 +81,10 @@ enum class PmuType : uint16_t {
   // Arm
   armv8_pmuv3,
 
-  // Nvidia Uncore
+  // Nvidia Uncores
   nvidia_scf_pmu,
+  nvidia_nvlink_c2c0_pmu,
+  nvidia_pcie_pmu,
 
   // AMD L3
   amd_l3,

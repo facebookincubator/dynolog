@@ -6,6 +6,7 @@
 #pragma once
 #include "hbt/src/common/System.h"
 #include "hbt/src/perf_event/PmuDevices.h"
+#include "hbt/src/perf_event/PmuEvent.h"
 
 namespace facebook::hbt::perf_event {
 

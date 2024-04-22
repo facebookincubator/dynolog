@@ -20,6 +20,9 @@ target_link_libraries(PmuEvent PUBLIC System)
 add_library(AmdEvents AmdEvents.h AmdEvents.cpp)
 target_link_libraries(AmdEvents PUBLIC PmuDevices)
 
+add_library(ArmEvents ArmEvents.h ArmEvents.cpp)
+target_link_libraries(ArmEvents PUBLIC PmuDevices)
+
 add_library(PerfEventsGroup PerfEventsGroup.h)
 target_link_libraries(PerfEventsGroup PUBLIC System)
 target_link_libraries(PerfEventsGroup PUBLIC PmuEvent)
@@ -37,6 +40,7 @@ target_link_libraries(Metrics PUBLIC CpuArch)
 add_library(BuiltinMetrics BuiltinMetrics.h BuiltinMetrics.cpp)
 target_link_libraries(BuiltinMetrics
                         PUBLIC AmdEvents
+                        PUBLIC ArmEvents
                         PUBLIC PmuDevices
                         PUBLIC System
                         PUBLIC IptEventBuilder
