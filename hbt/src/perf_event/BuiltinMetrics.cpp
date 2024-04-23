@@ -9,6 +9,7 @@
 #include "hbt/src/common/System.h"
 #include "hbt/src/intel_pt/IptEventBuilder.h"
 #include "hbt/src/perf_event/AmdEvents.h"
+#include "hbt/src/perf_event/ArmEvents.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
@@ -491,7 +492,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
     }
 #endif // USE_JSON_GENERATED_PERF_EVENTS
   } else if (cpu_info.cpu_family == CpuFamily::ARM) {
-    /* TODO */
+    addArmEvents(cpu_info, *pmu_manager);
   } else {
     HBT_LOG_ERROR() << "Unknown CPU family\n";
   }
