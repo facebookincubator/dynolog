@@ -3,6 +3,9 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+// Use glog for FabricManager.h
+#define USE_GOOGLE_LOG
+
 #include <gtest/gtest.h>
 #include <linux/perf_event.h>
 #include <sys/ioctl.h>

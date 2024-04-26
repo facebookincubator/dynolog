@@ -13,17 +13,13 @@
 #include "dynolog/src/ipcfabric/Utils.h"
 
 // If building inside Kineto, use its logger, otherwise use glog
-#if defined(KINETO_NAMESPACE) && defined(ENABLE_IPC_FABRIC)
-// We need to include the Logger header here for LOG() macros.
+#if defined USE_GOOGLE_LOG
+// We need to include the Logger header before here for LOG() macros.
 // However this can alias with other files that include this and
-// also use glog. TODO(T131440833). Thus, the user should also set
-#include "Logger.h" // @manual
-// add to namespace to get logger
-using namespace libkineto;
-
-#else // KINETO_NAMESPACE && ENABLE_IPC_FABRIC
+// also use glog. TODO(T131440833).
+// Whoever includes this needs to also include Logger.h for use in kineto
 #include <glog/logging.h>
-#endif // KINETO_NAMESPACE && ENABLE_IPC_FABRIC
+#endif // USE_GOOGLE_LOG
 
 namespace dynolog::ipcfabric {
 
@@ -90,7 +86,6 @@ struct Message {
   std::string src;
 };
 
-#if !defined(KINETO_NAMESPACE) || defined(ENABLE_IPC_FABRIC)
 class FabricManager {
  public:
   FabricManager(const FabricManager&) = delete;
@@ -221,33 +216,5 @@ class FabricManager {
   EndPoint<0> ep_;
   std::mutex dequeLock_;
 };
-
-#else
-
-// Adds an empty implementation so compilation works.
-class FabricManager {
- public:
-  FabricManager(const FabricManager&) = delete;
-  FabricManager& operator=(const FabricManager&) = delete;
-
-  static std::unique_ptr<FabricManager> factory(
-      std::string endpoint_name = "") {
-    return nullptr;
-  }
-
-  bool sync_send(
-      const Message& msg,
-      const std::string& dest_name,
-      int num_retries = 10,
-      int sleep_time_us = 10000) {
-    return false;
-  }
-
-  std::unique_ptr<Message> poll_recv(int max_retries, int sleep_time_us) {
-    return nullptr;
-  }
-};
-
-#endif // !KINETO_NAMESPACE || ENABLE_IPC_FABRIC
 
 } // namespace dynolog::ipcfabric
