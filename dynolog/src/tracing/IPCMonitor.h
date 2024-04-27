@@ -6,6 +6,10 @@
 #pragma once
 
 #include <memory>
+
+// Use glog for FabricManager.h
+#define USE_GOOGLE_LOG
+
 #include "dynolog/src/ipcfabric/FabricManager.h"
 
 namespace dynolog {
