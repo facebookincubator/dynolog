@@ -71,7 +71,7 @@ class BPerfEventsGroup {
   bool open();
   void close();
   bool isOpen() const;
-  bool enable();
+  bool enable(bool reset = false);
   bool disable();
   bool isEnabled() const {
     return enabled_;

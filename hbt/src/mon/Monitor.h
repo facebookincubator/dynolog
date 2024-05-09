@@ -80,8 +80,8 @@ class Monitor {
     sync_();
   }
 
-  explicit Monitor(bool mux_queue_per_pmu_type = false)
-      : mux_queue_per_pmu_type_{mux_queue_per_pmu_type} {}
+  explicit Monitor(bool mux_queue_per_pmu_type = false, bool reset = true)
+      : mux_queue_per_pmu_type_{mux_queue_per_pmu_type}, reset_{reset} {}
 
   bool open() {
     std::lock_guard<std::mutex> lock{mutex_};
@@ -675,6 +675,13 @@ class Monitor {
 
   bool mux_queue_per_pmu_type_;
 
+  // Whether reset a counter's value to 0 at the moment when state is transited
+  // to State::Enabled.
+  // Note only value will be reset. Enabled/running time will not reset. Check
+  // perf_event_open(2): PERF_EVENT_IOC_RESET for more details.
+  // BPerf doesn't support reset = true mode.
+  bool reset_;
+
   // Mark as mutable to allow usage from const methods.
   mutable std::mutex mutex_;
 
@@ -906,9 +913,9 @@ void tryOpen_(TGen& gen, Args&&... args) {
 }
 
 template <class TGen>
-void tryEnable_(TGen& gen) {
+void tryEnable_(TGen& gen, bool reset) {
   if (!gen.isEnabled()) {
-    gen.enable();
+    gen.enable(reset);
   }
 }
 
@@ -947,7 +954,8 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
         HBT_DCHECK_GT(mux_queue_.size(), 0);
         // Only enable if it's at front of its multiplexing queue.
         if (active_mux_ids.count(mux)) {
-          tryEnable_(*bperf_events_group);
+          // BPerf doesn't support reset = true mode.
+          tryEnable_(*bperf_events_group, false);
         } else {
           tryDisable_(*bperf_events_group);
         }
@@ -986,7 +994,7 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
         tryOpen_<TMonitor>(elem);
         // Only enable if it's at front of its multiplexing queue.
         if (enabled_elems.count(k) > 0) {
-          tryEnable_(elem);
+          tryEnable_(elem, reset_);
         } else {
           tryDisable_(elem);
         }
