@@ -76,7 +76,9 @@ class IntelPTMonitor {
     sync_();
   }
 
-  void enable() {
+  void enable(bool reset = false) {
+    HBT_ARG_CHECK_EQ(reset, false)
+        << "IntelPTMonitor does not support resetting counters";
     std::lock_guard<std::mutex> lock{state_mutex_};
     state_ = State::Enabled;
     sync_();

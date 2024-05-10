@@ -286,9 +286,9 @@ void tryOpen_(TGen& gen, Args&&... args) {
 }
 
 template <class TGen>
-void tryEnable_(TGen& gen) {
+void tryEnable_(TGen& gen, bool reset) {
   if (!gen.isEnabled()) {
-    gen.enable();
+    gen.enable(reset);
   }
 }
 
@@ -324,7 +324,7 @@ void TraceCollector::sync_() {
       case State::Enabled:
         tryOpen_(
             th_sw_gen, thread_gen_ctxt_->params.perf_event_per_cpu_num_pages);
-        tryEnable_(th_sw_gen);
+        tryEnable_(th_sw_gen, reset_);
         break;
     }
   }
@@ -351,7 +351,7 @@ void TraceCollector::sync_() {
             cg,
             cg_ctxt->perf_event_per_cpu_num_pages,
             cg_ctxt->sampling_period);
-        tryEnable_(cg);
+        tryEnable_(cg, reset_);
         break;
     }
   }

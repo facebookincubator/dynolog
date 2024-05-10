@@ -28,10 +28,10 @@ class PerPerfEventsGroupBase {
     }
   }
 
-  void enable() {
+  void enable(bool reset = true) {
     try {
       for (auto& [_, gen] : generators_) {
-        gen->enable();
+        gen->enable(reset);
       }
     } catch (std::exception& /*e*/) {
       for (auto& [_, gen] : generators_) {

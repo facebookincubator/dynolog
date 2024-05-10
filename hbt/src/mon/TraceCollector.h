@@ -103,7 +103,7 @@ class TraceCollector {
   explicit TraceCollector(const CpuSet& mon_cpus)
       : state_{State::Closed}, mon_cpus_{mon_cpus}, dummy_gen_{0} {
     dummy_gen_.open();
-    dummy_gen_.enable();
+    dummy_gen_.enable(true);
   }
 
   auto getMonCpus() const {
@@ -188,10 +188,11 @@ class TraceCollector {
     sync_();
   }
 
-  void enable() {
+  void enable(bool reset) {
     std::lock_guard<std::mutex> slices_lock{slices_mutex_};
     std::lock_guard<std::mutex> counts_lock{counts_mutex_};
     state_ = State::Enabled;
+    reset_ = reset;
     sync_();
   }
 
@@ -597,6 +598,8 @@ class TraceCollector {
   std::unique_ptr<std::thread> slices_accum_thread_;
   std::unique_ptr<std::thread> counts_accum_thread_;
   std::atomic<bool> do_accum_threads_ = false;
+
+  bool reset_ = true;
 
   void sync_();
 

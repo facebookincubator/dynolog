@@ -220,7 +220,9 @@ bool BPerfEventsGroup::isOpen() const {
   return opened_;
 }
 
-[[nodiscard]] bool BPerfEventsGroup::enable() {
+[[nodiscard]] bool BPerfEventsGroup::enable(bool reset) {
+  HBT_ARG_CHECK_EQ(reset, false)
+      << "BPerfEventsGroup does not support resetting counters";
   if (enabled_) {
     HBT_LOG_WARNING() << "BPerfEventsGroup is already enabled.";
     return true;
