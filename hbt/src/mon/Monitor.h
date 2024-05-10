@@ -43,8 +43,10 @@ struct ManagedBPerfEventInfo {
 /// (TraceMonitor, CountReaders, BPerfCountReaders, etc).
 /// Groups are rotated in the MuxQueue. Only elements at the front of the
 /// MuxQueue are enabled when the queue is enabled.
-/// All elements in the queue are opened when the queue is open, regadless
-/// of their position in the queue.
+/// There might be multiple MuxQueus indexed by PmuType, all elements in the
+/// front of each MuxQueue will be enabled independently.
+/// All elements in the queue are opened when the queue is open, regadless of
+/// their position in the queue.
 template <
     class MuxGroupIdType = std::optional<std::string>,
     class ElemIdType = std::string>
@@ -69,15 +71,17 @@ class Monitor {
 
   void muxRotate() {
     std::lock_guard<std::mutex> lock{mutex_};
-    if (mux_queue_.empty()) {
-      return;
+    for (auto& [pmu_type, queue] : mux_queue_) {
+      if (queue.empty()) {
+        return;
+      }
+      std::rotate(queue.rbegin(), queue.rbegin() + 1, queue.rend());
     }
-    std::rotate(
-        mux_queue_.rbegin(), mux_queue_.rbegin() + 1, mux_queue_.rend());
     sync_();
   }
 
-  explicit Monitor() {}
+  explicit Monitor(bool mux_queue_per_pmu_type = false)
+      : mux_queue_per_pmu_type_{mux_queue_per_pmu_type} {}
 
   bool open() {
     std::lock_guard<std::mutex> lock{mutex_};
@@ -329,7 +333,7 @@ class Monitor {
         << "There is already an interval source with key: \"" << elem_id
         << "\"";
 
-    addMuxEntry_(mux_group_id, elem_id);
+    addMuxEntry_(mux_group_id, elem_id, std::nullopt);
     auto [it, emplaced] = trace_monitors_.emplace(
         elem_id, std::make_unique<TraceMonitor>(mon_cpus));
     HBT_THROW_ASSERT_IF(!emplaced);
@@ -359,7 +363,9 @@ class Monitor {
         << "There is already an interval source with key: \"" << elem_id
         << "\"";
 
-    addMuxEntry_(mux_group_id, elem_id);
+    auto pmu_type = getPmuTypeOfMetric(*metric_desc, *pmu_manager);
+
+    addMuxEntry_(mux_group_id, elem_id, pmu_type);
     auto [it, emplaced] = cpu_count_readers_.emplace(
         elem_id,
         std::make_unique<Monitor::TCpuCountReader>(
@@ -402,7 +408,9 @@ class Monitor {
         << "There is already an interval source with key: \"" << elem_id
         << "\"";
 
-    addMuxEntry_(mux_group_id, elem_id);
+    auto pmu_type = getPmuTypeOfMetric(*metric_desc, *pmu_manager);
+
+    addMuxEntry_(mux_group_id, elem_id, pmu_type);
     auto [it, emplaced] = uncore_count_readers_.emplace(
         elem_id,
         std::make_unique<Monitor::TUncoreCountReader>(
@@ -488,7 +496,7 @@ class Monitor {
     // Add mux entry as other Readers.
     // But Monitor will multiplex BPerfEventsGroup rather than BPerfCountReader.
     // This is specially handled during sync_().
-    addMuxEntry_(mux_group_id, elem_id);
+    addMuxEntry_(mux_group_id, elem_id, std::nullopt);
     // emplace BPerfCountReader
     auto [it, emplaced] =
         bperf_count_readers_.emplace(elem_id, std::move(bperf_cnt_reader));
@@ -569,7 +577,7 @@ class Monitor {
     HBT_ARG_CHECK_EQ(ipt_monitors_.count(elem_id), 0)
         << "There is already a IntelPTMonitor  with key: \"" << elem_id << "\"";
 
-    addMuxEntry_(mux_group_id, elem_id);
+    addMuxEntry_(mux_group_id, elem_id, std::nullopt);
 
     auto [it, emplaced] = ipt_monitors_.emplace(
         elem_id, std::make_unique<IntelPTMonitor>(std::move(ipt_gen_ctxt)));
@@ -661,10 +669,43 @@ class Monitor {
 
   std::unordered_map<MuxGroupId, MuxGroup> mux_groups_;
 
-  std::vector<MuxGroupId> mux_queue_;
+  std::
+      unordered_map<std::optional<perf_event::PmuType>, std::vector<MuxGroupId>>
+          mux_queue_;
+
+  bool mux_queue_per_pmu_type_;
 
   // Mark as mutable to allow usage from const methods.
   mutable std::mutex mutex_;
+
+  std::unordered_set<MuxGroupId> getEnabledMuxGroupId_() const {
+    std::unordered_set<MuxGroupId> ret;
+    for (const auto& [perf_event_type, queue] : mux_queue_) {
+      if (queue.size() > 0) {
+        ret.insert(queue.front());
+      }
+    }
+    return ret;
+  }
+
+  std::optional<perf_event::PmuType> getPmuTypeOfMetric(
+      const perf_event::MetricDesc& metric_desc,
+      const perf_event::PmuDeviceManager& pmu_manager) const {
+    if (mux_queue_per_pmu_type_) {
+      auto event_refs = metric_desc.getEventRefs(pmu_manager.cpuInfo.cpu_arch);
+      HBT_THROW_ASSERT_IF(!event_refs.has_value() || event_refs.value().empty())
+          << "No event refs found for metric " << metric_desc;
+      // If a metric contains events of different PmuTypes, this metric cannot
+      // be emplaced into a Monitor with mux_queue_per_pmu_type_.
+      for (const auto& event_ref : event_refs.value()) {
+        HBT_THROW_ASSERT_IF(event_ref.pmu_type != event_refs->at(0).pmu_type)
+            << "Expect all events in the metric " << metric_desc
+            << " have the same PmuType but not";
+      }
+      return event_refs->at(0).pmu_type;
+    }
+    return std::nullopt;
+  }
 
   State getState_() const {
     return state_;
@@ -688,10 +729,13 @@ class Monitor {
   void syncElems_(
       std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events);
 #endif
-  void addMuxEntry_(const MuxGroupId& mux_group_id, const ElemId& elem_id) {
+  void addMuxEntry_(
+      const MuxGroupId& mux_group_id,
+      const ElemId& elem_id,
+      std::optional<perf_event::PmuType> pmu_type) {
     auto& g = mux_groups_[mux_group_id];
     if (g.empty()) {
-      mux_queue_.push_back(mux_group_id);
+      mux_queue_[pmu_type].push_back(mux_group_id);
     }
     g.insert(elem_id);
     sync_();
@@ -705,17 +749,22 @@ class Monitor {
     auto& g = mux_groups_[mux_group_id];
     g.erase(elem_id);
     if (g.empty()) {
+      bool removed = false;
       mux_groups_.erase(mux_group_id);
-      const auto groupIdIt =
-          std::find(mux_queue_.begin(), mux_queue_.end(), mux_group_id);
-      // monitor must be in an inconsistent state if a mux_group_id is in
-      // mux_groups_ but not in mux_queue_
-      if (groupIdIt == mux_queue_.cend()) {
+      for (auto& [pmu_type, queue] : mux_queue_) {
+        const auto groupIdIt =
+            std::find(queue.begin(), queue.end(), mux_group_id);
+        if (groupIdIt == queue.cend()) {
+          continue;
+        }
+        queue.erase(groupIdIt);
+        removed = true;
+      }
+      if (!removed) {
         HBT_THROW_ASSERT() << "mux_group_id \""
                            << mux_group_id.value_or("nullopt")
                            << "\" exists in mux_groups_ but not in mux_queue_";
       }
-      mux_queue_.erase(groupIdIt);
     }
     sync_();
     return true;
@@ -824,14 +873,21 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
       os << "Enabled";
       break;
   }
+  os << "\n";
   if (mux_queue_.size() == 0) {
     os << " <No Groups>";
     return os;
   }
-
-  for (const auto& g_id : mux_queue_) {
-    os << fmt::format(
-        " <{}: {}>", g_id.value_or("<None>"), mux_groups_.at(g_id));
+  for (const auto& [pmu_type, queue] : mux_queue_) {
+    if (pmu_type.has_value()) {
+      os << '[' << perf_event::PmuTypeToStr(pmu_type.value()) << ']' << '\n';
+    } else {
+      os << '[' << "all_pmus" << ']' << "\n";
+    }
+    for (const auto& g_id : queue) {
+      os << fmt::format(
+          " <{}: {}>", g_id.value_or("<None>"), mux_groups_.at(g_id));
+    }
   }
   return os;
 }
@@ -875,7 +931,7 @@ template <class MuxGroupId, class ElemId>
 void Monitor<MuxGroupId, ElemId>::syncElems_(
     std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events) {
   using TMonitor = std::decay_t<decltype(*this)>;
-  auto active_mux_id = mux_queue_.front();
+  auto active_mux_ids = getEnabledMuxGroupId_();
   for (auto& [mux, bperf_events_group] : bperf_events) {
     switch (state_) {
       case State::Closed:
@@ -890,7 +946,7 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
         tryOpen_<TMonitor>(*bperf_events_group);
         HBT_DCHECK_GT(mux_queue_.size(), 0);
         // Only enable if it's at front of its multiplexing queue.
-        if (mux == active_mux_id) {
+        if (active_mux_ids.count(mux)) {
           tryEnable_(*bperf_events_group);
         } else {
           tryDisable_(*bperf_events_group);
@@ -907,6 +963,13 @@ template <class MuxGroupId, class ElemId>
 template <class TContainer>
 void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
   using TMonitor = std::decay_t<decltype(*this)>;
+  // prepare all elements in mux enabled status
+  MuxGroup enabled_elems;
+  auto active_mux_ids = getEnabledMuxGroupId_();
+  for (auto mux_id : active_mux_ids) {
+    enabled_elems.insert(
+        mux_groups_.at(mux_id).begin(), mux_groups_.at(mux_id).end());
+  }
   for (auto& [k, elem_ptr] : elems_container) {
     HBT_THROW_ASSERT_IF(elem_ptr == nullptr);
     auto& elem = *elem_ptr;
@@ -921,11 +984,8 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
         break;
       case State::Enabled:
         tryOpen_<TMonitor>(elem);
-        HBT_DCHECK_GT(mux_queue_.size(), 0);
-        const auto& active_elem_ids = mux_groups_.at(mux_queue_.front());
-        HBT_DCHECK_GT(active_elem_ids.size(), 0);
         // Only enable if it's at front of its multiplexing queue.
-        if (active_elem_ids.count(k) > 0) {
+        if (enabled_elems.count(k) > 0) {
           tryEnable_(elem);
         } else {
           tryDisable_(elem);
