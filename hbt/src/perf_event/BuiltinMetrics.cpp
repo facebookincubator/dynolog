@@ -383,9 +383,9 @@ void populatePredefinedEventsOffcore(
     offcoreEventDef =
         pmu_manager->findEventDef("OCR.ALL_PF_RFO.L3_MISS.ANY_SNOOP");
   }
-  if (!offcoreEventDef) {
+  if (cpu_info.cpu_family == CpuFamily::INTEL && !offcoreEventDef) {
     HBT_LOG_ERROR()
-        << "cannot find code and umask for offcore response event on architecture"
+        << "cannot find code and umask for offcore response event on architecture "
         << cpu_info.cpu_arch;
     return;
   }
