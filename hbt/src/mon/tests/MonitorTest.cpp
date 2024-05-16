@@ -396,7 +396,7 @@ TEST(CpuCountReader, SystemWideCountRead) {
 
   auto cpu_set = CpuSet::makeAllOnline();
 
-  auto& reader = *mon.emplaceCpuCountReader(
+  mon.emplaceCpuCountReader(
       std::nullopt,
       kInstruction,
       metrics->getMetricDesc("instructions"),
