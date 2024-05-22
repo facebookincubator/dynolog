@@ -84,6 +84,7 @@ enum class PmuType : uint16_t {
   // Nvidia Uncores
   nvidia_scf_pmu,
   nvidia_nvlink_c2c0_pmu,
+  nvidia_nvlink_c2c1_pmu,
   nvidia_pcie_pmu,
 
   // AMD L3
