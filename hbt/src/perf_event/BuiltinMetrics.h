@@ -13,6 +13,9 @@ namespace facebook::hbt::perf_event {
 std::shared_ptr<PmuDeviceManager> makePmuDeviceManager();
 std::shared_ptr<Metrics> makeAvailableMetrics();
 void addCoreMetrics(std::shared_ptr<Metrics>& metrics);
+void addUncoreMetrics(std::shared_ptr<Metrics>& metrics);
+void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics);
+
 struct HwCacheEventInfo {
   // this is not unique, but enum of different cache event
   uint32_t id;
