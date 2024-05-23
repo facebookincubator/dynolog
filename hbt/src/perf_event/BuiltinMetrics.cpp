@@ -1755,4 +1755,270 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       System::Permissions{},
       std::vector<std::string>{}));
 }
+
+void addUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+#ifdef __aarch64__
+  addArmUncoreMetrics(metrics);
+#endif
+  // TODO: Add x86_64 path in future
+}
+
+void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CYCLES",
+      "Cycles on SCF uncore",
+      "Cycles on SCF uncore",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cycles",
+               PmuType::nvidia_scf_pmu,
+               "cycles",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_WRITE_BYTES",
+      "Write memory bandwidth in MBps from SCF to local CPU memory.",
+      "Write memory bandwidth in MBps from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_write_bytes",
+               PmuType::nvidia_scf_pmu,
+               "cmem_wr_total_bytes",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_READ_BEATS",
+      "Read memory beats (32 byte chunks) from SCF to local CPU memory.",
+      "Read memory beats (32 byte chunks) from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_read_chunks",
+               PmuType::nvidia_scf_pmu,
+               "cmem_rd_data",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_WB_ACCESS",
+      "Write-back requests from SCF to local CPU memory.",
+      "Write-back requests from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_mem_wb_access",
+               PmuType::nvidia_scf_pmu,
+               "cmem_wb_access",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_WR_ACCESS",
+      "Write-unique and non-coherent write requests from SCF to local CPU memory.",
+      "Write-unique and non-coherent write requests from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_mem_wr_access",
+               PmuType::nvidia_scf_pmu,
+               "cmem_wr_access",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_RD_ACCESS",
+      "Read requests from SCF to local CPU memory.",
+      "Read and non-coherent write requests from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_mem_rd_access",
+               PmuType::nvidia_scf_pmu,
+               "cmem_rd_access",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C0_CYCLES",
+      "Cycles on C2C0 uncore",
+      "Cycles on C2C0 uncore",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c0_cycles",
+               PmuType::nvidia_nvlink_c2c0_pmu,
+               "cycles",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C0_WRITE_BYTES_LOC",
+      "NVLink C2C0 write bandwidth local",
+      "NVLink C2C0 write bandwidth local",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c0_wr_bytes_loc",
+               PmuType::nvidia_nvlink_c2c0_pmu,
+               "wr_bytes_loc",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C0_WRITE_BYTES_REM",
+      "NVLink C2C0 write bandwidth remote",
+      "NVLink C2C0 write bandwidth remote",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c0_wr_bytes_rem",
+               PmuType::nvidia_nvlink_c2c0_pmu,
+               "wr_bytes_rem",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C0_READ_BYTES_LOC",
+      "NVLink C2C0 read bandwidth local",
+      "NVLink C2C0 read bandwidth local",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c0_rd_bytes_loc",
+               PmuType::nvidia_nvlink_c2c0_pmu,
+               "rd_bytes_loc",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C0_READ_BYTES_REM",
+      "NVLink C2C0 read bandwidth remote",
+      "NVLink C2C0 read bandwidth remote",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c0_rd_bytes_rem",
+               PmuType::nvidia_nvlink_c2c0_pmu,
+               "rd_bytes_rem",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C1_CYCLES",
+      "Cycles on C2C1 uncore",
+      "Cycles on C2C1 uncore",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c1_cycles",
+               PmuType::nvidia_nvlink_c2c1_pmu,
+               "cycles",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C1_WRITE_BYTES_LOC",
+      "NVLink C2C1 write bandwidth local",
+      "NVLink C2C1 write bandwidth local",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c1_wr_bytes_loc",
+               PmuType::nvidia_nvlink_c2c1_pmu,
+               "wr_bytes_loc",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C1_WRITE_BYTES_REM",
+      "NVLink C2C1 write bandwidth remote",
+      "NVLink C2C1 write bandwidth remote",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c1_wr_bytes_rem",
+               PmuType::nvidia_nvlink_c2c1_pmu,
+               "wr_bytes_rem",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C1_READ_BYTES_LOC",
+      "NVLink C2C1 read bandwidth local",
+      "NVLink C2C1 read bandwidth local",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c1_rd_bytes_loc",
+               PmuType::nvidia_nvlink_c2c1_pmu,
+               "rd_bytes_loc",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_C2C1_READ_BYTES_REM",
+      "NVLink C2C1 read bandwidth remote",
+      "NVLink C2C1 read bandwidth remote",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "c2c1_rd_bytes_rem",
+               PmuType::nvidia_nvlink_c2c1_pmu,
+               "rd_bytes_rem",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+}
+
 } // namespace facebook::hbt::perf_event
