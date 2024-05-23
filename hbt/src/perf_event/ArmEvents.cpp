@@ -81,6 +81,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   scanPmu(pmu_manager, PmuType::armv8_pmuv3);
   scanPmu(pmu_manager, PmuType::nvidia_scf_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c0_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c1_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_pcie_pmu);
 }
 
