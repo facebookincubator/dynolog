@@ -13,10 +13,11 @@ namespace facebook::hbt::perf_event::generated {
 namespace sandybridge_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
+
 /*
   Events from sandybridge_uncore.json (34 events).
 
-  Supported SKUs:
+  Supported SKUs: 
       - Arch: x86, Model: SNB id: 42
 */
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -30,7 +31,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -44,7 +45,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -58,7 +59,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -72,7 +73,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -86,7 +87,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -100,7 +101,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -114,7 +115,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -128,7 +129,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -142,7 +143,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -156,7 +157,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -170,7 +171,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -184,7 +185,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -198,7 +199,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -212,7 +213,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -226,7 +227,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -240,7 +241,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -254,7 +255,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -268,7 +269,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -282,7 +283,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -296,7 +297,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -310,7 +311,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -324,7 +325,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -338,7 +339,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -352,7 +353,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -366,7 +367,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -380,7 +381,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -394,7 +395,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -408,7 +409,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -422,7 +423,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -436,7 +437,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -450,7 +451,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -464,7 +465,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -478,7 +479,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -492,8 +493,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
+
 }
 
 } // namespace sandybridge_uncore

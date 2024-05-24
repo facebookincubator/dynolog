@@ -13,10 +13,11 @@ namespace facebook::hbt::perf_event::generated {
 namespace icelake_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
+
 /*
   Events from icelake_uncore_experimental.json (7 experimental events).
 
-  Supported SKUs:
+  Supported SKUs: 
       - Arch: x86, Model: ICL id: 125
       - Arch: x86, Model: ICL id: 126
 */
@@ -31,7 +32,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -45,7 +46,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -59,7 +60,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -73,7 +74,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -87,7 +88,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -101,7 +102,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
@@ -115,8 +116,9 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
-      ));
+  ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
+
 }
 
 } // namespace icelake_uncore_experimental
