@@ -1586,7 +1586,7 @@ void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       std::map<TOptCpuArch, EventRefs>{
           {std::nullopt,
            EventRefs{EventRef{
-               "branch_misses",
+               "branch_instructions",
                PmuType::cpu,
                "BR_INST_RETIRED.ALL_BRANCHES",
                EventExtraAttr{},
@@ -2021,4 +2021,299 @@ void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
       std::vector<std::string>{}));
 }
 
+// Uncore events for modern Intel architectures using PerfCounterManagerHbt
+// includes ICX, SPR, and SRF
+// For now, enclose each event in a single metric since
+// hbt will enable all events within a metric simultaneously
+// and there may not be enough PMUs.
+void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_MEM_BW_READ",
+      "DDR memory read bandwidth (MB/sec)",
+      "DDR memory read bandwidth (MB/sec)",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::ICX,
+           EventRefs{EventRef{
+               "uncore_cas_count_read",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.RD",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::SPR,
+           EventRefs{EventRef{
+               "uncore_cas_count_read",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.RD",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::SRF,
+           EventRefs{
+               EventRef{
+                   "uncore_cas_count_sch_0_read",
+                   PmuType::uncore_imc,
+                   "UNC_M_CAS_COUNT_SCH0.RD",
+                   EventExtraAttr{},
+                   {},
+               },
+               EventRef{
+                   "uncore_cas_count_sch_1_read",
+                   PmuType::uncore_imc,
+                   "UNC_M_CAS_COUNT_SCH1.RD",
+                   EventExtraAttr{},
+                   {},
+               }}},
+      },
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_MEM_BW_WRITE",
+      "DDR memory write bandwidth (MB/sec)",
+      "DDR memory write bandwidth (MB/sec)",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::ICX,
+           EventRefs{EventRef{
+               "uncore_cas_count_write",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.WR",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::SPR,
+           EventRefs{EventRef{
+               "uncore_cas_count_write",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.WR",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::SRF,
+           EventRefs{
+               EventRef{
+                   "uncore_cas_count_sch_0_write",
+                   PmuType::uncore_imc,
+                   "UNC_M_CAS_COUNT_SCH0.WR",
+                   EventExtraAttr{},
+                   {},
+               },
+               EventRef{
+                   "uncore_cas_count_sch_1_write",
+                   PmuType::uncore_imc,
+                   "UNC_M_CAS_COUNT_SCH1.WR",
+                   EventExtraAttr{},
+                   {},
+               }}},
+      },
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_CHA_READ_MEM_BW_LOCAL",
+      "Bandwidth (MB/sec) of read requests that miss the last level cache (LLC) and go to local memory.",
+      "Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a write).",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uncore_cha_reads_local",
+               PmuType::uncore_cha,
+               "UNC_CHA_REQUESTS.READS_LOCAL",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_CHA_WRITE_MEM_BW_LOCAL",
+      "Bandwidth (MB/sec) of write requests that miss the last level cache (LLC) and go to local memory.",
+      "Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uncore_cha_writes_local",
+               PmuType::uncore_cha,
+               "UNC_CHA_REQUESTS.WRITES_LOCAL",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_CHA_READ_MEM_BW_REMOTE",
+      "Bandwidth (MB/sec) of read requests that miss the last level cache (LLC) and go to remote memory.",
+      "Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uncore_cha_reads_remote",
+               PmuType::uncore_cha,
+               "UNC_CHA_REQUESTS.READS_REMOTE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_CHA_WRITE_MEM_BW_REMOTE",
+      "Bandwidth (MB/sec) of write requests that miss the last level cache (LLC) and go to remote memory.",
+      "Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uncore_cha_writes_remote",
+               PmuType::uncore_cha,
+               "UNC_CHA_REQUESTS.WRITES_REMOTE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_CHA_CLOCKTICKS",
+      "Number of CHA clock cycles while the event is enabled",
+      "Clockticks of the uncore caching and home agent (CHA)",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uncore_cha_clocktics",
+               PmuType::uncore_cha,
+               "UNC_CHA_CLOCKTICKS",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  // Memory latency events for ICX and SPR
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_MEMORY_LATENCY_LOCAL",
+      "Average LLC demand data read miss latency for LOCAL requests (in ns)",
+      "Average latency of a last level cache (LLC) demand data read miss (read memory access) addressed to local memory in nano seconds",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::ICX,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::SPR,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_MEMORY_LATENCY_REMOTE",
+      "Average LLC demand data read miss latency for REMOTE requests (in ns)",
+      "Average latency of a last level cache (LLC) demand data read miss (read memory access) addressed to remote memory in nano seconds",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::ICX,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::SPR,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  // SRF machines are currently single socket only
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_UNCORE_MEMORY_LATENCY",
+      "Average LLC demand data read miss latency (in ns)",
+      "Average latency of a last level cache (LLC) demand data read miss (read memory access) in nano seconds",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::SRF,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_opt",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_opt",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+}
 } // namespace facebook::hbt::perf_event

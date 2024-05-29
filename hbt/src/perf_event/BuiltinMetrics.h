@@ -15,6 +15,7 @@ std::shared_ptr<Metrics> makeAvailableMetrics();
 void addCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addUncoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics);
+void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics);
 
 struct HwCacheEventInfo {
   // this is not unique, but enum of different cache event
