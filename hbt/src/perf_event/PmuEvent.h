@@ -273,6 +273,7 @@ struct EventDef {
   struct Encoding {
     uint64_t code;
     uint64_t umask = 0x0;
+    uint64_t umaskExt = 0x0;
     bool edge = false; // Edge Detect.
     bool any = false; // Any Thread.
     bool inv = false; // Invert.
@@ -367,11 +368,9 @@ struct EventDef {
     }
   }
 
-  /// Create perf_event_attr config field,
-  /// as done in kernel's
-  /// linux/arch/x86/include/asm/perf_event.h macro X86_RAW_EVENT_MASK.
+  /// Create perf_event_attr config field
   EventConfigs makeConfigs(uint32_t new_pmu_type) const {
-    uint64_t config = (encoding.cmask << 24) |
+    uint64_t config = (encoding.umaskExt << 32) | (encoding.cmask << 24) |
         (((uint64_t)encoding.inv) << 23) | (((uint64_t)encoding.any) << 21) |
         (((uint64_t)encoding.edge) << 18) | (encoding.umask << 8u) |
         encoding.code;
