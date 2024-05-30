@@ -113,6 +113,29 @@ class Monitor {
     return toState_(State::Open);
   }
 
+  std::optional<bool> isMetricEnabled(const ElemId& elem_id) {
+    if (cpu_count_readers_.contains(elem_id)) {
+      return cpu_count_readers_.at(elem_id)->isEnabled();
+    }
+    if (uncore_count_readers_.contains(elem_id)) {
+      return uncore_count_readers_.at(elem_id)->isEnabled();
+    }
+#ifdef HBT_ENABLE_TRACING
+    if (trace_monitors_.contains(elem_id)) {
+      return trace_monitors_.at(elem_id)->isEnabled();
+    }
+#endif // HBT_ENABLE_TRACING
+#ifdef HBT_ENABLE_BPERF
+    if (bperf_count_readers_.contains(elem_id)) {
+      return bperf_count_readers_.at(elem_id)->isEnabled();
+    }
+#endif // HBT_ENABLE_BPERF
+    if (ipt_monitors_.contains(elem_id)) {
+      return ipt_monitors_.at(elem_id)->isEnabled();
+    }
+    return std::nullopt;
+  }
+
 #ifdef HBT_ENABLE_TRACING
   /// Process until <stop_ts_opt> (or now() if stop_ts_opt is nullopt.
   /// If <pipeline_max_lat_secs> is provided, then stop that many seconds
@@ -122,7 +145,7 @@ class Monitor {
       unsigned batch_size,
       std::optional<TimeStamp> stop_ts_opt,
       std::optional<std::chrono::seconds> pipeline_max_lat_secs_opt) {
-    std::lock_guard<std::mutex> lock{mutex_};
+    std::lock_guard lock{mutex_};
     for (auto& [k, tc] : trace_monitors_) {
       tc->processNext(batch_size, stop_ts_opt, pipeline_max_lat_secs_opt);
     }
