@@ -1465,7 +1465,11 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
   return metrics;
 }
 
-void addCoreMetrics(std::shared_ptr<Metrics>& metrics) {
+void addArmCoreMetrics(std::shared_ptr<Metrics>& /*metrics*/) {
+  // TODO
+}
+
+void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
   metrics->add(std::make_shared<MetricDesc>(
       "HW_CORE_ICACHE_MISSES",
       "L2 code requests",
