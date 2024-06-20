@@ -424,24 +424,31 @@ class Monitor {
       std::shared_ptr<const perf_event::MetricDesc> metric_desc,
       std::shared_ptr<const perf_event::PmuDeviceManager> pmu_manager,
       perf_event::uncore_scope::Scope scope) {
-    std::lock_guard<std::mutex> lock{mutex_};
+    try {
+      std::lock_guard<std::mutex> lock{mutex_};
 
-    // Check for key before creating new count generator.
-    HBT_ARG_CHECK_EQ(uncore_count_readers_.count(elem_id), 0)
-        << "There is already an interval source with key: \"" << elem_id
-        << "\"";
+      // Check for key before creating new count generator.
+      HBT_ARG_CHECK_EQ(uncore_count_readers_.count(elem_id), 0)
+          << "There is already an interval source with key: \"" << elem_id
+          << "\"";
 
-    auto pmu_type = getPmuTypeOfMetric(*metric_desc, *pmu_manager);
+      auto pmu_type = getPmuTypeOfMetric(*metric_desc, *pmu_manager);
 
-    addMuxEntry_(mux_group_id, elem_id, pmu_type);
-    auto [it, emplaced] = uncore_count_readers_.emplace(
-        elem_id,
-        std::make_unique<Monitor::TUncoreCountReader>(
-            scope, metric_desc, pmu_manager));
+      addMuxEntry_(mux_group_id, elem_id, pmu_type);
+      auto [it, emplaced] = uncore_count_readers_.emplace(
+          elem_id,
+          std::make_unique<Monitor::TUncoreCountReader>(
+              scope, metric_desc, pmu_manager));
 
-    // Transition newly emplaced PerUncoreCountReader to Monitor's state.
-    sync_();
-    return it->second;
+      // Transition newly emplaced PerUncoreCountReader to Monitor's state.
+      sync_();
+      return it->second;
+    } catch (const std::exception& e) {
+      HBT_LOG_ERROR() << fmt::format(
+          "Failed to create Uncore Count Reader with key: \"{}\"", elem_id);
+      HBT_LOG_ERROR() << fmt::format("Error: {}", e.what());
+      return std::shared_ptr<TUncoreCountReader>();
+    }
   }
 
   bool eraseUncoreCountReader(
