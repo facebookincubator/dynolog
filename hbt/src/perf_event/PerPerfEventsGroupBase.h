@@ -33,7 +33,7 @@ class PerPerfEventsGroupBase {
       for (auto& [_, gen] : generators_) {
         gen->enable(reset);
       }
-    } catch (std::exception& /*e*/) {
+    } catch (std::exception&) {
       for (auto& [_, gen] : generators_) {
         if (gen->isEnabled()) {
           gen->disable();
