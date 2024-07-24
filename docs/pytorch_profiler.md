@@ -39,7 +39,7 @@ For PyTorch to register with Dynolog we need to set the following environment va
 export KINETO_USE_DAEMON=1
 export KINETO_DAEMON_INIT_DELAY_S=3
 ```
-The initialization delay is recommended to avoid dynamic library loading race conditions that [manifests as a segfault](https://github.com/pytorch/pytorch/issues/131020).
+The initialization delay is recommended to avoid dynamic library loading race condition that [manifests as a segfault](https://github.com/pytorch/pytorch/issues/131020).
 
 Now you can run the PyTorch program. We included a simple example PyTorch script for you to test out this flow.
 ```bash
