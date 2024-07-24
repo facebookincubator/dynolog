@@ -325,3 +325,31 @@ TEST(MetricFrameTest, showTest) {
 
   std::cout << frame;
 }
+
+TEST(MetricFrameVectorTest, showTest) {
+  auto ts = std::make_shared<MetricFrameTsUnitFixInterval>(
+      std::chrono::seconds{60}, 10);
+  MetricFrameVector frameVector(
+      {std::make_shared<MetricSeries<int64_t>>(10, "metric1", "test metric 1"),
+       std::make_shared<MetricSeries<double>>(10, "metric2", "test metric 2"),
+       std::make_shared<MetricSeries<uint64_t>>(
+           10, "metric3", "test metric 3")},
+      "test",
+      "test metric frame",
+      std::move(ts));
+
+  auto now = std::chrono::steady_clock::now();
+  frameVector.addSamples({42l, 23.9f, (uint64_t)42}, now);
+  frameVector.addSamples({43l, 24.9f, (uint64_t)43}, now + 60s);
+  frameVector.addSamples({44l, 25.9f, (uint64_t)44}, now + 120s);
+
+  std::stringstream ss;
+  frameVector.show(ss);
+  EXPECT_FALSE(ss.str().empty());
+  EXPECT_TRUE(ss.str().find("metric1") != std::string::npos);
+  EXPECT_TRUE(ss.str().find("metric2") != std::string::npos);
+  EXPECT_TRUE(ss.str().find("metric3") != std::string::npos);
+  EXPECT_TRUE(ss.str().find("test metric frame") != std::string::npos);
+
+  std::cout << frameVector;
+}
