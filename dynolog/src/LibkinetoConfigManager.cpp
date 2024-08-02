@@ -13,6 +13,7 @@
 #include <thread>
 #include <type_traits>
 #include <utility>
+#include "hbt/src/common/System.h"
 #ifdef __linux__
 #include <sys/prctl.h>
 #endif
@@ -35,6 +36,28 @@ inline void setThreadName(const std::string& name) {
 }
 
 } // namespace
+
+static std::string addTraceIdToConfigString(
+    const std::string& trace_id,
+    const std::string& config) {
+  const std::string kTraceIdIdentifier = "REQUEST_TRACE_ID";
+  return fmt::format(
+      R"(
+    {}
+    {}={})",
+      config,
+      kTraceIdIdentifier,
+      trace_id);
+}
+
+static std::string generateTraceId(int32_t pid) {
+  // Hostname + PID + timestamp should be a unique trace id in the context
+  // of this code's execution
+  std::string str_trace_id = fmt::format(
+      "{}:{}:{}", facebook::hbt::getHostName(), pid, std::time(nullptr));
+  std::size_t hashed_trace_id = std::hash<std::string>{}(str_trace_id);
+  return std::to_string(hashed_trace_id);
+}
 
 LibkinetoConfigManager::LibkinetoConfigManager() {
   managerThread_ = new std::thread(&LibkinetoConfigManager::start, this);
@@ -212,8 +235,14 @@ void LibkinetoConfigManager::setOnDemandConfigForProcess(
     if (process.activityProfilerConfig.empty()) {
       preCheckOnDemandConfig(process);
 
-      process.activityProfilerConfig = config;
+      std::string trace_id = generateTraceId(process.pid);
+      std::string updatedConfig = addTraceIdToConfigString(trace_id, config);
+
       res.activityProfilersTriggered.push_back(process.pid);
+      process.activityProfilerConfig = updatedConfig;
+      res.traceIds.push_back(trace_id);
+
+      LOG(INFO) << " PID: " << process.pid << ", Trace Id: " << trace_id;
     } else {
       res.activityProfilersBusy++;
     }

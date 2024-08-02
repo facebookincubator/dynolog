@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <string>
 #include <vector>
 
 namespace dynolog {
@@ -16,6 +17,7 @@ enum class LibkinetoConfigType {
 };
 
 struct GpuProfilerResult {
+  std::vector<std::string> traceIds;
   std::vector<int32_t> processesMatched;
   std::vector<int32_t> eventProfilersTriggered;
   std::vector<int32_t> activityProfilersTriggered;
