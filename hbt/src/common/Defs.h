@@ -33,7 +33,7 @@ template <class TStream>
 TStream& LogCtxt(TStream& oss) {
   oss << "pid: " << ::getpid() << " on ";
   // Put date and time.
-  auto p = std::chrono::high_resolution_clock::now();
+  auto p = std::chrono::system_clock::now();
   auto t_c = std::chrono::system_clock::to_time_t(p);
   oss << std::put_time(std::localtime(&t_c), "%F %T");
   // Put microseconds.
