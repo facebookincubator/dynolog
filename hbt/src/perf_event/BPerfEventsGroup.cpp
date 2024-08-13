@@ -17,9 +17,6 @@
 
 namespace facebook::hbt::perf_event {
 
-constexpr auto kAttrMapVersion = 1;
-constexpr auto kAttrMapSize = 16;
-
 static inline __u32 bpf_link_get_id(int fd) {
   struct bpf_link_info link_info = {
       .id = 0,
@@ -101,23 +98,6 @@ inline ino_t mapFdWrapperPtrIntoInode(
 
 BPerfEventsGroup::~BPerfEventsGroup() {
   this->close();
-}
-
-std::string BPerfEventsGroup::attrMapPath() {
-  std::stringstream ss;
-
-  ss << "/sys/fs/bpf/bperf_attr_map_v";
-  ss << std::setw(3) << std::setfill('0') << kAttrMapVersion;
-  return ss.str();
-}
-
-// TODO: deprecate attr map?
-bperf_attr_map_key::bperf_attr_map_key(std::string n, int s) : size(s) {
-  ::memset(name, 0, BPERF_METRIC_NAME_SIZE);
-  ::memcpy(
-      name,
-      n.c_str(),
-      std::min(static_cast<int>(n.size()), BPERF_METRIC_NAME_SIZE - 1));
 }
 
 size_t BPerfEventsGroup::getNumEvents() const {
@@ -434,44 +414,6 @@ bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
   } else {
     return false;
   }
-}
-
-// TODO replace flock with mkdirmutex:
-//   https://github.com/cdown/mkdirmutex
-[[nodiscard]] int BPerfEventsGroup::lockAttrMap_() {
-  auto path = BPerfEventsGroup::attrMapPath();
-  int map_fd;
-  int err = -1;
-
-  if (::access(path.c_str(), F_OK)) {
-    HBT_LOG_INFO() << "Creating " << path;
-
-    map_fd = ::bpf_map_create(
-        BPF_MAP_TYPE_HASH,
-        nullptr,
-        sizeof(struct bperf_attr_map_key),
-        sizeof(struct bperf_attr_map_elem),
-        kAttrMapSize,
-        nullptr);
-    if (map_fd < 0) {
-      return -1;
-    }
-
-    if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
-      HBT_LOG_WARNING() << "Someone pinned the map at " << path << ". "
-                        << "Error: " << toErrorCode(-err).message();
-      ::close(map_fd);
-    }
-  }
-  if (err) {
-    map_fd = ::bpf_obj_get(path.c_str());
-    if (map_fd < 0) {
-      return -1;
-    }
-  }
-  ::flock(map_fd, LOCK_EX);
-
-  return map_fd;
 }
 
 void BPerfEventsGroup::toReadValues(
