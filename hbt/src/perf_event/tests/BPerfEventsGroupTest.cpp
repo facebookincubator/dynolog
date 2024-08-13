@@ -32,12 +32,6 @@ void checkReading(
 }
 } // namespace
 
-TEST(BPerfEventsGroupTest, attr_map_path) {
-  auto attr_map_path = BPerfEventsGroup::attrMapPath();
-
-  EXPECT_EQ(attr_map_path.find("/sys/fs/bpf/bperf_attr_map_v"), 0);
-}
-
 TEST(BPerfEventsGroupTest, RunSystemWide) {
   auto pmu_manager = makePmuDeviceManager();
   auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");

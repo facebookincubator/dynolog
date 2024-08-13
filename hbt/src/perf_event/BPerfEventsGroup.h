@@ -65,7 +65,6 @@ class BPerfEventsGroup {
       int cgroup_update_level);
 
   ~BPerfEventsGroup();
-  static std::string attrMapPath();
 
   size_t getNumEvents() const;
   bool open();
@@ -140,7 +139,6 @@ class BPerfEventsGroup {
       __u64 id,
       bool skip_offset = false);
 
-  int lockAttrMap_();
   int reloadSkel_(struct bperf_attr_map_elem* entry);
   int loadPerfEvent_(struct bperf_leader_cgroup* skel);
 
