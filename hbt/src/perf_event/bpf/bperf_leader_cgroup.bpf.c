@@ -75,7 +75,7 @@ static void update_cgroup_output(struct bpf_perf_event_value* diff_val,
 
 static __always_inline int bperf_leader_prog(struct task_struct *prev) {
   struct bpf_perf_event_value val, *prev_val, *diff_val, *sys_val;
-  __u32 key = bpf_get_smp_processor_id();
+  __u32 cpu = bpf_get_smp_processor_id();
   __u32 zero = 0, i;
   long err;
 
@@ -92,7 +92,7 @@ static __always_inline int bperf_leader_prog(struct task_struct *prev) {
     return 0;
 
   for (i = 0; i < BPERF_MAX_GROUP_SIZE; i++) {
-    __u32 idx = i * cpu_cnt + key;
+    __u32 idx = i * cpu_cnt + cpu;
 
     if (i >= event_cnt)
       break;
