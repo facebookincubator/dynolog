@@ -285,8 +285,7 @@ TEST(BPerfCountReader, SmokeTest) {
   // User's slice.
   auto cgroup_path = "/sys/fs/cgroup/user.slice";
 
-  auto eg =
-      std::make_shared<BPerfEventsGroup>("myperfunittest", *m, *pmu_manager, 1);
+  auto eg = std::make_shared<BPerfEventsGroup>(*m, *pmu_manager, 1);
   if (!eg->open() || !eg->enable()) {
     GTEST_SKIP()
         << "Failed to open global perf events. Something is wrong with BPerfEventsGroup"
