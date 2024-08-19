@@ -59,12 +59,9 @@ static inline __u32 bpf_prog_get_id(int fd) {
 
 /// name: Path of ebpf map
 BPerfEventsGroup::BPerfEventsGroup(
-    const std::string& name,
     const EventConfs& confs,
     int cgroup_update_level)
-    : name_(name), confs_(confs), cgroup_update_level_(cgroup_update_level) {
-  HBT_ARG_CHECK_LE(name.length(), BPERF_METRIC_NAME_SIZE)
-      << "bpf map name is too long, max size is " << BPERF_METRIC_NAME_SIZE;
+    : confs_(confs), cgroup_update_level_(cgroup_update_level) {
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
         .size = sizeof(attr),
@@ -80,12 +77,10 @@ BPerfEventsGroup::BPerfEventsGroup(
 }
 
 BPerfEventsGroup::BPerfEventsGroup(
-    const std::string& name,
     const MetricDesc& metric,
     const PmuDeviceManager& pmu_manager,
     int cgroup_update_level)
     : BPerfEventsGroup(
-          name,
           metric.makeNoCpuTopologyConfs(pmu_manager),
           cgroup_update_level) {}
 inline ino_t mapFdWrapperPtrIntoInode(

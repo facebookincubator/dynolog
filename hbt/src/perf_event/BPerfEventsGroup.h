@@ -19,20 +19,6 @@ struct bperf_leader_cgroup;
 
 namespace facebook::hbt::perf_event {
 
-#define BPERF_METRIC_NAME_SIZE 16
-
-// This is the data we stored in a pinned BPF map
-//   /sys/fs/bpf/bperf_attr_map_vXXX
-// where XXX is the version number ATTR_MAP_VERSION.
-//
-// This map doesn't hold reference on any of these programs or maps.
-struct bperf_attr_map_key {
-  __u32 size;
-  __u32 flags = 0;
-  char name[BPERF_METRIC_NAME_SIZE];
-  bperf_attr_map_key(std::string n, int s);
-};
-
 struct bperf_attr_map_elem {
   __u32 perf_event_array_id;
   __u32 leader_prog_link_id;
@@ -52,14 +38,9 @@ class BPerfEventsGroup {
  public:
   using ReadValues = GroupReadValues<mode::Counting>;
   ///
-  ///  - name: Name for eBPF maps.
   ///  - confs: Event Confs for group.
+  BPerfEventsGroup(const EventConfs& confs, int cgroup_update_level);
   BPerfEventsGroup(
-      const std::string& name,
-      const EventConfs& confs,
-      int cgroup_update_level);
-  BPerfEventsGroup(
-      const std::string& name,
       const MetricDesc& metric,
       const PmuDeviceManager& pmu_manager,
       int cgroup_update_level);
@@ -87,7 +68,6 @@ class BPerfEventsGroup {
   bool readCgroup(ReadValues& rv, __u64 id);
 
  protected:
-  const std::string name_;
   const EventConfs confs_;
 
   // set of cgrup inodes that the BPerfEventsGroup is monitoring

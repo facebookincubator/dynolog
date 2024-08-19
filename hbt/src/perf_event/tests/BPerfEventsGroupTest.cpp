@@ -42,7 +42,7 @@ TEST(BPerfEventsGroupTest, RunSystemWide) {
   auto ev_conf =
       pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
 
-  auto system = BPerfEventsGroup("cycles", EventConfs({ev_conf}), 0);
+  auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE];
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
   if (!system.open() || !system.enable()) {
@@ -70,8 +70,7 @@ TEST(BPerfEventsGroupTest, RunCgroup) {
   auto instructions_conf = pmu->makeConf(
       instructions_def->id, EventExtraAttr(), EventValueTransforms());
   auto cgrpFdPtr = std::make_shared<FdWrapper>("/sys/fs/cgroup/system.slice/");
-  auto cgrp =
-      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 1);
+  auto cgrp = BPerfEventsGroup(EventConfs({cycles_conf, instructions_conf}), 1);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE];
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
 
@@ -130,7 +129,7 @@ TEST(BPerfEventsGroupTest, MetricConstructor) {
       std::vector<std::string>{} // No post-processing dives
   );
 
-  auto eg = BPerfEventsGroup("ipc", *m, *pmu_manager, 0);
+  auto eg = BPerfEventsGroup(*m, *pmu_manager, 0);
   if (!eg.open() || !eg.enable()) {
     GTEST_SKIP() << "Skip RunSystemWide test, do we have CAP_PERFMON?";
   }
@@ -157,8 +156,7 @@ TEST(BPerfEventsGroupTest, EnableDisable) {
       pmu->makeConf(cycles_def->id, EventExtraAttr(), EventValueTransforms());
   auto instructions_conf = pmu->makeConf(
       instructions_def->id, EventExtraAttr(), EventValueTransforms());
-  auto eg =
-      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 0);
+  auto eg = BPerfEventsGroup(EventConfs({cycles_conf, instructions_conf}), 0);
   struct bpf_perf_event_value val[BPERF_MAX_GROUP_SIZE] = {};
   struct bpf_perf_event_value prev[BPERF_MAX_GROUP_SIZE] = {};
 
@@ -192,8 +190,7 @@ TEST(BPerfEventsGroupTest, cgroup_update_level) {
   auto instructions_conf = pmu->makeConf(
       instructions_def->id, EventExtraAttr(), EventValueTransforms());
   auto cgrpFdPtr = std::make_shared<FdWrapper>("/sys/fs/cgroup/system.slice/");
-  auto cgrp =
-      BPerfEventsGroup("ipc", EventConfs({cycles_conf, instructions_conf}), 2);
+  auto cgrp = BPerfEventsGroup(EventConfs({cycles_conf, instructions_conf}), 2);
 
   if (!cgrp.open() || !cgrp.enable()) {
     GTEST_SKIP() << "Skip RunCgroup test, do we have CAP_PERFMON?";
