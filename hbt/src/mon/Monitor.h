@@ -113,6 +113,7 @@ class Monitor {
     return toState_(State::Open);
   }
 
+  // Return a null optional if the element is not found.
   std::optional<bool> isMetricEnabled(const ElemId& elem_id) {
     if (cpu_count_readers_.contains(elem_id)) {
       return cpu_count_readers_.at(elem_id)->isEnabled();
