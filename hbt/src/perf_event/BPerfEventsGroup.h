@@ -36,14 +36,23 @@ struct bperf_attr_map_elem {
 
 class BPerfEventsGroup {
  public:
+  static std::string perThreadArrayMapPath(const std::string& n);
+  static std::string perThreadIndexMapPath(const std::string& n);
+
   using ReadValues = GroupReadValues<mode::Counting>;
   ///
   ///  - confs: Event Confs for group.
-  BPerfEventsGroup(const EventConfs& confs, int cgroup_update_level);
+  BPerfEventsGroup(
+      const EventConfs& confs,
+      int cgroup_update_level,
+      bool support_per_thread = false,
+      const std::string& pin_name = "");
   BPerfEventsGroup(
       const MetricDesc& metric,
       const PmuDeviceManager& pmu_manager,
-      int cgroup_update_level);
+      int cgroup_update_level,
+      bool support_per_thread = false,
+      const std::string& pin_name = "");
 
   ~BPerfEventsGroup();
 
@@ -125,6 +134,16 @@ class BPerfEventsGroup {
   static int syncCpu_(__u32 cpu, int leader_pd);
   static void toReadValues(ReadValues& rv, struct bpf_perf_event_value*);
   void syncGlobal_();
-};
 
+  // For per thread monitoring
+  bool per_thread_;
+  const std::string pin_name_;
+
+  int pinThreadMaps_(bperf_leader_cgroup* skel);
+  int preparePerThreadBPerf_(bperf_leader_cgroup* skel);
+
+  ::bpf_link* register_thread_link_ = nullptr;
+  ::bpf_link* unregister_thread_link_ = nullptr;
+  ::bpf_link* update_thread_link_ = nullptr;
+};
 } // namespace facebook::hbt::perf_event

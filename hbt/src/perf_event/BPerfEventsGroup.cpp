@@ -60,8 +60,13 @@ static inline __u32 bpf_prog_get_id(int fd) {
 /// name: Path of ebpf map
 BPerfEventsGroup::BPerfEventsGroup(
     const EventConfs& confs,
-    int cgroup_update_level)
-    : confs_(confs), cgroup_update_level_(cgroup_update_level) {
+    int cgroup_update_level,
+    bool support_per_thread,
+    const std::string& pin_name)
+    : confs_(confs),
+      cgroup_update_level_(cgroup_update_level),
+      per_thread_(support_per_thread),
+      pin_name_(pin_name) {
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
         .size = sizeof(attr),
@@ -79,10 +84,14 @@ BPerfEventsGroup::BPerfEventsGroup(
 BPerfEventsGroup::BPerfEventsGroup(
     const MetricDesc& metric,
     const PmuDeviceManager& pmu_manager,
-    int cgroup_update_level)
+    int cgroup_update_level,
+    bool support_per_thread,
+    const std::string& pin_name)
     : BPerfEventsGroup(
           metric.makeNoCpuTopologyConfs(pmu_manager),
-          cgroup_update_level) {}
+          cgroup_update_level,
+          support_per_thread,
+          pin_name) {}
 inline ino_t mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
@@ -185,12 +194,31 @@ void BPerfEventsGroup::close() {
   cgroup_output_fd_ = -1;
   ::close(global_output_fd_);
   global_output_fd_ = -1;
+  ::bpf_link__destroy(register_thread_link_);
+  register_thread_link_ = nullptr;
+  ::bpf_link__destroy(unregister_thread_link_);
+  unregister_thread_link_ = nullptr;
   for (auto& fd : pe_fds_) {
     ::close(fd);
     fd = -1;
   }
   opened_ = false;
 }
+
+std::string BPerfEventsGroup::perThreadArrayMapPath(const std::string& n) {
+  std::stringstream ss;
+
+  ss << "/sys/fs/bpf/bperf_per_thread_array_" << n;
+  return ss.str();
+}
+
+std::string BPerfEventsGroup::perThreadIndexMapPath(const std::string& n) {
+  std::stringstream ss;
+
+  ss << "/sys/fs/bpf/bperf_per_thread_index_" << n;
+  return ss.str();
+}
+
 bool BPerfEventsGroup::isOpen() const {
   return opened_;
 }
@@ -225,7 +253,7 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
   DECLARE_LIBBPF_OPTS(
       bpf_test_run_opts,
       opts,
-      .ctx_in = NULL,
+      .ctx_in = nullptr,
       .ctx_size_in = 0,
       .flags = BPF_F_TEST_RUN_ON_CPU,
       .cpu = cpu,
@@ -269,6 +297,7 @@ void bperf_attr_map_elem::loadFromSkelLink(
   int event_cnt = confs_.size();
   ::bpf_link* link;
   int err;
+  int per_thread_data_size;
 
   if (skel == nullptr) {
     HBT_LOG_ERROR() << "Failed to open skeleton.";
@@ -276,6 +305,13 @@ void bperf_attr_map_elem::loadFromSkelLink(
   }
 
   ::bpf_map__set_max_entries(skel->maps.events, cpu_cnt_ * event_cnt);
+
+  per_thread_data_size = sizeof(struct bperf_thread_data) +
+      sizeof(struct bperf_perf_event_data) * event_cnt;
+  /* roundup to 64 byte aligned */
+  per_thread_data_size = (per_thread_data_size + 63) & ~63;
+  ::bpf_map__set_value_size(skel->maps.per_thread_data, per_thread_data_size);
+
   if (err = bperf_leader_cgroup__load(skel); err) {
     HBT_LOG_ERROR() << "Failed to load skeleton.";
     return err;
@@ -305,10 +341,80 @@ void bperf_attr_map_elem::loadFromSkelLink(
     HBT_LOG_ERROR() << "Failed to load perf events";
   }
 
+  if (per_thread_) {
+    preparePerThreadBPerf_(skel);
+  }
 out:
   bperf_leader_cgroup__destroy(skel);
   ::bpf_link__destroy(link);
   return err;
+}
+
+int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
+  int err, map_fd;
+  auto path = BPerfEventsGroup::perThreadIndexMapPath(pin_name_);
+
+  map_fd = ::bpf_map__fd(skel->maps.per_thread_idx);
+  ::unlink(path.c_str());
+  if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
+    HBT_LOG_WARNING() << "Someone pinned the map at " << path << ". "
+                      << "Error: " << toErrorCode(-err).message();
+    return -1;
+  }
+
+  path = BPerfEventsGroup::perThreadArrayMapPath(pin_name_);
+  map_fd = bpf_map__fd(skel->maps.per_thread_data);
+  ::unlink(path.c_str());
+  if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
+    HBT_LOG_WARNING() << "Someone pinned the map at " << path << ". "
+                      << "Error: " << toErrorCode(-err).message();
+    return -1;
+  }
+  return 0;
+}
+
+int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
+  int err, fd;
+
+  err = pinThreadMaps_(skel);
+  if (err != 0) {
+    HBT_LOG_ERROR() << "Failed to pin maps for per thread monitoring";
+    return err;
+  }
+
+  fd = ::bpf_map__fd(skel->maps.per_thread_data);
+  skel->bss->per_thread_data_id = bpf_map_get_id(fd);
+
+  register_thread_link_ =
+      ::bpf_program__attach(skel->progs.bperf_register_thread);
+  if (!register_thread_link_) {
+    HBT_LOG_ERROR() << "Failed to attach register_per_thread";
+    return -1;
+  }
+
+  unregister_thread_link_ =
+      ::bpf_program__attach(skel->progs.bperf_unregister_thread);
+  if (!unregister_thread_link_) {
+    HBT_LOG_ERROR() << "Failed to attach trace_bpf_mmap_close";
+    goto error_out;
+  }
+
+  update_thread_link_ = ::bpf_program__attach(skel->progs.bperf_update_thread);
+  if (!update_thread_link_) {
+    HBT_LOG_ERROR() << "Failed to attach bperf_update_thread";
+    goto error_out;
+  }
+
+  return 0;
+
+error_out:
+  ::bpf_link__destroy(register_thread_link_);
+  register_thread_link_ = nullptr;
+  ::bpf_link__destroy(unregister_thread_link_);
+  unregister_thread_link_ = nullptr;
+  ::bpf_link__destroy(update_thread_link_);
+  update_thread_link_ = nullptr;
+  return -1;
 }
 
 [[nodiscard]] int BPerfEventsGroup::loadPerfEvent_(
