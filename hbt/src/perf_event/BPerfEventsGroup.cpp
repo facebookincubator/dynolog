@@ -312,14 +312,15 @@ void bperf_attr_map_elem::loadFromSkelLink(
   per_thread_data_size = (per_thread_data_size + 63) & ~63;
   ::bpf_map__set_value_size(skel->maps.per_thread_data, per_thread_data_size);
 
+  skel->bss->cpu_cnt = cpu_cnt_;
+  skel->rodata->event_cnt = event_cnt;
+  skel->bss->cgroup_update_level = cgroup_update_level_;
+
   if (err = bperf_leader_cgroup__load(skel); err) {
     HBT_LOG_ERROR() << "Failed to load skeleton.";
     return err;
   }
 
-  skel->bss->cpu_cnt = cpu_cnt_;
-  skel->bss->event_cnt = event_cnt;
-  skel->bss->cgroup_update_level = cgroup_update_level_;
   link = ::bpf_program__attach(skel->progs.bperf_on_sched_switch);
   if (!link) {
     HBT_LOG_ERROR() << "Failed to attach leader program";

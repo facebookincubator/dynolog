@@ -49,7 +49,7 @@ struct {
 static void update_prev_user_page(struct bpf_perf_event_value* diff_val,
                                   struct task_struct *task);
 
-int event_cnt = 0;
+const volatile int event_cnt = 0;
 int cpu_cnt = 0;
 int cgroup_update_level = 0;
 
