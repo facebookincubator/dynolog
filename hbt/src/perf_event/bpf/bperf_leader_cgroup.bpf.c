@@ -159,11 +159,15 @@ struct {
   __uint(max_entries, BPERF_MAX_THREAD_READER);
 } per_thread_idx SEC(".maps");
 
+#define BPERF_MAX_THREAD_DATA_SIZE (sizeof(struct bperf_thread_data) + \
+                                    sizeof(struct bperf_perf_event_data) * BPERF_MAX_GROUP_SIZE)
 struct {
   __uint(type, BPF_MAP_TYPE_ARRAY);
   __uint(key_size, sizeof(int));
-  /* for variable size bperf_thread_data, update value_size before load */
-  __uint(value_size, 1);
+  /* for variable size bperf_thread_data, update value_size before load.
+   * Set the default size to the maximum to make veristat happy.
+   */
+  __uint(value_size, BPERF_MAX_THREAD_DATA_SIZE);
   __uint(max_entries, BPERF_MAX_THREAD_READER);
   __uint(map_flags, BPF_F_MMAPABLE);
 } per_thread_data SEC(".maps");
