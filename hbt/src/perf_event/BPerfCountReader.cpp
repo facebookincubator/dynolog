@@ -32,9 +32,10 @@ bool BPerfCountReader::enable() {
       cgroup_tracking_ = true;
     }
     return cgroup_tracking_;
-  } else {
-    return bperf_eg_->enable();
   }
+  // if BPerfCountReader is open for global perf counter, then enable() is a
+  // no-op
+  return false;
 }
 
 bool BPerfCountReader::disable() {
@@ -43,9 +44,10 @@ bool BPerfCountReader::disable() {
       cgroup_tracking_ = false;
     }
     return !cgroup_tracking_;
-  } else {
-    return bperf_eg_->disable();
   }
+  // if BPerfCountReader is open for global perf counter, then disable() is a
+  // no-op
+  return false;
 }
 
 bool BPerfCountReader::read(
