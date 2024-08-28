@@ -30,11 +30,18 @@ class BPerfPerThreadReader {
  protected:
   void* mmap_ptr_ = nullptr;
   struct bperf_thread_data* data_ = nullptr;
+  // For compatibility (newer leader with older reader), we cannot use
+  // data_->events directly. Instead use event_data_ which is adjusted
+  // based on leader data structure.
+  struct bperf_perf_event_data* event_data_[BPERF_MAX_GROUP_SIZE] = {nullptr};
   int data_fd_ = -1;
   const std::string pin_name_;
   __s64 initial_clock_drift_ = 0;
   int event_cnt_;
-  int mmap_size_;
+  int data_size_ = 0;
+  int mmap_size_ = 0;
+
+  int getDataSize_();
 };
 
 } // namespace facebook::hbt::perf_event

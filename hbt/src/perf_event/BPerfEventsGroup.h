@@ -145,5 +145,6 @@ class BPerfEventsGroup {
   ::bpf_link* register_thread_link_ = nullptr;
   ::bpf_link* unregister_thread_link_ = nullptr;
   ::bpf_link* update_thread_link_ = nullptr;
+  int per_thread_data_size_ = 0;
 };
 } // namespace facebook::hbt::perf_event

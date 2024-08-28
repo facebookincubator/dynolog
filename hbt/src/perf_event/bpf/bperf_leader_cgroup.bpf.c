@@ -234,10 +234,6 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   if (!data)
     return 0;
 
-  data->header_size = sizeof(struct bperf_thread_data);
-  data->event_data_size = sizeof(struct bperf_perf_event_data);
-  data->event_cnt = event_cnt;
-  data->flags = 0;
   data->lock = 1;
 
   tid = bpf_get_current_pid_tgid() & 0xffffffff;

@@ -11,13 +11,7 @@
 namespace facebook::hbt::perf_event {
 
 BPerfPerThreadReader::BPerfPerThreadReader(std::string pin_name, int event_cnt)
-    : pin_name_(std::move(pin_name)), event_cnt_(event_cnt) {
-  // TODO: to be really backward/forward compatible, it is necessary to
-  // adjust mmap_size_ based after mmap.
-  mmap_size_ = (sizeof(struct bperf_thread_data) +
-                event_cnt * sizeof(struct bperf_perf_event_data)) *
-      BPERF_MAX_THREAD_READER;
-}
+    : pin_name_(std::move(pin_name)), event_cnt_(event_cnt) {}
 
 static __u64 getRefMonoTime(void) {
   struct timespec ts;
@@ -26,8 +20,26 @@ static __u64 getRefMonoTime(void) {
   return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
+int BPerfPerThreadReader::getDataSize_() {
+  struct bpf_map_info map_info;
+  __u32 map_info_len = sizeof(map_info);
+  int err;
+
+  memset(&map_info, 0, sizeof(map_info));
+  err = bpf_obj_get_info_by_fd(data_fd_, &map_info, &map_info_len);
+
+  if (err) {
+    return err;
+  }
+
+  data_size_ = map_info.value_size;
+  mmap_size_ = data_size_ * map_info.max_entries;
+  return 0;
+}
+
 int BPerfPerThreadReader::enable() {
   int idx_fd, tid, idx = 0, err;
+  struct bperf_thread_metadata* metadata;
 
   idx_fd =
       ::bpf_obj_get(BPerfEventsGroup::perThreadIndexMapPath(pin_name_).c_str());
@@ -39,8 +51,11 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
-  mmap_ptr_ = mmap(
-      nullptr, mmap_size_, PROT_READ | PROT_WRITE, MAP_SHARED, data_fd_, 0);
+  if (getDataSize_() != 0) {
+    goto error;
+  }
+
+  mmap_ptr_ = mmap(nullptr, mmap_size_, PROT_READ, MAP_SHARED, data_fd_, 0);
 
   if (mmap_ptr_ == MAP_FAILED) {
     HBT_LOG_ERROR() << "mmap failed with " << errno;
@@ -51,14 +66,23 @@ int BPerfPerThreadReader::enable() {
   err = ::bpf_map_lookup_elem(idx_fd, &tid, &idx);
 
   if (err != 0) {
-    HBT_LOG_ERROR() << "cannot lookup the idx";
+    HBT_LOG_ERROR() << "cannot lookup the idx ";
     goto error;
   }
 
+  metadata = (struct bperf_thread_metadata*)mmap_ptr_;
+
   ::close(idx_fd);
 
-  data_ = (struct bperf_thread_data*)mmap_ptr_;
-  data_ += idx;
+  data_ = (struct bperf_thread_data*)((unsigned long long)mmap_ptr_ +
+                                      idx * data_size_);
+
+  for (int i = 0; i < event_cnt_; i++) {
+    event_data_[i] =
+        (struct bperf_perf_event_data*)((unsigned long long)data_ +
+                                        metadata->thread_data_size +
+                                        i * metadata->event_data_size);
+  }
 
   // There is a small drift between time from clock_gettime() and tsc.
   // On a skylake host, I get about 0.02% difference. Get the initial
