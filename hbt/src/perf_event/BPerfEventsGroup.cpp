@@ -297,7 +297,6 @@ void bperf_attr_map_elem::loadFromSkelLink(
   int event_cnt = confs_.size();
   ::bpf_link* link;
   int err;
-  int per_thread_data_size;
 
   if (skel == nullptr) {
     HBT_LOG_ERROR() << "Failed to open skeleton.";
@@ -306,11 +305,11 @@ void bperf_attr_map_elem::loadFromSkelLink(
 
   ::bpf_map__set_max_entries(skel->maps.events, cpu_cnt_ * event_cnt);
 
-  per_thread_data_size = sizeof(struct bperf_thread_data) +
+  per_thread_data_size_ = sizeof(struct bperf_thread_data) +
       sizeof(struct bperf_perf_event_data) * event_cnt;
   /* roundup to 64 byte aligned */
-  per_thread_data_size = (per_thread_data_size + 63) & ~63;
-  ::bpf_map__set_value_size(skel->maps.per_thread_data, per_thread_data_size);
+  per_thread_data_size_ = bperf_roundup(per_thread_data_size_, 64);
+  ::bpf_map__set_value_size(skel->maps.per_thread_data, per_thread_data_size_);
 
   skel->bss->cpu_cnt = cpu_cnt_;
   skel->rodata->event_cnt = event_cnt;
@@ -364,7 +363,7 @@ int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
   }
 
   path = BPerfEventsGroup::perThreadArrayMapPath(pin_name_);
-  map_fd = bpf_map__fd(skel->maps.per_thread_data);
+  map_fd = ::bpf_map__fd(skel->maps.per_thread_data);
   ::unlink(path.c_str());
   if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
     HBT_LOG_WARNING() << "Someone pinned the map at " << path << ". "
@@ -375,7 +374,13 @@ int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
 }
 
 int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
+  char buf[per_thread_data_size_];
+  struct bperf_thread_metadata* metadata = (struct bperf_thread_metadata*)buf;
   int err, fd;
+  int zero = 0;
+
+  static_assert(
+      sizeof(struct bperf_thread_metadata) <= sizeof(struct bperf_thread_data));
 
   err = pinThreadMaps_(skel);
   if (err != 0) {
@@ -403,6 +408,37 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
   update_thread_link_ = ::bpf_program__attach(skel->progs.bperf_update_thread);
   if (!update_thread_link_) {
     HBT_LOG_ERROR() << "Failed to attach bperf_update_thread";
+    goto error_out;
+  }
+
+  /* Use the first element of array per_thread_data for meta data */
+  skel->bss->bitmap[0] |= 1;
+  memset(metadata, 0, per_thread_data_size_);
+  err = ::bpf_map__lookup_elem(
+      skel->maps.per_thread_data,
+      &zero,
+      sizeof(zero),
+      metadata,
+      per_thread_data_size_,
+      0);
+  if (err) {
+    goto error_out;
+  }
+
+  metadata->metadata_size = sizeof(struct bperf_thread_metadata);
+  metadata->thread_data_size = sizeof(struct bperf_thread_data);
+  metadata->event_data_size = sizeof(struct bperf_perf_event_data);
+  metadata->event_cnt = skel->rodata->event_cnt;
+  metadata->flags = 0;
+
+  err = ::bpf_map__update_elem(
+      skel->maps.per_thread_data,
+      &zero,
+      sizeof(zero),
+      metadata,
+      per_thread_data_size_,
+      BPF_ANY);
+  if (err) {
     goto error_out;
   }
 

@@ -32,6 +32,14 @@ struct bperf_clock_param {
 /* data of a single perf_event */
 struct bperf_perf_event_data {};
 
+struct bperf_thread_metadata {
+  __u32 metadata_size; /* sizeof(bperf_thread_metadata) */
+  __u32 thread_data_size; /* sizeof(bperf_thread_data) */
+  __u32 event_data_size; /* sizeof(bperf_perf_event_data) */
+  __u32 event_cnt;
+  __u32 flags;
+};
+
 /* BPerfEventsGroup may have variable number of perf events.
  * Therefore, the bperf_thread_data used for each thread may
  * change. To show the data, we use fixed size header for per
@@ -39,16 +47,11 @@ struct bperf_perf_event_data {};
  * per event data (bperf_perf_event_data).
  */
 struct bperf_thread_data {
-  __u32 header_size; /* sizeof(bperf_thread_data) */
-  __u32 event_data_size; /* sizeof(bperf_perf_event_data) */
-  __u32 event_cnt;
-  __u32 flags;
-
   __u32 lock;
+  __u32 __reserved;
   struct bperf_clock_param tsc_param;
 
   /* all the times are in nano seconds */
-
   /* when the task got sched in the last time */
   __u64 schedin_time;
 
@@ -56,6 +59,10 @@ struct bperf_thread_data {
   __u64 runtime_until_schedin;
 
   struct bperf_perf_event_data events[];
-} __attribute__((packed));
+};
+
+inline int bperf_roundup(int size, int align) {
+  return (size + align - 1) / align * align;
+}
 
 #endif
