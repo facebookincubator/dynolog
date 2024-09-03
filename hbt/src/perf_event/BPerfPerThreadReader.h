@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <bpf/libbpf.h>
+
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/perf_event/PmuDevices.h"
@@ -16,7 +18,7 @@ namespace facebook::hbt::perf_event {
 struct BPerfThreadData {
   __u64 cpuTime;
   __u64 monoTime;
-  __u64 counters[BPERF_MAX_GROUP_SIZE];
+  struct bpf_perf_event_value values[BPERF_MAX_GROUP_SIZE];
 };
 
 class BPerfPerThreadReader {
@@ -37,11 +39,12 @@ class BPerfPerThreadReader {
   int data_fd_ = -1;
   const std::string pin_name_;
   __s64 initial_clock_drift_ = 0;
-  int event_cnt_;
+  int event_cnt_ = -1;
   int data_size_ = 0;
   int mmap_size_ = 0;
-
   int getDataSize_();
+  int dummy_pe_fd_ = -1;
+  void* dummy_pe_mmap_ = nullptr;
 };
 
 } // namespace facebook::hbt::perf_event

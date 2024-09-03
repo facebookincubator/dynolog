@@ -30,7 +30,11 @@ struct bperf_clock_param {
 };
 
 /* data of a single perf_event */
-struct bperf_perf_event_data {};
+struct bperf_perf_event_data {
+  struct bpf_perf_event_value output_value;
+  __u64 offset;
+  __u32 idx;
+};
 
 struct bperf_thread_metadata {
   __u32 metadata_size; /* sizeof(bperf_thread_metadata) */

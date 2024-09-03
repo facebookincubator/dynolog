@@ -202,6 +202,8 @@ void BPerfEventsGroup::close() {
     ::close(fd);
     fd = -1;
   }
+  ::bpf_link__destroy(pmu_enable_exit_link_);
+  pmu_enable_exit_link_ = nullptr;
   opened_ = false;
 }
 
@@ -382,6 +384,12 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
   static_assert(
       sizeof(struct bperf_thread_metadata) <= sizeof(struct bperf_thread_data));
 
+  err = lookupPerfEvent_(skel);
+  if (err) {
+    HBT_LOG_ERROR() << "Failed to lookup perf events";
+    return err;
+  }
+
   err = pinThreadMaps_(skel);
   if (err != 0) {
     HBT_LOG_ERROR() << "Failed to pin maps for per thread monitoring";
@@ -442,6 +450,13 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
     goto error_out;
   }
 
+  pmu_enable_exit_link_ =
+      ::bpf_program__attach(skel->progs.bperf_pmu_enable_exit);
+  if (!pmu_enable_exit_link_) {
+    HBT_LOG_ERROR() << "Failed to attach bperf_pmu_enable_exit";
+    goto error_out;
+  }
+
   return 0;
 
 error_out:
@@ -451,6 +466,8 @@ error_out:
   unregister_thread_link_ = nullptr;
   ::bpf_link__destroy(update_thread_link_);
   update_thread_link_ = nullptr;
+  ::bpf_link__destroy(pmu_enable_exit_link_);
+  pmu_enable_exit_link_ = nullptr;
   return -1;
 }
 
@@ -577,6 +594,52 @@ void BPerfEventsGroup::toReadValues(
   // Integer round-up division to get the average time enabled/running.
   rv.t->time_enabled = (sum_time_enabled + num_events - 1) / num_events;
   rv.t->time_running = (sum_time_running + num_events - 1) / num_events;
+}
+
+int BPerfEventsGroup::lookupPerfEvent_(struct bperf_leader_cgroup* skel) {
+  LIBBPF_OPTS(bpf_iter_attach_opts, opts);
+  union bpf_iter_link_info linfo;
+  struct bpf_link* link;
+  int iter_fd;
+  char buf[128];
+  int e, err;
+
+  for (e = 0; e < attrs_.size(); e++) {
+    for (int cpu = 0; cpu < cpu_cnt_; cpu++) {
+      int key = e * cpu_cnt_ + cpu;
+      int fd = pe_fds_[key];
+
+      err = ::bpf_map_update_elem(
+          ::bpf_map__fd(skel->maps.event_fd_to_idx), &fd, &key, BPF_ANY);
+      if (err) {
+        return err;
+      }
+    }
+  }
+
+  memset(&linfo, 0, sizeof(linfo));
+  linfo.task.pid = getpid();
+  opts.link_info = &linfo;
+  opts.link_info_len = sizeof(linfo);
+
+  skel->bss->leader_pid = linfo.task.pid;
+
+  link = bpf_program__attach_iter(skel->progs.find_perf_events, &opts);
+  if (!link) {
+    return -1;
+  }
+
+  iter_fd = bpf_iter_create(bpf_link__fd(link));
+  if (iter_fd < 0) {
+    err = -1;
+    goto out;
+  }
+  err = ::read(iter_fd, buf, sizeof(buf));
+
+out:
+  ::close(iter_fd);
+  ::bpf_link__destroy(link);
+  return err;
 }
 
 } // namespace facebook::hbt::perf_event
