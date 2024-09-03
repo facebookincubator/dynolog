@@ -459,6 +459,40 @@ inline TimeStamp rdtsc() {
 #endif
 }
 
+inline uint64_t rdpmc(int idx) {
+  uint64_t val;
+
+#if defined(__x86_64__)
+  val = __rdpmc(idx);
+#elif defined(__aarch64__)
+  /* TODO: Test and verify this */
+  switch (idx) {
+    case 0:
+      __asm__ volatile("mrs %0, pmevcntr0_el0" : "=r"(val));
+      break;
+    case 1:
+      __asm__ volatile("mrs %0, pmevcntr1_el0" : "=r"(val));
+      break;
+    case 2:
+      __asm__ volatile("mrs %0, pmevcntr2_el0" : "=r"(val));
+      break;
+    case 3:
+      __asm__ volatile("mrs %0, pmevcntr3_el0" : "=r"(val));
+      break;
+    case 4:
+      __asm__ volatile("mrs %0, pmevcntr4_el0" : "=r"(val));
+      break;
+    case 5:
+      __asm__ volatile("mrs %0, pmevcntr5_el0" : "=r"(val));
+      break;
+    default:
+      val = 0ULL;
+      break;
+  }
+#endif
+  return val;
+}
+
 #if defined(__i386__) || defined(__x86_64__)
 // Store CPU ID in <cpu> variable.
 inline TimeStamp rdtscp(CpuId& cpu) {

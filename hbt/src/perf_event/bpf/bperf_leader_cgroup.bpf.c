@@ -46,9 +46,6 @@ struct {
   __uint(max_entries, DEFAULT_CGROUP_MAP_SIZE);
 } cgroup_output SEC(".maps");
 
-static void update_prev_user_page(struct bpf_perf_event_value* diff_val,
-                                  struct task_struct *task);
-
 const volatile int event_cnt = 0;
 int cpu_cnt = 0;
 int cgroup_update_level = 0;
@@ -311,12 +308,16 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
 #endif
 
   data->schedin_time = now;
+  return 0;
 }
 
 static void __always_inline update_prev_task(struct task_struct *prev, __u64 now) {
+  struct bpf_perf_event_value *diff_val;
   struct bperf_thread_data *data;
   int pid = prev->pid;
+  __u32 zero = 0;
   int *idx;
+  int i;
 
   idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
   if (!idx)
@@ -327,12 +328,48 @@ static void __always_inline update_prev_task(struct task_struct *prev, __u64 now
     return;
 
   data->runtime_until_schedin += now - data->schedin_time;
+
+  diff_val = bpf_map_lookup_elem(&diff_readings, &zero);
+  if (!diff_val)
+    return;
+
+  for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
+    data->events[i].output_value.counter += diff_val[i].counter;
+    data->events[i].output_value.enabled += diff_val[i].enabled;
+    data->events[i].output_value.running += diff_val[i].running;
+  }
 }
 
+/* event_fd_to_idx is fd => idx hash map. This is only used by the
+ * task_file iterator.
+ */
+struct {
+  __uint(type, BPF_MAP_TYPE_HASH);
+  __uint(key_size, sizeof(int));
+  __uint(value_size, sizeof(__u32));
+  __uint(max_entries, 1024);
+} event_fd_to_idx SEC(".maps");
+
+struct pe_data {
+  struct perf_event *event;
+  int idx;
+};
+
+struct {
+  __uint(type, BPF_MAP_TYPE_PERCPU_ARRAY);
+  __uint(key_size, sizeof(__u32));
+  __uint(value_size, sizeof(struct pe_data));
+  __uint(max_entries, BPERF_MAX_GROUP_SIZE);
+} event_data SEC(".maps");
+
 static void __always_inline update_next_task(struct task_struct *next, __u64 now) {
+  struct bpf_perf_event_value *prev_val;
   struct bperf_thread_data *data;
+  struct pe_data *pe_data;
   int pid = next->pid;
+  __u32 zero = 0;
   int *idx;
+  int i;
 
   idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
   if (!idx)
@@ -344,6 +381,24 @@ static void __always_inline update_next_task(struct task_struct *next, __u64 now
 
   data->lock += 1;
   bperf_update_thread_time(data, now);
+
+  prev_val = bpf_map_lookup_elem(&prev_readings, &zero);
+  if (!prev_val)
+    return;
+
+  for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
+    struct perf_event *event;
+    int key = i;
+
+    pe_data = bpf_map_lookup_elem(&event_data, &key);
+    if (!pe_data) {
+      continue;
+    }
+
+    event = bpf_core_cast(pe_data->event, struct perf_event);
+    data->events[i].offset = event->hw.prev_count.a.a.counter;
+    data->events[i].idx = pe_data->idx;
+  }
 }
 
 SEC("tp_btf/sched_switch")
@@ -354,5 +409,143 @@ int BPF_PROG(bperf_update_thread, bool preempt, struct task_struct *prev,
   update_next_task(next, now);
   return 0;
 }
+
+#define PERF_HES_STOPPED 0x01
+#define PERF_EVENT_FLAG_USER_READ_CNT 0x80000000
+#define INTEL_PMC_IDX_FIXED 32
+#define INTEL_PMC_IDX_METRIC_BASE (INTEL_PMC_IDX_FIXED + 16)
+#define INTEL_TD_METRIC_NUM 8
+#define INTEL_PMC_FIXED_RDPMC_METRICS (1 << 29)
+
+#define ARMV8_IDX_CYCLE_COUNTER 0
+#define ARMV8_IDX_CYCLE_COUNTER_USER    32
+
+static __always_inline bool is_metric_idx(int idx)
+{
+  return (unsigned)(idx - INTEL_PMC_IDX_METRIC_BASE) < INTEL_TD_METRIC_NUM;
+}
+
+int __always_inline bperf_perf_event_index(struct perf_event *event) {
+  struct hw_perf_event *hwc = &event->hw;
+
+  /* Kernel code has the following check. However, since we are calling
+   * this from event_sched_in, we need to remove this. Otherwise, we
+   * will always get 0.
+   */
+  if (hwc->state & PERF_HES_STOPPED)
+    return 0;
+
+  if (event->state != PERF_EVENT_STATE_ACTIVE)
+    return 0;
+
+  if (!(hwc->flags & PERF_EVENT_FLAG_USER_READ_CNT))
+    return 0;
+
+#if __x86_64__
+  if (is_metric_idx(hwc->idx))
+    return INTEL_PMC_FIXED_RDPMC_METRICS + 1;
+  return hwc->event_base_rdpmc + 1;
+#elif __aarch64__
+  if (hwc->idx == ARMV8_IDX_CYCLE_COUNTER)
+    return ARMV8_IDX_CYCLE_COUNTER_USER;
+  return hwc->idx;
+#else
+  return 0;
+#endif
+}
+
+int leader_pid = 0;
+
+SEC("iter/task_file")
+int find_perf_events(struct bpf_iter__task_file *ctx) {
+  struct task_struct *task = ctx->task;
+  struct file *file;
+  __u32 fd = ctx->fd;
+  struct perf_event *event;
+  struct pe_data *pe_data;
+  __u32 *idx;
+  __u32 key, cpu;
+
+  if (!task || task->tgid != leader_pid)
+    return 0;
+
+  fd = ctx->fd;
+
+  idx = bpf_map_lookup_elem(&event_fd_to_idx, &fd);
+
+  if (!idx)
+    return 0;
+
+  file = ctx->file;
+  if (!file)
+    return 0;
+
+  cpu = (*idx) % cpu_cnt;
+  key = (*idx) / cpu_cnt;
+  event = bpf_core_cast(file->private_data, struct perf_event);
+  pe_data = bpf_map_lookup_percpu_elem(&event_data, &key, cpu);
+  if (!pe_data)
+    return 0;
+  pe_data->event = event;
+  pe_data->idx = bperf_perf_event_index(event);
+
+  return 0;
+}
+
+static int __always_inline _pmu_enable_exit(struct pmu *pmu)
+{
+  struct bperf_thread_data *data;
+  struct pe_data *pe_data;
+  int *idx, i, pid;
+
+  for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
+    struct perf_event *event;
+    int key = i, pmc_idx;
+
+    pe_data = bpf_map_lookup_elem(&event_data, &key);
+    if (!pe_data)
+      continue;
+    event = bpf_core_cast(pe_data->event, struct perf_event);
+    pmc_idx = bperf_perf_event_index(event);
+    if (pe_data->idx == pmc_idx)
+      continue;
+
+    if (pe_data->idx == 0) {
+      /* TODO: This is with perf event multiplexing, we need logic to
+       * handle time_enabled and time_running correctly.
+       */
+    } else if (pmc_idx == 0) {
+      /* TODO: This is with perf event multiplexing, we need logic to
+       * handle time_enabled and time_running correctly.
+       */
+    }
+    pe_data->idx = pmc_idx;
+  }
+
+  pid = bpf_get_current_pid_tgid() & 0xffffffff;
+  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
+  if (!idx)
+    return 0;
+
+  data = bpf_map_lookup_elem(&per_thread_data, idx);
+  if (!data)
+    return 0;
+  data->lock += 1;
+
+  return 0;
+}
+
+#if __x86_64__
+SEC("fexit/x86_pmu_enable")
+int BPF_PROG(bperf_pmu_enable_exit, struct pmu *pmu) {
+  return _pmu_enable_exit(pmu);
+}
+#elif __aarch64__
+SEC("fexit/armpmu_enable")
+int BPF_PROG(bperf_pmu_enable_exit, struct pmu *pmu,
+             int flags, int ret) {
+  return _pmu_enable_exit(pmu);
+}
+#endif
 
 char _license[] SEC("license") = "GPL";

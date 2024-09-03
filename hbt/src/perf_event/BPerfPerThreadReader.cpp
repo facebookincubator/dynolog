@@ -38,8 +38,10 @@ int BPerfPerThreadReader::getDataSize_() {
 }
 
 int BPerfPerThreadReader::enable() {
+  struct perf_event_attr attr;
   int idx_fd, tid, idx = 0, err;
   struct bperf_thread_metadata* metadata;
+  struct BPerfThreadData data;
 
   idx_fd =
       ::bpf_obj_get(BPerfEventsGroup::perThreadIndexMapPath(pin_name_).c_str());
@@ -84,10 +86,36 @@ int BPerfPerThreadReader::enable() {
                                         i * metadata->event_data_size);
   }
 
+  // Create a disabled hardware event. This is needed, otherwise rdpmc
+  // instruction will cause segmentation fault.
+  memset(&attr, 0, sizeof(attr));
+  attr.type = PERF_TYPE_HARDWARE;
+  attr.config = PERF_COUNT_HW_CPU_CYCLES;
+  attr.size = sizeof(attr);
+  attr.disabled = 1;
+
+  dummy_pe_fd_ = syscall(
+      __NR_perf_event_open,
+      &attr,
+      0 /* pid */,
+      -1 /* cpu */,
+      -1 /* group_fd */,
+      0 /* flags */);
+
+  if (dummy_pe_fd_ < 0) {
+    HBT_LOG_ERROR() << "cannot create dummy perf event";
+    goto error;
+  }
+
+  dummy_pe_mmap_ =
+      ::mmap(nullptr, getpagesize(), PROT_READ, MAP_SHARED, dummy_pe_fd_, 0);
+  if (dummy_pe_mmap_ == MAP_FAILED) {
+    goto error;
+  }
+
   // There is a small drift between time from clock_gettime() and tsc.
   // On a skylake host, I get about 0.02% difference. Get the initial
   // drift at the moment and use it to fix future readings.
-  struct BPerfThreadData data;
   read(&data);
   initial_clock_drift_ = getRefMonoTime() - data.monoTime;
   return 0;
@@ -99,37 +127,66 @@ error:
 }
 
 void BPerfPerThreadReader::disable() {
-  munmap(mmap_ptr_, mmap_size_);
+  ::munmap(mmap_ptr_, mmap_size_);
   mmap_ptr_ = nullptr;
   data_ = nullptr;
   ::close(data_fd_);
   data_fd_ = -1;
   initial_clock_drift_ = 0LL;
+  ::munmap(dummy_pe_mmap_, getpagesize());
+  dummy_pe_mmap_ = nullptr;
+  ::close(dummy_pe_fd_);
+  dummy_pe_fd_ = -1;
 }
 
 BPerfPerThreadReader::~BPerfPerThreadReader() {
   disable();
 }
 
+#define barrier() asm volatile("" ::: "memory")
+
 int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   struct bperf_clock_param *ptr = &data_->tsc_param, p;
-  __u64 tsc;
+  struct bperf_perf_event_data raw_event_data[event_cnt_];
+  __u64 pmc_val[event_cnt_];
+  __u64 tsc, time_after_sched_in;
   __u32 lock;
+  int i, idx;
 
   do {
     lock = data_->lock;
+    barrier();
     tsc = rdtsc();
-    memcpy(&p, ptr, sizeof(p));
+    p = *ptr;
+    for (i = 0; i < event_cnt_; i++) {
+      raw_event_data[i] = *event_data_[i];
+      idx = raw_event_data[i].idx;
+      if (idx > 0) {
+        pmc_val[i] = rdpmc(idx - 1);
+      } else {
+        pmc_val[i] = 0;
+      }
+    }
+    barrier();
   } while (lock != data_->lock);
 
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
-  data->cpuTime =
-      data_->runtime_until_schedin + (data->monoTime - data_->schedin_time);
+  time_after_sched_in = data->monoTime - data_->schedin_time;
+  data->cpuTime = data_->runtime_until_schedin + time_after_sched_in;
 
-  // TODO: Detect when the lead program exists. It is a bit tricky, as
+  // TODO: Detect when the lead program stops. It is a bit tricky, as
   //       it may look like current thread is always running.
   //       This will be easier once with some perf event.
+  for (i = 0; i < event_cnt_; i++) {
+    data->values[i] = raw_event_data[i].output_value;
+    data->values[i].enabled += time_after_sched_in;
+
+    if (raw_event_data[i].idx) {
+      data->values[i].counter += pmc_val[i] - raw_event_data[i].offset;
+      data->values[i].running += time_after_sched_in;
+    }
+  }
   return 0;
 }
 
