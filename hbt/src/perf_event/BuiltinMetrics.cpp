@@ -1886,6 +1886,22 @@ void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
       std::vector<std::string>{}));
 
   metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_RD_OUTSTANDING",
+      "Outstanding read requests from SCF to local CPU memory.",
+      "Outstanding read requests from SCF to local CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_mem_rd_outstanding",
+               PmuType::nvidia_scf_pmu,
+               "cmem_rd_outstanding",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
       "HW_C2C0_CYCLES",
       "Cycles on C2C0 uncore",
       "Cycles on C2C0 uncore",
