@@ -50,6 +50,18 @@ const volatile int event_cnt = 0;
 int cpu_cnt = 0;
 int cgroup_update_level = 0;
 
+static __always_inline __u64 event_offset(struct perf_event *event) {
+  __u64 val = event->hw.prev_count.a.a.counter;
+
+#if __x86_64__
+  /* Only lower 48 bits are used. The upper bits could be either ffff or
+   * 0000. Always clear upper bits so the result is accurate.
+   */
+  val &= 0xffffffffffffULL;
+#endif
+  return val;
+}
+
 #define PF_IDLE 0x00000002
 
 static void update_cgroup_output(struct bpf_perf_event_value* diff_val,
@@ -401,7 +413,7 @@ static void __always_inline update_next_task(struct task_struct *next, __u64 now
     }
 
     event = bpf_core_cast(pe_data->event, struct perf_event);
-    data->events[i].offset = event->hw.prev_count.a.a.counter;
+    data->events[i].offset = event_offset(event);
     data->events[i].idx = pe_data->idx;
   }
 }
@@ -503,6 +515,15 @@ static int __always_inline _pmu_enable_exit(struct pmu *pmu)
   struct pe_data *pe_data;
   int *idx, i, pid;
 
+  pid = bpf_get_current_pid_tgid() & 0xffffffff;
+  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
+  if (!idx)
+    return 0;
+
+  data = bpf_map_lookup_elem(&per_thread_data, idx);
+  if (data)
+    data->lock += 1;
+
   for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
     struct perf_event *event;
     int key = i, pmc_idx;
@@ -525,18 +546,11 @@ static int __always_inline _pmu_enable_exit(struct pmu *pmu)
        */
     }
     pe_data->idx = pmc_idx;
+    if (data) {
+      data->events[i].idx = pmc_idx;
+      data->events[i].offset = event_offset(event);
+    }
   }
-
-  pid = bpf_get_current_pid_tgid() & 0xffffffff;
-  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
-  if (!idx)
-    return 0;
-
-  data = bpf_map_lookup_elem(&per_thread_data, idx);
-  if (!data)
-    return 0;
-  data->lock += 1;
-
   return 0;
 }
 
