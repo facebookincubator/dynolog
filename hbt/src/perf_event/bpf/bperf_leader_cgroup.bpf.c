@@ -209,6 +209,8 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
 
 __u32 per_thread_data_id; /* map id of per_thread_data */
 
+static void __always_inline update_next_task(struct task_struct *next, __u64 now);
+
 /* Trace mmap of per_thread_data */
 SEC("fentry/array_map_mmap")
 int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
@@ -216,6 +218,7 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   __u32 map_id = map->id;
   __u32 tid;
   __u32 idx;
+  __u64 now;
 
   if (map_id != per_thread_data_id)
     return 0;
@@ -237,7 +240,9 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
 
   data->runtime_until_schedin = 0;
-  bperf_update_thread_time(data, bpf_ktime_get_ns());
+  now = bpf_ktime_get_ns();
+  bperf_update_thread_time(data, now);
+  update_next_task(bpf_get_current_task_btf(), now);
   return 0;
 }
 
