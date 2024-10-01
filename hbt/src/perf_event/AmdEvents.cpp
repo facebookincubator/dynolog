@@ -172,6 +172,7 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
     case CpuArch::MILAN:
     case CpuArch::BERGAMO:
     case CpuArch::GENOA:
+    case CpuArch::TURIN:
       milan::addEvents(pmu_manager);
 #ifdef FACEBOOK
       milan::addEventsFb(pmu_manager);

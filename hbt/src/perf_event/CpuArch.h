@@ -12,12 +12,14 @@
 
 namespace facebook::hbt::perf_event {
 
-enum class CpuFamily { AMD, INTEL, ARM, UNKNOWN };
+enum class CpuFamily { AMDZEN3, AMDZEN5, INTEL, ARM, UNKNOWN };
 
 inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
   switch (f) {
-    case CpuFamily::AMD:
-      return os << "AMD";
+    case CpuFamily::AMDZEN3:
+      return os << "AMD Zen 3 / Zen 3+ / Zen 4";
+    case CpuFamily::AMDZEN5:
+      return os << "AMD Zen 5";
     case CpuFamily::INTEL:
       return os << "INTEL";
     case CpuFamily::ARM:
@@ -40,7 +42,9 @@ inline CpuFamily makeCpuFamily(
     case 6:
       return CpuFamily::INTEL;
     case 25:
-      return CpuFamily::AMD;
+      return CpuFamily::AMDZEN3;
+    case 26:
+      return CpuFamily::AMDZEN5;
     // Not recognized CPU model.
     default:
       return CpuFamily::UNKNOWN;
