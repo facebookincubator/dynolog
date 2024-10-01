@@ -57,6 +57,11 @@ pub struct GpuTraceOptions {
     pub with_modules: bool,
 }
 
+#[derive(Debug)]
+pub struct GpuTraceCliConfig {
+    pub fail_on_no_process: bool,
+}
+
 impl GpuTraceOptions {
     fn config(&self) -> String {
         format!(
@@ -100,6 +105,7 @@ pub fn run_gputrace(
     pids: &str,
     process_limit: u32,
     config: GpuTraceConfig,
+    cli_config: GpuTraceCliConfig,
 ) -> Result<()> {
     let kineto_config = config.config();
     println!("Kineto config = \n{}", kineto_config);
@@ -128,6 +134,9 @@ pub fn run_gputrace(
 
     if processes.is_empty() {
         println!("No processes were matched, please check --job-id or --pids flags");
+        if cli_config.fail_on_no_process {
+            return Err(anyhow::anyhow!("No processes were matched"));
+        }
     } else {
         println!("Matched {} processes", processes.len());
         println!("Trace output files will be written to:");
