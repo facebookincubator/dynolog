@@ -117,6 +117,8 @@ void userThread(void) {
 
 } // namespace
 
+#define BPERF_TEST_PARALLEL_THREADS 8
+
 TEST(BPerfEventsGroupPerThreadTest, TestCycles) {
   auto pmu_manager = makePmuDeviceManager();
   auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
@@ -130,6 +132,13 @@ TEST(BPerfEventsGroupPerThreadTest, TestCycles) {
   auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
   EXPECT_EQ(system.open(), true);
 
-  std::thread t(userThread);
-  t.join();
+  std::thread threads[BPERF_TEST_PARALLEL_THREADS];
+
+  for (int i = 0; i < BPERF_TEST_PARALLEL_THREADS; i++) {
+    threads[i] = std::thread(userThread);
+  }
+
+  for (int i = 0; i < BPERF_TEST_PARALLEL_THREADS; i++) {
+    threads[i].join();
+  }
 }
