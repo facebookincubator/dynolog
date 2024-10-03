@@ -50,16 +50,8 @@ const volatile int event_cnt = 0;
 int cpu_cnt = 0;
 int cgroup_update_level = 0;
 
-static __always_inline __u64 event_offset(struct perf_event *event) {
-  __u64 val = event->hw.prev_count.a.a.counter;
-
-#if __x86_64__
-  /* Only lower 48 bits are used. The upper bits could be either ffff or
-   * 0000. Always clear upper bits so the result is accurate.
-   */
-  val &= 0xffffffffffffULL;
-#endif
-  return val;
+static __always_inline __u64 event_prev_count(struct perf_event *event) {
+  return event->hw.prev_count.a.a.counter;
 }
 
 #define PF_IDLE 0x00000002
@@ -222,6 +214,7 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
 __u32 per_thread_data_id; /* map id of per_thread_data */
 
 static void __always_inline update_next_task(struct task_struct *next, __u64 now);
+static void __always_inline update_prev_task(struct task_struct *prev, __u64 now);
 
 /* Trace mmap of per_thread_data */
 SEC("fentry/array_map_mmap")
@@ -231,6 +224,7 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   __u32 tid;
   __u32 idx;
   __u64 now;
+  struct task_struct *task;
 
   if (map_id != per_thread_data_id)
     return 0;
@@ -252,9 +246,13 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
 
   data->runtime_until_schedin = 0;
+
+  task = bpf_get_current_task_btf();
+  bperf_leader_prog(task);
   now = bpf_ktime_get_ns();
   bperf_update_thread_time(data, now);
-  update_next_task(bpf_get_current_task_btf(), now);
+  update_prev_task(task, now);
+  update_next_task(task, now);
   return 0;
 }
 
@@ -379,6 +377,8 @@ struct {
   __uint(max_entries, BPERF_MAX_GROUP_SIZE);
 } event_data SEC(".maps");
 
+int __always_inline bperf_perf_event_index(struct perf_event *event);
+
 static void __always_inline update_next_task(struct task_struct *next, __u64 now) {
   struct bpf_perf_event_value *prev_val;
   struct bperf_thread_data *data;
@@ -413,7 +413,8 @@ static void __always_inline update_next_task(struct task_struct *next, __u64 now
     }
 
     event = bpf_core_cast(pe_data->event, struct perf_event);
-    data->events[i].offset = event_offset(event);
+    pe_data->idx = bperf_perf_event_index(event);
+    data->events[i].offset = event_prev_count(event);
     data->events[i].idx = pe_data->idx;
   }
 }
@@ -512,8 +513,9 @@ int find_perf_events(struct bpf_iter__task_file *ctx) {
 static int __always_inline _pmu_enable_exit(struct pmu *pmu)
 {
   struct bperf_thread_data *data;
-  struct pe_data *pe_data;
   int *idx, i, pid;
+  struct task_struct *task;
+  __u64 now;
 
   pid = bpf_get_current_pid_tgid() & 0xffffffff;
   idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
@@ -521,36 +523,14 @@ static int __always_inline _pmu_enable_exit(struct pmu *pmu)
     return 0;
 
   data = bpf_map_lookup_elem(&per_thread_data, idx);
-  if (data)
-    data->lock += 1;
+  if (!data)
+    return 0;
 
-  for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
-    struct perf_event *event;
-    int key = i, pmc_idx;
-
-    pe_data = bpf_map_lookup_elem(&event_data, &key);
-    if (!pe_data)
-      continue;
-    event = bpf_core_cast(pe_data->event, struct perf_event);
-    pmc_idx = bperf_perf_event_index(event);
-    if (pe_data->idx == pmc_idx)
-      continue;
-
-    if (pe_data->idx == 0) {
-      /* TODO: This is with perf event multiplexing, we need logic to
-       * handle time_enabled and time_running correctly.
-       */
-    } else if (pmc_idx == 0) {
-      /* TODO: This is with perf event multiplexing, we need logic to
-       * handle time_enabled and time_running correctly.
-       */
-    }
-    pe_data->idx = pmc_idx;
-    if (data) {
-      data->events[i].idx = pmc_idx;
-      data->events[i].offset = event_offset(event);
-    }
-  }
+  task = bpf_get_current_task_btf();
+  now = bpf_ktime_get_ns();
+  bperf_leader_prog(task);
+  update_prev_task(task, now);
+  update_next_task(task, now);
   return 0;
 }
 
