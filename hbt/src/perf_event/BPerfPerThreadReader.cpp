@@ -57,6 +57,12 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
+  tid = gettid();
+  if (::bpf_map_lookup_elem(idx_fd, &tid, &idx) == 0) {
+    HBT_LOG_ERROR() << "cannot register the same thread twice";
+    goto error;
+  }
+
   mmap_ptr_ = mmap(nullptr, mmap_size_, PROT_READ, MAP_SHARED, data_fd_, 0);
 
   if (mmap_ptr_ == MAP_FAILED) {
@@ -64,7 +70,6 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
-  tid = gettid();
   err = ::bpf_map_lookup_elem(idx_fd, &tid, &idx);
 
   if (err != 0) {

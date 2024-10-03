@@ -19,8 +19,11 @@ namespace {
 
 std::shared_ptr<BPerfPerThreadReader> createReader(void) {
   auto reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
+  auto second_reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
 
   EXPECT_EQ(reader->enable(), 0);
+  // second_read will fail to enable
+  EXPECT_EQ(second_reader->enable(), -1);
   return reader;
 }
 
