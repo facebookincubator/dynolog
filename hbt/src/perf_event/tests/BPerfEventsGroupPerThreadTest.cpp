@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 #include <unistd.h>
+#include <chrono>
 #include <thread>
 
 using namespace facebook::hbt;
@@ -47,6 +48,7 @@ volatile __u64 __work = 0;
 static void doSomeWork(long count) {
   long i;
 
+  std::this_thread::sleep_for(std::chrono::milliseconds(10));
   for (i = 0; i < count; i++) {
     __work += i * count;
   }
@@ -55,7 +57,7 @@ static void doSomeWork(long count) {
 __u64 normalizedValue(const struct bpf_perf_event_value& value) {
   if (value.running == 0)
     return 0;
-  return (__u64)((float)value.counter * value.enabled / value.running);
+  return (__u64)((double)value.counter * value.enabled / value.running);
 }
 
 #define TESTS 4
