@@ -92,6 +92,16 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "The number of all SSE/AVX floating-point Ops that have retired."),
       std::vector<EventId>({"zen4-ret-sse-avx-fp-ops-all"}));
 
+  // Branches
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ex_ret_brn_tkn",
+          EventDef::Encoding{.code = amd_msr::kRetiredBranchTaken.val},
+          "Retired taken branch instructions.",
+          "Retired taken branch instructions (all types of architectural control flow changes, including exceptions and interrupts)."),
+      std::vector<EventId>({"ex-ret-brn-tkn"}));
+
   // Sampled memory latency for AMD Zen4. The latency is measured from the L3
   // cache to near/far data sources (DRAM, CXL, CCX cache) and back in
   // nano-seconds.

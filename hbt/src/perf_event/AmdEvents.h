@@ -152,6 +152,7 @@ constexpr PmuMsr kZen4RetiredSseAvxFlops{
 // Branches
 constexpr PmuMsr kRetiredBranchInstructions{.amdCore = {.event = 0xc2}};
 constexpr PmuMsr kRetiredBranchMispred{.amdCore = {.event = 0xc3}};
+constexpr PmuMsr kRetiredBranchTaken{.amdCore = {.event = 0xc4}};
 constexpr PmuMsr kRetiredFarControlTransfer{.amdCore = {.event = 0xc6}};
 
 // TLB
