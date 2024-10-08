@@ -83,6 +83,26 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c0_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c1_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_pcie_pmu);
+
+  // Add Neoverse v2 PMU events not found in sysfs
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::armv8_pmuv3,
+      "FP_HP_SPEC",
+      EventDef::Encoding{.code = 0x8014},
+      "Floating-point operation speculatively executed, half precision",
+      "Counts speculatively executed half precision floating point operations."));
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::armv8_pmuv3,
+      "FP_SP_SPEC",
+      EventDef::Encoding{.code = 0x8018},
+      "Floating-point operation speculatively executed, single precision",
+      "Counts speculatively executed single precision floating point operations."));
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::armv8_pmuv3,
+      "FP_DP_SPEC",
+      EventDef::Encoding{.code = 0x801C},
+      "Floating-point operation speculatively executed, double precision",
+      "Counts speculatively executed double precision floating point operations."));
 }
 
 } // namespace neoverse_v2
