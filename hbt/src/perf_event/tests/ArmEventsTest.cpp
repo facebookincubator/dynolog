@@ -45,7 +45,7 @@ TEST(ArmEventsTest, ScanPmu) {
   addArmEvents(cpu_info, pmu_manager);
 
   auto pmu = pmu_manager.getPmuGroups().at(PmuType::armv8_pmuv3);
-  EXPECT_EQ(pmu.at(kDeviceEnum)->getEventDefs().size(), 1);
+  EXPECT_EQ(pmu.at(kDeviceEnum)->getEventDefs().size(), 4);
 
   auto event1 = pmu_manager.findEventDef("cpu_cycles");
   EXPECT_TRUE(event1 != nullptr);
