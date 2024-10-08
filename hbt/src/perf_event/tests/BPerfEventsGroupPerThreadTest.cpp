@@ -8,6 +8,7 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <gtest/gtest.h>
+#include <time.h>
 #include <unistd.h>
 #include <chrono>
 #include <thread>
@@ -63,6 +64,13 @@ __u64 normalizedValue(const struct bpf_perf_event_value& value) {
   return (__u64)((double)value.counter * value.enabled / value.running);
 }
 
+static __u64 get_time_nanosecond(clockid_t clockid) {
+  struct timespec ts;
+
+  clock_gettime(clockid, &ts);
+  return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
+}
+
 #define TESTS 4
 
 void printBPerfThreadData(
@@ -78,6 +86,9 @@ void userThread(void) {
   auto pmu_fd = createPerfEvent();
   struct bpf_perf_event_value beforeValue, afterValue;
   struct BPerfThreadData beforeData, afterData;
+  __u64 monoTimeBefore, monoTimeDiff;
+  __u64 cpuTimeBefore, cpuTimeDiff;
+
   long workSizes[TESTS] = {1000000, 10000000, 100000000, 1000000000};
 
   for (int i = 0; i < TESTS; i++) {
@@ -87,10 +98,15 @@ void userThread(void) {
     EXPECT_EQ(err, 24);
     err = reader->read(&beforeData);
     EXPECT_EQ(err, 0);
+    monoTimeBefore = get_time_nanosecond(CLOCK_MONOTONIC);
+    cpuTimeBefore = get_time_nanosecond(CLOCK_THREAD_CPUTIME_ID);
+
     doSomeWork(workSizes[i]);
     err = ::read(pmu_fd, &afterValue, sizeof(afterValue));
     err = reader->read(&afterData);
     EXPECT_EQ(err, 0);
+    monoTimeDiff = get_time_nanosecond(CLOCK_MONOTONIC) - monoTimeBefore;
+    cpuTimeDiff = get_time_nanosecond(CLOCK_THREAD_CPUTIME_ID) - cpuTimeBefore;
 
     auto perfDiff = normalizedValue(afterValue) - normalizedValue(beforeValue);
     auto bperfDiff = normalizedValue(afterData.values[0]) -
@@ -109,6 +125,16 @@ void userThread(void) {
     // test is more stable.
     EXPECT_GE(ratio, 0.95);
     EXPECT_LE(ratio, 1.05);
+
+    auto monoTimeRatio =
+        (double)monoTimeDiff / (afterData.monoTime - beforeData.monoTime);
+    EXPECT_GE(monoTimeRatio, 0.95);
+    EXPECT_LE(monoTimeRatio, 1.05);
+
+    auto cpuTimeRatio =
+        (double)cpuTimeDiff / (afterData.cpuTime - beforeData.cpuTime);
+    EXPECT_GE(cpuTimeRatio, 0.95);
+    EXPECT_LE(cpuTimeRatio, 1.05);
   }
 
   reader->disable();
