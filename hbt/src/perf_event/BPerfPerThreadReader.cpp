@@ -59,6 +59,10 @@ int BPerfPerThreadReader::enable() {
 
   tid = gettid();
   if (::bpf_map_lookup_elem(idx_fd, &tid, &idx) == 0) {
+    // We haven't registered this tid yet. If the tid is already added,
+    // it must be added by a different instance of BPerfPerThreadReader
+    // for the same thread. BPerfPerThreadReader does not support two
+    // instances for the same thread, so we abort this enable().
     HBT_LOG_ERROR() << "cannot register the same thread twice";
     goto error;
   }
@@ -152,6 +156,7 @@ BPerfPerThreadReader::~BPerfPerThreadReader() {
 
 int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   struct bperf_clock_param *ptr = &data_->tsc_param, p;
+  struct bperf_thread_data raw_thread_data;
   struct bperf_perf_event_data raw_event_data[event_cnt_];
   __u64 pmc_val[event_cnt_];
   __u64 tsc, time_after_sched_in;
@@ -163,6 +168,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     barrier();
     tsc = rdtsc();
     p = *ptr;
+    raw_thread_data = *data_;
     for (i = 0; i < event_cnt_; i++) {
       raw_event_data[i] = *event_data_[i];
       idx = raw_event_data[i].idx;
@@ -177,8 +183,8 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
 
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
-  time_after_sched_in = data->monoTime - data_->schedin_time;
-  data->cpuTime = data_->runtime_until_schedin + time_after_sched_in;
+  time_after_sched_in = data->monoTime - raw_thread_data.schedin_time;
+  data->cpuTime = raw_thread_data.runtime_until_schedin + time_after_sched_in;
 
   // TODO: Detect when the lead program stops. It is a bit tricky, as
   //       it may look like current thread is always running.

@@ -209,7 +209,7 @@ static void __always_inline clear_bit(__u32 idx) {
   bitmap[key] &= ~(1ULL << shift);
 }
 
-static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data, __u64 now);
+static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data);
 
 __u32 per_thread_data_id; /* map id of per_thread_data */
 
@@ -245,14 +245,12 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   tid = bpf_get_current_pid_tgid() & 0xffffffff;
   bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
 
-  data->runtime_until_schedin = 0;
-
   task = bpf_get_current_task_btf();
   bperf_leader_prog(task);
   now = bpf_ktime_get_ns();
-  bperf_update_thread_time(data, now);
   update_prev_task(task, now);
   update_next_task(task, now);
+  data->runtime_until_schedin = 0;
   return 0;
 }
 
@@ -288,7 +286,7 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
 extern const struct cyc2ns cyc2ns __ksym;
 #endif
 
-static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data, __u64 now)
+static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data)
 {
 #if __x86_64__
   struct cyc2ns *c;
@@ -321,8 +319,6 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
 #elif __aarch64__
   /* TODO add arm64 support */
 #endif
-
-  data->schedin_time = now;
   return 0;
 }
 
@@ -343,6 +339,14 @@ static void __always_inline update_prev_task(struct task_struct *prev, __u64 now
     return;
 
   data->runtime_until_schedin += now - data->schedin_time;
+  /* We may call update_prev_task twice on the same context switch:
+   * 1. From bperf_update_thread();
+   * 2. From bperf_pmu_enable_exit().
+   *
+   * Update schedin_time here so that we do not account
+   * runtime_until_schedin twice.
+   */
+  data->schedin_time = now;
 
   diff_val = bpf_map_lookup_elem(&diff_readings, &zero);
   if (!diff_val)
@@ -397,7 +401,8 @@ static void __always_inline update_next_task(struct task_struct *next, __u64 now
     return;
 
   data->lock += 1;
-  bperf_update_thread_time(data, now);
+  bperf_update_thread_time(data);
+  data->schedin_time = now;
 
   prev_val = bpf_map_lookup_elem(&prev_readings, &zero);
   if (!prev_val)
