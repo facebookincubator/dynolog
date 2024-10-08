@@ -56,8 +56,8 @@ struct bperf_thread_data {
   struct bperf_clock_param tsc_param;
 
   /* all the times are in nano seconds */
-  /* when the task got sched in the last time */
-  __u64 schedin_time;
+  /* when the task got scheduled the last time */
+  __u64 schedule_time;
 
   /* runtime = runtime_until_schedin + tsc_time - schedin_time; */
   __u64 runtime_until_schedin;

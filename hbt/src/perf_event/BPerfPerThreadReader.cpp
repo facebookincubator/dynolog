@@ -183,7 +183,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
 
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
-  time_after_sched_in = data->monoTime - raw_thread_data.schedin_time;
+  time_after_sched_in = data->monoTime - raw_thread_data.schedule_time;
   data->cpuTime = raw_thread_data.runtime_until_schedin + time_after_sched_in;
 
   // TODO: Detect when the lead program stops. It is a bit tricky, as
