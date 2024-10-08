@@ -338,15 +338,15 @@ static void __always_inline update_prev_task(struct task_struct *prev, __u64 now
   if (!data)
     return;
 
-  data->runtime_until_schedin += now - data->schedin_time;
+  data->runtime_until_schedin += now - data->schedule_time;
   /* We may call update_prev_task twice on the same context switch:
    * 1. From bperf_update_thread();
    * 2. From bperf_pmu_enable_exit().
    *
-   * Update schedin_time here so that we do not account
+   * Update schedule_time here so that we do not account
    * runtime_until_schedin twice.
    */
-  data->schedin_time = now;
+  data->schedule_time = now;
 
   diff_val = bpf_map_lookup_elem(&diff_readings, &zero);
   if (!diff_val)
@@ -402,7 +402,7 @@ static void __always_inline update_next_task(struct task_struct *next, __u64 now
 
   data->lock += 1;
   bperf_update_thread_time(data);
-  data->schedin_time = now;
+  data->schedule_time = now;
 
   prev_val = bpf_map_lookup_elem(&prev_readings, &zero);
   if (!prev_val)
