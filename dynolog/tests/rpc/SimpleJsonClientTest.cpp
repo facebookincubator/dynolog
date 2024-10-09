@@ -207,8 +207,8 @@ TEST_F(SimpleJsonClientTest, DISABLED_SetKinetoOnDemandRequestTest) {
   ASSERT_TRUE(resp_str) << "Null response on setKinetOnDemandRequest()";
   EXPECT_EQ(handler_->setKinetoOnDemandCalls_, 1);
 
-  EXPECT_EQ(handler_->config_, request["config"]);
-  EXPECT_EQ(handler_->pids_, request["pids"]);
+  EXPECT_EQ(request["config"], handler_->config_);
+  EXPECT_EQ(request["pids"], handler_->pids_);
   EXPECT_EQ(handler_->job_id_, 10);
   EXPECT_EQ(handler_->limit_, 42);
 
