@@ -20,7 +20,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
         - Arch: x86, Model: SRF id: 175
   */
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_CLOCKTICKS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CLOCKTICKS",
@@ -32,7 +32,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -230,7 +229,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
@@ -242,7 +241,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2190,7 +2188,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_REQUESTS.READS_LOCAL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_REQUESTS.READS_LOCAL",
@@ -2202,9 +2200,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_REQUESTS.READS_REMOTE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_REQUESTS.READS_REMOTE",
@@ -2216,9 +2213,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_REQUESTS.WRITES_LOCAL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_REQUESTS.WRITES_LOCAL",
@@ -2230,9 +2226,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_REQUESTS.WRITES_REMOTE is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_REQUESTS.WRITES_REMOTE",
@@ -2244,7 +2239,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2400,7 +2394,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT_SCH0.RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT_SCH0.RD",
@@ -2412,9 +2406,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT_SCH0.WR is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT_SCH0.WR",
@@ -2426,7 +2419,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2470,7 +2462,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT_SCH1.RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT_SCH1.RD",
@@ -2482,9 +2474,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT_SCH1.WR is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT_SCH1.WR",
@@ -2496,7 +2487,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
