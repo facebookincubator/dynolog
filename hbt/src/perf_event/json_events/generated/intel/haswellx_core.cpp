@@ -1886,7 +1886,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event ICACHE.MISSES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.MISSES",
@@ -1899,7 +1899,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(

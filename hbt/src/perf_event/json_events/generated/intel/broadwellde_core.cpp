@@ -1848,7 +1848,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event ICACHE.MISSES is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "ICACHE.MISSES",
@@ -1861,7 +1861,6 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
   // Event ICACHE.IFDATA_STALL is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(

@@ -13,13 +13,13 @@ namespace facebook::hbt::perf_event::generated {
 namespace snowridgex_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-/*
-  Events from snowridgex_uncore.json (207 events).
+  /*
+    Events from snowridgex_uncore.json (207 events).
 
-  Supported SKUs:
-      - Arch: x86, Model: SNR id: 134
-*/
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+    Supported SKUs:
+        - Arch: x86, Model: SNR id: 134
+  */
+  // Event UNC_CHA_CLOCKTICKS is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_CLOCKTICKS",
@@ -31,7 +31,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -1055,7 +1054,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT.RD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.RD",
@@ -1067,9 +1066,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_M_CAS_COUNT.WR is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_imc,
       "UNC_M_CAS_COUNT.WR",
@@ -1081,7 +1079,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2063,7 +2060,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
@@ -2075,7 +2072,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2133,7 +2129,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
@@ -2145,7 +2141,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
