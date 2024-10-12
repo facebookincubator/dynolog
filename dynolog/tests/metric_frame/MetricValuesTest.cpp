@@ -58,3 +58,22 @@ TEST(MetricValuesTest, aggTest) {
   EXPECT_TRUE(p50Maybe);
   EXPECT_EQ(p50Maybe.value(), 2.0);
 }
+
+TEST(MetricValuesTest, mergeTest) {
+  MetricValues<uint32_t> u, v;
+  for (int i = 0; i < 5; i++) {
+    u.push_back(i);
+  }
+  for (int i = 0; i < 5; i++) {
+    v.push_back(i);
+  }
+  EXPECT_EQ(u.size(), 5);
+
+  u.merge(v);
+  EXPECT_EQ(u.size(), 10);
+  EXPECT_EQ(u.sum(), 20);
+
+  auto avgMaybe = u.avg();
+  EXPECT_TRUE(avgMaybe);
+  EXPECT_EQ(avgMaybe.value(), 2.0);
+}

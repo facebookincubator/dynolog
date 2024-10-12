@@ -43,6 +43,10 @@ class MetricValues final {
     return *(begin() + idx);
   }
 
+  void reserve(const size_t size) {
+    data_.reserve(size);
+  }
+
   void resize(const size_t size) {
     data_.resize(size);
   }
@@ -75,6 +79,11 @@ class MetricValues final {
     }
     const auto [min_it, max_it] = std::minmax_element(begin(), end());
     return std::make_pair(*min_it, *max_it);
+  }
+
+  void merge(const MetricValues<T>& other) {
+    data_.reserve(data_.size() + other.data_.size());
+    data_.insert(data_.end(), other.data_.begin(), other.data_.end());
   }
 
  private:
