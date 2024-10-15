@@ -1749,6 +1749,38 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       std::vector<std::string>{}));
 
   metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_DTLB_LOAD_MISSES",
+      "Load miss in all TLB levels causes a page walk that completes. (All page sizes).",
+      "Counts completed page walks  (all page sizes) caused by demand data loads. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "dtlb_load_misses",
+               PmuType::cpu,
+               "DTLB_LOAD_MISSES.WALK_COMPLETED",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_DTLB_STORE_MISSES",
+      "Store misses in all TLB levels causes a page walk that completes. (All page sizes).",
+      "Counts completed page walks  (all page sizes) caused by demand data stores. This implies it missed in the DTLB and further levels of TLB. The page walk can end with or without a fault.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "dtlb_load_misses",
+               PmuType::cpu,
+               "DTLB_STORE_MISSES.WALK_COMPLETED",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
       "HW_CORE_FLOPS_DP_SCALAR",
       "Counts number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element.",
       "Number of SSE/AVX computational scalar double precision floating-point instructions retired; some instructions will count twice as noted below.  Each count represents 1 computational operation. Applies to SSE* and AVX* scalar double precision floating-point instructions: ADD SUB MUL DIV MIN MAX SQRT FM(N)ADD/SUB.  FM(N)ADD/SUB instructions count twice as they perform 2 calculations per element. The DAZ and FTZ flags in the MXCSR register need to be set when using these events.",
