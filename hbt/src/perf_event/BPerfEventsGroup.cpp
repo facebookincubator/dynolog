@@ -194,14 +194,16 @@ void BPerfEventsGroup::close() {
   cgroup_output_fd_ = -1;
   ::close(global_output_fd_);
   global_output_fd_ = -1;
-  ::bpf_link__destroy(register_thread_link_);
-  register_thread_link_ = nullptr;
-  ::bpf_link__destroy(unregister_thread_link_);
-  unregister_thread_link_ = nullptr;
   for (auto& fd : pe_fds_) {
     ::close(fd);
     fd = -1;
   }
+  // Close the perf event fds before destroying the links for per thread
+  // monitoring. This will help the reader detect the lead has exited.
+  ::bpf_link__destroy(register_thread_link_);
+  register_thread_link_ = nullptr;
+  ::bpf_link__destroy(unregister_thread_link_);
+  unregister_thread_link_ = nullptr;
   ::bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
   opened_ = false;
