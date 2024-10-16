@@ -43,6 +43,10 @@ int BPerfPerThreadReader::enable() {
   struct bperf_thread_metadata* metadata;
   struct BPerfThreadData data;
 
+  if (enabled_) {
+    return 0;
+  }
+
   idx_fd =
       ::bpf_obj_get(BPerfEventsGroup::perThreadIndexMapPath(pin_name_).c_str());
   data_fd_ =
@@ -127,6 +131,7 @@ int BPerfPerThreadReader::enable() {
   // drift at the moment and use it to fix future readings.
   read(&data);
   initial_clock_drift_ = getRefMonoTime() - data.monoTime;
+  enabled_ = true;
   return 0;
 
 error:
@@ -136,6 +141,9 @@ error:
 }
 
 void BPerfPerThreadReader::disable() {
+  if (!enabled_) {
+    return;
+  }
   ::munmap(mmap_ptr_, mmap_size_);
   mmap_ptr_ = nullptr;
   data_ = nullptr;
@@ -146,6 +154,7 @@ void BPerfPerThreadReader::disable() {
   dummy_pe_mmap_ = nullptr;
   ::close(dummy_pe_fd_);
   dummy_pe_fd_ = -1;
+  enabled_ = false;
 }
 
 BPerfPerThreadReader::~BPerfPerThreadReader() {
@@ -162,6 +171,10 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   __u64 tsc, time_after_sched_in;
   __u32 lock;
   int i, idx;
+
+  if (!enabled_) {
+    return -1;
+  }
 
   do {
     lock = data_->lock;
@@ -198,7 +211,24 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       data->values[i].running += time_after_sched_in;
     }
   }
+  if (leadExited(data->values[0].counter)) {
+    disable();
+    return -1;
+  }
   return 0;
+}
+
+// Heuristic to check whether the lead program has exited.
+bool BPerfPerThreadReader::leadExited(__u64 counter_zero) {
+  bool ret;
+
+  if (!enabled_) {
+    return true;
+  }
+
+  ret = counter_zero == prev_counter_zero_;
+  prev_counter_zero_ = counter_zero;
+  return ret;
 }
 
 } // namespace facebook::hbt::perf_event

@@ -28,6 +28,9 @@ class BPerfPerThreadReader {
   int read(struct BPerfThreadData* data);
   int enable();
   void disable();
+  bool isEnabled() {
+    return enabled_;
+  }
 
  protected:
   void* mmap_ptr_ = nullptr;
@@ -45,6 +48,10 @@ class BPerfPerThreadReader {
   int getDataSize_();
   int dummy_pe_fd_ = -1;
   void* dummy_pe_mmap_ = nullptr;
+  bool enabled_ = false;
+  // Previous reading of event 0, used to detect when the lead exits
+  __u64 prev_counter_zero_;
+  bool leadExited(__u64 counter_zero);
 };
 
 } // namespace facebook::hbt::perf_event

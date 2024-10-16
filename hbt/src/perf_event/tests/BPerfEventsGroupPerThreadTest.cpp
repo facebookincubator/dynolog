@@ -81,13 +81,12 @@ void printBPerfThreadData(
   GTEST_LOG_(INFO) << name << " running = " << data.values[0].running;
 }
 
-void userThread(void) {
-  auto reader = createReader();
-  auto pmu_fd = createPerfEvent();
+void checkValue(std::shared_ptr<BPerfPerThreadReader> reader) {
   struct bpf_perf_event_value beforeValue, afterValue;
   struct BPerfThreadData beforeData, afterData;
   __u64 monoTimeBefore, monoTimeDiff;
   __u64 cpuTimeBefore, cpuTimeDiff;
+  auto pmu_fd = createPerfEvent();
 
   long workSizes[TESTS] = {1000000, 10000000, 100000000, 1000000000};
 
@@ -136,9 +135,57 @@ void userThread(void) {
     EXPECT_GE(cpuTimeRatio, 0.95);
     EXPECT_LE(cpuTimeRatio, 1.05);
   }
+  close(pmu_fd);
+}
+
+void userThread(void) {
+  auto reader = createReader();
+
+  checkValue(reader);
 
   reader->disable();
-  close(pmu_fd);
+}
+
+// The main thread and the leadExitThread uses testStage to communicate
+// status of the test. More details below.
+static int testStage = 0;
+
+void readerThread(void) {
+  int ret, i = 0;
+  auto reader = createReader();
+  BPerfThreadData d;
+
+  checkValue(reader);
+
+  // readerThread finished the test, set testStage to 1
+  testStage = 1;
+  GTEST_LOG_(INFO) << "testStage = " << testStage;
+
+  // Wait for lead to stop
+  while (testStage != 2) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Wait until reader detect lead exited, set testStage 3
+  while (reader->read(&d) == 0 && i++ < 10) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+  testStage = 3;
+
+  // Wait until another lead started.
+  while (testStage != 4) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  ASSERT_FALSE(reader->isEnabled());
+
+  // Re-enable the reader
+  ret = reader->enable();
+  ASSERT_EQ(ret, 0);
+  ASSERT_EQ(reader->read(&d), 0);
+
+  // Run check again
+  checkValue(reader);
 }
 
 } // namespace
@@ -167,4 +214,43 @@ TEST(BPerfEventsGroupPerThreadTest, TestCycles) {
   for (int i = 0; i < BPERF_TEST_PARALLEL_THREADS; i++) {
     threads[i].join();
   }
+}
+
+TEST(BPerfEventsGroupPerThreadTest, TestLeadExit) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
+  auto ev_def = pmu_manager->findEventDef("cycles");
+  if (!ev_def) {
+    GTEST_SKIP() << "Cannot find event cycles";
+  }
+  auto ev_conf =
+      pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
+
+  auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
+  EXPECT_EQ(system.open(), true);
+
+  // Start of lead exit test. Set testStage to 0
+  testStage = 0;
+  auto t = std::thread(readerThread);
+
+  // Wait for the first test is done.
+  while (testStage != 1) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Disable the lead. Set testStage to 2
+  system.disable();
+  testStage = 2;
+
+  // Wait until reader notice the lead is gone.
+  while (testStage != 3) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Start another instance of lead, set testStage to 4
+  auto system2 = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
+  EXPECT_EQ(system2.open(), true);
+
+  testStage = 4;
+  t.join();
 }
