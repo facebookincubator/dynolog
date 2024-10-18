@@ -319,6 +319,13 @@ void bperf_attr_map_elem::loadFromSkelLink(
   skel->rodata->event_cnt = event_cnt;
   skel->bss->cgroup_update_level = cgroup_update_level_;
 
+  if (!per_thread_) {
+    bpf_program__set_autoload(skel->progs.bperf_register_thread, false);
+    bpf_program__set_autoload(skel->progs.bperf_unregister_thread, false);
+    bpf_program__set_autoload(skel->progs.bperf_update_thread, false);
+    bpf_program__set_autoload(skel->progs.bperf_pmu_enable_exit, false);
+    bpf_program__set_autoload(skel->progs.find_perf_events, false);
+  }
   if (err = bperf_leader_cgroup__load(skel); err) {
     HBT_LOG_ERROR() << "Failed to load skeleton.";
     return err;
