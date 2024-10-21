@@ -38,11 +38,20 @@ namespace facebook::hbt {
 
 struct FdWrapper {
   FdWrapper(const FdWrapper&) = delete;
-  FdWrapper(FdWrapper&&) = delete;
+  FdWrapper(FdWrapper&& other) noexcept {
+    fd = other.fd;
+    close_on_destruction = other.close_on_destruction;
+
+    other.fd = -1;
+    other.close_on_destruction = false;
+  }
 
   explicit FdWrapper() {}
 
-  explicit FdWrapper(int fd) : fd{fd} {}
+  explicit FdWrapper(int fd) : FdWrapper(fd, false) {}
+
+  explicit FdWrapper(int fd, bool close_on_destruction)
+      : fd{fd}, close_on_destruction(close_on_destruction) {}
 
   explicit FdWrapper(const std::string& path, int flags = O_RDONLY) {
     fd = ::open(path.c_str(), flags);
