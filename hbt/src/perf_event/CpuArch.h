@@ -40,6 +40,7 @@ inline CpuFamily makeCpuFamily(
     case 6:
       return CpuFamily::INTEL;
     case 25:
+    case 26:
       return CpuFamily::AMD;
     // Not recognized CPU model.
     default:
