@@ -38,6 +38,9 @@ target_link_libraries(dynolog_lib PUBLIC dynolog_ipcmonitor_lib)
 add_subdirectory(gpumon)
 target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib "-ldl")
 
+add_subdirectory(rdmamon)
+target_link_libraries(dynolog_lib PUBLIC dynolog_rdmamon_lib)
+
 add_subdirectory(metric_frame)
 
 add_executable(dynolog Main.cpp)
