@@ -3,6 +3,7 @@
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
 
 #include <glog/logging.h>
+#include <fstream>
 #include <mutex>
 
 namespace dynolog {
@@ -112,6 +113,26 @@ void RdcWrapper::clean_(RdcRuntimeContextWithWLock& context) {
   rdc_status_t result = rdc_shutdown();
   if (result != RDC_ST_OK) {
     LOG(WARNING) << "rdc_shutdown() failed with error code: " << result;
+  }
+
+  static const char* rocprofilerLockPath = "/tmp/rocprofiler.pid";
+  std::ifstream rocprofilerLock(rocprofilerLockPath);
+  if (rocprofilerLock.fail()) {
+    // rdc may not start rocprofiler
+    // it's fine if the lock file doesn't exist
+    return;
+  }
+  pid_t rocprofilerPid = -1;
+  if (rocprofilerLock >> rocprofilerPid) {
+    if (rocprofilerPid == getpid()) {
+      LOG(INFO) << "remove rocprofiler.pid";
+      if (std::remove(rocprofilerLockPath) != 0) {
+        LOG(ERROR) << "failed to remove rocprofiler lock at "
+                   << rocprofilerLockPath;
+      }
+    }
+  } else {
+    LOG(WARNING) << "failed to read pid from rocprofiler lock file";
   }
 }
 
