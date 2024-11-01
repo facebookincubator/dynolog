@@ -4,7 +4,6 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "dynolog/tests/rpc/SimpleJsonClientTest.h"
-#include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>

@@ -4,7 +4,6 @@
 #include <glog/logging.h>
 #include <stdio.h>
 #include <sys/types.h>
-#include <unistd.h>
 #include <fstream>
 #include <optional>
 #include "pfs/procfs.hpp"

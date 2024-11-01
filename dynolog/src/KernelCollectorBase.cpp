@@ -6,9 +6,7 @@
 #include "dynolog/src/KernelCollectorBase.h"
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <chrono>
 #include <sstream>
 #include <string>
