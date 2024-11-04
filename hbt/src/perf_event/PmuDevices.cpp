@@ -355,7 +355,7 @@ void parseSysFsPmu_(fs::directory_entry dentry, PmuDeviceManager& pmu_manager) {
 }
 
 void PmuDeviceManager::loadSysFsPmus() {
-  const fs::path p = "/sys/devices";
+  const fs::path p = "/sys/bus/event_source/devices";
   for (const auto& dentry : fs::directory_iterator(p)) {
     if (!fs::is_directory(dentry.path())) {
       continue;
