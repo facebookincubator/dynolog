@@ -20,6 +20,7 @@ enum class CpuArch {
   MILAN,
   GENOA,
   BERGAMO,
+  TURIN,
   // Intel Architectures Sorted by model id.
   BDW,
   BDW_DE,
@@ -58,6 +59,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "GENOA";
     case CpuArch::BERGAMO:
       return os << "BERGAMO";
+    case CpuArch::TURIN:
+      return os << "TURIN";
     case CpuArch::BDW:
       return os << "BDW";
     case CpuArch::BDW_DE:
@@ -104,7 +107,7 @@ inline CpuArch makeCpuArchX86(
     uint32_t cpu_model_num,
     uint32_t cpu_step_num) {
   auto cpu_family = makeCpuFamily(cpu_family_num);
-  if (cpu_family == CpuFamily::AMD) {
+  if (cpu_family == CpuFamily::AMDZEN3) {
     switch (cpu_model_num) {
       case 1:
         return CpuArch::MILAN;
@@ -112,6 +115,11 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::GENOA;
       case 160:
         return CpuArch::BERGAMO;
+    }
+  } else if (cpu_family == CpuFamily::AMDZEN5) {
+    switch (cpu_model_num) {
+      case 17:
+        return CpuArch::TURIN;
     }
   } else if (cpu_family == CpuFamily::INTEL) {
     switch (cpu_model_num) {

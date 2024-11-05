@@ -476,7 +476,8 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
     populateGenericEventsTracepoint(pmu_manager);
   }
 
-  if (cpu_info.cpu_family == CpuFamily::AMD) {
+  if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
     addAmdEvents(cpu_info, *pmu_manager);
   } else if (cpu_info.cpu_family == CpuFamily::INTEL) {
     //
@@ -607,7 +608,9 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
         100'000'000,
         System::Permissions{},
         std::vector<std::string>{}));
-  } else if (cpu_info.cpu_family == CpuFamily::AMD) {
+  } else if (
+      cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
     metrics->add(std::make_shared<MetricDesc>(
         "l2_cache_misses",
         "Core-originated cacheable demand requests missed L2",
@@ -852,6 +855,20 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
                    EventExtraAttr{},
                    {}}}},
           {CpuArch::GENOA,
+           EventRefs{
+               EventRef{
+                   "flops_scalar",
+                   PmuType::cpu,
+                   "zen3/4::fp_ret_x87_fp_ops.all",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "flops_vector",
+                   PmuType::cpu,
+                   "zen4::fp_ret_sse_avx_ops.all",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::TURIN,
            EventRefs{
                EventRef{
                    "flops_scalar",
