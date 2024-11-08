@@ -21,7 +21,7 @@ constexpr std::chrono::milliseconds kUpdateInterval{500};
 // == 1, this should of no use when sufficiently large
 constexpr std::chrono::seconds kMaxKeepAge{2};
 // how many sample to keep in the RDC cache, we only use the latest value
-constexpr int kMaxKeepSamples = 1;
+constexpr int kMaxKeepSamples = 2;
 
 // check the RDC API reference
 // https://rocm.docs.amd.com/projects/rdc/en/docs-6.2.0/reference/api_ref.html
