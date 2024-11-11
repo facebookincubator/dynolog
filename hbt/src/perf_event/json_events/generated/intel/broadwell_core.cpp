@@ -27,9 +27,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x00, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Instructions retired from execution.)",
-      R"(This event counts the number of instructions retired from execution. For instructions that consist of multiple micro-ops, this event counts the retirement of the last micro-op of the instruction. Counting continues during hardware interrupts, traps, and inside interrupt handlers. 
-Notes: INST_RETIRED.ANY is counted by a designated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. INST_RETIRED.ANY_P is counted by a programmable counter and it is an architectural performance event. 
-Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as retired instructions.)",
+      R"(This event counts the number of instructions retired from execution. For instructions that consist of multiple micro-ops, this event counts the retirement of the last micro-op of the instruction. Counting continues during hardware interrupts, traps, and inside interrupt handlers.  Notes: INST_RETIRED.ANY is counted by a designated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. INST_RETIRED.ANY_P is counted by a programmable counter and it is an architectural performance event.  Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as retired instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -77,8 +75,7 @@ Counting: Faulting executions of GETSEC/VM entry/VM Exit/MWait will not count as
       EventDef::Encoding{
           .code = 0x00, .umask = 0x03, .cmask = 0, .msr_values = {0}},
       R"(Reference cycles when the core is not in halt state.)",
-      R"(This event counts the number of reference cycles when the core is not in a halt state. The core enters the halt state when it is running the HLT instruction or the MWAIT instruction. This event is not affected by core frequency changes (for example, P states, TM2 transitions) but has the same incrementing frequency as the time stamp counter. This event can approximate elapsed time while the core was not in a halt state. This event has a constant ratio with the CPU_CLK_UNHALTED.REF_XCLK event. It is counted on a dedicated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events. 
-Note: On all current platforms this event stops counting during 'throttling (TM)' states duty off periods the processor is 'halted'.  This event is clocked by base clock (100 Mhz) on Sandy Bridge. The counter update is done at a lower clock rate then the core clock the overflow status bit for this counter may appear 'sticky'.  After the counter has overflowed and software clears the overflow status bit and resets the counter to less than MAX. The reset value to the counter is not clocked immediately so the overflow status bit will flip 'high (1)' and generate another PMI (if enabled) after which the reset value gets clocked into the counter. Therefore, software will get the interrupt, read the overflow status bit '1 for bit 34 while the counter value is less than MAX. Software should ignore this case.)",
+      R"(This event counts the number of reference cycles when the core is not in a halt state. The core enters the halt state when it is running the HLT instruction or the MWAIT instruction. This event is not affected by core frequency changes (for example, P states, TM2 transitions) but has the same incrementing frequency as the time stamp counter. This event can approximate elapsed time while the core was not in a halt state. This event has a constant ratio with the CPU_CLK_UNHALTED.REF_XCLK event. It is counted on a dedicated fixed counter, leaving the four (eight when Hyperthreading is disabled) programmable counters available for other events.  Note: On all current platforms this event stops counting during 'throttling (TM)' states duty off periods the processor is 'halted'.  This event is clocked by base clock (100 Mhz) on Sandy Bridge. The counter update is done at a lower clock rate then the core clock the overflow status bit for this counter may appear 'sticky'.  After the counter has overflowed and software clears the overflow status bit and resets the counter to less than MAX. The reset value to the counter is not clocked immediately so the overflow status bit will flip 'high (1)' and generate another PMI (if enabled) after which the reset value gets clocked into the counter. Therefore, software will get the interrupt, read the overflow status bit '1 for bit 34 while the counter value is less than MAX. Software should ignore this case.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -92,15 +89,7 @@ Note: On all current platforms this event stops counting during 'throttling (TM)
       EventDef::Encoding{
           .code = 0x03, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Cases when loads get true Block-on-Store blocking code preventing store forwarding)",
-      R"(This event counts how many times the load operation got the true Block-on-Store blocking code preventing store forwarding. This includes cases when:
- - preceding store conflicts with the load (incomplete overlap);
- - store forwarding is impossible due to u-arch limitations;
- - preceding lock RMW operations are not forwarded;
- - store has the no-forward bit set (uncacheable/page-split/masked stores);
- - all-blocking stores are used (mostly, fences and port I/O);
-and others.
-The most common case is a load blocked due to its address range overlapping with a preceding smaller uncompleted store. Note: This event does not take into account cases of out-of-SW-control (for example, SbTailHit), unknown physical STA, and cases of blocking loads on store due to being non-WB memory type or a lock. These cases are covered by other events.
-See the table of not supported store forwards in the Optimization Guide.)",
+      R"(This event counts how many times the load operation got the true Block-on-Store blocking code preventing store forwarding. This includes cases when:  - preceding store conflicts with the load (incomplete overlap);  - store forwarding is impossible due to u-arch limitations;  - preceding lock RMW operations are not forwarded;  - store has the no-forward bit set (uncacheable/page-split/masked stores);  - all-blocking stores are used (mostly, fences and port I/O); and others. The most common case is a load blocked due to its address range overlapping with a preceding smaller uncompleted store. Note: This event does not take into account cases of out-of-SW-control (for example, SbTailHit), unknown physical STA, and cases of blocking loads on store due to being non-WB memory type or a lock. These cases are covered by other events. See the table of not supported store forwards in the Optimization Guide.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -224,7 +213,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       R"(BDM69)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_LOAD_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -236,7 +225,6 @@ See the table of not supported store forwards in the Optimization Guide.)",
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -385,8 +373,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::Encoding{
           .code = 0x0E, .umask = 0x10, .cmask = 0, .msr_values = {0}},
       R"(Number of flags-merge uops being allocated. Such uops considered perf sensitive; added by GSR u-arch.)",
-      R"(Number of flags-merge uops being allocated. Such uops considered perf sensitive
- added by GSR u-arch.)",
+      R"(Number of flags-merge uops being allocated. Such uops considered perf sensitive  added by GSR u-arch.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -859,8 +846,7 @@ See the table of not supported store forwards in the Optimization Guide.)",
       EventDef::Encoding{
           .code = 0x48, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(L1D miss outstandings duration in cycles)",
-      R"(This event counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand; from the demand Hit FB, if it is allocated by hardware or software prefetch.
-Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
+      R"(This event counts duration of L1D miss outstanding, that is each cycle number of Fill Buffers (FB) outstanding required by Demand Reads. FB either is held by demand loads, or it is held by non-demand loads and gets hit at least once by demand. The valid outstanding interval is defined until the FB deallocation by one of the following ways: from FB allocation, if FB is allocated by demand; from the demand Hit FB, if it is allocated by hardware or software prefetch. Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads, including ones causing cache-line splits and reads due to page walks resulted from any request type.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -973,7 +959,7 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       R"(BDM69)"));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_STORE_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
@@ -985,7 +971,6 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       R"(BDM69)"));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -1401,8 +1386,7 @@ Note: In the L1D, a Demand Read contains cacheable or noncacheable demand loads,
       EventDef::Encoding{
           .code = 0x5E, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Cycles when Reservation Station (RS) is empty for the thread)",
-      R"(This event counts cycles during which the reservation station (RS) is empty for the thread.
-Note: In ST-mode, not active thread should drive 0. This is usually caused by severely costly branch mispredictions, or allocator/FE issues.)",
+      R"(This event counts cycles during which the reservation station (RS) is empty for the thread. Note: In ST-mode, not active thread should drive 0. This is usually caused by severely costly branch mispredictions, or allocator/FE issues.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1437,8 +1421,7 @@ Note: In ST-mode, not active thread should drive 0. This is usually caused by se
       EventDef::Encoding{
           .code = 0x60, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Offcore outstanding Demand Data Read transactions in uncore queue.)",
-      R"(This event counts the number of offcore outstanding Demand Data Read transactions in the super queue (SQ) every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor. See the corresponding Umask under OFFCORE_REQUESTS.
-Note: A prefetch promoted to Demand is counted from the promotion point.)",
+      R"(This event counts the number of offcore outstanding Demand Data Read transactions in the super queue (SQ) every cycle. A transaction is considered to be in the Offcore outstanding state between L2 miss and transaction completion sent to requestor. See the corresponding Umask under OFFCORE_REQUESTS. Note: A prefetch promoted to Demand is counted from the promotion point.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2357,10 +2340,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0x9C, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Uops not delivered to Resource Allocation Table (RAT) per thread when backend of the machine is not stalled)",
-      R"(This event counts the number of uops not delivered to Resource Allocation Table (RAT) per thread adding 4  x when Resource Allocation Table (RAT) is not stalled and Instruction Decode Queue (IDQ) delivers x uops to Resource Allocation Table (RAT) (where x belongs to {0,1,2,3}). Counting does not cover cases when:
- a. IDQ-Resource Allocation Table (RAT) pipe serves the other thread;
- b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions); 
- c. Instruction Decode Queue (IDQ) delivers four uops.)",
+      R"(This event counts the number of uops not delivered to Resource Allocation Table (RAT) per thread adding 4  x when Resource Allocation Table (RAT) is not stalled and Instruction Decode Queue (IDQ) delivers x uops to Resource Allocation Table (RAT) (where x belongs to {0,1,2,3}). Counting does not cover cases when:  a. IDQ-Resource Allocation Table (RAT) pipe serves the other thread;  b. Resource Allocation Table (RAT) is stalled for the thread (including uop drops and clear BE conditions);   c. Instruction Decode Queue (IDQ) delivers four uops.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3172,9 +3152,7 @@ Note: A prefetch promoted to Demand is counted from the promotion point.)",
       EventDef::Encoding{
           .code = 0xAB, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles.)",
-      R"(This event counts Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles. These cycles do not include uops routed through because of the switch itself, for example, when Instruction Decode Queue (IDQ) pre-allocation is unavailable, or Instruction Decode Queue (IDQ) is full. SBD-to-MITE switch true penalty cycles happen after the merge mux (MM) receives Decode Stream Buffer (DSB) Sync-indication until receiving the first MITE uop. 
-MM is placed before Instruction Decode Queue (IDQ) to merge uops being fed from the MITE and Decode Stream Buffer (DSB) paths. Decode Stream Buffer (DSB) inserts the Sync-indication whenever a Decode Stream Buffer (DSB)-to-MITE switch occurs.
-Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DSB) miss can cost up to six cycles in which no uops are delivered to the IDQ. Most often, such switches from the Decode Stream Buffer (DSB) to the legacy pipeline cost 02 cycles.)",
+      R"(This event counts Decode Stream Buffer (DSB)-to-MITE switch true penalty cycles. These cycles do not include uops routed through because of the switch itself, for example, when Instruction Decode Queue (IDQ) pre-allocation is unavailable, or Instruction Decode Queue (IDQ) is full. SBD-to-MITE switch true penalty cycles happen after the merge mux (MM) receives Decode Stream Buffer (DSB) Sync-indication until receiving the first MITE uop.  MM is placed before Instruction Decode Queue (IDQ) to merge uops being fed from the MITE and Decode Stream Buffer (DSB) paths. Decode Stream Buffer (DSB) inserts the Sync-indication whenever a Decode Stream Buffer (DSB)-to-MITE switch occurs. Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DSB) miss can cost up to six cycles in which no uops are delivered to the IDQ. Most often, such switches from the Decode Stream Buffer (DSB) to the legacy pipeline cost 02 cycles.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3467,8 +3445,7 @@ Penalty: A Decode Stream Buffer (DSB) hit followed by a Decode Stream Buffer (DS
       EventDef::Encoding{
           .code = 0xb2, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Offcore requests buffer cannot take more entries for this thread core.)",
-      R"(This event counts the number of cases when the offcore requests buffer cannot take more entries for the core. This can happen when the superqueue does not contain eligible entries, or when L1D writeback pending FIFO requests is full.
-Note: Writeback pending FIFO has six entries.)",
+      R"(This event counts the number of cases when the offcore requests buffer cannot take more entries for the core. This can happen when the superqueue does not contain eligible entries, or when L1D writeback pending FIFO requests is full. Note: Writeback pending FIFO has six entries.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3811,10 +3788,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xC3, .umask = 0x02, .cmask = 0, .msr_values = {0}},
       R"(Counts the number of machine clears due to memory order conflicts.)",
-      R"(This event counts the number of memory ordering Machine Clears detected. Memory Ordering Machine Clears can result from one of the following:
-1. memory disambiguation,
-2. external snoop, or
-3. cross SMT-HW-thread snoop (stores) hitting load buffer.)",
+      R"(This event counts the number of memory ordering Machine Clears detected. Memory Ordering Machine Clears can result from one of the following: 1. memory disambiguation, 2. external snoop, or 3. cross SMT-HW-thread snoop (stores) hitting load buffer.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4239,8 +4213,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc8, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Number of times we entered an HLE region; does not count nested transactions)",
-      R"(Number of times we entered an HLE region
- does not count nested transactions.)",
+      R"(Number of times we entered an HLE region  does not count nested transactions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4360,8 +4333,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xc9, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Number of times we entered an RTM region; does not count nested transactions)",
-      R"(Number of times we entered an RTM region
- does not count nested transactions.)",
+      R"(Number of times we entered an RTM region  does not count nested transactions.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4394,7 +4366,7 @@ Note: Writeback pending FIFO has six entries.)",
       R"(Number of times RTM abort was triggered .)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 2},
+      EventDef::IntelFeatures{.pebs = 1},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -4790,8 +4762,7 @@ Note: Writeback pending FIFO has six entries.)",
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x01, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops with L1 cache hits as data sources.)",
-      R"(This event counts retired load uops which data sources were hits in the nearest-level (L1) cache.
-Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load. This event also counts SW prefetches independent of the actual data source.)",
+      R"(This event counts retired load uops which data sources were hits in the nearest-level (L1) cache. Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load. This event also counts SW prefetches independent of the actual data source.)",
       2000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},
@@ -4878,8 +4849,7 @@ Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though 
       EventDef::Encoding{
           .code = 0xD1, .umask = 0x40, .cmask = 0, .msr_values = {0}},
       R"(Retired load uops which data sources were load uops missed L1 but hit FB due to preceding miss to the same cache line with data not ready.)",
-      R"(This event counts retired load uops which data sources were load uops missed L1 but hit a fill buffer due to a preceding miss to the same cache line with the data not ready.
-Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load.)",
+      R"(This event counts retired load uops which data sources were load uops missed L1 but hit a fill buffer due to a preceding miss to the same cache line with the data not ready. Note: Only two data-sources of L1/FB are applicable for AVX-256bit  even though the corresponding AVX load could be serviced by a deeper level in the memory hierarchy. Data source is reported for the Low-half load.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{.data_la = true, .pebs = 1},

@@ -14,7 +14,7 @@ namespace sierraforest_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sierraforest_uncore.json (319 events).
+    Events from sierraforest_uncore.json (327 events).
 
     Supported SKUs:
         - Arch: x86, Model: SRF id: 175
@@ -331,7 +331,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_RFO_PREF",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C887FF},
-      R"(Read for ownership prefetch from local IA that miss the cache)",
+      R"(Read for ownership prefetch from local IA)",
       R"(TOR Inserts : RFO_Prefs issued by iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -345,7 +345,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_RFO",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C807FF},
-      R"(Read for ownership from local IA that miss the cache)",
+      R"(Read for ownership from local IA)",
       R"(TOR Inserts : RFOs issued by iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -373,7 +373,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRD_OPT",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C827FF},
-      R"(Data read opt from local IA that miss the cache)",
+      R"(Data read opt from local IA)",
       R"(TOR Inserts : DRd_Opts issued by iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -387,7 +387,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_DRD_OPT_PREF",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A7FF},
-      R"(Data read opt prefetch from local IA that miss the cache)",
+      R"(Data read opt prefetch from local IA)",
       R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -415,7 +415,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_CRD",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80FFF},
-      R"(Code read from local IA that miss the cache)",
+      R"(Code read from local IA)",
       R"(TOR Inserts : CRDs issued by iA Cores)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -429,7 +429,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_LOCAL",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C806FE},
-      R"(Read for ownership from local IA that miss the cache)",
+      R"(Read for ownership from local IA that miss the LLC targeting local memory)",
       R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed locally)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -443,7 +443,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8077E},
-      R"(Read for ownership from local IA that miss the cache)",
+      R"(Read for ownership from local IA that miss the LLC targeting remote memory)",
       R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed remotely)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -457,7 +457,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_LOCAL",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C886FE},
-      R"(Read for ownership prefetch from local IA that miss the cache)",
+      R"(Read for ownership prefetch from local IA that miss the LLC targeting local memory)",
       R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -471,7 +471,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8877E},
-      R"(Read for ownership prefetch from local IA that miss the cache)",
+      R"(Read for ownership prefetch from local IA that miss the LLC targeting remote memory)",
       R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -1309,6 +1309,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FD},
+      R"(TOR Occupancy for Data read opt from local IA that hit the cache)",
+      R"(TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FD},
+      R"(TOR Occupancy for Data read opt prefetch from local IA that hit the cache)",
+      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
       "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO_PREF",
       EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C887FD},
       R"(TOR Occupancy for Read for ownership prefetch from local IA that hit the cache)",
@@ -1327,6 +1355,33 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88FFE},
       R"(TOR Occupancy for Code read prefetch from local IA that miss the cache)",
       R"(TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+  // Event UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT is allowlisted
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FE},
+      R"(TOR Occupancy for Data read opt from local IA that miss the cache)",
+      R"(TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FE},
+      R"(TOR Occupancy for Data read opt prefetch from local IA that miss the cache)",
+      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2329,7 +2384,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_imc,
       "UNC_M_CLOCKTICKS",
       EventDef::Encoding{.code = 0x01, .umask = 0x01, .umaskExt = 0x00000000},
-      R"(Number of DRAM DCLK clock cycles while the event is enabled)",
+      R"(Number of DRAM DCLK clock cycles while the event is enabled.  DCLK is 1/4 of DRAM data rate.)",
       R"(DRAM Clockticks)",
       std::nullopt,
       std::nullopt, // ScaleUnit
@@ -2957,6 +3012,34 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
       R"(PCU Clockticks)",
       R"(PCU Clockticks:  The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY_CORES_C0",
+      EventDef::Encoding{.code = 0x35, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Number of cores in C0)",
+      R"(Number of cores in C0 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY_CORES_C6",
+      EventDef::Encoding{.code = 0x37, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Number of cores in C6)",
+      R"(Number of cores in C6 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3964,7 +4047,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_LOCAL",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A6FE},
       R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target local memory)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting local memory)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3978,7 +4061,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8277E},
       R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRd_Opt, and target remote memory)",
-      R"(TOR Inserts : DRd_Opt issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : Data read opt from local iA that missed the LLC targeting remote memory)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3992,7 +4075,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_REMOTE",
       EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A77E},
       R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target remote memory)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
+      R"(TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting remote memory)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4003,10 +4086,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC437E},
-      R"(ItoM transactions from an IO device on a remote socket that miss the cache)",
-      R"(TOR Inserts : ItoMs issued by IO Devices that missed the LLC)",
+      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD42FF},
+      R"(ItoMCacheNear (partial write) transactions from an IO device that addresses memory on the local socket)",
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on the local socket)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4017,10 +4100,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC42FE},
-      R"(ItoM transactions from an IO device on the local socket that miss the cache)",
-      R"(TOR Inserts : ItoMs issued by IO Devices that missed the LLC)",
+      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD437F},
+      R"(ItoMCacheNear (partial write) transactions from an IO device that addresses memory on a remote socket)",
+      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on a remote socket)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4031,10 +4114,10 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOMCACHENEAR_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD437E},
-      R"(ItoMCacheNear transactions from an IO device on a remote socket that miss the cache)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
+      "UNC_CHA_TOR_INSERTS.IO_ITOM_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC42FF},
+      R"(ItoM (write) transactions from an IO device that addresses memory on the local socket)",
+      R"(TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on the local socket)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4045,10 +4128,38 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOMCACHENEAR_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD42FE},
-      R"(ItoMCacheNear transactions from an IO device on the local socket that miss the cache)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
+      "UNC_CHA_TOR_INSERTS.IO_ITOM_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC437F},
+      R"(ItoM (write) transactions from an IO device that addresses memory on a remote socket)",
+      R"(TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on a remote socket)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F2FF},
+      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on the local socket)",
+      R"(TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on the local socket)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_REMOTE",
+      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F37F},
+      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on a remote socket)",
+      R"(TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on a remote socket)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

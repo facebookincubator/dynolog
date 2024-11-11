@@ -10,14 +10,14 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace sapphirerapids_uncore {
+namespace emeraldrapids_uncore {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from sapphirerapids_uncore.json (287 events).
+  Events from emeraldrapids_uncore.json (287 events).
 
   Supported SKUs:
-      - Arch: x86, Model: SPR id: 143
+      - Arch: x86, Model: EMR id: 207
 */
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -3901,5 +3901,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
-} // namespace sapphirerapids_uncore
+} // namespace emeraldrapids_uncore
 } // namespace facebook::hbt::perf_event::generated

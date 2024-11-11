@@ -115,10 +115,6 @@ namespace icelake_uncore {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace icelake_uncore
 
-namespace icelake_uncore_experimental {
-void addEvents(PmuDeviceManager& pmu_manager);
-} // namespace icelake_uncore_experimental
-
 namespace snowridgex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace snowridgex_core
@@ -142,6 +138,18 @@ void addEvents(PmuDeviceManager& pmu_manager);
 namespace sapphirerapids_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace sapphirerapids_uncore_experimental
+
+namespace emeraldrapids_core {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace emeraldrapids_core
+
+namespace emeraldrapids_uncore {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace emeraldrapids_uncore
+
+namespace emeraldrapids_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace emeraldrapids_uncore_experimental
 
 namespace icelakex_core {
 void addEvents(PmuDeviceManager& pmu_manager);
@@ -558,8 +566,6 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       icelake_core::addEvents(pmu_manager);
       // from icelake_uncore.json
       icelake_uncore::addEvents(pmu_manager);
-      // from icelake_uncore_experimental.json
-      icelake_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(126, 0x0): // fall-through
@@ -582,8 +588,6 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       icelake_core::addEvents(pmu_manager);
       // from icelake_uncore.json
       icelake_uncore::addEvents(pmu_manager);
-      // from icelake_uncore_experimental.json
-      icelake_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(133, 0x0): // fall-through
@@ -766,6 +770,30 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       sierraforest_uncore::addEvents(pmu_manager);
       // from sierraforest_uncore_experimental.json
       sierraforest_uncore_experimental::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(207, 0x0): // fall-through
+    case toCpuKey(207, 0x1): // fall-through
+    case toCpuKey(207, 0x2): // fall-through
+    case toCpuKey(207, 0x3): // fall-through
+    case toCpuKey(207, 0x4): // fall-through
+    case toCpuKey(207, 0x5): // fall-through
+    case toCpuKey(207, 0x6): // fall-through
+    case toCpuKey(207, 0x7): // fall-through
+    case toCpuKey(207, 0x8): // fall-through
+    case toCpuKey(207, 0x9): // fall-through
+    case toCpuKey(207, 0x10): // fall-through
+    case toCpuKey(207, 0x11): // fall-through
+    case toCpuKey(207, 0x12): // fall-through
+    case toCpuKey(207, 0x13): // fall-through
+    case toCpuKey(207, 0x14): // fall-through
+    case toCpuKey(207, 0x15): // fall-through
+      // from emeraldrapids_core.json
+      emeraldrapids_core::addEvents(pmu_manager);
+      // from emeraldrapids_uncore.json
+      emeraldrapids_uncore::addEvents(pmu_manager);
+      // from emeraldrapids_uncore_experimental.json
+      emeraldrapids_uncore_experimental::addEvents(pmu_manager);
       break;
 
     default:

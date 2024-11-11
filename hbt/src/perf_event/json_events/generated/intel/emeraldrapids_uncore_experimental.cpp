@@ -10,16 +10,323 @@
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
-namespace sapphirerapids_uncore_experimental {
+namespace emeraldrapids_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from sapphirerapids_uncore_experimental.json (1981 experimental
-  events).
+  Events from emeraldrapids_uncore_experimental.json (2003 experimental events).
 
   Supported SKUs:
-      - Arch: x86, Model: SPR id: 143
+      - Arch: x86, Model: EMR id: 207
 */
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20C81682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20C80682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20C81682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20C80682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.RRQ_MISS_RDCUR_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x40, .umaskExt = 0x20E80682},
+      R"(TOR Occupancy for RDCUR opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Occupancy for RDCUR opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.RRQ_MISS_RDCODE_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x40, .umaskExt = 0x20E80E82},
+      R"(TOR Occupancy for RDCODE opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Occupancy for RDCODE opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.RRQ_MISS_RDDATA_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x40, .umaskExt = 0x20E81682},
+      R"(TOR Occupancy for RDDATA opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Occupancy for RDDATA opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.RRQ_MISS_RDINVOWN_OPT_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x40, .umaskExt = 0x20E82682},
+      R"(TOR Occupancy for RDINVOWN_OPT opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Occupancy for RDINVOWN_OPT opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.RRQ_MISS_INVXTOM_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x40, .umaskExt = 0x20E87E82},
+      R"(TOR Occupancy for INVXTOM opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Occupancy for INVXTOM opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.RRQ_MISS_RDCUR_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .umaskExt = 0x20E80682},
+      R"(TOR Inserts for RDCUR opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Inserts for RDCUR opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.RRQ_MISS_RDCODE_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .umaskExt = 0x20E80E82},
+      R"(TOR Inserts for RDCODE opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Inserts for RDCODE opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.RRQ_MISS_RDDATA_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .umaskExt = 0x20E81682},
+      R"(TOR Inserts for RDDATA opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Inserts for RDDATA opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.RRQ_MISS_RDINVOWN_OPT_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .umaskExt = 0x20E82682},
+      R"(TOR Inserts for RDINVOWN_OPT opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Inserts for RDINVOWN_OPT opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.RRQ_MISS_INVXTOM_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x40, .umaskExt = 0x20E87E82},
+      R"(TOR Inserts for INVXTOM opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      R"(TOR Inserts for INVXTOM opcodes received from a remote socket which miss the L3 and target memory in a CXL type 3 memory expander local to this socket.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20CCD682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20C88682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20CCD682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20C88682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20CCC682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20CCC682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x20C89682},
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_cha,
+      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_EXP_LOCAL",
+      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x20C89682},
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_EXP_LOCAL)",
+      R"(UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_EXP_LOCAL)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_ubox,
@@ -24449,5 +24756,5 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
-} // namespace sapphirerapids_uncore_experimental
+} // namespace emeraldrapids_uncore_experimental
 } // namespace facebook::hbt::perf_event::generated

@@ -14,7 +14,7 @@ namespace icelakex_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from icelakex_core.json (361 events).
+  Events from icelakex_core.json (363 events).
 
   Supported SKUs:
       - Arch: x86, Model: ICX id: 106
@@ -30,7 +30,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of instructions retired - an Architectural PerfMon event. Counting continues during hardware interrupts, traps, and inside interrupt handlers. Notes: INST_RETIRED.ANY is counted by a designated fixed counter freeing up programmable counters to count other events. INST_RETIRED.ANY_P is counted by a programmable counter.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -45,7 +45,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(A version of INST_RETIRED that allows for a more unbiased distribution of samples across instructions retired. It utilizes the Precise Distribution of Instructions Retired (PDIR) feature to mitigate some bias in how retired instructions get sampled. Use on Fixed Counter 0.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -184,7 +184,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_LOAD_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -197,7 +197,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -365,6 +364,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Uops inserted at issue-stage in order to preserve upper bits of vector registers.)",
       R"(Counts the number of Blend Uops issued by the Resource Allocation Table (RAT) to the reservation station (RS) in order to preserve upper bits of vector registers. Starting with the Skylake microarchitecture, these Blend uops are needed since every Intel SSE instruction executed in Dirty Upper State needs to preserve bits 128-255 of the destination register. For more information, refer to 'Mixing Intel AVX and Intel SSE Code' section of the Optimization Guide.)",
       100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "ARITH.FP_DIVIDER_ACTIVE",
+      EventDef::Encoding{
+          .code = 0x14, .umask = 0x01, .cmask = 1, .msr_values = {0x00}},
+      R"(ARITH.FP_DIVIDER_ACTIVE)",
+      R"(ARITH.FP_DIVIDER_ACTIVE)",
+      1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
       std::nullopt // Errata
@@ -896,7 +910,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_STORE_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
@@ -909,7 +923,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -2359,7 +2372,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of instructions retired - an Architectural PerfMon event. Counting continues during hardware interrupts, traps, and inside interrupt handlers. Notes: INST_RETIRED.ANY is counted by a designated fixed counter freeing up programmable counters to count other events. INST_RETIRED.ANY_P is counted by a programmable counter.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2374,7 +2387,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Number of all retired NOP instructions.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2521,7 +2534,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -2535,7 +2548,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts taken conditional branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2550,7 +2563,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts both direct and indirect near call instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2565,7 +2578,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts return instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2580,7 +2593,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts not taken branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2595,7 +2608,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts conditional branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2610,7 +2623,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts taken branch instructions retired.)",
       400009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2625,7 +2638,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts far branch instructions retired.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2640,7 +2653,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts near indirect branch instructions retired excluding returns. TSX abort is an indirect branch.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2655,7 +2668,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all the retired branch instructions that were mispredicted by the processor. A branch misprediction occurs when the processor incorrectly predicts the destination of the branch.  When the misprediction is discovered at execution, all the instructions executed in the wrong (speculative) path must be discarded, and the processor must start fetching from the correct path.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -2669,7 +2682,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts taken conditional mispredicted branch instructions retired.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2684,7 +2697,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired mispredicted indirect (near taken) calls, including both register and memory indirect.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2699,7 +2712,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(This is a non-precise version (that is, does not use PEBS) of the event that counts mispredicted return instructions retired.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2714,7 +2727,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of conditional branch instructions retired that were mispredicted and the branch direction was not taken.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2729,7 +2742,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts mispredicted conditional branch instructions retired.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2744,7 +2757,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts number of near branch instructions retired that were mispredicted and taken.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2759,7 +2772,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all miss-predicted indirect branch instructions retired (excluding RETs. TSX aborts is considered indirect branch).)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2774,7 +2787,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Number of retired Instructions that experienced a critical DSB (Decode stream buffer i.e. the decoded instruction-cache) miss. Critical means stalls were exposed to the back-end as a result of the DSB miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2789,7 +2802,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired Instructions who experienced Instruction L1 Cache true miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2804,7 +2817,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired Instructions who experienced Instruction L2 Cache true miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2819,7 +2832,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired Instructions that experienced iTLB (Instruction TLB) true miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2834,7 +2847,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired Instructions that experienced STLB (2nd level TLB) true miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2849,7 +2862,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of at least 2 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2864,7 +2877,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 4 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2879,7 +2892,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 8 cycles. During this period the front-end delivered no uops.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2894,7 +2907,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 16 cycles. During this period the front-end delivered no uops.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2909,7 +2922,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are delivered to the back-end after a front-end stall of at least 32 cycles. During this period the front-end delivered no uops.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2924,7 +2937,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 64 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2939,7 +2952,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 128 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2954,7 +2967,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 256 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2969,7 +2982,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are fetched after an interval where the front-end delivered no uops for a period of 512 cycles which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2984,7 +2997,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired instructions that are delivered to the back-end after the front-end had at least 1 bubble-slot for a period of 2 cycles. A bubble-slot is an empty issue-pipeline slot while there was no RAT stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2999,7 +3012,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired instructions that are fetched after an interval where the front-end delivered no uops for a period of at least 1 cycle which was not interrupted by a back-end stall.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3014,7 +3027,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired Instructions that experienced DSB (Decode stream buffer i.e. the decoded instruction-cache) miss.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3231,7 +3244,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of times RTM abort was triggered.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3287,8 +3300,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "RTM_RETIRED.ABORTED_EVENTS",
       EventDef::Encoding{
           .code = 0xc9, .umask = 0x80, .cmask = 0, .msr_values = {0x00}},
-      R"(Number of times an RTM execution aborted due to none of the previous 4 categories (e.g. interrupt))",
-      R"(Counts the number of times an RTM execution aborted due to none of the previous 4 categories (e.g. interrupt).)",
+      R"(Number of times an RTM execution aborted due to none of the previous 3 categories (e.g. interrupt))",
+      R"(Counts the number of times an RTM execution aborted due to none of the previous 3 categories (e.g. interrupt).)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -3336,7 +3349,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 4 cycles.  Reported latency may be longer than just the memory latency.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3351,7 +3364,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 8 cycles.  Reported latency may be longer than just the memory latency.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3366,7 +3379,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 16 cycles.  Reported latency may be longer than just the memory latency.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3381,7 +3394,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 32 cycles.  Reported latency may be longer than just the memory latency.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3396,7 +3409,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 64 cycles.  Reported latency may be longer than just the memory latency.)",
       2003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3411,7 +3424,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 128 cycles.  Reported latency may be longer than just the memory latency.)",
       1009,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3426,7 +3439,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 256 cycles.  Reported latency may be longer than just the memory latency.)",
       503,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3441,7 +3454,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts randomly selected loads when the latency from first dispatch to completion is greater than 512 cycles.  Reported latency may be longer than just the memory latency.)",
       101,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3456,7 +3469,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Number of retired load instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3471,8 +3484,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Number of retired store instructions that (start a) miss in the 2nd-level TLB (STLB).)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3487,7 +3499,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with locked access.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3502,7 +3514,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions that split across a cacheline boundary.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3517,8 +3529,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired store instructions that split across a cacheline boundary.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3533,7 +3544,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all retired load instructions. This event accounts for SW prefetch instructions of PREFETCHNTA or PREFETCHT0/1/2 or PREFETCHW.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3548,8 +3559,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all retired store instructions.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3564,8 +3574,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts all retired memory instructions - loads and stores.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3580,7 +3589,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with at least one uop that hit in the L1 data cache. This event includes all SW prefetches and lock instructions regardless of the data source.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3595,7 +3604,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with L2 cache hits as data sources.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3610,7 +3619,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with at least one uop that hit in the L3 cache.)",
       100021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3625,7 +3634,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with at least one uop that missed in the L1 cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3640,7 +3649,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions missed L2 cache as data sources.)",
       100021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3655,7 +3664,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with at least one uop that missed in the L3 cache.)",
       50021,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3670,7 +3679,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with at least one uop was load missed in L1 but hit FB (Fill Buffers) due to preceding miss to the same cache line with data not ready.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3685,7 +3694,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with local Intel(R) Optane(TM) DC persistent memory as the data source and the data request missed L3 (AppDirect or Memory Mode) and DRAM cache(Memory Mode).)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3700,7 +3709,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the retired load instructions whose data sources were L3 hit and cross-core snoop missed in on-pkg core cache.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3715,7 +3724,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions whose data sources were L3 and cross-core snoop hits in on-pkg core cache.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3730,7 +3739,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions whose data sources were HitM responses from shared L3.)",
       20011,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3745,7 +3754,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions whose data sources were hits in L3 without snoops required.)",
       100003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3760,7 +3769,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired load instructions which data sources missed L3 but serviced from local DRAM.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3775,7 +3784,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired load instructions which data sources missed L3 but serviced from remote dram)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3790,7 +3799,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired load instructions whose data sources was remote HITM.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3805,7 +3814,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired load instructions whose data sources was forwarded from a remote cache.)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3820,7 +3829,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts retired load instructions with remote Intel(R) Optane(TM) DC persistent memory as the data source and the data request missed L3 (AppDirect or Memory Mode) and DRAM cache(Memory Mode).)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -3835,7 +3844,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Retired instructions with at least one load to uncacheable memory-type, or at least one cache-line split locked access (Bus Lock).)",
       100007,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -4010,8 +4019,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "L2_LINES_OUT.SILENT",
       EventDef::Encoding{
           .code = 0xF2, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
-      R"(Non-modified cache lines that are silently dropped by L2 cache when triggered by an L2 cache fill.)",
-      R"(Counts the number of lines that are silently dropped by L2 cache when triggered by an L2 cache fill. These lines are typically in Shared or Exclusive state. A non-threaded event.)",
+      R"(Non-modified cache lines that are silently dropped by L2 cache.)",
+      R"(Counts the number of lines that are silently dropped by L2 cache. These lines are typically in Shared or Exclusive state. A non-threaded event.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4027,6 +4036,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .code = 0xF2, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
       R"(Cache lines that are evicted by L2 cache when triggered by an L2 cache fill.)",
       R"(Counts the number of lines that are evicted by the L2 cache due to L2 cache fills.  Evicted lines are delivered to the L3, which may or may not cache them, according to system load and priorities.)",
+      200003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "L2_LINES_OUT.USELESS_HWPF",
+      EventDef::Encoding{
+          .code = 0xf2, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
+      R"(Cache lines that have been L2 hardware prefetched but not used by demand accesses)",
+      R"(Counts the number of cache lines that have been prefetched by the L2 hardware prefetcher but not used by demand access when evicted from the L2 cache)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
