@@ -14,7 +14,7 @@ namespace snowridgex_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from snowridgex_uncore_experimental.json (2316 experimental events).
+  Events from snowridgex_uncore_experimental.json (2313 experimental events).
 
   Supported SKUs:
       - Arch: x86, Model: SNR id: 134
@@ -1606,48 +1606,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_cha,
       "UNC_CHA_PIPE_REJECT.VN_BL_RSP",
       EventDef::Encoding{.code = 0x42, .umask = 0x00, .umaskExt = 0x2000000},
-      R"(Pipe Rejects)",
-      R"(Pipe Rejects : More Miscellaneous events in the Cbo.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PIPE_REJECT.VN_BL_WB",
-      EventDef::Encoding{.code = 0x42, .umask = 0x00, .umaskExt = 0x4000000},
-      R"(Pipe Rejects)",
-      R"(Pipe Rejects : More Miscellaneous events in the Cbo.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PIPE_REJECT.VN_BL_NCB",
-      EventDef::Encoding{.code = 0x42, .umask = 0x00, .umaskExt = 0x8000000},
-      R"(Pipe Rejects)",
-      R"(Pipe Rejects : More Miscellaneous events in the Cbo.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_PIPE_REJECT.VN_BL_NCS",
-      EventDef::Encoding{.code = 0x42, .umask = 0x00, .umaskExt = 0x10000000},
       R"(Pipe Rejects)",
       R"(Pipe Rejects : More Miscellaneous events in the Cbo.)",
       std::nullopt,

@@ -14,7 +14,7 @@ namespace sierraforest_core {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
 /*
-  Events from sierraforest_core.json (149 events).
+  Events from sierraforest_core.json (160 events).
 
   Supported SKUs:
       - Arch: x86, Model: SRF id: 175
@@ -29,7 +29,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Fixed Counter: Counts the number of instructions retired)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -88,7 +88,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired loads that are blocked because its address exactly matches an older store whose data is not ready.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -103,7 +103,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired loads that are blocked because its address partially overlapped with an older store.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -118,7 +118,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired loads that are blocked because it initially appears to be store forward blocked, but subsequently is shown not to be blocked based on 4K alias check.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -318,7 +318,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_LOAD_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_LOAD_MISSES.WALK_COMPLETED",
@@ -331,7 +331,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -387,7 +386,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts misaligned loads that are 4K page splits.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -402,7 +401,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts misaligned stores that are 4K page splits.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -414,7 +413,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x2e, .umask = 0x41, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of cacheable memory requests that miss in the LLC. Counts on a per core basis.)",
-      R"(Counts the number of cacheable memory requests that miss in the Last Level Cache (LLC). Requests include demand loads, reads for ownership (RFO), instruction fetches and L1 HW prefetches. If the platform has an L3 cache, the LLC is the L3 cache, otherwise it is the L2 cache. Counts on a per core basis.)",
+      R"(Counts the number of cacheable memory requests that miss in the Last Level Cache (LLC). Requests include demand loads, reads for ownership (RFO), instruction fetches and L1 HW prefetches. If the core has access to an L3 cache, the LLC is the L3 cache, otherwise it is the L2 cache. Counts on a per core basis.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -428,7 +427,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{
           .code = 0x2e, .umask = 0x4f, .cmask = 0, .msr_values = {0x00}},
       R"(Counts the number of cacheable memory requests that access the LLC. Counts on a per core basis.)",
-      R"(Counts the number of cacheable memory requests that access the Last Level Cache (LLC). Requests include demand loads, reads for ownership (RFO), instruction fetches and L1 HW prefetches. If the platform has an L3 cache, the LLC is the L3 cache, otherwise it is the L2 cache. Counts on a per core basis.)",
+      R"(Counts the number of cacheable memory requests that access the Last Level Cache (LLC). Requests include demand loads, reads for ownership (RFO), instruction fetches and L1 HW prefetches. If the core has access to an L3 cache, the LLC is the L3 cache, otherwise it is the L2 cache. Counts on a per core basis.)",
       200003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -631,7 +630,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event DTLB_STORE_MISSES.WALK_COMPLETED is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "DTLB_STORE_MISSES.WALK_COMPLETED",
@@ -644,7 +643,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -862,11 +860,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "TOPDOWN_RETIRING.ALL_P",
       EventDef::Encoding{
           .code = 0x72, .umask = 0x00, .cmask = 0, .msr_values = {0x00}},
-      R"(Counts the number of consumed retirement slots.  Similar to UOPS_RETIRED.ALL [This event is alias to TOPDOWN_RETIRING.ALL])",
-      R"(Counts the number of consumed retirement slots.  Similar to UOPS_RETIRED.ALL [This event is alias to TOPDOWN_RETIRING.ALL])",
+      R"(Counts the number of consumed retirement slots. [This event is alias to TOPDOWN_RETIRING.ALL])",
+      R"(Counts the number of consumed retirement slots. [This event is alias to TOPDOWN_RETIRING.ALL])",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -877,11 +875,11 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "TOPDOWN_RETIRING.ALL",
       EventDef::Encoding{
           .code = 0x72, .umask = 0x00, .cmask = 0, .msr_values = {0x00}},
-      R"(Counts the number of consumed retirement slots.  Similar to UOPS_RETIRED.ALL [This event is alias to TOPDOWN_RETIRING.ALL_P])",
-      R"(Counts the number of consumed retirement slots.  Similar to UOPS_RETIRED.ALL [This event is alias to TOPDOWN_RETIRING.ALL_P])",
+      R"(Counts the number of consumed retirement slots. [This event is alias to TOPDOWN_RETIRING.ALL_P])",
+      R"(Counts the number of consumed retirement slots. [This event is alias to TOPDOWN_RETIRING.ALL_P])",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1239,7 +1237,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of instructions retired)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1254,7 +1252,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the total number of uops retired.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -1268,7 +1266,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of uops that are from the complex flows issued by the micro-sequencer (MS).  This includes uops from flows due to complex instructions, faults, assists, and inserted flows.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1283,7 +1281,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of x87 uops retired, includes those in ms flows)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1298,7 +1296,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of floating point divide uops retired (x87 and sse, including x87 sqrt).)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1313,7 +1311,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of integer divide uops retired.)",
       2000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1418,7 +1416,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the total number of instructions in which the instruction pointer (IP) of the processor is resteered due to a branch instruction and the branch instruction successfully retires.  All branch type instructions are accounted for.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -1432,7 +1430,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired JCC (Jump on Conditional Code) branch instructions retired, includes both taken and not taken branches.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1447,7 +1445,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of far branch instructions retired, includes far jump, far call and return, and interrupt call and return.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1462,7 +1460,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of near indirect JMP and near indirect CALL branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1477,7 +1475,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of near RET branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1492,7 +1490,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of near CALL branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1507,7 +1505,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of near indirect CALL branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1522,7 +1520,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of taken JCC (Jump on Conditional Code) branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1537,7 +1535,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the total number of mispredicted branch instructions retired.  All branch type instructions are accounted for.  Prediction of the branch target address enables the processor to begin executing instructions before the non-speculative execution path is known. The branch prediction unit (BPU) predicts the target address based on the instruction pointer (IP) of the branch and on the execution path through which execution reached this IP.    A branch misprediction occurs when the prediction is wrong, and results in discarding all instructions executed in the speculative path and re-fetching from the correct path.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -1551,7 +1549,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted JCC (Jump on Conditional Code) branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1566,7 +1564,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted near taken branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1581,7 +1579,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted near indirect JMP and near indirect CALL branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1596,7 +1594,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted near RET branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1611,7 +1609,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted near indirect CALL branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1626,7 +1624,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of mispredicted taken JCC (Jump on Conditional Code) branch instructions retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1641,7 +1639,82 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of instructions retired that were tagged because empty issue slots were seen before the uop due to ITLB miss)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_INST_RETIRED.32B_SP",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x01, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of retired instructions whose sources are a scalar 32bit single precision floating point.)",
+      R"(Counts the number of retired instructions whose sources are a scalar 32bit single precision floating point.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_INST_RETIRED.64B_DP",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x02, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of retired instructions whose sources are a scalar 64 bit double precision floating point.)",
+      R"(Counts the number of retired instructions whose sources are a scalar 64 bit double precision floating point.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_INST_RETIRED.128B_SP",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x04, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of retired instructions whose sources are a packed 128 bit single precision floating point. This may be SSE or AVX.128 operations.)",
+      R"(Counts the number of retired instructions whose sources are a packed 128 bit single precision floating point. This may be SSE or AVX.128 operations.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_INST_RETIRED.128B_DP",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x08, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the total number of  floating point retired instructions.)",
+      R"(Counts the total number of  floating point retired instructions.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "FP_INST_RETIRED.256B_DP",
+      EventDef::Encoding{
+          .code = 0xc7, .umask = 0x20, .cmask = 0, .msr_values = {0x00}},
+      R"(Counts the number of retired instructions whose sources are a packed 256 bit double precision floating point.)",
+      R"(Counts the number of retired instructions whose sources are a packed 256 bit double precision floating point.)",
+      1000003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1656,7 +1729,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of floating point operations that produce 64 bit double precision results [This event is alias to FP_FLOPS_RETIRED.DP])",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -1670,7 +1743,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of floating point operations that produce 32 bit single precision results [This event is alias to FP_FLOPS_RETIRED.SP])",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 
@@ -1684,7 +1757,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of all types of floating point operations per uop with all default weighting)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1710,8 +1783,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       "ARITH.DIV_ACTIVE",
       EventDef::Encoding{
           .code = 0xcd, .umask = 0x03, .cmask = 1, .msr_values = {0x00}},
-      R"(Counts the number of cycles when any of the dividers are active.)",
-      R"(Counts the number of cycles when any of the dividers are active.)",
+      R"(Counts the number of cycles when any of the floating point or integer dividers are active.)",
+      R"(Counts the number of cycles when any of the floating point or integer dividers are active.)",
       1000003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -1729,8 +1802,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1745,8 +1817,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1761,8 +1832,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1777,8 +1847,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1793,8 +1862,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1809,8 +1877,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1825,8 +1892,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1841,8 +1907,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1857,8 +1922,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1873,8 +1937,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of tagged load uops retired that exceed the latency threshold defined in MEC_CR_PEBS_LD_LAT_THRESHOLD - Only counts with PEBS enabled.)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1889,8 +1952,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of  stores uops retired same as MEM_UOPS_RETIRED.ALL_STORES)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{
-          .data_la = true, .l1_hit_indication = true, .pebs = 2},
+      EventDef::IntelFeatures{.data_la = true, .l1_hit_indication = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1905,7 +1967,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load uops retired that performed one or more locks)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1920,7 +1982,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired split load uops.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1935,7 +1997,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of retired split store uops.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1950,7 +2012,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of memory uops retired that were splits.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1965,7 +2027,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1980,7 +2042,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of store ops retired.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.data_la = true, .pebs = 1},
+      EventDef::IntelFeatures{.data_la = true},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -1995,7 +2057,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that hit the L1 data cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2010,7 +2072,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that hit in the L2 cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2025,7 +2087,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that hit in the L3 cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2040,7 +2102,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of loads that hit in a write combining buffer (WCB), excluding the first load that caused the WCB to allocate.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2055,7 +2117,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that miss in the L1 data cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2070,7 +2132,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that miss in the L2 cache.)",
       200003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2085,7 +2147,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of load ops retired that miss the L3 cache and hit in DRAM)",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2100,7 +2162,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       R"(Counts the number of Last Branch Record (LBR) entries. Requires LBRs to be enabled and configured in IA32_LBR_CTL. [This event is alias to LBR_INSERTS.ANY])",
       1000003,
       std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{.pebs = 1},
+      EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
@@ -2156,6 +2218,21 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
+      "OCR.DEMAND_DATA_RD.LOCAL_DRAM",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x184000001}},
+      R"(Counts demand data reads that were supplied by DRAM attached to this socket.)",
+      R"(Counts demand data reads that were supplied by DRAM attached to this socket.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
       "OCR.DEMAND_RFO.ANY_RESPONSE",
       EventDef::Encoding{
           .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10002}},
@@ -2179,6 +2256,87 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           .msr_values = {0x3FBFC00002}},
       R"(Counts demand reads for ownership (RFO) and software prefetches for exclusive ownership (PREFETCHW) that were not supplied by the L3 cache.)",
       R"(Counts demand reads for ownership (RFO) and software prefetches for exclusive ownership (PREFETCHW) that were not supplied by the L3 cache.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OCR.STREAMING_WR.ANY_RESPONSE",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x10800}},
+      R"(Counts streaming stores that have any type of response.)",
+      R"(Counts streaming stores that have any type of response.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HIT_WITH_FWD",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x8003C0001}},
+      R"(Counts demand data reads that were supplied by the L3 cache where a snoop was sent, the snoop hit, and non-modified data was forwarded.)",
+      R"(Counts demand data reads that were supplied by the L3 cache where a snoop was sent, the snoop hit, and non-modified data was forwarded.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OCR.DEMAND_DATA_RD.L3_HIT.SNOOP_HITM",
+      EventDef::Encoding{
+          .code = 0xB7,
+          .umask = 0x01,
+          .cmask = 0,
+          .msr_values = {0x10003C0001}},
+      R"(Counts demand data reads that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
+      R"(Counts demand data reads that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OCR.DEMAND_RFO.L3_HIT.SNOOP_HITM",
+      EventDef::Encoding{
+          .code = 0xB7,
+          .umask = 0x01,
+          .cmask = 0,
+          .msr_values = {0x10003C0002}},
+      R"(Counts demand reads for ownership (RFO) and software prefetches for exclusive ownership (PREFETCHW) that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
+      R"(Counts demand reads for ownership (RFO) and software prefetches for exclusive ownership (PREFETCHW) that were supplied by the L3 cache where a snoop was sent, the snoop hit, and modified data was forwarded.)",
+      100003,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::cpu,
+      "OCR.DEMAND_DATA_RD.REMOTE_DRAM",
+      EventDef::Encoding{
+          .code = 0xB7, .umask = 0x01, .cmask = 0, .msr_values = {0x730000001}},
+      R"(Counts demand data reads that were supplied by DRAM attached to another socket.)",
+      R"(Counts demand data reads that were supplied by DRAM attached to another socket.)",
       100003,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

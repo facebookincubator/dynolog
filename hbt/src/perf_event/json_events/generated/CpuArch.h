@@ -26,6 +26,7 @@ enum class CpuArch {
   BDW_DE,
   BDX,
   CLX,
+  EMR,
   GLM,
   HSX,
   ICL,
@@ -69,6 +70,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "BDX";
     case CpuArch::CLX:
       return os << "CLX";
+    case CpuArch::EMR:
+      return os << "EMR";
     case CpuArch::GLM:
       return os << "GLM";
     case CpuArch::HSX:
@@ -210,6 +213,8 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::SKL;
       case 175:
         return CpuArch::SRF;
+      case 207:
+        return CpuArch::EMR;
       default:
         return CpuArch::UNKNOWN;
     } // End of model switch case

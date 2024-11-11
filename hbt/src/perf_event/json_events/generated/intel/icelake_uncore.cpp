@@ -53,8 +53,8 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       PmuType::uncore_ncu,
       "UNC_CLOCK.SOCKET",
       EventDef::Encoding{.code = 0x00, .umask = 0x01, .cmask = 0},
-      R"(UNC_CLOCK.SOCKET)",
-      R"(UNC_CLOCK.SOCKET)",
+      R"(This 48-bit fixed counter counts the UCLK cycles.)",
+      R"(This 48-bit fixed counter counts the UCLK cycles.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},

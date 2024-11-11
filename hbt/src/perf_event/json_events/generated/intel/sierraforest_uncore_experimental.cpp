@@ -14,7 +14,7 @@ namespace sierraforest_uncore_experimental {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   /*
-    Events from sierraforest_uncore_experimental.json (379 experimental events).
+    Events from sierraforest_uncore_experimental.json (405 experimental events).
 
     Supported SKUs:
         - Arch: x86, Model: SRF id: 175
@@ -1049,61 +1049,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x36, .umask = 0xC8, .umaskExt = 0x00C001FF},
       R"(TOR Occupancy for All remote requests (e.g. snoops, writebacks) that came from remote sockets)",
       R"(TOR Occupancy : All Remote Requests)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FD},
-      R"(TOR Occupancy for Data read opt from local IA that hit the cache)",
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FD},
-      R"(TOR Occupancy for Data read opt prefetch from local IA that hit the cache)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FE},
-      R"(TOR Occupancy for Data read opt from local IA that miss the cache)",
-      R"(TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FE},
-      R"(TOR Occupancy for Data read opt prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2318,10 +2263,94 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_MISS",
+      EventDef::Encoding{.code = 0x12, .umask = 0x71, .umaskExt = 0x00000000},
+      R"(Snoop miss responses)",
+      R"(Snoop miss responses)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_I",
+      EventDef::Encoding{.code = 0x12, .umask = 0x72, .umaskExt = 0x00000000},
+      R"(Snoop Hit I responses)",
+      R"(Snoop Hit I responses)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_ES",
+      EventDef::Encoding{.code = 0x12, .umask = 0x74, .umaskExt = 0x00000000},
+      R"(Snoop Hit E/S responses)",
+      R"(Snoop Hit E/S responses)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_SNOOP_RESP.ALL_HIT_M",
+      EventDef::Encoding{.code = 0x12, .umask = 0x78, .umaskExt = 0x00000000},
+      R"(Snoop Hit M responses)",
+      R"(Snoop Hit M responses)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
       "UNC_I_FAF_OCCUPANCY",
       EventDef::Encoding{.code = 0x19, .umask = 0x00, .umaskExt = 0x00000000},
       R"(FAF occupancy)",
       R"(FAF occupancy)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.FAST_REQ",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x01, .umaskExt = 0x00000000},
+      R"(Counts Timeouts - Set 0 : Fastpath Requests)",
+      R"(Counts Timeouts - Set 0 : Fastpath Requests)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_irp,
+      "UNC_I_MISC0.FAST_REJ",
+      EventDef::Encoding{.code = 0x1E, .umask = 0x02, .umaskExt = 0x00000000},
+      R"(Counts Timeouts - Set 0 : Fastpath Rejects)",
+      R"(Counts Timeouts - Set 0 : Fastpath Rejects)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -2966,6 +2995,160 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x21, .umask = 0x00, .umaskExt = 0x00000000},
       R"(Cycles in L1 : Number of UPI qfclk cycles spent in L1 power mode.  L1 is a mode that totally shuts down a UPI link.  Use edge detect to count the number of instances when the UPI link entered L1.  Link power states are per link and per direction, so for example the Tx direction could be in one state while Rx was in another. Because L1 totally shuts down the link, it takes a good amount of time to exit this mode.)",
       R"(Cycles in L1)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x27, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Cycles in L0p)",
+      R"(Cycles in L0p)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER",
+      EventDef::Encoding{.code = 0x28, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_LL_ENTER)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_upi,
+      "UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT",
+      EventDef::Encoding{.code = 0x29, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
+      R"(UNC_UPI_TxL0P_POWER_CYCLES_M3_EXIT)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_MAX_LIMIT_THERMAL_CYCLES",
+      EventDef::Encoding{.code = 0x04, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Thermal Strongest Upper Limit Cycles)",
+      R"(Thermal Strongest Upper Limit Cycles : Number of cycles any frequency is reduced due to a thermal limit.  Count only if throttling is occurring.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_MAX_POWER_CYCLES",
+      EventDef::Encoding{.code = 0x05, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Power Strongest Upper Limit Cycles)",
+      R"(Power Strongest Upper Limit Cycles : Counts the number of cycles when power is the upper limit on frequency.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_FREQ_TRANS_CYCLES",
+      EventDef::Encoding{.code = 0x74, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Cycles spent changing Frequency)",
+      R"(Cycles spent changing Frequency : Counts the number of cycles when the system is changing frequency.  This can not be filtered by thread ID.  One can also use it with the occupancy counter that monitors number of threads in C0 to estimate the performance impact that frequency transitions had on the system.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C2E_CYCLES",
+      EventDef::Encoding{.code = 0x2b, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Package C State Residency - C2E)",
+      R"(Package C State Residency - C2E : Counts the number of cycles when the package was in C2E.  This event can be used in conjunction with edge detect to count C2E entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PKG_RESIDENCY_C6_CYCLES",
+      EventDef::Encoding{.code = 0x2d, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Package C State Residency - C6)",
+      R"(Package C State Residency - C6 : Counts the number of cycles when the package was in C6.  This event can be used in conjunction with edge detect to count C6 entrances (or exits using invert).  Residency events do not include transition times.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_POWER_STATE_OCCUPANCY_CORES_C3",
+      EventDef::Encoding{.code = 0x36, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Number of cores in C3)",
+      R"(Number of cores in C3 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PROCHOT_EXTERNAL_CYCLES",
+      EventDef::Encoding{.code = 0x0a, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(External Prochot)",
+      R"(External Prochot : Counts the number of cycles that we are in external PROCHOT mode.  This mode is triggered when a sensor off the die determines that something off-die (like DRAM) is too hot and must throttle to avoid damaging the chip.)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_pcu,
+      "UNC_P_PROCHOT_INTERNAL_CYCLES",
+      EventDef::Encoding{.code = 0x09, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(Internal Prochot)",
+      R"(Internal Prochot : Counts the number of cycles that we are in Internal PROCHOT mode.  This mode is triggered when a sensor on the die determines that we are too hot and must throttle to avoid damaging the chip.)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
@@ -4151,6 +4334,146 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH0_RANK0",
+      EventDef::Encoding{.code = 0x47, .umask = 0x01, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH0_RANK1",
+      EventDef::Encoding{.code = 0x47, .umask = 0x02, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH0_RANK2",
+      EventDef::Encoding{.code = 0x47, .umask = 0x04, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH0_RANK3",
+      EventDef::Encoding{.code = 0x47, .umask = 0x08, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH1_RANK0",
+      EventDef::Encoding{.code = 0x47, .umask = 0x10, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH1_RANK1",
+      EventDef::Encoding{.code = 0x47, .umask = 0x20, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH1_RANK2",
+      EventDef::Encoding{.code = 0x47, .umask = 0x40, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWERDOWN_CYCLES.SCH1_RANK3",
+      EventDef::Encoding{.code = 0x47, .umask = 0x80, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_POWER_CHANNEL_PPD_CYCLES",
+      EventDef::Encoding{.code = 0x88, .umask = 0x00, .umaskExt = 0x00000000},
+      R"(# of cycles a given rank is in Power Down Mode and all pages are closed)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SELF_REFRESH.ENTER_SUCCESS_CYCLES",
+      EventDef::Encoding{.code = 0x43, .umask = 0x01, .umaskExt = 0x00000000},
+      R"(# of cycles all ranks were in SR)",
+      R"(-)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::uncore_iio,
       "UNC_IIO_PWT_OCCUPANCY",
       EventDef::Encoding{.code = 0x42, .umask = 0x00, .umaskExt = 0x00000000},
@@ -4492,6 +4815,20 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::Encoding{.code = 0x05, .umask = 0xaa, .umaskExt = 0x00000001},
       R"(Matches on Receive path of a UPI Port : Response - Conflict)",
       R"(Matches on Receive path of a UPI Port : Response - Conflict)",
+      std::nullopt,
+      std::nullopt, // ScaleUnit
+      EventDef::IntelFeatures{},
+      std::nullopt // Errata
+      ));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  pmu_manager.addEvent(std::make_shared<EventDef>(
+      PmuType::uncore_imc,
+      "UNC_M_SELF_REFRESH.ENTER_SUCCESS",
+      EventDef::Encoding{.code = 0x43, .umask = 0x02, .umaskExt = 0x00000000},
+      R"(subevent0 - # of cycles all ranks were in SR subevent1 - # of times all ranks went into SR subevent2 -# of times  ps_sr_active asserted (SRE) subevent3 - # of times ps_sr_active deasserted (SRX) subevent4 - # of times PS-&>Refresh ps_sr_req asserted (SRE) subevent5 - # of times PS-&>Refresh ps_sr_req deasserted (SRX) subevent6 - # of cycles PSCtrlr FSM was in FATAL)",
+      R"(UNC_M_SELF_REFRESH.ENTER_SUCCESS)",
       std::nullopt,
       std::nullopt, // ScaleUnit
       EventDef::IntelFeatures{},
