@@ -55,6 +55,15 @@ TEST(BPerfEventsGroupTest, RunSystemWide) {
     checkReading(val, prev, n);
     ::memcpy(prev, val, sizeof(prev));
   }
+
+  std::map<int, std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>
+      perCpuValues;
+  auto n = system.readGlobalPerCpu(perCpuValues);
+  EXPECT_GT(n, 0);
+  EXPECT_EQ(perCpuValues.size(), CpuSet::makeAllOnline().numCpus());
+  for (const auto& [cpu, values] : perCpuValues) {
+    EXPECT_GE(values[0].counter, 0);
+  }
 }
 
 TEST(BPerfEventsGroupTest, RunCgroup) {
