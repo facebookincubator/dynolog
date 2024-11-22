@@ -9,6 +9,9 @@
 namespace dynolog {
 
 int ServiceHandler::getStatus() {
+  if (dcgm_) {
+    return dcgm_->getRpcStatus();
+  }
   return 1;
 }
 
