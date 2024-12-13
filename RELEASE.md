@@ -24,9 +24,9 @@ We include a `Dockerfile` in the repo to make release generation easy.
 Run the following commands for building debian (Ubuntu based) and rpm (Rocky/CentOS based)packages
 ```
 # For debian package
-docker build . -f /path/to/dynolog_repo/dynolog.dockerfile -t dyno_build:ubuntu20.04 --target ubuntu_build_x86
+docker build . -f /path/to/dynolog_repo/dynolog.dockerfile -t dyno_build:ubuntu20.04 --target ubuntu_x86
 # For rpm package
-docker build . -f /path/to/dynolog_repo/dynolog.dockerfile -t dyno_build:rocky9_build_x86 --target rocky_build_x86
+docker build . -f /path/to/dynolog_repo/dynolog.dockerfile -t dyno_build:rocky9_build_x86 --target rocky9_x86
 ```
 
 Note, this step may take a while if you are using an ARM based laptop/machine and building the x86 packages.
