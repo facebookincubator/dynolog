@@ -172,6 +172,21 @@ constexpr PmuMsr kStalledCyclesIdqEmpty{
     .amdCore = {.event = 0x87, .unitMask = 0x2}};
 constexpr PmuMsr kStalledCyclesAny{.amdCore = {.event = 0x87, .unitMask = 0x4}};
 
+// Zen4 Stalls per dispatch slots
+constexpr PmuMsr kFrontendBoundStalls{
+    .amdCore = {.event = 0xa0, .unitMask = 0x1, .event_11_8 = 0x1}};
+constexpr PmuMsr kBackendBoundStalls{
+    .amdCore = {.event = 0xa0, .unitMask = 0x1e, .event_11_8 = 0x1}};
+constexpr PmuMsr kSMTContentionStalls{
+    .amdCore = {.event = 0xa0, .unitMask = 0x60, .event_11_8 = 0x1}};
+// Bad speculation stalls events
+constexpr PmuMsr kMacroOpsDispatched{
+    .amdCore = {.event = 0xaa, .unitMask = 0x7}};
+// constexpr PmuMsr kRetiredUOps{.amdCore = {.event = 0xc1}};
+constexpr PmuMsr kDispatchSlots{
+    .amdCore = {
+        .event = 0x76}}; // this is unhalted cycles, which is already defined
+
 // Retired uops
 constexpr PmuMsr kRetiredUOps{.amdCore = {.event = 0xc1}};
 constexpr PmuMsr kDeUopsDispatchedOpCache{
