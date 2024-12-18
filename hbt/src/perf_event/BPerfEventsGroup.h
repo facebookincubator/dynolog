@@ -72,6 +72,12 @@ class BPerfEventsGroup {
   // eBPF like interface to read counters from all CPUs and accumulate them.
   int readGlobal(struct bpf_perf_event_value* output, bool skip_offset = false);
   bool readGlobal(ReadValues& rv, bool skip_offset = false);
+  int readGlobalPerCpu(
+      std::map<
+          int,
+          std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
+          output);
+  bool readGlobalPerCpu(std::map<int, ReadValues>& rv);
 
   int readCgroup(struct bpf_perf_event_value* output, __u64 id);
   bool readCgroup(ReadValues& rv, __u64 id);
@@ -122,11 +128,21 @@ class BPerfEventsGroup {
   //     read(&offset_);
   struct bpf_perf_event_value offsets_[BPERF_MAX_GROUP_SIZE];
 
+  std::vector<struct bpf_perf_event_value> readFromBpf_(int fd, __u64 id);
+
   int read(
       struct bpf_perf_event_value* output,
       int fd,
       __u64 id,
       bool skip_offset = false);
+
+  int readPerCpu(
+      std::map<
+          int,
+          std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
+          output,
+      int fd,
+      __u64 id);
 
   int reloadSkel_(struct bperf_attr_map_elem* entry);
   int loadPerfEvent_(struct bperf_leader_cgroup* skel);
