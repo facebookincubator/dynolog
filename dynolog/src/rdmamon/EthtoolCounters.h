@@ -61,9 +61,11 @@ class EthtoolCounters {
 
   [[nodiscard]] bool setup_ethtool_counters(
       const std::vector<std::string>& eth_counter_names_) {
-    struct {
+    union {
       struct ethtool_sset_info hdr;
-      uint32_t buf[1];
+      // Allocate extra space for flexible array member.
+      uint8_t
+          _buf[offsetof(struct ethtool_sset_info, data) + sizeof(uint32_t[1])];
     } ss_stats;
     uint32_t ss_stats_len;
 
