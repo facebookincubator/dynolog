@@ -246,8 +246,8 @@ bool BPerfEventsGroup::isOpen() const {
   HBT_DCHECK(leader_link_fd_ >= 0);
   // set proper offset_
   ::memset(offsets_, 0, sizeof(offsets_));
-  readGlobal(offsets_, true);
   enabled_ = true;
+  readGlobal(offsets_, true);
   return true;
 }
 
@@ -265,7 +265,7 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
   return ::bpf_prog_test_run_opts(leader_fd, &opts);
 }
 
-void BPerfEventsGroup::syncGlobal_() {
+void BPerfEventsGroup::syncGlobal_() const {
   int err;
 
   for (int cpu = 0; cpu < cpu_cnt_; cpu++) {
@@ -504,23 +504,35 @@ error_out:
   return err;
 }
 
-int BPerfEventsGroup::read(
-    struct bpf_perf_event_value* output,
+std::vector<struct bpf_perf_event_value> BPerfEventsGroup::readFromBpf_(
     int fd,
-    __u64 id,
-    bool skip_offset) {
-  auto event_cnt = confs_.size();
+    __u64 id) const {
   std::vector<struct bpf_perf_event_value> values(
       (size_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE);
-
   if (!enabled_) {
-    return -1;
+    return {};
   }
 
   syncGlobal_();
   if (int ret = ::bpf_map_lookup_elem(fd, &id, values.data()); ret) {
     HBT_LOG_ERROR() << "cannot look up key " << id
                     << " from output map. Return value: " << ret;
+    return {};
+  }
+
+  return values;
+}
+
+int BPerfEventsGroup::read(
+    struct bpf_perf_event_value* output,
+    int fd,
+    __u64 id,
+    bool skip_offset) const {
+  auto event_cnt = confs_.size();
+
+  auto values = readFromBpf_(fd, id);
+
+  if (values.empty()) {
     return -1;
   }
 
@@ -542,13 +554,35 @@ int BPerfEventsGroup::read(
   return event_cnt;
 }
 
+int BPerfEventsGroup::readPerCpu(
+    std::map<
+        int,
+        std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>& output,
+    int fd,
+    __u64 id) const {
+  auto event_cnt = confs_.size();
+
+  auto values = readFromBpf_(fd, id);
+
+  for (size_t e = 0; e < event_cnt; e++) {
+    for (int c = 0; c < cpu_cnt_; c++) {
+      int idx = c * BPERF_MAX_GROUP_SIZE + e;
+      output[c][e].counter = values[idx].counter;
+      output[c][e].enabled = values[idx].enabled;
+      output[c][e].running = values[idx].running;
+    }
+  }
+
+  return event_cnt;
+}
+
 int BPerfEventsGroup::readGlobal(
     struct bpf_perf_event_value* output,
-    bool skip_offset) {
+    bool skip_offset) const {
   return read(output, global_output_fd_, 0, skip_offset);
 }
 
-bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) {
+bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) const {
   const auto num_events = rv.getNumEvents();
   HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
@@ -561,13 +595,30 @@ bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) {
   }
 }
 
-int BPerfEventsGroup::readCgroup(
-    struct bpf_perf_event_value* output,
-    __u64 id) {
+int BPerfEventsGroup::readGlobalPerCpu(
+    std::
+        map<int, std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
+            output) const {
+  return readPerCpu(output, global_output_fd_, 0);
+}
+
+bool BPerfEventsGroup::readGlobalPerCpu(std::map<int, ReadValues>& rv) const {
+  std::map<int, std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>
+      output;
+  int numEvents = readGlobalPerCpu(output);
+  for (auto& [cpu, values] : output) {
+    rv.insert({cpu, ReadValues(numEvents)});
+    toReadValues(rv.at(cpu), values.data());
+  }
+  return numEvents > 0;
+}
+
+int BPerfEventsGroup::readCgroup(struct bpf_perf_event_value* output, __u64 id)
+    const {
   return read(output, cgroup_output_fd_, id, true /* skip_offset */);
 }
 
-bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
+bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) const {
   const auto num_events = rv.getNumEvents();
   HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
@@ -578,6 +629,10 @@ bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
   } else {
     return false;
   }
+}
+
+EventConfs BPerfEventsGroup::getEventConfs() const {
+  return confs_;
 }
 
 void BPerfEventsGroup::toReadValues(
