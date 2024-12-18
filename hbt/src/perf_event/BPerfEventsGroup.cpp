@@ -265,7 +265,7 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
   return ::bpf_prog_test_run_opts(leader_fd, &opts);
 }
 
-void BPerfEventsGroup::syncGlobal_() {
+void BPerfEventsGroup::syncGlobal_() const {
   int err;
 
   for (int cpu = 0; cpu < cpu_cnt_; cpu++) {
@@ -506,7 +506,7 @@ error_out:
 
 std::vector<struct bpf_perf_event_value> BPerfEventsGroup::readFromBpf_(
     int fd,
-    __u64 id) {
+    __u64 id) const {
   std::vector<struct bpf_perf_event_value> values(
       (size_t)cpu_cnt_ * BPERF_MAX_GROUP_SIZE);
   if (!enabled_) {
@@ -527,7 +527,7 @@ int BPerfEventsGroup::read(
     struct bpf_perf_event_value* output,
     int fd,
     __u64 id,
-    bool skip_offset) {
+    bool skip_offset) const {
   auto event_cnt = confs_.size();
 
   auto values = readFromBpf_(fd, id);
@@ -559,7 +559,7 @@ int BPerfEventsGroup::readPerCpu(
         int,
         std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>& output,
     int fd,
-    __u64 id) {
+    __u64 id) const {
   auto event_cnt = confs_.size();
 
   auto values = readFromBpf_(fd, id);
@@ -578,11 +578,11 @@ int BPerfEventsGroup::readPerCpu(
 
 int BPerfEventsGroup::readGlobal(
     struct bpf_perf_event_value* output,
-    bool skip_offset) {
+    bool skip_offset) const {
   return read(output, global_output_fd_, 0, skip_offset);
 }
 
-bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) {
+bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) const {
   const auto num_events = rv.getNumEvents();
   HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
@@ -598,11 +598,11 @@ bool BPerfEventsGroup::readGlobal(ReadValues& rv, bool skip_offset) {
 int BPerfEventsGroup::readGlobalPerCpu(
     std::
         map<int, std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
-            output) {
+            output) const {
   return readPerCpu(output, global_output_fd_, 0);
 }
 
-bool BPerfEventsGroup::readGlobalPerCpu(std::map<int, ReadValues>& rv) {
+bool BPerfEventsGroup::readGlobalPerCpu(std::map<int, ReadValues>& rv) const {
   std::map<int, std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>
       output;
   int numEvents = readGlobalPerCpu(output);
@@ -613,13 +613,12 @@ bool BPerfEventsGroup::readGlobalPerCpu(std::map<int, ReadValues>& rv) {
   return numEvents > 0;
 }
 
-int BPerfEventsGroup::readCgroup(
-    struct bpf_perf_event_value* output,
-    __u64 id) {
+int BPerfEventsGroup::readCgroup(struct bpf_perf_event_value* output, __u64 id)
+    const {
   return read(output, cgroup_output_fd_, id, true /* skip_offset */);
 }
 
-bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
+bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) const {
   const auto num_events = rv.getNumEvents();
   HBT_ARG_CHECK_EQ(confs_.size(), rv.getNumEvents());
 
@@ -630,6 +629,10 @@ bool BPerfEventsGroup::readCgroup(ReadValues& rv, __u64 id) {
   } else {
     return false;
   }
+}
+
+EventConfs BPerfEventsGroup::getEventConfs() const {
+  return confs_;
 }
 
 void BPerfEventsGroup::toReadValues(
