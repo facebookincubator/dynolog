@@ -1938,6 +1938,22 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_STALLS_NO_EXECUTE",
+      "Total execution stalls.",
+      "Total execution stalls.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "cpu_stalls_cycles",
+               PmuType::cpu,
+               "CYCLE_ACTIVITY.STALLS_TOTAL",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
 }
 
 void addUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
