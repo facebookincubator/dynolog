@@ -1954,6 +1954,42 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_UOPS_UNDELIVERED",
+      "Uops not delivered by IDQ when backend of the machine is not stalled.",
+      "Counts the number of uops not delivered to by the Instruction Decode Queue (IDQ) to the back-end of the pipeline when there was no back-end stalls. This event counts for one SMT thread in a given cycle.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uops_undelivered",
+               PmuType::cpu,
+               "IDQ_UOPS_NOT_DELIVERED.CORE",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  // CPU_CLK_UNHALTED.THREAD_P_ANY no longer available on ICL+
+  // CPU_CLK_UNHALTED.THREAD's encoding does not work for some reason, see
+  // https://pxl.cl/6406M
+  // Use CPU_CLK_UNHALTED.THREAD_P, which works and is the most similar event
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_UNHALTED_CYCLES",
+      "Thread cycles when thread is not in halt state.",
+      "This is an architectural event that counts the number of thread cycles while the thread is not in a halt state. The thread enters the halt state when it is running the HLT instruction. The core frequency may change from time to time due to power or thermal throttling. For this reason, this event may have a changing ratio with regards to wall clock time.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "unhalted_cycles",
+               PmuType::cpu,
+               "CPU_CLK_UNHALTED.THREAD_P",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
 }
 
 void addUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
