@@ -184,7 +184,7 @@ class MetricSeries final {
     return size_;
   }
 
-  size_t maxLength() {
+  size_t maxLength() const {
     return data_.size();
   }
 
