@@ -18,13 +18,17 @@ class MetricFrameTsUnitFixIntervalTest : public MetricFrameTsUnitFixInterval {
   MetricFrameTsUnitFixIntervalTest() : MetricFrameTsUnitFixInterval{60s, 10} {}
 };
 
+class MetricFrameTsUnitTest : public MetricFrameTsUnit {
+ public:
+  MetricFrameTsUnitTest() : MetricFrameTsUnit{10} {}
+};
+
 TEST(MetricFrameTsUnitTest, constructor) {
-  MetricFrameTsUnitFixIntervalTest t;
+  MetricFrameTsUnitFixIntervalTest fix;
+  MetricFrameTsUnitTest t;
 }
 
-TEST(MetricFrameTsUnitTest, smokeTest) {
-  MetricFrameTsUnitFixIntervalTest t;
-  MetricFrameTsUnitInterface& i = t;
+void smokeTest(MetricFrameTsUnitInterface& i) {
   auto now = std::chrono::steady_clock::now();
   i.addSample(now - 120s);
   i.addSample(now - 60s);
@@ -50,9 +54,14 @@ TEST(MetricFrameTsUnitTest, smokeTest) {
   EXPECT_EQ(timeVector[2], now);
 }
 
-TEST(MetricFrameTsUnitTest, emptyFrame) {
+TEST(MetricFrameTsUnitTest, smokeTest) {
   MetricFrameTsUnitFixIntervalTest t;
-  MetricFrameTsUnitInterface& i = t;
+  smokeTest(t);
+  MetricFrameTsUnitTest t2;
+  smokeTest(t2);
+}
+
+void emptyFrame(MetricFrameTsUnitInterface& i) {
   auto now = std::chrono::steady_clock::now();
   auto resMaybe = i.getRange(now - 120s, now);
   EXPECT_FALSE(resMaybe.has_value());
@@ -62,9 +71,14 @@ TEST(MetricFrameTsUnitTest, emptyFrame) {
   EXPECT_EQ(i.maxLength(), 10);
 }
 
-TEST(MetricFrameTsUnitTest, interpolationPolicies) {
+TEST(MetricFrameTsUnitTest, emptyFrame) {
   MetricFrameTsUnitFixIntervalTest t;
-  MetricFrameTsUnitInterface& i = t;
+  emptyFrame(t);
+  MetricFrameTsUnitTest t2;
+  emptyFrame(t2);
+}
+
+void interpolationPolicies(MetricFrameTsUnitInterface& i) {
   auto now = std::chrono::steady_clock::now();
   i.addSample(now - 120s);
   i.addSample(now - 60s);
@@ -132,4 +146,11 @@ TEST(MetricFrameTsUnitTest, interpolationPolicies) {
   res = i.getRange(now - 89s, now - 12s).value();
   EXPECT_EQ(res.start.offset, 1);
   EXPECT_EQ(res.end.offset, 2);
+}
+
+TEST(MetricFrameTsUnitTest, interpolationPolicies) {
+  MetricFrameTsUnitFixIntervalTest t;
+  interpolationPolicies(t);
+  MetricFrameTsUnitTest t2;
+  interpolationPolicies(t2);
 }

@@ -6,10 +6,37 @@
 #pragma once
 
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
+#include "dynolog/src/metric_frame/MetricSeries.h"
 
 #include <optional>
 
 namespace facebook::dynolog {
+
+class MetricFrameTsUnit : public MetricFrameTsUnitInterface {
+ public:
+  explicit MetricFrameTsUnit(size_t frameLength);
+  virtual void addSample(TimePoint time) override;
+  virtual std::optional<TimePoint> firstSampleTime() const override;
+  virtual std::optional<TimePoint> lastSampleTime() const override;
+  virtual std::vector<TimePoint> getTimeVector() const override;
+  virtual size_t length() const override;
+  virtual size_t maxLength() const override;
+  virtual std::optional<MetricFrameRange> getRange(
+      TimePoint startTime,
+      TimePoint endTime,
+      MATCH_POLICY startTimePolicy,
+      MATCH_POLICY endTimePolicy) const override;
+
+ protected:
+  MetricSeries<TimePoint> timeSeries_;
+
+  std::optional<MetricFrameOffset> findMatchingOffset(
+      TimePoint time,
+      MATCH_POLICY policy) const;
+  std::optional<MetricFrameOffset> closestPolicy(TimePoint time) const;
+  std::optional<MetricFrameOffset> prevClosestPolicy(TimePoint time) const;
+  std::optional<MetricFrameOffset> nextClosestPolicy(TimePoint time) const;
+};
 
 class MetricFrameTsUnitFixInterval : public MetricFrameTsUnitInterface {
  public:
