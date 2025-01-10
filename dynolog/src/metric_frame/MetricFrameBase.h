@@ -52,6 +52,7 @@ class MetricFrameBase {
   virtual std::optional<MetricSeriesVar> series(
       const std::string& name) const = 0;
   virtual std::optional<MetricSeriesVar> series(int name) const = 0;
+  virtual std::vector<MetricSeriesVar> allSeriesVec() const = 0;
   virtual void show(std::ostream& s) const = 0;
 
  protected:
@@ -161,6 +162,18 @@ class MetricFrameSlice {
       return std::nullopt;
     }
     return getSeriesFromVar<T>(seriesVar.value(), range_);
+  }
+  template <typename T>
+  std::vector<MetricSeriesSlice<T>> allSeriesVec() const {
+    std::vector<MetricSeriesSlice<T>> res;
+    auto allSeriesVec = frame_.allSeriesVec();
+    for (const auto& series : allSeriesVec) {
+      auto seriesSliceMaybe = getSeriesFromVar<T>(series, range_);
+      if (seriesSliceMaybe.has_value()) {
+        res.push_back(seriesSliceMaybe.value());
+      }
+    }
+    return res;
   }
 
   size_t length() const {

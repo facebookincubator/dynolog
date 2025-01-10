@@ -87,6 +87,16 @@ std::optional<MetricSeriesVar> MetricFrameMap::series(const int) const {
   return std::nullopt;
 }
 
+std::vector<MetricSeriesVar> MetricFrameMap::allSeriesVec() const {
+  std::vector<MetricSeriesVar> res;
+  std::transform(
+      series_.begin(),
+      series_.end(),
+      std::back_inserter(res),
+      [](const auto& kv) { return kv.second; });
+  return res;
+}
+
 void MetricFrameMap::show(std::ostream& s) const {
   std::vector<MetricSeriesVar> series;
   std::transform(
@@ -152,6 +162,10 @@ std::optional<MetricSeriesVar> MetricFrameVector::series(int idx) const {
     return std::nullopt;
   }
   return series_[idx];
+}
+
+std::vector<MetricSeriesVar> MetricFrameVector::allSeriesVec() const {
+  return series_;
 }
 
 void MetricFrameVector::show(std::ostream& s) const {
