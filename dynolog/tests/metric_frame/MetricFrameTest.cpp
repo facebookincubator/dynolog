@@ -353,3 +353,22 @@ TEST(MetricFrameVectorTest, showTest) {
 
   std::cout << frameVector;
 }
+
+TEST(MetricFrameVectorTest, seriesAllVec) {
+  auto ts = std::make_shared<MetricFrameTsUnitFixInterval>(
+      std::chrono::seconds{60}, 10);
+  MetricFrameVector frameVector(
+      {std::make_shared<MetricSeries<int64_t>>(10, "metric1", "test metric 1"),
+       std::make_shared<MetricSeries<int64_t>>(10, "metric2", "test metric 2")},
+      "test",
+      "test metric frame",
+      std::move(ts));
+
+  auto now = std::chrono::steady_clock::now();
+  frameVector.addSamples({10, 20}, now);
+
+  EXPECT_EQ(frameVector.allSeriesVec().size(), 2);
+
+  auto slice = frameVector.slice(now - 10s, now);
+  EXPECT_EQ(slice->allSeriesVec<int64_t>().size(), 2);
+}
