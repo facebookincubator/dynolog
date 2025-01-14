@@ -163,8 +163,10 @@ dcgmApi* getDcgmAPI() {
     SETAPI(dcgmShutdown);
     SETAPI(dcgmStopEmbedded);
     SETAPI(dcgmProfGetSupportedMetricGroups);
-    SETAPI(dcgmProfWatchFields);
-    SETAPI(dcgmProfUnwatchFields);
+    if (api.dcgm_major_version < 3) {
+      SETAPI(dcgmProfWatchFields);
+      SETAPI(dcgmProfUnwatchFields);
+    }
     SETAPI(dcgmUnwatchFields);
     SETAPI(dcgmProfPause);
     SETAPI(dcgmProfResume);
@@ -361,7 +363,7 @@ dcgmReturn_t dcgmProfWatchFields_stub(
     dcgmHandle_t pDcgmHandle,
     dcgmProfWatchFields_t* watchFields) {
   if (auto api = detail::getDcgmAPI(); api) {
-    if (api->dcgm_major_version == 3) {
+    if (api->dcgm_major_version >= 3) {
       // DCGM 3.0 deprecated dcgmProfWatchFields and uses dcgmWatchFields
       // instead
       return DCGM_ST_OK;
@@ -376,7 +378,7 @@ dcgmReturn_t dcgmProfUnwatchFields_stub(
     dcgmHandle_t pDcgmHandle,
     dcgmProfUnwatchFields_t* unwatchFields) {
   if (auto api = detail::getDcgmAPI(); api) {
-    if (api->dcgm_major_version == 3) {
+    if (api->dcgm_major_version >= 3) {
       // DCGM 3.0 deprecated dcgmProfUnWatchFields and uses dcgmWatchFields
       // instead
       return DCGM_ST_OK;
