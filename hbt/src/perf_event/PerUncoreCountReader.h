@@ -57,11 +57,27 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
   using TBase = PerPerfEventsGroupBase<UncoreCountReader>;
   using ReadValues = UncoreCountReader::ReadValues;
 
+  // a unique identifier for uncore PMU devices of the same type
+  // e.g. all uncore_cha devices
+  struct UncoreDeviceId {
+    uint16_t cpu;
+    uint16_t pmu_id;
+    int toInt() const {
+      return static_cast<uint16_t>(pmu_id) << 16 | static_cast<uint16_t>(cpu);
+    }
+    explicit UncoreDeviceId(int id)
+        : cpu(cpu = id & 0xffff), pmu_id(static_cast<uint32_t>(id) >> 16) {}
+    UncoreDeviceId(CpuId cpu, uint32_t pmu_id)
+        : cpu(static_cast<uint16_t>(cpu)),
+          pmu_id(static_cast<uint16_t>(pmu_id)) {
+      HBT_ARG_CHECK(
+          pmu_id <= std::numeric_limits<uint16_t>::max() &&
+          cpu <= std::numeric_limits<uint16_t>::max())
+          << "pmu id or cpu must be equal to or smaller than 2^16-1";
+    }
+  };
+
   static int32_t generateEventsGroupId(uint32_t pmu_id, CpuId cpu) {
-    HBT_ARG_CHECK(
-        pmu_id <= std::numeric_limits<uint16_t>::max() &&
-        cpu <= std::numeric_limits<uint16_t>::max())
-        << "pmu id or cpu must be equal to or smaller than 2^16-1";
     return static_cast<uint16_t>(pmu_id) << 16 | static_cast<uint16_t>(cpu);
   }
 
@@ -83,8 +99,8 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
 
     for (const auto& [perf_pmu, conf] : per_uncore_event_confs) {
       const auto& [cpu, pmu] = perf_pmu;
-      auto id = generateEventsGroupId(pmu->getPmuId(), cpu);
-      this->generators_[id] = std::make_shared<UncoreCountReader>(
+      UncoreDeviceId id(cpu, pmu->getPmuId());
+      this->generators_[id.toInt()] = std::make_shared<UncoreCountReader>(
           metric_desc->eventNicknames(pmu_manager->cpuInfo.cpu_arch),
           cpu,
           conf);
