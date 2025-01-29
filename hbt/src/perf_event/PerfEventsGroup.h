@@ -624,6 +624,10 @@ class PerfEventsGroupBase {
     return cpu_;
   }
 
+  size_t getNumEvents() const {
+    return confs_.size();
+  }
+
   /// Read a value from file descriptors.
   /// Enable only for Counting and Sampling modes because only those modes
   /// use not Dummy events.

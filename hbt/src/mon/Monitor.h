@@ -302,6 +302,43 @@ class Monitor {
     return rvs;
   }
 
+  // migrage current thread to the CPU that owns specific uncore perf events
+  // before reading to avoid IPI before CPUs.
+  // **Warning:** Invoking this function may cause one or more context switches,
+  // potentially resulting in significant performance degradation compared to a
+  // standard read function.
+  std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>
+  readAllUncoreCountsPerPerfEventOnLocalCpu() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>> rvs;
+    // group by CPU first to minimize # of thread migration required
+    std::set<int> cpus;
+    for (const auto& [k, cr] : uncore_count_readers_) {
+      HBT_THROW_ASSERT_IF(cr == nullptr);
+      cpus.merge(cr->listCpus());
+    }
+    cpu_set_t mask;
+    for (int cpu : cpus) {
+      CPU_ZERO(&mask);
+      CPU_SET(cpu, &mask);
+      if (sched_setaffinity(0, sizeof(mask), &mask) != 0) {
+        HBT_LOG_ERROR() << "Failed to set sched affinity on CPU " << cpu;
+      }
+      // read perf counter value per CPU per per hbt metric
+      // then merge values from the same hbt metric and different CPU to a
+      // single list
+      for (const auto& [k, cr] : uncore_count_readers_) {
+        auto counters = cr->readPerPerfEventsGroupOnCpu(cpu);
+        auto& list = rvs[k];
+        std::for_each(
+            counters.begin(), counters.end(), [&list](const auto& pair) {
+              list.push_back(pair.second);
+            });
+      }
+    }
+    return rvs;
+  }
+
   /// Read counts for all uncore events opened in counting mode
   /// in all PerUncoreCountReaders.
   std::map<ElemId, std::optional<TUncoreCountReader::ReadValues>>
