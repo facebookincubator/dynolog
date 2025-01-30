@@ -474,6 +474,65 @@ constexpr PmuMsr kUmcZen5Cyc{
         .event = 0x0,
         .rdwrmask = 0x0,
     }};
+
+// DF Counters for CXL (Zen 5)
+constexpr PmuMsr kDfZen4CxlReadBeatsCmp0{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xF,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlWriteBeatsCmp0{
+    .amdDfZen4 = {
+        .event = 0x1F,
+        .unitMask = 0xFD,
+        .unitMask_11_8 = 0xC,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlReadBeatsCmp1{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xF,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlWriteBeatsCmp1{
+    .amdDfZen4 = {
+        .event = 0x5F,
+        .unitMask = 0xFD,
+        .unitMask_11_8 = 0xC,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlReadBeatsCmp2{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xF,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlWriteBeatsCmp2{
+    .amdDfZen4 = {
+        .event = 0x9F,
+        .unitMask = 0xFD,
+        .unitMask_11_8 = 0xC,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlReadBeatsCmp3{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFE,
+        .unitMask_11_8 = 0xF,
+        .event_13_8 = 0x3,
+    }};
+constexpr PmuMsr kDfZen4CxlWriteBeatsCmp3{
+    .amdDfZen4 = {
+        .event = 0xDF,
+        .unitMask = 0xFD,
+        .unitMask_11_8 = 0xC,
+        .event_13_8 = 0x3,
+    }};
+
 } // namespace amd_msr
 
 namespace milan {
