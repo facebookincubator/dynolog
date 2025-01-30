@@ -175,6 +175,35 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 }
 } // namespace milan
 
+namespace turin {
+void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_umc,
+          "zen5::umc_read_write_cyc",
+          EventDef::Encoding{.code = amd_msr::kUmcZen5ReadWriteCyc.val},
+          "Zen5 UMC read/write cycles",
+          "Number of cycles the DRAM (reads and writes) data bus channel is utilized."),
+      std::vector<EventId>({"zen5-umc-read-write-cycles"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_umc,
+          "zen5::umc_write_cyc",
+          EventDef::Encoding{.code = amd_msr::kUmcZen5WriteCyc.val},
+          "Zen5 UMC write cycles",
+          "Number of cycles the DRAM write data bus channel is utilized."),
+      std::vector<EventId>({"zen5-umc-write-cycles"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_umc,
+          "zen5::umc_cyc",
+          EventDef::Encoding{.code = amd_msr::kUmcZen5Cyc.val},
+          "Zen5 UMC cycles",
+          "Total number of DRAM bus channel cycles."),
+      std::vector<EventId>({"zen5-umc-write-cycles"}));
+}
+} // namespace turin
+
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // When multiple families/models are in the fleet, add a switch stmt similar
   // to addEvents in json_events/generated/intel/JsonEvents.h
