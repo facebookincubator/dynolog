@@ -22,7 +22,7 @@ DEFINE_string(
 DEFINE_int32(
     dcgm_major_version,
     2,
-    "Version of Nvidia DCGM library. Currently supports 2 and 3");
+    "Version of Nvidia DCGM library. Currently supports 2, 3 and 4");
 
 constexpr int kDcgmDefaultVersion = 2;
 
@@ -113,8 +113,8 @@ inline int parse_lib_major_version(const std::filesystem::path& lib_path) {
       return c - '0';
     }
   }
-  LOG(INFO) << "Couldn't find version in lib path " << lib_path
-            << ", using default version " << kDcgmDefaultVersion;
+  LOG(ERROR) << "Couldn't find version in lib path " << lib_path
+             << ", using default version " << kDcgmDefaultVersion;
   return kDcgmDefaultVersion;
 }
 
@@ -131,19 +131,36 @@ dcgmApi* getDcgmAPI() {
       LOG(ERROR) << "Couldn't load librt : " << dlerror();
       return;
     }
-    void* handle = dlopen(FLAGS_dcgm_lib_path.c_str(), RTLD_LAZY);
+    std::string dcgm_lib_path = FLAGS_dcgm_lib_path;
+    std::filesystem::path p(dcgm_lib_path);
+    if (!std::filesystem::exists(p)) {
+      LOG(ERROR) << "Couldn't find dcgm lib at " << dcgm_lib_path
+                 << " retrying with dcgm 4 path";
+      // Starting with DCGM 4, the libdcgm.so symlink no longer exists, so
+      // we must explicitly rename to libdcgm.so.4
+      dcgm_lib_path.append(".4");
+      p = std::filesystem::path(dcgm_lib_path);
+      if (!std::filesystem::exists(p)) {
+        LOG(ERROR) << "Couldn't find dcgm 4 lib at " << dcgm_lib_path;
+        return;
+      }
+    }
+
+    // this gflag variable is used by other places in the code, so update it
+    // with the final DCGM path here
+    FLAGS_dcgm_lib_path = dcgm_lib_path;
+    void* handle = dlopen(dcgm_lib_path.c_str(), RTLD_LAZY);
     if (!handle) {
       LOG(ERROR) << "Couldn't load libdcgm : " << dlerror();
       return;
     }
 
-    std::filesystem::path p(FLAGS_dcgm_lib_path);
-    if (std::filesystem::exists(p) && std::filesystem::is_symlink(p)) {
-      api.dcgm_major_version =
-          parse_lib_major_version(std::filesystem::read_symlink(p));
-      LOG(INFO) << "Parse " << std::filesystem::read_symlink(p)
-                << ", dcgm version = " << api.dcgm_major_version;
+    if (std::filesystem::is_symlink(p)) {
+      dcgm_lib_path = std::filesystem::read_symlink(p);
     }
+    api.dcgm_major_version = parse_lib_major_version(dcgm_lib_path);
+    LOG(INFO) << "Parse " << dcgm_lib_path
+              << ", dcgm version = " << api.dcgm_major_version;
 
 #define SETAPI(name)                                        \
   api.name = (decltype(dcgmApi::name))dlsym(handle, #name); \
