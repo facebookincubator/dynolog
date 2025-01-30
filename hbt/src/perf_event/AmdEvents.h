@@ -106,12 +106,23 @@ static_assert(
     sizeof(DFZen4PmuMsrAmd) == sizeof(uint64_t),
     "DFZen4PmuMsrAmd is packed to be 64 bits to fit in MSR.");
 
+struct UMCZen5PmuMsrAmd {
+  uint64_t event : 8;
+  uint64_t rdwrmask : 2;
+  uint64_t : 54;
+};
+
+static_assert(
+    sizeof(UMCZen5PmuMsrAmd) == sizeof(uint64_t),
+    "UMCZen5PmuMsrAmd is packed to be 64 bits to fit in MSR.");
+
 union PmuMsr {
   uint64_t val = 0;
   CorePmuMsrAmd amdCore;
   L3PmuMsrAmd amdL3;
   DFPmuMsrAmd amdDf;
   DFZen4PmuMsrAmd amdDfZen4;
+  UMCZen5PmuMsrAmd amdUmcZen5;
 };
 
 constexpr PmuMsr kRetiredInstructions{.amdCore = {.event = 0xc0}};
@@ -446,6 +457,23 @@ constexpr PmuMsr kDfZen4UmcJWriteReqsRemote{
         .unitMask = 0xFF,
         .unitMask_11_8 = 0xB,
         .event_13_8 = 0x2}};
+
+// Zen5 UMC counters
+constexpr PmuMsr kUmcZen5ReadWriteCyc{
+    .amdUmcZen5 = {
+        .event = 0x14,
+        .rdwrmask = 0x0,
+    }};
+constexpr PmuMsr kUmcZen5WriteCyc{
+    .amdUmcZen5 = {
+        .event = 0x14,
+        .rdwrmask = 0x2,
+    }};
+constexpr PmuMsr kUmcZen5Cyc{
+    .amdUmcZen5 = {
+        .event = 0x0,
+        .rdwrmask = 0x0,
+    }};
 } // namespace amd_msr
 
 namespace milan {
