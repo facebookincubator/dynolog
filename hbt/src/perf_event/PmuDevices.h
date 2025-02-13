@@ -136,6 +136,7 @@ class PmuDevice {
     config,
     config1,
     config2,
+    config3,
   };
 
   struct FormatAttr {
