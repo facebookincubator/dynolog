@@ -232,6 +232,14 @@ class MetricSeries final {
     return *(end_ - 1) - *begin_;
   }
 
+  std::vector<T> raw(
+      std::optional<Iterator> beginMaybe = std::nullopt,
+      std::optional<Iterator> endMaybe = std::nullopt) const {
+    auto begin_ = beginMaybe.value_or(begin());
+    auto end_ = endMaybe.value_or(end());
+    return std::vector<T>(begin_, end_);
+  }
+
  private:
   template <typename R>
   static R rate(

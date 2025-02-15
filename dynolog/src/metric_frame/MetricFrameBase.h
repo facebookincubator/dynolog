@@ -133,6 +133,11 @@ class MetricSeriesSlice {
         series_.begin() + range_.start.offset,
         series_.begin() + range_.end.offset + 1);
   }
+  std::vector<T> raw() const {
+    return series_.raw(
+        series_.begin() + range_.start.offset,
+        series_.begin() + range_.end.offset + 1);
+  }
 
  protected:
   MetricSeriesSlice(
