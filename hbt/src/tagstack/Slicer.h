@@ -524,7 +524,7 @@ class Slicer {
       Slice::TransitionType swin_type) {
     // HBT_LOG_INFO() << "activateStackState_ idx: " << group_idx << " stack: "
     // <<
-    ss.stats.stack;
+    //  ss.stats.stack;
     HBT_ARG_CHECK(active_states_[group_idx] == nullptr);
     active_states_[group_idx] = &ss;
     ss.markSwitchIn(group_idx, ts, swin_type);
