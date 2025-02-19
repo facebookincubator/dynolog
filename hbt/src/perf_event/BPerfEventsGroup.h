@@ -70,17 +70,20 @@ class BPerfEventsGroup {
   bool removeCgroup(__u64 id);
 
   // eBPF like interface to read counters from all CPUs and accumulate them.
-  int readGlobal(struct bpf_perf_event_value* output, bool skip_offset = false);
-  bool readGlobal(ReadValues& rv, bool skip_offset = false);
+  int readGlobal(struct bpf_perf_event_value* output, bool skip_offset = false)
+      const;
+  bool readGlobal(ReadValues& rv, bool skip_offset = false) const;
   int readGlobalPerCpu(
       std::map<
           int,
           std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
-          output);
-  bool readGlobalPerCpu(std::map<int, ReadValues>& rv);
+          output) const;
+  bool readGlobalPerCpu(std::map<int, ReadValues>& rv) const;
 
-  int readCgroup(struct bpf_perf_event_value* output, __u64 id);
-  bool readCgroup(ReadValues& rv, __u64 id);
+  int readCgroup(struct bpf_perf_event_value* output, __u64 id) const;
+  bool readCgroup(ReadValues& rv, __u64 id) const;
+
+  EventConfs getEventConfs() const;
 
  protected:
   const EventConfs confs_;
@@ -128,13 +131,13 @@ class BPerfEventsGroup {
   //     read(&offset_);
   struct bpf_perf_event_value offsets_[BPERF_MAX_GROUP_SIZE];
 
-  std::vector<struct bpf_perf_event_value> readFromBpf_(int fd, __u64 id);
+  std::vector<struct bpf_perf_event_value> readFromBpf_(int fd, __u64 id) const;
 
   int read(
       struct bpf_perf_event_value* output,
       int fd,
       __u64 id,
-      bool skip_offset = false);
+      bool skip_offset = false) const;
 
   int readPerCpu(
       std::map<
@@ -142,14 +145,14 @@ class BPerfEventsGroup {
           std::array<struct bpf_perf_event_value, BPERF_MAX_GROUP_SIZE>>&
           output,
       int fd,
-      __u64 id);
+      __u64 id) const;
 
   int reloadSkel_(struct bperf_attr_map_elem* entry);
   int loadPerfEvent_(struct bperf_leader_cgroup* skel);
 
   static int syncCpu_(__u32 cpu, int leader_pd);
   static void toReadValues(ReadValues& rv, struct bpf_perf_event_value*);
-  void syncGlobal_();
+  void syncGlobal_() const;
 
   // For per thread monitoring
   bool per_thread_;
