@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 
 namespace facebook::hbt::perf_event {
 
@@ -18,13 +19,25 @@ void setTestRootDir(const std::string& rootDir) {
   rootDir_ = rootDir;
 }
 
-void scanPmu(PmuDeviceManager& pmu_manager, const PmuType pmu_name) {
+namespace {
+
+std::string getPmuName(const PmuType& pmu_type) {
+  auto res = PmuTypeToStr(pmu_type);
+  if (pmu_type != PmuType::cs_etm) {
+    res += "_0";
+  }
+  return res;
+}
+
+} // namespace
+
+void scanPmu(PmuDeviceManager& pmu_manager, PmuType pmu_type) {
   const std::string pmu_events_path = rootDir_ +
-      "/sys/bus/event_source/devices/" + PmuTypeToStr(pmu_name) + "_0/events";
+      "/sys/bus/event_source/devices/" + getPmuName(pmu_type) + "/events";
 
   if (!std::filesystem::is_directory(pmu_events_path)) {
-    HBT_LOG_WARNING() << "No events found for " << PmuTypeToStr(pmu_name)
-                      << " in sysfs";
+    HBT_LOG_WARNING() << "No events found for "
+                      << std::quoted(getPmuName(pmu_type)) << " in sysfs";
     return;
   }
 
@@ -54,7 +67,7 @@ void scanPmu(PmuDeviceManager& pmu_manager, const PmuType pmu_name) {
         break;
       }
       auto field = configEntry.substr(0, pos);
-      if (field != "event") {
+      if (field != "event" && field != "configid") {
         HBT_LOG_WARNING()
             << "HBT does not support the perf_event config field: " << field;
         isValidConfig = false;
@@ -65,7 +78,7 @@ void scanPmu(PmuDeviceManager& pmu_manager, const PmuType pmu_name) {
     }
     if (isValidConfig && code != std::numeric_limits<uint64_t>::max()) {
       pmu_manager.addEvent(std::make_shared<EventDef>(
-          pmu_name,
+          pmu_type,
           event_name,
           EventDef::Encoding{.code = code},
           event_name + " (auto-generated)",
@@ -79,6 +92,7 @@ void scanPmu(PmuDeviceManager& pmu_manager, const PmuType pmu_name) {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
   scanPmu(pmu_manager, PmuType::armv8_pmuv3);
+  scanPmu(pmu_manager, PmuType::cs_etm);
   scanPmu(pmu_manager, PmuType::nvidia_scf_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c0_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c1_pmu);

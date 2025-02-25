@@ -98,7 +98,10 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(amd_l3);
 
     CASE_PMU_TYPE(amd_umc);
+
+    CASE_PMU_TYPE(cs_etm);
   }
+  return "";
 }
 
 /// Macro to generate "if" statements for PMU string names.
@@ -158,6 +161,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
 
   IF_PMU_TYPE(str, amd_umc);
 
+  IF_PMU_TYPE(str, cs_etm);
+
   HBT_THROW_EINVAL() << "Unrecognized PmuType string: \"" + str + "\"";
   __builtin_unreachable();
 }
@@ -170,6 +175,7 @@ PmuDevice::ConfigType ConfigTypeFromStr(const std::string& str) {
   IF_CONFIG_TYPE(str, config);
   IF_CONFIG_TYPE(str, config1);
   IF_CONFIG_TYPE(str, config2);
+  IF_CONFIG_TYPE(str, config3);
 
   HBT_THROW_EINVAL() << "Unrecognized ConfigType string: \"" + str + "\"";
   __builtin_unreachable();

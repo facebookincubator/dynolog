@@ -92,6 +92,9 @@ enum class PmuType : uint16_t {
 
   // AMD Zen5 UMC
   amd_umc,
+
+  // Arm
+  cs_etm,
 };
 
 std::string PmuTypeToStr(PmuType);
