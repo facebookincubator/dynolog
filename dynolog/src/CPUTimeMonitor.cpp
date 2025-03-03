@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-#include "dynolog/src/DynoCPUTimeMonitor.h"
+#include "dynolog/src/CPUTimeMonitor.h"
 #include <dynolog/src/metric_frame/MetricFrameTsUnit.h>
 
 #define IDX_MIN 0
@@ -12,15 +12,12 @@ namespace dynolog {
 
 constexpr int kRingbufferSizeMinutes = 6;
 
-DynoCPUTimeMonitor::DynoCPUTimeMonitor(
-    std::shared_ptr<TDynoTicker> ticker,
+CPUTimeMonitor::CPUTimeMonitor(
+    std::shared_ptr<TTicker> ticker,
     const std::string& rootDir,
     uint64_t coreCount,
     bool isUnitTest)
-    : DynoMonitorBase<TDynoTicker>(
-          std::move(ticker),
-          "DynoCPUTimeMonitor",
-          {1.0}),
+    : MonitorBase<TTicker>(std::move(ticker), "CPUTimeMonitor", {1.0}),
       rootDir_(rootDir),
       coreCount_(coreCount),
       isUnitTest_(isUnitTest),
@@ -57,8 +54,8 @@ DynoCPUTimeMonitor::DynoCPUTimeMonitor(
   }
 }
 
-std::optional<double> DynoCPUTimeMonitor::getStat(
-    DynoCPUTimeMonitor::Granularity gran,
+std::optional<double> CPUTimeMonitor::getStat(
+    CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     const std::optional<std::string>& allotmentId,
     Statistic stat,
@@ -93,23 +90,23 @@ std::optional<double> DynoCPUTimeMonitor::getStat(
   return std::nullopt;
 }
 
-std::optional<double> DynoCPUTimeMonitor::getAvgCPUCoresUsage(
-    DynoCPUTimeMonitor::Granularity gran,
+std::optional<double> CPUTimeMonitor::getAvgCPUCoresUsage(
+    CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     const std::optional<std::string>& allotmentId) {
   return getStat(gran, seconds_ago, allotmentId, Statistic::AVG, 0.0);
 }
 
-std::optional<double> DynoCPUTimeMonitor::getQuantileCPUCoresUsage(
-    DynoCPUTimeMonitor::Granularity gran,
+std::optional<double> CPUTimeMonitor::getQuantileCPUCoresUsage(
+    CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     double quantile,
     const std::optional<std::string>& allotmentId) {
   return getStat(gran, seconds_ago, allotmentId, Statistic::QUANTILE, quantile);
 }
 
-std::vector<double> DynoCPUTimeMonitor::getRawCPUCoresUsage(
-    DynoCPUTimeMonitor::Granularity gran,
+std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
+    CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     const std::optional<std::string>& allotmentId) {
   TimePoint now = std::chrono::steady_clock::now();
@@ -137,7 +134,7 @@ std::vector<double> DynoCPUTimeMonitor::getRawCPUCoresUsage(
   return series->raw();
 }
 
-void DynoCPUTimeMonitor::tick(TMask mask) {
+void CPUTimeMonitor::tick(TMask mask) {
   TimePoint measure_time_lo = std::chrono::steady_clock::now();
   std::vector<uint64_t> idleTime =
       readProcStat(!allotmentsNeedPerCore_.empty());
@@ -183,7 +180,7 @@ void DynoCPUTimeMonitor::tick(TMask mask) {
       }
       if (wallDelta == 0) {
         // log on major tick only to avoid spam
-        if (TDynoTicker::is_major_tick(mask)) {
+        if (TTicker::is_major_tick(mask)) {
           LOG(INFO) << "Wall delta is 0, cannot compute CPU cores usage";
         }
         continue;
@@ -194,7 +191,7 @@ void DynoCPUTimeMonitor::tick(TMask mask) {
 
       if (CPUCoresUsage < 0 || CPUCoresUsage > (double)coreCount) {
         // log on major tick only to avoid spam
-        if (TDynoTicker::is_major_tick(mask)) {
+        if (TTicker::is_major_tick(mask)) {
           LOG(ERROR) << "Invalid CPU cores usage at level: " << level
                      << " allotmentId: " << allotmentId
                      << " wallDelta: " << wallDelta
@@ -221,22 +218,22 @@ void DynoCPUTimeMonitor::tick(TMask mask) {
     TimeLast_[level] = measure_time_lo;
   };
 
-  if (TDynoTicker::is_major_tick(mask)) {
+  if (TTicker::is_major_tick(mask)) {
     // every 60s
     make_cores_usage(IDX_MIN);
   }
   // a tick can be both major and minor
-  if (TDynoTicker::is_minor_tick(mask)) {
+  if (TTicker::is_minor_tick(mask)) {
     // every 1s
     make_cores_usage(IDX_SEC);
   }
-  if (TDynoTicker::is_subminor_tick(mask, 0)) {
+  if (TTicker::is_subminor_tick(mask, 0)) {
     // every 100ms
     make_cores_usage(IDX_HUNDRED_MS);
   }
 }
 
-void DynoCPUTimeMonitor::registerAllotment(
+void CPUTimeMonitor::registerAllotment(
     const std::string& allotmentId,
     const std::vector<int64_t>& cpuSet) {
   if (allotmentId == "" || allotmentId == "host") {
@@ -273,7 +270,7 @@ void DynoCPUTimeMonitor::registerAllotment(
   }
 }
 
-void DynoCPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
+void CPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
   LOG(INFO) << "Deregister allotment, allotmentId: " << allotmentId;
   std::unique_lock lock(dataLock_);
   allotmentToCpuSet_.erase(allotmentId);
@@ -286,7 +283,7 @@ void DynoCPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
   }
 }
 
-std::vector<uint64_t> DynoCPUTimeMonitor::readProcStat(bool read_per_core) {
+std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
   // based on KernelMonitor.cpp
   // For unclear reasons, a C++ implementation is rather slower
   static FILE* fp = nullptr;

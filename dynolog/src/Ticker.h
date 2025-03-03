@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <sstream>
 #include <string>
@@ -20,7 +21,7 @@ namespace facebook {
 namespace dynolog {
 
 /*
-  A class to manage the periodic scheduling of e.g. DynoMonitors.
+  A class to manage the periodic scheduling of e.g. Monitors.
 
   Multiple periodicities are supported: major, minor, and a templated number of
   levels of sub-minor ticks. Template parameters:
@@ -56,30 +57,47 @@ namespace dynolog {
 */
 
 template <std::size_t N, uint64_t base, bool reverse>
-constexpr std::array<uint64_t, N> make_geometric_array() {
-  // e.g. make_geometric_array<3, 2, false>() -> {1, 2, 4}
-  // e.g. make_geometric_array<4, 10, true>() -> {1000, 100, 10, 1}
-  static_assert(N > 0, "cannot instantiate empty array");
-  std::array<uint64_t, N> ret;
-  ret.fill(1);
-  if (reverse) {
-    for (std::size_t i = N - 1; i != 0; --i) {
-      ret[i - 1] = ret[i] * base;
+constexpr std::array<uint64_t, N> make_geometric_array_impl(
+    std::array<uint64_t, N> ret,
+    std::size_t i = 0) {
+  if (i == N) {
+    return ret;
+  }
+  if (i == 0) {
+    if (reverse) {
+      ret[N - 1] = 1;
+    } else {
+      ret[0] = 1;
     }
   } else {
-    for (std::size_t i = 1; i != N; ++i) {
+    if (reverse) {
+      ret[N - 1 - i] = ret[N - i] * base;
+    } else {
       ret[i] = ret[i - 1] * base;
     }
   }
-  return ret;
+  return make_geometric_array_impl<N, base, reverse>(ret, i + 1);
 }
+template <std::size_t N, uint64_t base, bool reverse>
+constexpr std::array<uint64_t, N> make_geometric_array() {
+  static_assert(N > 0, "cannot instantiate empty array");
+  return make_geometric_array_impl<N, base, reverse>(std::array<uint64_t, N>{});
+}
+
+static_assert(make_geometric_array<3, 2, false>()[0] == 1);
+static_assert(make_geometric_array<3, 2, false>()[1] == 2);
+static_assert(make_geometric_array<3, 2, false>()[2] == 4);
+static_assert(make_geometric_array<4, 10, true>()[0] == 1000);
+static_assert(make_geometric_array<4, 10, true>()[1] == 100);
+static_assert(make_geometric_array<4, 10, true>()[2] == 10);
+static_assert(make_geometric_array<4, 10, true>()[3] == 1);
 
 template <
     uint64_t major_tick_ms,
     uint64_t minor_tick_ms,
     uint64_t base,
     std::size_t levels>
-class DynoTicker {
+class Ticker {
   static constexpr std::size_t k_max_levels = 16; // including major and minor
   static_assert(major_tick_ms > 0, "invalid major tick");
   static_assert(minor_tick_ms > 0, "invalid minor tick");
@@ -109,7 +127,7 @@ class DynoTicker {
 
  public:
   using TMask = uint16_t;
-  using TDynoTicker = DynoTicker<major_tick_ms, minor_tick_ms, base, levels>;
+  using TTicker = Ticker<major_tick_ms, minor_tick_ms, base, levels>;
   using TFunc = std::function<void(TMask level_mask)>;
   using TFuncBound = std::function<void()>;
   using Tick = std::pair<uint64_t, TFuncBound>; // idx, mask, callback
@@ -272,10 +290,11 @@ class DynoTicker {
     std::array<uint64_t, _subtick_levels> _start_idx;
     std::array<uint64_t, _subtick_levels> _end_idx;
 
-    friend class DynoTicker;
+    friend class MonitorTickerTest;
+    friend class Ticker;
   };
 
-  using TSubscriberConfig = typename TDynoTicker::SubscriberConfig;
+  using TSubscriberConfig = typename TTicker::SubscriberConfig;
 
   void subscribe(const std::string& name, const SubscriberConfig& config) {
     const std::lock_guard<std::mutex> lock(_rebuild_mutex);
@@ -301,8 +320,7 @@ class DynoTicker {
   void run_inner(uint64_t major_tick_limit = 0) {
     bool l = _run_mutex.try_lock();
     if (!l) {
-      throw std::runtime_error(
-          "cannot run a DynoTicker that is already running");
+      throw std::runtime_error("cannot run a Ticker that is already running");
     }
     uint64_t major_tick_count = 0;
     const std::chrono::steady_clock::time_point ticker_start =
@@ -421,9 +439,9 @@ class DynoTicker {
   std::mutex _run_mutex;
 };
 
-using DynoTickerMinuteSecondBase10 = DynoTicker<60000, 1000, 10, 4>;
-using DynoTickerConfigMinuteSecondBase10 =
-    DynoTickerMinuteSecondBase10::TSubscriberConfig;
+using TickerMinuteSecondBase10 = Ticker<60000, 1000, 10, 4>;
+using TickerConfigMinuteSecondBase10 =
+    TickerMinuteSecondBase10::TSubscriberConfig;
 
 } // namespace dynolog
 } // namespace facebook

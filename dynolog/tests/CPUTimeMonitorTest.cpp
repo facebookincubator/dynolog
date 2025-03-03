@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-#include "dynolog/src/DynoCPUTimeMonitor.h"
+#include "dynolog/src/CPUTimeMonitor.h"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
@@ -11,11 +11,11 @@ namespace dynolog {
 
 const unsigned coreCount = 32;
 
-std::shared_ptr<DynoCPUTimeMonitor> createTestMonitor() {
-  std::shared_ptr<DynoCPUTimeMonitor::TDynoTicker> ticker =
-      std::make_shared<DynoCPUTimeMonitor::TDynoTicker>();
+std::shared_ptr<CPUTimeMonitor> createTestMonitor() {
+  std::shared_ptr<CPUTimeMonitor::TTicker> ticker =
+      std::make_shared<CPUTimeMonitor::TTicker>();
   // hard code the core count to match the testroot file
-  return std::make_shared<DynoCPUTimeMonitor>(
+  return std::make_shared<CPUTimeMonitor>(
       ticker, getenv("TESTROOT"), coreCount, true);
 }
 
@@ -32,41 +32,52 @@ unsigned short major_tick_60s = 7; // 111
 unsigned short minor_tick_1s = 6; // 110
 unsigned short subminor_tick_100ms = 4; // 100
 
+class CPUTimeMonitorTest : public ::testing::Test {
+ protected:
+  auto readProcStat(bool read_per_core = false) {
+    return monitor->readProcStat(read_per_core);
+  }
+  auto& CPUTimeLast_() const {
+    return monitor->CPUTimeLast_;
+  }
+  auto& CPUTimeMetricFrames_() const {
+    return monitor->CPUTimeMetricFrames_;
+  }
+  std::shared_ptr<CPUTimeMonitor> monitor = createTestMonitor();
+};
+
 // Just check that the monitor can be created and read the data from /proc/stat
-TEST(DynoCPUTimeMonitorTest, testProcStat) {
-  std::shared_ptr<DynoCPUTimeMonitor> monitor = createTestMonitor();
-  auto cpuTime = monitor->readProcStat(false);
+TEST_F(CPUTimeMonitorTest, testProcStat) {
+  auto cpuTime = readProcStat(false);
   EXPECT_EQ(cpuTime, std::vector<uint64_t>{allCoresReference[0]});
-  auto cpuTimePerCore = monitor->readProcStat(true);
+  auto cpuTimePerCore = readProcStat(true);
   EXPECT_EQ(cpuTimePerCore, allCoresReference);
 }
 
 // Test the tick function
-TEST(DynoCPUTimeMonitorTest, testAllotment) {
+TEST_F(CPUTimeMonitorTest, testAllotment) {
   auto now = std::chrono::steady_clock::now();
-  std::shared_ptr<DynoCPUTimeMonitor> monitor = createTestMonitor();
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(monitor->CPUTimeLast_[0]["host"], allCoresReference[0]);
-  EXPECT_EQ(monitor->CPUTimeLast_[1]["host"], allCoresReference[0]);
-  EXPECT_EQ(monitor->CPUTimeLast_[2]["host"], allCoresReference[0]);
+  EXPECT_EQ(CPUTimeLast_()[0]["host"], allCoresReference[0]);
+  EXPECT_EQ(CPUTimeLast_()[1]["host"], allCoresReference[0]);
+  EXPECT_EQ(CPUTimeLast_()[2]["host"], allCoresReference[0]);
 
   // need at least 2 ticks to get the delta
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 0);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 0);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 0);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 0);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 0);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 0);
 
   for (int i = 0; i < 2; i++) {
-    ASSERT_EQ(
-        monitor->CPUTimeMetricFrames_[i].slice(now, now + 60s), std::nullopt);
+    ASSERT_EQ(CPUTimeMetricFrames_()[i].slice(now, now + 60s), std::nullopt);
   }
   EXPECT_EQ(
-      monitor->getAvgCPUCoresUsage(DynoCPUTimeMonitor::Granularity::MINUTE, 60),
+      monitor->getAvgCPUCoresUsage(CPUTimeMonitor::Granularity::MINUTE, 60),
       std::nullopt);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 1);
 
   auto checkStats = [&](const std::optional<std::string>& allotmentId =
                             std::nullopt,
@@ -74,7 +85,7 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
     for (int i = 0; i < 2; i++) {
       // Zero idle delta means maximum CPU usage
       EXPECT_NEAR(
-          monitor->CPUTimeMetricFrames_[i]
+          CPUTimeMetricFrames_()[i]
               .slice(now, now + 60s)
               ->series<double>(allotmentId.value_or("host"))
               ->avg<double>(),
@@ -84,37 +95,34 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
 
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            DynoCPUTimeMonitor::Granularity::MINUTE, 60, allotmentId),
+            CPUTimeMonitor::Granularity::MINUTE, 60, allotmentId),
         expected,
         0.1);
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            DynoCPUTimeMonitor::Granularity::SECOND, 60, allotmentId),
+            CPUTimeMonitor::Granularity::SECOND, 60, allotmentId),
         expected,
         0.1);
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, allotmentId),
+            CPUTimeMonitor::Granularity::HUNDRED_MS, 60, allotmentId),
         expected,
         0.1);
 
     for (const auto& quant : {0.0, 0.1, 0.5, 0.9, 1.0}) {
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              DynoCPUTimeMonitor::Granularity::MINUTE, 60, quant, allotmentId),
+              CPUTimeMonitor::Granularity::MINUTE, 60, quant, allotmentId),
           expected,
           0.1);
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              DynoCPUTimeMonitor::Granularity::SECOND, 60, quant, allotmentId),
+              CPUTimeMonitor::Granularity::SECOND, 60, quant, allotmentId),
           expected,
           0.1);
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              DynoCPUTimeMonitor::Granularity::HUNDRED_MS,
-              60,
-              quant,
-              allotmentId),
+              CPUTimeMonitor::Granularity::HUNDRED_MS, 60, quant, allotmentId),
           expected,
           0.1);
     }
@@ -123,16 +131,16 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
   checkStats();
 
   monitor->tick(minor_tick_1s);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 2);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 2);
 
   checkStats();
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 2);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 3);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 3);
 
   checkStats();
 
@@ -140,109 +148,109 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
   monitor->registerAllotment("allotment2", {0, 1, 2, 3, 4, 5, 6, 7});
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 2);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 4);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 4);
   checkStats();
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
       std::nullopt);
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 1);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 2);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 5);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 5);
   checkStats();
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
       std::nullopt);
 
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
       coreCount,
       0.1);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
       8.0,
       0.1);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 2);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 3);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 6);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 2);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 3);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 6);
   checkStats();
 
   // still don't expect allotments to have minutely data becase we only have 1
   // sample
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
       std::nullopt);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
       coreCount,
       0.1);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
       8.0,
       0.1);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[0].length(), 3);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[1].length(), 4);
-  EXPECT_EQ(monitor->CPUTimeMetricFrames_[2].length(), 7);
+  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 3);
+  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 4);
+  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 7);
 
   // Now all allotments have data for all granularities
   checkStats();
@@ -252,15 +260,15 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
   monitor->deRegisterAllotment("allotment1");
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
       std::nullopt);
 
   monitor->tick(major_tick_60s);
@@ -268,30 +276,30 @@ TEST(DynoCPUTimeMonitorTest, testAllotment) {
   checkStats("allotment2", 8.0);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
       std::nullopt);
 
   monitor->deRegisterAllotment("allotment2");
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          DynoCPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
       std::nullopt);
 
   monitor->tick(major_tick_60s);

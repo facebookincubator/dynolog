@@ -6,36 +6,38 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include "dynolog/src/DynoMonitorBase.h"
-#include "dynolog/src/DynoTicker.h"
+#include "dynolog/src/MonitorBase.h"
+#include "dynolog/src/Ticker.h"
 
 using namespace ::testing;
 
 namespace facebook {
 namespace dynolog {
 
-using TestTickerTwoLevels = DynoTicker<100, 10, 10, 2>;
-using TestTickerThreeLevels = DynoTicker<100, 10, 10, 3>;
-using TestTickerFourLevels = DynoTicker<100, 10, 10, 4>;
+using TestTickerTwoLevels = Ticker<100, 10, 10, 2>;
+using TestTickerThreeLevels = Ticker<100, 10, 10, 3>;
+using TestTickerFourLevels = Ticker<100, 10, 10, 4>;
 
-template <typename TDynoTicker>
-class DynoMonitorDerivedTest : public DynoMonitorBase<TDynoTicker> {
+class MonitorTickerTest : public ::testing::Test {};
+
+template <typename TTicker>
+class MonitorDerivedTest : public MonitorBase<TTicker> {
  public:
-  using typename DynoMonitorBase<TDynoTicker>::TMask;
-  DynoMonitorDerivedTest(
-      std::shared_ptr<TDynoTicker> ticker,
+  using typename MonitorBase<TTicker>::TMask;
+  MonitorDerivedTest(
+      std::shared_ptr<TTicker> ticker,
       std::vector<double> subminor_tick_sample_rates,
-      std::string name = "DynoMonitorDerivedTest")
-      : DynoMonitorBase<TDynoTicker>(ticker, name, subminor_tick_sample_rates),
+      std::string name = "MonitorDerivedTest")
+      : MonitorBase<TTicker>(ticker, name, subminor_tick_sample_rates),
         start(std::chrono::steady_clock::now()) {}
 
   std::map<std::size_t, uint64_t> tick_counter;
 
   void tick(TMask mask) {
     std::string annotation;
-    if (TDynoTicker::is_major_tick(mask)) {
+    if (TTicker::is_major_tick(mask)) {
       annotation = "MAJOR_TICK";
-    } else if (TDynoTicker::is_minor_tick(mask)) {
+    } else if (TTicker::is_minor_tick(mask)) {
       annotation = "MINOR_TICK";
     }
     std::bitset<sizeof(mask) * 8> bset(mask);
@@ -58,15 +60,15 @@ class DynoMonitorDerivedTest : public DynoMonitorBase<TDynoTicker> {
   void validate_tick_counter(std::size_t major_ticks_ran) {
     LOG(INFO) << "validate_ticks_counter for " << this->get_name();
     EXPECT_EQ(major_ticks_ran, tick_counter[0]);
-    std::size_t minor_ticks_expected = major_ticks_ran *
-        TDynoTicker::_major_tick_ms / TDynoTicker::_minor_tick_ms;
+    std::size_t minor_ticks_expected =
+        major_ticks_ran * TTicker::_major_tick_ms / TTicker::_minor_tick_ms;
     EXPECT_EQ(minor_ticks_expected, tick_counter[1]);
-    for (std::size_t i = 2; i != TDynoTicker::_levels; i++) {
-      LOG(INFO) << "sublevel " << i << ": " << pow(TDynoTicker::_base, i - 1)
-                << " " << this->get_subminor_tick_sample_rates()[i - 2] << " "
+    for (std::size_t i = 2; i != TTicker::_levels; i++) {
+      LOG(INFO) << "sublevel " << i << ": " << pow(TTicker::_base, i - 1) << " "
+                << this->get_subminor_tick_sample_rates()[i - 2] << " "
                 << minor_ticks_expected << " " << tick_counter[i];
       EXPECT_EQ(
-          pow(TDynoTicker::_base, i - 1) *
+          pow(TTicker::_base, i - 1) *
               this->get_subminor_tick_sample_rates()[i - 2] *
               minor_ticks_expected,
           tick_counter[i]);
@@ -76,69 +78,68 @@ class DynoMonitorDerivedTest : public DynoMonitorBase<TDynoTicker> {
   const std::chrono::steady_clock::time_point start;
 };
 
-TEST(DynoMonitorTickerTest, testSimpleTwoLevels) {
+TEST(MonitorTickerTest, testSimpleTwoLevels) {
   std::shared_ptr<TestTickerTwoLevels> ticker =
       std::make_shared<TestTickerTwoLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerTwoLevels> monitor(ticker, {});
+  MonitorDerivedTest<TestTickerTwoLevels> monitor(ticker, {});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testSimpleThreeLevels) {
+TEST(MonitorTickerTest, testSimpleThreeLevels) {
   std::shared_ptr<TestTickerThreeLevels> ticker =
       std::make_shared<TestTickerThreeLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerThreeLevels> monitor(ticker, {0.5});
+  MonitorDerivedTest<TestTickerThreeLevels> monitor(ticker, {0.5});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testSimpleFourLevels) {
+TEST(MonitorTickerTest, testSimpleFourLevels) {
   std::shared_ptr<TestTickerFourLevels> ticker =
       std::make_shared<TestTickerFourLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.5, 0.1});
+  MonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.5, 0.1});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testFullSampling) {
+TEST(MonitorTickerTest, testFullSampling) {
   std::shared_ptr<TestTickerFourLevels> ticker =
       std::make_shared<TestTickerFourLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {1.0, 1.0});
+  MonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {1.0, 1.0});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testZeroSampling) {
+TEST(MonitorTickerTest, testZeroSampling) {
   std::shared_ptr<TestTickerFourLevels> ticker =
       std::make_shared<TestTickerFourLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.0, 0.0});
+  MonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.0, 0.0});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testTwoSubcribers) {
+TEST(MonitorTickerTest, testTwoSubcribers) {
   std::shared_ptr<TestTickerFourLevels> ticker =
       std::make_shared<TestTickerFourLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor(
+  MonitorDerivedTest<TestTickerFourLevels> monitor(
       ticker, {0.5, 0.1}, "Monitor1");
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor2(
-      ticker, {0.5}, "Monitor2");
+  MonitorDerivedTest<TestTickerFourLevels> monitor2(ticker, {0.5}, "Monitor2");
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
   monitor2.validate_tick_counter(2);
 }
 
-TEST(DynoMonitorTickerTest, testChangeSampling) {
+TEST(MonitorTickerTest, testChangeSampling) {
   std::shared_ptr<TestTickerFourLevels> ticker =
       std::make_shared<TestTickerFourLevels>();
   std::srand(std::time(nullptr));
-  DynoMonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.5, 0.1});
+  MonitorDerivedTest<TestTickerFourLevels> monitor(ticker, {0.5, 0.1});
   ticker->run_inner(2);
   monitor.validate_tick_counter(2);
   // Too many sample rates for the ticker levels, should fail

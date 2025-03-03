@@ -8,15 +8,15 @@
 namespace facebook {
 namespace dynolog {
 
-/* Skeleton Monitor class for Dyno which subscribes to a DynoTicker for
+/* Skeleton Monitor class which subscribes to a Ticker for
  * scheduling.
  */
-template <typename TDynoTicker>
-class DynoMonitorBase {
+template <typename TTicker>
+class MonitorBase {
  public:
-  using TMask = typename TDynoTicker::TMask;
-  DynoMonitorBase(
-      std::shared_ptr<TDynoTicker> ticker,
+  using TMask = typename TTicker::TMask;
+  MonitorBase(
+      std::shared_ptr<TTicker> ticker,
       const std::string& name,
       std::vector<double> subminor_tick_sample_rates)
       : _ticker(ticker),
@@ -24,17 +24,17 @@ class DynoMonitorBase {
         _subminor_tick_sample_rates(subminor_tick_sample_rates) {
     _ticker->subscribe(
         name,
-        TDynoTicker::TSubscriberConfig::make(
+        TTicker::TSubscriberConfig::make(
             name,
             [this](TMask mask) { this->tick(mask); },
             subminor_tick_sample_rates));
   }
 
   bool try_change_sample_rates(std::vector<double> subminor_tick_sample_rates) {
-    std::shared_ptr<typename TDynoTicker::TSubscriberConfig> new_config;
+    std::shared_ptr<typename TTicker::TSubscriberConfig> new_config;
     try {
-      new_config = std::make_shared<typename TDynoTicker::TSubscriberConfig>(
-          TDynoTicker::TSubscriberConfig::make(
+      new_config = std::make_shared<typename TTicker::TSubscriberConfig>(
+          TTicker::TSubscriberConfig::make(
               _name,
               [this](TMask mask) { this->tick(mask); },
               subminor_tick_sample_rates));
@@ -49,10 +49,10 @@ class DynoMonitorBase {
   }
 
   virtual void tick(TMask mask) = 0;
-  virtual ~DynoMonitorBase() {}
+  virtual ~MonitorBase() {}
 
  private:
-  std::shared_ptr<TDynoTicker> _ticker;
+  std::shared_ptr<TTicker> _ticker;
   std::string _name;
   std::vector<double> _subminor_tick_sample_rates;
 
@@ -60,8 +60,8 @@ class DynoMonitorBase {
   std::string get_name() const {
     return _name;
   }
-  std::array<double, TDynoTicker::_subtick_levels>
-  get_subminor_tick_sample_rates() const {
+  std::array<double, TTicker::_subtick_levels> get_subminor_tick_sample_rates()
+      const {
     return _ticker->get_config(_name)->get_subminor_tick_sample_rates();
   }
 };
