@@ -3,13 +3,12 @@
 #pragma once
 
 #include <dynolog/src/metric_frame/MetricFrame.h>
-#include <gtest/gtest.h>
 #include <memory>
 #include <set>
 #include <shared_mutex>
 #include <thread>
-#include "dynolog/src/DynoMonitorBase.h"
-#include "dynolog/src/DynoTicker.h"
+#include "dynolog/src/MonitorBase.h"
+#include "dynolog/src/Ticker.h"
 
 namespace facebook {
 namespace dynolog {
@@ -30,15 +29,15 @@ different start time). If the CPU set is non-empty then the entire per-core
 /proc/stat file is parsed and the CPU Cores Usage of the allotment cores is
 determined by aggregation over its CPU set. */
 
-class DynoCPUTimeMonitor : DynoMonitorBase<DynoTicker<60000, 1000, 10, 3>> {
+class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
  public:
-  using TDynoTicker = DynoTicker<60000, 1000, 10, 3>;
-  using typename DynoMonitorBase<TDynoTicker>::TMask;
+  using TTicker = Ticker<60000, 1000, 10, 3>;
+  using typename MonitorBase<TTicker>::TMask;
 
   enum class Granularity { MINUTE, SECOND, HUNDRED_MS };
 
-  explicit DynoCPUTimeMonitor(
-      std::shared_ptr<TDynoTicker> ticker,
+  explicit CPUTimeMonitor(
+      std::shared_ptr<TTicker> ticker,
       const std::string& rootDir = "",
       uint64_t coreCount = std::thread::hardware_concurrency(),
       bool isUnitTest = false);
@@ -93,8 +92,7 @@ class DynoCPUTimeMonitor : DynoMonitorBase<DynoTicker<60000, 1000, 10, 3>> {
 
   std::shared_mutex dataLock_;
 
-  FRIEND_TEST(DynoCPUTimeMonitorTest, testProcStat);
-  FRIEND_TEST(DynoCPUTimeMonitorTest, testAllotment);
+  friend class CPUTimeMonitorTest;
 };
 } // namespace dynolog
 
