@@ -317,12 +317,19 @@ class Monitor {
       HBT_THROW_ASSERT_IF(cr == nullptr);
       cpus.merge(cr->listCpus());
     }
-    cpu_set_t mask;
+    cpu_set_t prev_mask, mask;
+    CPU_ZERO(&prev_mask);
+    if (sched_getaffinity(0, sizeof(cpu_set_t), &prev_mask) != 0) {
+      HBT_LOG_ERROR() << "Failed to get CPU affinity: " << errno;
+      return {};
+    }
     for (int cpu : cpus) {
       CPU_ZERO(&mask);
       CPU_SET(cpu, &mask);
       if (sched_setaffinity(0, sizeof(mask), &mask) != 0) {
         HBT_LOG_ERROR() << "Failed to set sched affinity on CPU " << cpu;
+        // all or nothing
+        return {};
       }
       // read perf counter value per CPU per per hbt metric
       // then merge values from the same hbt metric and different CPU to a
@@ -335,6 +342,10 @@ class Monitor {
               list.push_back(pair.second);
             });
       }
+    }
+    // restore previous CPU affinity
+    if (sched_setaffinity(0, sizeof(prev_mask), &prev_mask) != 0) {
+      HBT_LOG_ERROR() << "Failed to restore to pervious affinity mask";
     }
     return rvs;
   }
