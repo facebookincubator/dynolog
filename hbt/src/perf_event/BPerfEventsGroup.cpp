@@ -206,6 +206,8 @@ void BPerfEventsGroup::close() {
   unregister_thread_link_ = nullptr;
   ::bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
+  ::bpf_link__destroy(update_thread_link_);
+  update_thread_link_ = nullptr;
   opened_ = false;
 }
 
