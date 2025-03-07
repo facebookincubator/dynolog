@@ -566,6 +566,32 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       std::vector<std::string>{}));
 
   metrics->add(std::make_shared<MetricDesc>(
+      "instructions_cycles",
+      "An events group containing instructions and cycles.",
+      "An events group containing instructions and cycles. "
+      "Instructions and cycles are often enabled all the time and measured together. "
+      "Putting them in the same group for convenience.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{
+               EventRef{
+                   "instructions",
+                   PmuType::generic_hardware,
+                   "retired_instructions",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "cycles",
+                   PmuType::generic_hardware,
+                   "cpu_cycles",
+                   EventExtraAttr{},
+                   {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{},
+      getRateReducer()));
+
+  metrics->add(std::make_shared<MetricDesc>(
       "instructions_per_cycle",
       "Average number of instructions executed each clock cycle.",
       "Average number of instructions executed each clock cycle.",
