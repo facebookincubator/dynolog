@@ -254,3 +254,52 @@ TEST(BPerfEventsGroupPerThreadTest, TestLeadExit) {
   testStage = 4;
   t.join();
 }
+
+static int testStage2 = 0;
+
+// A even simpler workload just for verifying we can create enough readers
+void emptyReaderThread() {
+  auto reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
+  EXPECT_EQ(reader->enable(), 0);
+  BPerfThreadData d;
+
+  while (testStage2 == 0) {
+    reader->read(&d);
+    sleep(1);
+  }
+
+  printf(
+      "tid=%d, cycles=%llu, enabled=%llu, running=%llu\n",
+      gettid(),
+      d.values[0].counter,
+      d.values[0].enabled,
+      d.values[0].running);
+}
+
+TEST(BPerfEventsGroupPerThreadTest, TestConcurrentReader) {
+  const int numThreads = 30000;
+  auto pmu_manager = makePmuDeviceManager();
+  auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
+  auto ev_def = pmu_manager->findEventDef("cycles");
+  if (!ev_def) {
+    GTEST_SKIP() << "Cannot find event cycles";
+  }
+  auto ev_conf =
+      pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
+
+  auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
+  EXPECT_EQ(system.open(), true);
+
+  std::vector<std::unique_ptr<std::thread>> threads;
+  threads.reserve(numThreads);
+  for (int i = 0; i < numThreads; i++) {
+    threads.emplace_back(std::make_unique<std::thread>(emptyReaderThread));
+  }
+  /* sleep override */
+  sleep(5);
+  testStage2 = 1;
+  for (int i = 0; i < numThreads; i++) {
+    threads[i]->join();
+  }
+  system.disable();
+}
