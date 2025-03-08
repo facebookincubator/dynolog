@@ -8,7 +8,8 @@
 
 #define BPERF_MAX_GROUP_SIZE 8
 
-#define BPERF_MAX_THREAD_READER 1024
+#define BPERF_MAX_THREAD_READER 65536
+typedef __u16 idx_t;
 
 /* x86
  * struct cyc2ns_data {
