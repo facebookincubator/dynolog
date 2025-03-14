@@ -430,8 +430,13 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
     goto error_out;
   }
 
+  /* Initialize idx_list */
+  for (int i = 0; i < BPERF_MAX_GROUP_SIZE; i++) {
+    skel->bss->idx_list[i] = i;
+  }
+
   /* Use the first element of array per_thread_data for meta data */
-  skel->bss->bitmap[0] |= 1;
+  skel->bss->idx_list_first_free = 1;
   memset(metadata, 0, per_thread_data_size_);
   err = ::bpf_map__lookup_elem(
       skel->maps.per_thread_data,

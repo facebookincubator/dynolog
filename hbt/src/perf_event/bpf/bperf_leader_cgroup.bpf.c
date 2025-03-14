@@ -173,40 +173,27 @@ struct {
   __uint(map_flags, BPF_F_MMAPABLE);
 } per_thread_data SEC(".maps");
 
-/* The following is a simple bitmap for per_thread_idx */
-#define BITS_PER_U64 64
-__u64 bitmap[BPERF_MAX_THREAD_READER / BITS_PER_U64];
-#define NULL_BIT 0xffffffff
+/* The following tracks available idx for per_thread_idx */
+idx_t idx_list[BPERF_MAX_THREAD_READER];
+idx_t idx_list_first_free;
 
 #define private(name) SEC(".data." #name) __hidden __attribute__((aligned(8)))
-private(A) struct bpf_spin_lock bitmap_lock;
+private(A) struct bpf_spin_lock idx_allocator_lock;
 
-static __u32 __always_inline find_free_bit(void) {
-  int i, j;
-
-  for (i = 0; i < BPERF_MAX_THREAD_READER / BITS_PER_U64; i++) {
-    if (bitmap[i] == ~0ULL)
-      continue;
-    for (j = 0; j < BITS_PER_U64; j++) {
-      if (((1ULL << j) & bitmap[i]) == 0) {
-        bitmap[i] |= 1ULL << j;
-        return i * BITS_PER_U64 + j;
-      }
-    }
+static __u32 __always_inline request_idx(void) {
+  if (idx_list_first_free >= BPERF_MAX_THREAD_READER) {
+    /* BPERF_MAX_THREAD_READER indicates no more available idx */
+    return BPERF_MAX_THREAD_READER;
   }
-  return NULL_BIT;
+  return idx_list[idx_list_first_free++];
 }
 
-static void __always_inline clear_bit(__u32 idx) {
-  __u32 key, shift;
-
-  if (idx >= BPERF_MAX_THREAD_READER)
+static void __always_inline reclaim_idx(__u32 idx) {
+  if (idx_list_first_free == 0) {
+    /* theoretically this should never happen */
     return;
-
-  key = idx / BITS_PER_U64;
-  shift = idx % BITS_PER_U64;
-
-  bitmap[key] &= ~(1ULL << shift);
+  }
+  idx_list[--idx_list_first_free] = idx;
 }
 
 static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data);
@@ -229,11 +216,11 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   if (map_id != per_thread_data_id)
     return 0;
 
-  bpf_spin_lock(&bitmap_lock);
-  idx = find_free_bit();
-  bpf_spin_unlock(&bitmap_lock);
+  bpf_spin_lock(&idx_allocator_lock);
+  idx = request_idx();
+  bpf_spin_unlock(&idx_allocator_lock);
 
-  if (idx == NULL_BIT)
+  if (idx >= BPERF_MAX_THREAD_READER)
     return 0;
 
   data = bpf_map_lookup_elem(&per_thread_data, &idx);
@@ -274,9 +261,9 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
 
   bpf_map_delete_elem(&per_thread_idx, &tid);
 
-  bpf_spin_lock(&bitmap_lock);
-  clear_bit(*idx);
-  bpf_spin_unlock(&bitmap_lock);
+  bpf_spin_lock(&idx_allocator_lock);
+  reclaim_idx(*idx);
+  bpf_spin_unlock(&idx_allocator_lock);
 
   return 0;
 }
