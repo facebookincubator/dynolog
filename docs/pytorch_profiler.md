@@ -15,6 +15,8 @@ The following instructions walk through:
 ## PyTorch Setup
 > Note that these instructions continue to evolve as we add more features to PyTorch profiler and Dynolog.
 
+> There are several known issues for PyTorch > 2.3.0. Presently, these have been fixed in the nighly branch that you can download from [here](https://pytorch.org/get-started/locally/). We will update this document once pytorch 2.7.0 is out. See the Known Issues Section.
+
 Please use the latest [PyTorch 2.0 release](https://pytorch.org/get-started/pytorch-2.0/). For more information on obtaining PyTorch nightly see [here](https://pytorch.org/get-started/locally/).
 Older versions of PyTorch (< 2.0) are currently not supported.
 
@@ -40,6 +42,7 @@ export KINETO_USE_DAEMON=1
 export KINETO_DAEMON_INIT_DELAY_S=3
 ```
 The initialization delay is recommended to avoid dynamic library loading race condition that [manifests as a segfault](https://github.com/pytorch/pytorch/issues/131020).
+The delay is no longer needed in later versions of PyTorch but is recommended in case users are leveraging an older version.
 
 Now you can run the PyTorch program. We included a simple example PyTorch script for you to test out this flow.
 ```bash
@@ -91,6 +94,41 @@ of processes launched using the SLURM job scheduler. One can pass a job ID to fi
 ```bash
 dyno --host-name remote_host gputrace --job-id 4242 --log-file /path/to/log/file/libkineto_trace.json
 ```
+
+## Known Issues
+
+Recent versions of PyTorch have known issues wth the initialization and interaction with Kineto. Fixing them would require upgrading to the latest nighly branch to get working correctly.
+
+### Initializetion failures: pytorch >= 2.3.0
+
+With the `KINETO_DAEMON_INIT_DELAY_S`  environment variable set you may see the folloing error:
+```
+ERROR: External init callback must run in same thread as registerClient (1258501696 != 107225088)
+```
+
+The initialization delay is implemented by using a different thread to init the profiler state. This was clashing with an existing [check](https://github.com/pytorch/kineto/blob/d9753139d181b9ff42872465aac0e5d3018be415/libkineto/src/libkineto_api.cpp#L23-L31)
+
+Long story short you would need to use PyTorch nightly or 2.7.0 once it is out, to fix this.
+There are two fixes that help with addressing the problem.
+A detailed discussion can be found at [issue/1302](https://github.com/pytorch/kineto/issues/1032)
+
+#### Fix 1: Avoid delayed init workaround
+We currently, do not need the delay anymore as the init function is now called when we "import torch" [pytorch/pytorch#131448](https://github.com/pytorch/pytorch/pull/131448)
+
+With the above fix we still see a “Failed to match processes error” on CUDA/NVIDIA GPUs.
+
+Our init flow for CUDA GPUs relies on CUPTI callback .
+1. However, with new `global_init_flow` there appears to be a race condition to register the callbacks and setting up CUDA contexts. For some reason callbacks are not being called.
+2. Secondly, we are no longer need this deferred init as we have a global init flow now.
+3. We can also avoid loading CUPTI library right at the start.
+
+#### Fix 2 : PyTorch nightly, and future 2.7.0
+See [kineto/kineto#1035](https://github.com/pytorch/kineto/pull/1035) and [pytorch/pytorch#147195](https://github.com/pytorch/pytorch/pull/147195)
+This fix Cleans up the initialization process in Kineto
+* The current method to init Kineto for CUDA builds is to add a callback on CUDA context. But this leads to CUPTI being enabled right from the start.
+* For the case where profiling daemon is enabled (dynolog), we always initialize the profiler and config loader, for both CPU and CUDA builds. This should be safe to do as kineto init now happens when torch is imported.
+
+The second fix is available on **PyTorch nighly versions past Feb 17th, 2025**.
 
 ## Coordinated Tracing on a distributed application
 Lastly, this section talks about how to profile a distributed training job running on multiple nodes simultaneously.
