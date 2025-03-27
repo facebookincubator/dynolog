@@ -8,7 +8,7 @@
 
 #define BPERF_MAX_GROUP_SIZE 8
 
-#define BPERF_MAX_THREAD_READER 65536
+#define BPERF_MAX_THREAD_READER 65535
 typedef __u16 idx_t;
 
 /* x86
