@@ -1109,16 +1109,14 @@ void PerfEventsGroup<TImpl, TMode>::open_(
   num_data_pages_ = num_data_pages;
   num_aux_pages_ = num_aux_pages;
 
-  this->open_counting_(sample_period, pinned);
-
   {
     int page_size = ::getpagesize();
-    HBT_THROW_ASSERT_IF(page_size == 0);
-    HBT_THROW_ASSERT_IF(page_size != 4 * 1024)
-        << "Currently only supports 4 KB pages";
+    HBT_DCHECK(page_size > 0 && isPow2(static_cast<size_t>(page_size)))
+        << "Page size must be a power of 2, got: " << page_size;
     page_size_ = static_cast<size_t>(page_size);
-    HBT_DCHECK(isPow2(page_size_));
   }
+
+  this->open_counting_(sample_period, pinned);
 
   // Only map page to leader since it is the only one generating samples.
   if (int err = mmap_(this->event_fds_[0]); 0 > err) {
