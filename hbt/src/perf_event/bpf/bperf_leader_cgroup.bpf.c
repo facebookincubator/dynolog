@@ -200,8 +200,8 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
 
 __u32 per_thread_data_id; /* map id of per_thread_data */
 
-static void __always_inline update_next_task(struct task_struct *next, __u64 now);
-static void __always_inline update_prev_task(struct task_struct *prev, __u64 now);
+static void __always_inline update_next_task_data(struct bperf_thread_data *data, __u64 now);
+static void __always_inline update_prev_task_data(struct bperf_thread_data *data, __u64 now);
 
 /* Trace mmap of per_thread_data */
 SEC("fentry/array_map_mmap")
@@ -235,8 +235,8 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   task = bpf_get_current_task_btf();
   bperf_leader_prog(task);
   now = bpf_ktime_get_ns();
-  update_prev_task(task, now);
-  update_next_task(task, now);
+  update_prev_task_data(data, now);
+  update_next_task_data(data, now);
   data->runtime_until_schedin = 0;
   return 0;
 }
@@ -309,24 +309,17 @@ static int __always_inline bperf_update_thread_time(struct bperf_thread_data *da
   return 0;
 }
 
-static void __always_inline update_prev_task(struct task_struct *prev, __u64 now) {
+static void __always_inline update_prev_task_data(struct bperf_thread_data *data, __u64 now) {
   struct bpf_perf_event_value *diff_val;
-  struct bperf_thread_data *data;
-  int pid = prev->pid;
   __u32 zero = 0;
-  int *idx;
   int i;
 
-  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
-  if (!idx)
+  if (!data) {
     return;
-
-  data = bpf_map_lookup_elem(&per_thread_data, idx);
-  if (!data)
-    return;
+  }
 
   data->runtime_until_schedin += now - data->schedule_time;
-  /* We may call update_prev_task twice on the same context switch:
+  /* We may call update_prev_task_data twice on the same context switch:
    * 1. From bperf_update_thread();
    * 2. From bperf_pmu_enable_exit().
    *
@@ -369,23 +362,17 @@ struct {
 } event_data SEC(".maps");
 
 int __always_inline bperf_perf_event_index(struct perf_event *event);
+__always_inline struct bperf_thread_data* get_bperf_thread_data(int pid);
 
-static void __always_inline update_next_task(struct task_struct *next, __u64 now) {
+static void __always_inline update_next_task_data(struct bperf_thread_data *data, __u64 now) {
   struct bpf_perf_event_value *prev_val;
-  struct bperf_thread_data *data;
   struct pe_data *pe_data;
-  int pid = next->pid;
   __u32 zero = 0;
-  int *idx;
   int i;
 
-  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
-  if (!idx)
+  if (!data) {
     return;
-
-  data = bpf_map_lookup_elem(&per_thread_data, idx);
-  if (!data)
-    return;
+  }
 
   data->lock += 1;
   bperf_update_thread_time(data);
@@ -415,8 +402,11 @@ SEC("tp_btf/sched_switch")
 int BPF_PROG(bperf_update_thread, bool preempt, struct task_struct *prev,
              struct task_struct *next) {
   __u64 now = bpf_ktime_get_ns();
-  update_prev_task(prev, now);
-  update_next_task(next, now);
+  struct bperf_thread_data *prev_data, *next_data;
+  prev_data = get_bperf_thread_data(prev->pid);
+  update_prev_task_data(prev_data, now);
+  next_data = get_bperf_thread_data(next->pid);
+  update_next_task_data(next_data, now);
   return 0;
 }
 
@@ -464,6 +454,17 @@ int __always_inline bperf_perf_event_index(struct perf_event *event) {
 #endif
 }
 
+__always_inline struct bperf_thread_data* get_bperf_thread_data(int pid) {
+  int *idx;
+  struct bperf_thread_data *data;
+
+  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
+  if (!idx)
+    return NULL;
+
+  return bpf_map_lookup_elem(&per_thread_data, idx);
+}
+
 int leader_pid = 0;
 
 SEC("iter/task_file")
@@ -505,24 +506,19 @@ int find_perf_events(struct bpf_iter__task_file *ctx) {
 static int __always_inline _pmu_enable_exit(struct pmu *pmu)
 {
   struct bperf_thread_data *data;
-  int *idx, i, pid;
+  int i, pid;
   struct task_struct *task;
   __u64 now;
 
   pid = bpf_get_current_pid_tgid() & 0xffffffff;
-  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
-  if (!idx)
-    return 0;
 
-  data = bpf_map_lookup_elem(&per_thread_data, idx);
-  if (!data)
-    return 0;
+  data = get_bperf_thread_data(pid);
 
   task = bpf_get_current_task_btf();
   now = bpf_ktime_get_ns();
   bperf_leader_prog(task);
-  update_prev_task(task, now);
-  update_next_task(task, now);
+  update_prev_task_data(data, now);
+  update_next_task_data(data, now);
   return 0;
 }
 
