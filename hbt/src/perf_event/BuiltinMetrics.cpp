@@ -521,7 +521,18 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   // Alias for Intel
   if (cpu_info.cpu_family == CpuFamily::INTEL) {
     pmu_manager->addAliases(
+        "BR_INST_RETIRED.NEAR_TAKEN",
+        std::vector<EventId>({"branch-instructions-ret-tkn"}));
+    pmu_manager->addAliases(
         "L2_RQSTS.MISS", std::vector<EventId>({"l2_cache_misses"}));
+  }
+
+  // Alias for AMD
+  if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+    pmu_manager->addAliases(
+        "ex_ret_brn_tkn",
+        std::vector<EventId>({"branch-instructions-ret-tkn"}));
   }
 
   return pmu_manager;
