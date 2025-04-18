@@ -70,7 +70,7 @@ void IPCMonitor::getLibkinetoOnDemandRequest(
     LOG(ERROR) << "Fabric Manager not initialized";
     return;
   }
-  std::string ret_config = "";
+  std::string ret_config;
   ipcfabric::LibkinetoRequest* req =
       (ipcfabric::LibkinetoRequest*)msg->buf.get();
   if (req->n == 0) {
