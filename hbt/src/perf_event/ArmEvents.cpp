@@ -13,7 +13,7 @@ namespace facebook::hbt::perf_event {
 
 namespace neoverse_v2 {
 
-std::string rootDir_ = "";
+std::string rootDir_;
 
 void setTestRootDir(const std::string& rootDir) {
   rootDir_ = rootDir;
