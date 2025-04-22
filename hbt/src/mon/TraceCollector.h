@@ -196,6 +196,11 @@ class TraceCollector {
     sync_();
   }
 
+  void enableForCpu(bool reset, CpuId cpu) {
+    HBT_THROW_EINVAL()
+        << "enableForCpu() is not implemented for TraceCollector";
+  }
+
   bool isEnabled() const {
     std::lock_guard<std::mutex> slices_lock{slices_mutex_};
     std::lock_guard<std::mutex> counts_lock{counts_mutex_};
@@ -207,6 +212,15 @@ class TraceCollector {
     std::lock_guard<std::mutex> counts_lock{counts_mutex_};
     state_ = State::Open;
     sync_();
+  }
+
+  void disableForCpu(CpuId cpu) {
+    HBT_THROW_EINVAL()
+        << "disableForCpu() is not implemented for TraceCollector";
+  }
+
+  std::set<CpuId> listCpus() const {
+    return getMonCpus().asSet();
   }
 
   /// Read events in PerCpuCountSampleGenerator.
