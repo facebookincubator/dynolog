@@ -808,6 +808,11 @@ class Monitor {
 
   void sync_();
 
+  template <class TElemType>
+  void commitElemChange_(
+      const std::vector<TElemType*>& to_close,
+      const std::vector<TElemType*>& to_open,
+      const std::vector<TElemType*>& to_enable);
   // Transition all elements in container.
   template <class TContainer>
   void syncElems_(TContainer& elems_container);
@@ -1012,35 +1017,62 @@ void tryDisable_(TGen& gen) {
   }
 }
 
+template <class MuxGroupId, class ElemId>
+template <class TElemType>
+void Monitor<MuxGroupId, ElemId>::commitElemChange_(
+    const std::vector<TElemType*>& to_close,
+    const std::vector<TElemType*>& to_open,
+    const std::vector<TElemType*>& to_enable) {
+  using TMonitor = std::decay_t<decltype(*this)>;
+// Following the order of elemToClose -> elemToOpen -> elemToEnable to
+// guarantee enable happened after, or there might be a burst of multiplexing
+#ifdef HBT_ENABLE_BPERF
+  constexpr bool bperf = std::is_same_v<TElemType*, TBPerfEventsGroup*>;
+#else
+  constexpr bool bperf = false;
+#endif
+  // BPerf doesn't support reset = true mode.
+  bool reset = bperf ? false : reset_;
+  for (const auto elem_ptr : to_close) {
+    tryDisable_(*elem_ptr);
+    tryClose_<TMonitor>(*elem_ptr);
+  }
+  for (const auto elem_ptr : to_open) {
+    tryDisable_(*elem_ptr);
+    tryOpen_<TMonitor>(*elem_ptr);
+  }
+  for (const auto& elem_ptr : to_enable) {
+    tryOpen_<TMonitor>(*elem_ptr);
+    tryEnable_(*elem_ptr, reset);
+  }
+}
+
 #ifdef HBT_ENABLE_BPERF
 template <class MuxGroupId, class ElemId>
 void Monitor<MuxGroupId, ElemId>::syncElems_(
     std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events) {
-  using TMonitor = std::decay_t<decltype(*this)>;
+  std::vector<TBPerfEventsGroup*> to_close, to_open, to_enable;
   auto active_mux_ids = getEnabledMuxGroupId_();
   for (auto& [mux, bperf_events_group] : bperf_events) {
     switch (state_) {
       case State::Closed:
-        tryDisable_(*bperf_events_group);
-        tryClose_<TMonitor>(*bperf_events_group);
+        to_close.push_back(bperf_events_group);
         break;
       case State::Open:
-        tryDisable_(*bperf_events_group);
-        tryOpen_<TMonitor>(*bperf_events_group);
+        to_open.push_back(bperf_events_group);
         break;
       case State::Enabled:
-        tryOpen_<TMonitor>(*bperf_events_group);
         HBT_DCHECK_GT(mux_queue_.size(), 0);
         // Only enable if it's at front of its multiplexing queue.
         if (active_mux_ids.count(mux)) {
-          // BPerf doesn't support reset = true mode.
-          tryEnable_(*bperf_events_group, false);
+          to_enable.push_back(bperf_events_group);
         } else {
-          tryDisable_(*bperf_events_group);
+          to_open.push_back(bperf_events_group);
         }
         break;
     }
   }
+  commitElemChange_(to_close, to_open, to_enable);
 }
 #endif
 
@@ -1049,7 +1081,8 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
 template <class MuxGroupId, class ElemId>
 template <class TContainer>
 void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
-  using TMonitor = std::decay_t<decltype(*this)>;
+  using TElemSmartPtrType = std::decay_t<typename TContainer::mapped_type>;
+  using TElemType = typename TElemSmartPtrType::element_type;
   // prepare all elements in mux enabled status
   MuxGroup enabled_elems;
   auto active_mux_ids = getEnabledMuxGroupId_();
@@ -1057,29 +1090,26 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
     enabled_elems.insert(
         mux_groups_.at(mux_id).begin(), mux_groups_.at(mux_id).end());
   }
+  std::vector<TElemType*> elem_to_close, elem_to_open, elem_to_enable;
   for (auto& [k, elem_ptr] : elems_container) {
     HBT_THROW_ASSERT_IF(elem_ptr == nullptr);
-    auto& elem = *elem_ptr;
     switch (state_) {
       case State::Closed:
-        tryDisable_(elem);
-        tryClose_<TMonitor>(elem);
+        elem_to_close.push_back(elem_ptr.get());
         break;
       case State::Open:
-        tryDisable_(elem);
-        tryOpen_<TMonitor>(elem);
+        elem_to_open.push_back(elem_ptr.get());
         break;
       case State::Enabled:
-        tryOpen_<TMonitor>(elem);
         // Only enable if it's at front of its multiplexing queue.
         if (enabled_elems.count(k) > 0) {
-          tryEnable_(elem, reset_);
+          elem_to_enable.push_back(elem_ptr.get());
         } else {
-          tryDisable_(elem);
+          elem_to_open.push_back(elem_ptr.get());
         }
-        break;
     }
   }
+  commitElemChange_(elem_to_close, elem_to_open, elem_to_enable);
 }
 
 /// Transitions (enable/disable, open/close)
