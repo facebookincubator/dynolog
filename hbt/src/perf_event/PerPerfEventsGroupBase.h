@@ -43,6 +43,22 @@ class PerPerfEventsGroupBase {
     }
   }
 
+  void enableForCpu(CpuId cpu, bool reset = true) {
+    for (auto& [_, gen] : generators_) {
+      if (gen->getCpu() != cpu) {
+        continue;
+      }
+      try {
+        gen->enable(reset);
+      } catch (std::exception&) {
+        if (gen->isEnabled()) {
+          gen->disable();
+        }
+        throw;
+      }
+    }
+  }
+
   bool isEnabled() const {
     HBT_THROW_ASSERT_IF(generators_.empty())
         << "PerPerfEventsGroupBase should always contain at least one generator.";
@@ -58,6 +74,15 @@ class PerPerfEventsGroupBase {
 
   void disable() {
     for (auto& [_, gen] : generators_) {
+      gen->disable();
+    }
+  }
+
+  void disableForCpu(CpuId cpu) {
+    for (auto& [_, gen] : generators_) {
+      if (gen->getCpu() != cpu) {
+        continue;
+      }
       gen->disable();
     }
   }
@@ -121,8 +146,8 @@ class PerPerfEventsGroupBase {
     return true;
   }
 
-  std::set<int> listCpus() const {
-    std::set<int> res;
+  std::set<CpuId> listCpus() const {
+    std::set<CpuId> res;
     for (const auto& [_, gen] : generators_) {
       HBT_ARG_CHECK(gen != nullptr) << "Generator in generators_ is nullptr";
       res.insert(gen->getCpu());

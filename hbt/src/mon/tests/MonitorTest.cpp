@@ -273,7 +273,7 @@ TEST_F(IntelPTMonitorTest, SystemWideTraceCollection) {
   auto pmu_manager = makePmuDeviceManager();
   ASSERT_NE(pmu_manager, nullptr);
 
-  Monitor mon;
+  Monitor mon(false, false);
   Monitor<>::ElemId kIptMonElemId = "ipt_mon";
 
   size_t trace_buffer_size_pages = 8;
@@ -339,7 +339,7 @@ TEST_F(IntelPTMonitorTest, SystemWideTraceCopy) {
   auto pmu_manager = makePmuDeviceManager();
   ASSERT_NE(pmu_manager, nullptr);
 
-  Monitor mon;
+  Monitor mon(false, false);
   Monitor<>::ElemId kIptMonElemId = "ipt_mon";
 
   size_t trace_buffer_size_pages = 1;
@@ -439,9 +439,9 @@ TEST(CpuCountReader, Multiplexing) {
   EXPECT_TRUE(mon.enable());
 
   EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
-  mon.muxRotate();
+  mon.muxRotate(false);
   EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
-  mon.muxRotate();
+  mon.muxRotate(false);
   EXPECT_NE(instructionsReader.isEnabled(), cyclesReader.isEnabled());
 }
 
@@ -472,5 +472,53 @@ TEST(ContextSwitch, CopyToSink) {
 
   // Ensure that the copy lambda was called for each CPU.
   ASSERT_EQ(seenCpus, cpu_set.asSet());
+}
+
+TEST(MuxRotat, EnableDisableOnLocal) {
+  long numCores = sysconf(_SC_NPROCESSORS_ONLN);
+  if (numCores == -1) {
+    GTEST_SKIP() << "Failed to determine number of cores";
+  }
+  if (numCores < 2) {
+    GTEST_SKIP() << "This is not a SMP environment";
+  }
+  Monitor mon;
+  auto manager = makePmuDeviceManager();
+  auto metric = std::make_shared<MetricDesc>(
+      "dummy",
+      "dummy_metric",
+      "dummy_metric",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           {EventRef{
+               "dummy", PmuType::software, "dummy", EventExtraAttr{}, {}}}}},
+      10000,
+      System::Permissions{},
+      std::vector<std::string>{});
+  auto core0 = CpuSet::makeFromCpusList("0");
+  auto reader0 = mon.emplaceCpuCountReader(
+      "0", "event_0", metric, manager, core0, nullptr);
+
+  auto core1 = CpuSet::makeFromCpusList("1");
+  auto reader1 = mon.emplaceCpuCountReader(
+      "1", "event_1", metric, manager, core1, nullptr);
+
+  ASSERT_TRUE(mon.enable());
+
+  cpu_set_t prev_mask, cur_mask;
+  CPU_ZERO(&prev_mask);
+  if (sched_getaffinity(0, sizeof(cpu_set_t), &prev_mask) != 0) {
+    return;
+  }
+
+  mon.muxRotate(false, true);
+  EXPECT_TRUE(reader0->isEnabled() != reader1->isEnabled());
+  mon.muxRotate(false, true);
+  EXPECT_FALSE(reader0->isEnabled() != reader1->isEnabled());
+  CPU_ZERO(&cur_mask);
+  if (sched_getaffinity(0, sizeof(cpu_set_t), &cur_mask) != 0) {
+    return;
+  }
+  EXPECT_TRUE(CPU_EQUAL(&prev_mask, &cur_mask));
 }
 #endif // HBT_ENABLE_TRACING

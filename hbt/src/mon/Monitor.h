@@ -69,7 +69,7 @@ class Monitor {
   using MuxGroupId = MuxGroupIdType;
   using MuxGroup = std::set<ElemId>;
 
-  void muxRotate() {
+  void muxRotate(bool uncore_local = false, bool core_local = false) {
     std::lock_guard<std::mutex> lock{mutex_};
     for (auto& [pmu_type, queue] : mux_queue_) {
       if (queue.empty()) {
@@ -77,7 +77,7 @@ class Monitor {
       }
       std::rotate(queue.rbegin(), queue.rbegin() + 1, queue.rend());
     }
-    sync_();
+    sync_(uncore_local, core_local);
   }
 
   explicit Monitor(bool mux_queue_per_pmu_type = false, bool reset = true)
@@ -312,7 +312,7 @@ class Monitor {
     std::lock_guard<std::mutex> lock{mutex_};
     std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>> rvs;
     // group by CPU first to minimize # of thread migration required
-    std::set<int> cpus;
+    std::set<CpuId> cpus;
     for (const auto& [k, cr] : uncore_count_readers_) {
       HBT_THROW_ASSERT_IF(cr == nullptr);
       cpus.merge(cr->listCpus());
@@ -323,7 +323,7 @@ class Monitor {
       HBT_LOG_ERROR() << "Failed to get CPU affinity: " << errno;
       return {};
     }
-    for (int cpu : cpus) {
+    for (auto cpu : cpus) {
       CPU_ZERO(&mask);
       CPU_SET(cpu, &mask);
       if (sched_setaffinity(0, sizeof(mask), &mask) != 0) {
@@ -806,19 +806,27 @@ class Monitor {
     return true;
   }
 
-  void sync_();
+  void sync_(
+      bool uncore_local = false, /* enable/disable uncore events on the CPU owns that perf event */
+      bool core_local = false /* enable/disable core events on the CPU owns that perf event */);
 
   template <class TElemType>
   void commitElemChange_(
       const std::vector<TElemType*>& to_close,
       const std::vector<TElemType*>& to_open,
       const std::vector<TElemType*>& to_enable);
+  template <class TElemType>
+  void commitElemChangeOnLocalCpu_(
+      const std::vector<TElemType*>& to_close,
+      const std::vector<TElemType*>& to_open,
+      const std::vector<TElemType*>& to_enable);
   // Transition all elements in container.
   template <class TContainer>
-  void syncElems_(TContainer& elems_container);
+  void syncElems_(TContainer& elems_container, bool on_local_cpu);
 #ifdef HBT_ENABLE_BPERF
   void syncElems_(
-      std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events);
+      std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events,
+      bool on_local_cpu);
 #endif
   void addMuxEntry_(
       const MuxGroupId& mux_group_id,
@@ -1003,6 +1011,13 @@ void tryEnable_(TGen& gen, bool reset) {
   }
 }
 
+template <class TGen>
+void tryEnableForCpu_(TGen& gen, bool reset, CpuId cpu) {
+  if (!gen.isEnabled()) {
+    gen.enableForCpu(reset, cpu);
+  }
+}
+
 template <class TMonitor, class TGen>
 void tryClose_(TGen& gen) {
   if (gen.isOpen()) {
@@ -1014,6 +1029,13 @@ template <class TGen>
 void tryDisable_(TGen& gen) {
   if (gen.isEnabled()) {
     gen.disable();
+  }
+}
+
+template <class TGen>
+void tryDisableForCpu_(TGen& gen, CpuId cpu) {
+  if (gen.isEnabled()) {
+    gen.disableForCpu(cpu);
   }
 }
 
@@ -1047,10 +1069,62 @@ void Monitor<MuxGroupId, ElemId>::commitElemChange_(
   }
 }
 
+template <class MuxGroupId, class ElemId>
+template <class TElemType>
+void Monitor<MuxGroupId, ElemId>::commitElemChangeOnLocalCpu_(
+    const std::vector<TElemType*>& to_close,
+    const std::vector<TElemType*>& to_open,
+    const std::vector<TElemType*>& to_enable) {
+  using TMonitor = std::decay_t<decltype(*this)>;
+  std::set<CpuId> cpus;
+  for (const auto& elem : to_close) {
+    cpus.merge(elem->listCpus());
+  }
+  for (const auto& elem : to_open) {
+    cpus.merge(elem->listCpus());
+  }
+  for (const auto& elem : to_enable) {
+    cpus.merge(elem->listCpus());
+  }
+  cpu_set_t prev_mask, mask;
+  CPU_ZERO(&prev_mask);
+  if (sched_getaffinity(0, sizeof(cpu_set_t), &prev_mask) != 0) {
+    HBT_LOG_ERROR() << "Failed to get CPU affinity: " << errno;
+    return;
+  }
+  for (auto cpu : cpus) {
+    CPU_ZERO(&mask);
+    CPU_SET(cpu, &mask);
+    if (sched_setaffinity(0, sizeof(mask), &mask) != 0) {
+      HBT_LOG_ERROR() << "Failed to set sched affinity on CPU " << cpu;
+      return;
+    }
+    for (const auto elem_ptr : to_close) {
+      tryDisableForCpu_(*elem_ptr, cpu);
+      tryClose_<TMonitor>(*elem_ptr);
+    }
+    for (const auto elem_ptr : to_open) {
+      tryDisableForCpu_(*elem_ptr, cpu);
+      tryOpen_<TMonitor>(*elem_ptr);
+    }
+    for (const auto elem_ptr : to_enable) {
+      tryOpen_<TMonitor>(*elem_ptr);
+      tryEnableForCpu_(*elem_ptr, reset_, cpu);
+    }
+  }
+  // restore previous CPU affinity
+  if (sched_setaffinity(0, sizeof(prev_mask), &prev_mask) != 0) {
+    HBT_LOG_ERROR() << "Failed to restore to pervious affinity mask";
+  }
+}
+
 #ifdef HBT_ENABLE_BPERF
 template <class MuxGroupId, class ElemId>
 void Monitor<MuxGroupId, ElemId>::syncElems_(
-    std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events) {
+    std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events,
+    bool on_local_cpu) {
+  HBT_ARG_CHECK_EQ(on_local_cpu, false)
+      << "BPerf events doesn't support enable/disable on local cpu opt";
   std::vector<TBPerfEventsGroup*> to_close, to_open, to_enable;
   auto active_mux_ids = getEnabledMuxGroupId_();
   for (auto& [mux, bperf_events_group] : bperf_events) {
@@ -1080,7 +1154,9 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
 /// and BPerfCountReaders) inside elems_container to state.
 template <class MuxGroupId, class ElemId>
 template <class TContainer>
-void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
+void Monitor<MuxGroupId, ElemId>::syncElems_(
+    TContainer& elems_container,
+    bool on_local_cpu) {
   using TElemSmartPtrType = std::decay_t<typename TContainer::mapped_type>;
   using TElemType = typename TElemSmartPtrType::element_type;
   // prepare all elements in mux enabled status
@@ -1109,26 +1185,30 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(TContainer& elems_container) {
         }
     }
   }
-  commitElemChange_(elem_to_close, elem_to_open, elem_to_enable);
+  if (on_local_cpu) {
+    commitElemChangeOnLocalCpu_(elem_to_close, elem_to_open, elem_to_enable);
+  } else {
+    commitElemChange_(elem_to_close, elem_to_open, elem_to_enable);
+  }
 }
 
 /// Transitions (enable/disable, open/close)
 /// all components in Monitor to the new state.
 template <class MuxGroupId, class ElemId>
-void Monitor<MuxGroupId, ElemId>::sync_() {
+void Monitor<MuxGroupId, ElemId>::sync_(bool uncore_local, bool core_local) {
   if (mux_queue_.size() == 0) {
     // Empty queues have no elements to sync.
     return;
   }
 #ifdef HBT_ENABLE_TRACING
-  syncElems_(trace_monitors_);
+  syncElems_(trace_monitors_, false);
 #endif // HBT_ENABLE_TRACING
-  syncElems_(cpu_count_readers_);
-  syncElems_(uncore_count_readers_);
+  syncElems_(cpu_count_readers_, core_local);
+  syncElems_(uncore_count_readers_, uncore_local);
 #ifdef HBT_ENABLE_BPERF
-  syncElems_(mux_bperf_event_map_);
+  syncElems_(mux_bperf_event_map_, false);
 #endif // HBT_ENABLE_BPERF
-  syncElems_(ipt_monitors_);
+  syncElems_(ipt_monitors_, false);
 }
 
 } // namespace facebook::hbt::mon
