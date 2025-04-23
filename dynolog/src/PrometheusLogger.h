@@ -20,6 +20,7 @@
 
 #ifdef USE_PROMETHEUS
 
+DECLARE_string(prometheus_address);
 DECLARE_int32(prometheus_port);
 
 namespace dynolog {
