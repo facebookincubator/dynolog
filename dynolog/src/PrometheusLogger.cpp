@@ -13,6 +13,11 @@
 #ifdef USE_PROMETHEUS
 using namespace prometheus;
 
+DEFINE_string(
+    prometheus_address,
+    "127.0.0.1",
+    "IP address to bind the Prometheus HTTP server to.");
+
 DEFINE_int32(
     prometheus_port,
     8080,
@@ -25,9 +30,12 @@ inline auto& buildGaugeFromMetric(const MetricDesc& m, Registry& registry) {
 }
 
 PrometheusManager::PrometheusManager()
-    : exposer_(fmt::format("127.0.0.1:{}", FLAGS_prometheus_port)) {
-  LOG(INFO) << "Initialized prometheus HTTP server on port = "
-            << FLAGS_prometheus_port;
+    : exposer_(fmt::format(
+          "{}:{}",
+          FLAGS_prometheus_address,
+          FLAGS_prometheus_port)) {
+  LOG(INFO) << "Prometheus HTTP server listening at "
+            << FLAGS_prometheus_address << ":" << FLAGS_prometheus_port;
 
   // setup registry
   registry_ = std::make_shared<Registry>();
