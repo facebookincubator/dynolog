@@ -174,6 +174,11 @@ class TraceCollector {
     sync_();
   }
 
+  void openForCpu(CpuId cpu) {
+    HBT_THROW_EINVAL()
+        << "openForCpu() << is not implemented for TraceCollector";
+  }
+
   // Enabled implies open.
   bool isOpen() const {
     std::lock_guard<std::mutex> slices_lock{slices_mutex_};
@@ -181,11 +186,21 @@ class TraceCollector {
     return state_ == State::Open || state_ == State::Enabled;
   }
 
+  bool isOpenOnCpu(CpuId cpu) const {
+    HBT_THROW_EINVAL()
+        << "isOpenOnCpu() << is not implemented for TraceCollector";
+    return false;
+  }
+
   void close() {
     std::lock_guard<std::mutex> slices_lock{slices_mutex_};
     std::lock_guard<std::mutex> counts_lock{counts_mutex_};
     state_ = State::Closed;
     sync_();
+  }
+
+  void closeForCpu(CpuId cpu) {
+    HBT_THROW_EINVAL() << "closeForCpu() is not implemented for TraceCollector";
   }
 
   void enable(bool reset) {
@@ -205,6 +220,12 @@ class TraceCollector {
     std::lock_guard<std::mutex> slices_lock{slices_mutex_};
     std::lock_guard<std::mutex> counts_lock{counts_mutex_};
     return state_ == State::Enabled;
+  }
+
+  bool isEnabledOnCpu(CpuId cpu) const {
+    HBT_THROW_EINVAL()
+        << "isEnabledOnCpu() << is not implemented for TraceCollector";
+    return false;
   }
 
   void disable() {

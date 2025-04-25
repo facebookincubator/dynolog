@@ -100,6 +100,17 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
     }
   }
 
+  void openForCpu(CpuId cpu, bool pinned = false) {
+    try {
+      if (generators_.count(static_cast<int>(cpu))) {
+        generators_.at(static_cast<int>(cpu))->open(pinned);
+      }
+    } catch (...) {
+      closeForCpu(cpu);
+      throw;
+    }
+  }
+
   size_t getNumEvents() const {
     return this->metric_desc->getNumEvents(pmu_manager->cpuInfo.cpu_arch)
         .value_or(0);

@@ -64,6 +64,15 @@ class IntelPTMonitor {
     sync_();
   }
 
+  void openForCpu(CpuId cpu) {
+    HBT_THROW_EINVAL() << "openForCpu() is not implemented for IntelPTMonitor";
+  }
+
+  bool isOpenOnCpu(CpuId) {
+    HBT_THROW_EINVAL() << "isOpenOnCpu() is not implemented for IntelPTMonitor";
+    return false;
+  }
+
   // Enabled implies open.
   bool isOpen() const {
     std::lock_guard<std::mutex> lock{state_mutex_};
@@ -74,6 +83,10 @@ class IntelPTMonitor {
     std::lock_guard<std::mutex> lock{state_mutex_};
     state_ = State::Closed;
     sync_();
+  }
+
+  void closeForCpu(CpuId cpu) {
+    HBT_THROW_EINVAL() << "closeForCpu() is not implemented for IntelPTMonitor";
   }
 
   void enable(bool reset = false) {
@@ -92,6 +105,12 @@ class IntelPTMonitor {
   bool isEnabled() const {
     std::lock_guard<std::mutex> lock{state_mutex_};
     return state_ == State::Enabled;
+  }
+
+  bool isEnabledOnCpu(CpuId) const {
+    HBT_THROW_EINVAL()
+        << "isEnabledOnCpu() is not implemented for IntelPTMonitor";
+    return false;
   }
 
   void disable() {
