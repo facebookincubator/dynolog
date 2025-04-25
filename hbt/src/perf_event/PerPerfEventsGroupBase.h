@@ -28,6 +28,14 @@ class PerPerfEventsGroupBase {
     }
   }
 
+  void closeForCpu(CpuId cpu) {
+    for (auto& [_, gen] : generators_) {
+      if (gen->getCpu() == cpu) {
+        gen->close();
+      }
+    }
+  }
+
   void enable(bool reset = true) {
     try {
       for (auto& [_, gen] : generators_) {
@@ -72,6 +80,26 @@ class PerPerfEventsGroupBase {
     return enabled;
   }
 
+  bool isEnabledOnCpu(CpuId cpu) const {
+    std::optional<bool> enabled;
+    for (const auto& [key, gen] : generators_) {
+      if (gen->getCpu() == cpu) {
+        HBT_THROW_ASSERT_IF(
+            enabled.has_value() && enabled.value() != gen->isEnabled())
+            << "Generator with key=" << key
+            << " has a different isEnabled() status comparing to some other generators on CPU "
+            << cpu;
+        enabled = gen->isEnabled();
+      }
+    }
+    if (enabled.has_value()) {
+      return enabled.value();
+    }
+    // No generator found on this CPU
+    // Treat this as not enabled
+    return false;
+  }
+
   void disable() {
     for (auto& [_, gen] : generators_) {
       gen->disable();
@@ -98,6 +126,25 @@ class PerPerfEventsGroupBase {
           << " has a different isOpen() status comparing to some other generators.";
     }
     return is_open;
+  }
+
+  bool isOpenOnCpu(CpuId cpu) const {
+    std::optional<bool> open;
+    for (const auto& [key, gen] : generators_) {
+      if (gen->getCpu() == cpu) {
+        HBT_THROW_ASSERT_IF(open.has_value() && open.value() != gen->isOpen())
+            << "Generator with key=" << key
+            << " has a different isOpen() status comparing to some other generators on CPU "
+            << cpu;
+        open = gen->isOpen();
+      }
+    }
+    if (open.has_value()) {
+      return open.value();
+    }
+    // No generator found on this CPU
+    // Treat this as not opened
+    return false;
   }
 
   const TPerfEventGroupGenBase& getFirstGenerator() const {

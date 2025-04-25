@@ -1004,6 +1004,13 @@ void tryOpen_(TGen& gen, Args&&... args) {
   }
 }
 
+template <class TMonitor, class TGen, class... Args>
+void tryOpenForCpu_(TGen& gen, CpuId cpu, Args&&... args) {
+  if (!gen.isOpenOnCpu(cpu)) {
+    gen.openForCpu(cpu);
+  }
+}
+
 template <class TGen>
 void tryEnable_(TGen& gen, bool reset) {
   if (!gen.isEnabled()) {
@@ -1013,8 +1020,8 @@ void tryEnable_(TGen& gen, bool reset) {
 
 template <class TGen>
 void tryEnableForCpu_(TGen& gen, bool reset, CpuId cpu) {
-  if (!gen.isEnabled()) {
-    gen.enableForCpu(reset, cpu);
+  if (!gen.isEnabledOnCpu(cpu)) {
+    gen.enableForCpu(cpu, reset);
   }
 }
 
@@ -1022,6 +1029,13 @@ template <class TMonitor, class TGen>
 void tryClose_(TGen& gen) {
   if (gen.isOpen()) {
     gen.close();
+  }
+}
+
+template <class TMonitor, class TGen>
+void tryCloseForCpu_(TGen& gen, CpuId cpu) {
+  if (gen.isOpenOnCpu(cpu)) {
+    gen.closeForCpu(cpu);
   }
 }
 
@@ -1034,7 +1048,7 @@ void tryDisable_(TGen& gen) {
 
 template <class TGen>
 void tryDisableForCpu_(TGen& gen, CpuId cpu) {
-  if (gen.isEnabled()) {
+  if (gen.isEnabledOnCpu(cpu)) {
     gen.disableForCpu(cpu);
   }
 }
@@ -1101,14 +1115,14 @@ void Monitor<MuxGroupId, ElemId>::commitElemChangeOnLocalCpu_(
     }
     for (const auto elem_ptr : to_close) {
       tryDisableForCpu_(*elem_ptr, cpu);
-      tryClose_<TMonitor>(*elem_ptr);
+      tryCloseForCpu_<TMonitor>(*elem_ptr, cpu);
     }
     for (const auto elem_ptr : to_open) {
       tryDisableForCpu_(*elem_ptr, cpu);
-      tryOpen_<TMonitor>(*elem_ptr);
+      tryOpenForCpu_<TMonitor>(*elem_ptr, cpu);
     }
     for (const auto elem_ptr : to_enable) {
-      tryOpen_<TMonitor>(*elem_ptr);
+      tryOpenForCpu_<TMonitor>(*elem_ptr, cpu);
       tryEnableForCpu_(*elem_ptr, reset_, cpu);
     }
   }

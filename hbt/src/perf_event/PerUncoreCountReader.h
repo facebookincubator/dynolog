@@ -118,6 +118,19 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     }
   }
 
+  void openForCpu(CpuId cpu, bool pinned = false) {
+    try {
+      for (const auto& [key, gen] : this->generators_) {
+        if (gen->getCpu() == cpu) {
+          gen->open(pinned);
+        }
+      }
+    } catch (...) {
+      closeForCpu(cpu);
+      throw;
+    }
+  }
+
   size_t getNumEvents() const {
     return this->metric_desc->getNumEvents(pmu_manager->cpuInfo.cpu_arch)
         .value_or(0);
