@@ -155,13 +155,36 @@ void gpu_monitor_loop(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm) {
   }
 }
 
+void version_info() {
+  LOG(INFO) << "Starting dynolog, version = " DYNOLOG_VERSION
+            << ", build git-hash = " DYNOLOG_GIT_REV;
+  LOG(INFO) << "Build Config:";
+  LOG(INFO) << "  USE_GRAPH_ENDPOINT = "
+#ifdef USE_GRAPH_ENDPOINT
+    << 1;
+#else
+    << 0;
+#endif // USE_GRAPH_ENDPOINT
+
+  LOG(INFO) << "  USE_JSON_GENERATED_PERF_EVENTS = "
+#ifdef USE_JSON_GENERATED_PERF_EVENTS
+    << 1;
+#else
+    << 0;
+#endif // USE_JSON_GENERATED_PERF_EVENTS
+  LOG(INFO) << "  USE_PROMETHEUS = "
+#ifdef USE_PROMETHEUS
+    << 1;
+#else
+    << 0;
+#endif // USE_PROMETHEUS
+}
+
 int main(int argc, char** argv) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
   FLAGS_logtostderr = 1;
   google::InitGoogleLogging(argv[0]);
-
-  LOG(INFO) << "Starting dynolog, version = " DYNOLOG_VERSION
-            << ", build git-hash = " DYNOLOG_GIT_REV;
+  version_info();
 
   std::shared_ptr<gpumon::DcgmGroupInfo> dcgm;
 
