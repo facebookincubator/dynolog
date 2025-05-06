@@ -60,8 +60,7 @@ struct L3PmuMsrAmd {
   uint64_t : 6;
   uint64_t enable : 1;
   uint64_t : 19;
-  uint64_t coreId : 3;
-  uint64_t : 1;
+  uint64_t coreId : 4;
   uint64_t enAllSlices : 1;
   uint64_t enAllCores : 1;
   uint64_t sliceId : 3;
