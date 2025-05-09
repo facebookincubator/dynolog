@@ -85,10 +85,10 @@ int setup_ipv6_socket(const std::string& addr, int port) {
 }
 
 FBRelayLogger::SocketWrapper::SocketWrapper(const std::string& addr, int port) {
-  if (addr.find(".") != std::string::npos) {
+  if (addr.find('.') != std::string::npos) {
     LOG(INFO) << "Using IPv4 address";
     sock_fd_ = setup_ipv4_socket(addr, port);
-  } else if (addr.find(":") != std::string::npos) {
+  } else if (addr.find(':') != std::string::npos) {
     LOG(INFO) << "Using IPv6 address";
     sock_fd_ = setup_ipv6_socket(addr, port);
   } else {
