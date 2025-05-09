@@ -320,7 +320,7 @@ std::optional<cpu_set_t> parseSysFsPmuCpuMask_(fs::directory_entry dentry) {
 /// PmuType and device id.
 std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
     const std::string& str) {
-  const auto pos = str.find_last_of("_");
+  const auto pos = str.find_last_of('_');
   if (pos != std::string::npos) {
     std::optional<uint32_t> num_device;
     auto s = str.substr(pos + 1);

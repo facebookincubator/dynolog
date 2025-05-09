@@ -204,7 +204,7 @@ class PmuDevice {
       }
     }
 
-    bool has_dashes = ev_def->id.find("-") != std::string::npos;
+    bool has_dashes = ev_def->id.find('-') != std::string::npos;
     bool has_upper =
         std::any_of(ev_def->id.begin(), ev_def->id.end(), ::isupper);
     if (has_dashes || has_upper) {
