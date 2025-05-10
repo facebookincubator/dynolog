@@ -206,8 +206,6 @@ void BPerfEventsGroup::close() {
   unregister_thread_link_ = nullptr;
   ::bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
-  ::bpf_link__destroy(update_thread_link_);
-  update_thread_link_ = nullptr;
   opened_ = false;
 }
 
@@ -319,12 +317,12 @@ void bperf_attr_map_elem::loadFromSkelLink(
 
   skel->bss->cpu_cnt = cpu_cnt_;
   skel->rodata->event_cnt = event_cnt;
+  skel->rodata->task_counting_enabled = per_thread_ ? 1 : 0;
   skel->bss->cgroup_update_level = cgroup_update_level_;
 
   if (!per_thread_) {
     bpf_program__set_autoload(skel->progs.bperf_register_thread, false);
     bpf_program__set_autoload(skel->progs.bperf_unregister_thread, false);
-    bpf_program__set_autoload(skel->progs.bperf_update_thread, false);
     bpf_program__set_autoload(skel->progs.bperf_pmu_enable_exit, false);
     bpf_program__set_autoload(skel->progs.find_perf_events, false);
   }
@@ -394,7 +392,6 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
 
   static_assert(
       sizeof(struct bperf_thread_metadata) <= sizeof(struct bperf_thread_data));
-
   err = lookupPerfEvent_(skel);
   if (err) {
     HBT_LOG_ERROR() << "Failed to lookup perf events";
@@ -421,12 +418,6 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
       ::bpf_program__attach(skel->progs.bperf_unregister_thread);
   if (!unregister_thread_link_) {
     HBT_LOG_ERROR() << "Failed to attach trace_bpf_mmap_close";
-    goto error_out;
-  }
-
-  update_thread_link_ = ::bpf_program__attach(skel->progs.bperf_update_thread);
-  if (!update_thread_link_) {
-    HBT_LOG_ERROR() << "Failed to attach bperf_update_thread";
     goto error_out;
   }
 
@@ -480,8 +471,6 @@ error_out:
   register_thread_link_ = nullptr;
   ::bpf_link__destroy(unregister_thread_link_);
   unregister_thread_link_ = nullptr;
-  ::bpf_link__destroy(update_thread_link_);
-  update_thread_link_ = nullptr;
   ::bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
   return -1;
