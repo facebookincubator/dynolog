@@ -174,7 +174,7 @@ struct {
 } per_thread_data SEC(".maps");
 
 /* The following tracks available idx for per_thread_idx */
-idx_t idx_list[BPERF_MAX_THREAD_READER];
+idx_t idx_list[BPERF_MAX_THREAD_READER + 1];
 idx_t idx_list_first_free;
 
 #define private(name) SEC(".data." #name) __hidden __attribute__((aligned(8)))
