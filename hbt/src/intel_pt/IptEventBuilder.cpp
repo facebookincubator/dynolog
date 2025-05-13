@@ -16,7 +16,7 @@ namespace facebook::hbt::intel_pt {
 using namespace ::facebook::hbt::perf_event;
 
 void verifyFormatExistsThrowOnError(
-    std::optional<perf_event::PmuDevice::FormatAttr> formatMaybe,
+    const std::optional<perf_event::PmuDevice::FormatAttr>& formatMaybe,
     const std::string& key,
     const std::string& err) {
   HBT_THROW_ASSERT_IF(!formatMaybe.has_value())
