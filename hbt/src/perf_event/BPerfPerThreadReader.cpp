@@ -129,9 +129,9 @@ int BPerfPerThreadReader::enable() {
   // There is a small drift between time from clock_gettime() and tsc.
   // On a skylake host, I get about 0.02% difference. Get the initial
   // drift at the moment and use it to fix future readings.
+  enabled_ = true;
   read(&data);
   initial_clock_drift_ = getRefMonoTime() - data.monoTime;
-  enabled_ = true;
   return 0;
 
 error:
