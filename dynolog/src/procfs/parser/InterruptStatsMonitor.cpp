@@ -12,7 +12,7 @@ using Granularity = InterruptStatsMonitor::Granularity;
 InterruptStatsMonitor::InterruptStatsMonitor(
     std::shared_ptr<TTicker> ticker,
     const std::string& rootDir)
-    : MonitorBase<TTicker>(std::move(ticker), "InterruptStatsMonitor", {}),
+    : MonitorBase<TTicker>(std::move(ticker), "InterruptStatsMonitor", {1.0}),
       rootDir_(rootDir) {
   cpuCount_ = (int)sysconf(_SC_NPROCESSORS_CONF);
 }

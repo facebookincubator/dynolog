@@ -18,7 +18,7 @@ struct InterruptStats {
   int64_t eth0Intrps, eth0IntrpsPrev;
 };
 
-class InterruptStatsMonitor : MonitorBase<Ticker<60000, 1000, 1, 2>> {
+class InterruptStatsMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
  private:
   std::string const rootDir_;
   int16_t cpuCount_;
@@ -33,7 +33,7 @@ class InterruptStatsMonitor : MonitorBase<Ticker<60000, 1000, 1, 2>> {
   explicit InterruptStatsMonitor(const std::string& rootDir = "");
 
  public:
-  using TTicker = Ticker<60000, 1000, 1, 2>;
+  using TTicker = Ticker<60000, 1000, 10, 3>;
   using typename MonitorBase<TTicker>::TMask;
   // maps client req granularity with level wise stats (interruptStats_)
   enum class Granularity { MINUTE = 0, SECOND = 1 };
