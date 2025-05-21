@@ -19,7 +19,7 @@ InterruptStatsMonitor InterruptStatsMonitor::makeTestClass(
     const std::string& rootDir) {
   std::shared_ptr<InterruptStatsMonitor::TTicker> intTicker =
       std::make_shared<InterruptStatsMonitor::TTicker>();
-  return InterruptStatsMonitor(intTicker, rootDir);
+  return InterruptStatsMonitor(std::move(intTicker), rootDir);
 }
 
 InterruptStats InterruptStatsMonitor::getInterruptStatsPerMinute() {
