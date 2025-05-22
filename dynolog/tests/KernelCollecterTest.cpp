@@ -4,9 +4,12 @@
 // LICENSE file in the root directory of this source tree.
 
 #include <glog/logging.h>
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <sys/stat.h>
-#include "dynolog/src/KernelCollector.h"
+#include "dynolog/src/KernelCollectorBase.h"
+
+using namespace ::testing;
 
 namespace dynolog {
 
@@ -77,35 +80,48 @@ TEST(KernelCollecterTest, NetworkStatsTest) {
   ASSERT_EQ(is_directory(test_root.c_str()), 1)
       << "Path for test root is invalid" << test_root;
 
-  int numDev = 0;
   KernelCollectorBase kb{get_test_root()};
 
   kb.readNetworkStats();
-
-  for (const auto& [devName, devRxtx] : kb.rxtx_) {
-    if (devName.compare("eth0") == 0) {
-      numDev++;
-      EXPECT_EQ(devRxtx.rxBytes, 17566262828804);
-      EXPECT_EQ(devRxtx.rxPackets, 18353492234);
-      EXPECT_EQ(devRxtx.rxErrors, 0);
-      EXPECT_EQ(devRxtx.rxDrops, 6734908);
-      EXPECT_EQ(devRxtx.txBytes, 4485442728479);
-      EXPECT_EQ(devRxtx.txPackets, 11129776879);
-      EXPECT_EQ(devRxtx.txErrors, 0);
-      EXPECT_EQ(devRxtx.txDrops, 0);
-    } else if (devName.compare("eth1") == 0) {
-      numDev++;
-      EXPECT_EQ(devRxtx.rxBytes, 5651376349);
-      EXPECT_EQ(devRxtx.rxPackets, 3826963);
-      EXPECT_EQ(devRxtx.rxErrors, 0);
-      EXPECT_EQ(devRxtx.rxDrops, 0);
-      EXPECT_EQ(devRxtx.txBytes, 8626730);
-      EXPECT_EQ(devRxtx.txPackets, 100254);
-      EXPECT_EQ(devRxtx.txErrors, 0);
-      EXPECT_EQ(devRxtx.txDrops, 0);
-    }
-  }
-  EXPECT_EQ(numDev, 2);
+  EXPECT_THAT(
+      kb.rxtx_,
+      ElementsAre(
+          Pair(
+              "eth0",
+              AllOf(
+                  Field(&RxTx::rxBytes, 17566262828804),
+                  Field(&RxTx::rxPackets, 18353492234),
+                  Field(&RxTx::rxErrors, 0),
+                  Field(&RxTx::rxDrops, 6734908),
+                  Field(&RxTx::txBytes, 4485442728479),
+                  Field(&RxTx::txPackets, 11129776879),
+                  Field(&RxTx::txErrors, 0),
+                  Field(&RxTx::txDrops, 0))),
+          Pair(
+              "eth1",
+              AllOf(
+                  Field(&RxTx::rxBytes, 5651376349),
+                  Field(&RxTx::rxPackets, 3826963),
+                  Field(&RxTx::rxErrors, 0),
+                  Field(&RxTx::rxDrops, 0),
+                  Field(&RxTx::txBytes, 8626730),
+                  Field(&RxTx::txPackets, 100254),
+                  Field(&RxTx::txErrors, 0),
+                  Field(&RxTx::txDrops, 0))),
+          Pair(
+              "lo",
+              AllOf(
+                  Field(&RxTx::rxBytes, 15218789826969),
+                  Field(&RxTx::rxPackets, 2393400479),
+                  Field(&RxTx::rxErrors, 0),
+                  Field(&RxTx::rxDrops, 0),
+                  Field(&RxTx::txBytes, 15218789826969),
+                  Field(&RxTx::txPackets, 2393400479),
+                  Field(&RxTx::txErrors, 0),
+                  Field(&RxTx::txDrops, 0)))));
+  EXPECT_THAT(
+      kb.netLimitBps_,
+      ElementsAre(Pair("eth0", 25000000000), Pair("eth1", 40000000000)));
 }
 
 TEST(KernelCollecterTest, UpdateNetworkStatsDeltaTest) {
