@@ -8,6 +8,7 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <gtest/gtest.h>
+#include <sys/resource.h>
 #include <time.h>
 #include <unistd.h>
 #include <chrono>
@@ -192,6 +193,20 @@ void readerThread(void) {
 
 #define BPERF_TEST_PARALLEL_THREADS 8
 
+TEST(BPerfEventsGroupPerThreadTest, TestBPFLoad) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
+  auto ev_def = pmu_manager->findEventDef("cycles");
+  if (!ev_def) {
+    GTEST_SKIP() << "Cannot find event cycles";
+  }
+  auto ev_conf =
+      pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
+
+  auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
+  EXPECT_EQ(system.open(), true);
+}
+
 TEST(BPerfEventsGroupPerThreadTest, TestCycles) {
   auto pmu_manager = makePmuDeviceManager();
   auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
@@ -256,28 +271,30 @@ TEST(BPerfEventsGroupPerThreadTest, TestLeadExit) {
 }
 
 static int testStage2 = 0;
+std::atomic<int> successed = 0;
+std::atomic<int> failed = 0;
 
 // A even simpler workload just for verifying we can create enough readers
 void emptyReaderThread() {
   auto reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
-  EXPECT_EQ(reader->enable(), 0);
+  int res = reader->enable();
+  if (res != 0) {
+    failed += 1;
+    return;
+  }
   BPerfThreadData d;
 
   while (testStage2 == 0) {
-    reader->read(&d);
+    if (reader->read(&d) != 0) {
+      failed += 1;
+      return;
+    }
     sleep(1);
   }
-
-  printf(
-      "tid=%d, cycles=%llu, enabled=%llu, running=%llu\n",
-      gettid(),
-      d.values[0].counter,
-      d.values[0].enabled,
-      d.values[0].running);
+  successed += 1;
 }
 
 TEST(BPerfEventsGroupPerThreadTest, TestConcurrentReader) {
-  const int numThreads = 30000;
   auto pmu_manager = makePmuDeviceManager();
   auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
   auto ev_def = pmu_manager->findEventDef("cycles");
@@ -291,15 +308,26 @@ TEST(BPerfEventsGroupPerThreadTest, TestConcurrentReader) {
   EXPECT_EQ(system.open(), true);
 
   std::vector<std::unique_ptr<std::thread>> threads;
-  threads.reserve(numThreads);
-  for (int i = 0; i < numThreads; i++) {
+  int concurrentThreads = BPERF_MAX_THREAD_READER + 1;
+  struct rlimit rl {};
+  // we will need at least 2 fds per thread, then 2 fds for global perf events
+  rl.rlim_cur = 2 * concurrentThreads + 100;
+  rl.rlim_max = 2 * concurrentThreads + 100;
+  if (setrlimit(RLIMIT_NOFILE, &rl) != 0) {
+    GTEST_SKIP() << "Failed to set RLIMIT_NOFILE limit";
+  }
+  threads.reserve(concurrentThreads);
+  for (int i = 0; i < concurrentThreads; i++) {
     threads.emplace_back(std::make_unique<std::thread>(emptyReaderThread));
   }
   /* sleep override */
-  sleep(5);
+  sleep(1);
   testStage2 = 1;
-  for (int i = 0; i < numThreads; i++) {
+  for (int i = 0; i < concurrentThreads; i++) {
     threads[i]->join();
   }
   system.disable();
+
+  EXPECT_EQ(successed, BPERF_MAX_THREAD_READER);
+  EXPECT_EQ(failed, 1);
 }
