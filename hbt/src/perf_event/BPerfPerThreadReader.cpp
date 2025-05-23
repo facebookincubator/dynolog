@@ -168,7 +168,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   struct bperf_thread_data raw_thread_data;
   struct bperf_perf_event_data raw_event_data[event_cnt_];
   __u64 pmc_val[event_cnt_];
-  __u64 tsc, time_after_sched_in;
+  __u64 tsc, time_after_offset_update;
   __u32 lock;
   int i, idx;
 
@@ -196,19 +196,21 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
 
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
-  time_after_sched_in = data->monoTime - raw_thread_data.schedule_time;
-  data->cpuTime = raw_thread_data.runtime_until_schedin + time_after_sched_in;
+  time_after_offset_update =
+      data->monoTime - raw_thread_data.offset_update_time;
+  data->cpuTime =
+      raw_thread_data.runtime_until_offset_update + time_after_offset_update;
 
   // TODO: Detect when the lead program stops. It is a bit tricky, as
   //       it may look like current thread is always running.
   //       This will be easier once with some perf event.
   for (i = 0; i < event_cnt_; i++) {
     data->values[i] = raw_event_data[i].output_value;
-    data->values[i].enabled += time_after_sched_in;
+    data->values[i].enabled += time_after_offset_update;
 
     if (raw_event_data[i].idx) {
       data->values[i].counter += pmc_val[i] - raw_event_data[i].offset;
-      data->values[i].running += time_after_sched_in;
+      data->values[i].running += time_after_offset_update;
     }
   }
   if (leadExited(data->values[0].counter)) {

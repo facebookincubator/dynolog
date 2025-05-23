@@ -63,11 +63,11 @@ struct bperf_thread_data {
   struct bperf_clock_param tsc_param;
 
   /* all the times are in nano seconds */
-  /* when the task got scheduled the last time */
-  __u64 schedule_time;
+  /* when the perf value offset is updated */
+  __u64 offset_update_time;
 
-  /* runtime = runtime_until_schedin + tsc_time - schedin_time; */
-  __u64 runtime_until_schedin;
+  /* runtime = runtime_until_offset_update + tsc_time - offset_time; */
+  __u64 runtime_until_offset_update;
 
   struct bperf_perf_event_data events[];
 };
