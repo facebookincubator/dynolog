@@ -8,6 +8,8 @@
 #include <glog/logging.h>
 #include <stdlib.h>
 #include <chrono>
+#include <filesystem>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -43,6 +45,23 @@ KernelCollectorBase::KernelCollectorBase(const std::string& rootDir)
   while (std::getline(iss, prefix, ',')) {
     nicInterfacePrefixes_.push_back(prefix);
   }
+}
+
+void KernelCollectorBase::readNetworkInfo(const std::string& interface) {
+  std::filesystem::path rootDir(rootDir_.empty() ? "/" : rootDir_);
+  std::filesystem::path devSpeedPath =
+      rootDir / "sys/class/net" / interface / "speed";
+  std::ifstream ifs(devSpeedPath);
+  if (!ifs.is_open()) {
+    LOG_EVERY_N(ERROR, 10) << "Failed to open " << devSpeedPath;
+    return;
+  }
+  uint64_t speedMbps;
+  if (!(ifs >> speedMbps)) {
+    LOG_EVERY_N(ERROR, 10) << "Failed to read " << devSpeedPath;
+    return;
+  }
+  netLimitBps_[interface] = speedMbps * 1000 * 1000;
 }
 
 time_t KernelCollectorBase::readUptime() {
@@ -128,6 +147,8 @@ void KernelCollectorBase::readNetworkStats() {
     devRxtx.txPackets = device.tx_packets;
     devRxtx.txErrors = device.tx_errs;
     devRxtx.txDrops = device.tx_drop;
+
+    readNetworkInfo(device.interface);
   }
 
   updateNetworkStatsDelta(rxtxNew_);

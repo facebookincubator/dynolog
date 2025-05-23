@@ -48,7 +48,12 @@ class KernelCollectorBase {
 
   // Save more recent net device stats
   std::map<std::string, struct RxTx> rxtx_, rxtxDelta_;
+  // The net device limit in bps. this is read from /sys/class/net/<dev>/speed
+  std::map<std::string, uint64_t> netLimitBps_;
 
+  // network info is initialized once during construction, while network stats
+  // is updated periodically.
+  void readNetworkInfo(const std::string& interface);
   void updateNetworkStatsDelta(
       const std::map<std::string, struct RxTx>& rxtxNew);
   bool isMonitoringInterfaceActive(std::string interface);
