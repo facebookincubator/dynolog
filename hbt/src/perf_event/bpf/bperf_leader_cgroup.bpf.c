@@ -169,27 +169,26 @@ struct {
    * Set the default size to the maximum to make veristat happy.
    */
   __uint(value_size, BPERF_MAX_THREAD_DATA_SIZE);
-  __uint(max_entries, BPERF_MAX_THREAD_READER);
+  __uint(max_entries, BPERF_MAX_THREAD_READER + 1);
   __uint(map_flags, BPF_F_MMAPABLE);
 } per_thread_data SEC(".maps");
 
 /* The following tracks available idx for per_thread_idx */
-idx_t idx_list[BPERF_MAX_THREAD_READER];
-idx_t idx_list_first_free;
+idx_t idx_list[BPERF_MAX_THREAD_READER + 1];
+int idx_list_first_free;
 
 #define private(name) SEC(".data." #name) __hidden __attribute__((aligned(8)))
 private(A) struct bpf_spin_lock idx_allocator_lock;
 
 static __u32 __always_inline request_idx(void) {
-  if (idx_list_first_free >= BPERF_MAX_THREAD_READER) {
-    /* BPERF_MAX_THREAD_READER indicates no more available idx */
-    return BPERF_MAX_THREAD_READER;
+  if (idx_list_first_free > BPERF_MAX_THREAD_READER || idx_list_first_free <= 0) {
+    return BPERF_INVALID_THREAD_IDX;
   }
   return idx_list[idx_list_first_free++];
 }
 
 static void __always_inline reclaim_idx(__u32 idx) {
-  if (idx_list_first_free == 0) {
+  if (idx_list_first_free <= 0 || idx_list_first_free > BPERF_MAX_THREAD_READER) {
     /* theoretically this should never happen */
     return;
   }
@@ -220,7 +219,7 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   idx = request_idx();
   bpf_spin_unlock(&idx_allocator_lock);
 
-  if (idx >= BPERF_MAX_THREAD_READER)
+  if (idx == BPERF_INVALID_THREAD_IDX)
     return 0;
 
   data = bpf_map_lookup_elem(&per_thread_data, &idx);

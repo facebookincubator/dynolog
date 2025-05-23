@@ -431,7 +431,7 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
   }
 
   /* Initialize idx_list */
-  for (int i = 0; i < BPERF_MAX_GROUP_SIZE; i++) {
+  for (int i = 0; i <= BPERF_MAX_THREAD_READER; i++) {
     skel->bss->idx_list[i] = i;
   }
 
