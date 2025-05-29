@@ -11,7 +11,6 @@
 
 #include <common/init/Init.h>
 #include <folly/Benchmark.h>
-#include <folly/MPMCQueue.h>
 
 template <class T, class TExtra = int>
 using MPMCRingBufferBenchmark = MPMCBenchmark<
