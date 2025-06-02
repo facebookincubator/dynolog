@@ -8,7 +8,6 @@
 
 #include "hbt/src/common/ProcFsHelpers.h"
 #include "hbt/src/common/System.h"
-#include "pfs/task.hpp"
 
 using namespace facebook::hbt;
 
