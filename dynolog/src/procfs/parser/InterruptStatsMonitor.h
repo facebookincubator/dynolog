@@ -17,6 +17,8 @@ struct InterruptStats {
   int64_t eth0Intrps, eth0IntrpsPrev;
 };
 
+// The Ticket template is configured to have the major tick at 60sec, minor at
+// 1sec intervals
 class InterruptStatsMonitor : MonitorBase<Ticker<60000, 1000, 1, 2>> {
  private:
   std::string const rootDir_;
