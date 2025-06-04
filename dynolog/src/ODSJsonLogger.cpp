@@ -10,7 +10,6 @@
 #include <cpr/cpr.h> // @manual
 #include <curl/curl.h> // @manual
 #endif
-#include <fmt/format.h>
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 

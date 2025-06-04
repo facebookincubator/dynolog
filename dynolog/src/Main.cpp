@@ -22,7 +22,6 @@
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 #include "dynolog/src/tracing/IPCMonitor.h"
-#include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #ifdef USE_PROMETHEUS
 #include "dynolog/src/PrometheusLogger.h"
