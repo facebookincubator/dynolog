@@ -198,6 +198,21 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       initial_clock_drift_;
   time_after_offset_update =
       data->monoTime - raw_thread_data.offset_update_time;
+
+  // We use rdtsc to estimate enabled and running time. However,
+  // kernel occasionally adjusts the algorithm of tsc based timer.
+  // Therefore, extra care is need to avoid "time going back" issue.
+  // Please refer to the comment before kernel function
+  // ktime_get_mono_fast_ns() for more information.
+  //
+  // Here, we make time_after_offset_update 0.1% smaller. So that
+  // the time never goes back. This is not an issue for time_enabled
+  // and time_running, as they are only used adjust PMC reading. However,
+  // cpuTime may show some spikes.
+
+  time_after_offset_update = time_after_offset_update * 1023;
+  time_after_offset_update = time_after_offset_update >> 10;
+
   data->cpuTime =
       raw_thread_data.runtime_until_offset_update + time_after_offset_update;
 
