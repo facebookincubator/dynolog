@@ -5,8 +5,6 @@
 
 #include "dynolog/src/tracing/IPCMonitor.h"
 #include <gtest/gtest.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <chrono>
 #include <iostream>
