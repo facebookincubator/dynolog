@@ -58,16 +58,29 @@ pub struct GpuTraceOptions {
 }
 
 impl GpuTraceOptions {
-    fn config(&self) -> String {
+    fn config(&self, duration_ms: u64) -> String {
+        // Note the PROFILE_PROFILE_MEMORY is required to turn on the Python component
+        // of the memory snapshot profiler. Then PROFILE_MEMORY enables on-demand snapshot.
+        // The following is not a typo/mistake.
+        let profile_memory_start_str = if self.profile_memory {
+            format!(
+                r#"
+PROFILE_PROFILE_MEMORY=true
+PROFILE_MEMORY=true
+PROFILE_MEMORY_DURATION_MSECS={}"#,
+                duration_ms
+            )
+        } else {
+            "".to_string()
+        };
         format!(
             r#"
-PROFILE_REPORT_INPUT_SHAPES={}
-PROFILE_PROFILE_MEMORY={}
+PROFILE_REPORT_INPUT_SHAPES={}{}
 PROFILE_WITH_STACK={}
 PROFILE_WITH_FLOPS={}
 PROFILE_WITH_MODULES={}"#,
             self.record_shapes,
-            self.profile_memory,
+            profile_memory_start_str,
             self.with_stacks,
             self.with_flops,
             self.with_modules
@@ -84,11 +97,21 @@ pub struct GpuTraceConfig {
 
 impl GpuTraceConfig {
     fn config(&self) -> String {
+        let duration_ms = match self.trigger_config {
+            GpuTraceTriggerConfig::DurationBased {
+                profile_start_time: _,
+                duration_ms,
+            } => duration_ms,
+            _ => {
+                panic!("Please only use -profile-memory with duration mode, i.e. set --duration-ms")
+            }
+        };
+
         format!(
             "ACTIVITIES_LOG_FILE={}\n{}{}",
             self.log_file,
             self.trigger_config.config(),
-            self.trace_options.config()
+            self.trace_options.config(duration_ms)
         )
     }
 }
@@ -121,7 +144,7 @@ pub fn run_gputrace(
 
     let resp_str = utils::get_resp(&client).expect("Unable to decode output bytes");
 
-    println!("response = {}", resp_str);
+    println!("response = {}\n", resp_str);
 
     let resp_v: Value = serde_json::from_str(&resp_str)?;
     let processes = resp_v["processesMatched"].as_array().unwrap();
@@ -137,6 +160,18 @@ pub fn run_gputrace(
             println!(
                 "    {}",
                 config.log_file.replace(".json", &format!("_{}.json", pid))
+            );
+            if config.trace_options.profile_memory {
+                println!("      Or /tmp/memory_snapshot_{}.pickle", pid);
+            }
+        }
+        if config.trace_options.profile_memory {
+            println!("\nMemory profiles may take 4-5 mins to export.");
+            println!(
+                "\nTo view them please drag and drop the file to https://docs.pytorch.org/memory_viz"
+            );
+            println!(
+                "For more info please see https://pytorch.org/blog/understanding-gpu-memory-1/"
             );
         }
     }
@@ -182,10 +217,9 @@ ACTIVITIES_ITERATIONS=42"#
             with_modules: true,
         };
         assert_eq!(
-            test_trace_options.config(),
+            test_trace_options.config(42),
             r#"
 PROFILE_REPORT_INPUT_SHAPES=true
-PROFILE_PROFILE_MEMORY=false
 PROFILE_WITH_STACK=true
 PROFILE_WITH_FLOPS=false
 PROFILE_WITH_MODULES=true"#
@@ -208,6 +242,8 @@ PROFILE_START_TIME=1000
 ACTIVITIES_DURATION_MSECS=42
 PROFILE_REPORT_INPUT_SHAPES=true
 PROFILE_PROFILE_MEMORY=true
+PROFILE_MEMORY=true
+PROFILE_MEMORY_DURATION_MSECS=42
 PROFILE_WITH_STACK=true
 PROFILE_WITH_FLOPS=false
 PROFILE_WITH_MODULES=true"#
