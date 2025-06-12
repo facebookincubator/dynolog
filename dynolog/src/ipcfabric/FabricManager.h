@@ -13,13 +13,17 @@
 #include "dynolog/src/ipcfabric/Utils.h"
 
 // If building inside Kineto, use its logger, otherwise use glog
-#if defined USE_GOOGLE_LOG
-// We need to include the Logger header before here for LOG() macros.
+#if defined(KINETO_NAMESPACE) && defined(ENABLE_IPC_FABRIC)
+// We need to include the Logger header here for LOG() macros.
 // However this can alias with other files that include this and
-// also use glog. TODO(T131440833).
-// Whoever includes this needs to also include Logger.h for use in kineto
+// also use glog. TODO(T131440833). Thus, the user should also set
+#include "Logger.h" // @manual
+// set error to use kineto version
+#define ERROR libkineto::ERROR
+
+#else // KINETO_NAMESPACE && ENABLE_IPC_FABRIC
 #include <glog/logging.h>
-#endif // USE_GOOGLE_LOG
+#endif // KINETO_NAMESPACE && ENABLE_IPC_FABRIC
 
 namespace dynolog::ipcfabric {
 
