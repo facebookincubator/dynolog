@@ -2,12 +2,14 @@
 
 #pragma once
 
-#include <dynolog/src/metric_frame/MetricFrame.h>
-#include <gtest/gtest_prod.h>
 #include <memory>
 #include <shared_mutex>
+
+#include <gtest/gtest_prod.h>
+
 #include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/Ticker.h"
+#include "dynolog/src/metric_frame/MetricFrame.h"
 
 namespace facebook {
 namespace dynolog {
