@@ -1,4 +1,5 @@
 #include "dynolog/src/procfs/parser/InterruptStatsMonitor.h"
+
 #include <filesystem>
 #include <fstream>
 
@@ -70,16 +71,13 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
       return stats;
     }
 
-    // enough for  /proc/interrupts line
-    const int bufferSize = 1024;
-    char buf[bufferSize];
-    while (file.getline(buf, bufferSize)) {
-      // expected buf format where xxxx refers to a TLB shootdown value for a
+    for (std::string line; std::getline(file, line);) {
+      // expected line format where xxxx refers to a TLB shootdown value for a
       // core One value for one core. So, the number of values should match
       // cpuCount_
       //   TLB xxxx xxxx xxxx .... xxxx xxxx TLB shootdowns
-      if (strstr(buf, "TLB shootdowns")) {
-        std::istringstream ipStream(buf);
+      if (line.find("TLB shootdowns") != std::string::npos) {
+        std::istringstream ipStream(line);
         std::string word;
         int64_t tlbshootdowns = 0;
         size_t valueCount = 0;
@@ -101,13 +99,14 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
         }
       }
 
-      // expected buf format where xxxx refers to a eth0Intrp value for a core
+      // expected line format where xxxx refers to a eth0Intrp value for a core
       // One value for one core. So, the number of values should match cpuCount_
       //   IRQ#: xxxx xxxx xxxx .... xxxx xxxx PCI-MSI-edge eth0-#
       // In the some versions of kernel, PCI-MSI-edge part may be separated by a
       // space
-      if (strstr(buf, "eth0-") || strstr(buf, "mlx5_comp")) {
-        std::istringstream iss(buf);
+      if (line.find("eth0-") != std::string::npos ||
+          line.find("mlx5_comp") != std::string::npos) {
+        std::istringstream iss(line);
         std::string word;
         int64_t eth0IntrpRow = 0;
         size_t valueCount = 0;
@@ -125,7 +124,6 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
                        << " Expected: " << cpuCount_;
         }
       }
-      std::fill(std::begin(buf), std::end(buf), 0);
     }
 
     if (eth0IntrpsSum) {
@@ -135,8 +133,6 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
       stats.eth0IntrpsPrev = eth0IntrpsSum;
       stats.eth0Intrps = eth0Intrps;
     }
-
-    file.close();
   } catch (const std::exception& e) {
     LOG(ERROR) << "Error in reading the procfs interrupts file: " << fullPath
                << " Error: " << e.what();
