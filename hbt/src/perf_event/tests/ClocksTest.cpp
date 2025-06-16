@@ -7,9 +7,6 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/PerCpuCountSampleGenerator.h"
 #include "hbt/src/perf_event/PerCpuThreadSwitchGenerator.h"
-#include "hbt/src/ringbuffer/Consumer.h"
-#include "hbt/src/ringbuffer/Producer.h"
-#include "hbt/src/ringbuffer/RingBuffer.h"
 
 #include <gtest/gtest.h>
 
