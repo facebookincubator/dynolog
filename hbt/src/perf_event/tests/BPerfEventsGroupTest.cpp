@@ -7,9 +7,6 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <gtest/gtest.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <chrono>
 #include <thread>
 

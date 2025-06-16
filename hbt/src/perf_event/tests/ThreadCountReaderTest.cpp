@@ -8,7 +8,6 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <gtest/gtest.h>
-#include <sched.h>
 #include <chrono>
 
 using namespace facebook::hbt;
