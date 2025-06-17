@@ -518,6 +518,17 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   pmu_manager->addAliases(
       "llc_load_misses", std::vector<EventId>({"LLC-load-misses"}));
 
+  if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+    if (cpu_info.cpu_arch != CpuArch::MILAN) {
+      pmu_manager->addAliases(
+          "l2_fill_l3_resp", std::vector<EventId>({"llc-cache-misses-oncore"}));
+    }
+  } else {
+    pmu_manager->addAliases(
+        "llc_load_misses", std::vector<EventId>({"llc-cache-misses-oncore"}));
+  }
+
   // Alias for Intel
   if (cpu_info.cpu_family == CpuFamily::INTEL) {
     pmu_manager->addAliases(
