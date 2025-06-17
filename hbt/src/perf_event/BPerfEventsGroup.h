@@ -19,21 +19,6 @@ struct bperf_leader_cgroup;
 
 namespace facebook::hbt::perf_event {
 
-struct bperf_attr_map_elem {
-  __u32 perf_event_array_id;
-  __u32 leader_prog_link_id;
-  __u32 diff_reading_map_id;
-
-  __u32 global_output_map_id;
-  __u32 cgroup_output_map_id;
-
-  __u32 trigger_prog_id;
-
-  void loadFromSkelLink(
-      struct bperf_leader_cgroup* skel,
-      struct bpf_link* link);
-};
-
 class BPerfEventsGroup {
  public:
   static std::string perThreadArrayMapPath(const std::string& n);
@@ -93,11 +78,11 @@ class BPerfEventsGroup {
   std::map<__u64, std::shared_ptr<hbt::FdWrapper>> cgroup_fds_;
 
   std::vector<struct perf_event_attr> attrs_;
-  int leader_link_fd_ = -1;
-  int leader_prog_fd_ = -1;
+
   int trigger_prog_fd_ = -1;
   int global_output_fd_ = -1;
   int cgroup_output_fd_ = -1;
+  struct bpf_link* leader_link_ = nullptr;
 
   bool opened_ = false;
   bool enabled_ = false;
@@ -147,7 +132,7 @@ class BPerfEventsGroup {
       int fd,
       __u64 id) const;
 
-  int reloadSkel_(struct bperf_attr_map_elem* entry);
+  int reloadSkel_();
   int loadPerfEvent_(struct bperf_leader_cgroup* skel);
 
   static int syncCpu_(__u32 cpu, int leader_pd);
@@ -166,5 +151,6 @@ class BPerfEventsGroup {
   ::bpf_link* unregister_thread_link_ = nullptr;
   int per_thread_data_size_ = 0;
   ::bpf_link* pmu_enable_exit_link_ = nullptr;
+  struct bperf_leader_cgroup* skel_ = nullptr;
 };
 } // namespace facebook::hbt::perf_event

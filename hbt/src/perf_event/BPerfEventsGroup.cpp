@@ -151,9 +151,14 @@ bool BPerfEventsGroup::removeCgroup(__u64 id) {
 }
 
 bool BPerfEventsGroup::disable() {
+  if (!enabled_) {
+    return false;
+  }
   syncGlobal_();
-  ::close(leader_link_fd_);
-  leader_link_fd_ = -1;
+  if (::bpf_link__destroy(leader_link_) != 0) {
+    HBT_LOG_WARNING() << "Failed to destroy leader link";
+  }
+  leader_link_ = nullptr;
   for (auto& fd : pe_fds_) {
     ::ioctl(fd, PERF_EVENT_IOC_DISABLE, 0);
   }
@@ -167,45 +172,24 @@ bool BPerfEventsGroup::open() {
     return true;
   }
   HBT_LOG_INFO() << "Loading leader program.";
-  struct bperf_attr_map_elem entry = {};
-  int err = reloadSkel_(&entry);
+  int err = reloadSkel_();
   if (err < 0) {
     HBT_LOG_ERROR() << "Failed to load leader program.";
     return false;
   }
-  leader_prog_fd_ =
-      ::bpf_prog_get_fd_by_id(bpf_link_get_prog_id(leader_link_fd_));
-  HBT_DCHECK(leader_link_fd_ >= 0);
   HBT_DCHECK(global_output_fd_ >= 0);
   HBT_DCHECK(cgroup_output_fd_ >= 0);
-  HBT_DCHECK(leader_prog_fd_ >= 0);
   opened_ = true;
   return true;
 }
 
 void BPerfEventsGroup::close() {
-  ::close(leader_link_fd_);
-  leader_link_fd_ = -1;
-  ::close(leader_prog_fd_);
-  leader_prog_fd_ = -1;
-  ::close(trigger_prog_fd_);
-  trigger_prog_fd_ = -1;
-  ::close(cgroup_output_fd_);
-  cgroup_output_fd_ = -1;
-  ::close(global_output_fd_);
-  global_output_fd_ = -1;
   for (auto& fd : pe_fds_) {
     ::close(fd);
     fd = -1;
   }
-  // Close the perf event fds before destroying the links for per thread
-  // monitoring. This will help the reader detect the lead has exited.
-  ::bpf_link__destroy(register_thread_link_);
-  register_thread_link_ = nullptr;
-  ::bpf_link__destroy(unregister_thread_link_);
-  unregister_thread_link_ = nullptr;
-  ::bpf_link__destroy(pmu_enable_exit_link_);
-  pmu_enable_exit_link_ = nullptr;
+  ::bperf_leader_cgroup__destroy(skel_);
+  skel_ = nullptr;
   opened_ = false;
 }
 
@@ -238,12 +222,12 @@ bool BPerfEventsGroup::isOpen() const {
     ::ioctl(fd, PERF_EVENT_IOC_ENABLE, 0);
   }
 
-  if (leader_link_fd_ < 0) {
-    leader_link_fd_ =
-        bpf_link_create(leader_prog_fd_, 0, BPF_TRACE_RAW_TP, nullptr);
+  leader_link_ = ::bpf_program__attach(skel_->progs.bperf_on_sched_switch);
+  if (!leader_link_) {
+    HBT_LOG_WARNING()
+        << "Failed to attach leader prog to ctx switch tracepoint";
+    return false;
   }
-
-  HBT_DCHECK(leader_link_fd_ >= 0);
   // set proper offset_
   ::memset(offsets_, 0, sizeof(offsets_));
   enabled_ = true;
@@ -277,88 +261,54 @@ void BPerfEventsGroup::syncGlobal_() const {
   }
 }
 
-void bperf_attr_map_elem::loadFromSkelLink(
-    struct bperf_leader_cgroup* skel,
-    struct bpf_link* link) {
-  auto fd = ::bpf_map__fd(skel->maps.events);
-
-  perf_event_array_id = bpf_map_get_id(fd);
-  fd = ::bpf_link__fd(link);
-  leader_prog_link_id = bpf_link_get_id(fd);
-  bpf_map__fd(skel->maps.diff_readings);
-  diff_reading_map_id = bpf_map_get_id(fd);
-  fd = ::bpf_map__fd(skel->maps.global_output);
-  global_output_map_id = bpf_map_get_id(fd);
-  fd = ::bpf_map__fd(skel->maps.cgroup_output);
-  cgroup_output_map_id = bpf_map_get_id(fd);
-  fd = ::bpf_program__fd(skel->progs.bperf_read_trigger);
-  trigger_prog_id = bpf_prog_get_id(fd);
-}
-
-[[nodiscard]] int BPerfEventsGroup::reloadSkel_(
-    struct bperf_attr_map_elem* entry) {
-  struct bperf_leader_cgroup* skel = bperf_leader_cgroup__open();
+[[nodiscard]] int BPerfEventsGroup::reloadSkel_() {
+  skel_ = bperf_leader_cgroup__open();
   int event_cnt = confs_.size();
-  ::bpf_link* link;
   int err;
 
-  if (skel == nullptr) {
+  if (skel_ == nullptr) {
     HBT_LOG_ERROR() << "Failed to open skeleton.";
     return -1;
   }
 
-  ::bpf_map__set_max_entries(skel->maps.events, cpu_cnt_ * event_cnt);
+  ::bpf_map__set_max_entries(skel_->maps.events, cpu_cnt_ * event_cnt);
 
   per_thread_data_size_ = sizeof(struct bperf_thread_data) +
       sizeof(struct bperf_perf_event_data) * event_cnt;
   /* roundup to 64 byte aligned */
   per_thread_data_size_ = bperf_roundup(per_thread_data_size_, 64);
-  ::bpf_map__set_value_size(skel->maps.per_thread_data, per_thread_data_size_);
+  ::bpf_map__set_value_size(skel_->maps.per_thread_data, per_thread_data_size_);
 
-  skel->bss->cpu_cnt = cpu_cnt_;
-  skel->rodata->event_cnt = event_cnt;
-  skel->rodata->task_counting_enabled = per_thread_ ? 1 : 0;
-  skel->bss->cgroup_update_level = cgroup_update_level_;
+  skel_->bss->cpu_cnt = cpu_cnt_;
+  skel_->rodata->event_cnt = event_cnt;
+  skel_->rodata->task_counting_enabled = per_thread_ ? 1 : 0;
+  skel_->bss->cgroup_update_level = cgroup_update_level_;
 
   if (!per_thread_) {
-    bpf_program__set_autoload(skel->progs.bperf_register_thread, false);
-    bpf_program__set_autoload(skel->progs.bperf_unregister_thread, false);
-    bpf_program__set_autoload(skel->progs.bperf_pmu_enable_exit, false);
-    bpf_program__set_autoload(skel->progs.find_perf_events, false);
+    bpf_program__set_autoload(skel_->progs.bperf_register_thread, false);
+    bpf_program__set_autoload(skel_->progs.bperf_unregister_thread, false);
+    bpf_program__set_autoload(skel_->progs.bperf_pmu_enable_exit, false);
+    bpf_program__set_autoload(skel_->progs.find_perf_events, false);
   }
-  if (err = bperf_leader_cgroup__load(skel); err) {
+  if (err = bperf_leader_cgroup__load(skel_); err) {
     HBT_LOG_ERROR() << "Failed to load skeleton.";
     return err;
   }
 
-  link = ::bpf_program__attach(skel->progs.bperf_on_sched_switch);
-  if (!link) {
-    HBT_LOG_ERROR() << "Failed to attach leader program";
-    err = -1;
-    goto out;
-  }
+  trigger_prog_fd_ = ::bpf_program__fd(skel_->progs.bperf_read_trigger);
+  global_output_fd_ = ::bpf_map__fd(skel_->maps.global_output);
+  cgroup_output_fd_ = ::bpf_map__fd(skel_->maps.cgroup_output);
 
-  // fill the attr build map
-  entry->loadFromSkelLink(skel, link);
-
-  // open another fd to the link and the output map, so we can destroy the skel
-  leader_link_fd_ = ::bpf_link_get_fd_by_id(entry->leader_prog_link_id);
-  trigger_prog_fd_ = ::bpf_prog_get_fd_by_id(entry->trigger_prog_id);
-  global_output_fd_ = ::bpf_map_get_fd_by_id(entry->global_output_map_id);
-  cgroup_output_fd_ = ::bpf_map_get_fd_by_id(entry->cgroup_output_map_id);
-
-  err = loadPerfEvent_(skel);
+  err = loadPerfEvent_(skel_);
   if (err != 0) {
     HBT_LOG_ERROR() << "Failed to load perf events";
   }
 
   if (per_thread_) {
-    preparePerThreadBPerf_(skel);
+    preparePerThreadBPerf_(skel_);
   }
-out:
-  bperf_leader_cgroup__destroy(skel);
-  ::bpf_link__destroy(link);
-  return err;
+
+  return 0;
 }
 
 int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
