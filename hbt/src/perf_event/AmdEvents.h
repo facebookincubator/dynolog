@@ -147,6 +147,8 @@ constexpr PmuMsr kL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0x1f}};
 constexpr PmuMsr kL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0x1f}};
+constexpr PmuMsr kL2FillL3Responses{
+    .amdCore = {.event = 0x165, .unitMask = 0xfe}};
 // L2 and L1 Prefetcher misses
 constexpr PmuMsr kL1AndL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0xff}};
@@ -533,10 +535,6 @@ constexpr PmuMsr kDfZen4CxlWriteBeatsCmp3{
     }};
 
 } // namespace amd_msr
-
-namespace milan {
-void addEvents(PmuDeviceManager& pmu_manager);
-}
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager);
 

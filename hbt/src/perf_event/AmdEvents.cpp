@@ -11,6 +11,7 @@
 namespace facebook::hbt::perf_event {
 
 namespace milan {
+
 void addEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
@@ -173,9 +174,37 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "Dram_Near. Read-write. The number of sampled L3 cache fill requests from another NUMA node and return from another CCX's cache."),
       std::vector<EventId>({"zen4-l3-xi-sampled-ccx-latency-requests-far"}));
 }
+
 } // namespace milan
 
+namespace bergamo {
+
+void addEvents(PmuDeviceManager& pmu_manager) {
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l2_fill_l3_resp",
+          EventDef::Encoding{.code = amd_msr::kL2FillL3Responses.val},
+          "L2 cache fill L3 responses.",
+          "L2 cache fill L3 responses. Count all L3 responses to fill requests."),
+      std::vector<EventId>({"l2-fill-l3-resp"}));
+}
+
+} // namespace bergamo
+
 namespace turin {
+
+void addEvents(PmuDeviceManager& pmu_manager) {
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l2_fill_l3_resp",
+          EventDef::Encoding{.code = amd_msr::kL2FillL3Responses.val},
+          "L2 cache fill L3 responses.",
+          "L2 cache fill L3 responses. Count all L3 responses to fill requests."),
+      std::vector<EventId>({"l2-fill-l3-resp"}));
+}
+
 void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
@@ -202,6 +231,7 @@ void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
           "Total number of DRAM bus channel cycles."),
       std::vector<EventId>({"zen5-umc-write-cycles"}));
 }
+
 } // namespace turin
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
@@ -209,13 +239,25 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // to addEvents in json_events/generated/intel/JsonEvents.h
   switch (cpu_info.cpu_arch) {
     case CpuArch::MILAN:
+      milan::addEvents(pmu_manager);
+#ifdef FACEBOOK
+      milan::addEventsFb(pmu_manager);
+#endif
+      break;
     case CpuArch::BERGAMO:
     case CpuArch::GENOA:
+      milan::addEvents(pmu_manager);
+#ifdef FACEBOOK
+      milan::addEventsFb(pmu_manager);
+#endif
+      bergamo::addEvents(pmu_manager);
+      break;
     case CpuArch::TURIN:
       milan::addEvents(pmu_manager);
 #ifdef FACEBOOK
       milan::addEventsFb(pmu_manager);
 #endif
+      turin::addEvents(pmu_manager);
       break;
     default:
       HBT_LOG_ERROR()
