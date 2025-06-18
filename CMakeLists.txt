@@ -1,7 +1,8 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
-cmake_minimum_required(VERSION 3.16 LANGUAGE CXX)
+cmake_minimum_required(VERSION 3.16)
 
-project(Dynolog VERSION 1.0)
+cmake_policy(SET CMP0079 NEW)
+project(Dynolog VERSION 1.0 LANGUAGES CXX)
 option(BUILD_TESTS "Build the unit tests" ON)
 option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
 OFF)
@@ -44,7 +45,7 @@ endif()
 include_directories(".")
 add_subdirectory(dynolog)
 add_subdirectory(cli)
-# The following dummy depdendency ensures the cli is built
+# The following dummy dependency ensures the cli is built
 add_dependencies(dynolog_lib dyno)
 add_subdirectory(hbt)
 
