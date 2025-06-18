@@ -8,8 +8,8 @@
 #include <cstdint>
 #include <map>
 
-namespace dynolog {
-namespace rdmamon {
+
+namespace dynolog::rdmamon {
 
 bool RdmaCounters::setupRdmaCounters() {
   const std::vector<std::string> rdma_port_counters_ = {
@@ -70,5 +70,5 @@ bool RdmaCounters::sampleRdmaCounters(
   return true;
 }
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon
+

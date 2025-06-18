@@ -53,7 +53,7 @@ TEST(IPCMonitorTest, LibkinetoRegisterAndOndemandTest) {
     // Construct OnDemand Request object to send through the manager
     std::vector<int32_t> pids{processId()};
     int size = pids.size();
-    LibkinetoRequest* req = (LibkinetoRequest*)malloc(
+    auto* req = (LibkinetoRequest*)malloc(
         sizeof(LibkinetoRequest) + sizeof(int32_t) * size);
 
     req->type = int(LibkinetoConfigType::ACTIVITIES);

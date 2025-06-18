@@ -93,7 +93,7 @@ void kernel_monitor_loop() {
   LOG(INFO) << "Running kernel monitor loop : interval = "
             << FLAGS_kernel_monitor_reporting_interval_s << " s.";
 
-  while (1) {
+  while (true) {
     auto logger = getLogger();
     auto wakeup_timepoint =
         next_wakeup(FLAGS_kernel_monitor_reporting_interval_s);
@@ -117,7 +117,7 @@ void perf_monitor_loop() {
   LOG(INFO) << "Running perf monitor loop : interval = "
             << FLAGS_perf_monitor_reporting_interval_s << " s.";
 
-  while (1) {
+  while (true) {
     auto logger = getLogger();
     auto wakeup_timepoint =
         next_wakeup(FLAGS_perf_monitor_reporting_interval_s);
@@ -143,7 +143,7 @@ void gpu_monitor_loop(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm) {
             << FLAGS_dcgm_reporting_interval_s << " s.";
   LOG(INFO) << "DCGM fields: " << gpumon::FLAGS_dcgm_fields;
 
-  while (1) {
+  while (true) {
     auto wakeup_timepoint = next_wakeup(FLAGS_dcgm_reporting_interval_s);
 
     dcgm->update();
@@ -156,7 +156,7 @@ void gpu_monitor_loop(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm) {
 
 int main(int argc, char** argv) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
-  FLAGS_logtostderr = 1;
+  FLAGS_logtostderr = true;
   google::InitGoogleLogging(argv[0]);
 
   LOG(INFO) << "Starting dynolog, version = " DYNOLOG_VERSION

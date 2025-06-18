@@ -54,7 +54,7 @@ struct dcgmApi {
   dcgmReturn_t (*dcgmFieldGroupDestroy)(
       dcgmHandle_t dcgmHandle,
       dcgmFieldGrp_t dcgmFieldGroupId);
-  dcgmReturn_t (*dcgmInit)(void);
+  dcgmReturn_t (*dcgmInit)();
   dcgmReturn_t (*dcgmStartEmbedded)(
       dcgmOperationMode_t opMode,
       dcgmHandle_t* pDcgmHandle);
@@ -83,7 +83,7 @@ struct dcgmApi {
       dcgmFieldGrp_t fieldGroupId,
       dcgmFieldValueEntityEnumeration_f enumCB,
       void* userData);
-  dcgmReturn_t (*dcgmShutdown)(void);
+  dcgmReturn_t (*dcgmShutdown)();
   dcgmReturn_t (*dcgmStopEmbedded)(dcgmHandle_t pDcgmHandle);
   dcgmReturn_t (*dcgmProfGetSupportedMetricGroups)(
       dcgmHandle_t pDcgmHandle,

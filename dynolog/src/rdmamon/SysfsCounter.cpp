@@ -7,8 +7,7 @@
 
 // @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror
 
-namespace dynolog {
-namespace rdmamon {
+namespace dynolog::rdmamon {
 
 bool SysfsCounter::openSysfsCounter() {
   fd_ = open(path_.c_str(), O_RDONLY);
@@ -24,5 +23,4 @@ std::optional<uint64_t> SysfsCounter::getSysfsCounter() {
   return get_current_sysfs_counters_();
 }
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon

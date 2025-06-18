@@ -372,13 +372,13 @@ TEST_F(IntelPTMonitorTest, SystemWideTraceCopy) {
 
     auto& cpuTraceBuffer = it->second.data;
 
-    const uint8_t* byte_ptr1 = static_cast<const uint8_t*>(rb.first.from);
+    const auto* byte_ptr1 = static_cast<const uint8_t*>(rb.first.from);
 
     std::vector<uint8_t> sink;
     sink.insert(sink.end(), byte_ptr1, byte_ptr1 + rb.first.size);
 
     if (rb.second.has_value()) {
-      const uint8_t* byte_ptr2 = static_cast<const uint8_t*>(rb.second->from);
+      const auto* byte_ptr2 = static_cast<const uint8_t*>(rb.second->from);
       sink.insert(sink.end(), byte_ptr2, byte_ptr2 + rb.second->size);
     }
     ASSERT_EQ(sink, cpuTraceBuffer);

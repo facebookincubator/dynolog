@@ -5,8 +5,7 @@
 
 #include "dynolog/src/rdmamon/RdmaMonitor.h"
 
-namespace dynolog {
-namespace rdmamon {
+namespace dynolog::rdmamon {
 
 bool RdmaPortMonitor::setupRdmaPortMonitor() {
   bool r1 = eth_counters_->setupEthtoolCounters();
@@ -15,7 +14,7 @@ bool RdmaPortMonitor::setupRdmaPortMonitor() {
 }
 
 bool RdmaPortMonitor::sampleRdmaPortMonitor(
-    std::map<std::string, int64_t>& rdmaPortCounterMap) {
+    std::map<std::string, int64_t> &rdmaPortCounterMap) {
   bool r1 = eth_counters_->sampleEthtoolCounters(rdmaPortCounterMap);
   bool r2 = rdma_counters_->sampleRdmaCounters(rdmaPortCounterMap);
   return (r1 && r2);
@@ -23,7 +22,7 @@ bool RdmaPortMonitor::sampleRdmaPortMonitor(
 
 bool RdmaMonitor::setupRdmaMonitor() {
   bool ret = true;
-  for (auto const& monitor : monitors_) {
+  for (auto const &monitor : monitors_) {
     if (!monitor->setupRdmaPortMonitor()) {
       LOG(ERROR) << "Unable to setup RDMA monitor for "
                  << monitor->getRdmaIfname();
@@ -34,9 +33,9 @@ bool RdmaMonitor::setupRdmaMonitor() {
 }
 
 bool RdmaMonitor::sampleRdmaMonitor(
-    std::map<std::string, int64_t>& rdmaCounterMap) {
+    std::map<std::string, int64_t> &rdmaCounterMap) {
   bool ret = true;
-  for (auto const& monitor : monitors_) {
+  for (auto const &monitor : monitors_) {
     if (!monitor->sampleRdmaPortMonitor(rdmaCounterMap)) {
       LOG(ERROR) << "Unable to sample RDMA monitor for "
                  << monitor->getRdmaIfname();
@@ -46,5 +45,4 @@ bool RdmaMonitor::sampleRdmaMonitor(
   return ret;
 }
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon

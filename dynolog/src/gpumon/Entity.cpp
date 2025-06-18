@@ -51,7 +51,7 @@ int getLatestDcgmValueCB(
     return DCGM_ST_BADPARAM;
   }
 
-  cbData* data = (cbData*)userData;
+  auto* data = (cbData*)userData;
 
   /**
    * If there's no data yet, status of the first record will be

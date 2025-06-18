@@ -63,7 +63,7 @@ std::pair<std::error_code, std::vector<unsigned char>> readProcFsByteStr(
       ::close(fd);
       return {toErrorCode(errno), {}};
     }
-    size_t delta = static_cast<size_t>(r);
+    auto delta = static_cast<size_t>(r);
     offset += delta;
     if (r < read_size) {
       ::close(fd);
@@ -221,7 +221,7 @@ CpuSet makeCpuSet(std::optional<cpu_set_t> cpus) {
 
   if (!cpus.has_value()) {
     // if no value is passed, then use all online CPUs.
-    return CpuSet(online_cpus, max_cpu_id_online, max_cpu_id_online);
+    return {online_cpus, max_cpu_id_online, max_cpu_id_online};
   }
 
   // cpus are provided, use them.
@@ -235,7 +235,7 @@ CpuSet makeCpuSet(std::optional<cpu_set_t> cpus) {
     }
   }
 
-  return CpuSet(*cpus, max_cpu_id, max_cpu_id_online);
+  return {*cpus, max_cpu_id, max_cpu_id_online};
 }
 
 CpuSet CpuSet::makeAllOnline() {

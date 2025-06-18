@@ -9,7 +9,7 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
-#include <stdio.h>
+#include <cstdio>
 #include <sys/socket.h>
 #include <cerrno>
 #include "hbt/src/common/System.h"

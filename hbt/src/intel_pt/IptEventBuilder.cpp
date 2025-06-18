@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <limits>
 #include <string>
+#include <utility>
 
 namespace facebook::hbt::intel_pt {
 
@@ -293,15 +294,15 @@ IptEventBuilder& IptEventBuilder::setTsc(bool enable) {
 
 IptEventBuilder::IptEventBuilder(
     uint32_t perfType,
-    const PmuDevice::SysFsDeviceFormat& format,
-    const PmuDevice::SysFsDeviceCaps& caps)
-    : format_{format}, caps_{caps}, perfType_{perfType} {
+    PmuDevice::SysFsDeviceFormat  format,
+    PmuDevice::SysFsDeviceCaps  caps)
+    : format_{std::move(format)}, caps_{std::move(caps)}, perfType_{perfType} {
   setPt(true);
 }
 
 std::optional<PmuDevice::FormatAttr> IptEventBuilder::getFormatAttr(
     const std::string& key) const {
-  PmuDevice::SysFsDeviceFormat::const_iterator it = format_.find(key);
+  auto it = format_.find(key);
   if (it != format_.end()) {
     return it->second;
   }

@@ -5,7 +5,7 @@
 
 #include "dynolog/src/tracing/IPCMonitor.h"
 #include <glog/logging.h>
-#include <string.h>
+#include <cstring>
 #include <unistd.h>
 #include <cstdint>
 #include <ostream>
@@ -16,8 +16,8 @@
 #include "dynolog/src/LibkinetoConfigManager.h"
 #include "dynolog/src/ipcfabric/Utils.h"
 
-namespace dynolog {
-namespace tracing {
+
+namespace dynolog::tracing {
 
 constexpr int kSleepUs = 10000;
 const std::string kLibkinetoRequest = "req";
@@ -71,7 +71,7 @@ void IPCMonitor::getLibkinetoOnDemandRequest(
     return;
   }
   std::string ret_config;
-  ipcfabric::LibkinetoRequest* req =
+  auto* req =
       (ipcfabric::LibkinetoRequest*)msg->buf.get();
   if (req->n == 0) {
     LOG(ERROR) << "Missing pids parameter for type " << req->type;
@@ -102,7 +102,7 @@ void IPCMonitor::registerLibkinetoContext(
     LOG(ERROR) << "Fabric Manager not initialized";
     return;
   }
-  ipcfabric::LibkinetoContext* ctxt =
+  auto* ctxt =
       (ipcfabric::LibkinetoContext*)msg->buf.get();
   int32_t size = -1;
   try {
@@ -121,5 +121,5 @@ void IPCMonitor::registerLibkinetoContext(
   return;
 }
 
-} // namespace tracing
-} // namespace dynolog
+} // namespace dynolog::tracing
+
