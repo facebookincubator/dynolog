@@ -13,6 +13,7 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <chrono>
+#include <utility>
 
 namespace dynolog {
 #ifdef USE_GRAPH_ENDPOINT
@@ -24,8 +25,8 @@ DEFINE_string(
     "perfpipe_fair_cluster_gpu_stats",
     "The scribe category name for scuba logging");
 
-ScubaLogger::ScubaLogger(const std::string& scribe_category)
-    : scribe_category_(scribe_category),
+ScubaLogger::ScubaLogger(std::string  scribe_category)
+    : scribe_category_(std::move(scribe_category)),
       hostname_(facebook::hbt::getHostName()) {}
 
 void ScubaLogger::logInt(const std::string& key, int64_t val) {

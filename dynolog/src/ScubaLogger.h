@@ -13,7 +13,7 @@ DECLARE_string(scribe_category);
 
 class ScubaLogger final : public Logger {
  public:
-  explicit ScubaLogger(const std::string& scribe_category);
+  explicit ScubaLogger(std::string  scribe_category);
   void setTimestamp(Timestamp ts) override {
     ts_ = ts;
   }

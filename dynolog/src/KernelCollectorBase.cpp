@@ -6,12 +6,13 @@
 #include "dynolog/src/KernelCollectorBase.h"
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <utility>
 #include <vector>
 
 DEFINE_bool(
@@ -31,9 +32,9 @@ namespace dynolog {
 //   2. Must not use Meta specific infrastructure.
 //   3. Try to leverage std:: instead of folly:: library.
 
-KernelCollectorBase::KernelCollectorBase(const std::string& rootDir)
+KernelCollectorBase::KernelCollectorBase(std::string  rootDir)
     : uptime_(readUptime()),
-      rootDir_(rootDir),
+      rootDir_(std::move(rootDir)),
       pfs_(rootDir_ + "/proc"),
       numCpuSockets_(1), // TODO discover sockets from /proc/cpuinfo
       cpuCoresTotal_(pfs_.get_stat().cpus.per_item.size()),

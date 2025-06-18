@@ -582,7 +582,7 @@ std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
       continue;
     }
     for_each_cpu_set_t(cpu, device->getCpuMask().value()) {
-      perf_pmu_group.push_back(TPerfPmuDevice{cpu, device});
+      perf_pmu_group.emplace_back(cpu, device);
     }
   }
   return perf_pmu_group;

@@ -2,7 +2,7 @@
 
 #include "dynolog/src/gpumon/Utils.h"
 #include <glog/logging.h>
-#include <stdio.h>
+#include <cstdio>
 #include <sys/types.h>
 #include <fstream>
 #include <optional>

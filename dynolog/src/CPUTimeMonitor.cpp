@@ -3,22 +3,26 @@
 #include "dynolog/src/CPUTimeMonitor.h"
 #include <dynolog/src/metric_frame/MetricFrameTsUnit.h>
 
-#define IDX_MIN 0
-#define IDX_SEC 1
-#define IDX_HUNDRED_MS 2
+#include <utility>
 
-namespace facebook {
-namespace dynolog {
+enum {
+IDX_MIN = 0,
+IDX_SEC = 1,
+IDX_HUNDRED_MS = 2
+};
+
+
+namespace facebook::dynolog {
 
 constexpr int kRingbufferSizeMinutes = 6;
 
 CPUTimeMonitor::CPUTimeMonitor(
     std::shared_ptr<TTicker> ticker,
-    const std::string& rootDir,
+    std::string  rootDir,
     uint64_t coreCount,
     bool isUnitTest)
     : MonitorBase<TTicker>(std::move(ticker), "CPUTimeMonitor", {1.0}),
-      rootDir_(rootDir),
+      rootDir_(std::move(rootDir)),
       coreCount_(coreCount),
       isUnitTest_(isUnitTest),
       CPUTimeMetricFrames_(
@@ -341,5 +345,5 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
   }
   return ret;
 }
-} // namespace dynolog
-} // namespace facebook
+} // namespace facebook::dynolog
+

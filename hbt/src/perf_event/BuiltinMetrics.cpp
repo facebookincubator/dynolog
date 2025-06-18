@@ -24,7 +24,7 @@
 
 namespace facebook::hbt::perf_event {
 
-typedef std::pair<std::string, HwCacheEventInfo> HwCacheEventInfoMap;
+using HwCacheEventInfoMap = std::pair<std::string, HwCacheEventInfo>;
 
 const static std::vector<HwCacheEventInfoMap> kHWCacheTypes = {
     {"l1_dcache",

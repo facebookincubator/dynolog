@@ -125,8 +125,8 @@ class IptEventBuilder {
   // respectively.
   IptEventBuilder(
       uint32_t perfType,
-      const perf_event::PmuDevice::SysFsDeviceFormat& format,
-      const perf_event::PmuDevice::SysFsDeviceCaps& caps);
+      perf_event::PmuDevice::SysFsDeviceFormat  format,
+      perf_event::PmuDevice::SysFsDeviceCaps  caps);
 
   // Check if format exists identified by key.
   std::optional<perf_event::PmuDevice::FormatAttr> getFormatAttr(

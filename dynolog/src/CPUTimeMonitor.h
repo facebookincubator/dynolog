@@ -38,7 +38,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
-      const std::string& rootDir = "",
+      std::string  rootDir = "",
       uint64_t coreCount = std::thread::hardware_concurrency(),
       bool isUnitTest = false);
 

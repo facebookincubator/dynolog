@@ -84,7 +84,7 @@ class SimpleJsonClientTest : public ::testing::Test {
     port_ = server_->getPort();
 
     thread_ = std::make_unique<std::thread>([this]() {
-      while (1) {
+      while (true) {
         std::unique_lock lk(mutex_);
         rpc_ready_.wait(lk);
         if (!run_) {

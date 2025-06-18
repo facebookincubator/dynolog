@@ -17,7 +17,7 @@ DEFINE_string(host_ip, "::1", "Host ipv6 address.");
 int main(int argc, char** argv) {
   google::InitGoogleLogging(argv[0]);
   gflags::ParseCommandLineFlags(&argc, &argv, true);
-  FLAGS_logtostderr = 1;
+  FLAGS_logtostderr = true;
 
   auto client = dynolog::SimpleJsonServerClient(FLAGS_host_ip, FLAGS_port);
   if (!client.initSuccessful()) {

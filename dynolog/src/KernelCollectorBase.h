@@ -19,7 +19,7 @@ namespace dynolog {
  */
 class KernelCollectorBase {
  public:
-  explicit KernelCollectorBase(const std::string& rootDir = "");
+  explicit KernelCollectorBase(std::string  rootDir = "");
 
   time_t readUptime();
 
