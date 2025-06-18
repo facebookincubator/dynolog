@@ -87,3 +87,15 @@ target_link_libraries(PerCpuDummyGenerator PUBLIC System)
 
 add_library(PerCpuTraceAuxGenerator PerCpuTraceAuxGenerator.h)
 target_link_libraries(PerCpuTraceAuxGenerator PUBLIC PerCpuSampleGeneratorBase)
+set_target_properties(
+  PerfEventsGroup
+  PerPerfEventsGroupBase
+  PerCpuBase
+  PerCpuSampleGeneratorBase
+  PerCpuCountReader
+  ThreadCountReader
+  PerCpuCountSampleGenerator
+  PerCpuThreadSwitchGenerator
+  PerCpuDummyGenerator
+  PerCpuTraceAuxGenerator
+  PROPERTIES LINKER_LANGUAGE CXX)
