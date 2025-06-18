@@ -70,15 +70,11 @@ target_link_libraries(PerCpuSampleGeneratorBase PUBLIC PerCpuBase)
 add_library(PerCpuCountSampleGenerator PerCpuCountSampleGenerator.h)
 target_link_libraries(PerCpuCountSampleGenerator PUBLIC
     PerCpuSampleGeneratorBase)
-target_link_libraries(PerCpuCountSampleGenerator PUBLIC PerCpuRingBuffer)
-target_link_libraries(PerCpuCountSampleGenerator PUBLIC Event)
 
 add_library(PerCpuThreadSwitchGenerator PerCpuThreadSwitchGenerator.h)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC
     PerCpuSampleGeneratorBase)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC PerCpuRingBuffer)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ProcFsHelpers)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC Event)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ValueTimeSeries)
 
 add_library(PerCpuDummyGenerator PerCpuDummyGenerator.h)
