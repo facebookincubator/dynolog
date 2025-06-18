@@ -39,7 +39,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE True)
 
 if(BUILD_TESTS)
   enable_testing()
-  add_subdirectory("third_party/googletest" "third_party/googletest")
+  add_subdirectory(third_party/googletest)
 endif()
 
 include_directories(".")
