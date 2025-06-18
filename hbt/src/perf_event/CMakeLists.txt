@@ -40,12 +40,12 @@ target_link_libraries(Metrics PUBLIC CpuArch)
 add_library(BuiltinMetrics BuiltinMetrics.h BuiltinMetrics.cpp)
 target_link_libraries(BuiltinMetrics
                         PUBLIC AmdEvents
-                        PUBLIC ArmEvents
-                        PUBLIC PmuDevices
-                        PUBLIC System
-                        PUBLIC IptEventBuilder
-                        PUBLIC Metrics
-                        PUBLIC CpuArch)
+                        ArmEvents
+                        PmuDevices
+                        System
+                        IptEventBuilder
+                        Metrics
+                        CpuArch)
 if(USE_JSON_GENERATED_PERF_EVENTS)
   target_link_libraries(BuiltinMetrics PUBLIC JsonEvents)
 endif()
@@ -74,8 +74,6 @@ target_link_libraries(PerCpuCountSampleGenerator PUBLIC
 add_library(PerCpuThreadSwitchGenerator PerCpuThreadSwitchGenerator.h)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC
     PerCpuSampleGeneratorBase)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ProcFsHelpers)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ValueTimeSeries)
 
 add_library(PerCpuDummyGenerator PerCpuDummyGenerator.h)
 target_link_libraries(PerCpuDummyGenerator PUBLIC PerCpuSampleGeneratorBase)
