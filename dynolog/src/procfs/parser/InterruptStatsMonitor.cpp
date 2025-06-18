@@ -1,6 +1,10 @@
 #include "dynolog/src/procfs/parser/InterruptStatsMonitor.h"
 
 #include <filesystem>
+#include <string>
+#include <vector>
+
+#include "dynolog/src/String.h"
 
 namespace facebook {
 namespace dynolog {
@@ -70,11 +74,10 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
       // cpuCount_
       //   TLB xxxx xxxx xxxx .... xxxx xxxx TLB shootdowns
       if (line.find("TLB shootdowns") != std::string::npos) {
-        std::istringstream ipStream(line);
-        std::string word;
+        const std::vector<std::string> words = split(line, ' ');
         int64_t tlbshootdowns = 0;
         size_t valueCount = 0;
-        while (ipStream >> word) {
+        for (const auto& word : words) {
           if (std::all_of(word.begin(), word.end(), ::isdigit)) {
             int64_t tlbshootdown = std::stoll(word);
             tlbshootdowns += tlbshootdown;
@@ -99,11 +102,10 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
       // space
       if (line.find("eth0-") != std::string::npos ||
           line.find("mlx5_comp") != std::string::npos) {
-        std::istringstream iss(line);
-        std::string word;
+        const std::vector<std::string> words = split(line, ' ');
         int64_t eth0IntrpRow = 0;
         size_t valueCount = 0;
-        while (iss >> word) {
+        for (const auto& word : words) {
           if (std::all_of(word.begin(), word.end(), ::isdigit)) {
             int64_t eth0Intrp = std::stoll(word);
             eth0IntrpRow += eth0Intrp;
