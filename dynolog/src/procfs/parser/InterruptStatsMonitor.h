@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <fstream>
 #include <memory>
 #include <shared_mutex>
 
@@ -23,9 +24,9 @@ struct InterruptStats {
 // 1sec intervals
 class InterruptStatsMonitor : MonitorBase<Ticker<60000, 1000, 1, 2>> {
  private:
-  std::string const rootDir_;
   int16_t cpuCount_;
   std::shared_mutex dataLock_;
+  std::ifstream procInterrupts_;
   InterruptStats stats{};
   InterruptStats statsAtMinuteTick_{};
   InterruptStats statsAtSecondTick_{};

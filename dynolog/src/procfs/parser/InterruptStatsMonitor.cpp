@@ -1,7 +1,6 @@
 #include "dynolog/src/procfs/parser/InterruptStatsMonitor.h"
 
 #include <filesystem>
-#include <fstream>
 
 namespace facebook {
 namespace dynolog {
@@ -12,7 +11,7 @@ InterruptStatsMonitor::InterruptStatsMonitor(
     std::shared_ptr<TTicker> ticker,
     const std::string& rootDir)
     : MonitorBase<TTicker>(std::move(ticker), "InterruptStatsMonitor", {}),
-      rootDir_(rootDir) {
+      procInterrupts_(rootDir + "/proc/interrupts") {
   cpuCount_ = (int)sysconf(_SC_NPROCESSORS_CONF);
 }
 
@@ -55,23 +54,17 @@ void InterruptStatsMonitor::tick(TMask mask) {
 }
 
 InterruptStats InterruptStatsMonitor::interruptsRefresh() {
-  std::string fullPath = rootDir_ + "/proc/interrupts";
-
   int64_t eth0IntrpsSum = 0, eth0Intrps;
   stats.eth0Intrps = 0;
 
   try {
-    if (!std::filesystem::exists(fullPath)) {
-      LOG(ERROR) << "Path " << fullPath << " does not exist";
+    if (!procInterrupts_.is_open()) {
       return stats;
     }
-    std::ifstream file(fullPath);
-    if (!file.is_open()) {
-      LOG(ERROR) << "Failed to open the file  " << fullPath;
-      return stats;
-    }
+    procInterrupts_.clear();
+    procInterrupts_.seekg(0);
 
-    for (std::string line; std::getline(file, line);) {
+    for (std::string line; std::getline(procInterrupts_, line);) {
       // expected line format where xxxx refers to a TLB shootdown value for a
       // core One value for one core. So, the number of values should match
       // cpuCount_
@@ -134,8 +127,7 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
       stats.eth0Intrps = eth0Intrps;
     }
   } catch (const std::exception& e) {
-    LOG(ERROR) << "Error in reading the procfs interrupts file: " << fullPath
-               << " Error: " << e.what();
+    LOG(ERROR) << "Error in reading the procfs interrupts file: " << e.what();
   }
   return stats;
 }
