@@ -168,6 +168,27 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
   update_task_offset(next_data, now);
 }
 
+static __u64 lookup_tracked_cgroup_id(struct task_struct *task) {
+  int level;
+  struct cgroup* cgrp;
+  cgrp = task->cgroups->dfl_cgrp;
+  for (level = 0; level < MAX_CGROUP_LEVELS; level++) {
+    __u64 id = cgrp->kn->id;
+    struct bpf_perf_event_value* val;
+
+    cgrp = bpf_rdonly_cast(cgrp->self.parent,
+                           bpf_core_type_id_kernel(struct cgroup));
+    if (cgrp == NULL)
+      break;
+
+    val = bpf_map_lookup_elem(&cgroup_output, &id);
+    if (!val)
+      continue;
+    return id;
+  }
+  return 0;
+}
+
 static struct bpf_perf_event_value* get_cgroup_perf_event_value(struct task_struct *task) {
   struct bpf_perf_event_value* val;
   __u64 id;
@@ -184,7 +205,17 @@ static struct bpf_perf_event_value* get_cgroup_perf_event_value(struct task_stru
     /*
      * slow path. we will need to walk along the cgroup tree to find if any ancestor cgroup is being tracked.
      */
-    id = bpf_get_current_ancestor_cgroup_id(cgroup_update_level);
+    if (cgroup_update_level > 0) {
+      /*
+       * if cgroup_update_level is set before bpf is loaded, then we could jump to the tracked cgroup with the provided level info.
+       */
+      id = bpf_get_current_ancestor_cgroup_id(cgroup_update_level);
+      /*
+       * else we need to walk up the cgroup tree and evaluate each node on the path.
+       */
+    } else {
+      id = lookup_tracked_cgroup_id(task);
+    }
     cgroup_cache = bpf_cgrp_storage_get(&per_cgroup_cache, task->cgroups->dfl_cgrp, 0, BPF_LOCAL_STORAGE_GET_F_CREATE);
   }
   val = bpf_map_lookup_elem(&cgroup_output, &id);

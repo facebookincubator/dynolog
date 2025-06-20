@@ -111,7 +111,7 @@ size_t BPerfEventsGroup::getNumEvents() const {
 bool BPerfEventsGroup::addCgroup(
     std::shared_ptr<hbt::FdWrapper> fd,
     int cgroup_update_level) {
-  if (cgroup_update_level != cgroup_update_level_) {
+  if (cgroup_update_level_ > 0 && cgroup_update_level != cgroup_update_level_) {
     HBT_LOG_ERROR() << "BPerfEventsGroup will only track cgroups at level "
                     << cgroup_update_level_
                     << ", but addCgroup() ask to add a cgroup at level "
