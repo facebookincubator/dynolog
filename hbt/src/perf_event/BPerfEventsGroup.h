@@ -53,6 +53,10 @@ class BPerfEventsGroup {
 
   bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd, int cgroup_update_level);
   bool removeCgroup(__u64 id);
+  // invalidateCgroupCache() is not thread safe.
+  // you will need explicit synchronization if multiple threads are calling this
+  // function.
+  void invalidateCgroupCache();
 
   // eBPF like interface to read counters from all CPUs and accumulate them.
   int readGlobal(struct bpf_perf_event_value* output, bool skip_offset = false)

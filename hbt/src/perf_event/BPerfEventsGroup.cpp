@@ -132,6 +132,7 @@ bool BPerfEventsGroup::addCgroup(
   }
 
   cgroup_fds_.insert({id, std::move(fd)});
+  invalidateCgroupCache();
   return true;
 }
 
@@ -148,6 +149,12 @@ bool BPerfEventsGroup::removeCgroup(__u64 id) {
 
   cgroup_fds_.erase(id);
   return true;
+}
+
+void BPerfEventsGroup::invalidateCgroupCache() {
+  if (enabled_) {
+    skel_->bss->cur_cgroup_cache_version += 1;
+  }
 }
 
 bool BPerfEventsGroup::disable() {
