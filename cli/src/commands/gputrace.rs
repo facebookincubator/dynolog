@@ -58,7 +58,7 @@ pub struct GpuTraceOptions {
 }
 
 impl GpuTraceOptions {
-    fn config(&self, duration_ms: u64) -> String {
+    fn config(&self, duration_ms: Option<u64>) -> String {
         // Note the PROFILE_PROFILE_MEMORY is required to turn on the Python component
         // of the memory snapshot profiler. Then PROFILE_MEMORY enables on-demand snapshot.
         // The following is not a typo/mistake.
@@ -68,7 +68,7 @@ impl GpuTraceOptions {
 PROFILE_PROFILE_MEMORY=true
 PROFILE_MEMORY=true
 PROFILE_MEMORY_DURATION_MSECS={}"#,
-                duration_ms
+                duration_ms.expect("Duration must be set when profiling memory!")
             )
         } else {
             "".to_string()
@@ -101,9 +101,14 @@ impl GpuTraceConfig {
             GpuTraceTriggerConfig::DurationBased {
                 profile_start_time: _,
                 duration_ms,
-            } => duration_ms,
+            } => Some(duration_ms),
             _ => {
-                panic!("Please only use -profile-memory with duration mode, i.e. set --duration-ms")
+                if self.trace_options.profile_memory {
+                    panic!(
+                        "Please only use -profile-memory with duration mode, i.e. set --duration-ms"
+                    );
+                }
+                None
             }
         };
 
@@ -217,7 +222,7 @@ ACTIVITIES_ITERATIONS=42"#
             with_modules: true,
         };
         assert_eq!(
-            test_trace_options.config(42),
+            test_trace_options.config(Some(42)),
             r#"
 PROFILE_REPORT_INPUT_SHAPES=true
 PROFILE_WITH_STACK=true
@@ -225,8 +230,25 @@ PROFILE_WITH_FLOPS=false
 PROFILE_WITH_MODULES=true"#
         );
 
-        test_trace_options.profile_memory = true;
+        // Test iteration based config
+        let test_trace_config = GpuTraceConfig {
+            log_file: String::from("/tmp/test_trace.json"),
+            trigger_config: GpuTraceTriggerConfig::IterationBased {
+                profile_start_iteration_roundup: 1000,
+                iterations: 42,
+            },
+            trace_options: test_trace_options,
+        };
+        test_trace_config.config();
 
+        // Test duration based config with profile_memory
+        test_trace_options = GpuTraceOptions {
+            record_shapes: true,
+            profile_memory: true,
+            with_stacks: true,
+            with_flops: false,
+            with_modules: true,
+        };
         let test_trace_config = GpuTraceConfig {
             log_file: String::from("/tmp/test_trace.json"),
             trigger_config: GpuTraceTriggerConfig::DurationBased {
