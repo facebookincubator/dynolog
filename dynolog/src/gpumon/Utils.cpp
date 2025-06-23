@@ -2,8 +2,8 @@
 
 #include "dynolog/src/gpumon/Utils.h"
 #include <glog/logging.h>
-#include <stdio.h>
 #include <sys/types.h>
+#include <cstdio>
 #include <fstream>
 #include <optional>
 #include "pfs/procfs.hpp"

@@ -6,6 +6,8 @@
 #include "dynolog/src/PerfMonitor.h"
 #include <glog/logging.h>
 
+#include <utility>
+
 namespace dynolog {
 
 PerfMonitor::PerfMonitor(
@@ -14,7 +16,7 @@ PerfMonitor::PerfMonitor(
     std::shared_ptr<hbt::perf_event::PmuDeviceManager> pmuDeviceManager,
     std::shared_ptr<hbt::perf_event::Metrics> availableMetrics)
     : monCpus_(monCpus),
-      pmuDeviceManager_{pmuDeviceManager},
+      pmuDeviceManager_{std::move(pmuDeviceManager)},
       defaultMuxGroupId_() {
   for (ElemId id : metricIds) {
     countReaders_.emplace(
@@ -55,13 +57,13 @@ void PerfMonitor::log(Logger& logger) {
       uint64_t count = readValueOpt->getCount(i);
       if (id == "instructions" && nickname == "instructions") {
         // * 10^9 (nanoseconds) / 10^6 (millions of instructions)
-        float countPerSec = static_cast<float>(
+        auto countPerSec = static_cast<float>(
             static_cast<double>(count) * 1e3 / static_cast<double>(time));
         std::string key = "mips";
         logger.logFloat(key, countPerSec);
       } else if (id == "cycles" && nickname == "cycles") {
         // * 10^9 (nanoseconds) / 10^6 (millions of instructions)
-        float countPerSec = static_cast<float>(
+        auto countPerSec = static_cast<float>(
             static_cast<double>(count) * 1e3 / static_cast<double>(time));
         std::string key = "mega_cycles_per_second";
         logger.logFloat(key, countPerSec);

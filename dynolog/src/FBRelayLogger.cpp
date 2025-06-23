@@ -9,9 +9,9 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
-#include <stdio.h>
 #include <sys/socket.h>
 #include <cerrno>
+#include <cstdio>
 #include "hbt/src/common/System.h"
 
 using json = nlohmann::json;

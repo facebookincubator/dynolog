@@ -5,7 +5,7 @@
 
 #include "dynolog/src/KernelCollector.h"
 #include <fmt/format.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <iostream>
 
 namespace dynolog {

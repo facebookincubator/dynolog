@@ -18,8 +18,7 @@
 #include "dynolog/src/gpumon/Utils.h"
 #include "dynolog/src/gpumon/dcgm_fields.h"
 
-namespace dynolog {
-namespace gpumon {
+namespace dynolog::gpumon {
 
 DEFINE_string(
     dcgm_fields,
@@ -452,5 +451,4 @@ DcgmGroupInfo::~DcgmGroupInfo() {
   }
 }
 
-} // namespace gpumon
-} // namespace dynolog
+} // namespace dynolog::gpumon

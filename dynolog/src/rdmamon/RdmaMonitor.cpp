@@ -5,8 +5,7 @@
 
 #include "dynolog/src/rdmamon/RdmaMonitor.h"
 
-namespace dynolog {
-namespace rdmamon {
+namespace dynolog::rdmamon {
 
 bool RdmaPortMonitor::setupRdmaPortMonitor() {
   bool r1 = eth_counters_->setupEthtoolCounters();
@@ -46,5 +45,4 @@ bool RdmaMonitor::sampleRdmaMonitor(
   return ret;
 }
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon

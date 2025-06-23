@@ -7,6 +7,7 @@
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 
 #include <stdexcept>
+#include <utility>
 
 namespace facebook::dynolog {
 
@@ -116,7 +117,7 @@ MetricFrameVector::MetricFrameVector(
     std::string description,
     std::shared_ptr<MetricFrameTsUnitInterface> ts)
     : MetricFrameBase(std::move(name), std::move(description), std::move(ts)),
-      series_{defs} {}
+      series_{std::move(defs)} {}
 
 bool MetricFrameVector::addSamples(
     const VectorSamplesT& samples,
