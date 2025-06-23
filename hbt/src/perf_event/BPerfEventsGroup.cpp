@@ -188,6 +188,8 @@ void BPerfEventsGroup::close() {
     ::close(fd);
     fd = -1;
   }
+  ::bpf_link__destroy(leader_link_);
+  leader_link_ = nullptr;
   ::bperf_leader_cgroup__destroy(skel_);
   skel_ = nullptr;
   opened_ = false;
