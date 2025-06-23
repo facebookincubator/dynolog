@@ -36,6 +36,9 @@ class DcgmGroupInfo {
   void log(Logger& logger);
   bool pauseProfiling(int duration_s);
   bool resumeProfiling();
+  int getRpcStatus() const {
+    return rpcStatus_;
+  }
 
  private:
   DcgmGroupInfo(
@@ -49,6 +52,8 @@ class DcgmGroupInfo {
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
 
   std::vector<unsigned int> gpuIdList_;
+  int rpcStatus_ =
+      1; // Default to 1, will be set to 0 when DCGM_INT64_BLANK is detected
   int deviceCount_ = 0;
   bool profEnabled_ = false;
   int updateIntervalMs_;

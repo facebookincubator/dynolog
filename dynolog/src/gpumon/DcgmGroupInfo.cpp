@@ -324,6 +324,7 @@ void DcgmGroupInfo::update() {
           }
         }
         metricsInt["dcgm_error"] = blank_value_field ? 1 : 0;
+        rpcStatus_ = blank_value_field ? 0 : 1;
         metricsMapDouble_[entity.m_entityId] = metricsDouble;
         metricsMapInt_[entity.m_entityId] = metricsInt;
       }
