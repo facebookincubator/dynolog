@@ -25,6 +25,7 @@ endif()
 
 target_link_libraries(dynolog_lib PUBLIC Monitor)
 target_link_libraries(dynolog_lib PUBLIC BuiltinMetrics)
+target_link_libraries(dynolog_lib PUBLIC metric_frame)
 
 add_subdirectory(rpc)
 

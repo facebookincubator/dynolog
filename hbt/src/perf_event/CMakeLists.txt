@@ -40,12 +40,12 @@ target_link_libraries(Metrics PUBLIC CpuArch)
 add_library(BuiltinMetrics BuiltinMetrics.h BuiltinMetrics.cpp)
 target_link_libraries(BuiltinMetrics
                         PUBLIC AmdEvents
-                        PUBLIC ArmEvents
-                        PUBLIC PmuDevices
-                        PUBLIC System
-                        PUBLIC IptEventBuilder
-                        PUBLIC Metrics
-                        PUBLIC CpuArch)
+                        ArmEvents
+                        PmuDevices
+                        System
+                        IptEventBuilder
+                        Metrics
+                        CpuArch)
 if(USE_JSON_GENERATED_PERF_EVENTS)
   target_link_libraries(BuiltinMetrics PUBLIC JsonEvents)
 endif()
@@ -70,16 +70,10 @@ target_link_libraries(PerCpuSampleGeneratorBase PUBLIC PerCpuBase)
 add_library(PerCpuCountSampleGenerator PerCpuCountSampleGenerator.h)
 target_link_libraries(PerCpuCountSampleGenerator PUBLIC
     PerCpuSampleGeneratorBase)
-target_link_libraries(PerCpuCountSampleGenerator PUBLIC PerCpuRingBuffer)
-target_link_libraries(PerCpuCountSampleGenerator PUBLIC Event)
 
 add_library(PerCpuThreadSwitchGenerator PerCpuThreadSwitchGenerator.h)
 target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC
     PerCpuSampleGeneratorBase)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC PerCpuRingBuffer)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ProcFsHelpers)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC Event)
-target_link_libraries(PerCpuThreadSwitchGenerator PUBLIC ValueTimeSeries)
 
 add_library(PerCpuDummyGenerator PerCpuDummyGenerator.h)
 target_link_libraries(PerCpuDummyGenerator PUBLIC PerCpuSampleGeneratorBase)
@@ -87,3 +81,15 @@ target_link_libraries(PerCpuDummyGenerator PUBLIC System)
 
 add_library(PerCpuTraceAuxGenerator PerCpuTraceAuxGenerator.h)
 target_link_libraries(PerCpuTraceAuxGenerator PUBLIC PerCpuSampleGeneratorBase)
+set_target_properties(
+  PerfEventsGroup
+  PerPerfEventsGroupBase
+  PerCpuBase
+  PerCpuSampleGeneratorBase
+  PerCpuCountReader
+  ThreadCountReader
+  PerCpuCountSampleGenerator
+  PerCpuThreadSwitchGenerator
+  PerCpuDummyGenerator
+  PerCpuTraceAuxGenerator
+  PROPERTIES LINKER_LANGUAGE CXX)

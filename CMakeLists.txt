@@ -1,7 +1,8 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 cmake_minimum_required(VERSION 3.16)
 
-project(Dynolog VERSION 1.0)
+cmake_policy(SET CMP0079 NEW)
+project(Dynolog VERSION 1.0 LANGUAGES CXX)
 option(BUILD_TESTS "Build the unit tests" ON)
 option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
 OFF)
@@ -19,7 +20,7 @@ endif()
 file(READ "version.txt" DYNOLOG_VERSION)
 string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)
 
-execute_process (
+execute_process(
   COMMAND git rev-parse --short HEAD
   OUTPUT_VARIABLE DYNOLOG_GIT_REV
   OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -36,18 +37,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_POSITION_INDEPENDENT_CODE True)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
-
 if(BUILD_TESTS)
   enable_testing()
-  add_subdirectory("third_party/googletest" "third_party/googletest")
+  add_subdirectory(third_party/googletest)
 endif()
 
 include_directories(".")
 add_subdirectory(dynolog)
 add_subdirectory(cli)
-# The following dummy depdendency ensures the cli is built
+# The following dummy dependency ensures the cli is built
 add_dependencies(dynolog_lib dyno)
 add_subdirectory(hbt)
 
@@ -59,6 +57,8 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
 
 set(BUILD_TESTING OFF CACHE BOOL "")
 set(WITH_GFLAGS OFF CACHE BOOL "")
+find_package(Threads REQUIRED)
+target_link_libraries(dynolog_lib PRIVATE Threads::Threads)
 add_subdirectory(third_party/glog)
 target_link_libraries(dynolog_lib PUBLIC glog::glog)
 
