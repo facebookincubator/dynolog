@@ -11,6 +11,7 @@ use clap::Parser;
 
 // Make all the command modules accessible to this file.
 mod commands;
+use commands::gputrace::GpuTraceCliConfig;
 use commands::gputrace::GpuTraceConfig;
 use commands::gputrace::GpuTraceOptions;
 use commands::gputrace::GpuTraceTriggerConfig;
@@ -91,6 +92,9 @@ enum Command {
         /// Capture PyTorch operator modules in traces
         #[clap(long, action)]
         with_modules: bool,
+        /// Returns exit code 1 if no process is found
+        #[clap(long, action)]
+        fail_on_no_process: bool,
     },
     /// Pause dcgm profiling. This enables running tools like Nsight compute and avoids conflicts.
     DcgmPause {
@@ -139,6 +143,7 @@ fn main() -> Result<()> {
             with_stacks,
             with_flops,
             with_modules,
+            fail_on_no_process,
         } => {
             let trigger_config = if iterations > 0 {
                 GpuTraceTriggerConfig::IterationBased {
@@ -163,7 +168,15 @@ fn main() -> Result<()> {
                 trigger_config,
                 trace_options,
             };
-            gputrace::run_gputrace(dyno_client, job_id, &pids, process_limit, trace_config)
+            let cli_config = GpuTraceCliConfig { fail_on_no_process };
+            gputrace::run_gputrace(
+                dyno_client,
+                job_id,
+                &pids,
+                process_limit,
+                trace_config,
+                cli_config,
+            )
         }
         Command::DcgmPause { duration_s } => dcgm::run_dcgm_pause(dyno_client, duration_s),
         Command::DcgmResume => dcgm::run_dcgm_resume(dyno_client),
