@@ -3,14 +3,11 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-#include <sys/types.h>
-#include <unistd.h>
-
+#include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/common/System.h"
 #include "hbt/src/intel_pt/IptEventBuilder.h"
 #include "hbt/src/perf_event/AmdEvents.h"
 #include "hbt/src/perf_event/ArmEvents.h"
-#include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PmuDevices.h"

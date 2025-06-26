@@ -6,13 +6,11 @@
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include <bpf/bpf.h>
 #include <bpf/libbpf.h>
-#include <sys/file.h>
 #include <unistd.h>
 #include <algorithm>
 #include <memory>
 #include <optional>
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
-#include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 
 namespace facebook::hbt::perf_event {
