@@ -177,7 +177,12 @@ int main(int argc, char** argv) {
   if (FLAGS_enable_gpu_monitor) {
     dcgm = gpumon::DcgmGroupInfo::factory(
         gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
-    gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
+    if (!dcgm) {
+      LOG(ERROR) << "Failed to initialize DCGM";
+      return 1;
+    } else {
+      gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
+    }
   }
   std::thread km_thread{kernel_monitor_loop};
   if (FLAGS_enable_perf_monitor) {
