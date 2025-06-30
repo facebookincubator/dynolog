@@ -125,6 +125,7 @@ std::shared_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
   auto dcgmGroupInfo = std::shared_ptr<DcgmGroupInfo>(
       new DcgmGroupInfo(fields, prof_fields, updateIntervalMs));
   if (dcgmGroupInfo->isFailing()) {
+    LOG(ERROR) << "Failed to create DcgmGroupInfo instance";
     return nullptr;
   }
   return dcgmGroupInfo;
