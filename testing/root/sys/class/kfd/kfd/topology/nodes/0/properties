@@ -1,0 +1,5 @@
+simd_count 0
+drm_render_minor 0
+unique_id 1000
+cpu_cores_count 32
+name CPU
