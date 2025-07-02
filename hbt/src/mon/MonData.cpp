@@ -4,7 +4,6 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/mon/MonData.h"
-#include <hbt/src/common/Defs.h>
 #include <string>
 
 using namespace facebook::hbt::mon;
