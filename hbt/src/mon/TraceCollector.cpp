@@ -4,8 +4,6 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/mon/TraceCollector.h"
-#include <fmt/core.h>
-#include <fmt/ranges.h>
 
 namespace facebook::hbt::mon {
 
