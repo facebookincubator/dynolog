@@ -234,7 +234,8 @@ void CPUTimeMonitor::tick(TMask mask) {
 
 void CPUTimeMonitor::registerAllotment(
     const std::string& allotmentId,
-    const std::vector<int64_t>& cpuSet) {
+    const std::vector<int64_t>& cpuSet,
+    const std::optional<std::string>& path) {
   if (allotmentId == "" || allotmentId == "host") {
     LOG(INFO) << "Invalid allotmentId: " << allotmentId;
     return;
@@ -247,7 +248,8 @@ void CPUTimeMonitor::registerAllotment(
                    std::string(),
                    [](const std::string& a, const int64_t& b) {
                      return a + " " + std::to_string(b);
-                   });
+                   })
+            << ", path: " << path.value_or("(none)");
   {
     std::shared_lock lock(dataLock_);
     if (allotmentToCpuSet_.find(allotmentId) != allotmentToCpuSet_.end()) {
@@ -267,6 +269,9 @@ void CPUTimeMonitor::registerAllotment(
         std::make_shared<MetricSeries<double>>(
             frame.maxLength(), allotmentId, ""));
   }
+  if (path.has_value()) {
+    allotmentCgroupPaths_[allotmentId] = path.value();
+  }
 }
 
 void CPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
@@ -280,6 +285,42 @@ void CPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
   for (auto& frame : CPUTimeMetricFrames_) {
     frame.eraseSeries(allotmentId);
   }
+  allotmentCgroupPaths_.erase(allotmentId);
+}
+
+std::optional<uint64_t> CPUTimeMonitor::readCgroupCpuStat(
+    const std::string& allotmentId) {
+  std::unique_lock lock(dataLock_);
+  const auto iter = allotmentCgroupPaths_.find(allotmentId);
+  if (iter == allotmentCgroupPaths_.end()) {
+    return std::nullopt;
+  }
+
+  std::string path = iter->second + "/cpu.stat";
+
+  FILE* fp = fopen(path.c_str(), "r");
+  if (!fp) {
+    LOG(ERROR) << "Error opening " << path;
+    return std::nullopt;
+  }
+
+  char buf[64];
+  if (!fgets(buf, sizeof(buf), fp)) {
+    LOG(ERROR) << "Error reading " << path;
+    fclose(fp);
+    return std::nullopt;
+  }
+
+  unsigned long long usage;
+  int num = sscanf(buf, "%*s %Lu", &usage);
+  if (num != 1) {
+    LOG(ERROR) << "Error parsing " << path;
+    fclose(fp);
+    return std::nullopt;
+  }
+
+  fclose(fp);
+  return usage;
 }
 
 std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
