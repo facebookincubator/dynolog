@@ -46,7 +46,8 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   void registerAllotment(
       const std::string& allotmentId,
-      const std::vector<int64_t>& cpuSet);
+      const std::vector<int64_t>& cpuSet,
+      const std::optional<std::string>& path = std::nullopt);
 
   void deRegisterAllotment(const std::string& allotmentId);
 
@@ -73,6 +74,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   enum class Statistic { AVG, QUANTILE };
 
   std::vector<uint64_t> readProcStat(bool read_per_core = false);
+  std::optional<uint64_t> readCgroupCpuStat(const std::string& allotmentId);
   std::optional<double> getStat(
       Granularity gran,
       uint64_t seconds_ago,
@@ -84,6 +86,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   bool const isUnitTest_;
   std::map<std::string, std::vector<int64_t>> allotmentToCpuSet_;
   std::set<std::string> allotmentsNeedPerCore_;
+  std::map<std::string, std::string> allotmentCgroupPaths_;
 
   // Index 0 is minute, 1 is second, 2 is 100ms
   std::array<MetricFrameMap, 3> CPUTimeMetricFrames_;

@@ -37,6 +37,9 @@ class CPUTimeMonitorTest : public ::testing::Test {
   auto readProcStat(bool read_per_core = false) {
     return monitor->readProcStat(read_per_core);
   }
+  auto readCgroupCpuStat(const std::string& allotment) {
+    return monitor->readCgroupCpuStat(allotment);
+  }
   auto& CPUTimeLast_() const {
     return monitor->CPUTimeLast_;
   }
@@ -54,6 +57,14 @@ TEST_F(CPUTimeMonitorTest, testProcStat) {
   EXPECT_EQ(cpuTimePerCore, allCoresReference);
 }
 
+TEST_F(CPUTimeMonitorTest, testCgroupCpuStat) {
+  std::string allotment("user.slice");
+  std::string allotmentPath("/sys/fs/cgroup");
+  std::vector<int64_t> cpuSet;
+  monitor->registerAllotment(allotment, cpuSet, allotmentPath);
+  auto cpuUsage = readCgroupCpuStat(allotment);
+  EXPECT_NE(cpuUsage, std::nullopt);
+}
 // Test the tick function
 TEST_F(CPUTimeMonitorTest, testAllotment) {
   auto now = std::chrono::steady_clock::now();
