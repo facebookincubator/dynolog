@@ -12,6 +12,7 @@
 #include <fstream>
 #include <optional>
 #include <stdexcept>
+#include <unordered_map>
 
 namespace dynolog {
 namespace gpumon {
@@ -89,6 +90,14 @@ std::vector<LogicalDevice> LogicalDevice::parseTopologyNodes(
   } catch (const std::exception& e) {
     LOG(ERROR) << "Error parsing topology nodes: " << e.what();
     return {};
+  }
+
+  std::unordered_map<uint64_t, int> numPartitions;
+  for (const auto& device : devices) {
+    numPartitions[device.getUniqueId()]++;
+  }
+  for (auto& device : devices) {
+    device.setPartition(numPartitions.at(device.getUniqueId()) > 1);
   }
 
   return devices;
