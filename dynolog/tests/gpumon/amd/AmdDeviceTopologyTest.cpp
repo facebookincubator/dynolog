@@ -29,14 +29,17 @@ TEST_F(AmdDeviceTopologyTest, ParseKfdNodes) {
   EXPECT_EQ(devices[0].getKfdNodeId(), 1);
   EXPECT_EQ(devices[0].getMinorId(), 177);
   EXPECT_EQ(devices[0].getUniqueId(), 9847564688237960509ULL);
+  EXPECT_FALSE(devices[0].isPartition());
 
   // Check second GPU node
   EXPECT_EQ(devices[1].getKfdNodeId(), 2);
   EXPECT_EQ(devices[1].getMinorId(), 178);
   EXPECT_EQ(devices[1].getUniqueId(), 9847564688237960510ULL);
+  EXPECT_TRUE(devices[1].isPartition());
 
   // Check second GPU node
   EXPECT_EQ(devices[2].getKfdNodeId(), 3);
   EXPECT_EQ(devices[2].getMinorId(), 179);
   EXPECT_EQ(devices[2].getUniqueId(), 9847564688237960510ULL);
+  EXPECT_TRUE(devices[2].isPartition());
 }

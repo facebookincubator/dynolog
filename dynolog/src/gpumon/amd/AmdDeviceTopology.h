@@ -22,6 +22,12 @@ class LogicalDevice {
   int getMinorId() const {
     return minorId_;
   }
+  bool isPartition() const {
+    return partitioned_;
+  }
+  void setPartition(bool partitioned) {
+    partitioned_ = partitioned;
+  }
 
   /**
    * parse AMD GPU topology information from sysfs.
@@ -42,6 +48,8 @@ class LogicalDevice {
   uint32_t kfdNodeId_;
   uint64_t uniqueId_;
   int minorId_;
+  // to be updated after all devices are parsed
+  bool partitioned_ = false;
 };
 
 class PhysicalDevice {
