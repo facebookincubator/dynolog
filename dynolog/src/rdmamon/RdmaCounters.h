@@ -11,8 +11,8 @@
 #include <string>
 #include "dynolog/src/rdmamon/SysfsCounter.h"
 
-namespace dynolog {
-namespace rdmamon {
+
+namespace dynolog::rdmamon {
 
 class RdmaCounters {
  public:
@@ -82,5 +82,5 @@ class RdmaCounters {
   }
 };
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon
+

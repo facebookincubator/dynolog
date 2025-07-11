@@ -45,7 +45,7 @@ struct Message {
     // if constexpr (std::is_same_v<std::string, T>) {
     // Without constexpr following is not possible
 #if __cplusplus >= 201703L
-    if constexpr (std::is_same<std::string, T>::value == true) {
+    if constexpr (std::is_same_v<std::string, T> == true) {
       msg->metadata.size = data.size();
       msg->buf = std::make_unique<unsigned char[]>(msg->metadata.size);
       memcpy(msg->buf.get(), data.c_str(), msg->metadata.size);
@@ -54,7 +54,7 @@ struct Message {
       // ensure memcpy works on T
       // TODO CXX 17 - https://github.com/pytorch/kineto/issues/650
       // static_assert(std::is_trivially_copyable_v<T>);
-      static_assert(std::is_trivially_copyable<T>::value);
+      static_assert(std::is_trivially_copyable_v<T>);
       msg->metadata.size = sizeof(data);
       msg->buf = std::make_unique<unsigned char[]>(msg->metadata.size);
       memcpy(msg->buf.get(), &data, msg->metadata.size);
@@ -76,8 +76,8 @@ struct Message {
     // TODO CXX 17 - https://github.com/pytorch/kineto/issues/650
     // static_assert(std::is_trivially_copyable_v<T>);
     // static_assert(std::is_trivially_copyable_v<U>);
-    static_assert(std::is_trivially_copyable<T>::value);
-    static_assert(std::is_trivially_copyable<U>::value);
+    static_assert(std::is_trivially_copyable_v<T>);
+    static_assert(std::is_trivially_copyable_v<U>);
     msg->metadata.size = sizeof(data) + sizeof(U) * n;
     msg->buf = std::make_unique<unsigned char[]>(msg->metadata.size);
     memcpy(msg->buf.get(), &data, msg->metadata.size);

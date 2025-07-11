@@ -22,7 +22,7 @@ class SocketWrapper;
 class FBRelayLogger : public JsonLogger {
  public:
   explicit FBRelayLogger();
-  ~FBRelayLogger() override {}
+  ~FBRelayLogger() override = default;
 
   void finalize() override;
 

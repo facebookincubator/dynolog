@@ -24,7 +24,7 @@ DECLARE_string(certificate_path);
 class Logger {
  public:
   using Timestamp = std::chrono::time_point<std::chrono::system_clock>;
-  virtual ~Logger() {}
+  virtual ~Logger() = default;
 
   virtual void setTimestamp(
       Timestamp ts = std::chrono::system_clock::now()) = 0;

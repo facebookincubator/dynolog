@@ -8,8 +8,8 @@
 #include <sys/types.h>
 #include <cstdint>
 
-namespace dynolog {
-namespace ipcfabric {
+
+namespace dynolog::ipcfabric {
 
 // struct to register libkineto process
 struct LibkinetoContext {
@@ -36,5 +36,5 @@ struct LibkinetoRequest {
 constexpr char dynolog_endpoint[] = "dynolog";
 constexpr char kLibkinetoRequest[] = "req";
 constexpr char kLibkinetoContext[] = "ctxt";
-} // namespace ipcfabric
-} // namespace dynolog
+} // namespace dynolog::ipcfabric
+

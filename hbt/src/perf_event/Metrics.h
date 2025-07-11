@@ -11,6 +11,7 @@
 
 #include <map>
 #include <memory>
+#include <utility>
 #include <variant>
 
 namespace facebook::hbt::perf_event {
@@ -58,7 +59,7 @@ struct MetricDesc {
       const std::string& full_desc,
       const std::map<TOptCpuArch, EventRefs>& event_refs_by_arch,
       uint64_t default_sampling_period,
-      const System::Permissions& req_permissions,
+      System::Permissions  req_permissions,
       const std::vector<std::string>& dives,
       ReducerFunc reducer = nullptr)
       : id{id},
@@ -66,9 +67,9 @@ struct MetricDesc {
         full_desc{full_desc},
         event_refs_by_arch{event_refs_by_arch},
         default_sampling_period{default_sampling_period},
-        req_permissions{req_permissions},
+        req_permissions{std::move(req_permissions)},
         dives{dives},
-        reducer{reducer} {
+        reducer{std::move(reducer)} {
     HBT_ARG_CHECK_GT(id.size(), 0);
     HBT_ARG_CHECK_GT(brief_desc.size(), 0);
     HBT_ARG_CHECK_GT(full_desc.size(), 0);
@@ -214,7 +215,7 @@ std::ostream& operator<<(std::ostream& os, const MetricDesc& desc);
 /// Container for Metrics and their supporting event definitions.
 class Metrics {
  public:
-  Metrics() {}
+  Metrics() = default;
 
   Metrics(const Metrics&) = delete;
   Metrics(Metrics&&) = delete;

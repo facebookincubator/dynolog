@@ -35,7 +35,7 @@ class KernelCollectorBase {
   // proc fs parser
   pfs::procfs pfs_;
 
-  size_t numCpuSockets_;
+  size_t numCpuSockets_{1};
   const size_t cpuCoresTotal_;
   size_t nicDevCount_;
   bool filterInteraces_;

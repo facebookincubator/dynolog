@@ -29,9 +29,9 @@ namespace facebook::hbt::mon {
 template <class MuxGroupIdType>
 struct ManagedBPerfEventInfo {
   explicit ManagedBPerfEventInfo(MuxGroupIdType muxId)
-      : muxId{std::move(muxId)}, refCount{0} {}
+      : muxId{std::move(muxId)} {}
   MuxGroupIdType muxId;
-  size_t refCount;
+  size_t refCount{0};
 };
 
 /// Class to consolidate initialization, polling,  processing
@@ -512,7 +512,7 @@ class Monitor {
       HBT_LOG_ERROR() << fmt::format(
           "Failed to create Uncore Count Reader with key: \"{}\"", elem_id);
       HBT_LOG_ERROR() << fmt::format("Error: {}", e.what());
-      return std::shared_ptr<TUncoreCountReader>();
+      return {};
     }
   }
 
