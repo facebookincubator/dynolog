@@ -36,7 +36,7 @@ class MetricSeries final {
         : data_{&data}, size_{size}, headIdx_{headIdx}, headDis_{headDis} {}
     // see P2325R3
     // default constructor should not be required in the future
-    Iterator() {}
+    Iterator() = default;
 
     const value_type& operator*() const {
       return data_->at(dataIdx());

@@ -13,16 +13,17 @@
 #include <map>
 #include <optional>
 #include <string>
+#include <utility>
 
 // @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror
 
-namespace dynolog {
-namespace rdmamon {
+
+namespace dynolog::rdmamon {
 
 class SysfsCounter {
  public:
-  explicit SysfsCounter(const std::string& name, const std::string& path)
-      : name_(name), path_(path) {}
+  explicit SysfsCounter(std::string  name, std::string  path)
+      : name_(std::move(name)), path_(std::move(path)) {}
   virtual ~SysfsCounter() {
     if (fd_ >= 0) {
       close(fd_);
@@ -74,5 +75,5 @@ class SysfsCounter {
   }
 };
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon
+

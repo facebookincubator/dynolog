@@ -12,14 +12,14 @@
 
 #include "dynolog/src/ipcfabric/FabricManager.h"
 
-namespace dynolog {
-namespace tracing {
+
+namespace dynolog::tracing {
 
 class IPCMonitor {
  public:
   using FabricManager = dynolog::ipcfabric::FabricManager;
   IPCMonitor(const std::string& ipc_fabric_name = "dynolog");
-  virtual ~IPCMonitor() {}
+  virtual ~IPCMonitor() = default;
 
   void loop();
 
@@ -34,5 +34,5 @@ class IPCMonitor {
   friend class IPCMonitorTest_LibkinetoRegisterAndOndemandTest_Test;
 };
 
-} // namespace tracing
-} // namespace dynolog
+} // namespace dynolog::tracing
+

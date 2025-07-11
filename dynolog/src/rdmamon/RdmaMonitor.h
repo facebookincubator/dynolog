@@ -10,8 +10,8 @@
 #include "dynolog/src/rdmamon/EthtoolCounters.h"
 #include "dynolog/src/rdmamon/RdmaCounters.h"
 
-namespace dynolog {
-namespace rdmamon {
+
+namespace dynolog::rdmamon {
 
 class RdmaPortMonitor {
  public:
@@ -60,5 +60,5 @@ class RdmaMonitor {
   std::vector<std::unique_ptr<RdmaPortMonitor>> monitors_;
 };
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon
+

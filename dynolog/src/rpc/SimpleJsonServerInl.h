@@ -16,7 +16,7 @@ class SimpleJsonServer : public SimpleJsonServerBase {
   explicit SimpleJsonServer(std::shared_ptr<TServiceHandler> handler, int port)
       : SimpleJsonServerBase(port), handler_(std::move(handler)) {}
 
-  ~SimpleJsonServer() {}
+  ~SimpleJsonServer() override = default;
 
   std::string processOneImpl(const std::string& request) override;
 
@@ -46,13 +46,13 @@ nlohmann::json toJson(const std::string& message) {
   if (result.empty() || !result.is_object()) {
     LOG(ERROR)
         << "Request message should not be empty and should be json object.";
-    return json();
+    return {};
   }
 
   if (!result.contains("fn")) {
     LOG(ERROR) << "Request must contain a 'fn' field for the RPC call "
                << " request json = " << result.dump();
-    return json();
+    return {};
   }
 
   return result;

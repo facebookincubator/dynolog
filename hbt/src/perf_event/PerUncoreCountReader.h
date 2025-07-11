@@ -11,6 +11,7 @@
 #include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <memory>
+#include <utility>
 #include <vector>
 
 namespace facebook::hbt::perf_event {
@@ -86,8 +87,8 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
       std::shared_ptr<const MetricDesc> metric_desc_in,
       std::shared_ptr<const PmuDeviceManager> pmu_manager_in)
       : TBase{nullptr},
-        pmu_manager{pmu_manager_in},
-        metric_desc{metric_desc_in} {
+        pmu_manager{std::move(pmu_manager_in)},
+        metric_desc{std::move(metric_desc_in)} {
     HBT_DCHECK(pmu_manager != nullptr);
     HBT_DCHECK(metric_desc != nullptr);
 

@@ -34,7 +34,7 @@ class SimpleJsonServerBase {
   void run();
 
   void stop() {
-    run_ = 0;
+    run_ = false;
     thread_->join();
   }
 

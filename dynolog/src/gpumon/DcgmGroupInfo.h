@@ -13,8 +13,8 @@
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/gpumon/dcgm_structs.h"
 
-namespace dynolog {
-namespace gpumon {
+
+namespace dynolog::gpumon {
 
 DECLARE_string(dcgm_fields);
 
@@ -75,5 +75,5 @@ class DcgmGroupInfo {
   std::chrono::seconds profPauseTimer_;
 };
 
-} // namespace gpumon
-} // namespace dynolog
+} // namespace dynolog::gpumon
+
