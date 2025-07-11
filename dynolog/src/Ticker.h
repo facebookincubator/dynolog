@@ -445,4 +445,3 @@ using TickerConfigMinuteSecondBase10 =
     TickerMinuteSecondBase10::TSubscriberConfig;
 
 } // namespace facebook::dynolog
-

@@ -54,7 +54,7 @@ struct MetricDesc {
   ReducerFunc reducer;
 
   MetricDesc(
-      MetricId id,
+      const MetricId& id,
       const std::string& brief_desc,
       const std::string& full_desc,
       const std::map<TOptCpuArch, EventRefs>& event_refs_by_arch,
@@ -222,6 +222,7 @@ class Metrics {
 
   auto getMetricIDs() const {
     std::vector<MetricId> ids;
+    ids.reserve(metric_descs_.size());
     for (const auto& [k, _] : metric_descs_) {
       ids.push_back(k);
     }

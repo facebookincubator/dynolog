@@ -9,6 +9,7 @@
 #include <deque>
 #include <exception>
 #include <mutex>
+#include <utility>
 #include "dynolog/src/ipcfabric/Endpoint.h"
 #include "dynolog/src/ipcfabric/Utils.h"
 
@@ -96,7 +97,7 @@ class FabricManager {
   FabricManager& operator=(const FabricManager&) = delete;
 
   static std::unique_ptr<FabricManager> factory(
-      std::string endpoint_name = "") {
+      const std::string& endpoint_name = "") {
     try {
       return std::unique_ptr<FabricManager>(new FabricManager(endpoint_name));
     } catch (std::exception& e) {
@@ -214,7 +215,7 @@ class FabricManager {
   }
 
  private:
-  explicit FabricManager(std::string endpoint_name = "") : ep_{endpoint_name} {}
+  explicit FabricManager(const std::string& endpoint_name = "") : ep_{endpoint_name} {}
   // message LIFO deque with oldest message at front
   std::deque<std::unique_ptr<Message>> message_deque_;
   EndPoint<0> ep_;

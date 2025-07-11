@@ -163,7 +163,7 @@ struct TimeStampNsConverter {
   /// Build converter by estimating reasonable starting points
   /// for system clock and Tstamp counter.
   /// As parameter, takes a function that provides current timestamp
-  static auto makeFromNow(std::function<TimeStamp(void)> now_function) {
+  static auto makeFromNow(const std::function<TimeStamp(void)>& now_function) {
     auto before = std::chrono::high_resolution_clock::now();
     auto tstamp = now_function(); // Capture tstamp that is within (before,
                                   // start) interval.
@@ -599,7 +599,7 @@ inline std::optional<std::string> readProcFsCgroup(pid_t tid) noexcept {
   return std::string(s.begin(), end_it);
 }
 
-inline int readIntFromFile(std::string filepath) {
+inline int readIntFromFile(const std::string& filepath) {
   auto [err, s] = readProcFsByteStr(filepath.c_str());
   if (!err) {
     return std::stoi(std::string(s.begin(), s.end()));

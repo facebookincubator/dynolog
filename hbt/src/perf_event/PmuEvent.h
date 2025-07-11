@@ -185,7 +185,7 @@ struct EventExtraAttr {
       return makeCountAll();
     }
 
-    auto has_any = [&](std::string s) {
+    auto has_any = [&](const std::string& s) {
       return str.find_first_of(s) != std::string::npos;
     };
 

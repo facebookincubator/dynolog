@@ -105,8 +105,8 @@ void MetricFrameMap::show(std::ostream& s) const {
       series_.end(),
       std::back_inserter(series),
       [](const auto& kv) { return kv.second; });
-  s << name() << std::endl;
-  s << description() << std::endl;
+  s << name() << '\n';
+  s << description() << '\n';
   MetricFrameBase::show<decltype(series.begin())>(
       series.begin(), series.end(), *ts_, s);
 }
@@ -170,8 +170,8 @@ std::vector<MetricSeriesVar> MetricFrameVector::allSeriesVec() const {
 }
 
 void MetricFrameVector::show(std::ostream& s) const {
-  s << name() << std::endl;
-  s << description() << std::endl;
+  s << name() << '\n';
+  s << description() << '\n';
   MetricFrameBase::show<decltype(series_.begin())>(
       series_.begin(), series_.end(), *ts_, s);
 }

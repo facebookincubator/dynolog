@@ -19,7 +19,7 @@ class MonitorBase {
   MonitorBase(
       std::shared_ptr<TTicker> ticker,
       const std::string& name,
-      std::vector<double> subminor_tick_sample_rates)
+      const std::vector<double>& subminor_tick_sample_rates)
       : _ticker(std::move(ticker)),
         _name(name),
         _subminor_tick_sample_rates(subminor_tick_sample_rates) {
@@ -68,4 +68,3 @@ class MonitorBase {
 };
 
 } // namespace facebook::dynolog
-

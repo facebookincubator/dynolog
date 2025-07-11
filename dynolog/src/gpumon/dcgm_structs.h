@@ -152,17 +152,13 @@
 /**
  * Max number of GPUs supported by DCGM
  */
-enum {
-DCGM_MAX_NUM_DEVICES = 32 /* DCGM 2.0 and newer = 32. DCGM 1.8 and older = 16. */
-};
+#define DCGM_MAX_NUM_DEVICES 32 /* DCGM 2.0 and newer = 32. DCGM 1.8 and older = 16. */
 
 /**
  * Number of NvLink links per GPU supported by DCGM
  * 18 for Hopper, 12 for Ampere, 6 for Volta, and 4 for Pascal
  */
-enum {
-DCGM_NVLINK_MAX_LINKS_PER_GPU = 18
-};
+#define DCGM_NVLINK_MAX_LINKS_PER_GPU 18
 
 /**
  * Number of nvlink errors supported by DCGM
@@ -170,130 +166,94 @@ DCGM_NVLINK_MAX_LINKS_PER_GPU = 18
  *
  * NVML_NVLINK_ERROR_DL_ECC_DATA not currently supported
  */
-enum {
-DCGM_NVLINK_ERROR_COUNT = 4
-};
+#define DCGM_NVLINK_ERROR_COUNT 4
 
 /**
  * Number of nvlink error types: @see NVML_NVLINK_ERROR_COUNT
  * TODO: update with refactor of ampere-next nvlink APIs (JIRA DCGM-2628)
  */
-enum {
-DCGM_HEALTH_WATCH_NVLINK_ERROR_NUM_FIELDS = 4
-};
+#define DCGM_HEALTH_WATCH_NVLINK_ERROR_NUM_FIELDS 4
 
 /**
  * Maximum NvLink links pre-Ampere
  */
-enum {
-DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY1 = 6
-};
+#define DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY1 6
 
 /**
  * Maximum NvLink links pre-Hopper
  */
-enum {
-DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY2 = 12
-};
+#define DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY2 12
 
 /**
  * Max number of NvSwitches supported by DCGM
  **/
-enum {
-DCGM_MAX_NUM_SWITCHES = 12
-};
+#define DCGM_MAX_NUM_SWITCHES 12
 
 /**
  * Number of NvLink links per NvSwitch supported by DCGM
  */
-enum {
-DCGM_NVLINK_MAX_LINKS_PER_NVSWITCH = 64
-};
+#define DCGM_NVLINK_MAX_LINKS_PER_NVSWITCH 64
 
 /**
  * Number of Lines per NvSwitch NvLink supported by DCGM
  */
-enum {
-DCGM_LANE_MAX_LANES_PER_NVSWICH_LINK = 4
-};
+#define DCGM_LANE_MAX_LANES_PER_NVSWICH_LINK 4
 
 /**
  * Maximum number of vGPU instances per physical GPU
  */
-enum {
-DCGM_MAX_VGPU_INSTANCES_PER_PGPU = 32
-};
+#define DCGM_MAX_VGPU_INSTANCES_PER_PGPU 32
 
 /**
  * Max length of the DCGM string field
  */
-enum {
-DCGM_MAX_STR_LENGTH = 256
-};
+#define DCGM_MAX_STR_LENGTH 256
 
 /**
  * Max number of clocks supported for a device
  */
-enum {
-DCGM_MAX_CLOCKS = 256
-};
+#define DCGM_MAX_CLOCKS 256
 
 /**
  * Max limit on the number of groups supported by DCGM
  */
-enum {
-DCGM_MAX_NUM_GROUPS = 64
-};
+#define DCGM_MAX_NUM_GROUPS 64
 
 /**
  * Max number of active FBC sessions
  */
-enum {
-DCGM_MAX_FBC_SESSIONS = 256
-};
+#define DCGM_MAX_FBC_SESSIONS 256
 
 /**
  * Represents the size of a buffer that holds a vGPU type Name or vGPU class type or name of process running on vGPU
  * instance.
  */
-enum {
-DCGM_VGPU_NAME_BUFFER_SIZE = 64
-};
+#define DCGM_VGPU_NAME_BUFFER_SIZE 64
 
 /**
  * Represents the size of a buffer that holds a vGPU license string
  */
-enum {
-DCGM_GRID_LICENSE_BUFFER_SIZE = 128
-};
+#define DCGM_GRID_LICENSE_BUFFER_SIZE 128
 
 /**
  * Default compute mode -- multiple contexts per device
  */
-enum {
-DCGM_CONFIG_COMPUTEMODE_DEFAULT = 0
-};
+#define DCGM_CONFIG_COMPUTEMODE_DEFAULT 0
 
 /**
  * Compute-prohibited mode -- no contexts per device
  */
-enum {
-DCGM_CONFIG_COMPUTEMODE_PROHIBITED = 1
-};
+#define DCGM_CONFIG_COMPUTEMODE_PROHIBITED 1
 
 /**
  * Compute-exclusive-process mode -- only one context per device, usable from multiple threads at a time
  */
-enum {
-DCGM_CONFIG_COMPUTEMODE_EXCLUSIVE_PROCESS = 2
-};
+#define DCGM_CONFIG_COMPUTEMODE_EXCLUSIVE_PROCESS 2
 
 /**
  * Default Port Number for DCGM Host Engine
  */
-enum {
-DCGM_HE_PORT_NUMBER = 5555
-};
+#define DCGM_HE_PORT_NUMBER 5555
 
 #ifdef __cplusplus
 extern "C" {
@@ -310,25 +270,25 @@ extern "C" {
  * \ref dcgmUpdateAllFields which tells DCGM to wake up and perform data collection and
  * operations needed for policy management.
  */
-using dcgmOperationMode_t = enum dcgmOperationMode_enum
+typedef enum dcgmOperationMode_enum
 {
     DCGM_OPERATION_MODE_AUTO   = 1,
     DCGM_OPERATION_MODE_MANUAL = 2
-};
+} dcgmOperationMode_t;
 
 /**
  * When more than one value is returned from a query, which order should it be returned in?
  */
-using dcgmOrder_t = enum dcgmOrder_enum
+typedef enum dcgmOrder_enum
 {
     DCGM_ORDER_ASCENDING  = 1, //!< Data with earliest (lowest) timestamps returned first
     DCGM_ORDER_DESCENDING = 2  //!< Data with latest (highest) timestamps returned first
-};
+} dcgmOrder_t;
 
 /**
  * Return values for DCGM API calls.
  */
-using dcgmReturn_t = enum dcgmReturn_enum
+typedef enum dcgmReturn_enum
 {
     DCGM_ST_OK                   = 0,   //!< Success
     DCGM_ST_BADPARAM             = -1,  //!< A bad parameter was passed to a function
@@ -386,14 +346,14 @@ using dcgmReturn_t = enum dcgmReturn_enum
     DCGM_ST_NVVS_ISOLATE_ERROR    = -51, //!< The diagnostic returned an error that indicates the need for isolation
     DCGM_ST_NVVS_BINARY_NOT_FOUND = -52, //!< The NVVS binary was not found in the specified location
     DCGM_ST_NVVS_KILLED           = -53, //!< The NVVS process was killed by a signal
-};
+} dcgmReturn_t;
 
 const char *errorString(dcgmReturn_t result);
 
 /**
  * Type of GPU groups
  */
-using dcgmGroupType_t = enum dcgmGroupType_enum
+typedef enum dcgmGroupType_enum
 {
     DCGM_GROUP_DEFAULT                   = 0, //!< All the GPUs on the node are added to the group
     DCGM_GROUP_EMPTY                     = 1, //!< Creates an empty group
@@ -401,7 +361,7 @@ using dcgmGroupType_t = enum dcgmGroupType_enum
     DCGM_GROUP_DEFAULT_INSTANCES         = 3, //!< All GPU instances of the node are added to the group
     DCGM_GROUP_DEFAULT_COMPUTE_INSTANCES = 4, //!< All compute instances of the node are added to the group
     DCGM_GROUP_DEFAULT_EVERYTHING        = 5, //!< All entities are added to this default group
-};
+} dcgmGroupType_t;
 
 /**
  * Identifies for special DCGM groups
@@ -421,7 +381,7 @@ using dcgmGroupType_t = enum dcgmGroupType_enum
  * Simplified chip architecture. Note that these are made to match nvmlChipArchitecture_t and thus
  * do not start at 0.
  */
-using dcgmChipArchitecture_t = enum dcgmChipArchitecture_enum
+typedef enum dcgmChipArchitecture_enum
 {
     DCGM_CHIP_ARCH_OLDER   = 1, //!< All GPUs older than Kepler
     DCGM_CHIP_ARCH_KEPLER  = 2, //!< All Kepler-architecture parts
@@ -436,25 +396,25 @@ using dcgmChipArchitecture_t = enum dcgmChipArchitecture_enum
     DCGM_CHIP_ARCH_COUNT, //!< Keep this second to last, exclude unknown
 
     DCGM_CHIP_ARCH_UNKNOWN = 0xffffffff //!< Anything else, presumably something newer
-};
+} dcgmChipArchitecture_t;
 
 /**
  * Represents the type of configuration to be fetched from the GPUs
  */
-using dcgmConfigType_t = enum dcgmConfigType_enum
+typedef enum dcgmConfigType_enum
 {
     DCGM_CONFIG_TARGET_STATE  = 0, //!< The target configuration values to be applied
     DCGM_CONFIG_CURRENT_STATE = 1, //!< The current configuration state
-};
+} dcgmConfigType_t;
 
 /**
  * Represents the power cap for each member of the group.
  */
-using dcgmConfigPowerLimitType_t = enum dcgmConfigPowerLimitType_enum
+typedef enum dcgmConfigPowerLimitType_enum
 {
     DCGM_CONFIG_POWER_CAP_INDIVIDUAL = 0, //!< Represents the power cap to be applied for each member of the group
     DCGM_CONFIG_POWER_BUDGET_GROUP   = 1, //!< Represents the power budget for the entire group
-};
+} dcgmConfigPowerLimitType_t;
 
 /** @} */
 
@@ -464,16 +424,16 @@ using dcgmConfigPowerLimitType_t = enum dcgmConfigPowerLimitType_enum
  *  @{
  */
 /***************************************************************************************************/
-using dcgmHandle_t = uintptr_t;   //!< Identifier for DCGM Handle
-using dcgmGpuGrp_t = uintptr_t;   //!< Identifier for a group of GPUs. A group can have one or more GPUs
-using dcgmFieldGrp_t = uintptr_t; //!< Identifier for a group of fields.
-using dcgmStatus_t = uintptr_t;   //!< Identifier for list of status codes
+typedef uintptr_t dcgmHandle_t;   //!< Identifier for DCGM Handle
+typedef uintptr_t dcgmGpuGrp_t;   //!< Identifier for a group of GPUs. A group can have one or more GPUs
+typedef uintptr_t dcgmFieldGrp_t; //!< Identifier for a group of fields.
+typedef uintptr_t dcgmStatus_t;   //!< Identifier for list of status codes
 
 /**
  * DCGM Logging Severities. These match up with plog severities defined in Severity.h
  * Each level includes all of the levels above it. For instance, level 4 includes 3,2, and 1 as well
  */
-using DcgmLoggingSeverity_t = enum
+typedef enum
 {
     DcgmLoggingSeverityUnspecified = -1, /*!< Don't care/inherit from the environment */
     DcgmLoggingSeverityNone        = 0,  /*!< No logging */
@@ -483,7 +443,7 @@ using DcgmLoggingSeverity_t = enum
     DcgmLoggingSeverityInfo        = 4,  /*!< Informative */
     DcgmLoggingSeverityDebug       = 5,  /*!< Debug information (will generate large logs) */
     DcgmLoggingSeverityVerbose     = 6   /*!< Verbose debugging information */
-};
+} DcgmLoggingSeverity_t;
 
 /**
  * Represents a link object. type should be one of DCGM_FE_GPU or
@@ -491,7 +451,7 @@ using DcgmLoggingSeverity_t = enum
  * is the link index, 0-based, with TX (even) coming before RX (odd).
  */
 #pragma pack(push, 1)
-using dcgm_link_t = struct dcgm_link_s
+typedef struct dcgm_link_s
 {
     union
     {
@@ -507,7 +467,7 @@ using dcgm_link_t = struct dcgm_link_s
         } parsed;             /*!< Broken out Link identifier GPU/SW:[GPU|SW]:Index */
         dcgm_field_eid_t raw; /*!< Raw Link ID */
     };
-};
+} dcgm_link_t;
 #pragma pack(pop)
 
 /**
@@ -515,7 +475,7 @@ using dcgm_link_t = struct dcgm_link_s
  *
  * NOTE: This version is deprecated. use dcgmConnectV2Params_v2
  */
-using dcgmConnectV2Params_v1 = struct
+typedef struct
 {
     unsigned int version;                /*!< Version number. Use dcgmConnectV2Params_version */
     unsigned int persistAfterDisconnect; /*!< Whether to persist DCGM state modified by this connection
@@ -524,7 +484,7 @@ using dcgmConnectV2Params_v1 = struct
                                               connection goes away.
                                               1 = do not clean up after this connection.
                                               0 = clean up after this connection */
-};
+} dcgmConnectV2Params_v1;
 
 /**
  * Version 1 for \ref dcgmConnectV2Params_v1
@@ -534,7 +494,7 @@ using dcgmConnectV2Params_v1 = struct
 /**
  * Connection options for dcgmConnect_v2 (v2)
  */
-using dcgmConnectV2Params_v2 = struct
+typedef struct
 {
     unsigned int version;                /*!< Version number. Use dcgmConnectV2Params_version */
     unsigned int persistAfterDisconnect; /*!< Whether to persist DCGM state modified by this connection once the
@@ -545,12 +505,12 @@ using dcgmConnectV2Params_v2 = struct
                                               we wait in milliseconds before giving up */
     unsigned int addressIsUnixSocket;    /*!< Whether or not the passed-in address is a unix socket filename (1) or a
                                               TCP/IP address (0) */
-};
+} dcgmConnectV2Params_v2;
 
 /**
  * Typedef for \ref dcgmConnectV2Params_v2
  */
-using dcgmConnectV2Params_t = dcgmConnectV2Params_v2;
+typedef dcgmConnectV2Params_v2 dcgmConnectV2Params_t;
 
 /**
  * Version 2 for \ref dcgmConnectV2Params_v2
@@ -565,7 +525,7 @@ using dcgmConnectV2Params_t = dcgmConnectV2Params_v2;
 /**
  * Typedef for \ref dcgmHostengineHealth_v1
  */
-using dcgmHostengineHealth_v1 = struct
+typedef struct
 {
     unsigned int version;       //!< The version of this request
     unsigned int overallHealth; //!< 0 to indicate healthy, or a code to indicate the error
@@ -573,12 +533,12 @@ using dcgmHostengineHealth_v1 = struct
                                 //   hostengine can respond. In the future this will be
                                 //   updated to have other options like NVML unresponsive,
                                 //   no GPUs on system, etc.
-};
+} dcgmHostengineHealth_v1;
 
 /**
  * Typedef for \ref dcgmHostengineHealth_t
  */
-using dcgmHostengineHealth_t = dcgmHostengineHealth_v1;
+typedef dcgmHostengineHealth_v1 dcgmHostengineHealth_t;
 
 #define dcgmHostengineHealth_version1 MAKE_DCGM_VERSION(dcgmHostengineHealth_v1, 1)
 
@@ -592,29 +552,29 @@ using dcgmHostengineHealth_t = dcgmHostengineHealth_v1;
  *
  * Added in DCGM 1.5.0
  */
-using dcgmGroupEntityPair_t = struct
+typedef struct
 {
     dcgm_field_entity_group_t entityGroupId; //!< Entity Group ID entity belongs to
     dcgm_field_eid_t entityId;               //!< Entity ID of the entity
-};
+} dcgmGroupEntityPair_t;
 
 /**
  * Structure to store information for DCGM group
  *
  * Added in DCGM 1.5.0
  */
-using dcgmGroupInfo_v2 = struct
+typedef struct
 {
     unsigned int version;                                      //!< Version Number (use dcgmGroupInfo_version2)
     unsigned int count;                                        //!< count of entityIds returned in \a entityList
     char groupName[DCGM_MAX_STR_LENGTH];                       //!< Group Name
     dcgmGroupEntityPair_t entityList[DCGM_GROUP_MAX_ENTITIES]; //!< List of the entities that are in this group
-};
+} dcgmGroupInfo_v2;
 
 /**
  * Typedef for \ref dcgmGroupInfo_v2
  */
-using dcgmGroupInfo_t = dcgmGroupInfo_v2;
+typedef dcgmGroupInfo_v2 dcgmGroupInfo_t;
 
 /**
  * Version 2 for \ref dcgmGroupInfo_v2
@@ -629,7 +589,7 @@ using dcgmGroupInfo_t = dcgmGroupInfo_v2;
 /**
  * Enum for the different kinds of MIG profiles
  */
-using dcgmMigProfile_t = enum
+typedef enum
 {
     DcgmMigProfileNone                  = 0,  /*!< No profile (for GPUs) */
     DcgmMigProfileGpuInstanceSlice1     = 1,  /*!< GPU instance slice 1 */
@@ -644,22 +604,22 @@ using dcgmMigProfile_t = enum
     DcgmMigProfileComputeInstanceSlice4 = 33, /*!< compute instance slice 4*/
     DcgmMigProfileComputeInstanceSlice7 = 34, /*!< compute instance slice 7 */
     DcgmMigProfileComputeInstanceSlice8 = 35, /*!< compute instance slice 8 */
-};
+} dcgmMigProfile_t;
 
 /**
  * Represents a pair of entity pairings to uniquely identify an entity and its place in the hierarchy.
  */
-using dcgmMigHierarchyInfo_t = struct
+typedef struct
 {
     dcgmGroupEntityPair_t entity;  //!< Entity id and type for the entity in question
     dcgmGroupEntityPair_t parent;  //!< Entity id and type for the parent of the entity in question
     dcgmMigProfile_t sliceProfile; //!< Entity MIG profile identifier
-};
+} dcgmMigHierarchyInfo_t;
 
 /**
  * Provides additional information about location of MIG entities.
  */
-using dcgmMigEntityInfo_t = struct
+typedef struct
 {
     char gpuUuid[128];                  /*!< GPU UUID */
     unsigned int nvmlGpuIndex;          /*!< GPU index from NVML */
@@ -670,14 +630,14 @@ using dcgmMigEntityInfo_t = struct
                                          *      \see nvmlComputeInstanceProfileInfo_st
                                          *      \see nvmlGpuInstanceProfileInfo_st */
     unsigned int nvmlProfileSlices;     /*!< Number of slices in the MIG profile */
-};
+} dcgmMigEntityInfo_t;
 
-using dcgmMigHierarchyInfo_v2 = struct
+typedef struct
 {
     dcgmGroupEntityPair_t entity;
     dcgmGroupEntityPair_t parent;
     dcgmMigEntityInfo_t info;
-};
+} dcgmMigHierarchyInfo_v2;
 
 #define DCGM_MAX_INSTANCES_PER_GPU 8
 // There can never be more compute instances per GPU than instances per GPU because a compute instance is part
@@ -692,12 +652,12 @@ using dcgmMigHierarchyInfo_v2 = struct
 // part of an instance.
 #define DCGM_MAX_COMPUTE_INSTANCES DCGM_MAX_INSTANCES
 
-using dcgmMigHierarchy_v2 = struct
+typedef struct
 {
     unsigned int version;
     unsigned int count;
     dcgmMigHierarchyInfo_v2 entityList[DCGM_MAX_HIERARCHY_INFO];
-};
+} dcgmMigHierarchy_v2;
 
 #define dcgmMigHierarchy_version2 MAKE_DCGM_VERSION(dcgmMigHierarchy_v2, 2)
 
@@ -716,16 +676,16 @@ using dcgmMigHierarchy_v2 = struct
 /**
  * Structure to represent information about a field group
  */
-using dcgmFieldGroupInfo_v1 = struct
+typedef struct
 {
     unsigned int version;                                        //!< Version number (dcgmFieldGroupInfo_version)
     unsigned int numFieldIds;                                    //!< Number of entries in fieldIds[] that are valid
     dcgmFieldGrp_t fieldGroupId;                                 //!< ID of this field group
     char fieldGroupName[DCGM_MAX_STR_LENGTH];                    //!< Field Group Name
     unsigned short fieldIds[DCGM_MAX_FIELD_IDS_PER_FIELD_GROUP]; //!< Field ids that belong to this group
-};
+} dcgmFieldGroupInfo_v1;
 
-using dcgmFieldGroupInfo_t = dcgmFieldGroupInfo_v1;
+typedef dcgmFieldGroupInfo_v1 dcgmFieldGroupInfo_t;
 
 /**
  * Version 1 for dcgmFieldGroupInfo_v1
@@ -737,14 +697,14 @@ using dcgmFieldGroupInfo_t = dcgmFieldGroupInfo_v1;
  */
 #define dcgmFieldGroupInfo_version dcgmFieldGroupInfo_version1
 
-using dcgmAllFieldGroup_v1 = struct
+typedef struct
 {
     unsigned int version;        //!< Version number (dcgmAllFieldGroupInfo_version)
     unsigned int numFieldGroups; //!< Number of entries in fieldGroups[] that are populated
     dcgmFieldGroupInfo_t fieldGroups[DCGM_MAX_NUM_FIELD_GROUPS]; //!< Info about each field group
-};
+} dcgmAllFieldGroup_v1;
 
-using dcgmAllFieldGroup_t = dcgmAllFieldGroup_v1;
+typedef dcgmAllFieldGroup_v1 dcgmAllFieldGroup_t;
 
 /**
  * Version 1 for dcgmAllFieldGroup_v1
@@ -759,29 +719,29 @@ using dcgmAllFieldGroup_t = dcgmAllFieldGroup_v1;
 /**
  * Structure to represent error attributes
  */
-using dcgmErrorInfo_t = struct
+typedef struct
 {
     unsigned int gpuId; //!< Represents GPU ID
     short fieldId;      //!< One of DCGM_FI_?
     int status;         //!< One of DCGM_ST_?
-};
+} dcgmErrorInfo_t;
 
 /**
  * Represents a set of memory, SM, and video clocks for a device. This can be current values or a target values
  * based on context
  */
-using dcgmClockSet_v1 = struct
+typedef struct
 {
     int version;           //!< Version Number (dcgmClockSet_version)
     unsigned int memClock; //!< Memory Clock (Memory Clock value OR DCGM_INT32_BLANK to Ignore/Use compatible
                            //!< value with smClk)
     unsigned int smClock;  //!< SM Clock (SM Clock value OR DCGM_INT32_BLANK to Ignore/Use compatible value with memClk)
-};
+} dcgmClockSet_v1;
 
 /**
  * Typedef for \ref dcgmClockSet_v1
  */
-using dcgmClockSet_t = dcgmClockSet_v1;
+typedef dcgmClockSet_v1 dcgmClockSet_t;
 
 /**
  * Version 1 for \ref dcgmClockSet_v1
@@ -796,17 +756,17 @@ using dcgmClockSet_t = dcgmClockSet_v1;
 /**
  * Represents list of supported clock sets for a device
  */
-using dcgmDeviceSupportedClockSets_v1 = struct
+typedef struct
 {
     unsigned int version;                     //!< Version Number (dcgmDeviceSupportedClockSets_version)
     unsigned int count;                       //!< Number of supported clocks
     dcgmClockSet_t clockSet[DCGM_MAX_CLOCKS]; //!< Valid clock sets for the device. Upto \ref count entries are filled
-};
+} dcgmDeviceSupportedClockSets_v1;
 
 /**
  * Typedef for \ref dcgmDeviceSupportedClockSets_v1
  */
-using dcgmDeviceSupportedClockSets_t = dcgmDeviceSupportedClockSets_v1;
+typedef dcgmDeviceSupportedClockSets_v1 dcgmDeviceSupportedClockSets_t;
 
 /**
  * Version 1 for \ref dcgmDeviceSupportedClockSets_v1
@@ -821,7 +781,7 @@ using dcgmDeviceSupportedClockSets_t = dcgmDeviceSupportedClockSets_v1;
 /**
  * Represents accounting data for one process
  */
-using dcgmDevicePidAccountingStats_v1 = struct
+typedef struct
 {
     unsigned int version;              //!< Version Number. Should match dcgmDevicePidAccountingStats_version
     unsigned int pid;                  //!< Process id of the process these stats are for
@@ -837,12 +797,12 @@ using dcgmDevicePidAccountingStats_v1 = struct
     unsigned long long activeTimeUsec; //!< Amount of time in usec during which the compute context was active.
                                        //!< Note that this does not mean the context was being used. endTimestamp
                                        //!< can be computed as startTimestamp + activeTime
-};
+} dcgmDevicePidAccountingStats_v1;
 
 /**
  * Typedef for \ref dcgmDevicePidAccountingStats_v1
  */
-using dcgmDevicePidAccountingStats_t = dcgmDevicePidAccountingStats_v1;
+typedef dcgmDevicePidAccountingStats_v1 dcgmDevicePidAccountingStats_t;
 
 /**
  * Version 1 for \ref dcgmDevicePidAccountingStats_v1
@@ -857,17 +817,17 @@ using dcgmDevicePidAccountingStats_t = dcgmDevicePidAccountingStats_v1;
 /**
  * Represents thermal information
  */
-using dcgmDeviceThermals_v1 = struct
+typedef struct
 {
     unsigned int version;      //!< Version Number
     unsigned int slowdownTemp; //!< Slowdown temperature
     unsigned int shutdownTemp; //!< Shutdown temperature
-};
+} dcgmDeviceThermals_v1;
 
 /**
  * Typedef for \ref dcgmDeviceThermals_v1
  */
-using dcgmDeviceThermals_t = dcgmDeviceThermals_v1;
+typedef dcgmDeviceThermals_v1 dcgmDeviceThermals_t;
 
 /**
  * Version 1 for \ref dcgmDeviceThermals_v1
@@ -882,7 +842,7 @@ using dcgmDeviceThermals_t = dcgmDeviceThermals_v1;
 /**
  * Represents various power limits
  */
-using dcgmDevicePowerLimits_v1 = struct
+typedef struct
 {
     unsigned int version;            //!< Version Number
     unsigned int curPowerLimit;      //!< Power management limit associated with this device (in W)
@@ -891,12 +851,12 @@ using dcgmDevicePowerLimits_v1 = struct
                                      //!< all limiters (in W)
     unsigned int minPowerLimit;      //!< Minimum power management limit (in W)
     unsigned int maxPowerLimit;      //!< Maximum power management limit (in W)
-};
+} dcgmDevicePowerLimits_v1;
 
 /**
  * Typedef for \ref dcgmDevicePowerLimits_v1
  */
-using dcgmDevicePowerLimits_t = dcgmDevicePowerLimits_v1;
+typedef dcgmDevicePowerLimits_v1 dcgmDevicePowerLimits_t;
 
 /**
  * Version 1 for \ref dcgmDevicePowerLimits_v1
@@ -911,7 +871,7 @@ using dcgmDevicePowerLimits_t = dcgmDevicePowerLimits_v1;
 /**
  * Represents device identifiers
  */
-using dcgmDeviceIdentifiers_v1 = struct
+typedef struct
 {
     unsigned int version;                          //!< Version Number (dcgmDeviceIdentifiers_version)
     char brandName[DCGM_MAX_STR_LENGTH];           //!< Brand Name
@@ -925,12 +885,12 @@ using dcgmDeviceIdentifiers_v1 = struct
     unsigned int pciSubSystemId;                   //!< The 32-bit Sub System Device ID
     char driverVersion[DCGM_MAX_STR_LENGTH];       //!< Driver Version
     unsigned int virtualizationMode;               //!< Virtualization Mode
-};
+} dcgmDeviceIdentifiers_v1;
 
 /**
  * Typedef for \ref dcgmDeviceIdentifiers_v1
  */
-using dcgmDeviceIdentifiers_t = dcgmDeviceIdentifiers_v1;
+typedef dcgmDeviceIdentifiers_v1 dcgmDeviceIdentifiers_t;
 
 /**
  * Version 1 for \ref dcgmDeviceIdentifiers_v1
@@ -945,19 +905,19 @@ using dcgmDeviceIdentifiers_t = dcgmDeviceIdentifiers_v1;
 /**
  * Represents device memory and usage
  */
-using dcgmDeviceMemoryUsage_v1 = struct
+typedef struct
 {
     unsigned int version;   //!< Version Number (dcgmDeviceMemoryUsage_version)
     unsigned int bar1Total; //!< Total BAR1 size in megabytes
     unsigned int fbTotal;   //!< Total framebuffer memory in megabytes
     unsigned int fbUsed;    //!< Used framebuffer memory in megabytes
     unsigned int fbFree;    //!< Free framebuffer memory in megabytes
-};
+} dcgmDeviceMemoryUsage_v1;
 
 /**
  * Typedef for \ref dcgmDeviceMemoryUsage_v1
  */
-using dcgmDeviceMemoryUsage_t = dcgmDeviceMemoryUsage_v1;
+typedef dcgmDeviceMemoryUsage_v1 dcgmDeviceMemoryUsage_t;
 
 /**
  * Version 1 for \ref dcgmDeviceMemoryUsage_v1
@@ -972,7 +932,7 @@ using dcgmDeviceMemoryUsage_t = dcgmDeviceMemoryUsage_v1;
 /**
  * Represents utilization values for vGPUs running on the device
  */
-using dcgmDeviceVgpuUtilInfo_v1 = struct
+typedef struct
 {
     unsigned int version; //!< Version Number (dcgmDeviceVgpuUtilInfo_version)
     unsigned int vgpuId;  //!< vGPU instance ID
@@ -980,12 +940,12 @@ using dcgmDeviceVgpuUtilInfo_v1 = struct
     unsigned int memUtil; //!< Memory utilization for vGPU
     unsigned int encUtil; //!< Encoder utilization for vGPU
     unsigned int decUtil; //!< Decoder utilization for vGPU
-};
+} dcgmDeviceVgpuUtilInfo_v1;
 
 /**
  * Typedef for \ref dcgmDeviceVgpuUtilInfo_v1
  */
-using dcgmDeviceVgpuUtilInfo_t = dcgmDeviceVgpuUtilInfo_v1;
+typedef dcgmDeviceVgpuUtilInfo_v1 dcgmDeviceVgpuUtilInfo_t;
 
 /**
  * Version 1 for \ref dcgmDeviceVgpuUtilInfo_v1
@@ -1000,18 +960,18 @@ using dcgmDeviceVgpuUtilInfo_t = dcgmDeviceVgpuUtilInfo_v1;
 /**
  * Represents current encoder statistics for the given device/vGPU instance
  */
-using dcgmDeviceEncStats_v1 = struct
+typedef struct
 {
     unsigned int version;        //!< Version Number (dcgmDeviceEncStats_version)
     unsigned int sessionCount;   //!< Count of active encoder sessions
     unsigned int averageFps;     //!< Trailing average FPS of all active sessions
     unsigned int averageLatency; //!< Encode latency in milliseconds
-};
+} dcgmDeviceEncStats_v1;
 
 /**
  * Typedef for \ref dcgmDeviceEncStats_v1
  */
-using dcgmDeviceEncStats_t = dcgmDeviceEncStats_v1;
+typedef dcgmDeviceEncStats_v1 dcgmDeviceEncStats_t;
 
 /**
  * Version 1 for \ref dcgmDeviceEncStats_v1
@@ -1026,18 +986,18 @@ using dcgmDeviceEncStats_t = dcgmDeviceEncStats_v1;
 /**
  * Represents current frame buffer capture sessions statistics for the given device/vGPU instance
  */
-using dcgmDeviceFbcStats_v1 = struct
+typedef struct
 {
     unsigned int version;        //!< Version Number (dcgmDeviceFbcStats_version)
     unsigned int sessionCount;   //!< Count of active FBC sessions
     unsigned int averageFps;     //!< Moving average new frames captured per second
     unsigned int averageLatency; //!< Moving average new frame capture latency in microseconds
-};
+} dcgmDeviceFbcStats_v1;
 
 /**
  * Typedef for \ref dcgmDeviceFbcStats_v1
  */
-using dcgmDeviceFbcStats_t = dcgmDeviceFbcStats_v1;
+typedef dcgmDeviceFbcStats_v1 dcgmDeviceFbcStats_t;
 
 /**
  * Version 1 for \ref dcgmDeviceFbcStats_v1
@@ -1052,19 +1012,19 @@ using dcgmDeviceFbcStats_t = dcgmDeviceFbcStats_v1;
 /*
  * Represents frame buffer capture session type
  */
-using dcgmFBCSessionType_t = enum dcgmFBCSessionType_enum
+typedef enum dcgmFBCSessionType_enum
 {
     DCGM_FBC_SESSION_TYPE_UNKNOWN = 0, //!< Unknown
     DCGM_FBC_SESSION_TYPE_TOSYS,       //!< FB capture for a system buffer
     DCGM_FBC_SESSION_TYPE_CUDA,        //!< FB capture for a cuda buffer
     DCGM_FBC_SESSION_TYPE_VID,         //!< FB capture for a Vid buffer
     DCGM_FBC_SESSION_TYPE_HWENC,       //!< FB capture for a NVENC HW buffer
-};
+} dcgmFBCSessionType_t;
 
 /**
  * Represents information about active FBC session on the given device/vGPU instance
  */
-using dcgmDeviceFbcSessionInfo_v1 = struct
+typedef struct
 {
     unsigned int version;             //!< Version Number (dcgmDeviceFbcSessionInfo_version)
     unsigned int sessionId;           //!< Unique session ID
@@ -1079,12 +1039,12 @@ using dcgmDeviceFbcSessionInfo_v1 = struct
     unsigned int vResolution;         //!< Vertical resolution requested by caller in capture call
     unsigned int averageFps;          //!< Moving average new frames captured per second
     unsigned int averageLatency;      //!< Moving average new frame capture latency in microseconds
-};
+} dcgmDeviceFbcSessionInfo_v1;
 
 /**
  * Typedef for \ref dcgmDeviceFbcSessionInfo_v1
  */
-using dcgmDeviceFbcSessionInfo_t = dcgmDeviceFbcSessionInfo_v1;
+typedef dcgmDeviceFbcSessionInfo_v1 dcgmDeviceFbcSessionInfo_t;
 
 /**
  * Version 1 for \ref dcgmDeviceFbcSessionInfo_v1
@@ -1099,17 +1059,17 @@ using dcgmDeviceFbcSessionInfo_t = dcgmDeviceFbcSessionInfo_v1;
 /**
  * Represents all the active FBC sessions on the given device/vGPU instance
  */
-using dcgmDeviceFbcSessions_v1 = struct
+typedef struct
 {
     unsigned int version;                                          //!< Version Number (dcgmDeviceFbcSessions_version)
     unsigned int sessionCount;                                     //!< Count of active FBC sessions
     dcgmDeviceFbcSessionInfo_t sessionInfo[DCGM_MAX_FBC_SESSIONS]; //!< Info about the active FBC session
-};
+} dcgmDeviceFbcSessions_v1;
 
 /**
  * Typedef for \ref dcgmDeviceFbcSessions_v1
  */
-using dcgmDeviceFbcSessions_t = dcgmDeviceFbcSessions_v1;
+typedef dcgmDeviceFbcSessions_v1 dcgmDeviceFbcSessions_t;
 
 /**
  * Version 1 for \ref dcgmDeviceFbcSessions_v1
@@ -1124,16 +1084,16 @@ using dcgmDeviceFbcSessions_t = dcgmDeviceFbcSessions_v1;
 /*
  * Represents type of encoder for capacity can be queried
  */
-using dcgmEncoderType_t = enum dcgmEncoderQueryType_enum
+typedef enum dcgmEncoderQueryType_enum
 {
     DCGM_ENCODER_QUERY_H264 = 0,
     DCGM_ENCODER_QUERY_HEVC = 1
-};
+} dcgmEncoderType_t;
 
 /**
  * Represents information about active encoder sessions on the given vGPU instance
  */
-using dcgmDeviceVgpuEncSessions_v1 = struct
+typedef struct
 {
     unsigned int version; //!< Version Number (dcgmDeviceVgpuEncSessions_version)
     union
@@ -1148,12 +1108,12 @@ using dcgmDeviceVgpuEncSessions_v1 = struct
     unsigned int vResolution;    //!< Current encode vertical resolution
     unsigned int averageFps;     //!< Moving average encode frames per second
     unsigned int averageLatency; //!< Moving average encode latency in milliseconds
-};
+} dcgmDeviceVgpuEncSessions_v1;
 
 /**
  * Typedef for \ref dcgmDeviceVgpuEncSessions_v1
  */
-using dcgmDeviceVgpuEncSessions_t = dcgmDeviceVgpuEncSessions_v1;
+typedef dcgmDeviceVgpuEncSessions_v1 dcgmDeviceVgpuEncSessions_t;
 
 /**
  * Version 1 for \ref dcgmDeviceVgpuEncSessions_v1
@@ -1168,7 +1128,7 @@ using dcgmDeviceVgpuEncSessions_t = dcgmDeviceVgpuEncSessions_v1;
 /**
  * Represents utilization values for processes running in vGPU VMs using the device
  */
-using dcgmDeviceVgpuProcessUtilInfo_v1 = struct
+typedef struct
 {
     unsigned int version; //!< Version Number (dcgmDeviceVgpuProcessUtilInfo_version)
     union
@@ -1183,12 +1143,12 @@ using dcgmDeviceVgpuProcessUtilInfo_v1 = struct
     unsigned int memUtil;                         //!< Memory utilization of process running in the vGPU VM.
     unsigned int encUtil;                         //!< Encoder utilization of process running in the vGPU VM.
     unsigned int decUtil;                         //!< Decoder utilization of process running in the vGPU VM.
-};
+} dcgmDeviceVgpuProcessUtilInfo_v1;
 
 /**
  * Typedef for \ref dcgmDeviceVgpuProcessUtilInfo_v1
  */
-using dcgmDeviceVgpuProcessUtilInfo_t = dcgmDeviceVgpuProcessUtilInfo_v1;
+typedef dcgmDeviceVgpuProcessUtilInfo_v1 dcgmDeviceVgpuProcessUtilInfo_t;
 
 /**
  * Version 1 for \ref dcgmDeviceVgpuProcessUtilInfo_v1
@@ -1203,7 +1163,7 @@ using dcgmDeviceVgpuProcessUtilInfo_t = dcgmDeviceVgpuProcessUtilInfo_v1;
 /**
  * Represents static info related to vGPUs supported on the device.
  */
-using dcgmDeviceVgpuTypeInfo_v1 = struct
+typedef struct
 {
     unsigned int version; //!< Version number (dcgmDeviceVgpuTypeInfo_version)
     union
@@ -1222,14 +1182,14 @@ using dcgmDeviceVgpuTypeInfo_v1 = struct
     int maxResolutionX; //!< vGPU display head's maximum supported resolution in X dimension
     int maxResolutionY; //!< vGPU display head's maximum supported resolution in Y dimension
     int fbTotal;        //!< vGPU Total framebuffer size in megabytes
-};
+} dcgmDeviceVgpuTypeInfo_v1;
 
 /**
  * Version 1 for \ref dcgmDeviceVgpuTypeInfo_v1
  */
 #define dcgmDeviceVgpuTypeInfo_version1 MAKE_DCGM_VERSION(dcgmDeviceVgpuTypeInfo_v1, 1)
 
-using dcgmDeviceVgpuTypeInfo_v2 = struct
+typedef struct
 {
     unsigned int version; //!< Version number (dcgmDeviceVgpuTypeInfo_version2)
     union
@@ -1249,12 +1209,12 @@ using dcgmDeviceVgpuTypeInfo_v2 = struct
     int maxResolutionY;       //!< vGPU display head's maximum supported resolution in Y dimension
     int fbTotal;              //!< vGPU Total framebuffer size in megabytes
     int gpuInstanceProfileId; //!< GPU Instance Profile ID for the given vGPU type
-};
+} dcgmDeviceVgpuTypeInfo_v2;
 
 /**
  * Typedef for \ref dcgmDeviceVgpuTypeInfo_v2
  */
-using dcgmDeviceVgpuTypeInfo_t = dcgmDeviceVgpuTypeInfo_v2;
+typedef dcgmDeviceVgpuTypeInfo_v2 dcgmDeviceVgpuTypeInfo_t;
 
 /**
  * Version 2 for \ref dcgmDeviceVgpuTypeInfo_v2
@@ -1269,7 +1229,7 @@ using dcgmDeviceVgpuTypeInfo_t = dcgmDeviceVgpuTypeInfo_v2;
 /**
  * Represents the info related to vGPUs supported on the device.
  */
-using dcgmDeviceSupportedVgpuTypeInfo_v1 = struct
+typedef struct
 {
     unsigned int version;              //!< Version number (dcgmDeviceSupportedVgpuTypeInfo_version)
     unsigned long long deviceId;       //!< device ID of vGPU type
@@ -1281,12 +1241,12 @@ using dcgmDeviceSupportedVgpuTypeInfo_v1 = struct
     unsigned int maxResolutionY;       //!< vGPU display head's maximum supported resolution in Y dimension
     unsigned long long fbTotal;        //!< vGPU Total framebuffer size in megabytes
     unsigned int gpuInstanceProfileId; //!< GPU Instance Profile ID for the given vGPU type
-};
+} dcgmDeviceSupportedVgpuTypeInfo_v1;
 
 /**
  * Typedef for \ref dcgmDeviceSupportedVgpuTypeInfo_v1
  */
-using dcgmDeviceSupportedVgpuTypeInfo_t = dcgmDeviceSupportedVgpuTypeInfo_v1;
+typedef dcgmDeviceSupportedVgpuTypeInfo_v1 dcgmDeviceSupportedVgpuTypeInfo_t;
 
 /**
  * Version 1 for \ref dcgmDeviceSupportedVgpuTypeInfo_v1
@@ -1298,21 +1258,21 @@ using dcgmDeviceSupportedVgpuTypeInfo_t = dcgmDeviceSupportedVgpuTypeInfo_v1;
  */
 #define dcgmDeviceSupportedVgpuTypeInfo_version dcgmDeviceSupportedVgpuTypeInfo_version1
 
-using dcgmDeviceSettings_v2 = struct
+typedef struct
 {
     unsigned int version;
     unsigned int persistenceModeEnabled;
     unsigned int migModeEnabled;
     unsigned int confidentialComputeMode;
-};
+} dcgmDeviceSettings_v2;
 
-using dcgmDeviceSettings_t = dcgmDeviceSettings_v2;
+typedef dcgmDeviceSettings_v2 dcgmDeviceSettings_t;
 
 #define dcgmDeviceSettings_version2 MAKE_DCGM_VERSION(dcgmDeviceSettings_v2, 2)
 
 #define dcgmDeviceSettings_version dcgmDeviceSettings_version2
 
-using dcgmDeviceAttributes_v3 = struct
+typedef struct
 {
     unsigned int version;                     //!< Version number (dcgmDeviceAttributes_version)
     dcgmDeviceSupportedClockSets_t clockSets; //!< Supported clocks for the device
@@ -1321,12 +1281,12 @@ using dcgmDeviceAttributes_v3 = struct
     dcgmDeviceIdentifiers_t identifiers;      //!< Identifiers for the device
     dcgmDeviceMemoryUsage_t memoryUsage;      //!< Memory usage info for the device
     dcgmDeviceSettings_v2 settings;           //!< Basic device settings
-};
+} dcgmDeviceAttributes_v3;
 
 /**
  * Typedef for \ref dcgmDeviceAttributes_v3
  */
-using dcgmDeviceAttributes_t = dcgmDeviceAttributes_v3;
+typedef dcgmDeviceAttributes_v3 dcgmDeviceAttributes_t;
 
 /**
  * Version 3 for \ref dcgmDeviceAttributes_v3
@@ -1341,7 +1301,7 @@ using dcgmDeviceAttributes_t = dcgmDeviceAttributes_v3;
 /**
  * Structure to represent attributes info for a MIG device
  */
-using dcgmDeviceMigAttributesInfo_v1 = struct
+typedef struct
 {
     unsigned int version;                   //!< Version Number (dcgmDeviceMigAttributesInfo_version)
     unsigned int gpuInstanceId;             //!< GPU instance ID
@@ -1355,12 +1315,12 @@ using dcgmDeviceMigAttributesInfo_v1 = struct
     unsigned int gpuInstanceSliceCount;     //!< GPU instance slice count
     unsigned int computeInstanceSliceCount; //!< Compute instance slice count
     unsigned long long memorySizeMB;        //!< Device memory size (in MiB)
-};
+} dcgmDeviceMigAttributesInfo_v1;
 
 /**
  * Typedef for \ref dcgmDeviceMigAttributesInfo_v1
  */
-using dcgmDeviceMigAttributesInfo_t = dcgmDeviceMigAttributesInfo_v1;
+typedef dcgmDeviceMigAttributesInfo_v1 dcgmDeviceMigAttributesInfo_t;
 
 /**
  * Version 1 for \ref dcgmDeviceMigAttributesInfo_v1
@@ -1375,17 +1335,17 @@ using dcgmDeviceMigAttributesInfo_t = dcgmDeviceMigAttributesInfo_v1;
 /**
  * Structure to represent attributes for a MIG device
  */
-using dcgmDeviceMigAttributes_v1 = struct
+typedef struct
 {
     unsigned int version;                             //!< Version Number (dcgmDeviceMigAttributes_version)
     unsigned int migDevicesCount;                     //!< Count of MIG devices
     dcgmDeviceMigAttributesInfo_v1 migAttributesInfo; //!< MIG attributes information
-};
+} dcgmDeviceMigAttributes_v1;
 
 /**
  * Typedef for \ref dcgmDeviceMigAttributes_v1
  */
-using dcgmDeviceMigAttributes_t = dcgmDeviceMigAttributes_v1;
+typedef dcgmDeviceMigAttributes_v1 dcgmDeviceMigAttributes_t;
 
 /**
  * Version 1 for \ref dcgmDeviceMigAttributes_v1
@@ -1400,7 +1360,7 @@ using dcgmDeviceMigAttributes_t = dcgmDeviceMigAttributes_v1;
 /**
  * Structure to represent GPU instance profile information
  */
-using dcgmGpuInstanceProfileInfo_v1 = struct
+typedef struct
 {
     unsigned int version;             //!< Version Number (dcgmGpuInstanceProfileInfo_version)
     unsigned int id;                  //!< Unique profile ID within the device
@@ -1414,12 +1374,12 @@ using dcgmGpuInstanceProfileInfo_v1 = struct
     unsigned int jpegCount;           //!< JPEG Engine count
     unsigned int ofaCount;            //!< OFA Engine count
     unsigned long long memorySizeMB;  //!< Memory size in MBytes
-};
+} dcgmGpuInstanceProfileInfo_v1;
 
 /**
  * Typedef for \ref dcgmGpuInstanceProfileInfo_v1
  */
-using dcgmGpuInstanceProfileInfo_t = dcgmGpuInstanceProfileInfo_v1;
+typedef dcgmGpuInstanceProfileInfo_v1 dcgmGpuInstanceProfileInfo_t;
 
 /**
  * Version 1 for \ref dcgmGpuInstanceProfileInfo_v1
@@ -1434,17 +1394,17 @@ using dcgmGpuInstanceProfileInfo_t = dcgmGpuInstanceProfileInfo_v1;
 /**
  * Structure to represent GPU instance profiles
  */
-using dcgmGpuInstanceProfiles_v1 = struct
+typedef struct
 {
     unsigned int version;                      //!< Version Number (dcgmGpuInstanceProfiles_version)
     unsigned int profileCount;                 //!< Profile count
     dcgmGpuInstanceProfileInfo_v1 profileInfo; //!< GPU instance profile information
-};
+} dcgmGpuInstanceProfiles_v1;
 
 /**
  * Typedef for \ref dcgmGpuInstanceProfiles_v1
  */
-using dcgmGpuInstanceProfiles_t = dcgmGpuInstanceProfiles_v1;
+typedef dcgmGpuInstanceProfiles_v1 dcgmGpuInstanceProfiles_t;
 
 /**
  * Version 1 for \ref dcgmGpuInstanceProfiles_v1
@@ -1459,7 +1419,7 @@ using dcgmGpuInstanceProfiles_t = dcgmGpuInstanceProfiles_v1;
 /**
  * Structure to represent Compute instance profile information
  */
-using dcgmComputeInstanceProfileInfo_v1 = struct
+typedef struct
 {
     unsigned int version;               //!< Version Number (dcgmComputeInstanceProfileInfo_version)
     unsigned int gpuInstanceId;         //!< GPU instance ID
@@ -1472,12 +1432,12 @@ using dcgmComputeInstanceProfileInfo_v1 = struct
     unsigned int sharedEncoderCount;    //!< Shared Encoder Engine count
     unsigned int sharedJpegCount;       //!< Shared JPEG Engine count
     unsigned int sharedOfaCount;        //!< Shared OFA Engine count
-};
+} dcgmComputeInstanceProfileInfo_v1;
 
 /**
  * Typedef for \ref dcgmComputeInstanceProfileInfo_v1
  */
-using dcgmComputeInstanceProfileInfo_t = dcgmComputeInstanceProfileInfo_v1;
+typedef dcgmComputeInstanceProfileInfo_v1 dcgmComputeInstanceProfileInfo_t;
 
 /**
  * Version 1 for \ref dcgmComputeInstanceProfileInfo_v1
@@ -1492,17 +1452,17 @@ using dcgmComputeInstanceProfileInfo_t = dcgmComputeInstanceProfileInfo_v1;
 /**
  * Structure to represent Compute instance profiles
  */
-using dcgmComputeInstanceProfiles_v1 = struct
+typedef struct
 {
     unsigned int version;                          //!< Version Number (dcgmComputeInstanceProfiles_version)
     unsigned int profileCount;                     //!< Profile count
     dcgmComputeInstanceProfileInfo_v1 profileInfo; //!< Compute instance profile information
-};
+} dcgmComputeInstanceProfiles_v1;
 
 /**
  * Typedef for \ref dcgmComputeInstanceProfiles_v1
  */
-using dcgmComputeInstanceProfiles_t = dcgmComputeInstanceProfiles_v1;
+typedef dcgmComputeInstanceProfiles_v1 dcgmComputeInstanceProfiles_t;
 
 /**
  * Version 1 for \ref dcgmComputeInstanceProfiles_v1
@@ -1527,28 +1487,28 @@ using dcgmComputeInstanceProfiles_t = dcgmComputeInstanceProfiles_v1;
 /**
  * Used to represent Performance state settings
  */
-using dcgmConfigPerfStateSettings_t = struct
+typedef struct
 {
     unsigned int syncBoost;      //!< Sync Boost Mode (0: Disabled, 1 : Enabled, DCGM_INT32_BLANK : Ignored). Note that
                                  //!< using this setting may result in lower clocks than targetClocks
     dcgmClockSet_t targetClocks; //!< Target clocks. Set smClock and memClock to DCGM_INT32_BLANK to ignore/use
                                  //!< compatible values. For GPUs > Maxwell, setting this implies autoBoost=0
-};
+} dcgmConfigPerfStateSettings_t;
 
 /**
  * Used to represents the power capping limit for each GPU in the group or to represent the power
  * budget for the entire group
  */
-using dcgmConfigPowerLimit_t = struct
+typedef struct
 {
     dcgmConfigPowerLimitType_t type; //!< Flag to represent power cap for each GPU or power budget for the group of GPUs
     unsigned int val;                //!< Power Limit in Watts (Set a value OR DCGM_INT32_BLANK to Ignore)
-};
+} dcgmConfigPowerLimit_t;
 
 /**
  * Structure to represent default and target configuration for a device
  */
-using dcgmConfig_v1 = struct
+typedef struct
 {
     unsigned int version;     //!< Version number (dcgmConfig_version)
     unsigned int gpuId;       //!< GPU ID
@@ -1556,12 +1516,12 @@ using dcgmConfig_v1 = struct
     unsigned int computeMode; //!< Compute Mode (One of DCGM_CONFIG_COMPUTEMODE_? OR DCGM_INT32_BLANK to Ignore)
     dcgmConfigPerfStateSettings_t perfState; //!< Performance State Settings (clocks / boost mode)
     dcgmConfigPowerLimit_t powerLimit;       //!< Power Limits
-};
+} dcgmConfig_v1;
 
 /**
  * Typedef for \ref dcgmConfig_v1
  */
-using dcgmConfig_t = dcgmConfig_v1;
+typedef dcgmConfig_v1 dcgmConfig_t;
 
 /**
  * Version 1 for \ref dcgmConfig_v1
@@ -1581,13 +1541,13 @@ using dcgmConfig_t = dcgmConfig_v1;
  * dcgmPolicyCallbackResponse_t *callbackResponse = (dcgmPolicyCallbackResponse_t *) userData;
  *
  */
-using fpRecvUpdates = int (*)(void *userData);
+typedef int (*fpRecvUpdates)(void *userData);
 
 /*Remove from doxygen documentation
  *
  * Define the structure that contains specific policy information
  */
-using dcgmPolicyViolation_v1 = struct
+typedef struct
 {
     // version must always be first
     unsigned int version; //!< Version number (dcgmPolicyViolation_version)
@@ -1595,7 +1555,7 @@ using dcgmPolicyViolation_v1 = struct
     unsigned int notifyOnEccDbe;          //!< true/false notification on ECC Double Bit Errors
     unsigned int notifyOnPciEvent;        //!< true/false notification on PCI Events
     unsigned int notifyOnMaxRetiredPages; //!< number of retired pages to occur before notification
-};
+} dcgmPolicyViolation_v1;
 
 /*Remove from doxygen documentation
  *
@@ -1605,7 +1565,7 @@ using dcgmPolicyViolation_v1 = struct
 /*
  * Typedef for \ref dcgmPolicyViolation_v1
  */
-using dcgmPolicyViolation_t = dcgmPolicyViolation_v1;
+typedef dcgmPolicyViolation_v1 dcgmPolicyViolation_t;
 
 /*
  * Version 1 for \ref dcgmPolicyViolation_v1
@@ -1622,7 +1582,7 @@ using dcgmPolicyViolation_t = dcgmPolicyViolation_v1;
  * When used as part of dcgmPolicy_t these have corresponding parameters to
  * allow them to be switched on/off or set specific violation thresholds
  */
-using dcgmPolicyConditionIdx_t = enum dcgmPolicyConditionIdx_enum
+typedef enum dcgmPolicyConditionIdx_enum
 {
     // These are sequential rather than bitwise.
     DCGM_POLICY_COND_IDX_DBE = 0,           //!< Double bit errors -- boolean in dcgmPolicyConditionParams_t
@@ -1633,7 +1593,7 @@ using dcgmPolicyConditionIdx_t = enum dcgmPolicyConditionIdx_enum
     DCGM_POLICY_COND_IDX_POWER,             //!< Power violation -- number required in dcgmPolicyConditionParams_t
     DCGM_POLICY_COND_IDX_NVLINK,            //!< NVLINK errors -- boolean in dcgmPolicyConditionParams_t
     DCGM_POLICY_COND_IDX_XID                //!< XID errors -- number required in dcgmPolicyConditionParams_t
-};
+} dcgmPolicyConditionIdx_t;
 
 #define DCGM_POLICY_COND_IDX_MAX 7
 #define DCGM_POLICY_COND_MAX     DCGM_POLICY_COND_IDX_MAX
@@ -1643,7 +1603,7 @@ using dcgmPolicyConditionIdx_t = enum dcgmPolicyConditionIdx_enum
  * When used as part of dcgmPolicy_t these have corresponding parameters to
  * allow them to be switched on/off or set specific violation thresholds
  */
-using dcgmPolicyCondition_t = enum dcgmPolicyCondition_enum
+typedef enum dcgmPolicyCondition_enum
 {
     // These are bitwise rather than sequential.
     DCGM_POLICY_COND_DBE               = 0x1, //!< Double bit errors -- boolean in dcgmPolicyConditionParams_t
@@ -1654,7 +1614,7 @@ using dcgmPolicyCondition_t = enum dcgmPolicyCondition_enum
     DCGM_POLICY_COND_POWER   = 0x10,          //!< Power violation -- number required in dcgmPolicyConditionParams_t
     DCGM_POLICY_COND_NVLINK  = 0x20,          //!< NVLINK errors -- boolean in dcgmPolicyConditionParams_t
     DCGM_POLICY_COND_XID     = 0x40,          //!< XID errors -- number required in dcgmPolicyConditionParams_t
-};
+} dcgmPolicyCondition_t;
 
 /**
  * Structure for policy condition parameters.
@@ -1662,7 +1622,7 @@ using dcgmPolicyCondition_t = enum dcgmPolicyCondition_enum
  * as well as a "val" which is a union of the possible value types.  For example,
  * to pass a true boolean: tag = BOOL, val.boolean = 1.
  */
-using dcgmPolicyConditionParams_t = struct dcgmPolicyConditionParams_st
+typedef struct dcgmPolicyConditionParams_st
 {
     enum
     {
@@ -1674,67 +1634,67 @@ using dcgmPolicyConditionParams_t = struct dcgmPolicyConditionParams_st
         unsigned int boolean;
         unsigned long long llval;
     } val;
-};
+} dcgmPolicyConditionParams_t;
 
 /**
  * Enumeration for policy modes
  */
-using dcgmPolicyMode_t = enum dcgmPolicyMode_enum
+typedef enum dcgmPolicyMode_enum
 {
     DCGM_POLICY_MODE_AUTOMATED = 0, //!< automatic mode
     DCGM_POLICY_MODE_MANUAL    = 1, //!< manual mode
-};
+} dcgmPolicyMode_t;
 
 /**
  * Enumeration for policy isolation modes
  */
-using dcgmPolicyIsolation_t = enum dcgmPolicyIsolation_enum
+typedef enum dcgmPolicyIsolation_enum
 {
     DCGM_POLICY_ISOLATION_NONE = 0, //!< no isolation of GPUs on error
-};
+} dcgmPolicyIsolation_t;
 
 /**
  * Enumeration for policy actions
  */
-using dcgmPolicyAction_t = enum dcgmPolicyAction_enum
+typedef enum dcgmPolicyAction_enum
 {
     DCGM_POLICY_ACTION_NONE     = 0, //!< no action
     DCGM_POLICY_ACTION_GPURESET = 1, //!< Deprecated - perform a GPU reset on violation
-};
+} dcgmPolicyAction_t;
 
 /**
  * Enumeration for policy validation actions
  */
-using dcgmPolicyValidation_t = enum dcgmPolicyValidation_enum
+typedef enum dcgmPolicyValidation_enum
 {
     DCGM_POLICY_VALID_NONE     = 0, //!< no validation after an action is performed
     DCGM_POLICY_VALID_SV_SHORT = 1, //!< run a short System Validation on the system after failure
     DCGM_POLICY_VALID_SV_MED   = 2, //!< run a medium System Validation test after failure
     DCGM_POLICY_VALID_SV_LONG  = 3, //!< run a extensive System Validation test after failure
     DCGM_POLICY_VALID_SV_XLONG = 4, //!< run a more extensive System Validation test after failure
-};
+} dcgmPolicyValidation_t;
 
 /**
  * Enumeration for policy failure responses
  */
-using dcgmPolicyFailureResp_t = enum dcgmPolicyFailureResp_enum
+typedef enum dcgmPolicyFailureResp_enum
 {
     DCGM_POLICY_FAILURE_NONE = 0, //!< on failure of validation perform no action
-};
+} dcgmPolicyFailureResp_t;
 
 /**
  * Structure to fill when a user queries for policy violations
  */
-using dcgmPolicyViolationNotify_t = struct
+typedef struct
 {
     unsigned int gpuId;             //!< gpu ID
     unsigned int violationOccurred; //!< a violation based on the bit values in \ref dcgmPolicyCondition_t
-};
+} dcgmPolicyViolationNotify_t;
 
 /**
  * Define the structure that specifies a policy to be enforced for a GPU
  */
-using dcgmPolicy_v1 = struct
+typedef struct
 {
     // version must always be first
     unsigned int version; //!< version number (dcgmPolicy_version)
@@ -1746,12 +1706,12 @@ using dcgmPolicy_v1 = struct
     dcgmPolicyValidation_t validation; //!< Validation to perform after action is taken \ref dcgmPolicyValidation_t
     dcgmPolicyFailureResp_t response;  //!< Failure to validation response \ref dcgmPolicyFailureResp_t
     dcgmPolicyConditionParams_t parms[DCGM_POLICY_COND_MAX]; //!< Parameters for the \a condition fields
-};
+} dcgmPolicy_v1;
 
 /**
  * Typedef for \ref dcgmPolicy_v1
  */
-using dcgmPolicy_t = dcgmPolicy_v1;
+typedef dcgmPolicy_v1 dcgmPolicy_t;
 
 /**
  * Version 1 for \ref dcgmPolicy_v1
@@ -1767,7 +1727,7 @@ using dcgmPolicy_t = dcgmPolicy_v1;
 /**
  * Define the ECC DBE return structure
  */
-using dcgmPolicyConditionDbe_t = struct
+typedef struct
 {
     long long timestamp; //!< timestamp of the error
     enum
@@ -1779,69 +1739,69 @@ using dcgmPolicyConditionDbe_t = struct
         TEXTURE
     } location;             //!< location of the error
     unsigned int numerrors; //!< number of errors
-};
+} dcgmPolicyConditionDbe_t;
 
 /**
  * Define the PCI replay error return structure
  */
-using dcgmPolicyConditionPci_t = struct
+typedef struct
 {
     long long timestamp;  //!< timestamp of the error
     unsigned int counter; //!< value of the PCIe replay counter
-};
+} dcgmPolicyConditionPci_t;
 
 /**
  * Define the maximum pending retired pages limit return structure
  */
-using dcgmPolicyConditionMpr_t = struct
+typedef struct
 {
     long long timestamp;   //!< timestamp of the error
     unsigned int sbepages; //!< number of pending pages due to SBE
     unsigned int dbepages; //!< number of pending pages due to DBE
-};
+} dcgmPolicyConditionMpr_t;
 
 /**
  * Define the thermal policy violations return structure
  */
-using dcgmPolicyConditionThermal_t = struct
+typedef struct
 {
     long long timestamp;           //!< timestamp of the error
     unsigned int thermalViolation; //!< Temperature reached that violated policy
-};
+} dcgmPolicyConditionThermal_t;
 
 /**
  * Define the power policy violations return structure
  */
-using dcgmPolicyConditionPower_t = struct
+typedef struct
 {
     long long timestamp;         //!< timestamp of the error
     unsigned int powerViolation; //!< Power value reached that violated policy
-};
+} dcgmPolicyConditionPower_t;
 
 /**
  * Define the nvlink policy violations return structure
  */
-using dcgmPolicyConditionNvlink_t = struct
+typedef struct
 {
     long long timestamp;    //!< timestamp of the error
     unsigned short fieldId; //!< Nvlink counter field ID that violated policy
     unsigned int counter;   //!< Nvlink counter value that violated policy
-};
+} dcgmPolicyConditionNvlink_t;
 
 /**
  * Define the xid policy violations return structure
  */
-using dcgmPolicyConditionXID_t = struct
+typedef struct
 {
     long long timestamp; //!< Timestamp of the error
     unsigned int errnum; //!< The XID error number
-};
+} dcgmPolicyConditionXID_t;
 
 
 /**
  * Define the structure that is given to the callback function
  */
-using dcgmPolicyCallbackResponse_v1 = struct
+typedef struct
 {
     // version must always be first
     unsigned int version; //!< version number (dcgmPolicyCallbackResponse_version)
@@ -1857,13 +1817,13 @@ using dcgmPolicyCallbackResponse_v1 = struct
         dcgmPolicyConditionNvlink_t nvlink;   //!< Nvlink policy violations return structure
         dcgmPolicyConditionXID_t xid;         //!< XID policy violations return structure
     } val;
-};
+} dcgmPolicyCallbackResponse_v1;
 
 
 /**
  * Typedef for \ref dcgmPolicyCallbackResponse_v1
  */
-using dcgmPolicyCallbackResponse_t = dcgmPolicyCallbackResponse_v1;
+typedef dcgmPolicyCallbackResponse_v1 dcgmPolicyCallbackResponse_t;
 
 /**
  * Version 1 for \ref dcgmPolicyCallbackResponse_v1
@@ -1883,7 +1843,7 @@ using dcgmPolicyCallbackResponse_t = dcgmPolicyCallbackResponse_v1;
 /**
  * This structure is used to represent value for the field to be queried.
  */
-using dcgmFieldValue_v1 = struct
+typedef struct
 {
     // version must always be first
     unsigned int version; //!< version number (dcgmFieldValue_version1)
@@ -1899,7 +1859,7 @@ using dcgmFieldValue_v1 = struct
         char str[DCGM_MAX_STR_LENGTH];   //!< NULL terminated string
         char blob[DCGM_MAX_BLOB_LENGTH]; //!< Binary blob
     } value;                             //!< Value
-};
+} dcgmFieldValue_v1;
 
 /**
  * Version 1 for \ref dcgmFieldValue_v1
@@ -1909,7 +1869,7 @@ using dcgmFieldValue_v1 = struct
 /**
  * This structure is used to represent value for the field to be queried.
  */
-using dcgmFieldValue_v2 = struct
+typedef struct
 {
     // version must always be first
     unsigned int version;                    //!< version number (dcgmFieldValue_version2)
@@ -1927,7 +1887,7 @@ using dcgmFieldValue_v2 = struct
         char str[DCGM_MAX_STR_LENGTH];   //!< NULL terminated string
         char blob[DCGM_MAX_BLOB_LENGTH]; //!< Binary blob
     } value;                             //!< Value
-};
+} dcgmFieldValue_v2;
 
 /**
  * Version 2 for \ref dcgmFieldValue_v2
@@ -1959,7 +1919,7 @@ using dcgmFieldValue_v2 = struct
  *         <0 if enumeration should stop. This allows to callee to abort field value enumeration.
  *
  */
-using dcgmFieldValueEnumeration_f = int (*)(unsigned int gpuId,
+typedef int (*dcgmFieldValueEnumeration_f)(unsigned int gpuId,
                                            dcgmFieldValue_v1 *values,
                                            int numValues,
                                            void *userData);
@@ -1981,7 +1941,7 @@ using dcgmFieldValueEnumeration_f = int (*)(unsigned int gpuId,
  *         <0 if enumeration should stop. This allows to callee to abort field value enumeration.
  *
  */
-using dcgmFieldValueEntityEnumeration_f = int (*)(dcgm_field_entity_group_t entityGroupId,
+typedef int (*dcgmFieldValueEntityEnumeration_f)(dcgm_field_entity_group_t entityGroupId,
                                                  dcgm_field_eid_t entityId,
                                                  dcgmFieldValue_v1 *values,
                                                  int numValues,
@@ -1995,22 +1955,22 @@ using dcgmFieldValueEntityEnumeration_f = int (*)(dcgm_field_entity_group_t enti
  * Check for blank with the DCGM_INT64_IS_BLANK() macro.
  * \sa See dcgmvalue.h for the actual values of BLANK values
  */
-using dcgmStatSummaryInt64_t = struct
+typedef struct
 {
     long long minValue; //!< Minimum value of the samples looked at
     long long maxValue; //!< Maximum value of the samples looked at
     long long average;  //!< Simple average of the samples looked at. Blank values are ignored for this calculation
-};
+} dcgmStatSummaryInt64_t;
 
 /**
  * Same as dcgmStatSummaryInt64_t, but with 32-bit integer values
  */
-using dcgmStatSummaryInt32_t = struct
+typedef struct
 {
     int minValue; //!< Minimum value of the samples looked at
     int maxValue; //!< Maximum value of the samples looked at
     int average;  //!< Simple average of the samples looked at. Blank values are ignored for this calculation
-};
+} dcgmStatSummaryInt32_t;
 
 /**
  * Summary of time series data in double-precision format.
@@ -2018,17 +1978,17 @@ using dcgmStatSummaryInt32_t = struct
  * Check for blank with the DCGM_FP64_IS_BLANK() macro.
  * \sa See dcgmvalue.h for the actual values of BLANK values
  */
-using dcgmStatSummaryFp64_t = struct
+typedef struct
 {
     double minValue; //!< Minimum value of the samples looked at
     double maxValue; //!< Maximum value of the samples looked at
     double average;  //!< Simple average of the samples looked at. Blank values are ignored for this calculation
-};
+} dcgmStatSummaryFp64_t;
 
 /**
  * Systems structure used to enable or disable health watch systems
  */
-using dcgmHealthSystems_t = enum dcgmHealthSystems_enum
+typedef enum dcgmHealthSystems_enum
 {
     DCGM_HEALTH_WATCH_PCIE              = 0x1,   //!< PCIe system watches (must have 1m of data before query)
     DCGM_HEALTH_WATCH_NVLINK            = 0x2,   //!< NVLINK system watches
@@ -2045,7 +2005,7 @@ using dcgmHealthSystems_t = enum dcgmHealthSystems_enum
 
     // ...
     DCGM_HEALTH_WATCH_ALL = 0xFFFFFFFF //!< All watches enabled
-};
+} dcgmHealthSystems_t;
 
 #define DCGM_HEALTH_WATCH_COUNT_V1 10 /*!< For iterating through the dcgmHealthSystems_v1 enum */
 #define DCGM_HEALTH_WATCH_COUNT_V2 12 /*!< For iterating through the dcgmHealthSystems_v2 enum */
@@ -2053,41 +2013,41 @@ using dcgmHealthSystems_t = enum dcgmHealthSystems_enum
 /**
  * Health Watch test results
  */
-using dcgmHealthWatchResults_t = enum dcgmHealthWatchResult_enum
+typedef enum dcgmHealthWatchResult_enum
 {
     DCGM_HEALTH_RESULT_PASS = 0,  //!< All results within this system are reporting normal
     DCGM_HEALTH_RESULT_WARN = 10, //!< A warning has been issued, refer to the response for more information
     DCGM_HEALTH_RESULT_FAIL = 20, //!< A failure has been issued, refer to the response for more information
-};
+} dcgmHealthWatchResults_t;
 
-using dcgmDiagErrorDetail_t = struct
+typedef struct
 {
     char msg[1024];
     unsigned int code;
-};
+} dcgmDiagErrorDetail_t;
 
 #define DCGM_HEALTH_WATCH_MAX_INCIDENTS DCGM_GROUP_MAX_ENTITIES
 
-using dcgmIncidentInfo_t = struct
+typedef struct
 {
     dcgmHealthSystems_t system;       //!< system to which this information belongs
     dcgmHealthWatchResults_t health;  //!< health diagnosis of this incident
     dcgmDiagErrorDetail_t error;      //!< Information about the error(s) and their error codes
     dcgmGroupEntityPair_t entityInfo; //!< identify which entity has this error
-};
+} dcgmIncidentInfo_t;
 
 /**
  * Health response structure version 4 - Simply list the incidents instead of reporting by entity
  *
  * Since DCGM 2.0
  */
-using dcgmHealthResponse_v4 = struct
+typedef struct
 {
     unsigned int version;                   //!< The version number of this struct
     dcgmHealthWatchResults_t overallHealth; //!< The overall health of this entire host
     unsigned int incidentCount;             //!< The number of health incidents reported in this struct
     dcgmIncidentInfo_t incidents[DCGM_HEALTH_WATCH_MAX_INCIDENTS]; //!< Report of the errors detected
-};
+} dcgmHealthResponse_v4;
 
 /**
  * Version 4 for \ref dcgmHealthResponse_v4
@@ -2102,12 +2062,12 @@ using dcgmHealthResponse_v4 = struct
 /**
  * Typedef for \ref dcgmHealthResponse_v4
  */
-using dcgmHealthResponse_t = dcgmHealthResponse_v4;
+typedef dcgmHealthResponse_v4 dcgmHealthResponse_t;
 
 /**
  * Structure used to set health watches via the dcgmHealthSet_v2 API
  */
-using dcgmHealthSetParams_v2 = struct
+typedef struct
 {
     unsigned int version;        /*!< Version of this struct. Should be dcgmHealthSet_version2 */
     dcgmGpuGrp_t groupId;        /*!< Group ID representing collection of one or more entities. Look
@@ -2123,7 +2083,7 @@ using dcgmHealthSetParams_v2 = struct
                                       dcgmHealthCheck */
     double maxKeepAge;           /*!< How long to keep data cached for this field in seconds. This should
                                       be at least your maximum time between calling dcgmHealthCheck */
-};
+} dcgmHealthSetParams_v2;
 
 /**
  * Version 2 for \ref dcgmHealthSet_v2
@@ -2135,26 +2095,26 @@ using dcgmHealthSetParams_v2 = struct
 /**
  * per process utilization rates
  */
-using dcgmProcessUtilInfo_t = struct
+typedef struct
 {
     unsigned int pid;
     double smUtil;
     double memUtil;
-};
+} dcgmProcessUtilInfo_t;
 
 /**
  *Internal structure used to get the PID and the corresponding utilization rate
  */
-using dcgmProcessUtilSample_t = struct
+typedef struct
 {
     double util;
     unsigned int pid;
-};
+} dcgmProcessUtilSample_t;
 
 /**
  * Info corresponding to single PID
  */
-using dcgmPidSingleInfo_t = struct
+typedef struct
 {
     unsigned int gpuId; //!< ID of the GPU this pertains to. GPU_ID_INVALID = summary information for multiple GPUs
 
@@ -2200,12 +2160,12 @@ using dcgmPidSingleInfo_t = struct
         dcgmHealthSystems_t system;      //!< system to which this information belongs
         dcgmHealthWatchResults_t health; //!< health of the specified system on this GPU
     } systems[DCGM_HEALTH_WATCH_COUNT_V1];
-};
+} dcgmPidSingleInfo_t;
 
 /**
  * To store process statistics
  */
-using dcgmPidInfo_v2 = struct
+typedef struct
 {
     unsigned int version; //!< Version of this message  (dcgmPidInfo_version)
     unsigned int pid;     //!< PID of the process
@@ -2213,12 +2173,12 @@ using dcgmPidInfo_v2 = struct
     int numGpus;                                    //!< Number of GPUs that are valid in GPUs
     dcgmPidSingleInfo_t summary;                    //!< Summary information for all GPUs listed in gpus[]
     dcgmPidSingleInfo_t gpus[DCGM_MAX_NUM_DEVICES]; //!< Per-GPU information for this PID
-};
+} dcgmPidInfo_v2;
 
 /**
  * Typedef for \ref dcgmPidInfo_v2
  */
-using dcgmPidInfo_t = dcgmPidInfo_v2;
+typedef dcgmPidInfo_v2 dcgmPidInfo_t;
 
 /**
  * Version 2 for \ref dcgmPidInfo_v2
@@ -2233,7 +2193,7 @@ using dcgmPidInfo_t = dcgmPidInfo_v2;
 /**
  * Info corresponding to the job on a GPU
  */
-using dcgmGpuUsageInfo_t = struct
+typedef struct
 {
     unsigned int gpuId; //!< ID of the GPU this pertains to. GPU_ID_INVALID = summary information for multiple GPUs
 
@@ -2281,7 +2241,7 @@ using dcgmGpuUsageInfo_t = struct
         dcgmHealthSystems_t system;      //!< system to which this information belongs
         dcgmHealthWatchResults_t health; //!< health of the specified system on this GPU
     } systems[DCGM_HEALTH_WATCH_COUNT_V1];
-};
+} dcgmGpuUsageInfo_t;
 
 
 /**
@@ -2298,18 +2258,18 @@ using dcgmGpuUsageInfo_t = struct
  * The average value in the above fields (in the summary) is the
  * average of the averages of respective fields from all GPUs
  */
-using dcgmJobInfo_v3 = struct
+typedef struct
 {
     unsigned int version;                          //!< Version of this message  (dcgmPidInfo_version)
     int numGpus;                                   //!< Number of GPUs that are valid in gpus[]
     dcgmGpuUsageInfo_t summary;                    //!< Summary information for all GPUs listed in gpus[]
     dcgmGpuUsageInfo_t gpus[DCGM_MAX_NUM_DEVICES]; //!< Per-GPU information for this PID
-};
+} dcgmJobInfo_v3;
 
 /**
  * Typedef for \ref dcgmJobInfo_v3
  */
-using dcgmJobInfo_t = dcgmJobInfo_v3;
+typedef dcgmJobInfo_v3 dcgmJobInfo_t;
 
 /**
  * Version 3 for \ref dcgmJobInfo_v3
@@ -2325,17 +2285,17 @@ using dcgmJobInfo_t = dcgmJobInfo_v3;
 /**
  * Running process information for a compute or graphics process
  */
-using dcgmRunningProcess_v1 = struct
+typedef struct
 {
     unsigned int version;          //!< Version of this message (dcgmRunningProcess_version)
     unsigned int pid;              //!< PID of the process
     unsigned long long memoryUsed; //!< GPU memory used by this process in bytes.
-};
+} dcgmRunningProcess_v1;
 
 /**
  * Typedef for \ref dcgmRunningProcess_v1
  */
-using dcgmRunningProcess_t = dcgmRunningProcess_v1;
+typedef dcgmRunningProcess_v1 dcgmRunningProcess_t;
 
 /**
  * Version 1 for \ref dcgmRunningProcess_v1
@@ -2350,46 +2310,46 @@ using dcgmRunningProcess_t = dcgmRunningProcess_v1;
 /**
  * Enumeration for diagnostic levels
  */
-using dcgmDiagnosticLevel_t = enum
+typedef enum
 {
     DCGM_DIAG_LVL_INVALID = 0,  //!< Uninitialized
     DCGM_DIAG_LVL_SHORT   = 10, //!< run a very basic health check on the system
     DCGM_DIAG_LVL_MED     = 20, //!< run a medium-length diagnostic (a few minutes)
     DCGM_DIAG_LVL_LONG    = 30, //!< run a extensive diagnostic (several minutes)
     DCGM_DIAG_LVL_XLONG   = 40, //!< run a very extensive diagnostic (many minutes)
-};
+} dcgmDiagnosticLevel_t;
 
 /**
  * Diagnostic test results
  */
-using dcgmDiagResult_t = enum dcgmDiagResult_enum
+typedef enum dcgmDiagResult_enum
 {
     DCGM_DIAG_RESULT_PASS    = 0, //!< This test passed as diagnostics
     DCGM_DIAG_RESULT_SKIP    = 1, //!< This test was skipped
     DCGM_DIAG_RESULT_WARN    = 2, //!< This test passed with warnings
     DCGM_DIAG_RESULT_FAIL    = 3, //!< This test failed the diagnostics
     DCGM_DIAG_RESULT_NOT_RUN = 4, //!< This test wasn't executed
-};
+} dcgmDiagResult_t;
 
-using dcgmDiagTestResult_v1 = struct
+typedef struct
 {
     dcgmDiagResult_t status; //!< The result of the test
     char warning[1024];      //!< Warning returned from the test, if any
     char info[1024];         //!< Information details returned from the test, if any
-};
+} dcgmDiagTestResult_v1;
 
-using dcgmDiagTestResult_v2 = struct
+typedef struct
 {
     dcgmDiagResult_t status;     //!< The result of the test
     dcgmDiagErrorDetail_t error; //!< The error message and error code, if any
     char info[1024];             //!< Information details returned from the test, if any
-};
+} dcgmDiagTestResult_v2;
 
 
 /**
  * Diagnostic per gpu tests - fixed indices for dcgmDiagResponsePerGpu_t.results[]
  */
-using dcgmPerGpuTestIndices_t = enum dcgmPerGpuTestIndices_enum
+typedef enum dcgmPerGpuTestIndices_enum
 {
     DCGM_MEMORY_INDEX           = 0, //!< Memory test index
     DCGM_DIAGNOSTIC_INDEX       = 1, //!< Diagnostic test index
@@ -2410,7 +2370,7 @@ using dcgmPerGpuTestIndices_t = enum dcgmPerGpuTestIndices_enum
     DCGM_SOFTWARE_INDEX       = 14, //!< Software test index
     DCGM_CONTEXT_CREATE_INDEX = 15, //!< Context create test index
     DCGM_UNKNOWN_INDEX        = 16  //!< Unknown test
-};
+} dcgmPerGpuTestIndices_t;
 
 // TODO: transition these to dcgm_deprecated.h
 #define DCGM_SM_PERF_INDEX       DCGM_SM_STRESS_INDEX
@@ -2424,30 +2384,30 @@ using dcgmPerGpuTestIndices_t = enum dcgmPerGpuTestIndices_enum
 /**
  * Per GPU diagnostics result structure
  */
-using dcgmDiagResponsePerGpu_v4 = struct
+typedef struct
 {
     unsigned int gpuId;                                        //!< ID for the GPU this information pertains
     unsigned int hwDiagnosticReturn;                           //!< Per GPU hardware diagnostic test return code
     dcgmDiagTestResult_v2 results[DCGM_PER_GPU_TEST_COUNT_V8]; //!< Array with a result for each per-gpu test
-};
+} dcgmDiagResponsePerGpu_v4;
 
 /**
  * Per gpu response structure v3
  *
  * Since DCGM 2.4
  */
-using dcgmDiagResponsePerGpu_v3 = struct
+typedef struct
 {
     unsigned int gpuId;                                        //!< ID for the GPU this information pertains
     unsigned int hwDiagnosticReturn;                           //!< Per GPU hardware diagnostic test return code
     dcgmDiagTestResult_v2 results[DCGM_PER_GPU_TEST_COUNT_V7]; //!< Array with a result for each per-gpu test
-};
+} dcgmDiagResponsePerGpu_v3;
 
 
 #define DCGM_SWTEST_COUNT     10
 #define LEVEL_ONE_MAX_RESULTS 16
 
-using dcgmSoftwareTest_t = enum dcgmSoftwareTest_enum
+typedef enum dcgmSoftwareTest_enum
 {
     DCGM_SWTEST_DENYLIST             = 0, //!< test for presence of drivers on the denylist (e.g. nouveau)
     DCGM_SWTEST_NVML_LIBRARY         = 1, //!< test for presence (and version) of NVML lib
@@ -2459,14 +2419,14 @@ using dcgmSoftwareTest_t = enum dcgmSoftwareTest_enum
     DCGM_SWTEST_PAGE_RETIREMENT      = 7, //!< test for pending frame buffer page retirement
     DCGM_SWTEST_GRAPHICS_PROCESSES   = 8, //!< test for graphics processes running
     DCGM_SWTEST_INFOROM              = 9, //!< test for inforom corruption
-};
+} dcgmSoftwareTest_t;
 
 /**
  * Global diagnostics result structure v8
  *
  * Since DCGM 3.0
  */
-using dcgmDiagResponse_v8 = struct
+typedef struct
 {
     unsigned int version;           //!< version number (dcgmDiagResult_version)
     unsigned int gpuCount;          //!< number of valid per GPU results
@@ -2476,14 +2436,14 @@ using dcgmDiagResponse_v8 = struct
     dcgmDiagResponsePerGpu_v4 perGpuResponses[DCGM_MAX_NUM_DEVICES]; //!< per GPU test results
     dcgmDiagErrorDetail_t systemError;                               //!< System-wide error reported from NVVS
     char _unused[1024];                                              //!< No longer used
-};
+} dcgmDiagResponse_v8;
 
 /**
  * Global diagnostics result structure v7
  *
  * Since DCGM 2.4
  */
-using dcgmDiagResponse_v7 = struct
+typedef struct
 {
     unsigned int version;           //!< version number (dcgmDiagResult_version)
     unsigned int gpuCount;          //!< number of valid per GPU results
@@ -2493,12 +2453,12 @@ using dcgmDiagResponse_v7 = struct
     dcgmDiagResponsePerGpu_v3 perGpuResponses[DCGM_MAX_NUM_DEVICES]; //!< per GPU test results
     dcgmDiagErrorDetail_t systemError;                               //!< System-wide error reported from NVVS
     char _unused[1024];                                              //!< No longer used
-};
+} dcgmDiagResponse_v7;
 
 /**
  * Typedef for \ref dcgmDiagResponse_v8
  */
-using dcgmDiagResponse_t = dcgmDiagResponse_v8;
+typedef dcgmDiagResponse_v8 dcgmDiagResponse_t;
 
 /**
  * Version 8 for \ref dcgmDiagResponse_v8
@@ -2520,7 +2480,7 @@ using dcgmDiagResponse_t = dcgmDiagResponse_v8;
  * The enums are spaced to allow for future relationships.
  * These match the definitions in nvml.h
  */
-using dcgmGpuTopologyLevel_t = enum dcgmGpuLevel_enum
+typedef enum dcgmGpuLevel_enum
 {
     DCGM_TOPOLOGY_UNINITIALIZED = 0x0,
 
@@ -2555,7 +2515,7 @@ using dcgmGpuTopologyLevel_t = enum dcgmGpuLevel_enum
     DCGM_TOPOLOGY_NVLINK17 = 0x1000000, //!< GPUs connected via twelve NVLINK links
     DCGM_TOPOLOGY_NVLINK18 = 0x2000000, //!< GPUs connected via twelve NVLINK links
     /**@}*/
-};
+} dcgmGpuTopologyLevel_t;
 
 // the PCI paths are the lower 8 bits of the path information
 #define DCGM_TOPOLOGY_PATH_PCI(x) (dcgmGpuTopologyLevel_t)((unsigned int)(x)&0xFF)
@@ -2568,7 +2528,7 @@ using dcgmGpuTopologyLevel_t = enum dcgmGpuLevel_enum
 /**
  * Device topology information
  */
-using dcgmDeviceTopology_v1 = struct
+typedef struct
 {
     unsigned int version; //!< version number (dcgmDeviceTopology_version)
 
@@ -2590,12 +2550,12 @@ using dcgmDeviceTopology_v1 = struct
                                      //!< e.g. if this field == 3, links 0 and 1 are connected,
                                      //!< field is only valid if NVLINKS actually exist between GPUs
     } gpuPaths[DCGM_MAX_NUM_DEVICES - 1];
-};
+} dcgmDeviceTopology_v1;
 
 /**
  * Typedef for \ref dcgmDeviceTopology_v1
  */
-using dcgmDeviceTopology_t = dcgmDeviceTopology_v1;
+typedef dcgmDeviceTopology_v1 dcgmDeviceTopology_t;
 
 /**
  * Version 1 for \ref dcgmDeviceTopology_v1
@@ -2610,7 +2570,7 @@ using dcgmDeviceTopology_t = dcgmDeviceTopology_v1;
 /**
  * Group topology information
  */
-using dcgmGroupTopology_v1 = struct
+typedef struct
 {
     unsigned int version; //!< version number (dcgmGroupTopology_version)
 
@@ -2622,12 +2582,12 @@ using dcgmGroupTopology_v1 = struct
                                                                 //!< in the group have a different CPU affinity and thus
                                                                 //!< may not be optimal for certain algorithms
     dcgmGpuTopologyLevel_t slowestPath;                         //!< the slowest path amongst GPUs in the group
-};
+} dcgmGroupTopology_v1;
 
 /**
  * Typedef for \ref dcgmGroupTopology_v1
  */
-using dcgmGroupTopology_t = dcgmGroupTopology_v1;
+typedef dcgmGroupTopology_v1 dcgmGroupTopology_t;
 
 /**
  * Version 1 for \ref dcgmGroupTopology_v1
@@ -2642,16 +2602,16 @@ using dcgmGroupTopology_t = dcgmGroupTopology_v1;
 /**
  * DCGM Memory usage information
  */
-using dcgmIntrospectMemory_v1 = struct
+typedef struct
 {
     unsigned int version; //!< version number (dcgmIntrospectMemory_version)
     long long bytesUsed;  //!< number of bytes
-};
+} dcgmIntrospectMemory_v1;
 
 /**
  * Typedef for \ref dcgmIntrospectMemory_t
  */
-using dcgmIntrospectMemory_t = dcgmIntrospectMemory_v1;
+typedef dcgmIntrospectMemory_v1 dcgmIntrospectMemory_t;
 
 /**
  * Version 1 for \ref dcgmIntrospectMemory_t
@@ -2666,18 +2626,18 @@ using dcgmIntrospectMemory_t = dcgmIntrospectMemory_v1;
 /**
  * DCGM CPU Utilization information.  Multiply values by 100 to get them in %.
  */
-using dcgmIntrospectCpuUtil_v1 = struct
+typedef struct
 {
     unsigned int version; //!< version number (dcgmMetadataCpuUtil_version)
     double total;         //!< fraction of device's CPU resources that were used
     double kernel;        //!< fraction of device's CPU resources that were used in kernel mode
     double user;          //!< fraction of device's CPU resources that were used in user mode
-};
+} dcgmIntrospectCpuUtil_v1;
 
 /**
  * Typedef for \ref dcgmIntrospectCpuUtil_t
  */
-using dcgmIntrospectCpuUtil_t = dcgmIntrospectCpuUtil_v1;
+typedef dcgmIntrospectCpuUtil_v1 dcgmIntrospectCpuUtil_t;
 
 /**
  * Version 1 for \ref dcgmIntrospectCpuUtil_t
@@ -2737,7 +2697,7 @@ using dcgmIntrospectCpuUtil_t = dcgmIntrospectCpuUtil_v1;
 /*
  * Run diagnostic structure v7
  */
-using dcgmRunDiag_v7 = struct
+typedef struct
 {
     unsigned int version;            //!< version of this message
     unsigned int flags;              //!< flags specifying binary options for running it. See DCGM_RUN_FLAGS_*
@@ -2762,7 +2722,7 @@ using dcgmRunDiag_v7 = struct
     unsigned int _unusedInt3;       //!< No longer used
     char _unusedBuf[DCGM_PATH_LEN]; //!< No longer used
     unsigned int failCheckInterval; //!< How often the fail early checks should occur when enabled.
-};
+} dcgmRunDiag_v7;
 
 /**
  * Version 7 for \ref dcgmRunDiag_t
@@ -2780,11 +2740,11 @@ using dcgmRunDiag_v7 = struct
 /**
  * Identifies a GPU NVLink error type returned by DCGM_FI_DEV_GPU_NVLINK_ERRORS
  */
-using dcgmGpuNVLinkErrorType_t = enum dcgmGpuNVLinkErrorType_enum
+typedef enum dcgmGpuNVLinkErrorType_enum
 {
     DCGM_GPU_NVLINK_ERROR_RECOVERY_REQUIRED = 1, //!< NVLink link recovery error occurred
     DCGM_GPU_NVLINK_ERROR_FATAL,                 //!< NVLink link fatal error occurred
-};
+} dcgmGpuNVLinkErrorType_t;
 
 /** Topology hints for dcgmSelectGpusByTopology()
  * @{
@@ -2803,74 +2763,74 @@ using dcgmGpuNVLinkErrorType_t = enum dcgmGpuNVLinkErrorType_enum
  */
 
 
-using dcgmTopoSchedHint_v1 = struct
+typedef struct
 {
     unsigned int version; //!< version of this message
     uint64_t inputGpuIds; //!< bit-mask of the GPU ids to choose from
     uint32_t numGpus;     //!< the number of GPUs that DCGM should choose
     uint64_t hintFlags;   //!< Hints to ignore certain factors for the scheduling hint
-};
+} dcgmTopoSchedHint_v1;
 
-using dcgmTopoSchedHint_t = dcgmTopoSchedHint_v1;
+typedef dcgmTopoSchedHint_v1 dcgmTopoSchedHint_t;
 
 #define dcgmTopoSchedHint_version1 MAKE_DCGM_VERSION(dcgmTopoSchedHint_v1, 1)
 
 /**
  * NvLink link states
  */
-using dcgmNvLinkLinkState_t = enum dcgmNvLinkLinkState_enum
+typedef enum dcgmNvLinkLinkState_enum
 {
     DcgmNvLinkLinkStateNotSupported = 0, //!< NvLink is unsupported by this GPU (Default for GPUs)
     DcgmNvLinkLinkStateDisabled     = 1, //!< NvLink is supported for this link but this link is disabled
                                          //!< (Default for NvSwitches)
     DcgmNvLinkLinkStateDown = 2,         //!< This NvLink link is down (inactive)
     DcgmNvLinkLinkStateUp   = 3          //!< This NvLink link is up (active)
-};
+} dcgmNvLinkLinkState_t;
 
 /**
  * State of NvLink links for a GPU
  */
-using dcgmNvLinkGpuLinkStatus_v1 = struct
+typedef struct
 {
     dcgm_field_eid_t entityId;                                              //!< Entity ID of the GPU (gpuId)
     dcgmNvLinkLinkState_t linkState[DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY1]; //!< Per-GPU link states
-};
+} dcgmNvLinkGpuLinkStatus_v1;
 
-using dcgmNvLinkGpuLinkStatus_v2 = struct
+typedef struct
 {
     dcgm_field_eid_t entityId;                                              //!< Entity ID of the GPU (gpuId)
     dcgmNvLinkLinkState_t linkState[DCGM_NVLINK_MAX_LINKS_PER_GPU_LEGACY2]; //!< Per-GPU link states
-};
+} dcgmNvLinkGpuLinkStatus_v2;
 
 
-using dcgmNvLinkGpuLinkStatus_v3 = struct
+typedef struct
 {
     dcgm_field_eid_t entityId;                                      //!< Entity ID of the GPU (gpuId)
     dcgmNvLinkLinkState_t linkState[DCGM_NVLINK_MAX_LINKS_PER_GPU]; //!< Per-GPU link states
-};
+} dcgmNvLinkGpuLinkStatus_v3;
 
 /**
  * State of NvLink links for a NvSwitch
  */
-using dcgmNvLinkNvSwitchLinkStatus_t = struct
+typedef struct
 {
     dcgm_field_eid_t entityId;                                           //!< Entity ID of the NvSwitch (physicalId)
     dcgmNvLinkLinkState_t linkState[DCGM_NVLINK_MAX_LINKS_PER_NVSWITCH]; //!< Per-NvSwitch link states
-};
+} dcgmNvLinkNvSwitchLinkStatus_t;
 
 /**
  * Status of all of the NvLinks in a given system
  */
-using dcgmNvLinkStatus_v3 = struct
+typedef struct
 {
     unsigned int version; //!< Version of this request. Should be dcgmNvLinkStatus_version1
     unsigned int numGpus; //!< Number of entries in gpus[] that are populated
     dcgmNvLinkGpuLinkStatus_v3 gpus[DCGM_MAX_NUM_DEVICES]; //!< Per-GPU NvLink link statuses
     unsigned int numNvSwitches;                            //!< Number of entries in nvSwitches[] that are populated
     dcgmNvLinkNvSwitchLinkStatus_t nvSwitches[DCGM_MAX_NUM_SWITCHES]; //!< Per-NvSwitch link statuses
-};
+} dcgmNvLinkStatus_v3;
 
-using dcgmNvLinkStatus_t = dcgmNvLinkStatus_v3;
+typedef dcgmNvLinkStatus_v3 dcgmNvLinkStatus_t;
 
 /**
  * Version 3 of dcgmNvLinkStatus
@@ -2889,7 +2849,7 @@ using dcgmNvLinkStatus_t = dcgmNvLinkStatus_v3;
 
 /* dcgmSummaryResponse_t is part of dcgmFieldSummaryRequest, so it uses dcgmFieldSummaryRequest's version. */
 
-using dcgmSummaryResponse_t = struct
+typedef struct
 {
     unsigned int fieldType;    //!< type of field that is summarized (int64 or fp64)
     unsigned int summaryCount; //!< the number of populated summaries in \ref values
@@ -2901,9 +2861,9 @@ using dcgmSummaryResponse_t = struct
                                  //!< in order. For example, if MIN AND MAX are requested, then 0 will be MIN
                                  //!< and 1 will be MAX. If AVG and DIFF were requested, then AVG would be 0
                                  //!< and 1 would be DIFF
-};
+} dcgmSummaryResponse_t;
 
-using dcgmFieldSummaryRequest_v1 = struct
+typedef struct
 {
     unsigned int version;                    //!< version of this message - dcgmFieldSummaryRequest_v1
     unsigned short fieldId;                  //!< field id to be summarized
@@ -2915,16 +2875,16 @@ using dcgmFieldSummaryRequest_v1 = struct
     uint64_t endTime;                        //!< end time for the interval being summarized. 0 means to use
                                              //!< any data after.
     dcgmSummaryResponse_t response;          //!< response data for this request
-};
+} dcgmFieldSummaryRequest_v1;
 
-using dcgmFieldSummaryRequest_t = dcgmFieldSummaryRequest_v1;
+typedef dcgmFieldSummaryRequest_v1 dcgmFieldSummaryRequest_t;
 
 #define dcgmFieldSummaryRequest_version1 MAKE_DCGM_VERSION(dcgmFieldSummaryRequest_v1, 1)
 
 /**
  * Module IDs
  */
-using dcgmModuleId_t = enum
+typedef enum
 {
     DcgmModuleIdCore       = 0, //!< Core DCGM - always loaded
     DcgmModuleIdNvSwitch   = 1, //!< NvSwitch Module
@@ -2937,53 +2897,53 @@ using dcgmModuleId_t = enum
     DcgmModuleIdProfiling  = 8, //!< Profiling Module
 
     DcgmModuleIdCount //!< Always last. 1 greater than largest value above
-};
+} dcgmModuleId_t;
 
 /**
  * Module Status. Modules are lazy loaded, so they will be in status DcgmModuleStatusNotLoaded
  * until they are used. One modules are used, they will move to another status.
  */
-using dcgmModuleStatus_t = enum
+typedef enum
 {
     DcgmModuleStatusNotLoaded  = 0, //!< Module has not been loaded yet
     DcgmModuleStatusDenylisted = 1, //!< Module is on the denylist; can't be loaded
     DcgmModuleStatusFailed     = 2, //!< Loading the module failed
     DcgmModuleStatusLoaded     = 3, //!< Module has been loaded
     DcgmModuleStatusUnloaded   = 4, //!< Module has been unloaded, happens during shutdown
-};
+} dcgmModuleStatus_t;
 
 /**
  * Status of all of the modules of the host engine
  */
-using dcgmModuleGetStatusesModule_t = struct
+typedef struct
 {
     dcgmModuleId_t id;         //!< ID of this module
     dcgmModuleStatus_t status; //!< Status of this module
-};
+} dcgmModuleGetStatusesModule_t;
 
 /* This is larger than DcgmModuleIdCount so we can add modules without versioning this request */
 #define DCGM_MODULE_STATUSES_CAPACITY 16
 
-using dcgmModuleGetStatuses_v1 = struct
+typedef struct
 {
     unsigned int version;     //!< Version of this request. Should be dcgmModuleGetStatuses_version1
     unsigned int numStatuses; //!< Number of entries in statuses[] that are populated
     dcgmModuleGetStatusesModule_t statuses[DCGM_MODULE_STATUSES_CAPACITY]; //!< Per-module status information
-};
+} dcgmModuleGetStatuses_v1;
 
 /**
  * Version 1 of dcgmModuleGetStatuses
  */
 #define dcgmModuleGetStatuses_version1 MAKE_DCGM_VERSION(dcgmModuleGetStatuses_v1, 1)
 #define dcgmModuleGetStatuses_version  dcgmModuleGetStatuses_version1
-using dcgmModuleGetStatuses_t = dcgmModuleGetStatuses_v1;
+typedef dcgmModuleGetStatuses_v1 dcgmModuleGetStatuses_t;
 
 /**
  * Options for dcgmStartEmbedded_v2
  *
  * Added in DCGM 2.0.0
  */
-using dcgmStartEmbeddedV2Params_v1 = struct
+typedef struct
 {
     unsigned int version;           /*!< Version number. Use dcgmStartEmbeddedV2Params_version1 */
     dcgmOperationMode_t opMode;     /*!< IN: Collect data automatically or manually when asked by the user. */
@@ -2993,7 +2953,7 @@ using dcgmStartEmbeddedV2Params_v1 = struct
     unsigned int denyListCount;     /*!< IN: Number of modules in denyList[] */
     dcgmModuleId_t denyList[DcgmModuleIdCount]; /* IN: IDs of modules to add to the denylist */
     unsigned int unused;                        /*!< IN: Unused. Set to 0. Aligns structure to 8-bytes */
-};
+} dcgmStartEmbeddedV2Params_v1;
 
 /**
  * Version 1 for \ref dcgmStartEmbeddedV2Params_v1
@@ -3005,7 +2965,7 @@ using dcgmStartEmbeddedV2Params_v1 = struct
  *
  * Added in DCGM 2.4.0, renamed members in 3.0.0
  */
-using dcgmStartEmbeddedV2Params_v2 = struct
+typedef struct
 {
     unsigned int version;           /*!< Version number. Use dcgmStartEmbeddedV2Params_version2 */
     dcgmOperationMode_t opMode;     /*!< IN: Collect data automatically or manually when asked by the user. */
@@ -3016,7 +2976,7 @@ using dcgmStartEmbeddedV2Params_v2 = struct
     const char *serviceAccount;     /*!< IN: Service account for unprivileged processes */
     dcgmModuleId_t denyList[DcgmModuleIdCount]; /*!< IN: IDs of modules to be added to the denylist */
     char _padding[4];                           /*!< IN: Unused. Aligns the struct to 8 bytes. */
-};
+} dcgmStartEmbeddedV2Params_v2;
 
 /**
  * Version 3 for \ref dcgmStartEmbeddedV2Params
@@ -3036,7 +2996,7 @@ using dcgmStartEmbeddedV2Params_v2 = struct
 /**
  * Structure to return all of the profiling metric groups that are available for the given groupId.
  */
-using dcgmProfMetricGroupInfo_v2 = struct
+typedef struct
 {
     unsigned short majorId;   //!< Major ID of this metric group. Metric groups with the same majorId cannot be
                               //!< watched concurrently with other metric groups with the same majorId
@@ -3046,9 +3006,9 @@ using dcgmProfMetricGroupInfo_v2 = struct
     unsigned short fieldIds[DCGM_PROF_MAX_FIELD_IDS_PER_GROUP_V2]; //!< DCGM Field IDs that are part of this profiling
                                                                    //!< group. See DCGM_FI_PROF_* definitions in
                                                                    //!< dcgm_fields.h for details.
-};
+} dcgmProfMetricGroupInfo_v2;
 
-using dcgmProfGetMetricGroups_v3 = struct
+typedef struct
 {
     /** \name Input parameters
      * @{
@@ -3068,20 +3028,20 @@ using dcgmProfGetMetricGroups_v3 = struct
     /**
      * @}
      */
-};
+} dcgmProfGetMetricGroups_v3;
 
 /**
  * Version 3 of dcgmProfGetMetricGroups_t. See dcgm_structs_24.h for v2
  */
 #define dcgmProfGetMetricGroups_version3 MAKE_DCGM_VERSION(dcgmProfGetMetricGroups_v3, 3)
 #define dcgmProfGetMetricGroups_version  dcgmProfGetMetricGroups_version3
-using dcgmProfGetMetricGroups_t = dcgmProfGetMetricGroups_v3;
+typedef dcgmProfGetMetricGroups_v3 dcgmProfGetMetricGroups_t;
 
 // Legacy version of dcgmProfWatchFields() to support DCGM 2.x
 /**
  * Structure to pass to dcgmProfWatchFields() when watching profiling metrics
  */
-using dcgmProfWatchFields_v1 = struct
+typedef struct
 {
     unsigned int version;        //!< Version of this request. Should be dcgmProfWatchFields_version
     dcgmGpuGrp_t groupId;        //!< Group ID representing collection of one or more GPUs. Look at \ref dcgmGroupCreate
@@ -3098,19 +3058,19 @@ using dcgmProfWatchFields_v1 = struct
     double maxKeepAge;           //!< How long to keep data for every fieldId in seconds
     int maxKeepSamples;          //!< Maximum number of samples to keep for each fieldId. 0=no limit
     unsigned int flags;          //!< For future use. Set to 0 for now.
-};
+} dcgmProfWatchFields_v1;
 
 /**
  * Version 1 of dcgmProfWatchFields_v1
  */
 #define dcgmProfWatchFields_version1 MAKE_DCGM_VERSION(dcgmProfWatchFields_v1, 1)
 #define dcgmProfWatchFields_version  dcgmProfWatchFields_version1
-using dcgmProfWatchFields_t = dcgmProfWatchFields_v1;
+typedef dcgmProfWatchFields_v1 dcgmProfWatchFields_t;
 
 /**
  * Structure to pass to dcgmProfUnwatchFields when unwatching profiling metrics
  */
-using dcgmProfUnwatchFields_v1 = struct
+typedef struct
 {
     unsigned int version; //!< Version of this request. Should be dcgmProfUnwatchFields_version
     dcgmGpuGrp_t groupId; //!< Group ID representing collection of one or more GPUs. Look at
@@ -3119,33 +3079,33 @@ using dcgmProfUnwatchFields_v1 = struct
                           //!< to perform operation on all the GPUs. The GPUs of the group must all be
                           //!< identical or DCGM_ST_GROUP_INCOMPATIBLE will be returned by this API.
     unsigned int flags;   //!< For future use. Set to 0 for now.
-};
+} dcgmProfUnwatchFields_v1;
 
 /**
  * Version 1 of dcgmProfUnwatchFields_v1
  */
 #define dcgmProfUnwatchFields_version1 MAKE_DCGM_VERSION(dcgmProfUnwatchFields_v1, 1)
 #define dcgmProfUnwatchFields_version  dcgmProfUnwatchFields_version1
-using dcgmProfUnwatchFields_t = dcgmProfUnwatchFields_v1;
+typedef dcgmProfUnwatchFields_v1 dcgmProfUnwatchFields_t;
 
 /**
  * Version 1 of dcgmSettingsSetLoggingSeverity_t
  */
-using dcgmSettingsSetLoggingSeverity_v1 = struct
+typedef struct
 {
     int targetLogger;
     DcgmLoggingSeverity_t targetSeverity;
-};
+} dcgmSettingsSetLoggingSeverity_v1;
 
 
 #define dcgmSettingsSetLoggingSeverity_version1 MAKE_DCGM_VERSION(dcgmSettingsSetLoggingSeverity_v1, 1)
 #define dcgmSettingsSetLoggingSeverity_version  dcgmSettingsSetLoggingSeverity_version1
-using dcgmSettingsSetLoggingSeverity_t = dcgmSettingsSetLoggingSeverity_v1;
+typedef dcgmSettingsSetLoggingSeverity_v1 dcgmSettingsSetLoggingSeverity_t;
 
 /**
  * Structure to describe the DCGM build environment ver 2.0
  */
-using dcgmVersionInfo_v2 = struct
+typedef struct
 {
     unsigned int version; //<! Structure version
     /**
@@ -3168,7 +3128,7 @@ using dcgmVersionInfo_v2 = struct
      * This values are for reference only are not supposed to participate in some complicated logic.<br>
      */
     char rawBuildInfoString[DCGM_MAX_STR_LENGTH * 2];
-};
+} dcgmVersionInfo_v2;
 
 /**
  * Version 2 of the dcgmVersionInfo_v2
@@ -3176,7 +3136,7 @@ using dcgmVersionInfo_v2 = struct
 #define dcgmVersionInfo_version2 MAKE_DCGM_VERSION(dcgmVersionInfo_v2, 2)
 
 #define dcgmVersionInfo_version dcgmVersionInfo_version2
-using dcgmVersionInfo_t = dcgmVersionInfo_v2;
+typedef dcgmVersionInfo_v2 dcgmVersionInfo_t;
 
 /** @} */
 

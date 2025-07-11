@@ -33,4 +33,3 @@ std::vector<std::string> split(const std::string& line, char delim) {
 }
 
 } // namespace facebook::dynolog
-

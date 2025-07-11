@@ -158,7 +158,7 @@ extern "C" {
 /**
  * GPU virtualization mode types for DCGM_FI_DEV_VIRTUAL_MODE
  */
-using dcgmGpuVirtualizationMode_t = enum
+enum dcgmGpuVirtualizationMode_t
 {
     DCGM_GPU_VIRTUALIZATION_MODE_NONE        = 0, //!< Represents Bare Metal GPU
     DCGM_GPU_VIRTUALIZATION_MODE_PASSTHROUGH = 1, //!< Device is associated with GPU-Passthrough
@@ -180,7 +180,7 @@ using dcgmGpuVirtualizationMode_t = enum
 /**
  * Enum of possible field entity groups
  */
-using dcgm_field_entity_group_t = enum dcgm_field_entity_group_t
+enum dcgm_field_entity_group_t
 {
     DCGM_FE_NONE = 0, /*!< Field is not associated with an entity. Field scope should be DCGM_FS_GLOBAL */
     DCGM_FE_GPU,      /*!< Field is associated with a GPU entity */
@@ -2225,7 +2225,7 @@ using dcgm_field_eid_t = unsigned int;
  * Structure for formating the output for dmon.
  * Used as a member in dcgm_field_meta_p
  */
-using dcgm_field_output_format_t = struct
+struct dcgm_field_output_format_t
 {
     char shortName[10]; /*!< Short name corresponding to field. This short name is used to identify columns in dmon
                              output.*/
@@ -2238,7 +2238,7 @@ using dcgm_field_output_format_p = dcgm_field_output_format_t*;
  * Structure to store meta data for the field
  */
 
-using dcgm_field_meta_t = struct
+struct dcgm_field_meta_t
 {
     unsigned short fieldId; /*!< Field identifier. DCGM_FI_? #define */
     char fieldType;         /*!< Field type. DCGM_FT_? #define */

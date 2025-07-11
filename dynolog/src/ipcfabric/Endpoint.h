@@ -269,4 +269,3 @@ class EndPoint final {
 };
 
 } // namespace dynolog::ipcfabric
-

@@ -46,13 +46,13 @@ nlohmann::json toJson(const std::string& message) {
   if (result.empty() || !result.is_object()) {
     LOG(ERROR)
         << "Request message should not be empty and should be json object.";
-    return {};
+    return json();
   }
 
   if (!result.contains("fn")) {
     LOG(ERROR) << "Request must contain a 'fn' field for the RPC call "
                << " request json = " << result.dump();
-    return {};
+    return json();
   }
 
   return result;
