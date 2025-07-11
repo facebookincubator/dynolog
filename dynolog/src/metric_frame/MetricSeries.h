@@ -36,7 +36,7 @@ class MetricSeries final {
         : data_{&data}, size_{size}, headIdx_{headIdx}, headDis_{headDis} {}
     // see P2325R3
     // default constructor should not be required in the future
-    Iterator() {}
+    Iterator() = default;
 
     const value_type& operator*() const {
       return data_->at(dataIdx());
@@ -218,7 +218,7 @@ class MetricSeries final {
     auto begin_ = beginMaybe.value_or(begin());
     auto end_ = endMaybe.value_or(end());
     std::vector<T> dataCopy(begin_, end_);
-    auto nthIdx = lround(percentage * (dataCopy.size() - 1));
+    auto nthIdx = std::lround(percentage * (dataCopy.size() - 1));
     std::nth_element(
         dataCopy.begin(), dataCopy.begin() + nthIdx, dataCopy.end());
     return dataCopy[nthIdx];

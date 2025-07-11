@@ -6,6 +6,7 @@
 #include "dynolog/src/LibkinetoConfigManager.h"
 #include <fmt/core.h>
 #include <fmt/format.h>
+#include <fmt/ranges.h>
 #include <glog/logging.h>
 #include <exception>
 #include <fstream>

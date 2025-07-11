@@ -7,6 +7,7 @@
 
 #include <set>
 #include <string>
+#include <utility>
 #include "dynolog/src/LibkinetoConfigManager.h"
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 
@@ -19,7 +20,7 @@ namespace dynolog {
 class ServiceHandler {
  public:
   explicit ServiceHandler(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm)
-      : dcgm_(dcgm) {}
+      : dcgm_(std::move(dcgm)) {}
   // returns the state of the service
   int getStatus();
   std::string getVersion();

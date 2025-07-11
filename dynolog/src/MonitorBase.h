@@ -4,9 +4,10 @@
 
 #include <glog/logging.h>
 #include <memory>
+#include <utility>
 
-namespace facebook {
-namespace dynolog {
+
+namespace facebook::dynolog {
 
 /* Skeleton Monitor class which subscribes to a Ticker for
  * scheduling.
@@ -18,8 +19,8 @@ class MonitorBase {
   MonitorBase(
       std::shared_ptr<TTicker> ticker,
       const std::string& name,
-      std::vector<double> subminor_tick_sample_rates)
-      : _ticker(ticker),
+      const std::vector<double>& subminor_tick_sample_rates)
+      : _ticker(std::move(ticker)),
         _name(name),
         _subminor_tick_sample_rates(subminor_tick_sample_rates) {
     _ticker->subscribe(
@@ -49,7 +50,7 @@ class MonitorBase {
   }
 
   virtual void tick(TMask mask) = 0;
-  virtual ~MonitorBase() {}
+  virtual ~MonitorBase() = default;
 
  private:
   std::shared_ptr<TTicker> _ticker;
@@ -66,5 +67,4 @@ class MonitorBase {
   }
 };
 
-} // namespace dynolog
-} // namespace facebook
+} // namespace facebook::dynolog

@@ -11,6 +11,7 @@
 #include "hbt/src/perf_event/PmuEvent.h"
 
 #include <optional>
+#include <utility>
 
 namespace facebook::hbt::perf_event {
 
@@ -86,7 +87,7 @@ class CpuTraceAuxGenerator final
       pid_t pid,
       int cgroup_fd,
       EventConf event_conf)
-      : TBase{cpu, pid, cgroup_fd, {event_conf}} {}
+      : TBase{cpu, pid, cgroup_fd, {std::move(event_conf)}} {}
 
   void open(size_t num_aux_pages, AUXBufferMode mode) {
     HBT_ARG_CHECK(mode == AUXBufferMode::OVERWRITABLE)
@@ -133,7 +134,7 @@ class CpuTraceAuxGenerator final
     return num_itrace_start_;
   }
 
-  void onCpuAuxBufferRead(OnRbReadCallback callback) {
+  void onCpuAuxBufferRead(const OnRbReadCallback& callback) {
     HBT_ARG_CHECK(aux_buffer_mode_ == AUXBufferMode::OVERWRITABLE)
         << "Only support AUXBufferMode::OVERWRITABLE currently.";
 
@@ -188,8 +189,8 @@ class PerCpuTraceAuxGenerator
   PerCpuTraceAuxGenerator(
       const CpuSet& mon_cpus,
       pid_t pid,
-      std::shared_ptr<FdWrapper> cgroup_fd_wrapper,
-      EventConf event_conf)
+      const std::shared_ptr<FdWrapper>& cgroup_fd_wrapper,
+      const EventConf& event_conf)
       : PerCpuSampleGeneratorBase<CpuTraceAuxGenerator>{
             mon_cpus,
             cgroup_fd_wrapper} {
@@ -217,7 +218,7 @@ class PerCpuTraceAuxGenerator
       gen->open(num_data_pages, num_aux_pages, mode);
     }
   }
-  void onCpusAuxBufferRead(OnRbReadCallback callback) {
+  void onCpusAuxBufferRead(const OnRbReadCallback& callback) {
     for (const auto& [cpu, gen] : this->generators_) {
       gen->onCpuAuxBufferRead(callback);
     }
