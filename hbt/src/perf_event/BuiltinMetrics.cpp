@@ -2319,7 +2319,7 @@ void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
 }
 
 // Uncore events for modern Intel architectures using PerfCounterManagerHbt
-// includes ICX, SPR, and SRF
+// includes ICX, SPR, SRF, EMR
 // For now, enclose each event in a single metric since
 // hbt will enable all events within a metric simultaneously
 // and there may not be enough PMUs.
@@ -2337,6 +2337,13 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                EventExtraAttr{},
                {}}}},
           {CpuArch::SPR,
+           EventRefs{EventRef{
+               "uncore_cas_count_read",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.RD",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::EMR,
            EventRefs{EventRef{
                "uncore_cas_count_read",
                PmuType::uncore_imc,
@@ -2377,6 +2384,13 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                EventExtraAttr{},
                {}}}},
           {CpuArch::SPR,
+           EventRefs{EventRef{
+               "uncore_cas_count_write",
+               PmuType::uncore_imc,
+               "UNC_M_CAS_COUNT.WR",
+               EventExtraAttr{},
+               {}}}},
+          {CpuArch::EMR,
            EventRefs{EventRef{
                "uncore_cas_count_write",
                PmuType::uncore_imc,
@@ -2529,7 +2543,28 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::uncore_cha,
                    "UNC_CHA_CLOCKTICKS",
                    EventExtraAttr{},
-                   {}}}}},
+                   {}}}},
+          {CpuArch::EMR,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_local",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}},
+      },
       100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
@@ -2560,6 +2595,26 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
           {CpuArch::SPR,
+           EventRefs{
+               EventRef{
+                   "uncore_cha_tor_occupancy.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_tor_inserts.ia_miss_drd_remote",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE",
+                   EventExtraAttr{},
+                   {}},
+               EventRef{
+                   "uncore_cha_clocktics",
+                   PmuType::uncore_cha,
+                   "UNC_CHA_CLOCKTICKS",
+                   EventExtraAttr{},
+                   {}}}},
+          {CpuArch::EMR,
            EventRefs{
                EventRef{
                    "uncore_cha_tor_occupancy.ia_miss_drd_remote",
