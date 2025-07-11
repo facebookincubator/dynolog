@@ -56,7 +56,7 @@ class KernelCollectorBase {
   void readNetworkInfo(const std::string& interface);
   void updateNetworkStatsDelta(
       const std::map<std::string, struct RxTx>& rxtxNew);
-  bool isMonitoringInterfaceActive(std::string interface);
+  bool isMonitoringInterfaceActive(const std::string& interface);
 
   // Should match googletest/include/gtest/gtest_prod.h
   // friend class test_case_name##_##test_name##_Test

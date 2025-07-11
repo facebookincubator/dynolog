@@ -127,7 +127,7 @@ class EthtoolCounters {
     cur_eth_stats_->n_stats = gstrings_->len;
     ifr_.ifr_data = (char*)cur_eth_stats_;
 
-    for (auto eth_counter_name : eth_counter_names_) {
+    for (const auto& eth_counter_name : eth_counter_names_) {
       for (int j = 0; j < gstrings_->len; j++) {
         if (0 ==
             memcmp(
@@ -174,4 +174,3 @@ class EthtoolCounters {
 };
 
 } // namespace dynolog::rdmamon
-

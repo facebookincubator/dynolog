@@ -61,4 +61,3 @@ class RdmaMonitor {
 };
 
 } // namespace dynolog::rdmamon
-

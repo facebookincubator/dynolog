@@ -37,4 +37,3 @@ constexpr char dynolog_endpoint[] = "dynolog";
 constexpr char kLibkinetoRequest[] = "req";
 constexpr char kLibkinetoContext[] = "ctxt";
 } // namespace dynolog::ipcfabric
-

@@ -212,7 +212,7 @@ class Monitor {
   // Throws a pfs:parser exception if parsing /proc/<pid>/maps fails.
   void forEachFileBackedExecutableModules(
       const std::set<pid_t>& pids,
-      std::function<void(pid_t, const std::vector<ModuleInfo>&)> func) const {
+      const std::function<void(pid_t, const std::vector<ModuleInfo>&)>& func) const {
     pfs::procfs pfs;
 
     for (auto pid : pids) {
@@ -440,10 +440,10 @@ class Monitor {
   std::shared_ptr<TCpuCountReader> emplaceCpuCountReader(
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id,
-      std::shared_ptr<const perf_event::MetricDesc> metric_desc,
-      std::shared_ptr<const perf_event::PmuDeviceManager> pmu_manager,
+      const std::shared_ptr<const perf_event::MetricDesc>& metric_desc,
+      const std::shared_ptr<const perf_event::PmuDeviceManager>& pmu_manager,
       const CpuSet& mon_cpus,
-      std::shared_ptr<FdWrapper> cgroup_fd_wrapper) {
+      const std::shared_ptr<FdWrapper>& cgroup_fd_wrapper) {
     std::lock_guard<std::mutex> lock{mutex_};
 
     // Check for key before creating new count generator.
@@ -1197,7 +1197,7 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
   // prepare all elements in mux enabled status
   MuxGroup enabled_elems;
   auto active_mux_ids = getEnabledMuxGroupId_();
-  for (auto mux_id : active_mux_ids) {
+  for (const auto& mux_id : active_mux_ids) {
     enabled_elems.insert(
         mux_groups_.at(mux_id).begin(), mux_groups_.at(mux_id).end());
   }

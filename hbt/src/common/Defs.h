@@ -177,7 +177,7 @@ inline std::error_code toErrorCode(ssize_t e) {
 class LogEntry final {
  public:
   ~LogEntry() noexcept {
-    std::cerr << oss_.str() << std::endl;
+    std::cerr << oss_.str() << '\n';
   }
 
   std::ostream& logPreamble(const std::string& preffix) {

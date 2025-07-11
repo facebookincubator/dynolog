@@ -10,6 +10,7 @@
 
 #include <map>
 #include <memory>
+#include <utility>
 
 namespace facebook::hbt::perf_event {
 
@@ -23,7 +24,7 @@ class PerCpuSampleGeneratorBase : public PerCpuBase<TCpuGenerator> {
   PerCpuSampleGeneratorBase(
       const CpuSet& mon_cpus,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-      : TBase{mon_cpus, cgroup_fd_wrapper} {}
+      : TBase{mon_cpus, std::move(cgroup_fd_wrapper)} {}
 
   void changeSamplePeriod(uint64_t new_sample_period) {
     for_each_cpu(cpu, this->mon_cpus_) {

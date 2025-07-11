@@ -163,7 +163,7 @@ void KernelCollectorBase::readNetworkStats() {
   nicDevCount_ = nicDevCount;
 }
 
-bool KernelCollectorBase::isMonitoringInterfaceActive(std::string interface) {
+bool KernelCollectorBase::isMonitoringInterfaceActive(const std::string& interface) {
   if (interface.length() >= IFNAMSIZ) {
     LOG(ERROR) << "invalid device name found: " << interface;
     // Device name is too long to be valid, so consider the line malformed and

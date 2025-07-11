@@ -76,4 +76,3 @@ class SysfsCounter {
 };
 
 } // namespace dynolog::rdmamon
-

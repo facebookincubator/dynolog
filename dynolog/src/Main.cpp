@@ -131,12 +131,12 @@ void perf_monitor_loop() {
   }
 }
 
-auto setup_server(std::shared_ptr<ServiceHandler> handler) {
+auto setup_server(const std::shared_ptr<ServiceHandler>& handler) {
   return std::make_unique<SimpleJsonServer<ServiceHandler>>(
       handler, FLAGS_port);
 }
 
-void gpu_monitor_loop(std::shared_ptr<gpumon::DcgmGroupInfo> dcgm) {
+void gpu_monitor_loop(const std::shared_ptr<gpumon::DcgmGroupInfo>& dcgm) {
   auto logger = getLogger(FLAGS_scribe_category);
 
   LOG(INFO) << "Running DCGM loop : interval = "

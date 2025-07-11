@@ -35,4 +35,3 @@ class IPCMonitor {
 };
 
 } // namespace dynolog::tracing
-

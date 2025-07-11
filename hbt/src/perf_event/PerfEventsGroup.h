@@ -410,7 +410,7 @@ struct GroupReadValues {
     HBT_DCHECK_NOT_NULLPTR(t);
   }
 
-  GroupReadValues& operator=(GroupReadValues&& other) {
+  GroupReadValues& operator=(GroupReadValues&& other)  noexcept {
     release_();
     new (this) GroupReadValues(std::move(other));
     return *this;
@@ -721,7 +721,7 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
   /// Pass the pointers denoting the CPU's perf_event data ring buffer to
   /// `callback`. If consume == True, then update data_tail to mark copied data
   /// as consumed.
-  void onCpuDataBufferRead(OnRbReadCallback callback, bool consume);
+  void onCpuDataBufferRead(const OnRbReadCallback& callback, bool consume);
 
   //
   // Stats related methods.
@@ -1566,7 +1566,7 @@ exit:
 
 template <class TImpl, class TMode>
 void PerfEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
-    OnRbReadCallback callback,
+    const OnRbReadCallback& callback,
     bool consume) {
   HBT_ARG_CHECK(this->isOpen())
       << "PerfEventsGroup must be open for events to be consumed "

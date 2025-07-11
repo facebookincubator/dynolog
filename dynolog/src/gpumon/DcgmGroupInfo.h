@@ -76,4 +76,3 @@ class DcgmGroupInfo {
 };
 
 } // namespace dynolog::gpumon
-
