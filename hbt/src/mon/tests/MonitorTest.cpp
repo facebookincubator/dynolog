@@ -11,7 +11,6 @@
 
 #include <chrono>
 #include <filesystem>
-#include <fstream>
 
 using namespace facebook::hbt;
 using namespace facebook::hbt::mon;
