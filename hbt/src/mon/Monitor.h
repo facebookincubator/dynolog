@@ -81,7 +81,19 @@ class Monitor {
   }
 
   explicit Monitor(bool mux_queue_per_pmu_type = false, bool reset = true)
-      : mux_queue_per_pmu_type_{mux_queue_per_pmu_type}, reset_{reset} {}
+      : Monitor(
+            std::make_unique<perf_event::PerCpuCountReaderFactory>(),
+            mux_queue_per_pmu_type,
+            reset) {}
+
+  Monitor(
+      std::unique_ptr<perf_event::PerCpuCountReaderFactory>
+          cpu_count_reader_factory,
+      bool mux_queue_per_pmu_type,
+      bool reset)
+      : cpu_count_reader_factory_(std::move(cpu_count_reader_factory)),
+        mux_queue_per_pmu_type_{mux_queue_per_pmu_type},
+        reset_{reset} {}
 
   bool open() {
     std::lock_guard<std::mutex> lock{mutex_};
@@ -440,8 +452,8 @@ class Monitor {
     addMuxEntry_(mux_group_id, elem_id, pmu_type);
     auto [it, emplaced] = cpu_count_readers_.emplace(
         elem_id,
-        std::make_unique<Monitor::TCpuCountReader>(
-            mon_cpus, metric_desc, pmu_manager, cgroup_fd_wrapper));
+        cpu_count_reader_factory_->make(
+            elem_id, mon_cpus, metric_desc, pmu_manager, cgroup_fd_wrapper));
 
     // Transition newly emplaced PerCpuCountReader to Monitor's state.
     sync_();
@@ -573,8 +585,8 @@ class Monitor {
       return nullptr;
     }
     // Add mux entry as other Readers.
-    // But Monitor will multiplex BPerfEventsGroup rather than BPerfCountReader.
-    // This is specially handled during sync_().
+    // But Monitor will multiplex BPerfEventsGroup rather than
+    // BPerfCountReader. This is specially handled during sync_().
     addMuxEntry_(mux_group_id, elem_id, std::nullopt);
     // emplace BPerfCountReader
     auto [it, emplaced] =
@@ -718,6 +730,9 @@ class Monitor {
 
  protected:
   State state_ = State::Closed;
+
+  std::unique_ptr<perf_event::PerCpuCountReaderFactory>
+      cpu_count_reader_factory_;
 
 #ifdef HBT_ENABLE_TRACING
   std::unordered_map<ElemId, std::shared_ptr<TraceMonitor>> trace_monitors_;
