@@ -88,8 +88,9 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
               per_cpu_event_confs.at(cpu));
     }
   }
+  virtual ~PerCpuCountReader() = default;
 
-  void open(bool pinned = false) {
+  virtual void open(bool pinned = false) {
     try {
       for (const auto& [cpu, gen] : this->generators_) {
         gen->open(pinned);
@@ -100,7 +101,7 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
     }
   }
 
-  void openForCpu(CpuId cpu, bool pinned = false) {
+  virtual void openForCpu(CpuId cpu, bool pinned = false) {
     try {
       if (generators_.count(static_cast<int>(cpu))) {
         generators_.at(static_cast<int>(cpu))->open(pinned);
@@ -109,6 +110,46 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
       closeForCpu(cpu);
       throw;
     }
+  }
+
+  virtual void close() {
+    TBase::close();
+  }
+
+  virtual void closeForCpu(CpuId cpu) {
+    TBase::closeForCpu(cpu);
+  }
+
+  virtual void enable(bool reset = true) {
+    TBase::enable(reset);
+  }
+
+  virtual void enableForCpu(CpuId cpu, bool reset = true) {
+    TBase::enableForCpu(cpu, reset);
+  }
+
+  virtual bool isEnabled() const {
+    return TBase::isEnabled();
+  }
+
+  virtual bool isEnabledOnCpu(CpuId cpu) const {
+    return TBase::isEnabledOnCpu(cpu);
+  }
+
+  virtual void disable() {
+    TBase::disable();
+  }
+
+  virtual void disableForCpu(CpuId cpu) {
+    TBase::disableForCpu(cpu);
+  }
+
+  virtual bool isOpen() const {
+    return TBase::isOpen();
+  }
+
+  virtual bool isOpenOnCpu(CpuId cpu) const {
+    return TBase::isOpenOnCpu(cpu);
   }
 
   size_t getNumEvents() const {
@@ -123,7 +164,7 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
 
   using TBase::read;
 
-  std::optional<ReadValues> read() const {
+  virtual std::optional<ReadValues> read() const {
     auto rv = makeReadValues();
     if (TBase::read(rv)) {
       return std::make_optional(rv);
@@ -132,7 +173,7 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
     }
   }
 
-  std::optional<std::map<int, ReadValues>> readPerCpu() const {
+  virtual std::optional<std::map<int, ReadValues>> readPerCpu() const {
     std::map<int, ReadValues> rv;
     if (TBase::readPerPerfEventsGroup(rv, getNumEvents())) {
       return std::make_optional(rv);
@@ -169,6 +210,21 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
 
   const std::shared_ptr<const PmuDeviceManager> pmu_manager;
   const std::shared_ptr<const MetricDesc> metric_desc;
+};
+
+class PerCpuCountReaderFactory {
+ public:
+  PerCpuCountReaderFactory() = default;
+  virtual ~PerCpuCountReaderFactory() = default;
+  virtual std::unique_ptr<PerCpuCountReader> make(
+      const std::string& element_id,
+      const CpuSet& mon_cpus,
+      std::shared_ptr<const MetricDesc> metric_desc,
+      std::shared_ptr<const PmuDeviceManager> pmu_manager,
+      std::shared_ptr<FdWrapper> cgroup_fd_wrapper) {
+    return std::make_unique<PerCpuCountReader>(
+        mon_cpus, metric_desc, pmu_manager, cgroup_fd_wrapper);
+  }
 };
 
 } // namespace facebook::hbt::perf_event
