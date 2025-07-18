@@ -83,15 +83,19 @@ class Monitor {
   explicit Monitor(bool mux_queue_per_pmu_type = false, bool reset = true)
       : Monitor(
             std::make_unique<perf_event::PerCpuCountReaderFactory>(),
+            std::make_unique<perf_event::PerUncoreCountReaderFactory>(),
             mux_queue_per_pmu_type,
             reset) {}
 
   Monitor(
       std::unique_ptr<perf_event::PerCpuCountReaderFactory>
           cpu_count_reader_factory,
+      std::unique_ptr<perf_event::PerUncoreCountReaderFactory>
+          uncore_count_reader_factory,
       bool mux_queue_per_pmu_type,
       bool reset)
       : cpu_count_reader_factory_(std::move(cpu_count_reader_factory)),
+        uncore_count_reader_factory_(std::move(uncore_count_reader_factory)),
         mux_queue_per_pmu_type_{mux_queue_per_pmu_type},
         reset_{reset} {}
 
@@ -498,8 +502,8 @@ class Monitor {
       addMuxEntry_(mux_group_id, elem_id, pmu_type);
       auto [it, emplaced] = uncore_count_readers_.emplace(
           elem_id,
-          std::make_unique<Monitor::TUncoreCountReader>(
-              scope, metric_desc, pmu_manager));
+          uncore_count_reader_factory_->make(
+              elem_id, scope, metric_desc, pmu_manager));
 
       // Transition newly emplaced PerUncoreCountReader to Monitor's state.
       sync_();
@@ -733,6 +737,8 @@ class Monitor {
 
   std::unique_ptr<perf_event::PerCpuCountReaderFactory>
       cpu_count_reader_factory_;
+  std::unique_ptr<perf_event::PerUncoreCountReaderFactory>
+      uncore_count_reader_factory_;
 
 #ifdef HBT_ENABLE_TRACING
   std::unordered_map<ElemId, std::shared_ptr<TraceMonitor>> trace_monitors_;
