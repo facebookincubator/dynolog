@@ -74,13 +74,22 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   enum class Statistic { AVG, QUANTILE };
 
   std::vector<uint64_t> readProcStat(bool read_per_core = false);
-  std::optional<uint64_t> readCgroupCpuStat(const std::string& allotmentId);
+  std::optional<uint64_t> readCgroupCpuStat(const std::string& cgroupPath);
   std::optional<double> getStat(
       Granularity gran,
       uint64_t seconds_ago,
       const std::optional<std::string>& allotmentId,
       Statistic stat,
       double quant);
+
+  void processProcUsage(
+      int level,
+      const std::vector<uint64_t>& idleTime,
+      TimePoint measure_time_lo,
+      TimePoint measure_time_hi,
+      TMask mask);
+
+  static std::array<MetricFrameMap, 3> createMetricFrameArray();
   std::string const rootDir_;
   uint64_t const coreCount_;
   bool const isUnitTest_;
@@ -88,10 +97,10 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::set<std::string> allotmentsNeedPerCore_;
   std::map<std::string, std::string> allotmentCgroupPaths_;
 
-  // Index 0 is minute, 1 is second, 2 is 100ms
-  std::array<MetricFrameMap, 3> CPUTimeMetricFrames_;
-  std::array<std::map<std::string, uint64_t>, 3> CPUTimeLast_;
-  std::array<TimePoint, 3> TimeLast_;
+  // Proc stat tracking. Index 0 is minute, 1 is second, 2 is 100ms
+  std::array<MetricFrameMap, 3> procUsageMetricFrames_;
+  std::array<std::map<std::string, uint64_t>, 3> procCpuTimeLast_;
+  std::array<TimePoint, 3> procTimeLast_;
 
   std::shared_mutex dataLock_;
 
