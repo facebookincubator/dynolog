@@ -28,7 +28,7 @@ class PerfMonitor {
       const hbt::CpuSet& monCpus,
       const std::vector<ElemId>& metricIds,
       std::shared_ptr<hbt::perf_event::PmuDeviceManager> pmuDeviceManager,
-      std::shared_ptr<hbt::perf_event::Metrics> availableMetrics);
+      const std::shared_ptr<hbt::perf_event::Metrics>& availableMetrics);
 
   // perform metric lookups
   void step();

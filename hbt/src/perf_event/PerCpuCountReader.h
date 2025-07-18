@@ -11,6 +11,7 @@
 #include "hbt/src/perf_event/PerfEventsGroup.h"
 
 #include <memory>
+#include <utility>
 #include <vector>
 
 namespace facebook::hbt::perf_event {
@@ -33,7 +34,7 @@ class CpuCountReader final
       const std::vector<std::string>& ev_names,
       CpuId cpu,
       int cgroup_fd,
-      EventConfs event_confs)
+      const EventConfs& event_confs)
       : TBase{cpu, -1, cgroup_fd, event_confs}, event_names_{ev_names} {}
 
   void enableImpl() {}
@@ -64,9 +65,9 @@ class PerCpuCountReader : public PerCpuBase<CpuCountReader> {
       std::shared_ptr<const MetricDesc> metric_desc_in,
       std::shared_ptr<const PmuDeviceManager> pmu_manager_in,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-      : TBase{mon_cpus, cgroup_fd_wrapper},
-        pmu_manager{pmu_manager_in},
-        metric_desc{metric_desc_in} {
+      : TBase{mon_cpus, std::move(cgroup_fd_wrapper)},
+        pmu_manager{std::move(pmu_manager_in)},
+        metric_desc{std::move(metric_desc_in)} {
     HBT_DCHECK(pmu_manager != nullptr);
     HBT_DCHECK(metric_desc != nullptr);
 

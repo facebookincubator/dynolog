@@ -11,6 +11,7 @@
 
 #include <map>
 #include <memory>
+#include <utility>
 
 namespace facebook::hbt::perf_event {
 
@@ -20,7 +21,7 @@ template <class TPerfEventGroupGenBase>
 class PerPerfEventsGroupBase {
  public:
   explicit PerPerfEventsGroupBase(std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-      : cgroup_fd_wrapper_{cgroup_fd_wrapper} {}
+      : cgroup_fd_wrapper_{std::move(cgroup_fd_wrapper)} {}
 
   void close() {
     for (auto& [_, gen] : generators_) {
