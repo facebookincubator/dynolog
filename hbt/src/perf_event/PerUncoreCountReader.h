@@ -106,8 +106,9 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
           conf);
     }
   }
+  virtual ~PerUncoreCountReader() = default;
 
-  void open(bool pinned = false) {
+  virtual void open(bool pinned = false) {
     try {
       for (const auto& [cpu, gen] : this->generators_) {
         gen->open(pinned);
@@ -118,7 +119,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     }
   }
 
-  void openForCpu(CpuId cpu, bool pinned = false) {
+  virtual void openForCpu(CpuId cpu, bool pinned = false) {
     try {
       for (const auto& [key, gen] : this->generators_) {
         if (gen->getCpu() == cpu) {
@@ -129,6 +130,46 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
       closeForCpu(cpu);
       throw;
     }
+  }
+
+  virtual void close() {
+    TBase::close();
+  }
+
+  virtual void closeForCpu(CpuId cpu) {
+    TBase::closeForCpu(cpu);
+  }
+
+  virtual void enable(bool reset = true) {
+    TBase::enable(reset);
+  }
+
+  virtual void enableForCpu(CpuId cpu, bool reset = true) {
+    TBase::enableForCpu(cpu, reset);
+  }
+
+  virtual bool isEnabled() const {
+    return TBase::isEnabled();
+  }
+
+  virtual bool isEnabledOnCpu(CpuId cpu) const {
+    return TBase::isEnabledOnCpu(cpu);
+  }
+
+  virtual void disable() {
+    TBase::disable();
+  }
+
+  virtual void disableForCpu(CpuId cpu) {
+    TBase::disableForCpu(cpu);
+  }
+
+  virtual bool isOpen() const {
+    return TBase::isOpen();
+  }
+
+  virtual bool isOpenOnCpu(CpuId cpu) const {
+    return TBase::isOpenOnCpu(cpu);
   }
 
   size_t getNumEvents() const {
@@ -143,7 +184,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
 
   using TBase::read;
 
-  std::optional<ReadValues> read() const {
+  virtual std::optional<ReadValues> read() const {
     auto rv = makeReadValues();
     if (TBase::read(rv)) {
       return std::make_optional(rv);
@@ -152,7 +193,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     }
   }
 
-  std::vector<ReadValues> readPerPerfEventsGroup() const {
+  virtual std::vector<ReadValues> readPerPerfEventsGroup() const {
     std::vector<ReadValues> rvs;
     std::map<int, GroupReadValues<mode::Counting>> res;
     TBase::readPerPerfEventsGroup(res, getNumEvents());
@@ -180,6 +221,20 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
 
   const std::shared_ptr<const PmuDeviceManager> pmu_manager;
   const std::shared_ptr<const MetricDesc> metric_desc;
+};
+
+class PerUncoreCountReaderFactory {
+ public:
+  PerUncoreCountReaderFactory() = default;
+  virtual ~PerUncoreCountReaderFactory() = default;
+  virtual std::unique_ptr<PerUncoreCountReader> make(
+      const std::string& element_id,
+      uncore_scope::Scope scope,
+      std::shared_ptr<const MetricDesc> metric_desc,
+      std::shared_ptr<const PmuDeviceManager> pmu_manager) {
+    return std::make_unique<PerUncoreCountReader>(
+        scope, metric_desc, pmu_manager);
+  }
 };
 
 } // namespace facebook::hbt::perf_event
