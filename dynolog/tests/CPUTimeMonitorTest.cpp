@@ -438,5 +438,172 @@ TEST_F(CPUTimeMonitorTest, testInvalidCgroupPath) {
   monitor->deRegisterAllotment("invalid_path");
 }
 
+// Test data source selection functionality
+TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
+  // Register allotment with cgroup path
+  monitor->registerAllotment("test_allotment", {}, "/sys/fs/cgroup");
+
+  // Generate some data
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+  monitor->tick(minor_tick_1s);
+  monitor->tick(subminor_tick_100ms);
+
+  // Test default behavior (should use PROC_STAT)
+  auto procAvg = monitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_allotment");
+  auto procQuantile = monitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, 0.5, "test_allotment");
+  auto procRaw = monitor->getRawCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_allotment");
+
+  // Test explicit PROC_STAT
+  auto procAvgExplicit = monitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+  auto procQuantileExplicit = monitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      0.5,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+  auto procRawExplicit = monitor->getRawCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+
+  // Default and explicit PROC_STAT should be the same
+  EXPECT_EQ(procAvg, procAvgExplicit);
+  EXPECT_EQ(procQuantile, procQuantileExplicit);
+  EXPECT_EQ(procRaw, procRawExplicit);
+
+  // Test CGROUP_STAT
+  auto cgroupAvg = monitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+  auto cgroupQuantile = monitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      0.5,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+  auto cgroupRaw = monitor->getRawCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  // All should have values (assuming cgroup data is available)
+  EXPECT_NE(procAvg, std::nullopt);
+  EXPECT_NE(procQuantile, std::nullopt);
+  EXPECT_FALSE(procRaw.empty());
+
+  EXPECT_NE(cgroupAvg, std::nullopt);
+  EXPECT_NE(cgroupQuantile, std::nullopt);
+  EXPECT_FALSE(cgroupRaw.empty());
+
+  // Proc and cgroup values should be different (as mentioned in the commit
+  // message)
+  EXPECT_NE(procAvg, cgroupAvg);
+  EXPECT_NE(procQuantile, cgroupQuantile);
+
+  // Test with host allotment (should work with both data sources)
+  auto hostProcAvg = monitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::PROC_STAT);
+  EXPECT_NE(hostProcAvg, std::nullopt);
+
+  auto hostCgroupAvg = monitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+  EXPECT_NE(hostCgroupAvg, std::nullopt);
+
+  monitor->deRegisterAllotment("test_allotment");
+}
+
+// Test feature flag behavior - when readCgroupStat is disabled, should always
+// use PROC_STAT
+TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
+  // Create monitor with readCgroupStat disabled
+  std::shared_ptr<CPUTimeMonitor::TTicker> disabledTicker =
+      std::make_shared<CPUTimeMonitor::TTicker>();
+  auto disabledMonitor = std::make_shared<CPUTimeMonitor>(
+      disabledTicker,
+      false /* readCgroupStat disabled */,
+      getenv("TESTROOT"),
+      coreCount,
+      true);
+
+  // Register allotment with cgroup path
+  disabledMonitor->registerAllotment("test_allotment", {}, "/sys/fs/cgroup");
+
+  // Generate some data
+  disabledMonitor->tick(major_tick_60s);
+  disabledMonitor->tick(major_tick_60s);
+  disabledMonitor->tick(minor_tick_1s);
+  disabledMonitor->tick(subminor_tick_100ms);
+
+  // Request CGROUP_STAT data source, but should get PROC_STAT due to feature
+  // flag
+  auto procAvg = disabledMonitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+
+  auto cgroupRequestedAvg = disabledMonitor->getAvgCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  // Both should return the same value (proc data) since feature flag is
+  // disabled
+  EXPECT_EQ(procAvg, cgroupRequestedAvg);
+
+  // Same test for quantile
+  auto procQuantile = disabledMonitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      0.5,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+
+  auto cgroupRequestedQuantile = disabledMonitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      0.5,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  EXPECT_EQ(procQuantile, cgroupRequestedQuantile);
+
+  // Same test for raw data
+  auto procRaw = disabledMonitor->getRawCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::PROC_STAT);
+
+  auto cgroupRequestedRaw = disabledMonitor->getRawCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS,
+      60,
+      "test_allotment",
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  EXPECT_EQ(procRaw, cgroupRequestedRaw);
+
+  disabledMonitor->deRegisterAllotment("test_allotment");
+}
+
 } // namespace dynolog
 } // namespace facebook
