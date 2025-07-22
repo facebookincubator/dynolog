@@ -38,6 +38,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
+      bool readCgroupStat,
       std::string rootDir = "",
       uint64_t coreCount = std::thread::hardware_concurrency(),
       bool isUnitTest = false);
@@ -89,6 +90,13 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       TimePoint measure_time_hi,
       TMask mask);
 
+  void processCgroupUsage(
+      int level,
+      const std::map<std::string, std::tuple<TimePoint, uint64_t>>&
+          cgroupCpuStats,
+      TimePoint measure_time_lo,
+      TMask mask);
+
   static std::array<MetricFrameMap, 3> createMetricFrameArray();
   std::string const rootDir_;
   uint64_t const coreCount_;
@@ -101,6 +109,12 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::array<MetricFrameMap, 3> procUsageMetricFrames_;
   std::array<std::map<std::string, uint64_t>, 3> procCpuTimeLast_;
   std::array<TimePoint, 3> procTimeLast_;
+
+  // Cgroup stat tracking. Index 0 is minute, 1 is second, 2 is 100ms
+  bool readCgroupStat_;
+  std::array<MetricFrameMap, 3> cgroupUsageMetricFrames_;
+  std::array<std::map<std::string, uint64_t>, 3> cgroupUsageLast_;
+  std::array<std::map<std::string, TimePoint>, 3> cgroupTimeLast_;
 
   std::shared_mutex dataLock_;
 

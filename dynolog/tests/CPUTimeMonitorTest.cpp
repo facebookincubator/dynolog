@@ -16,7 +16,7 @@ std::shared_ptr<CPUTimeMonitor> createTestMonitor() {
       std::make_shared<CPUTimeMonitor::TTicker>();
   // hard code the core count to match the testroot file
   return std::make_shared<CPUTimeMonitor>(
-      ticker, getenv("TESTROOT"), coreCount, true);
+      ticker, true, getenv("TESTROOT"), coreCount, true);
 }
 
 // idle data from test /proc/stat
@@ -45,6 +45,15 @@ class CPUTimeMonitorTest : public ::testing::Test {
   }
   auto& procCPUTimeMetricFrames_() const {
     return monitor->procUsageMetricFrames_;
+  }
+  auto& cgroupUsageLast_() const {
+    return monitor->cgroupUsageLast_;
+  }
+  auto& cgroupUsageMetricFrames_() const {
+    return monitor->cgroupUsageMetricFrames_;
+  }
+  auto& cgroupTimeLast_() const {
+    return monitor->cgroupTimeLast_;
   }
   std::shared_ptr<CPUTimeMonitor> monitor = createTestMonitor();
 };
@@ -317,6 +326,116 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   checkStats();
   monitor->tick(subminor_tick_100ms);
   checkStats();
+}
+
+// Test cgroup CPU usage processing
+TEST_F(CPUTimeMonitorTest, testCgroupUsageProcessing) {
+  auto now = std::chrono::steady_clock::now();
+  auto hostAllotment = "host";
+  auto allotment2 = "cgroup_allotment2";
+
+  // Register allotments with cgroup paths
+  monitor->registerAllotment(allotment2, {0, 1, 2, 3}, "/sys/fs/cgroup");
+
+  // First tick - should initialize but not generate metrics (need delta)
+  monitor->tick(major_tick_60s);
+
+  // Check that cgroup data structures are initialized
+  for (int i = 0; i < 3; i++) {
+    for (const auto& allotmentId : {hostAllotment, allotment2}) {
+      EXPECT_TRUE(cgroupUsageLast_()[i].count(allotmentId));
+      EXPECT_TRUE(cgroupTimeLast_()[i].count(allotmentId));
+    }
+    // No metrics should be generated yet (need at least 2 ticks for delta)
+    EXPECT_EQ(cgroupUsageMetricFrames_()[i].length(), 0);
+  }
+
+  // Second tick - should generate metrics
+  monitor->tick(major_tick_60s);
+
+  // Now we should have cgroup metrics
+  EXPECT_EQ(cgroupUsageMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[1].length(), 1);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[2].length(), 1);
+
+  // Test different granularities
+  monitor->tick(minor_tick_1s);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[2].length(), 2);
+
+  monitor->tick(subminor_tick_100ms);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(cgroupUsageMetricFrames_()[2].length(), 3);
+
+  // Verify that cgroup metrics are accessible
+  auto slice = cgroupUsageMetricFrames_()[2].slice(now, now + 60s);
+  EXPECT_NE(slice, std::nullopt);
+
+  auto series1 = slice->series<double>(hostAllotment);
+  auto series2 = slice->series<double>(allotment2);
+  EXPECT_NE(series1, std::nullopt);
+  EXPECT_NE(series2, std::nullopt);
+  EXPECT_GT(series1->size(), 0);
+  EXPECT_GT(series2->size(), 0);
+
+  // Test deregistration cleans up cgroup data
+  monitor->deRegisterAllotment(allotment2);
+  EXPECT_FALSE(cgroupUsageLast_()[0].count(allotment2));
+  EXPECT_FALSE(cgroupUsageLast_()[1].count(allotment2));
+  EXPECT_FALSE(cgroupUsageLast_()[2].count(allotment2));
+
+  // host allotment should still exist
+  EXPECT_TRUE(cgroupUsageLast_()[0].count(hostAllotment));
+  EXPECT_TRUE(cgroupUsageLast_()[1].count(hostAllotment));
+  EXPECT_TRUE(cgroupUsageLast_()[2].count(hostAllotment));
+}
+
+// Test cgroup processing with mixed allotments (some with cgroup paths, some
+// without)
+TEST_F(CPUTimeMonitorTest, testMixedAllotments) {
+  // Register mixed allotments
+  monitor->registerAllotment("proc_only", {0, 1});
+  monitor->registerAllotment("both_no_cpuset", {}, "/sys/fs/cgroup");
+  monitor->registerAllotment("both", {2, 3, 4}, "/sys/fs/cgroup");
+
+  // Multiple ticks to generate data
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+  monitor->tick(minor_tick_1s);
+  monitor->tick(subminor_tick_100ms);
+
+  // Verify proc-only allotment has CPU time data but no cgroup data
+  EXPECT_TRUE(procCPUTimeLast_()[0].count("proc_only"));
+  EXPECT_FALSE(cgroupUsageLast_()[0].count("proc_only"));
+
+  // Verify cgroup allotments have both types of data
+  EXPECT_TRUE(procCPUTimeLast_()[0].count("both_no_cpuset"));
+  EXPECT_TRUE(cgroupUsageLast_()[0].count("both_no_cpuset"));
+
+  EXPECT_TRUE(procCPUTimeLast_()[0].count("both"));
+  EXPECT_TRUE(cgroupUsageLast_()[0].count("both"));
+
+  // Clean up
+  monitor->deRegisterAllotment("proc_only");
+  monitor->deRegisterAllotment("both_no_cpuset");
+  monitor->deRegisterAllotment("both");
+}
+
+TEST_F(CPUTimeMonitorTest, testInvalidCgroupPath) {
+  // Test with invalid cgroup path
+  monitor->registerAllotment("invalid_path", {}, "/invalid/cgroup/path");
+
+  // Should not crash, but won't generate cgroup metrics
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  // Should have proc data but no cgroup data
+  EXPECT_TRUE(procCPUTimeLast_()[0].count("invalid_path"));
+  EXPECT_FALSE(cgroupUsageLast_()[0].count("invalid_path"));
+
+  monitor->deRegisterAllotment("invalid_path");
 }
 
 } // namespace dynolog
