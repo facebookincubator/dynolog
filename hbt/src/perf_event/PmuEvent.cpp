@@ -10,12 +10,15 @@
 namespace facebook::hbt::perf_event {
 
 ScaleUnit scaleUnitFromStr(const std::string& s) {
-  if (s == "Bytes")
+  if (s == "Bytes") {
     return ScaleUnit::Bytes;
-  if (s == "Joules")
+  }
+  if (s == "Joules") {
     return ScaleUnit::Joules;
-  if (s == "MiB")
+  }
+  if (s == "MiB") {
     return ScaleUnit::MiB;
+  }
   HBT_THROW_EINVAL() << "Unknown ScaleUnit string \"" + s + "\"";
   __builtin_unreachable();
 }

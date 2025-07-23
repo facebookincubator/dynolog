@@ -188,8 +188,9 @@ inline std::ostream& operator<<(std::ostream& os, const Stack& s) {
   for (Level i = 0; i < s.num_set_tags; ++i) {
     os << tagToStr(s.tags[i]) << " ";
   }
-  if (!s.known_num_levels)
+  if (!s.known_num_levels) {
     os << "? ";
+  }
   return os << "]";
 }
 

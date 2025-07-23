@@ -24,8 +24,9 @@ using namespace facebook::hbt::perf_event;
 
 void spin(std::chrono::milliseconds duration) {
   auto start = std::chrono::steady_clock::now();
-  while (std::chrono::steady_clock::now() - start <= duration)
+  while (std::chrono::steady_clock::now() - start <= duration) {
     ;
+  }
 }
 
 TEST(PerCpuThreadSwitchGenerator, SmokeTest) {
@@ -410,8 +411,9 @@ TEST(CpuTraceAuxGenerator, SmokeTest) {
       return;
     }
     sched_yield();
-    while (true)
+    while (true) {
       ;
+    }
   }
 
   CpuTraceAuxGenerator g(
@@ -452,8 +454,9 @@ TEST(PerCpuTraceAuxGenerator, SmokeTest) {
   ASSERT_GE(pid, 0) << "fork() failed with errno: " << errno << std::endl;
 
   if (pid == 0) {
-    while (*phase == 0)
+    while (*phase == 0) {
       ;
+    }
     CPU_ZERO(&cpu_set);
     CPU_SET(1, &cpu_set);
     ASSERT_EQ(sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set), 0)
@@ -482,8 +485,9 @@ TEST(PerCpuTraceAuxGenerator, SmokeTest) {
   ASSERT_TRUE(g.isEnabled());
 
   *phase = 1;
-  while (*phase == 1)
+  while (*phase == 1) {
     ;
+  }
 
   size_t itraceStartEventCount = 0;
   for_each_cpu(cpu, allCpus) {

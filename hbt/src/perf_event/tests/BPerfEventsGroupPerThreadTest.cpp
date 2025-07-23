@@ -60,8 +60,9 @@ static void doSomeWork(long count) {
 }
 
 __u64 normalizedValue(const struct bpf_perf_event_value& value) {
-  if (value.running == 0)
+  if (value.running == 0) {
     return 0;
+  }
   return (__u64)((double)value.counter * value.enabled / value.running);
 }
 

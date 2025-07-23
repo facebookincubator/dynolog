@@ -36,8 +36,9 @@ class RingBufferConsumerWrapper
     // In a case of an error zero is returned since none of data were red.
     // This lets Consumer to reiterate read cycle.
     size_t rc = this->template copy<T>(data);
-    if (rc >= std::numeric_limits<size_t>::max() - 1024)
+    if (rc >= std::numeric_limits<size_t>::max() - 1024) {
       return 0;
+    }
     return rc;
   }
 };

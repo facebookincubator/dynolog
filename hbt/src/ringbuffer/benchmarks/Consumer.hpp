@@ -35,8 +35,9 @@ class Consumer {
 
  protected:
   void read(T& value) {
-    while (!endPoint.tryRead(value))
+    while (!endPoint.tryRead(value)) {
       ;
+    }
   }
 
  public:
