@@ -36,8 +36,9 @@ class RingBufferProducerWrapper
     // In a case of an error zero is returned since none of data were written.
     // This let Producer to reiterate write cycle.
     size_t rc = this->template write<T>(data);
-    if (rc >= std::numeric_limits<size_t>::max() - 1024)
+    if (rc >= std::numeric_limits<size_t>::max() - 1024) {
       return 0;
+    }
     return rc;
   }
 };

@@ -318,8 +318,9 @@ inline std::ostream& operator<<(std::ostream& os, const Sampling::Sample& r) {
   os << "<SAMPLE tstamp: " << r.tstamp << " mux" << r.time_running << "/"
      << r.time_enabled << " values: [";
   HBT_ARG_CHECK_GT(r.nr, 0);
-  for (uint64_t i = 0; i < r.nr; ++i)
+  for (uint64_t i = 0; i < r.nr; ++i) {
     os << " " << r.value[i];
+  }
   os << " ] >";
   return os;
 }
@@ -1323,8 +1324,9 @@ template <class TImpl, class TMode>
 void PerfEventsGroupBase<TImpl, TMode>::disable() {
   HBT_ARG_CHECK(isOpen()) << "Cannot disable events that are not open";
 
-  if (!enabled_)
+  if (!enabled_) {
     return;
+  }
 
   if (int ret = ::ioctl(event_fds_[0], PERF_EVENT_IOC_DISABLE, 0); 0 > ret) {
     HBT_THROW_SYSTEM(errno) << "ioctl PERF_EVENT_IOC_DISABLE";
@@ -1336,8 +1338,9 @@ void PerfEventsGroupBase<TImpl, TMode>::disable() {
 template <class TImpl, class TMode>
 void PerfEventsGroup<TImpl, TMode>::changeSamplePeriod(
     uint64_t new_sample_period) {
-  if (this->sample_period_ == new_sample_period)
+  if (this->sample_period_ == new_sample_period) {
     return;
+  }
   this->sample_period_ = new_sample_period;
   if (int ret = ::ioctl(
           this->event_fds_[0], PERF_EVENT_IOC_PERIOD, &this->sample_period_);
