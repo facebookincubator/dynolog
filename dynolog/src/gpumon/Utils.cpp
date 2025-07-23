@@ -58,7 +58,7 @@ std::unordered_map<std::string, std::string> getMetadataForPid(
   }
   auto task = pfs::procfs().get_task(pid);
   auto env = task.get_environ();
-  for (auto key : keysMap) {
+  for (const auto& key : keysMap) {
     if (auto val = env.find(key.first); val != env.end()) {
       varsMap[key.second] = val->second;
     }

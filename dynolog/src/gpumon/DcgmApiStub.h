@@ -331,7 +331,7 @@ dcgmReturn_t dcgmStopEmbedded_stub(dcgmHandle_t pDcgmHandle);
  *        - \ref DCGM_ST_UNINITIALIZED        if the library was not shut down
  * properly
  */
-dcgmReturn_t dcgmShutdown_stub(void);
+dcgmReturn_t dcgmShutdown_stub();
 
 /**
  * Get all of the profiling metric groups for a given GPU group.

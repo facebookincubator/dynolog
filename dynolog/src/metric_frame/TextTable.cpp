@@ -55,7 +55,7 @@ void TextTable::writeRow(size_t row, std::ostream& s) const {
       s << ' ';
     }
   }
-  s << '|' << std::endl;
+  s << '|' << '\n';
 }
 
 void TextTable::writeLine(std::ostream& s) const {
@@ -64,7 +64,7 @@ void TextTable::writeLine(std::ostream& s) const {
       s << '-';
     }
   }
-  s << '-' << std::endl;
+  s << '-' << '\n';
 }
 
 } // namespace facebook::dynolog

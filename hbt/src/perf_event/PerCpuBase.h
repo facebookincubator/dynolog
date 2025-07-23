@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <utility>
+
 #include "hbt/src/perf_event/PerPerfEventsGroupBase.h"
 
 namespace facebook::hbt::perf_event {
@@ -16,7 +18,7 @@ class PerCpuBase : public PerPerfEventsGroupBase<TPerfEventGroupGenBase> {
   PerCpuBase(
       const CpuSet& mon_cpus,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
-      : TBase(cgroup_fd_wrapper), mon_cpus_{mon_cpus} {
+      : TBase(std::move(cgroup_fd_wrapper)), mon_cpus_{mon_cpus} {
     for_each_cpu(cpu, mon_cpus) {
       TBase::generators_.insert(std::make_pair(static_cast<int>(cpu), nullptr));
     }
