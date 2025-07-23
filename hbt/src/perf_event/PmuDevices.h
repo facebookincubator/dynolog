@@ -14,6 +14,7 @@
 #include <map>
 #include <memory>
 #include <numeric>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -308,7 +309,11 @@ class PmuDeviceManager {
 
   const CpuInfo cpuInfo;
 
-  explicit PmuDeviceManager(CpuInfo cpu_info_in) : cpuInfo(cpu_info_in) {}
+  explicit PmuDeviceManager(CpuInfo cpuInfoIn)
+      : cpuInfo(std::move(cpuInfoIn)), rootDir_() {}
+
+  PmuDeviceManager(CpuInfo cpuInfoIn, const std::string& rootDir)
+      : cpuInfo(std::move(cpuInfoIn)), rootDir_(rootDir) {}
 
   // Sync PMUs exposed in /sys/devices with those in pmu_groups_.
   void loadSysFsPmus();
@@ -411,6 +416,7 @@ class PmuDeviceManager {
 
  protected:
   TPmuGroups pmu_groups_;
+  const std::string rootDir_;
 
   void updateSysFsPmus_();
 };

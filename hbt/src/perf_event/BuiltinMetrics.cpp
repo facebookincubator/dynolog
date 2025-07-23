@@ -427,8 +427,13 @@ void populatePredefinedEventsOffcore(
 std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
   // Load CPU Info
   auto cpu_info = CpuInfo::load();
-
   auto pmu_manager = std::make_shared<PmuDeviceManager>(cpu_info);
+  populatePmuDeviceManager(pmu_manager);
+  return pmu_manager;
+}
+
+void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
+  CpuInfo cpu_info = pmu_manager->cpuInfo;
   pmu_manager->loadSysFsPmus();
 
   // Add manually made Intel PT event
@@ -542,12 +547,14 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager() {
         "ex_ret_brn_tkn",
         std::vector<EventId>({"branch-instructions-ret-tkn"}));
   }
-
-  return pmu_manager;
 }
 
 /// Add Builtin-Metrics, other metrics can be added dynamically.
 std::shared_ptr<Metrics> makeAvailableMetrics() {
+  return makeAvailableMetricsForCpu(CpuInfo::load());
+}
+
+std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
   auto metrics = std::make_shared<Metrics>();
 
   // instructions replaces DynoPerfCounterType::INSTRUCTIONS
@@ -635,7 +642,6 @@ std::shared_ptr<Metrics> makeAvailableMetrics() {
       getRateReducer()));
 
   // l2_cache_misses replaces DynoPerfCounterType::L2CACHE_MISS
-  auto cpu_info = CpuInfo::load();
   if (cpu_info.cpu_family == CpuFamily::INTEL) {
     metrics->add(std::make_shared<MetricDesc>(
         "l2_cache_misses",
