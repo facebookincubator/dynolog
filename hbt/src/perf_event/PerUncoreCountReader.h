@@ -203,6 +203,11 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     return rvs;
   }
 
+  virtual std::map<int, ReadValues> readPerPerfEventsGroupOnCpu(
+      CpuId cpu) const {
+    return TBase::readPerPerfEventsGroupOnCpu(cpu);
+  }
+
   std::ostream& printStatus(std::ostream& os) const {
     os << "Uncore Count Reader \"" << metric_desc->id;
     if (this->isEnabled()) {
