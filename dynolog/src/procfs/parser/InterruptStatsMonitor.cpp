@@ -10,6 +10,8 @@ namespace facebook {
 namespace dynolog {
 
 using Granularity = InterruptStatsMonitor::Granularity;
+static std::chrono::steady_clock::time_point lastLogTime =
+    std::chrono::steady_clock::now();
 
 InterruptStatsMonitor::InterruptStatsMonitor(
     std::shared_ptr<TTicker> ticker,
@@ -115,8 +117,12 @@ InterruptStats InterruptStatsMonitor::interruptsRefresh() {
         if (valueCount == cpuCount_) {
           eth0IntrpsSum += eth0IntrpRow;
         } else {
-          LOG(WARNING) << "CPU count from procfs interrupts: " << valueCount
-                       << " Expected: " << cpuCount_;
+          if (std::chrono::steady_clock::now() - lastLogTime >=
+              std::chrono::seconds(60)) {
+            LOG(WARNING) << "CPU count from procfs interrupts: " << valueCount
+                         << " Expected: " << cpuCount_;
+            lastLogTime = std::chrono::steady_clock::now();
+          }
         }
       }
     }
