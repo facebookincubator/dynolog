@@ -28,7 +28,7 @@ MetricFrameMap::MetricFrameMap(
 bool MetricFrameMap::addSeries(
     const std::string& key,
     MetricSeriesVar seriesVar) {
-  if (series_.count(key)) {
+  if (series_.contains(key)) {
     return false;
   }
   series_.insert({key, std::move(seriesVar)});
@@ -41,7 +41,7 @@ bool MetricFrameMap::eraseSeries(const std::string& name) {
 
 bool MetricFrameMap::addSamples(const MapSamplesT& samples, TimePoint time) {
   for (const auto& [name, sampleVar] : samples) {
-    if (!series_.count(name)) {
+    if (!series_.contains(name)) {
       return false;
     }
   }
@@ -58,7 +58,7 @@ bool MetricFrameMap::incFromLastSample(
     const MapSamplesT& delta,
     TimePoint time) {
   for (const auto& [name, deltaVar] : delta) {
-    if (!series_.count(name)) {
+    if (!series_.contains(name)) {
       return false;
     }
   }
