@@ -692,6 +692,22 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
         System::Permissions{},
         std::vector<std::string>{},
         getAddReducer()));
+    metrics->add(std::make_shared<MetricDesc>(
+        "l2_cache_fills_l3_reponses",
+        "L2 cache fill from L3 responses",
+        "Count all L3 responses to fill requests."
+        "This event is specific to AMD Zen4 and Zen5 CPUs.",
+        std::map<TOptCpuArch, EventRefs>{
+            {std::nullopt,
+             EventRefs{EventRef{
+                 "l2_fill_l3_resp",
+                 PmuType::cpu,
+                 "l2_fill_l3_resp",
+                 EventExtraAttr{},
+                 {}}}}},
+        100'000'000,
+        System::Permissions{},
+        std::vector<std::string>{}));
   }
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(
