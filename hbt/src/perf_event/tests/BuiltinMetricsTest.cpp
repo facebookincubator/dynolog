@@ -336,7 +336,7 @@ TEST_F(BuiltinMetricsTest, IntelPtPmu) {
   EXPECT_FALSE(ipt_pmu->format.empty());
   EXPECT_FALSE(ipt_pmu->caps.empty());
   // "pt" format entry should present if intel pt feature is supported.
-  EXPECT_EQ(ipt_pmu->format.count("pt"), 1);
+  EXPECT_EQ(ipt_pmu->format.contains("pt"), 1);
   EXPECT_EQ(ipt_pmu->format["pt"].name, "pt");
   EXPECT_EQ(ipt_pmu->format["pt"].type, PmuDevice::ConfigType::config);
   EXPECT_EQ(ipt_pmu->format["pt"].msb, 0);
