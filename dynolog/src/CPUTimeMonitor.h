@@ -35,6 +35,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   using typename MonitorBase<TTicker>::TMask;
 
   enum class Granularity { MINUTE, SECOND, HUNDRED_MS };
+  enum class DataSource { PROC_STAT, CGROUP_STAT };
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
@@ -55,18 +56,21 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::optional<double> getAvgCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
-      const std::optional<std::string>& allotmentId = std::nullopt);
+      const std::optional<std::string>& allotmentId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
 
   std::optional<double> getQuantileCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
       double quantile,
-      const std::optional<std::string>& allotmentId = std::nullopt);
+      const std::optional<std::string>& allotmentId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
 
   std::vector<double> getRawCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
-      const std::optional<std::string>& allotmentId = std::nullopt);
+      const std::optional<std::string>& allotmentId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
 
  private:
   // Reads Idle time from /proc/stat
@@ -81,7 +85,8 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       uint64_t seconds_ago,
       const std::optional<std::string>& allotmentId,
       Statistic stat,
-      double quant);
+      double quant,
+      DataSource dataSource = DataSource::PROC_STAT);
 
   void processProcUsage(
       int level,
@@ -98,6 +103,10 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       TMask mask);
 
   static std::array<MetricFrameMap, 3> createMetricFrameArray();
+  std::optional<MetricFrameMap> getMetricFrame(
+      Granularity gran,
+      DataSource dataSource);
+
   std::string const rootDir_;
   uint64_t const coreCount_;
   bool const isUnitTest_;
