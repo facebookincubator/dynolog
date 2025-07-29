@@ -117,7 +117,7 @@ bool BPerfEventsGroup::addCgroup(
     return false;
   }
   auto id = fd->getInode();
-  if (cgroup_fds_.count(id)) {
+  if (cgroup_fds_.contains(id)) {
     HBT_LOG_WARNING() << "Cgroup " << id << " is already being monitored";
     return false;
   }
@@ -134,7 +134,7 @@ bool BPerfEventsGroup::addCgroup(
 }
 
 bool BPerfEventsGroup::removeCgroup(__u64 id) {
-  if (!cgroup_fds_.count(id)) {
+  if (!cgroup_fds_.contains(id)) {
     HBT_LOG_WARNING() << "Cgroup " << id << " is not being tracked";
     return false;
   }
