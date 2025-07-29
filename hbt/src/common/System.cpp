@@ -419,9 +419,9 @@ std::ostream& operator<<(std::ostream& os, const CpuInfo& cpu_info) {
   os << fmt::format(
       "<CpuInfo {0} {1}({2}) {3}({4}) Step: {5}>",
       cpu_info.vendor_id,
-      cpu_info.cpu_family,
+      fmt::underlying(cpu_info.cpu_family),
       cpu_info.cpu_family_num,
-      cpu_info.cpu_arch,
+      fmt::underlying(cpu_info.cpu_arch),
       cpu_info.cpu_model_num,
       cpu_info.cpu_step_num);
   return os;
