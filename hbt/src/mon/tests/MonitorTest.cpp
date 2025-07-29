@@ -407,7 +407,7 @@ TEST(CpuCountReader, SystemWideCountRead) {
   EXPECT_TRUE(mon.enable());
 
   auto vals = mon.readAllCpuCounts();
-  EXPECT_EQ(vals.count(kInstruction), 1);
+  EXPECT_EQ(vals.contains(kInstruction), 1);
   EXPECT_TRUE(vals.at(kInstruction).has_value());
 }
 
