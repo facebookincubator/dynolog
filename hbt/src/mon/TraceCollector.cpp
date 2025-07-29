@@ -111,7 +111,7 @@ void TraceCollector::emplaceTagStackGeneratorFromRbs(
 void TraceCollector::emplaceSlicesOutput(const std::string& new_key) {
   std::lock_guard<std::mutex> slices_lock{slices_mutex_};
   std::lock_guard<std::mutex> counts_lock{counts_mutex_};
-  HBT_ARG_CHECK_EQ(interval_sources_.count(new_key), 0)
+  HBT_ARG_CHECK(!interval_sources_.contains(new_key))
       << "There is already an interval source with key: \"" << new_key << "\"";
   interval_sources_[new_key] = nullptr;
 
@@ -166,7 +166,7 @@ void TraceCollector::emplaceCountGenerator(
   std::lock_guard<std::mutex> counts_lock{counts_mutex_};
 
   // Check for key before creating new count generator.
-  HBT_ARG_CHECK_EQ(interval_sources_.count(new_key), 0)
+  HBT_ARG_CHECK(!interval_sources_.contains(new_key))
       << "There is already an interval source with key: \"" << new_key << "\"";
 
   interval_sources_.emplace(
