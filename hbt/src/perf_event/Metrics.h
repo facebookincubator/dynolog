@@ -59,7 +59,7 @@ struct MetricDesc {
       const std::string& full_desc,
       const std::map<TOptCpuArch, EventRefs>& event_refs_by_arch,
       uint64_t default_sampling_period,
-      System::Permissions  req_permissions,
+      System::Permissions req_permissions,
       const std::vector<std::string>& dives,
       ReducerFunc reducer = nullptr)
       : id{id},

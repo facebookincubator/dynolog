@@ -122,7 +122,7 @@ const ReducerFunc& getRateReducer() {
 /// (linux/include/uapi/perf_event.h) as PERF_TYPE_HARDWARE.
 /// PERF_TYPE_HARDWARE mapped to PmuType::generic_hardware
 void populateGenericEventsHardware(
-    std::shared_ptr<PmuDeviceManager> pmu_manager) {
+    const std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   pmu_manager->addEvent(
       std::make_shared<EventDef>(
           PmuType::generic_hardware,
@@ -212,7 +212,7 @@ void populateGenericEventsHardware(
 /// (linux/include/uapi/perf_event.h) as PERF_TYPE_SOFTWARE.
 /// PERF_TYPE_SOFTWARE mapped to PmuType::software
 void populateGenericEventsSoftware(
-    std::shared_ptr<PmuDeviceManager> pmu_manager) {
+    const std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   pmu_manager->addEvent(std::make_shared<EventDef>(
       PmuType::software,
       "cpu_clock",
@@ -310,7 +310,7 @@ void populateGenericEventsSoftware(
 /// (linux/include/uapi/perf_event.h) as PERF_TYPE_TRACEPOINT.
 /// PERF_TYPE_TRACEPOINT mapped to PmuType::tracepoint
 void populateGenericEventsTracepoint(
-    std::shared_ptr<PmuDeviceManager> pmu_manager) {
+    const std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   auto categories = pmu_manager->listTracepointCategories();
   for (const auto& category : categories) {
     auto category_events = pmu_manager->listTracepointEvents(category);
@@ -330,7 +330,7 @@ void populateGenericEventsTracepoint(
 /// (linux/include/uapi/perf_event.h) as PERF_TYPE_HW_CACHE.
 /// PERF_TYPE_HW_CACHE mapped to PmuType::generic_hw_cache
 void populateGenericEventsHardwareCache(
-    std::shared_ptr<PmuDeviceManager> pmu_manager) {
+    const std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   for (const auto& cache_type : kHWCacheTypes) {
     for (const auto& cache_op : kHWCacheOpTypes) {
       for (const auto& cache_result : kHWCacheResultTypes) {
@@ -348,7 +348,7 @@ void populateGenericEventsHardwareCache(
   }
 }
 
-void populateDefaultIptEvents(std::shared_ptr<PmuDeviceManager> pmu_manager) {
+void populateDefaultIptEvents(const std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   // add a default event that should be supported by all Broadwell and later
   // Intel CPU
   auto iptEventBuilder =
@@ -368,7 +368,7 @@ void populateDefaultIptEvents(std::shared_ptr<PmuDeviceManager> pmu_manager) {
 }
 
 void populatePredefinedEventsOffcore(
-    std::shared_ptr<PmuDeviceManager> pmu_manager,
+    const std::shared_ptr<PmuDeviceManager>& pmu_manager,
     const CpuInfo& cpu_info) {
   auto offcoreEventDef = pmu_manager->findEventDef("OFFCORE_RESPONSE");
   if (!offcoreEventDef) {

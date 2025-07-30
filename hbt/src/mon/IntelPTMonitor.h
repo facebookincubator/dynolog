@@ -150,7 +150,7 @@ class IntelPTMonitor {
   // This method provides a "zero-copy" way to operate on the trace data.
   // For example, `callback` could contain the logic to directly upload the
   // trace data to remote storage without requiring unncessary copy operations.
-  void onCpusTraceBufferRead(perf_event::OnRbReadCallback callback);
+  void onCpusTraceBufferRead(const perf_event::OnRbReadCallback& callback);
 
  private:
   // Current state of the monitor, initally Closed.

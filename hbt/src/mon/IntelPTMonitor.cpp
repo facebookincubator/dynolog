@@ -45,7 +45,7 @@ std::optional<IntelPTGenCtxt> IntelPTGenCtxt::create(
 }
 
 void IntelPTMonitor::onCpusTraceBufferRead(
-    perf_event::OnRbReadCallback callback) {
+    const perf_event::OnRbReadCallback& callback) {
   std::lock_guard<std::mutex> lock{state_mutex_};
   HBT_ARG_CHECK(state_ != State::Closed)
       << "Cannot collect from IntelPTMonitor when it's in State::Closed.";

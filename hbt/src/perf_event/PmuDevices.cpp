@@ -250,7 +250,7 @@ void parseSysFsPmuFormat_(
   }
 }
 
-void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
+void parseSysFsPmuCaps_(const fs::directory_entry& dentry, PmuDevice& pmu_device) {
   auto caps_dir = dentry.path() / "caps";
   if (!fs::is_directory(caps_dir)) {
     HBT_DLOG_INFO() << caps_dir << " is not a directory";
@@ -275,7 +275,7 @@ void parseSysFsPmuCaps_(fs::directory_entry dentry, PmuDevice& pmu_device) {
   }
 }
 
-std::optional<cpu_set_t> parseSysFsPmuCpuMask_(fs::directory_entry dentry) {
+std::optional<cpu_set_t> parseSysFsPmuCpuMask_(const fs::directory_entry& dentry) {
   auto cpu_mask_path = dentry.path() / "cpumask";
   if (!fs::is_regular_file(cpu_mask_path)) {
     // not all pmu devices have cpumask file
@@ -341,7 +341,7 @@ std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
   return std::make_pair(PmuTypeFromStr(str), std::nullopt);
 }
 
-void parseSysFsPmu_(fs::directory_entry dentry, PmuDeviceManager& pmu_manager) {
+void parseSysFsPmu_(const fs::directory_entry& dentry, PmuDeviceManager& pmu_manager) {
   HBT_ARG_CHECK(fs::is_directory(dentry.path()));
 
   // Parse device type and index from name.
@@ -446,8 +446,8 @@ PmuDeviceManager::listTracepointEvents(const std::string& category) {
 }
 
 int PmuDeviceManager::addEvent(
-    std::shared_ptr<EventDef> ev,
-    std::optional<std::vector<EventId>> aliases) {
+    const std::shared_ptr<EventDef>& ev,
+    const std::optional<std::vector<EventId>>& aliases) {
   auto pmu_type = ev->pmu_type;
   // Adding to dynamic. There may be multiple.
   auto it = pmu_groups_.find(pmu_type);
@@ -473,7 +473,7 @@ int PmuDeviceManager::addAliases(
 }
 
 int PmuDeviceManager::addAliases(
-    std::shared_ptr<EventDef> ev,
+    const std::shared_ptr<EventDef>& ev,
     const std::vector<EventId>& aliases) {
   auto pmu_type = ev->pmu_type;
   auto it = pmu_groups_.find(pmu_type);
@@ -497,7 +497,7 @@ void PmuDevice::addAliases(
 
 void PmuDeviceManager::makePerCpuConfs(
     PmuType pmu_type,
-    EventId ev_id,
+    const EventId& ev_id,
     EventExtraAttr extra_attr,
     EventValueTransforms transforms,
     cpu_set_t mon_cpus,
@@ -519,7 +519,7 @@ void PmuDeviceManager::makePerCpuConfs(
 
 void PmuDeviceManager::makePerUncoreConfs(
     PmuType pmu_type,
-    EventId ev_id,
+    const EventId& ev_id,
     EventExtraAttr extra_attrs,
     EventValueTransforms transforms,
     uncore_scope::Scope scope,
@@ -535,7 +535,7 @@ void PmuDeviceManager::makePerUncoreConfs(
 
 EventConf PmuDeviceManager::makeNoCpuTopologyConf(
     PmuType pmu_type,
-    EventId ev_id,
+    const EventId& ev_id,
     EventExtraAttr extra_attr,
     EventValueTransforms transforms) const {
   // There can only be one PmuDevice per PmuType for PMUs without topology.
@@ -589,7 +589,7 @@ std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
 }
 
 std::shared_ptr<PmuDevice> PmuDeviceManager::findPmuDeviceByName(
-    std::string pmu_name) {
+    const std::string& pmu_name) {
   for (const auto& [pmu_type, pmu_devices] : getPmuGroups()) {
     for (auto& [dev_idx, pmu_device] : pmu_devices) {
       if (pmu_name == pmu_device->getName()) {
@@ -602,7 +602,7 @@ std::shared_ptr<PmuDevice> PmuDeviceManager::findPmuDeviceByName(
 
 /// Optionally pass PmuType and or pmu name to only add event to those PMUs.
 std::shared_ptr<EventDef> PmuDeviceManager::findEventDef(
-    std::string ev_id_str,
+    const std::string& ev_id_str,
     std::optional<PmuType> pmu_type_arg,
     std::optional<std::string> pmu_name_arg) {
   std::string canonical_name = toCanonicalEventId(ev_id_str);

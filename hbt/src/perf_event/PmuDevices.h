@@ -74,11 +74,11 @@ using LibPfm4EventGroups = std::map<std::string, LibPfm4EventGroup>;
 class PmuDevice {
  public:
   PmuDevice(
-      std::string  pmu_name,
+      std::string pmu_name,
       PmuType pmu_type,
       std::optional<unsigned> pmu_device_enumeration,
       uint32_t perf_pmu_id,
-      std::string  desc,
+      std::string desc,
       bool in_sysfs,
       std::optional<cpu_set_t> cpu_mask = std::nullopt)
       : pmu_name_{std::move(pmu_name)},
@@ -312,8 +312,8 @@ class PmuDeviceManager {
   explicit PmuDeviceManager(CpuInfo cpuInfoIn)
       : cpuInfo(std::move(cpuInfoIn)), rootDir_() {}
 
-  PmuDeviceManager(CpuInfo cpuInfoIn, const std::string& rootDir)
-      : cpuInfo(std::move(cpuInfoIn)), rootDir_(rootDir) {}
+  PmuDeviceManager(CpuInfo cpuInfoIn, std::string rootDir)
+      : cpuInfo(std::move(cpuInfoIn)), rootDir_(std::move(rootDir)) {}
 
   // Sync PMUs exposed in /sys/devices with those in pmu_groups_.
   void loadSysFsPmus();
@@ -323,8 +323,8 @@ class PmuDeviceManager {
   /// Add event to all PMU devices of event's pmu_type.
   /// It could be a specific PMU device or a type.
   int addEvent(
-      std::shared_ptr<EventDef> ev,
-      std::optional<std::vector<EventId>> aliases = std::nullopt);
+      const std::shared_ptr<EventDef>& ev,
+      const std::optional<std::vector<EventId>>& aliases = std::nullopt);
 
   /// List all static tracepoint categories defined
   /// in /sys/kernel/debug/tracing/events.
@@ -357,7 +357,7 @@ class PmuDeviceManager {
         });
   }
 
-  std::shared_ptr<PmuDevice> findPmuDeviceByName(std::string pmu_id_str);
+  std::shared_ptr<PmuDevice> findPmuDeviceByName(const std::string& pmu_id_str);
 
   std::set<std::string> getPmuNames() const;
 
@@ -376,7 +376,7 @@ class PmuDeviceManager {
   /// PMU device).
   void makePerCpuConfs(
       PmuType pmu_type,
-      EventId ev_id,
+      const EventId& ev_id,
       EventExtraAttr extra_attrs,
       EventValueTransforms transforms,
       cpu_set_t mon_cpus,
@@ -388,7 +388,7 @@ class PmuDeviceManager {
   /// So create makePerUncoreConfs to handle above problems.
   void makePerUncoreConfs(
       PmuType pmu_type,
-      EventId ev_id,
+      const EventId& ev_id,
       EventExtraAttr extra_attrs,
       EventValueTransforms transforms,
       uncore_scope::Scope scope,
@@ -399,19 +399,19 @@ class PmuDeviceManager {
   /// (e.g. core or software events).
   EventConf makeNoCpuTopologyConf(
       PmuType pmu_type,
-      EventId ev_id,
+      const EventId& ev_id,
       EventExtraAttr extra_attrs,
       EventValueTransforms transforms) const;
 
   std::shared_ptr<EventDef> findEventDef(
-      std::string ev_id_str,
+      const std::string& ev_id_str,
       std::optional<PmuType> pmu_type_arg = std::nullopt,
       std::optional<std::string> pmu_name_arg = std::nullopt);
 
   int addAliases(const EventId& ev_id, const std::vector<EventId>& aliases);
 
   int addAliases(
-      std::shared_ptr<EventDef> ev,
+      const std::shared_ptr<EventDef>& ev,
       const std::vector<EventId>& aliases);
 
  protected:
