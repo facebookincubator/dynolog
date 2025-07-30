@@ -11,6 +11,29 @@ namespace facebook::dynolog {
 
 constexpr int kRingbufferSizeMinutes = 6;
 
+std::array<MetricFrameMap, 3> CPUTimeMonitor::createMetricFrameArray() {
+  return {
+      MetricFrameMap(
+          kRingbufferSizeMinutes,
+          "cputime_60s",
+          "",
+          std::make_shared<MetricFrameTsUnitFixInterval>(
+              std::chrono::seconds(60), kRingbufferSizeMinutes)),
+      MetricFrameMap(
+          kRingbufferSizeMinutes * 60,
+          "cputime_1s",
+          "",
+          std::make_shared<MetricFrameTsUnitFixInterval>(
+              std::chrono::seconds(1), kRingbufferSizeMinutes * 60)),
+      MetricFrameMap(
+          kRingbufferSizeMinutes * 60 * 10,
+          "cputime_100ms",
+          "",
+          std::make_shared<MetricFrameTsUnitFixInterval>(
+              std::chrono::milliseconds(100),
+              kRingbufferSizeMinutes * 60 * 10))};
+}
+
 CPUTimeMonitor::CPUTimeMonitor(
     std::shared_ptr<TTicker> ticker,
     std::string rootDir,
@@ -20,33 +43,10 @@ CPUTimeMonitor::CPUTimeMonitor(
       rootDir_(std::move(rootDir)),
       coreCount_(coreCount),
       isUnitTest_(isUnitTest),
-      CPUTimeMetricFrames_(
-          {MetricFrameMap(
-               kRingbufferSizeMinutes,
-               "cputime_60s",
-               "",
-               std::make_shared<MetricFrameTsUnitFixInterval>(
-                   std::chrono::seconds(60),
-                   kRingbufferSizeMinutes)),
-           MetricFrameMap(
-               kRingbufferSizeMinutes * 60,
-               "cputime_1s",
-               "",
-               std::make_shared<MetricFrameTsUnitFixInterval>(
-                   std::chrono::seconds(1),
-                   kRingbufferSizeMinutes * 60)),
-           MetricFrameMap(
-               kRingbufferSizeMinutes * 60 * 10,
-               "cputime_100ms",
-               "",
-               std::make_shared<MetricFrameTsUnitFixInterval>(
-                   std::chrono::milliseconds(100),
-                   kRingbufferSizeMinutes * 60 * 10))})
-
-{
+      procUsageMetricFrames_(createMetricFrameArray()) {
   std::unique_lock lock(dataLock_);
   allotmentToCpuSet_["host"] = {};
-  for (auto& frame : CPUTimeMetricFrames_) {
+  for (auto& frame : procUsageMetricFrames_) {
     frame.addSeries(
         "host",
         std::make_shared<MetricSeries<double>>(frame.maxLength(), "host", ""));
@@ -71,7 +71,7 @@ std::optional<double> CPUTimeMonitor::getStat(
     return std::nullopt;
   }
   std::shared_lock lock(dataLock_);
-  auto frame = CPUTimeMetricFrames_[level];
+  auto frame = procUsageMetricFrames_[level];
   auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
   if (slice == std::nullopt) {
     return std::nullopt;
@@ -120,7 +120,7 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
     return {};
   }
   std::shared_lock lock(dataLock_);
-  auto frame = CPUTimeMetricFrames_[level];
+  auto frame = procUsageMetricFrames_[level];
   auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
   if (slice == std::nullopt) {
     return {};
@@ -134,101 +134,25 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
 }
 
 void CPUTimeMonitor::tick(TMask mask) {
-  TimePoint measure_time_lo = std::chrono::steady_clock::now();
+  TimePoint tickTime = std::chrono::steady_clock::now();
   std::vector<uint64_t> idleTime =
       readProcStat(!allotmentsNeedPerCore_.empty());
-  TimePoint measure_time_hi = std::chrono::steady_clock::now();
-
-  if (idleTime.empty()) {
-    return;
-  }
+  TimePoint measureTime = std::chrono::steady_clock::now();
 
   std::unique_lock lock(dataLock_);
 
-  auto make_cores_usage = [&](int level) {
-    auto frame = CPUTimeMetricFrames_[level];
-    auto& last = CPUTimeLast_[level];
-    auto& last_time = TimeLast_[level];
-    MapSamplesT line;
-
-    for (const auto& [allotmentId, cpuSet] : allotmentToCpuSet_) {
-      uint64_t newVal = idleTime[0];
-      uint64_t coreCount = coreCount_;
-      if (!cpuSet.empty()) {
-        newVal = 0;
-        for (auto cpu : cpuSet) {
-          newVal += idleTime[cpu + 1]; // zeroth line is system-wide
-        }
-        coreCount = cpuSet.size();
-      }
-      if (last.find(allotmentId) == last.end()) {
-        last[allotmentId] = newVal;
-        continue;
-      }
-      uint64_t lastVal = last[allotmentId];
-      uint64_t idleDelta =
-          (newVal - lastVal) * 10; // /proc/stat reports in 10ms, convert to ms
-      last[allotmentId] = newVal;
-
-      uint64_t wallDelta =
-          std::chrono::duration_cast<std::chrono::milliseconds>(
-              measure_time_hi - last_time)
-              .count();
-      if (isUnitTest_) {
-        wallDelta = 100;
-      }
-      if (wallDelta == 0) {
-        // log on major tick only to avoid spam
-        if (TTicker::is_major_tick(mask)) {
-          LOG(INFO) << "Wall delta is 0, cannot compute CPU cores usage";
-        }
-        continue;
-      }
-      uint64_t usageDelta = (coreCount * wallDelta) - idleDelta;
-
-      double CPUCoresUsage = (double)usageDelta / wallDelta;
-
-      if (CPUCoresUsage < 0 || CPUCoresUsage > (double)coreCount) {
-        // log on major tick only to avoid spam
-        if (TTicker::is_major_tick(mask)) {
-          LOG(ERROR) << "Invalid CPU cores usage at level: " << level
-                     << " allotmentId: " << allotmentId
-                     << " wallDelta: " << wallDelta
-                     << " CPUCoresUsage: " << CPUCoresUsage
-                     << " idleDelta: " << idleDelta << " newVal: " << newVal
-                     << " lastVal: " << lastVal << " coreCount: " << coreCount
-                     << " data: "
-                     << std::accumulate(
-                            idleTime.begin(),
-                            idleTime.end(),
-                            std::string(),
-                            [](const std::string& a, const uint64_t& b) {
-                              return a + " " + std::to_string(b);
-                            });
-        }
-        continue;
-      }
-
-      line.emplace_back(allotmentId, CPUCoresUsage);
-    }
-    if (!line.empty()) {
-      frame.addSamples(line, measure_time_lo);
-    }
-    TimeLast_[level] = measure_time_lo;
-  };
-
   if (TTicker::is_major_tick(mask)) {
     // every 60s
-    make_cores_usage(IDX_MIN);
+    processProcUsage(IDX_MIN, idleTime, tickTime, measureTime, mask);
   }
   // a tick can be both major and minor
   if (TTicker::is_minor_tick(mask)) {
     // every 1s
-    make_cores_usage(IDX_SEC);
+    processProcUsage(IDX_SEC, idleTime, tickTime, measureTime, mask);
   }
   if (TTicker::is_subminor_tick(mask, 0)) {
     // every 100ms
-    make_cores_usage(IDX_HUNDRED_MS);
+    processProcUsage(IDX_HUNDRED_MS, idleTime, tickTime, measureTime, mask);
   }
 }
 
@@ -263,7 +187,7 @@ void CPUTimeMonitor::registerAllotment(
   if (!cpuSet.empty()) {
     allotmentsNeedPerCore_.insert(allotmentId);
   }
-  for (auto& frame : CPUTimeMetricFrames_) {
+  for (auto& frame : procUsageMetricFrames_) {
     frame.addSeries(
         allotmentId,
         std::make_shared<MetricSeries<double>>(
@@ -279,24 +203,18 @@ void CPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
   std::unique_lock lock(dataLock_);
   allotmentToCpuSet_.erase(allotmentId);
   allotmentsNeedPerCore_.erase(allotmentId);
-  for (auto& last : CPUTimeLast_) {
+  for (auto& last : procCpuTimeLast_) {
     last.erase(allotmentId);
   }
-  for (auto& frame : CPUTimeMetricFrames_) {
+  for (auto& frame : procUsageMetricFrames_) {
     frame.eraseSeries(allotmentId);
   }
   allotmentCgroupPaths_.erase(allotmentId);
 }
 
 std::optional<uint64_t> CPUTimeMonitor::readCgroupCpuStat(
-    const std::string& allotmentId) {
-  std::unique_lock lock(dataLock_);
-  const auto iter = allotmentCgroupPaths_.find(allotmentId);
-  if (iter == allotmentCgroupPaths_.end()) {
-    return std::nullopt;
-  }
-
-  std::string path = iter->second + "/cpu.stat";
+    const std::string& cgroupPath) {
+  std::string path = cgroupPath + "/cpu.stat";
 
   FILE* fp = fopen(path.c_str(), "r");
   if (!fp) {
@@ -381,4 +299,84 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
   }
   return ret;
 }
+
+void CPUTimeMonitor::processProcUsage(
+    int level,
+    const std::vector<uint64_t>& idleTime,
+    TimePoint tickTime,
+    TimePoint measureTime,
+    TMask mask) {
+  if (idleTime.empty()) {
+    return;
+  }
+  auto& frame = procUsageMetricFrames_[level];
+  auto& lastCpuTime = procCpuTimeLast_[level];
+  auto& lastTickTime = procTimeLast_[level];
+  MapSamplesT line;
+
+  for (const auto& [allotmentId, cpuSet] : allotmentToCpuSet_) {
+    uint64_t newVal = idleTime[0];
+    uint64_t coreCount = coreCount_;
+    if (!cpuSet.empty()) {
+      newVal = 0;
+      for (const auto& cpu : cpuSet) {
+        newVal += idleTime[cpu + 1]; // zeroth line is system-wide
+      }
+      coreCount = cpuSet.size();
+    }
+    if (lastCpuTime.find(allotmentId) == lastCpuTime.end()) {
+      lastCpuTime[allotmentId] = newVal;
+      continue;
+    }
+    uint64_t lastVal = lastCpuTime[allotmentId];
+    uint64_t idleDelta =
+        (newVal - lastVal) * 10; // /proc/stat reports in 10ms, convert to ms
+    lastCpuTime[allotmentId] = newVal;
+
+    uint64_t wallDelta = std::chrono::duration_cast<std::chrono::milliseconds>(
+                             measureTime - lastTickTime)
+                             .count();
+    if (isUnitTest_) {
+      wallDelta = 100;
+    }
+    if (wallDelta == 0) {
+      // log on major tick only to avoid spam
+      if (TTicker::is_major_tick(mask)) {
+        LOG(WARNING) << "Wall delta is 0, cannot compute CPU cores usage";
+      }
+      continue;
+    }
+    uint64_t usageDelta = (coreCount * wallDelta) - idleDelta;
+
+    double CPUCoresUsage = (double)usageDelta / wallDelta;
+
+    if (CPUCoresUsage < 0 || CPUCoresUsage > (double)coreCount) {
+      // log on major tick only to avoid spam
+      if (TTicker::is_major_tick(mask)) {
+        LOG(ERROR) << "Invalid CPU cores usage at level: " << level
+                   << " allotmentId: " << allotmentId
+                   << " wallDelta: " << wallDelta
+                   << " CPUCoresUsage: " << CPUCoresUsage
+                   << " idleDelta: " << idleDelta << " newVal: " << newVal
+                   << " lastVal: " << lastVal << " coreCount: " << coreCount
+                   << " data: "
+                   << std::accumulate(
+                          idleTime.begin(),
+                          idleTime.end(),
+                          std::string(),
+                          [](const std::string& a, const uint64_t& b) {
+                            return a + " " + std::to_string(b);
+                          });
+      }
+      continue;
+    }
+
+    line.emplace_back(allotmentId, CPUCoresUsage);
+  }
+  if (!line.empty()) {
+    frame.addSamples(line, tickTime);
+  }
+  procTimeLast_[level] = tickTime;
+}
+
 } // namespace facebook::dynolog

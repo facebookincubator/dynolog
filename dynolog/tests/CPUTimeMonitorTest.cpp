@@ -37,14 +37,14 @@ class CPUTimeMonitorTest : public ::testing::Test {
   auto readProcStat(bool read_per_core = false) {
     return monitor->readProcStat(read_per_core);
   }
-  auto readCgroupCpuStat(const std::string& allotment) {
-    return monitor->readCgroupCpuStat(allotment);
+  auto readCgroupCpuStat(const std::string& cgroupPath) {
+    return monitor->readCgroupCpuStat(cgroupPath);
   }
-  auto& CPUTimeLast_() const {
-    return monitor->CPUTimeLast_;
+  auto& procCPUTimeLast_() const {
+    return monitor->procCpuTimeLast_;
   }
-  auto& CPUTimeMetricFrames_() const {
-    return monitor->CPUTimeMetricFrames_;
+  auto& procCPUTimeMetricFrames_() const {
+    return monitor->procUsageMetricFrames_;
   }
   std::shared_ptr<CPUTimeMonitor> monitor = createTestMonitor();
 };
@@ -58,37 +58,35 @@ TEST_F(CPUTimeMonitorTest, testProcStat) {
 }
 
 TEST_F(CPUTimeMonitorTest, testCgroupCpuStat) {
-  std::string allotment("user.slice");
   std::string allotmentPath("/sys/fs/cgroup");
-  std::vector<int64_t> cpuSet;
-  monitor->registerAllotment(allotment, cpuSet, allotmentPath);
-  auto cpuUsage = readCgroupCpuStat(allotment);
+  auto cpuUsage = readCgroupCpuStat(allotmentPath);
   EXPECT_NE(cpuUsage, std::nullopt);
 }
 // Test the tick function
 TEST_F(CPUTimeMonitorTest, testAllotment) {
   auto now = std::chrono::steady_clock::now();
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(CPUTimeLast_()[0]["host"], allCoresReference[0]);
-  EXPECT_EQ(CPUTimeLast_()[1]["host"], allCoresReference[0]);
-  EXPECT_EQ(CPUTimeLast_()[2]["host"], allCoresReference[0]);
+  EXPECT_EQ(procCPUTimeLast_()[0]["host"], allCoresReference[0]);
+  EXPECT_EQ(procCPUTimeLast_()[1]["host"], allCoresReference[0]);
+  EXPECT_EQ(procCPUTimeLast_()[2]["host"], allCoresReference[0]);
 
   // need at least 2 ticks to get the delta
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 0);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 0);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 0);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 0);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 0);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 0);
 
   for (int i = 0; i < 2; i++) {
-    ASSERT_EQ(CPUTimeMetricFrames_()[i].slice(now, now + 60s), std::nullopt);
+    ASSERT_EQ(
+        procCPUTimeMetricFrames_()[i].slice(now, now + 60s), std::nullopt);
   }
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(CPUTimeMonitor::Granularity::MINUTE, 60),
       std::nullopt);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 1);
 
   auto checkStats = [&](const std::optional<std::string>& allotmentId =
                             std::nullopt,
@@ -96,7 +94,7 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
     for (int i = 0; i < 2; i++) {
       // Zero idle delta means maximum CPU usage
       EXPECT_NEAR(
-          CPUTimeMetricFrames_()[i]
+          procCPUTimeMetricFrames_()[i]
               .slice(now, now + 60s)
               ->series<double>(allotmentId.value_or("host"))
               ->avg<double>(),
@@ -142,16 +140,16 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   checkStats();
 
   monitor->tick(minor_tick_1s);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 2);
 
   checkStats();
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 3);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 3);
 
   checkStats();
 
@@ -159,9 +157,9 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   monitor->registerAllotment("allotment2", {0, 1, 2, 3, 4, 5, 6, 7});
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 4);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 4);
   checkStats();
 
   EXPECT_EQ(
@@ -190,9 +188,9 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
       std::nullopt);
 
   monitor->tick(subminor_tick_100ms);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 1);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 2);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 5);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 5);
   checkStats();
 
   EXPECT_EQ(
@@ -224,9 +222,9 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
       0.1);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 2);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 3);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 6);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 2);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 3);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 6);
   checkStats();
 
   // still don't expect allotments to have minutely data becase we only have 1
@@ -259,9 +257,9 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
       0.1);
 
   monitor->tick(major_tick_60s);
-  EXPECT_EQ(CPUTimeMetricFrames_()[0].length(), 3);
-  EXPECT_EQ(CPUTimeMetricFrames_()[1].length(), 4);
-  EXPECT_EQ(CPUTimeMetricFrames_()[2].length(), 7);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 3);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 4);
+  EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 7);
 
   // Now all allotments have data for all granularities
   checkStats();
