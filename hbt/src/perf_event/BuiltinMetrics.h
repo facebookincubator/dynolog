@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <utility>
+
 #include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/Metrics.h"
 
@@ -25,7 +27,7 @@ struct HwCacheEventInfo {
   uint32_t id;
   std::string description;
   HwCacheEventInfo(uint32_t id, std::string descrption)
-      : id(id), description(descrption) {}
+      : id(id), description(std::move(descrption)) {}
 };
 
 const ReducerFunc& getAddReducer();

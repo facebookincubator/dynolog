@@ -36,7 +36,6 @@ KernelCollectorBase::KernelCollectorBase(std::string rootDir)
     : uptime_(readUptime()),
       rootDir_(std::move(rootDir)),
       pfs_(rootDir_ + "/proc"),
-      numCpuSockets_(1), // TODO discover sockets from /proc/cpuinfo
       cpuCoresTotal_(pfs_.get_stat().cpus.per_item.size()),
       filterInteraces_(FLAGS_filter_nic_interfaces) {
   perCoreCpuTime_.resize(cpuCoresTotal_);
@@ -163,7 +162,7 @@ void KernelCollectorBase::readNetworkStats() {
   nicDevCount_ = nicDevCount;
 }
 
-bool KernelCollectorBase::isMonitoringInterfaceActive(std::string interface) {
+bool KernelCollectorBase::isMonitoringInterfaceActive(const std::string& interface) {
   if (interface.length() >= IFNAMSIZ) {
     LOG(ERROR) << "invalid device name found: " << interface;
     // Device name is too long to be valid, so consider the line malformed and

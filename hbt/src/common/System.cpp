@@ -17,6 +17,7 @@
 #include <stdexcept>
 #include <system_error>
 #include <thread>
+#include <utility>
 
 namespace facebook::hbt {
 
@@ -156,7 +157,7 @@ cpu_set_t parseCpusList(std::string cpus_str) {
 }
 
 std::set<CpuId> parseCpusListToSet(std::string cpus_str) {
-  auto cpus = parseCpusList(cpus_str);
+  auto cpus = parseCpusList(std::move(cpus_str));
   std::set<CpuId> cpu_set;
   for_each_cpu_set_t(c, cpus) {
     cpu_set.insert(c);
