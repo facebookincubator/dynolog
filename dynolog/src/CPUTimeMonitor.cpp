@@ -72,21 +72,15 @@ std::optional<double> CPUTimeMonitor::getStat(
     uint64_t seconds_ago,
     const std::optional<std::string>& allotmentId,
     Statistic stat,
-    double quant) {
+    double quant,
+    DataSource dataSource) {
   TimePoint now = std::chrono::steady_clock::now();
-  int level;
-  if (gran == Granularity::MINUTE) {
-    level = IDX_MIN;
-  } else if (gran == Granularity::SECOND) {
-    level = IDX_SEC;
-  } else if (gran == Granularity::HUNDRED_MS) {
-    level = IDX_HUNDRED_MS;
-  } else {
+  std::shared_lock lock(dataLock_);
+  auto frame = getMetricFrame(gran, dataSource);
+  if (!frame.has_value()) {
     return std::nullopt;
   }
-  std::shared_lock lock(dataLock_);
-  auto frame = procUsageMetricFrames_[level];
-  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  auto slice = frame->slice(now - std::chrono::seconds(seconds_ago), now);
   if (slice == std::nullopt) {
     return std::nullopt;
   }
@@ -106,36 +100,39 @@ std::optional<double> CPUTimeMonitor::getStat(
 std::optional<double> CPUTimeMonitor::getAvgCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
-    const std::optional<std::string>& allotmentId) {
-  return getStat(gran, seconds_ago, allotmentId, Statistic::AVG, 0.0);
+    const std::optional<std::string>& allotmentId,
+    DataSource dataSource) {
+  return getStat(
+      gran, seconds_ago, allotmentId, Statistic::AVG, 0.0, dataSource);
 }
 
 std::optional<double> CPUTimeMonitor::getQuantileCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     double quantile,
-    const std::optional<std::string>& allotmentId) {
-  return getStat(gran, seconds_ago, allotmentId, Statistic::QUANTILE, quantile);
+    const std::optional<std::string>& allotmentId,
+    DataSource dataSource) {
+  return getStat(
+      gran,
+      seconds_ago,
+      allotmentId,
+      Statistic::QUANTILE,
+      quantile,
+      dataSource);
 }
 
 std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
-    const std::optional<std::string>& allotmentId) {
+    const std::optional<std::string>& allotmentId,
+    DataSource dataSource) {
   TimePoint now = std::chrono::steady_clock::now();
-  int level;
-  if (gran == Granularity::MINUTE) {
-    level = IDX_MIN;
-  } else if (gran == Granularity::SECOND) {
-    level = IDX_SEC;
-  } else if (gran == Granularity::HUNDRED_MS) {
-    level = IDX_HUNDRED_MS;
-  } else {
+  std::shared_lock lock(dataLock_);
+  auto frame = getMetricFrame(gran, dataSource);
+  if (!frame.has_value()) {
     return {};
   }
-  std::shared_lock lock(dataLock_);
-  auto frame = procUsageMetricFrames_[level];
-  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  auto slice = frame->slice(now - std::chrono::seconds(seconds_ago), now);
   if (slice == std::nullopt) {
     return {};
   }
@@ -145,6 +142,30 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
     return {};
   }
   return series->raw();
+}
+
+std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
+    Granularity gran,
+    DataSource dataSource) {
+  int level;
+  switch (gran) {
+    case Granularity::MINUTE:
+      level = IDX_MIN;
+      break;
+    case Granularity::SECOND:
+      level = IDX_SEC;
+      break;
+    case Granularity::HUNDRED_MS:
+      level = IDX_HUNDRED_MS;
+      break;
+    default:
+      return std::nullopt;
+  }
+  // If readCgroupStat_ is disabled, always use PROC_STAT regardless of
+  // requested dataSource
+  return (readCgroupStat_ && dataSource == DataSource::CGROUP_STAT)
+      ? cgroupUsageMetricFrames_[level]
+      : procUsageMetricFrames_[level];
 }
 
 void CPUTimeMonitor::tick(TMask mask) {
