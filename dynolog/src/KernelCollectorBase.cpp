@@ -36,7 +36,6 @@ KernelCollectorBase::KernelCollectorBase(std::string rootDir)
     : uptime_(readUptime()),
       rootDir_(std::move(rootDir)),
       pfs_(rootDir_ + "/proc"),
-      numCpuSockets_(1), // TODO discover sockets from /proc/cpuinfo
       cpuCoresTotal_(pfs_.get_stat().cpus.per_item.size()),
       filterInteraces_(FLAGS_filter_nic_interfaces) {
   perCoreCpuTime_.resize(cpuCoresTotal_);

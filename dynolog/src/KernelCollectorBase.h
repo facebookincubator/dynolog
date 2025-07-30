@@ -35,6 +35,7 @@ class KernelCollectorBase {
   // proc fs parser
   pfs::procfs pfs_;
 
+  // TODO discover sockets from /proc/cpuinfo
   size_t numCpuSockets_{1};
   const size_t cpuCoresTotal_;
   size_t nicDevCount_;
