@@ -27,7 +27,11 @@ granularity 100ms, 1s and 60s. If the CPU set is empty the allotment is assumed
 to be whole-host and will have the same CPU data as host level (albeit with a
 different start time). If the CPU set is non-empty then the entire per-core
 /proc/stat file is parsed and the CPU Cores Usage of the allotment cores is
-determined by aggregation over its CPU set. */
+determined by aggregation over its CPU set.
+
+As of July 2025, we began testing a new cgroup-based CPU time monitoringfor more
+accurate measurements of cgroup CPU time usage.
+*/
 
 class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
  public:
