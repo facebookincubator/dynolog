@@ -12,6 +12,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -184,7 +185,7 @@ struct EventExtraAttr {
       return makeCountAll();
     }
 
-    auto has_any = [&](std::string s) {
+    auto has_any = [&](const std::string& s) {
       return str.find_first_of(s) != std::string::npos;
     };
 
@@ -341,7 +342,7 @@ struct EventDef {
   EventDef(
       const PmuType& pmu_type,
       const EventId& id,
-      const Encoding& encoding,
+      Encoding encoding,
       const std::string& brief_desc,
       const std::string& full_desc,
       std::optional<uint64_t> default_sampling_period = std::nullopt,
@@ -350,7 +351,7 @@ struct EventDef {
       std::optional<std::string> errata = std::nullopt)
       : pmu_type{pmu_type},
         id{id},
-        encoding{encoding},
+        encoding{std::move(encoding)},
         scale_data{scale_data},
         features{features},
         brief_desc{brief_desc},

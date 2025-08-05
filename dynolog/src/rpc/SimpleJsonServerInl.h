@@ -16,7 +16,7 @@ class SimpleJsonServer : public SimpleJsonServerBase {
   explicit SimpleJsonServer(std::shared_ptr<TServiceHandler> handler, int port)
       : SimpleJsonServerBase(port), handler_(std::move(handler)) {}
 
-  ~SimpleJsonServer() {}
+  ~SimpleJsonServer() override = default;
 
   std::string processOneImpl(const std::string& request) override;
 

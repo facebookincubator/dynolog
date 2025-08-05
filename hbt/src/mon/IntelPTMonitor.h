@@ -13,6 +13,7 @@
 #include <filesystem>
 #include <mutex>
 #include <unordered_map>
+#include <utility>
 
 namespace facebook::hbt::mon {
 
@@ -39,10 +40,10 @@ class IntelPTGenCtxt {
  private:
   IntelPTGenCtxt(
       std::unique_ptr<perf_event::PerCpuTraceAuxGenerator> trace_aux_gen,
-      const CpuSet& mon_cpus,
+      CpuSet mon_cpus,
       size_t trace_buffer_size_pages)
       : trace_aux_gen{std::move(trace_aux_gen)},
-        mon_cpus{mon_cpus},
+        mon_cpus{std::move(mon_cpus)},
         trace_buffer_size_pages{trace_buffer_size_pages} {}
 };
 
@@ -56,7 +57,7 @@ class IntelPTMonitor {
 
  public:
   explicit IntelPTMonitor(IntelPTGenCtxt&& ipt_gen_ctxt)
-      : state_{State::Closed}, ipt_gen_ctxt_{std::move(ipt_gen_ctxt)} {}
+      : ipt_gen_ctxt_{std::move(ipt_gen_ctxt)} {}
 
   void open() {
     std::lock_guard<std::mutex> lock{state_mutex_};
@@ -153,7 +154,7 @@ class IntelPTMonitor {
 
  private:
   // Current state of the monitor, initally Closed.
-  State state_;
+  State state_{State::Closed};
 
   // Mark as mutable to allow usage from const methods.
   mutable std::mutex state_mutex_;

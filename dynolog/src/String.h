@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace facebook {
-namespace dynolog {
+namespace facebook::dynolog {
 
 /*
  * Split a line into a vector of non-empty tokens by delimiter.
@@ -19,5 +18,4 @@ namespace dynolog {
  */
 std::vector<std::string> split(const std::string& line, char delim);
 
-} // namespace dynolog
-} // namespace facebook
+} // namespace facebook::dynolog

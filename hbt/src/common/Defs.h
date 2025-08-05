@@ -14,6 +14,7 @@
 #include <sstream>
 #include <string>
 #include <system_error>
+#include <utility>
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -94,10 +95,10 @@ class EnvironmentError : public std::exception {
     NoMemory,
   };
 
-  explicit EnvironmentError(Type type, const std::string& what)
-      : std::exception(), type_{type}, what_{what} {}
+  explicit EnvironmentError(Type type, std::string what)
+      : std::exception(), type_{type}, what_{std::move(what)} {}
 
-  virtual const char* what() const noexcept override {
+  const char* what() const noexcept override {
     return what_.c_str();
   }
 
@@ -176,7 +177,7 @@ inline std::error_code toErrorCode(ssize_t e) {
 class LogEntry final {
  public:
   ~LogEntry() noexcept {
-    std::cerr << oss_.str() << std::endl;
+    std::cerr << oss_.str() << '\n';
   }
 
   std::ostream& logPreamble(const std::string& preffix) {

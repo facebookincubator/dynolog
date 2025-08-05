@@ -11,8 +11,7 @@
 #include <string>
 #include "dynolog/src/rdmamon/SysfsCounter.h"
 
-namespace dynolog {
-namespace rdmamon {
+namespace dynolog::rdmamon {
 
 class RdmaCounters {
  public:
@@ -66,7 +65,7 @@ class RdmaCounters {
   bool init_rdma_counters_(
       const std::string& path,
       const std::vector<std::string>& counters) {
-    for (auto counter : counters) {
+    for (const auto& counter : counters) {
       std::string path_to_name = path + counter;
       auto sysfs_counter =
           std::make_unique<SysfsCounter>(counter, path_to_name);
@@ -82,5 +81,4 @@ class RdmaCounters {
   }
 };
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon

@@ -74,18 +74,18 @@ using LibPfm4EventGroups = std::map<std::string, LibPfm4EventGroup>;
 class PmuDevice {
  public:
   PmuDevice(
-      const std::string& pmu_name,
+      std::string pmu_name,
       PmuType pmu_type,
       std::optional<unsigned> pmu_device_enumeration,
       uint32_t perf_pmu_id,
-      const std::string& desc,
+      std::string desc,
       bool in_sysfs,
       std::optional<cpu_set_t> cpu_mask = std::nullopt)
-      : pmu_name_{pmu_name},
+      : pmu_name_{std::move(pmu_name)},
         pmu_type_{pmu_type},
         pmu_device_enumeration_{pmu_device_enumeration},
         perf_pmu_id_{perf_pmu_id},
-        desc_{desc},
+        desc_{std::move(desc)},
         in_sysfs_{in_sysfs},
         cpu_mask_{cpu_mask} {}
 

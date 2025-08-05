@@ -13,12 +13,12 @@
 #include <sstream>
 #include <string>
 #include <thread>
+#include <utility>
 #include <vector>
 
 #include <glog/logging.h>
 
-namespace facebook {
-namespace dynolog {
+namespace facebook::dynolog {
 
 /*
   A class to manage the periodic scheduling of e.g. Monitors.
@@ -141,11 +141,11 @@ class Ticker {
   class SubscriberConfig {
    public:
     SubscriberConfig(
-        const std::string& name,
-        const TFunc& f,
+        std::string name,
+        TFunc f,
         const std::array<double, _subtick_levels>& subminor_tick_sample_rates)
-        : _name(name),
-          _f(f),
+        : _name(std::move(name)),
+          _f(std::move(f)),
           _subminor_tick_sample_rates(subminor_tick_sample_rates) {
       reseed();
       LOG(INFO) << print_plan();
@@ -443,5 +443,4 @@ using TickerMinuteSecondBase10 = Ticker<60000, 1000, 10, 4>;
 using TickerConfigMinuteSecondBase10 =
     TickerMinuteSecondBase10::TSubscriberConfig;
 
-} // namespace dynolog
-} // namespace facebook
+} // namespace facebook::dynolog

@@ -329,11 +329,11 @@ inline std::ostream& operator<<(std::ostream& os, const Sampling::Sample& r) {
 /// sample record depending on the mode used.
 template <class TRecord>
 size_t recordSize(const TRecord& r) {
-  if constexpr (std::is_same<TRecord, Sampling::Sample>::value) {
+  if constexpr (std::is_same_v<TRecord, Sampling::Sample>) {
     // See init_perf_event_attrs.
     return sizeof(TRecord) + r.nr * sizeof(uint64_t);
   }
-  if constexpr (std::is_same<TRecord, Sampling::Read>::value) {
+  if constexpr (std::is_same_v<TRecord, Sampling::Read>) {
     // See init_perf_event_attrs.
     return sizeof(TRecord) + r.nr * sizeof(uint64_t);
   } else {
@@ -410,7 +410,7 @@ struct GroupReadValues {
     HBT_DCHECK_NOT_NULLPTR(t);
   }
 
-  GroupReadValues& operator=(GroupReadValues&& other) {
+  GroupReadValues& operator=(GroupReadValues&& other) noexcept {
     release_();
     new (this) GroupReadValues(std::move(other));
     return *this;
@@ -706,7 +706,7 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
 
   using PerfEventsGroupBase<TImpl, TMode_>::PerfEventsGroupBase;
 
-  virtual ~PerfEventsGroup() {}
+  ~PerfEventsGroup() override = default;
 
   void close();
 
@@ -721,7 +721,7 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
   /// Pass the pointers denoting the CPU's perf_event data ring buffer to
   /// `callback`. If consume == True, then update data_tail to mark copied data
   /// as consumed.
-  void onCpuDataBufferRead(OnRbReadCallback callback, bool consume);
+  void onCpuDataBufferRead(const OnRbReadCallback& callback, bool consume);
 
   //
   // Stats related methods.
@@ -981,7 +981,7 @@ void PerfEventsGroupBase<TImpl, TMode>::init_perf_event_attrs(
     attrs[i].exclude_host = confs[i].extra_attr.exclude_host;
     attrs[i].exclude_guest = confs[i].extra_attr.exclude_guest;
     static_assert(
-        std::is_same_v<std::underlying_type<PreciseIpLevel>::type, uint8_t>);
+        std::is_same_v<std::underlying_type_t<PreciseIpLevel>, uint8_t>);
     attrs[i].precise_ip = static_cast<uint8_t>(confs[i].extra_attr.precise_ip);
 
     // HBT_LOG_INFO() << "Event " << i << " " << confs[i];
@@ -1414,7 +1414,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
 
     switch (event_header->type) {
       case PERF_RECORD_LOST: {
-        if constexpr (!std::is_void<TRecordLost>::value) {
+        if constexpr (!std::is_void_v<TRecordLost>) {
           auto r = reinterpret_cast<const TRecordLost*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordLost(*r);
@@ -1425,7 +1425,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_COMM: {
-        if constexpr (!std::is_void<TRecordComm_Lower>::value) {
+        if constexpr (!std::is_void_v<TRecordComm_Lower>) {
           auto r = reinterpret_cast<const TRecordComm_Lower*>(event_header);
           constexpr size_t non_name_size =
               sizeof(TRecordComm_Lower) + sizeof(TSampleId);
@@ -1439,7 +1439,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_EXIT: {
-        if constexpr (!std::is_void<TRecordExit>::value) {
+        if constexpr (!std::is_void_v<TRecordExit>) {
           auto r = reinterpret_cast<const TRecordExit*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordExit(*r);
@@ -1462,7 +1462,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         ++num_record_unthrottle_;
         break;
       case PERF_RECORD_FORK: {
-        if constexpr (!std::is_void<TRecordFork>::value) {
+        if constexpr (!std::is_void_v<TRecordFork>) {
           auto r = reinterpret_cast<const TRecordFork*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordFork(*r);
@@ -1473,7 +1473,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_SAMPLE: {
-        if constexpr (!std::is_void<TRecordSample>::value) {
+        if constexpr (!std::is_void_v<TRecordSample>) {
           auto r = reinterpret_cast<const TRecordSample*>(event_header);
           if (__hbt_unlikely(r->header.size != recordSize(*r))) {
             HBT_LOG_ERROR() << "Invalid record size of: " << r->header.size
@@ -1489,7 +1489,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_READ: {
-        if constexpr (!std::is_void<TRecordRead>::value) {
+        if constexpr (!std::is_void_v<TRecordRead>) {
           auto r = reinterpret_cast<const TRecordRead*>(event_header);
           if (__hbt_unlikely(r->header.size != recordSize(*r))) {
             HBT_LOG_ERROR() << "Invalid record read size of: " << r->header.size
@@ -1505,7 +1505,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_AUX: {
-        if constexpr (!std::is_void<TRecordAux>::value) {
+        if constexpr (!std::is_void_v<TRecordAux>) {
           auto r = reinterpret_cast<const TRecordAux*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordAux(*r);
@@ -1516,7 +1516,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_ITRACE_START: {
-        if constexpr (!std::is_void<TRecordItraceStart>::value) {
+        if constexpr (!std::is_void_v<TRecordItraceStart>) {
           auto r = reinterpret_cast<const TRecordItraceStart*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordItraceStart(*r);
@@ -1527,7 +1527,7 @@ ssize_t PerfEventsGroup<TImpl, TMode>::consume(unsigned max_num_records) {
         }
       } break;
       case PERF_RECORD_SWITCH_CPU_WIDE: {
-        if constexpr (!std::is_void<TRecordSwitchCpuWide>::value) {
+        if constexpr (!std::is_void_v<TRecordSwitchCpuWide>) {
           auto r = reinterpret_cast<const TRecordSwitchCpuWide*>(event_header);
           HBT_DCHECK_EQ(r->header.size, recordSize(*r));
           err = this->asImpl_().handleRecordSwitchCpuWide(*r);
@@ -1566,7 +1566,7 @@ exit:
 
 template <class TImpl, class TMode>
 void PerfEventsGroup<TImpl, TMode>::onCpuDataBufferRead(
-    OnRbReadCallback callback,
+    const OnRbReadCallback& callback,
     bool consume) {
   HBT_ARG_CHECK(this->isOpen())
       << "PerfEventsGroup must be open for events to be consumed "

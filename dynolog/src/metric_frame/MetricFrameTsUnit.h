@@ -15,13 +15,13 @@ namespace facebook::dynolog {
 class MetricFrameTsUnit : public MetricFrameTsUnitInterface {
  public:
   explicit MetricFrameTsUnit(size_t frameLength);
-  virtual void addSample(TimePoint time) override;
-  virtual std::optional<TimePoint> firstSampleTime() const override;
-  virtual std::optional<TimePoint> lastSampleTime() const override;
-  virtual std::vector<TimePoint> getTimeVector() const override;
-  virtual size_t length() const override;
-  virtual size_t maxLength() const override;
-  virtual std::optional<MetricFrameRange> getRange(
+  void addSample(TimePoint time) override;
+  std::optional<TimePoint> firstSampleTime() const override;
+  std::optional<TimePoint> lastSampleTime() const override;
+  std::vector<TimePoint> getTimeVector() const override;
+  size_t length() const override;
+  size_t maxLength() const override;
+  std::optional<MetricFrameRange> getRange(
       TimePoint startTime,
       TimePoint endTime,
       MATCH_POLICY startTimePolicy,
@@ -43,13 +43,13 @@ class MetricFrameTsUnitFixInterval : public MetricFrameTsUnitInterface {
   MetricFrameTsUnitFixInterval(
       std::chrono::microseconds interval,
       size_t frameLength);
-  virtual void addSample(TimePoint time) override;
-  virtual std::optional<TimePoint> firstSampleTime() const override;
-  virtual std::optional<TimePoint> lastSampleTime() const override;
-  virtual std::vector<TimePoint> getTimeVector() const override;
-  virtual size_t length() const override;
-  virtual size_t maxLength() const override;
-  virtual std::optional<MetricFrameRange> getRange(
+  void addSample(TimePoint time) override;
+  std::optional<TimePoint> firstSampleTime() const override;
+  std::optional<TimePoint> lastSampleTime() const override;
+  std::vector<TimePoint> getTimeVector() const override;
+  size_t length() const override;
+  size_t maxLength() const override;
+  std::optional<MetricFrameRange> getRange(
       TimePoint startTime,
       TimePoint endTime,
       MATCH_POLICY startTimePolicy,

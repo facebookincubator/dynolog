@@ -158,14 +158,14 @@ extern "C" {
 /**
  * GPU virtualization mode types for DCGM_FI_DEV_VIRTUAL_MODE
  */
-typedef enum
+enum dcgmGpuVirtualizationMode_t
 {
     DCGM_GPU_VIRTUALIZATION_MODE_NONE        = 0, //!< Represents Bare Metal GPU
     DCGM_GPU_VIRTUALIZATION_MODE_PASSTHROUGH = 1, //!< Device is associated with GPU-Passthrough
     DCGM_GPU_VIRTUALIZATION_MODE_VGPU        = 2, //!< Device is associated with vGPU inside virtual machine.
     DCGM_GPU_VIRTUALIZATION_MODE_HOST_VGPU   = 3, //!< Device is associated with VGX hypervisor in vGPU mode
     DCGM_GPU_VIRTUALIZATION_MODE_HOST_VSGA   = 4, //!< Device is associated with VGX hypervisor in vSGA mode
-} dcgmGpuVirtualizationMode_t;
+};
 
 
 /** @} */
@@ -180,7 +180,7 @@ typedef enum
 /**
  * Enum of possible field entity groups
  */
-typedef enum dcgm_field_entity_group_t
+enum dcgm_field_entity_group_t
 {
     DCGM_FE_NONE = 0, /*!< Field is not associated with an entity. Field scope should be DCGM_FS_GLOBAL */
     DCGM_FE_GPU,      /*!< Field is associated with a GPU entity */
@@ -191,12 +191,12 @@ typedef enum dcgm_field_entity_group_t
     DCGM_FE_LINK,     /*!< Field is associated with an NVLink */
 
     DCGM_FE_COUNT /*!< Number of elements in this enumeration. Keep this entry last */
-} dcgm_field_entity_group_t;
+};
 
 /**
  * Represents an identifier for an entity within a field entity. For instance, this is the gpuId for DCGM_FE_GPU.
  */
-typedef unsigned int dcgm_field_eid_t;
+using dcgm_field_eid_t = unsigned int;
 
 
 /** @} */
@@ -2225,19 +2225,20 @@ typedef unsigned int dcgm_field_eid_t;
  * Structure for formating the output for dmon.
  * Used as a member in dcgm_field_meta_p
  */
-typedef struct
+struct dcgm_field_output_format_t
 {
     char shortName[10]; /*!< Short name corresponding to field. This short name is used to identify columns in dmon
                              output.*/
     char unit[4];       /*!< The unit of value. Eg: C(elsius), W(att), MB/s*/
     short width;        /*!< Maximum width/number of digits that a value for field can have.*/
-} dcgm_field_output_format_t, *dcgm_field_output_format_p;
+};
+using dcgm_field_output_format_p = dcgm_field_output_format_t*;
 
 /**
  * Structure to store meta data for the field
  */
 
-typedef struct
+struct dcgm_field_meta_t
 {
     unsigned short fieldId; /*!< Field identifier. DCGM_FI_? #define */
     char fieldType;         /*!< Field type. DCGM_FT_? #define */
@@ -2251,9 +2252,9 @@ typedef struct
 
     dcgm_field_output_format_p valueFormat; /*!< pointer to the structure that holds the formatting the
                                                  values for fields */
-} dcgm_field_meta_t;
+};
 
-typedef const dcgm_field_meta_t *dcgm_field_meta_p;
+using dcgm_field_meta_p = dcgm_field_meta_t *;
 
 /***************************************************************************************************/
 /** @addtogroup dcgmFieldIdentifiers

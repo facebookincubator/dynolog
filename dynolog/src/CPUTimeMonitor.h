@@ -10,8 +10,7 @@
 #include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/Ticker.h"
 
-namespace facebook {
-namespace dynolog {
+namespace facebook::dynolog {
 
 /*
 A monitor class for measuring /proc/stat CPU Time according to periodic ticker
@@ -133,7 +132,6 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   friend class CPUTimeMonitorTest;
 };
-} // namespace dynolog
+} // namespace facebook::dynolog
 
-} // namespace facebook
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.

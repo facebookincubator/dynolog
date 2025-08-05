@@ -23,6 +23,7 @@
 #include <deque>
 #include <filesystem>
 #include <unordered_set>
+#include <utility>
 
 namespace facebook::hbt::mon {
 
@@ -638,8 +639,8 @@ struct TagStackIdBinner {
 #endif // HBT_ENABLE_TRACING
 
 struct ModuleInfo {
-  ModuleInfo(const std::string& systemPath, size_t loadAddress)
-      : systemPath{systemPath}, loadAddress{loadAddress} {}
+  ModuleInfo(std::string systemPath, size_t loadAddress)
+      : systemPath{std::move(systemPath)}, loadAddress{loadAddress} {}
 
   // The original path of the module at runtime.
   std::string systemPath;

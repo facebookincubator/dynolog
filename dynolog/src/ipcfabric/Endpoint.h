@@ -40,8 +40,7 @@
  *    netstat -a -p --unix on Linux
  */
 
-namespace dynolog {
-namespace ipcfabric {
+namespace dynolog::ipcfabric {
 
 [[noreturn]] inline void terminate_with_message(const std::string& message) {
   std::fputs(message.c_str(), stderr);
@@ -268,5 +267,4 @@ class EndPoint final {
   }
 };
 
-} // namespace ipcfabric
-} // namespace dynolog
+} // namespace dynolog::ipcfabric

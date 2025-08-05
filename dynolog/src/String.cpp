@@ -6,8 +6,7 @@
 #include <string_view>
 #include <vector>
 
-namespace facebook {
-namespace dynolog {
+namespace facebook::dynolog {
 
 std::vector<std::string> split(const std::string& line, char delim) {
   std::vector<std::string> ret;
@@ -32,5 +31,4 @@ std::vector<std::string> split(const std::string& line, char delim) {
   return ret;
 }
 
-} // namespace dynolog
-} // namespace facebook
+} // namespace facebook::dynolog

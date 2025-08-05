@@ -25,6 +25,7 @@
 #include <sstream>
 #include <string>
 #include <system_error>
+#include <utility>
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -46,7 +47,7 @@ struct FdWrapper {
     other.close_on_destruction = false;
   }
 
-  explicit FdWrapper() {}
+  explicit FdWrapper() = default;
 
   explicit FdWrapper(int fd) : FdWrapper(fd, false) {}
 
@@ -162,7 +163,7 @@ struct TimeStampNsConverter {
   /// Build converter by estimating reasonable starting points
   /// for system clock and Tstamp counter.
   /// As parameter, takes a function that provides current timestamp
-  static auto makeFromNow(std::function<TimeStamp(void)> now_function) {
+  static auto makeFromNow(const std::function<TimeStamp(void)>& now_function) {
     auto before = std::chrono::high_resolution_clock::now();
     auto tstamp = now_function(); // Capture tstamp that is within (before,
                                   // start) interval.
@@ -306,7 +307,7 @@ struct CpuInfo {
   uint32_t cpu_step_num;
 
   CpuInfo(
-      const std::string& vendor_id,
+      std::string vendor_id,
       uint32_t cpu_family_num,
       uint32_t cpu_model_num,
       uint32_t cpu_step_num,
@@ -318,7 +319,7 @@ struct CpuInfo {
             cpu_model_num,
             cpu_step_num)),
         vendor_id_int(vendor_id_int),
-        vendor_id(vendor_id),
+        vendor_id(std::move(vendor_id)),
         cpu_family_num(cpu_family_num),
         cpu_model_num(cpu_model_num),
         cpu_step_num(cpu_step_num) {}
@@ -447,7 +448,7 @@ struct Kernel {
   }
 
  private:
-  explicit Kernel(std::string release) : release(release) {}
+  explicit Kernel(std::string release) : release(std::move(release)) {}
 };
 
 inline TimeStamp rdtsc() {
@@ -598,7 +599,7 @@ inline std::optional<std::string> readProcFsCgroup(pid_t tid) noexcept {
   return std::string(s.begin(), end_it);
 }
 
-inline int readIntFromFile(std::string filepath) {
+inline int readIntFromFile(const std::string& filepath) {
   auto [err, s] = readProcFsByteStr(filepath.c_str());
   if (!err) {
     return std::stoi(std::string(s.begin(), s.end()));

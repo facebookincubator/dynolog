@@ -16,15 +16,15 @@
 #include <cstring>
 #include <map>
 #include <string>
+#include <utility>
 
 // @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror
 
-namespace dynolog {
-namespace rdmamon {
+namespace dynolog::rdmamon {
 
 class EthtoolCounters {
  public:
-  explicit EthtoolCounters(const std::string& ifname) : ifname_(ifname) {}
+  explicit EthtoolCounters(std::string ifname) : ifname_(std::move(ifname)) {}
   virtual ~EthtoolCounters() {
     teardown_ethtool_counters();
   }
@@ -126,7 +126,7 @@ class EthtoolCounters {
     cur_eth_stats_->n_stats = gstrings_->len;
     ifr_.ifr_data = (char*)cur_eth_stats_;
 
-    for (auto eth_counter_name : eth_counter_names_) {
+    for (const auto& eth_counter_name : eth_counter_names_) {
       for (int j = 0; j < gstrings_->len; j++) {
         if (0 ==
             memcmp(
@@ -172,5 +172,4 @@ class EthtoolCounters {
   }
 };
 
-} // namespace rdmamon
-} // namespace dynolog
+} // namespace dynolog::rdmamon
