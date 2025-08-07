@@ -98,7 +98,7 @@ enum class PmuType : uint16_t {
   cs_etm,
 };
 
-std::string PmuTypeToStr(PmuType);
+std::string PmuTypeToStr(PmuType /*pmu_type*/);
 
 enum class ScaleUnit {
   Bytes, // Bytes
@@ -181,7 +181,7 @@ struct EventExtraAttr {
     HBT_ARG_CHECK(str.find_first_not_of("ukhIGH"))
         << "Invalid ExtraAtrributes " << str << " to PmuEvent";
 
-    if (str.size() == 0) {
+    if (str.empty()) {
       return makeCountAll();
     }
 
@@ -226,7 +226,7 @@ struct EventExtraAttr {
   }
 };
 
-std::ostream& operator<<(std::ostream&, const EventExtraAttr&);
+std::ostream& operator<<(std::ostream& /*os*/, const EventExtraAttr& /*attr*/);
 
 using EventExtraAttrs = std::vector<EventExtraAttr>;
 
@@ -239,7 +239,7 @@ struct EventConfigs {
   uint64_t config2 = 0x0;
 };
 
-std::ostream& operator<<(std::ostream&, const EventConfigs&);
+std::ostream& operator<<(std::ostream& /*os*/, const EventConfigs& /*ev_configs*/);
 
 /// Parameters to transform event values.
 struct EventValueTransforms {
@@ -252,7 +252,7 @@ struct EventValueTransforms {
   }
 };
 
-std::ostream& operator<<(std::ostream&, const EventValueTransforms&);
+std::ostream& operator<<(std::ostream& /*os*/, const EventValueTransforms& /*t*/);
 
 // This is the full description of a perf_event_attr configuration.
 struct EventConf {
@@ -262,7 +262,7 @@ struct EventConf {
   EventValueTransforms transforms;
 };
 
-std::ostream& operator<<(std::ostream&, const EventConf&);
+std::ostream& operator<<(std::ostream& /*os*/, const EventConf& /*ev_conf*/);
 
 using EventConfs = std::vector<EventConf>;
 
@@ -402,10 +402,10 @@ struct EventDef {
   }
 };
 
-std::ostream& operator<<(std::ostream&, const EventDef::Encoding&);
-std::ostream& operator<<(std::ostream&, const EventDef::ScaleData&);
-std::ostream& operator<<(std::ostream&, const EventDef::IntelFeatures&);
-std::ostream& operator<<(std::ostream&, const EventDef&);
+std::ostream& operator<<(std::ostream& /*os*/, const EventDef::Encoding& /*ec*/);
+std::ostream& operator<<(std::ostream& /*os*/, const EventDef::ScaleData& /*s*/);
+std::ostream& operator<<(std::ostream& /*os*/, const EventDef::IntelFeatures& /*f*/);
+std::ostream& operator<<(std::ostream& /*os*/, const EventDef& /*ev*/);
 
 using EventDefs = std::vector<std::shared_ptr<EventDef>>;
 

@@ -69,7 +69,7 @@ class IntelPTMonitor {
     HBT_THROW_EINVAL() << "openForCpu() is not implemented for IntelPTMonitor";
   }
 
-  bool isOpenOnCpu(CpuId) {
+  bool isOpenOnCpu(CpuId /*unused*/) {
     HBT_THROW_EINVAL() << "isOpenOnCpu() is not implemented for IntelPTMonitor";
     return false;
   }
@@ -98,7 +98,7 @@ class IntelPTMonitor {
     sync_();
   }
 
-  void enableForCpu(bool reset, CpuId) {
+  void enableForCpu(bool reset, CpuId /*unused*/) {
     HBT_THROW_EINVAL()
         << "enableForCpu() is not implemented for IntelPTMonitor";
   }
@@ -108,7 +108,7 @@ class IntelPTMonitor {
     return state_ == State::Enabled;
   }
 
-  bool isEnabledOnCpu(CpuId) const {
+  bool isEnabledOnCpu(CpuId /*unused*/) const {
     HBT_THROW_EINVAL()
         << "isEnabledOnCpu() is not implemented for IntelPTMonitor";
     return false;
@@ -120,7 +120,7 @@ class IntelPTMonitor {
     sync_();
   }
 
-  void disableForCpu(CpuId) {
+  void disableForCpu(CpuId /*unused*/) {
     HBT_THROW_EINVAL()
         << "disableForCpu() is not implemented for IntelPTMonitor";
   }

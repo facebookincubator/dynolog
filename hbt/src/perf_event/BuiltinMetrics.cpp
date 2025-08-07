@@ -88,7 +88,7 @@ static inline std::string constructDescription(
 const ReducerFunc& getAddReducer() {
   static ReducerFunc add_reducer =
       [](const std::vector<uint64_t>& metrics) -> std::optional<double> {
-    if (metrics.size() == 0) {
+    if (metrics.empty()) {
       return std::nullopt;
     }
     return std::accumulate(metrics.begin(), metrics.end(), 0);
