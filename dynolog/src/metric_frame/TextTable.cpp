@@ -65,7 +65,7 @@ void TextTable::writeRow(size_t row, std::ostream& s) const {
 
 void TextTable::writeLine(std::ostream& s) const {
   for (auto cellWidth : colWidthCache_) {
-    for (int i = 0; i < cellWidth + 1 + extraPad_; i++) {
+    for (size_t i = 0; i < cellWidth + 1 + extraPad_; i++) {
       s << '-';
     }
   }

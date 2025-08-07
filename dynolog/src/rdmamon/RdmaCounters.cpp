@@ -47,7 +47,7 @@ bool RdmaCounters::sampleRdmaCounters(
       uint64_t diff = cur_val - prev_val;
       DLOG(INFO) << sysfs_counter->getSysfsCounterName()
                  << ": will return report value " << diff;
-      if (diff < 0) {
+      if (cur_val < prev_val) {
         LOG(ERROR) << sysfs_counter->getSysfsCounterName()
                    << ": current counter value " << cur_val
                    << " is lower than previous counter value " << prev_val

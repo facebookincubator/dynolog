@@ -333,7 +333,7 @@ void DcgmGroupInfo::update() {
 
       if (FLAGS_enable_env_var_attribution) {
         std::vector<pid_t> pids = getPidsOnGpu();
-        for (int device_id = 0; device_id < pids.size(); device_id++) {
+        for (size_t device_id = 0; device_id < pids.size(); device_id++) {
           envMetadataMapString_[device_id] = getMetadataForPid(
               pids[device_id], attributionEnvVarsToScubaColumns);
         }
