@@ -104,7 +104,7 @@ std::shared_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
 
   // parsing the fields_str to a list of field ids
   while (getline(field_ss, field, ',')) {
-    unsigned short field_id;
+    unsigned short field_id = 0;
     try {
       field_id = (unsigned short)std::stoi(field);
     } catch (std::invalid_argument&) {
@@ -206,7 +206,7 @@ void DcgmGroupInfo::createFieldGroups(
     // initialization failed, no group will be created
     return;
   }
-  dcgmFieldGrp_t fieldGroupId;
+  dcgmFieldGrp_t fieldGroupId = 0;
   if (retCode_ = dcgmFieldGroupCreate_stub(
           dcgmHandle_, fields, (char*)fieldGroupName.c_str(), &fieldGroupId);
       retCode_ != DCGM_ST_OK) {

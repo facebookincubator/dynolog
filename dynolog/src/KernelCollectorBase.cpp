@@ -58,7 +58,7 @@ void KernelCollectorBase::readNetworkInfo(const std::string& interface) {
     LOG_EVERY_N(ERROR, 10) << "Failed to open " << devSpeedPath;
     return;
   }
-  uint64_t speedMbps;
+  uint64_t speedMbps = 0;
   if (!(ifs >> speedMbps)) {
     LOG_EVERY_N(ERROR, 10) << "Failed to read " << devSpeedPath;
     return;

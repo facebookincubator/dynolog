@@ -470,7 +470,7 @@ inline TimeStamp rdtsc() {
 }
 
 inline uint64_t rdpmc(int idx) {
-  uint64_t val;
+  uint64_t val = 0;
 
 #if defined(__x86_64__)
   val = __rdpmc(idx);
@@ -525,7 +525,7 @@ inline TimeStamp rdtscp(CpuId& cpu) {
 #endif
 
 inline std::pair<TimeStamp, CpuId> rdtscp() {
-  CpuId cpu_id;
+  CpuId cpu_id = 0;
   auto tstamp = rdtscp(cpu_id);
   return std::make_pair(tstamp, cpu_id);
 }

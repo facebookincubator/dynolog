@@ -12,6 +12,7 @@ message("Use ODS Graph API = ${USE_ODS_GRAPH_API}")
 # our build script will first create a src/ dir where all source code will exist
 file(GLOB dynolog_src "*.h" "*.cpp")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options("-Wall")
 # Remove main from library, only needed for exec.
 list(REMOVE_ITEM dynolog_src "${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp")
