@@ -235,7 +235,7 @@ class PerUncoreCountReaderFactory {
   PerUncoreCountReaderFactory() = default;
   virtual ~PerUncoreCountReaderFactory() = default;
   virtual std::unique_ptr<PerUncoreCountReader> make(
-      const std::string& element_id,
+      const std::string& /*element_id*/,
       uncore_scope::Scope scope,
       std::shared_ptr<const MetricDesc> metric_desc,
       std::shared_ptr<const PmuDeviceManager> pmu_manager) {
