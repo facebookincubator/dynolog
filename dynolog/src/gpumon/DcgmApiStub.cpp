@@ -30,6 +30,8 @@ constexpr int kDcgmDefaultVersion = 2;
 
 namespace detail {
 
+namespace {
+
 /* a structure to hold function pointers after dynamically loading the library*/
 struct dcgmApi {
   bool valid = false;
@@ -106,6 +108,8 @@ struct dcgmApi {
 
   unsigned int dcgm_major_version = kDcgmDefaultVersion;
 };
+
+} // namespace
 
 inline int parse_lib_major_version(const std::filesystem::path& lib_path) {
   for (const auto& c : lib_path.filename().string()) {
