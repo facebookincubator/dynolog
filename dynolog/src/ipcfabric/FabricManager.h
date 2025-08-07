@@ -44,26 +44,17 @@ struct Message {
       const std::string& type) {
     std::unique_ptr<Message> msg = std::make_unique<Message>(Message());
     memcpy(msg->metadata.type, type.c_str(), type.size() + 1);
-    // TODO CXX 17 - https://github.com/pytorch/kineto/issues/650
-    // if constexpr (std::is_same_v<std::string, T>) {
-    // Without constexpr following is not possible
-#if __cplusplus >= 201703L
     if constexpr (std::is_same_v<std::string, T> == true) {
       msg->metadata.size = data.size();
       msg->buf = std::make_unique<unsigned char[]>(msg->metadata.size);
       memcpy(msg->buf.get(), data.c_str(), msg->metadata.size);
     } else {
-#endif
       // ensure memcpy works on T
-      // TODO CXX 17 - https://github.com/pytorch/kineto/issues/650
-      // static_assert(std::is_trivially_copyable_v<T>);
       static_assert(std::is_trivially_copyable_v<T>);
       msg->metadata.size = sizeof(data);
       msg->buf = std::make_unique<unsigned char[]>(msg->metadata.size);
       memcpy(msg->buf.get(), &data, msg->metadata.size);
-#if __cplusplus >= 201703L
     }
-#endif
     return msg;
   }
 
@@ -76,9 +67,6 @@ struct Message {
     std::unique_ptr<Message> msg = std::make_unique<Message>(Message());
     memcpy(msg->metadata.type, type.c_str(), type.size() + 1);
     // ensure memcpy works on T and U
-    // TODO CXX 17 - https://github.com/pytorch/kineto/issues/650
-    // static_assert(std::is_trivially_copyable_v<T>);
-    // static_assert(std::is_trivially_copyable_v<U>);
     static_assert(std::is_trivially_copyable_v<T>);
     static_assert(std::is_trivially_copyable_v<U>);
     msg->metadata.size = sizeof(data) + sizeof(U) * n;
@@ -152,7 +140,7 @@ class FabricManager {
       //   3) read metadata
       //   4) use metadata to find the desired size for the buffer to allocate.
       //   5) read metadata + data with allocated buffer
-      bool success;
+      bool success = false;
       try {
         success = ep_.tryPeekMsg(*peek_ctxt);
       } catch (std::exception& e) {
