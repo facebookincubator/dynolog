@@ -97,7 +97,7 @@ std::vector<LogicalDevice> LogicalDevice::parseTopologyNodes(
     numPartitions[device.getUniqueId()]++;
   }
   for (auto& device : devices) {
-    device.setPartition(numPartitions.at(device.getUniqueId()) > 1);
+    device.setPartition(numPartitions.at(device.getUniqueId()));
   }
 
   return devices;

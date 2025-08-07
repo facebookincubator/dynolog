@@ -23,10 +23,13 @@ class LogicalDevice {
     return minorId_;
   }
   bool isPartition() const {
-    return partitioned_;
+    return numPartitions_ > 1;
   }
-  void setPartition(bool partitioned) {
-    partitioned_ = partitioned;
+  size_t getNumPartitions() const {
+    return numPartitions_;
+  }
+  void setPartition(size_t numPartitions) {
+    numPartitions_ = numPartitions;
   }
 
   /**
@@ -49,7 +52,7 @@ class LogicalDevice {
   uint64_t uniqueId_;
   int minorId_;
   // to be updated after all devices are parsed
-  bool partitioned_ = false;
+  size_t numPartitions_ = 1;
 };
 
 class PhysicalDevice {
