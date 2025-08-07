@@ -52,11 +52,11 @@ void TextTable::writeRow(size_t row, std::ostream& s) const {
     size_t lPad = (cellWidth - textWidth) / 2;
     size_t rPad = cellWidth - textWidth - lPad;
     s << '|';
-    for (int i = 0; i < lPad; i++) {
+    for (size_t i = 0; i < lPad; i++) {
       s << ' ';
     }
     s << data_[row][col];
-    for (int i = 0; i < rPad; i++) {
+    for (size_t i = 0; i < rPad; i++) {
       s << ' ';
     }
   }

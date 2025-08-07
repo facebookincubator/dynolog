@@ -101,11 +101,11 @@ void KernelCollectorBase::readCpuStats() {
   cpuTime_ = newCpuTime;
 
   // zero out per node calculation
-  for (int node = 0; node < numCpuSockets_; node++) {
+  for (size_t node = 0; node < numCpuSockets_; node++) {
     nodeCpuTime_[node] = CpuTime{};
   }
 
-  int core = 0;
+  uint64_t core = 0;
   for (const auto& cpu : stats.cpus.per_item) {
     if (core >= cpuCoresTotal_) {
       break;

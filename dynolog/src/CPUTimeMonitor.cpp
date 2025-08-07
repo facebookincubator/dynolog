@@ -357,7 +357,7 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
     return ret;
   }
 
-  int lines = 0;
+  uint64_t lines = 0;
   while (lines < coreCount_) {
     auto perCoreIdle = readIdle();
     if (!perCoreIdle) {

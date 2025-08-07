@@ -256,7 +256,7 @@ void DcgmGroupInfo::watchProfFields(
   watchFields.version = dcgmProfWatchFields_version;
   watchFields.groupId = groupId_;
   watchFields.numFieldIds = prof_fields.size();
-  for (int i = 0; i < watchFields.numFieldIds; i++) {
+  for (size_t i = 0; i < watchFields.numFieldIds; i++) {
     watchFields.fieldIds[i] = prof_fields[i];
   }
   watchFields.updateFreq = updateIntervalMs_ * 1000;
