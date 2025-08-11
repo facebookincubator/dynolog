@@ -91,19 +91,14 @@ inline std::string toStr(const Slice::TransitionType& type) {
   switch (type) {
     case Slice::TransitionType::NA:
       return "NA";
-      break;
     case Slice::TransitionType::Analysis:
       return "Analysis";
-      break;
     case Slice::TransitionType::ThreadPreempted:
       return "ThreadPreempted";
-      break;
     case Slice::TransitionType::ThreadYield:
       return "ThreadYield";
-      break;
     case Slice::TransitionType::PhaseChange:
       return "PhaseChange";
-      break;
   }
 }
 
