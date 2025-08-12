@@ -183,6 +183,38 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::cpu,
+          "ls_dmnd_fills_from_sys.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsDmndFillsFromSysDramIoFar.val},
+          "Demand data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Demand data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-dmnd-fills-from-sys.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_any_fills_from_sys.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsAnyFillsFromSysDramIoFar.val},
+          "Any data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Any data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-any-fills-from-sys.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_sw_pf_dc_fills.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsSwPfDcFillsDramIoFar.val},
+          "Software prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Software prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-sw-pf-dc-fills.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_hw_pf_dc_fills.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsHwPfDcFillsDramIoFar.val},
+          "Hardware prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Hardware prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-hw-pf-dc-fills.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
           "l2_fill_l3_resp",
           EventDef::Encoding{.code = amd_msr::kL2FillL3Responses.val},
           "L2 cache fill L3 responses.",
@@ -195,6 +227,38 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 namespace turin {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_dmnd_fills_from_sys.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsDmndFillsFromSysDramIoFar.val},
+          "Demand data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Demand data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-dmnd-fills-from-sys.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_any_fills_from_sys.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsAnyFillsFromSysDramIoFar.val},
+          "Any data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Any data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-any-fills-from-sys.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_sw_pf_dc_fills.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsSwPfDcFillsDramIoFar.val},
+          "Software prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Software prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-sw-pf-dc-fills.dram-io-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_hw_pf_dc_fills.dram_io_far",
+          EventDef::Encoding{.code = amd_msr::kLsHwPfDcFillsDramIoFar.val},
+          "Hardware prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket).",
+          "Hardware prefetch data cache fills from either DRAM or MMIO in a different NUMA node (same or different socket)."),
+      std::vector<EventId>({"ls-hw-pf-dc-fills.dram-io-far"}));
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::cpu,
