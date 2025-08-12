@@ -127,6 +127,15 @@ union PmuMsr {
 constexpr PmuMsr kRetiredInstructions{.amdCore = {.event = 0xc0}};
 constexpr PmuMsr kUnhaltedCycles{.amdCore = {.event = 0x76}};
 
+constexpr PmuMsr kLsDmndFillsFromSysDramIoFar{
+    .amdCore = {.event = 0x43, .unitMask = 0x40}};
+constexpr PmuMsr kLsAnyFillsFromSysDramIoFar{
+    .amdCore = {.event = 0x44, .unitMask = 0x40}};
+constexpr PmuMsr kLsSwPfDcFillsDramIoFar{
+    .amdCore = {.event = 0x59, .unitMask = 0x40}};
+constexpr PmuMsr kLsHwPfDcFillsDramIoFar{
+    .amdCore = {.event = 0x5a, .unitMask = 0x40}};
+
 // L1 iCache
 constexpr PmuMsr kL1ICacheFillMisses{
     .amdCore = {.event = 0x64, .unitMask = 0x7}}; // Same as e=0x60,u=0x10
