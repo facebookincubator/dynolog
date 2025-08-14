@@ -157,7 +157,7 @@ constexpr PmuMsr kL2PrefetcherHitsInL3{
 constexpr PmuMsr kL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0x1f}};
 constexpr PmuMsr kL2FillL3Responses{
-    .amdCore = {.event = 0x165, .unitMask = 0xfe}};
+    .amdCore = {.event = 0x65, .unitMask = 0xfe, .event_11_8 = 0x1}};
 // L2 and L1 Prefetcher misses
 constexpr PmuMsr kL1AndL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0xff}};
