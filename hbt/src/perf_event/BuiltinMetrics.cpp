@@ -708,6 +708,21 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
         100'000'000,
         System::Permissions{},
         std::vector<std::string>{}));
+    metrics->add(std::make_shared<MetricDesc>(
+        "l2_cache_fills_dram_reponses",
+        "L2 cache fill from all DRAM or MMIO responses.",
+        "L2 cache fill responses returned from either DRAM or MMIO from the same or different NUMA node.",
+        std::map<TOptCpuArch, EventRefs>{
+            {std::nullopt,
+             EventRefs{EventRef{
+                 "l2_fill_dram_resp",
+                 PmuType::cpu,
+                 "l2_fill_dram_resp",
+                 EventExtraAttr{},
+                 {}}}}},
+        100'000'000,
+        System::Permissions{},
+        std::vector<std::string>{}));
   }
   // l3_cache_misses replaces DynoPerfCounterType::L3CACHE_MISS
   metrics->add(std::make_shared<MetricDesc>(

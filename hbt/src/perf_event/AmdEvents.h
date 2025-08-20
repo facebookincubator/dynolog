@@ -158,6 +158,9 @@ constexpr PmuMsr kL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0x1f}};
 constexpr PmuMsr kL2FillL3Responses{
     .amdCore = {.event = 0x65, .unitMask = 0xfe, .event_11_8 = 0x1}};
+// L2 Fill from DRAM responses only. Umask bit 01001000
+constexpr PmuMsr kL2FillDramResponses{
+    .amdCore = {.event = 0x65, .unitMask = 0x48, .event_11_8 = 0x1}};
 // L2 and L1 Prefetcher misses
 constexpr PmuMsr kL1AndL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0xff}};

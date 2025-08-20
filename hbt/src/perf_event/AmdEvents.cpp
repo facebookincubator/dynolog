@@ -220,6 +220,14 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "L2 cache fill L3 responses.",
           "L2 cache fill L3 responses. Count all L3 responses to fill requests."),
       std::vector<EventId>({"l2-fill-l3-resp"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l2_fill_dram_resp",
+          EventDef::Encoding{.code = amd_msr::kL2FillDramResponses.val},
+          "L2 cache fill from all DRAM or MMIO responses.",
+          "L2 cache fill responses returned from either DRAM or MMIO from the same or different NUMA node."),
+      std::vector<EventId>({"l2-fill-dram-resp"}));
 }
 
 } // namespace bergamo
@@ -267,6 +275,14 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "L2 cache fill L3 responses.",
           "L2 cache fill L3 responses. Count all L3 responses to fill requests."),
       std::vector<EventId>({"l2-fill-l3-resp"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l2_fill_dram_resp",
+          EventDef::Encoding{.code = amd_msr::kL2FillDramResponses.val},
+          "L2 cache fill from all DRAM or MMIO responses.",
+          "L2 cache fill requests that target the same or another NUMA node and return from either DRAM or MMIO from the same or different NUMA node."),
+      std::vector<EventId>({"l2-fill-dram-resp"}));
 }
 
 void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
