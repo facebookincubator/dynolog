@@ -62,7 +62,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       const std::optional<std::string>& allotmentId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
-  std::optional<double> getQuantileCPUCoresUsage(
+  virtual std::optional<double> getQuantileCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
       double quantile,
