@@ -16,7 +16,7 @@ std::shared_ptr<CPUTimeMonitor> createTestMonitor() {
       std::make_shared<CPUTimeMonitor::TTicker>();
   // hard code the core count to match the testroot file
   return std::make_shared<CPUTimeMonitor>(
-      ticker, true, getenv("TESTROOT"), coreCount, true);
+      ticker, true, coreCount, getenv("TESTROOT"), true);
 }
 
 // idle data from test /proc/stat
@@ -539,8 +539,8 @@ TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
   auto disabledMonitor = std::make_shared<CPUTimeMonitor>(
       disabledTicker,
       false /* readCgroupStat disabled */,
-      getenv("TESTROOT"),
       coreCount,
+      getenv("TESTROOT"),
       true);
 
   // Register allotment with cgroup path
