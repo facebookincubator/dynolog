@@ -489,10 +489,15 @@ void CPUTimeMonitor::processCgroupUsage(
         LOG(ERROR) << "Invalid cgroup usage at level: " << level
                    << " allotmentId: " << allotmentId
                    << " wallDelta: " << wallDelta
-                   << " cgroupUsage: " << cgroupUsage << " usage: " << newUsage
-                   << " lastUsage: " << lastUsage[allotmentId];
+                   << " cgroupUsage: " << cgroupUsage
+                   << " newUsage: " << newUsage << " oldUsage: " << oldUsage
+                   << " coreCount: " << coreCount_;
       }
-      continue;
+      if (cgroupUsage < 0) {
+        // Only skip when cgroupUsage is negative as the coreCount_ limit may be
+        // unreliable.
+        continue;
+      }
     }
 
     line.emplace_back(allotmentId, cgroupUsage);
