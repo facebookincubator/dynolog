@@ -38,8 +38,8 @@ std::array<MetricFrameMap, 3> CPUTimeMonitor::createMetricFrameArray() {
 CPUTimeMonitor::CPUTimeMonitor(
     std::shared_ptr<TTicker> ticker,
     bool readCgroupStat,
-    std::string rootDir,
     uint64_t coreCount,
+    std::string rootDir,
     bool isUnitTest)
     : MonitorBase<TTicker>(std::move(ticker), "CPUTimeMonitor", {1.0}),
       rootDir_(std::move(rootDir)),
@@ -49,6 +49,7 @@ CPUTimeMonitor::CPUTimeMonitor(
       readCgroupStat_(readCgroupStat),
       cgroupUsageMetricFrames_(createMetricFrameArray()) {
   std::unique_lock lock(dataLock_);
+
   allotmentToCpuSet_["host"] = {};
   for (auto& frame : procUsageMetricFrames_) {
     frame.addSeries(
@@ -489,8 +490,9 @@ void CPUTimeMonitor::processCgroupUsage(
         LOG(ERROR) << "Invalid cgroup usage at level: " << level
                    << " allotmentId: " << allotmentId
                    << " wallDelta: " << wallDelta
-                   << " cgroupUsage: " << cgroupUsage << " usage: " << newUsage
-                   << " lastUsage: " << lastUsage[allotmentId];
+                   << " cgroupUsage: " << cgroupUsage
+                   << " newUsage: " << newUsage << " oldUsage: " << oldUsage
+                   << " coreCount: " << coreCount_;
       }
       continue;
     }
