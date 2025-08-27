@@ -709,7 +709,23 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
         System::Permissions{},
         std::vector<std::string>{}));
     metrics->add(std::make_shared<MetricDesc>(
-        "l2_cache_fills_dram_reponses",
+        "l2_cache_fills_l3_misses_responses",
+        "L2 Fill responses except from L3 or different L2 in the same CCX.",
+        "L2 Fill responses except from L3 or different L2 in the same CCX."
+        "This event is specific to AMD Zen4 and Zen5 CPUs.",
+        std::map<TOptCpuArch, EventRefs>{
+            {std::nullopt,
+             EventRefs{EventRef{
+                 "l2_fill_l3_miss_resp",
+                 PmuType::cpu,
+                 "l2_fill_l3_miss_resp",
+                 EventExtraAttr{},
+                 {}}}}},
+        100'000'000,
+        System::Permissions{},
+        std::vector<std::string>{}));
+    metrics->add(std::make_shared<MetricDesc>(
+        "l2_cache_fills_dram_responses",
         "L2 cache fill from all DRAM or MMIO responses.",
         "L2 cache fill responses returned from either DRAM or MMIO from the same or different NUMA node.",
         std::map<TOptCpuArch, EventRefs>{

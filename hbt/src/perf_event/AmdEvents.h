@@ -156,11 +156,24 @@ constexpr PmuMsr kL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0x1f}};
 constexpr PmuMsr kL2PrefetcherMissesInL3{
     .amdCore = {.event = 0x72, .unitMask = 0x1f}};
+
+// L2 Fill Response Source events. Reference:
+// "Performance Monitor Counters for AMD Family 1Ah Model 00h0Fh Processors"
+
+// L2 Fill from all L3 responses, including both L3 hit and L3 miss.
 constexpr PmuMsr kL2FillL3Responses{
     .amdCore = {.event = 0x65, .unitMask = 0xfe, .event_11_8 = 0x1}};
-// L2 Fill from DRAM responses only. Umask bit 01001000
+
+// L2 Fill responses except from L3 or different L2 in the same CCX. This
+// can be used to estimate per-core L3 cache misses.
+constexpr PmuMsr kL2FillL3MissResponses{
+    .amdCore = {.event = 0x65, .unitMask = 0xfc, .event_11_8 = 0x1}};
+
+// L2 Fill from DRAM responses only, with bit 3 and 6 enabled. This can be used
+// to estimate per-core memory bandwidth.
 constexpr PmuMsr kL2FillDramResponses{
     .amdCore = {.event = 0x65, .unitMask = 0x48, .event_11_8 = 0x1}};
+
 // L2 and L1 Prefetcher misses
 constexpr PmuMsr kL1AndL2PrefetcherHitsInL3{
     .amdCore = {.event = 0x71, .unitMask = 0xff}};

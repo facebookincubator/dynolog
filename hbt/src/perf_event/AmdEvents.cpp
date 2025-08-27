@@ -223,6 +223,14 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::cpu,
+          "l2_fill_l3_miss_resp",
+          EventDef::Encoding{.code = amd_msr::kL2FillL3MissResponses.val},
+          "L2 Fill responses except from L3 or different L2 in the same CCX.",
+          "L2 Fill responses except from L3 or different L2 in the same CCX."),
+      std::vector<EventId>({"l2-fill-l3-miss-resp"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
           "l2_fill_dram_resp",
           EventDef::Encoding{.code = amd_msr::kL2FillDramResponses.val},
           "L2 cache fill from all DRAM or MMIO responses.",
