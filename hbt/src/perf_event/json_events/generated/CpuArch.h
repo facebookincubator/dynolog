@@ -121,6 +121,7 @@ inline CpuArch makeCpuArchX86(
     }
   } else if (cpu_family == CpuFamily::AMDZEN5) {
     switch (cpu_model_num) {
+      case 2:
       case 17:
         return CpuArch::TURIN;
     }
