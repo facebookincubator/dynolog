@@ -7,9 +7,9 @@ using namespace dynolog::gpumon;
 
 constexpr char kTestRoot[] = "TESTROOT";
 
-std::string get_test_root() {
+std::filesystem::path get_test_root() {
   if (const char* env_p = std::getenv(kTestRoot)) {
-    return std::filesystem::path(env_p) / "sys" / "class" / "kfd";
+    return std::filesystem::path(env_p);
   }
   LOG(ERROR) << "Missing test root env: " << kTestRoot;
   return "";
@@ -17,32 +17,52 @@ std::string get_test_root() {
 
 class AmdDeviceTopologyTest : public ::testing::Test {
  protected:
-  const std::filesystem::path testRoot = get_test_root();
+  const std::filesystem::path kfdRoot =
+      get_test_root() / "sys" / "class" / "kfd";
+  const std::filesystem::path pciRoot =
+      get_test_root() / "sys" / "bus" / "pci" / "drivers" / "amdgpu";
 };
 
 TEST_F(AmdDeviceTopologyTest, ParseKfdNodes) {
   auto devices =
-      dynolog::gpumon::amdgpu::LogicalDevice::parseTopologyNodes(testRoot);
+      dynolog::gpumon::amdgpu::LogicalDevice::parseTopologyNodes(kfdRoot);
   EXPECT_EQ(devices.size(), 3);
 
   // Check first GPU node
-  EXPECT_EQ(devices[0].getKfdNodeId(), 1);
-  EXPECT_EQ(devices[0].getMinorId(), 177);
-  EXPECT_EQ(devices[0].getUniqueId(), 9847564688237960509ULL);
-  EXPECT_FALSE(devices[0].isPartition());
-  EXPECT_EQ(devices[0].getNumPartitions(), 1);
+  EXPECT_EQ(devices[0]->getKfdNodeId(), 1);
+  EXPECT_EQ(devices[0]->getMinorId(), 177);
+  EXPECT_EQ(devices[0]->getUniqueId(), 9847564688237960509ULL);
 
   // Check second GPU node
-  EXPECT_EQ(devices[1].getKfdNodeId(), 2);
-  EXPECT_EQ(devices[1].getMinorId(), 178);
-  EXPECT_EQ(devices[1].getUniqueId(), 9847564688237960510ULL);
-  EXPECT_TRUE(devices[1].isPartition());
-  EXPECT_EQ(devices[1].getNumPartitions(), 2);
+  EXPECT_EQ(devices[1]->getKfdNodeId(), 2);
+  EXPECT_EQ(devices[1]->getMinorId(), 178);
+  EXPECT_EQ(devices[1]->getUniqueId(), 9847564688237960510ULL);
 
   // Check second GPU node
-  EXPECT_EQ(devices[2].getKfdNodeId(), 3);
-  EXPECT_EQ(devices[2].getMinorId(), 179);
-  EXPECT_EQ(devices[2].getUniqueId(), 9847564688237960510ULL);
-  EXPECT_TRUE(devices[2].isPartition());
-  EXPECT_EQ(devices[2].getNumPartitions(), 2);
+  EXPECT_EQ(devices[2]->getKfdNodeId(), 3);
+  EXPECT_EQ(devices[2]->getMinorId(), 179);
+  EXPECT_EQ(devices[2]->getUniqueId(), 9847564688237960510ULL);
+}
+
+TEST_F(AmdDeviceTopologyTest, ParsePci) {
+  auto devices = dynolog::gpumon::amdgpu::PhysicalDevice::parsePciDevices(
+      {"pci_addr_1", "pci_addr_2"}, pciRoot);
+  EXPECT_EQ(devices.size(), 2);
+
+  // Check device 1
+  EXPECT_EQ(devices[0]->getUniqueId(), 9847564688237960509ULL);
+  EXPECT_EQ(devices[0]->getPciAddr(), "pci_addr_1");
+  EXPECT_EQ(devices[0]->getOamId(), 0);
+
+  // Check device 2
+  EXPECT_EQ(devices[1]->getUniqueId(), 9847564688237960510ULL);
+  EXPECT_EQ(devices[1]->getPciAddr(), "pci_addr_2");
+  EXPECT_EQ(devices[1]->getOamId(), 1);
+}
+
+TEST_F(AmdDeviceTopologyTest, BuildTopology) {
+  auto devices = amdgpu::buildAmdDeviceTopology(
+      {"pci_addr_1", "pci_addr_2"}, kfdRoot, pciRoot);
+  EXPECT_EQ(devices[0]->getLogicalDevices().size(), 1);
+  EXPECT_EQ(devices[1]->getLogicalDevices().size(), 2);
 }
