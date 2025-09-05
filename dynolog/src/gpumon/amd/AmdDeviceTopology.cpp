@@ -18,10 +18,10 @@ namespace dynolog {
 namespace gpumon {
 namespace amdgpu {
 
-std::vector<LogicalDevice> LogicalDevice::parseTopologyNodes(
+std::vector<std::shared_ptr<LogicalDevice>> LogicalDevice::parseTopologyNodes(
     const std::filesystem::path& root) {
   const auto topologyPath = root / "kfd" / "topology" / "nodes";
-  std::vector<LogicalDevice> devices;
+  std::vector<std::shared_ptr<LogicalDevice>> devices;
 
   try {
     for (const auto& entry :
@@ -84,23 +84,85 @@ std::vector<LogicalDevice> LogicalDevice::parseTopologyNodes(
 
       // Only include nodes that have SIMD units (actual GPUs) and all of the
       // required properties
-      devices.push_back(
-          LogicalDevice(kfdNodeId, uniqueId.value(), minorId.value()));
+      devices.push_back(std::make_shared<LogicalDevice>(
+          kfdNodeId, uniqueId.value(), minorId.value()));
     }
   } catch (const std::exception& e) {
     LOG(ERROR) << "Error parsing topology nodes: " << e.what();
     return {};
   }
-
-  std::unordered_map<uint64_t, int> numPartitions;
-  for (const auto& device : devices) {
-    numPartitions[device.getUniqueId()]++;
-  }
-  for (auto& device : devices) {
-    device.setPartition(numPartitions.at(device.getUniqueId()));
-  }
-
   return devices;
+}
+
+// Convert hex string to uint64_t
+uint64_t hexToUint64(const std::string& hexStr) {
+  uint64_t value = 0;
+  std::istringstream iss(hexStr);
+  iss >> std::hex >> value;
+  return value;
+}
+
+std::shared_ptr<PhysicalDevice> PhysicalDevice::createFromPciDir(
+    const std::filesystem::path& pciDir) {
+  std::filesystem::path uniqueIdPath = pciDir / "unique_id";
+  std::filesystem::path xgmiIdPath = pciDir / "xgmi_physical_id";
+  // Read unique_id
+  std::ifstream uniqueIdFile(uniqueIdPath);
+  if (!uniqueIdFile) {
+    LOG(ERROR) << "Failed to open " << uniqueIdPath;
+    return nullptr;
+  }
+  std::string uniqueIdStr;
+  std::getline(uniqueIdFile, uniqueIdStr);
+  uint64_t uniqueId = hexToUint64(uniqueIdStr);
+  // Read xgmi_physical_id
+  std::ifstream xgmiIdFile(xgmiIdPath);
+  if (!xgmiIdFile) {
+    LOG(ERROR) << "Failed to open " << xgmiIdPath;
+    return nullptr;
+  }
+  std::string xgmiIdStr;
+  std::getline(xgmiIdFile, xgmiIdStr);
+  int xgmiId = std::stoi(xgmiIdStr);
+
+  return std::make_shared<PhysicalDevice>(uniqueId, pciDir.filename(), xgmiId);
+}
+
+std::vector<std::shared_ptr<PhysicalDevice>> PhysicalDevice::parsePciDevices(
+    const std::vector<std::string>& pciAddrs,
+    const std::filesystem::path& root) {
+  std::vector<std::shared_ptr<PhysicalDevice>> res;
+  for (const auto& addr : pciAddrs) {
+    auto device = createFromPciDir(root / addr);
+    if (device) {
+      res.push_back(std::move(device));
+    }
+  }
+  return res;
+}
+
+void PhysicalDevice::addLogicalDevice(std::shared_ptr<LogicalDevice> device) {
+  logicalDevices_.push_back(std::move(device));
+}
+
+std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(
+    std::vector<std::string> pciAddrs,
+    const std::filesystem::path& kfdRoot,
+    const std::filesystem::path& pciRoot) {
+  // Parse logical device info from KFD interface
+  auto logicalDevices = LogicalDevice::parseTopologyNodes(kfdRoot);
+  // Parse physical device info from PCI sysfs interface
+  auto physicalDevices =
+      PhysicalDevice::parsePciDevices(std::move(pciAddrs), pciRoot);
+  // Correlate logical and physical devices using uniqueId
+  for (const auto& physical : physicalDevices) {
+    for (const auto& logical : logicalDevices) {
+      if (physical->getUniqueId() == logical->getUniqueId()) {
+        physical->addLogicalDevice(logical);
+      }
+    }
+  }
+  return physicalDevices;
 }
 
 } // namespace amdgpu
