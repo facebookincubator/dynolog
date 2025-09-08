@@ -1,5 +1,6 @@
 // clang-format off
 
+/* @lint-ignore LICENSELINT */
 /*
  * Copyright (c) 2022, NVIDIA CORPORATION.  All rights reserved.
  *
