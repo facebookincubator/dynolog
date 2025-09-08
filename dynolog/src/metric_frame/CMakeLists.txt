@@ -1,3 +1,8 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
 add_library(extra_types STATIC ExtraTypes.h ExtraTypes.cpp)
 add_library(text_table STATIC TextTable.h TextTable.cpp)
 add_library(metric_series STATIC MetricSeries.h)
