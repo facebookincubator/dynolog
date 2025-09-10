@@ -107,7 +107,7 @@ cpu_set_t parseCpusRange(std::string cpu_range_str) {
   cpu_set_t cpus;
   CPU_ZERO(&cpus);
 
-  if (cpu_range_str.size() == 0) {
+  if (cpu_range_str.empty()) {
     return cpus;
   }
 
@@ -180,7 +180,7 @@ cpu_set_t parseCpuLineFile(const std::string& path) {
   if (!s.eof()) {
     std::string next_line;
     std::getline(s, next_line);
-    if (next_line.size() > 0) {
+    if (!next_line.empty()) {
       s.close();
       HBT_THROW_SYSTEM(EINVAL)
           << "File " << path << " must contain only one line. "
@@ -374,15 +374,15 @@ CpuInfo readCpuArm() {
   std::ifstream s(kArmMidrFile);
   // MIDR is a 64 bit register-> 16 hex digits
   std::array<char, 20> midrStr; // some space for 0x and null term
-  s.getline(&midrStr[0], 20);
+  s.getline(midrStr.data(), 20);
 
-  HBT_DLOG_INFO() << "ARM MIDR = " << std::string{&midrStr[0]};
+  HBT_DLOG_INFO() << "ARM MIDR = " << std::string{midrStr.data()};
 
   uint64_t midr = 0;
   uint32_t implementor = 0, variant = 0, revision = 0;
 
   // SCNx64 is the format specifier for hex 64 bit numbers
-  sscanf(&midrStr[0], "0x%" SCNx64, &midr);
+  sscanf(midrStr.data(), "0x%" SCNx64, &midr);
 
   implementor = (midr >> 24) & 0xff; // Implementor : Bits[31:24]
   variant = (midr >> 20) & 0xf; // Variant : Bits[23:20]

@@ -129,7 +129,7 @@ class EthtoolCounters {
     ifr_.ifr_data = (char*)cur_eth_stats_;
 
     for (const auto& eth_counter_name : eth_counter_names_) {
-      for (int j = 0; j < gstrings_->len; j++) {
+      for (size_t j = 0; j < gstrings_->len; j++) {
         if (0 ==
             memcmp(
                 (void*)eth_counter_name.c_str(),

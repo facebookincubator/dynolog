@@ -96,7 +96,7 @@ class EnvironmentError : public std::exception {
   };
 
   explicit EnvironmentError(Type type, std::string what)
-      : std::exception(), type_{type}, what_{std::move(what)} {}
+      :  type_{type}, what_{std::move(what)} {}
 
   const char* what() const noexcept override {
     return what_.c_str();

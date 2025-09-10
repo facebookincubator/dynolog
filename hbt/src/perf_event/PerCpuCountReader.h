@@ -218,7 +218,7 @@ class PerCpuCountReaderFactory {
   PerCpuCountReaderFactory() = default;
   virtual ~PerCpuCountReaderFactory() = default;
   virtual std::unique_ptr<PerCpuCountReader> make(
-      const std::string& element_id,
+      const std::string& /*element_id*/,
       const CpuSet& mon_cpus,
       std::shared_ptr<const MetricDesc> metric_desc,
       std::shared_ptr<const PmuDeviceManager> pmu_manager,

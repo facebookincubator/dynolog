@@ -27,7 +27,7 @@ DEFINE_string(
 namespace dynolog {
 
 int setup_ipv4_socket(const std::string& addr, int port) {
-  int sock_fd, domain = AF_INET;
+  int sock_fd = -1, domain = AF_INET;
   struct sockaddr_in serv_addr;
 
   if ((sock_fd = ::socket(domain, SOCK_STREAM, 0)) < 0) {
@@ -57,7 +57,7 @@ int setup_ipv4_socket(const std::string& addr, int port) {
 }
 
 int setup_ipv6_socket(const std::string& addr, int port) {
-  int sock_fd, domain = AF_INET6;
+  int sock_fd = -1, domain = AF_INET6;
   struct sockaddr_in6 serv_addr;
 
   if ((sock_fd = ::socket(domain, SOCK_STREAM, 0)) < 0) {

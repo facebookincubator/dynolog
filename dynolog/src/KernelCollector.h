@@ -18,7 +18,7 @@ namespace dynolog {
  */
 class KernelCollector : public KernelCollectorBase {
  public:
-  explicit KernelCollector();
+  explicit KernelCollector() = default;
 
   // perform metric lookups
   void step();

@@ -914,7 +914,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printCpuCountReadersStatus(
     std::ostream& os,
     const cpu_set_t& cpus) const {
   std::lock_guard<std::mutex> lock{mutex_};
-  if (cpu_count_readers_.size() == 0) {
+  if (cpu_count_readers_.empty()) {
     os << "\nNo Cpu Count Readers\n";
     return os;
   }
@@ -936,7 +936,7 @@ template <class MuxGroupId, class ElemId>
 std::ostream& Monitor<MuxGroupId, ElemId>::printUncoreCountReadersStatus(
     std::ostream& os) const {
   std::lock_guard<std::mutex> lock{mutex_};
-  if (uncore_count_readers_.size() == 0) {
+  if (uncore_count_readers_.empty()) {
     os << "\nNo Uncore Count Readers\n";
     return os;
   }
@@ -995,7 +995,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
       break;
   }
   os << "\n";
-  if (mux_queue_.size() == 0) {
+  if (mux_queue_.empty()) {
     os << " <No Groups>";
     return os;
   }
@@ -1232,7 +1232,7 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
 /// all components in Monitor to the new state.
 template <class MuxGroupId, class ElemId>
 void Monitor<MuxGroupId, ElemId>::sync_(bool uncore_local, bool core_local) {
-  if (mux_queue_.size() == 0) {
+  if (mux_queue_.empty()) {
     // Empty queues have no elements to sync.
     return;
   }

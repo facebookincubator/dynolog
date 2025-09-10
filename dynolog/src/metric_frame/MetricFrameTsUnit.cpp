@@ -82,6 +82,7 @@ std::optional<MetricFrameOffset> MetricFrameTsUnit::findMatchingOffset(
     case MATCH_POLICY::NEXT_CLOSEST:
       return nextClosestPolicy(time);
   }
+  return {};
 }
 
 std::optional<MetricFrameOffset> MetricFrameTsUnit::closestPolicy(

@@ -8,14 +8,12 @@
 #include "dynolog/src/KernelCollector.h"
 #include <fmt/format.h>
 #include <cstdlib>
-#include <iostream>
 
 namespace dynolog {
 
 inline int64_t ticksToMs(int64_t ticks) {
   return ticks * 10;
 }
-KernelCollector::KernelCollector() : KernelCollectorBase() {}
 
 void KernelCollector::step() {
   uptime_ = readUptime();

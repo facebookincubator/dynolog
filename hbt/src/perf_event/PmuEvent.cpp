@@ -72,7 +72,7 @@ std::ostream& operator<<(std::ostream& os, const EventDef::Encoding& ec) {
     os << " cmask: 0x" << std::hex << ec.cmask;
   }
 
-  if (ec.msr_values.size()) {
+  if (!ec.msr_values.empty()) {
     os << "MSR Values: [ ";
     for (auto v : ec.msr_values) {
       os << "0x" << v << " ";

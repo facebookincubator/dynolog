@@ -38,7 +38,7 @@ struct LibPfm4EventGroup {
 
   /// Best effort attempt to get description.
   std::optional<std::string> getDescription() const {
-    if (ev_defs.size() == 0) {
+    if (ev_defs.empty()) {
       return std::nullopt;
     }
     if (ev_defs.size() == 1) {
@@ -312,8 +312,8 @@ class PmuDeviceManager {
   explicit PmuDeviceManager(CpuInfo cpuInfoIn)
       : cpuInfo(std::move(cpuInfoIn)), rootDir_() {}
 
-  PmuDeviceManager(CpuInfo cpuInfoIn, const std::string& rootDir)
-      : cpuInfo(std::move(cpuInfoIn)), rootDir_(rootDir) {}
+  PmuDeviceManager(CpuInfo cpuInfoIn, std::string  rootDir)
+      : cpuInfo(std::move(cpuInfoIn)), rootDir_(std::move(rootDir)) {}
 
   // Sync PMUs exposed in /sys/devices with those in pmu_groups_.
   void loadSysFsPmus();
@@ -357,7 +357,7 @@ class PmuDeviceManager {
         });
   }
 
-  std::shared_ptr<PmuDevice> findPmuDeviceByName(std::string pmu_id_str);
+  std::shared_ptr<PmuDevice> findPmuDeviceByName(std::string pmu_name);
 
   std::set<std::string> getPmuNames() const;
 

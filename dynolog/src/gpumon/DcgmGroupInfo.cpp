@@ -104,7 +104,7 @@ std::shared_ptr<DcgmGroupInfo> DcgmGroupInfo::factory(
 
   // parsing the fields_str to a list of field ids
   while (getline(field_ss, field, ',')) {
-    unsigned short field_id;
+    unsigned short field_id = 0;
     try {
       field_id = (unsigned short)std::stoi(field);
     } catch (std::invalid_argument&) {
@@ -202,11 +202,11 @@ void DcgmGroupInfo::createGroups() {
 // TODO: make more than one field group configuration available
 void DcgmGroupInfo::createFieldGroups(
     const std::vector<unsigned short>& fields) {
-  if (isFailing() || fields.size() == 0) {
+  if (isFailing() || fields.empty()) {
     // initialization failed, no group will be created
     return;
   }
-  dcgmFieldGrp_t fieldGroupId;
+  dcgmFieldGrp_t fieldGroupId = 0;
   if (retCode_ = dcgmFieldGroupCreate_stub(
           dcgmHandle_, fields, (char*)fieldGroupName.c_str(), &fieldGroupId);
       retCode_ != DCGM_ST_OK) {
@@ -247,7 +247,7 @@ void DcgmGroupInfo::watchFields() {
 // TODO: make more than one profiling group configuration available
 void DcgmGroupInfo::watchProfFields(
     const std::vector<unsigned short>& prof_fields) {
-  if (isFailing() || prof_fields.size() == 0) {
+  if (isFailing() || prof_fields.empty()) {
     // setup failed
     return;
   }
@@ -256,7 +256,7 @@ void DcgmGroupInfo::watchProfFields(
   watchFields.version = dcgmProfWatchFields_version;
   watchFields.groupId = groupId_;
   watchFields.numFieldIds = prof_fields.size();
-  for (int i = 0; i < watchFields.numFieldIds; i++) {
+  for (size_t i = 0; i < watchFields.numFieldIds; i++) {
     watchFields.fieldIds[i] = prof_fields[i];
   }
   watchFields.updateFreq = updateIntervalMs_ * 1000;
@@ -333,7 +333,7 @@ void DcgmGroupInfo::update() {
 
       if (FLAGS_enable_env_var_attribution) {
         std::vector<pid_t> pids = getPidsOnGpu();
-        for (int device_id = 0; device_id < pids.size(); device_id++) {
+        for (size_t device_id = 0; device_id < pids.size(); device_id++) {
           envMetadataMapString_[device_id] = getMetadataForPid(
               pids[device_id], attributionEnvVarsToScubaColumns);
         }

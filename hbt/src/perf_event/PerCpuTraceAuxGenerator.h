@@ -115,7 +115,7 @@ class CpuTraceAuxGenerator final
   }
 
   // handle PERF_RECORD_AUX
-  int handleRecordAux(const typename mode::AUXSpace::Aux&) noexcept {
+  int handleRecordAux(const typename mode::AUXSpace::Aux& /*unused*/) noexcept {
     // ignore PERF_RECORD_AUX for now.
     // only rely on data from struct perf_event_mmap_page for simlicity.
     // but we still need to consume this event
@@ -125,7 +125,7 @@ class CpuTraceAuxGenerator final
 
   // handle PERF_RECORD_ITRACE_START
   int handleRecordItraceStart(
-      const typename mode::AUXSpace::ItraceStart&) noexcept {
+      const typename mode::AUXSpace::ItraceStart& /*unused*/) noexcept {
     num_itrace_start_++;
     return 0;
   }
