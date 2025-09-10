@@ -330,8 +330,17 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
     return {};
   }
 
+  errno = 0;
   rewind(fp);
-  fflush(fp);
+  if (errno != 0) {
+    LOG(ERROR) << "Error rewind /proc/stat";
+    return {};
+  }
+  auto res = fflush(fp);
+  if (res != 0) {
+    LOG(ERROR) << "Error fflush /proc/stat";
+    return {};
+  }
 
   auto readIdle = [&]() -> std::optional<uint64_t> {
     if (!fgets(buf, sizeof(buf), fp)) {
