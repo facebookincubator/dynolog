@@ -202,7 +202,7 @@ void DcgmGroupInfo::createGroups() {
 // TODO: make more than one field group configuration available
 void DcgmGroupInfo::createFieldGroups(
     const std::vector<unsigned short>& fields) {
-  if (isFailing() || fields.size() == 0) {
+  if (isFailing() || fields.empty()) {
     // initialization failed, no group will be created
     return;
   }
@@ -247,7 +247,7 @@ void DcgmGroupInfo::watchFields() {
 // TODO: make more than one profiling group configuration available
 void DcgmGroupInfo::watchProfFields(
     const std::vector<unsigned short>& prof_fields) {
-  if (isFailing() || prof_fields.size() == 0) {
+  if (isFailing() || prof_fields.empty()) {
     // setup failed
     return;
   }

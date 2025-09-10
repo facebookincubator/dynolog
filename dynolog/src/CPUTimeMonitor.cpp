@@ -217,7 +217,7 @@ void CPUTimeMonitor::registerAllotment(
     const std::string& allotmentId,
     const std::vector<int64_t>& cpuSet,
     const std::optional<std::string>& path) {
-  if (allotmentId == "" || allotmentId == "host") {
+  if (allotmentId.empty() || allotmentId == "host") {
     LOG(INFO) << "Invalid allotmentId: " << allotmentId;
     return;
   }

@@ -301,7 +301,7 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
           }
         }
       }
-      if (res.activityProfilersTriggered.size() > 0) {
+      if (!res.activityProfilersTriggered.empty()) {
         onSetOnDemandConfig(pids);
       }
     }
