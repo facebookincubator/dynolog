@@ -54,6 +54,14 @@ std::optional<MetricFrameSlice> MetricFrameBase::slice(
   return MetricFrameSlice(*this, rangeMaybe.value());
 }
 
+std::optional<MetricFrameSlice> MetricFrameBase::latest() const {
+  auto rangeMaybe = ts_->getLatest();
+  if (!rangeMaybe.has_value()) {
+    return std::nullopt;
+  }
+  return MetricFrameSlice(*this, ts_->getLatest().value());
+}
+
 template <bool flag = false>
 void unknown_type_assert() {
   static_assert(flag, "type provided to add samples is not supported");
