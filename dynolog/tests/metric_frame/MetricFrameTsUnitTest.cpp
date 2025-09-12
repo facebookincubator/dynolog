@@ -25,16 +25,21 @@ class MetricFrameTsUnitTest : public MetricFrameTsUnit {
   MetricFrameTsUnitTest() : MetricFrameTsUnit{10} {}
 };
 
+std::chrono::steady_clock::time_point setup(MetricFrameTsUnitInterface& i) {
+  auto now = std::chrono::steady_clock::now();
+  i.addSample(now - 120s);
+  i.addSample(now - 60s);
+  i.addSample(now);
+  return now;
+}
+
 TEST(MetricFrameTsUnitTest, constructor) {
   MetricFrameTsUnitFixIntervalTest fix;
   MetricFrameTsUnitTest t;
 }
 
 void smokeTest(MetricFrameTsUnitInterface& i) {
-  auto now = std::chrono::steady_clock::now();
-  i.addSample(now - 120s);
-  i.addSample(now - 60s);
-  i.addSample(now);
+  auto now = setup(i);
 
   EXPECT_EQ(i.lastSampleTime(), now);
   EXPECT_EQ(i.firstSampleTime(), now - 120s);
@@ -46,6 +51,12 @@ void smokeTest(MetricFrameTsUnitInterface& i) {
   auto& res = resMaybe.value();
   EXPECT_EQ(res.start.offset, 0);
   EXPECT_EQ(res.start.time, now - 120s);
+  EXPECT_EQ(res.end.offset, 2);
+  EXPECT_EQ(res.end.time, now);
+
+  resMaybe = i.getLatest();
+  EXPECT_EQ(res.start.offset, 2);
+  EXPECT_EQ(res.start.time, now);
   EXPECT_EQ(res.end.offset, 2);
   EXPECT_EQ(res.end.time, now);
 
@@ -67,6 +78,7 @@ void emptyFrame(MetricFrameTsUnitInterface& i) {
   auto now = std::chrono::steady_clock::now();
   auto resMaybe = i.getRange(now - 120s, now);
   EXPECT_FALSE(resMaybe.has_value());
+  EXPECT_FALSE(i.getLatest().has_value());
   EXPECT_FALSE(i.lastSampleTime().has_value());
   EXPECT_FALSE(i.firstSampleTime().has_value());
   EXPECT_EQ(i.length(), 0);
@@ -80,17 +92,25 @@ TEST(MetricFrameTsUnitTest, emptyFrame) {
   emptyFrame(t2);
 }
 
-void interpolationPolicies(MetricFrameTsUnitInterface& i) {
-  auto now = std::chrono::steady_clock::now();
-  i.addSample(now - 120s);
-  i.addSample(now - 60s);
-  i.addSample(now);
+void getLatest(
+    MetricFrameTsUnitInterface& i,
+    std::chrono::steady_clock::time_point now) {
+  auto latest = i.getLatest();
+  ASSERT_TRUE(latest.has_value());
 
+  EXPECT_EQ(latest->start.time, now);
+  EXPECT_EQ(latest->end.time, now);
+  EXPECT_EQ(latest->start.offset, 2);
+  EXPECT_EQ(latest->end.offset, 2);
+}
+
+void interpolationPolicies(
+    MetricFrameTsUnitInterface& i,
+    std::chrono::steady_clock::time_point now) {
   /*
   ------*---120----------60---------now-----#---
         |-----------------------------------|
   */
-
   auto res = i.getRange(now - 144s, now + 36s).value();
   EXPECT_EQ(res.start.offset, 0);
   EXPECT_EQ(res.start.time, now - 120s);
@@ -152,7 +172,9 @@ void interpolationPolicies(MetricFrameTsUnitInterface& i) {
 
 TEST(MetricFrameTsUnitTest, interpolationPolicies) {
   MetricFrameTsUnitFixIntervalTest t;
-  interpolationPolicies(t);
+  auto now = setup(t);
+  interpolationPolicies(t, now);
   MetricFrameTsUnitTest t2;
-  interpolationPolicies(t2);
+  now = setup(t2);
+  interpolationPolicies(t2, now);
 }

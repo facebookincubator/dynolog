@@ -23,6 +23,7 @@ class MetricFrameTsUnit : public MetricFrameTsUnitInterface {
   std::vector<TimePoint> getTimeVector() const override;
   size_t length() const override;
   size_t maxLength() const override;
+  std::optional<MetricFrameRange> getLatest() const override;
   std::optional<MetricFrameRange> getRange(
       TimePoint startTime,
       TimePoint endTime,
@@ -51,6 +52,7 @@ class MetricFrameTsUnitFixInterval : public MetricFrameTsUnitInterface {
   std::vector<TimePoint> getTimeVector() const override;
   size_t length() const override;
   size_t maxLength() const override;
+  std::optional<MetricFrameRange> getLatest() const override;
   std::optional<MetricFrameRange> getRange(
       TimePoint startTime,
       TimePoint endTime,

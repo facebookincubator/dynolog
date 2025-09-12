@@ -57,6 +57,22 @@ size_t MetricFrameTsUnit::maxLength() const {
   return timeSeries_.maxLength();
 }
 
+std::optional<MetricFrameRange> MetricFrameTsUnit::getLatest() const {
+  if (timeSeries_.size() == 0) {
+    return std::nullopt;
+  }
+  return MetricFrameRange{
+      .start =
+          MetricFrameOffset{
+              .offset = timeSeries_.size() - 1,
+              .time = *(timeSeries_.end() - 1)},
+      .end =
+          MetricFrameOffset{
+              .offset = timeSeries_.size() - 1,
+              .time = *(timeSeries_.end() - 1)},
+  };
+}
+
 std::optional<MetricFrameRange> MetricFrameTsUnit::getRange(
     TimePoint startTime,
     TimePoint endTime,
@@ -82,6 +98,7 @@ std::optional<MetricFrameOffset> MetricFrameTsUnit::findMatchingOffset(
     case MATCH_POLICY::NEXT_CLOSEST:
       return nextClosestPolicy(time);
   }
+  return std::nullopt;
 }
 
 std::optional<MetricFrameOffset> MetricFrameTsUnit::closestPolicy(
@@ -167,6 +184,19 @@ size_t MetricFrameTsUnitFixInterval::length() const {
 
 size_t MetricFrameTsUnitFixInterval::maxLength() const {
   return frameLength_;
+}
+
+std::optional<MetricFrameRange> MetricFrameTsUnitFixInterval::getLatest()
+    const {
+  if (sampleCount_ == 0) {
+    return std::nullopt;
+  }
+  return MetricFrameRange{
+      .start =
+          MetricFrameOffset{
+              .offset = sampleCount_ - 1, .time = lastSampleTime_},
+      .end = MetricFrameOffset{
+          .offset = sampleCount_ - 1, .time = lastSampleTime_}};
 }
 
 std::optional<MetricFrameRange> MetricFrameTsUnitFixInterval::getRange(
