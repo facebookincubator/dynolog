@@ -56,12 +56,12 @@ void KernelCollectorBase::readNetworkInfo(const std::string& interface) {
       rootDir / "sys/class/net" / interface / "speed";
   std::ifstream ifs(devSpeedPath);
   if (!ifs.is_open()) {
-    LOG_EVERY_N(ERROR, 10) << "Failed to open " << devSpeedPath;
+    DLOG_EVERY_N(ERROR, 1000) << "Failed to open " << devSpeedPath;
     return;
   }
   uint64_t speedMbps;
   if (!(ifs >> speedMbps)) {
-    LOG_EVERY_N(ERROR, 10) << "Failed to read " << devSpeedPath;
+    DLOG_EVERY_N(ERROR, 1000) << "Failed to read " << devSpeedPath;
     return;
   }
   netLimitBps_[interface] = speedMbps * 1000 * 1000;
