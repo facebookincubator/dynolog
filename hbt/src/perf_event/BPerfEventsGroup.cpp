@@ -289,6 +289,8 @@ void BPerfEventsGroup::syncGlobal_() const {
     bpf_program__set_autoload(skel_->progs.bperf_unregister_thread, false);
     bpf_program__set_autoload(skel_->progs.bperf_pmu_enable_exit, false);
     bpf_program__set_autoload(skel_->progs.find_perf_events, false);
+    bpf_map__set_autocreate(skel_->maps.per_thread_data, false);
+    bpf_map__set_autocreate(skel_->maps.per_thread_idx, false);
   }
   if (err = bperf_leader_cgroup__load(skel_); err) {
     HBT_LOG_ERROR() << "Failed to load skeleton.";
