@@ -8,6 +8,7 @@
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
 
 #include <glog/logging.h>
+#include <unistd.h>
 #include <fstream>
 #include <mutex>
 #include <set>

@@ -23,3 +23,5 @@ target_link_libraries(dynolog_dcgm_lib PUBLIC gflags::gflags)
 target_link_libraries(dynolog_dcgm_lib PUBLIC glog::glog)
 target_link_libraries(dynolog_dcgm_lib PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(dynolog_dcgm_lib PUBLIC pfs)
+
+add_subdirectory(amd)
