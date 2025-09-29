@@ -67,6 +67,7 @@ class SPSCBenchmark {
   SPSCBenchmark(SPSCBenchmark&&) = delete;
   SPSCBenchmark& operator=(SPSCBenchmark&&) = default;
   SPSCBenchmark& operator=(const SPSCBenchmark&) = delete;
+  ~SPSCBenchmark() = default;
 
   SPSCBenchmark& setProducerCpuSet(const std::vector<unsigned>& cpuSet) {
     producerCpuSet = std::make_unique<TCpuSet>(TCpuSet::makeFromCont(cpuSet));
