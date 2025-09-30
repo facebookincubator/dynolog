@@ -52,7 +52,6 @@ bool RdmaCounters::sampleRdmaCounters(
                    << ": current counter value " << cur_val
                    << " is lower than previous counter value " << prev_val
                    << " thus giving negative delta " << diff;
-        diff = 0;
       } else {
         const auto key = fmt::format(
             "{}.{}",

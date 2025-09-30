@@ -153,7 +153,7 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
 std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
     Granularity gran,
     DataSource dataSource) {
-  int level;
+  int level = 0;
   switch (gran) {
     case Granularity::MINUTE:
       level = IDX_MIN;
@@ -217,7 +217,7 @@ void CPUTimeMonitor::registerAllotment(
     const std::string& allotmentId,
     const std::vector<int64_t>& cpuSet,
     const std::optional<std::string>& path) {
-  if (allotmentId == "" || allotmentId == "host") {
+  if (allotmentId.empty() || allotmentId == "host") {
     LOG(INFO) << "Invalid allotmentId: " << allotmentId;
     return;
   }
@@ -298,7 +298,7 @@ std::optional<uint64_t> CPUTimeMonitor::readCgroupCpuStat(
     return std::nullopt;
   }
 
-  unsigned long long usage;
+  unsigned long long usage = 0;
   int num = sscanf(buf, "%*s %Lu", &usage);
   if (num != 1) {
     LOG(ERROR) << "Error parsing " << path;
@@ -330,15 +330,24 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
     return {};
   }
 
+  errno = 0;
   rewind(fp);
-  fflush(fp);
+  if (errno != 0) {
+    LOG(ERROR) << "Error rewind /proc/stat";
+    return {};
+  }
+  auto res = fflush(fp);
+  if (res != 0) {
+    LOG(ERROR) << "Error fflush /proc/stat";
+    return {};
+  }
 
   auto readIdle = [&]() -> std::optional<uint64_t> {
     if (!fgets(buf, sizeof(buf), fp)) {
       LOG(ERROR) << "Error reading /proc/stat";
       return std::nullopt;
     }
-    unsigned long long idle;
+    unsigned long long idle = 0;
     int num = 0;
     num = sscanf(buf, "%*s %*s %*s %*s %Lu", &idle);
     if (num != 1) {
@@ -357,7 +366,7 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
     return ret;
   }
 
-  int lines = 0;
+  uint64_t lines = 0;
   while (lines < coreCount_) {
     auto perCoreIdle = readIdle();
     if (!perCoreIdle) {

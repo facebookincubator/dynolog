@@ -54,7 +54,7 @@ void PerfMonitor::log(Logger& logger) {
       continue;
     }
     uint64_t time = readValueOpt->getTimeRunning();
-    for (int i = 0; i < eventRefsOpt->size(); i++) {
+    for (size_t i = 0; i < eventRefsOpt->size(); i++) {
       std::string nickname = (*eventRefsOpt)[i].nickname;
       uint64_t count = readValueOpt->getCount(i);
       if (id == "instructions" && nickname == "instructions") {

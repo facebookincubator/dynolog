@@ -86,7 +86,8 @@ std::optional<MetricSeriesVar> MetricFrameMap::series(
   return it->second;
 }
 
-std::optional<MetricSeriesVar> MetricFrameMap::series(const int) const {
+std::optional<MetricSeriesVar> MetricFrameMap::series(
+    const int /*name*/) const {
   return std::nullopt;
 }
 
@@ -156,7 +157,7 @@ size_t MetricFrameVector::width() const {
 }
 
 std::optional<MetricSeriesVar> MetricFrameVector::series(
-    const std::string&) const {
+    const std::string& /*name*/) const {
   return std::nullopt;
 }
 

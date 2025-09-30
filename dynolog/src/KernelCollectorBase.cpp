@@ -38,7 +38,6 @@ KernelCollectorBase::KernelCollectorBase(std::string rootDir)
     : uptime_(readUptime()),
       rootDir_(std::move(rootDir)),
       pfs_(rootDir_ + "/proc"),
-      numCpuSockets_(1), // TODO discover sockets from /proc/cpuinfo
       cpuCoresTotal_(pfs_.get_stat().cpus.per_item.size()),
       filterInteraces_(FLAGS_filter_nic_interfaces) {
   perCoreCpuTime_.resize(cpuCoresTotal_);
@@ -59,7 +58,7 @@ void KernelCollectorBase::readNetworkInfo(const std::string& interface) {
     DLOG_EVERY_N(ERROR, 1000) << "Failed to open " << devSpeedPath;
     return;
   }
-  uint64_t speedMbps;
+  uint64_t speedMbps = 0;
   if (!(ifs >> speedMbps)) {
     DLOG_EVERY_N(ERROR, 1000) << "Failed to read " << devSpeedPath;
     return;
@@ -102,11 +101,11 @@ void KernelCollectorBase::readCpuStats() {
   cpuTime_ = newCpuTime;
 
   // zero out per node calculation
-  for (int node = 0; node < numCpuSockets_; node++) {
+  for (size_t node = 0; node < numCpuSockets_; node++) {
     nodeCpuTime_[node] = CpuTime{};
   }
 
-  int core = 0;
+  uint64_t core = 0;
   for (const auto& cpu : stats.cpus.per_item) {
     if (core >= cpuCoresTotal_) {
       break;

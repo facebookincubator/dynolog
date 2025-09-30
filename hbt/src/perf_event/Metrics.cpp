@@ -41,7 +41,7 @@ std::ostream& operator<<(std::ostream& os, const MetricDesc& desc) {
     }
   }
 
-  if (desc.dives.size()) {
+  if (!desc.dives.empty()) {
     os << "\n  dives=[ ";
     for (const auto& d : desc.dives) {
       os << d << " ";

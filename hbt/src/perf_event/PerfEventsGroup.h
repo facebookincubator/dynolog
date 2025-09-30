@@ -676,8 +676,7 @@ class PerfEventsGroupBase {
     return static_cast<TImpl&>(*this);
   }
 
-  void
-  open_counting_(uint64_t sampling_period, bool pinned, bool thread = false);
+  void open_counting_(uint64_t sample_period, bool pinned, bool thread = false);
   void closeEvents_();
 };
 
@@ -816,7 +815,7 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
   }
 
 #if defined(__i386__) || defined(__x86_64__)
-  inline TimeStamp read_tsc() const noexcept {
+  TimeStamp read_tsc() const noexcept {
     return __rdtsc();
   }
 
@@ -876,7 +875,7 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
 
   void open_(
       size_t num_data_pages,
-      uint64_t sampling_period,
+      uint64_t sample_period,
       bool pinned,
       size_t num_aux_pages);
   int mmap_(int fd);
@@ -1242,8 +1241,7 @@ void PerfEventsGroup<TImpl, TMode>::close() {
 
   this->disable();
 
-  size_t mmap_size;
-  int ret;
+  int ret = 0;
   auto mmap_header =
       static_cast<volatile struct perf_event_mmap_page*>(mmap_base_);
   if (aux_base_) {
@@ -1253,8 +1251,8 @@ void PerfEventsGroup<TImpl, TMode>::close() {
         << " address: " << aux_base_ << " len: " << mmap_header->aux_size;
   }
   aux_base_ = nullptr;
-  mmap_size = page_size_ * (1 + num_data_pages_);
-  ret = ::munmap((void*)mmap_base_, mmap_size);
+  auto mmap_size = page_size_ * (1 + num_data_pages_);
+  ret = ::munmap(mmap_base_, mmap_size);
   HBT_LOG_ERROR_IF(0 > ret)
       << "munmap mmap_base_ error: " << toErrorCode(errno).message()
       << " address: " << mmap_base_ << " len: " << mmap_size;
