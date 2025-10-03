@@ -49,7 +49,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event CPU_CLK_UNHALTED.THREAD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD",
@@ -62,7 +62,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
   // Event CPU_CLK_UNHALTED.REF_TSC is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
@@ -570,7 +569,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       ));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event CPU_CLK_UNHALTED.THREAD_P is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "CPU_CLK_UNHALTED.THREAD_P",
@@ -583,7 +582,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
