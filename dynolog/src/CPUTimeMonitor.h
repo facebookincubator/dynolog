@@ -18,23 +18,38 @@
 namespace facebook::dynolog {
 
 /*
-A monitor class for measuring /proc/stat CPU Time according to periodic ticker
-schedules 100ms, 1s and 60s. Only idle time is measured, from which CPU Cores
-Usage is determined and stored in a MetricFrame (ringbuffer). By default only
-whole-host idle time is sampled, this is significantly less overhead because the
-Kernel appears to not evaluate the per-core lines of /proc/stat unless they are
-read.
+A monitor class for measuring CPU time from multiple data sources according to
+periodic ticker schedules (100ms, 1s, and 60s). CPU usage data is stored in
+MetricFrame ringbuffers for historical analysis.
 
-Allotments are akin to named CPU sets. They can be registered along with an
-optional CPU set. A registered allotment will have its own MetricSeries for each
-granularity 100ms, 1s and 60s. If the CPU set is empty the allotment is assumed
-to be whole-host and will have the same CPU data as host level (albeit with a
-different start time). If the CPU set is non-empty then the entire per-core
-/proc/stat file is parsed and the CPU Cores Usage of the allotment cores is
-determined by aggregation over its CPU set.
+SUPPORTED DATA SOURCES:
+1. /proc/stat CPU Time: Measures system-wide and per-core idle time from which
+   CPU Cores Usage is determined. By default, only whole-host idle time is
+   sampled for lower overhead, as the kernel evaluates per-core lines only
+   when read.
 
-As of July 2025, we began testing a new cgroup-based CPU time monitoringfor more
-accurate measurements of cgroup CPU time usage.
+2. Cgroup CPU Time: Directly measures CPU usage from cgroup cpu.stat files,
+   providing more accurate measurements for containerized workloads and
+   resource-constrained environments.
+
+MONITORING TARGETS:
+The monitor supports tracking various targets, each identified by a unique name:
+
+- Host-level monitoring: Tracks whole-system CPU usage
+- CPU set-based monitoring: Tracks usage of specific CPU cores by parsing
+  per-core /proc/stat data and aggregating over the specified CPU set
+- Cgroup monitoring: Tracks CPU usage of any cgroup by reading its cpu.stat
+  file directly, enabling monitoring of containers, systemd services, or any
+  cgroup hierarchy
+
+Each registered target maintains its own MetricSeries for each granularity
+(100ms, 1s, 60s). Targets can be registered with:
+- A CPU set for /proc/stat-based core-specific monitoring
+- A cgroup path for direct cgroup cpu.stat monitoring
+- Both data sources for comprehensive coverage
+
+The dual data source approach enables accurate monitoring across diverse
+deployment scenarios, from bare-metal systems to containerized environments.
 */
 
 class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
@@ -54,30 +69,30 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   void tick(TMask mask) override;
 
-  void registerAllotment(
-      const std::string& allotmentId,
+  void registerTarget(
+      const std::string& targetId,
       const std::vector<int64_t>& cpuSet,
       const std::optional<std::string>& path = std::nullopt);
 
-  void deRegisterAllotment(const std::string& allotmentId);
+  void deRegisterTarget(const std::string& targetId);
 
   std::optional<double> getAvgCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
-      const std::optional<std::string>& allotmentId = std::nullopt,
+      const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
   virtual std::optional<double> getQuantileCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
       double quantile,
-      const std::optional<std::string>& allotmentId = std::nullopt,
+      const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
   std::vector<double> getRawCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
-      const std::optional<std::string>& allotmentId = std::nullopt,
+      const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
  private:
@@ -91,7 +106,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::optional<double> getStat(
       Granularity gran,
       uint64_t seconds_ago,
-      const std::optional<std::string>& allotmentId,
+      const std::optional<std::string>& targetId,
       Statistic stat,
       double quant,
       DataSource dataSource = DataSource::PROC_STAT);
@@ -118,9 +133,9 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::string const rootDir_;
   uint64_t const coreCount_;
   bool const isUnitTest_;
-  std::map<std::string, std::vector<int64_t>> allotmentToCpuSet_;
-  std::set<std::string> allotmentsNeedPerCore_;
-  std::map<std::string, std::string> allotmentCgroupPaths_;
+  std::map<std::string, std::vector<int64_t>> targetToCpuSet_;
+  std::set<std::string> targetsNeedPerCore_;
+  std::map<std::string, std::string> targetCgroupPaths_;
 
   // Proc stat tracking. Index 0 is minute, 1 is second, 2 is 100ms
   std::array<MetricFrameMap, 3> procUsageMetricFrames_;
