@@ -76,7 +76,11 @@ class RdcRuntimeContextSynchronized {
 
 class RdcWrapper {
  public:
-  RdcWrapper(std::vector<rdc_field_t> enabledMetrics);
+  RdcWrapper(
+      std::vector<rdc_field_t> enabledMetrics,
+      std::chrono::milliseconds updateInterval,
+      std::chrono::seconds maxKeepAge,
+      int maxKeepSamples);
   ~RdcWrapper();
   void init(std::vector<rdc_field_t> enabledMetrics);
   void clean();
@@ -95,6 +99,10 @@ class RdcWrapper {
   void initPartition_(RdcRuntimeContext& context);
 
   RdcRuntimeContextSynchronized context_;
+
+  const std::chrono::milliseconds updateInterval_;
+  const std::chrono::seconds maxKeepAge_;
+  const int maxKeepSamples_;
 };
 
 } // namespace gpumon

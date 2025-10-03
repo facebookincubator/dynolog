@@ -38,19 +38,18 @@ const std::set<rdc_field_t> kPartitionSupportedMetrics = {
 #endif
 };
 
-// how often RDC should query from underlying sources (amd-smi, rocprofiler...)
-constexpr std::chrono::milliseconds kUpdateInterval{500};
-// how long the buffer should be to keep historical data, since kMaxKeepSamples
-// == 1, this should of no use when sufficiently large
-constexpr std::chrono::seconds kMaxKeepAge{2};
-// how many sample to keep in the RDC cache, we only use the latest value
-constexpr int kMaxKeepSamples = 2;
-
 // check the RDC API reference
 // https://rocm.docs.amd.com/projects/rdc/en/docs-6.4.2/reference/api_ref.html
 // for more information
 
-RdcWrapper::RdcWrapper(std::vector<rdc_field_t> enabledMetrics) {
+RdcWrapper::RdcWrapper(
+    std::vector<rdc_field_t> enabledMetrics,
+    std::chrono::milliseconds updateInterval,
+    std::chrono::seconds maxKeepAge,
+    const int maxKeepSamples)
+    : updateInterval_{updateInterval},
+      maxKeepAge_{maxKeepAge},
+      maxKeepSamples_{maxKeepSamples} {
   auto contextWlocked = context_.wlock();
   init_(std::move(enabledMetrics), contextWlocked);
 }
@@ -259,13 +258,17 @@ void RdcWrapper::initGpu_(RdcRuntimeContext& context) {
         std::to_string(result));
   }
   // start collecting metrics
+  LOG(INFO) << "start device metrics watch with updateInterval "
+            << updateInterval_.count() << "ms and maxKeepAge "
+            << maxKeepAge_.count() << "s and maxKeepSamples "
+            << maxKeepSamples_;
   result = rdc_field_watch(
       context.rdcHandle_,
       context.gpuGroupId_,
       context.fieldGroupId_,
-      std::chrono::microseconds(kUpdateInterval).count(),
-      std::chrono::seconds(kMaxKeepAge).count(),
-      kMaxKeepSamples);
+      std::chrono::microseconds(updateInterval_).count(),
+      std::chrono::seconds(maxKeepAge_).count(),
+      maxKeepSamples_);
   if (result != RDC_ST_OK) {
     throw std::runtime_error(
         "rdc_field_watch() failed on GPU group with error code: " +
@@ -318,13 +321,17 @@ void RdcWrapper::initPartition_(RdcRuntimeContext& context) {
         "rdc_group_field_create() failed when creating partition field group with error code: " +
         std::to_string(result));
   }
+  LOG(INFO) << "start partition metrics watch with updateInterval "
+            << updateInterval_.count() << "ms and maxKeepAge "
+            << maxKeepAge_.count() << "s and maxKeepSamples "
+            << maxKeepSamples_;
   result = rdc_field_watch(
       context.rdcHandle_,
       context.partitionGroupId_,
       context.partitionFieldGroupId_,
-      std::chrono::microseconds(kUpdateInterval).count(),
-      std::chrono::seconds(kMaxKeepAge).count(),
-      kMaxKeepSamples);
+      std::chrono::microseconds(updateInterval_).count(),
+      std::chrono::seconds(maxKeepAge_).count(),
+      maxKeepSamples_);
   if (result != RDC_ST_OK) {
     throw std::runtime_error(
         "rdc_field_watch() failed on partition group with error code: " +
