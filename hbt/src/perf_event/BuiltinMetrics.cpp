@@ -2069,6 +2069,54 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
       System::Permissions{},
       std::vector<std::string>{}));
 
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_UOPS_RETIRED_SLOTS",
+      "Number of micro-operations retirement slots used each cycle.",
+      "Counts the retirement slots used each cycle. Modern Intel cores are superscalar, meaning they can retire multiple uops simultaneously in a single clock cycle.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uops_retired",
+               PmuType::cpu,
+               "UOPS_RETIRED.SLOTS",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_UOPS_ISSUED",
+      "Number of micro-operations issued.",
+      "Counts the number of micro-operations (uops) that the Resource Allocation Table (RAT) issues to the Reservation Station (RS).",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "uops_issued",
+               PmuType::cpu,
+               "UOPS_ISSUED.ANY",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_CORE_RECOVERY_CYCLES",
+      "Core recovery cycles.",
+      "Counts core cycles when the Resource allocator was stalled due to recovery from an earlier branch misprediction or machine clear event.",
+      std::map<TOptCpuArch, EventRefs>{
+          {std::nullopt,
+           EventRefs{EventRef{
+               "recovery_cycles",
+               PmuType::cpu,
+               "INT_MISC.RECOVERY_CYCLES",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
   // CPU_CLK_UNHALTED.THREAD_P_ANY no longer available on ICL+
   // CPU_CLK_UNHALTED.THREAD's encoding does not work for some reason, see
   // https://pxl.cl/6406M
