@@ -75,7 +75,7 @@ int cgroup_update_level = 0;
 
 static __always_inline __u64 event_prev_count(struct perf_event *event) {
   /*
-   * X86 perf event counter is fixed to be 48 bits (x86_pmu.cntval_bits). 
+   * X86 perf event counter is fixed to be 48 bits (x86_pmu.cntval_bits).
    * arch/x86/events/core.c?lines=121
    * TODO: verify this for aarch64 architecture
    */
@@ -147,7 +147,7 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
     return;
 
   /* if next is not NULL
-   * update_task_output is called during a context switch 
+   * update_task_output is called during a context switch
    */
   next_data = get_bperf_thread_data(next->pid);
   if (!next_data)
@@ -305,6 +305,7 @@ __u32 per_thread_data_id; /* map id of per_thread_data */
 SEC("fentry/array_map_mmap")
 int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   struct bperf_thread_data *data;
+  int res;
   __u32 map_id = map->id;
   __u32 tid;
   __u32 idx;
@@ -322,13 +323,14 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
     return 0;
 
   data = bpf_map_lookup_elem(&per_thread_data, &idx);
-  if (!data)
+  if (!data) {
     return 0;
+  }
 
   bperf_thread_data_init(data);
 
   tid = bpf_get_current_pid_tgid() & 0xffffffff;
-  bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
+  res = bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
   task = bpf_get_current_task_btf();
   bperf_leader_prog(task, task);
   return 0;

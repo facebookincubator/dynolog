@@ -23,7 +23,10 @@ struct BPerfThreadData {
 
 class BPerfPerThreadReader {
  public:
-  BPerfPerThreadReader(std::string pin_name, int event_cnt);
+  BPerfPerThreadReader(
+      std::string pin_name,
+      const std::vector<std::filesystem::path>& bpf_pinned_map_dirs,
+      int event_cnt);
   ~BPerfPerThreadReader();
   int read(struct BPerfThreadData* data);
   int enable();
@@ -41,6 +44,7 @@ class BPerfPerThreadReader {
   struct bperf_perf_event_data* event_data_[BPERF_MAX_GROUP_SIZE] = {nullptr};
   int data_fd_ = -1;
   const std::string pin_name_;
+  const std::vector<std::filesystem::path> bpf_pinned_map_dirs_;
   __s64 initial_clock_drift_ = 0;
   int event_cnt_ = -1;
   int data_size_ = 0;
