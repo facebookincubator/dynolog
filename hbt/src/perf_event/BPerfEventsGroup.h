@@ -21,8 +21,8 @@ namespace facebook::hbt::perf_event {
 
 class BPerfEventsGroup {
  public:
-  static std::string perThreadArrayMapPath(const std::string& n);
-  static std::string perThreadIndexMapPath(const std::string& n);
+  static std::string perThreadArrayMapFileName(const std::string& n);
+  static std::string perThreadIndexMapFileName(const std::string& n);
 
   using ReadValues = GroupReadValues<mode::Counting>;
   ///
@@ -31,13 +31,15 @@ class BPerfEventsGroup {
       const EventConfs& confs,
       int cgroup_update_level,
       bool support_per_thread = false,
-      const std::string& pin_name = "");
+      const std::string& pin_name = "",
+      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/");
   BPerfEventsGroup(
       const MetricDesc& metric,
       const PmuDeviceManager& pmu_manager,
       int cgroup_update_level,
       bool support_per_thread = false,
-      const std::string& pin_name = "");
+      const std::string& pin_name = "",
+      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/");
 
   ~BPerfEventsGroup();
 
@@ -142,6 +144,7 @@ class BPerfEventsGroup {
   // For per thread monitoring
   bool per_thread_;
   const std::string pin_name_;
+  const std::filesystem::path bpf_pinned_map_dir_;
 
   int pinThreadMaps_(bperf_leader_cgroup* skel);
   int preparePerThreadBPerf_(bperf_leader_cgroup* skel);
