@@ -96,7 +96,7 @@ static void bperf_thread_data_init(struct bperf_thread_data *data) {
 }
 
 int __always_inline bperf_perf_event_index(struct perf_event *event);
-__always_inline struct bperf_thread_data* get_bperf_thread_data(int pid);
+__always_inline struct bperf_thread_data* get_bperf_thread_data(struct task_struct *task);
 static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data);
 
 static void add_diff_to_task_accumulate(struct bpf_perf_event_value* diff_val, struct bperf_thread_data *data, __u64 now) {
@@ -138,7 +138,7 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
   struct bperf_thread_data *prev_data, *next_data;
   __u64 now;
 
-  prev_data = get_bperf_thread_data(prev->pid);
+  prev_data = get_bperf_thread_data(prev);
   now = bpf_ktime_get_ns();
   if (prev_data) {
     add_diff_to_task_accumulate(diff_val, prev_data, now);
@@ -149,7 +149,7 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
   /* if next is not NULL
    * update_task_output is called during a context switch
    */
-  next_data = get_bperf_thread_data(next->pid);
+  next_data = get_bperf_thread_data(next);
   if (!next_data)
     return;
   update_task_offset(next_data, now);
@@ -258,10 +258,10 @@ int BPF_PROG(bperf_read_trigger) {
  * mmapped area.
  */
 struct {
-  __uint(type, BPF_MAP_TYPE_HASH);
-  __uint(key_size, sizeof(int)); /* pid */
-  __uint(value_size, sizeof(int)); /* idx in per_thread_data */
-  __uint(max_entries, BPERF_MAX_THREAD_READER);
+  __uint(type, BPF_MAP_TYPE_TASK_STORAGE);
+  __uint(map_flags, BPF_F_NO_PREALLOC);
+  __type(key, int);
+  __type(value, idx_t);
 } per_thread_idx SEC(".maps");
 
 #define BPERF_MAX_THREAD_DATA_SIZE (sizeof(struct bperf_thread_data) + \
@@ -310,8 +310,16 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   __u32 idx;
   __u64 now;
   struct task_struct *task;
+  idx_t *task_idx;
 
   if (map_id != per_thread_data_id)
+    return 0;
+
+  task = bpf_get_current_task_btf();
+
+  task_idx = bpf_task_storage_get(&per_thread_idx, task, 0, 0);
+  if (task_idx)
+    // this thread has already been registered
     return 0;
 
   bpf_spin_lock(&idx_allocator_lock);
@@ -327,9 +335,10 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
 
   bperf_thread_data_init(data);
 
-  tid = bpf_get_current_pid_tgid() & 0xffffffff;
-  bpf_map_update_elem(&per_thread_idx, &tid, &idx, BPF_ANY);
-  task = bpf_get_current_task_btf();
+  task_idx = bpf_task_storage_get(&per_thread_idx, task, 0, BPF_LOCAL_STORAGE_GET_F_CREATE);
+  if (!task_idx)
+    return 0;
+  *task_idx = idx;
   bperf_leader_prog(task, task);
   return 0;
 }
@@ -340,19 +349,18 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
   struct bpf_map *map = bpf_core_cast(vma->vm_file->private_data,
                                       struct bpf_map);
   __u32 map_id = map->id;
-  __u32 tid;
-  __u32 *idx;
+  idx_t *idx;
+  struct task_struct *task;
 
   if (map_id != per_thread_data_id)
     return 0;
 
-  tid = bpf_get_current_pid_tgid() & 0xffffffff;
-
-  idx = bpf_map_lookup_elem(&per_thread_idx, &tid);
+  task = bpf_get_current_task_btf();
+  idx = bpf_task_storage_get(&per_thread_idx, task, 0, 0);
   if (!idx)
     return 0;
 
-  bpf_map_delete_elem(&per_thread_idx, &tid);
+  bpf_task_storage_delete(&per_thread_idx, task);
 
   bpf_spin_lock(&idx_allocator_lock);
   reclaim_idx(*idx);
@@ -446,15 +454,17 @@ int __always_inline bperf_perf_event_index(struct perf_event *event) {
 #endif
 }
 
-__always_inline struct bperf_thread_data* get_bperf_thread_data(int pid) {
-  int *idx;
+__always_inline struct bperf_thread_data* get_bperf_thread_data(struct task_struct* task) {
+  idx_t *idx;
   struct bperf_thread_data *data;
 
-  idx = bpf_map_lookup_elem(&per_thread_idx, &pid);
+  if (!task)
+    return NULL;
+  idx = bpf_task_storage_get(&per_thread_idx, task, 0, 0);
   if (!idx)
     return NULL;
-
-  return bpf_map_lookup_elem(&per_thread_data, idx);
+  int task_idx = *idx;
+  return bpf_map_lookup_elem(&per_thread_data, &task_idx);
 }
 
 int leader_pid = 0;
@@ -498,16 +508,14 @@ int find_perf_events(struct bpf_iter__task_file *ctx) {
 static int __always_inline _pmu_enable_exit(struct pmu *pmu)
 {
   struct bperf_thread_data *data;
-  int i, pid;
+  int i;
   struct task_struct *task;
 
-  pid = bpf_get_current_pid_tgid() & 0xffffffff;
-
-  data = get_bperf_thread_data(pid);
+  task = bpf_get_current_task_btf();
+  data = get_bperf_thread_data(task);
   if (!data)
     return 0;
 
-  task = bpf_get_current_task_btf();
   bperf_leader_prog(task, task);
   return 0;
 }
