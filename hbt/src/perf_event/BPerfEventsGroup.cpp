@@ -60,11 +60,13 @@ BPerfEventsGroup::BPerfEventsGroup(
     const EventConfs& confs,
     int cgroup_update_level,
     bool support_per_thread,
-    const std::string& pin_name)
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir)
     : confs_(confs),
       cgroup_update_level_(cgroup_update_level),
       per_thread_(support_per_thread),
-      pin_name_(pin_name) {
+      pin_name_(pin_name),
+      bpf_pinned_map_dir_(bpf_pinned_map_dir) {
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
         .size = sizeof(attr),
@@ -84,12 +86,14 @@ BPerfEventsGroup::BPerfEventsGroup(
     const PmuDeviceManager& pmu_manager,
     int cgroup_update_level,
     bool support_per_thread,
-    const std::string& pin_name)
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir)
     : BPerfEventsGroup(
           metric.makeNoCpuTopologyConfs(pmu_manager),
           cgroup_update_level,
           support_per_thread,
-          pin_name) {}
+          pin_name,
+          bpf_pinned_map_dir) {}
 inline ino_t mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
@@ -193,17 +197,17 @@ void BPerfEventsGroup::close() {
   opened_ = false;
 }
 
-std::string BPerfEventsGroup::perThreadArrayMapPath(const std::string& n) {
+std::string BPerfEventsGroup::perThreadArrayMapFileName(const std::string& n) {
   std::stringstream ss;
 
-  ss << "/sys/fs/bpf/bperf_per_thread_array_" << n;
+  ss << "bperf_per_thread_array_" << n;
   return ss.str();
 }
 
-std::string BPerfEventsGroup::perThreadIndexMapPath(const std::string& n) {
+std::string BPerfEventsGroup::perThreadIndexMapFileName(const std::string& n) {
   std::stringstream ss;
 
-  ss << "/sys/fs/bpf/bperf_per_thread_index_" << n;
+  ss << "bperf_per_thread_index_" << n;
   return ss.str();
 }
 
@@ -315,7 +319,8 @@ void BPerfEventsGroup::syncGlobal_() const {
 
 int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
   int err, map_fd;
-  auto path = BPerfEventsGroup::perThreadIndexMapPath(pin_name_);
+  auto path = bpf_pinned_map_dir_ /
+      BPerfEventsGroup::perThreadIndexMapFileName(pin_name_);
 
   map_fd = ::bpf_map__fd(skel->maps.per_thread_idx);
   ::unlink(path.c_str());
@@ -324,14 +329,27 @@ int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
                       << "Error: " << toErrorCode(-err).message();
     return -1;
   }
+  if (err = ::chmod(
+          path.c_str(),
+          S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+      err) {
+    HBT_LOG_WARNING() << "Failed to chmod the map at " << path << ". ";
+  }
 
-  path = BPerfEventsGroup::perThreadArrayMapPath(pin_name_);
+  path = bpf_pinned_map_dir_ /
+      BPerfEventsGroup::perThreadArrayMapFileName(pin_name_);
   map_fd = ::bpf_map__fd(skel->maps.per_thread_data);
   ::unlink(path.c_str());
   if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
     HBT_LOG_WARNING() << "Someone pinned the map at " << path << ". "
                       << "Error: " << toErrorCode(-err).message();
     return -1;
+  }
+  if (err = ::chmod(
+          path.c_str(),
+          S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+      err) {
+    HBT_LOG_WARNING() << "Failed to chmod the map at " << path << ". ";
   }
   return 0;
 }
