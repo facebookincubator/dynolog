@@ -75,7 +75,7 @@ int cgroup_update_level = 0;
 
 static __always_inline __u64 event_prev_count(struct perf_event *event) {
   /*
-   * X86 perf event counter is fixed to be 48 bits (x86_pmu.cntval_bits). 
+   * X86 perf event counter is fixed to be 48 bits (x86_pmu.cntval_bits).
    * arch/x86/events/core.c?lines=121
    * TODO: verify this for aarch64 architecture
    */
@@ -147,7 +147,7 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
     return;
 
   /* if next is not NULL
-   * update_task_output is called during a context switch 
+   * update_task_output is called during a context switch
    */
   next_data = get_bperf_thread_data(next->pid);
   if (!next_data)

@@ -10,8 +10,13 @@
 
 namespace facebook::hbt::perf_event {
 
-BPerfPerThreadReader::BPerfPerThreadReader(std::string pin_name, int event_cnt)
-    : pin_name_(std::move(pin_name)), event_cnt_(event_cnt) {}
+BPerfPerThreadReader::BPerfPerThreadReader(
+    std::string pin_name,
+    const std::vector<std::filesystem::path>& bpf_pinned_map_dirs,
+    int event_cnt)
+    : pin_name_(std::move(pin_name)),
+      bpf_pinned_map_dirs_(bpf_pinned_map_dirs),
+      event_cnt_(event_cnt) {}
 
 static __u64 getRefMonoTime(void) {
   struct timespec ts;
@@ -39,7 +44,7 @@ int BPerfPerThreadReader::getDataSize_() {
 
 int BPerfPerThreadReader::enable() {
   struct perf_event_attr attr;
-  int idx_fd, tid, idx = 0, err;
+  int idx_fd = -1, tid, idx = 0, err;
   struct bperf_thread_metadata* metadata;
   struct BPerfThreadData data;
 
@@ -47,10 +52,23 @@ int BPerfPerThreadReader::enable() {
     return 0;
   }
 
-  idx_fd =
-      ::bpf_obj_get(BPerfEventsGroup::perThreadIndexMapPath(pin_name_).c_str());
-  data_fd_ =
-      ::bpf_obj_get(BPerfEventsGroup::perThreadArrayMapPath(pin_name_).c_str());
+  // use a list of directories to find if desired per-thread bpf map
+  for (const auto& bpf_pinned_map_dir : bpf_pinned_map_dirs_) {
+    idx_fd =
+        ::bpf_obj_get((bpf_pinned_map_dir /
+                       BPerfEventsGroup::perThreadIndexMapFileName(pin_name_))
+                          .c_str());
+    data_fd_ =
+        ::bpf_obj_get((bpf_pinned_map_dir /
+                       BPerfEventsGroup::perThreadArrayMapFileName(pin_name_))
+                          .c_str());
+
+    if (idx_fd >= 0 && data_fd_ >= 0) {
+      break;
+    }
+    close(idx_fd);
+    close(data_fd_);
+  }
 
   if (idx_fd < 0 || data_fd_ < 0) {
     HBT_LOG_ERROR() << "cannot open fds " << idx_fd << " " << data_fd_;
@@ -81,7 +99,7 @@ int BPerfPerThreadReader::enable() {
   err = ::bpf_map_lookup_elem(idx_fd, &tid, &idx);
 
   if (err != 0) {
-    HBT_LOG_ERROR() << "cannot lookup the idx ";
+    HBT_LOG_ERROR() << "cannot lookup the idx: " << err;
     goto error;
   }
 

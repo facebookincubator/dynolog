@@ -20,8 +20,10 @@ using namespace facebook::hbt::perf_event;
 namespace {
 
 std::shared_ptr<BPerfPerThreadReader> createReader(void) {
-  auto reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
-  auto second_reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
+  std::vector<std::filesystem::path> paths = {"/sys/fs/bpf/"};
+  auto reader = std::make_shared<BPerfPerThreadReader>("cycles", paths, 1);
+  auto second_reader =
+      std::make_shared<BPerfPerThreadReader>("cycles", paths, 1);
 
   EXPECT_EQ(reader->enable(), 0);
   // second_read will fail to enable
@@ -277,7 +279,8 @@ std::atomic<int> failed = 0;
 
 // A even simpler workload just for verifying we can create enough readers
 void emptyReaderThread() {
-  auto reader = std::make_shared<BPerfPerThreadReader>("cycles", 1);
+  std::vector<std::filesystem::path> paths = {"/sys/fs/bpf/"};
+  auto reader = std::make_shared<BPerfPerThreadReader>("cycles", paths, 1);
   int res = reader->enable();
   if (res != 0) {
     failed += 1;
