@@ -91,6 +91,9 @@ class PmuDevice {
 
   PmuDevice(const PmuDevice&) = delete;
   PmuDevice(PmuDevice&&) = delete;
+  PmuDevice& operator=(const PmuDevice&) = delete;
+  PmuDevice& operator=(PmuDevice&&) = delete;
+  ~PmuDevice() = default;
 
   auto getName() const noexcept {
     return pmu_name_;
