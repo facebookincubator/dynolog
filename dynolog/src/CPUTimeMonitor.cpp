@@ -55,7 +55,7 @@ CPUTimeMonitor::CPUTimeMonitor(
       cgroupUsageMetricFrames_(createMetricFrameArray()) {
   std::unique_lock lock(dataLock_);
 
-  allotmentToCpuSet_["host"] = {};
+  targetToCpuSet_["host"] = {};
   for (auto& frame : procUsageMetricFrames_) {
     frame.addSeries(
         "host",
@@ -69,14 +69,14 @@ CPUTimeMonitor::CPUTimeMonitor(
               frame.maxLength(), "host", ""));
     }
     // Set host cgroup path to system root cgroup
-    allotmentCgroupPaths_["host"] = kHostCgroupPath;
+    targetCgroupPaths_["host"] = kHostCgroupPath;
   }
 }
 
 std::optional<double> CPUTimeMonitor::getStat(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
-    const std::optional<std::string>& allotmentId,
+    const std::optional<std::string>& targetId,
     Statistic stat,
     double quant,
     DataSource dataSource) {
@@ -90,7 +90,7 @@ std::optional<double> CPUTimeMonitor::getStat(
   if (slice == std::nullopt) {
     return std::nullopt;
   }
-  std::string key = allotmentId.value_or("host");
+  std::string key = targetId.value_or("host");
   auto series = slice->series<double>(key);
   if (series == std::nullopt || series->size() == 0) {
     return std::nullopt;
@@ -106,31 +106,25 @@ std::optional<double> CPUTimeMonitor::getStat(
 std::optional<double> CPUTimeMonitor::getAvgCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
-    const std::optional<std::string>& allotmentId,
+    const std::optional<std::string>& targetId,
     DataSource dataSource) {
-  return getStat(
-      gran, seconds_ago, allotmentId, Statistic::AVG, 0.0, dataSource);
+  return getStat(gran, seconds_ago, targetId, Statistic::AVG, 0.0, dataSource);
 }
 
 std::optional<double> CPUTimeMonitor::getQuantileCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
     double quantile,
-    const std::optional<std::string>& allotmentId,
+    const std::optional<std::string>& targetId,
     DataSource dataSource) {
   return getStat(
-      gran,
-      seconds_ago,
-      allotmentId,
-      Statistic::QUANTILE,
-      quantile,
-      dataSource);
+      gran, seconds_ago, targetId, Statistic::QUANTILE, quantile, dataSource);
 }
 
 std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
     CPUTimeMonitor::Granularity gran,
     uint64_t seconds_ago,
-    const std::optional<std::string>& allotmentId,
+    const std::optional<std::string>& targetId,
     DataSource dataSource) {
   TimePoint now = std::chrono::steady_clock::now();
   std::shared_lock lock(dataLock_);
@@ -142,7 +136,7 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
   if (slice == std::nullopt) {
     return {};
   }
-  std::string key = allotmentId.value_or("host");
+  std::string key = targetId.value_or("host");
   auto series = slice->series<double>(key);
   if (series == std::nullopt || series->size() == 0) {
     return {};
@@ -176,18 +170,17 @@ std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
 
 void CPUTimeMonitor::tick(TMask mask) {
   TimePoint tickTime = std::chrono::steady_clock::now();
-  std::vector<uint64_t> idleTime =
-      readProcStat(!allotmentsNeedPerCore_.empty());
+  std::vector<uint64_t> idleTime = readProcStat(!targetsNeedPerCore_.empty());
   TimePoint measureTime = std::chrono::steady_clock::now();
 
   std::map<std::string, std::tuple<TimePoint, uint64_t>> cgroupCpuStats;
   if (readCgroupStat_) {
     std::shared_lock lock(dataLock_);
-    for (const auto& [allotmentId, path] : allotmentCgroupPaths_) {
+    for (const auto& [targetId, path] : targetCgroupPaths_) {
       auto usage = readCgroupCpuStat(path);
       if (usage.has_value()) {
         cgroupCpuStats.emplace(
-            allotmentId,
+            targetId,
             std::make_tuple(std::chrono::steady_clock::now(), usage.value()));
       }
     }
@@ -213,16 +206,15 @@ void CPUTimeMonitor::tick(TMask mask) {
   }
 }
 
-void CPUTimeMonitor::registerAllotment(
-    const std::string& allotmentId,
+void CPUTimeMonitor::registerTarget(
+    const std::string& targetId,
     const std::vector<int64_t>& cpuSet,
     const std::optional<std::string>& path) {
-  if (allotmentId.empty() || allotmentId == "host") {
-    LOG(INFO) << "Invalid allotmentId: " << allotmentId;
+  if (targetId.empty() || targetId == "host") {
+    LOG(INFO) << "Invalid targetId: " << targetId;
     return;
   }
-  LOG(INFO) << "Register allotment, allotmentId: " << allotmentId
-            << ", cpuSet: "
+  LOG(INFO) << "Register target, targetId: " << targetId << ", cpuSet: "
             << std::accumulate(
                    cpuSet.begin(),
                    cpuSet.end(),
@@ -233,52 +225,51 @@ void CPUTimeMonitor::registerAllotment(
             << ", path: " << path.value_or("(none)");
   {
     std::shared_lock lock(dataLock_);
-    if (allotmentToCpuSet_.find(allotmentId) != allotmentToCpuSet_.end()) {
-      LOG(INFO) << "Allotment is already registered, allotmentId: "
-                << allotmentId;
+    if (targetToCpuSet_.find(targetId) != targetToCpuSet_.end()) {
+      LOG(INFO) << "Target is already registered, targetId: " << targetId;
       return;
     }
   }
   std::unique_lock lock(dataLock_);
-  allotmentToCpuSet_[allotmentId] = cpuSet;
+  targetToCpuSet_[targetId] = cpuSet;
   if (!cpuSet.empty()) {
-    allotmentsNeedPerCore_.insert(allotmentId);
+    targetsNeedPerCore_.insert(targetId);
   }
   for (auto& frame : procUsageMetricFrames_) {
     frame.addSeries(
-        allotmentId,
+        targetId,
         std::make_shared<MetricSeries<double>>(
-            frame.maxLength(), allotmentId, ""));
+            frame.maxLength(), targetId, ""));
   }
   for (auto& frame : cgroupUsageMetricFrames_) {
     frame.addSeries(
-        allotmentId,
+        targetId,
         std::make_shared<MetricSeries<double>>(
-            frame.maxLength(), allotmentId, ""));
+            frame.maxLength(), targetId, ""));
   }
   if (path.has_value()) {
-    allotmentCgroupPaths_[allotmentId] = path.value();
+    targetCgroupPaths_[targetId] = path.value();
   }
 }
 
-void CPUTimeMonitor::deRegisterAllotment(const std::string& allotmentId) {
-  LOG(INFO) << "Deregister allotment, allotmentId: " << allotmentId;
+void CPUTimeMonitor::deRegisterTarget(const std::string& targetId) {
+  LOG(INFO) << "Deregister target, targetId: " << targetId;
   std::unique_lock lock(dataLock_);
-  allotmentToCpuSet_.erase(allotmentId);
-  allotmentsNeedPerCore_.erase(allotmentId);
+  targetToCpuSet_.erase(targetId);
+  targetsNeedPerCore_.erase(targetId);
   for (auto& last : procCpuTimeLast_) {
-    last.erase(allotmentId);
+    last.erase(targetId);
   }
   for (auto& last : cgroupUsageLast_) {
-    last.erase(allotmentId);
+    last.erase(targetId);
   }
   for (auto& frame : procUsageMetricFrames_) {
-    frame.eraseSeries(allotmentId);
+    frame.eraseSeries(targetId);
   }
   for (auto& frame : cgroupUsageMetricFrames_) {
-    frame.eraseSeries(allotmentId);
+    frame.eraseSeries(targetId);
   }
-  allotmentCgroupPaths_.erase(allotmentId);
+  targetCgroupPaths_.erase(targetId);
 }
 
 std::optional<uint64_t> CPUTimeMonitor::readCgroupCpuStat(
@@ -392,7 +383,7 @@ void CPUTimeMonitor::processProcUsage(
   auto& lastTickTime = procTimeLast_[level];
   MapSamplesT line;
 
-  for (const auto& [allotmentId, cpuSet] : allotmentToCpuSet_) {
+  for (const auto& [targetId, cpuSet] : targetToCpuSet_) {
     uint64_t newVal = idleTime[0];
     uint64_t coreCount = coreCount_;
     if (!cpuSet.empty()) {
@@ -402,14 +393,14 @@ void CPUTimeMonitor::processProcUsage(
       }
       coreCount = cpuSet.size();
     }
-    if (lastCpuTime.find(allotmentId) == lastCpuTime.end()) {
-      lastCpuTime[allotmentId] = newVal;
+    if (lastCpuTime.find(targetId) == lastCpuTime.end()) {
+      lastCpuTime[targetId] = newVal;
       continue;
     }
-    uint64_t lastVal = lastCpuTime[allotmentId];
+    uint64_t lastVal = lastCpuTime[targetId];
     uint64_t idleDelta =
         (newVal - lastVal) * 10; // /proc/stat reports in 10ms, convert to ms
-    lastCpuTime[allotmentId] = newVal;
+    lastCpuTime[targetId] = newVal;
 
     uint64_t wallDelta = std::chrono::duration_cast<std::chrono::milliseconds>(
                              measureTime - lastTickTime)
@@ -432,8 +423,7 @@ void CPUTimeMonitor::processProcUsage(
       // log on major tick only to avoid spam
       if (TTicker::is_major_tick(mask)) {
         LOG(ERROR) << "Invalid CPU cores usage at level: " << level
-                   << " allotmentId: " << allotmentId
-                   << " wallDelta: " << wallDelta
+                   << " targetId: " << targetId << " wallDelta: " << wallDelta
                    << " CPUCoresUsage: " << CPUCoresUsage
                    << " idleDelta: " << idleDelta << " newVal: " << newVal
                    << " lastVal: " << lastVal << " coreCount: " << coreCount
@@ -449,7 +439,7 @@ void CPUTimeMonitor::processProcUsage(
       continue;
     }
 
-    line.emplace_back(allotmentId, CPUCoresUsage);
+    line.emplace_back(targetId, CPUCoresUsage);
   }
   if (!line.empty()) {
     frame.addSamples(line, tickTime);
@@ -472,19 +462,19 @@ void CPUTimeMonitor::processCgroupUsage(
   auto& lastTime = cgroupTimeLast_[level];
   MapSamplesT line;
 
-  for (const auto& [allotmentId, cpuStat] : cgroupCpuStats) {
+  for (const auto& [targetId, cpuStat] : cgroupCpuStats) {
     auto [readTime, newUsage] = cpuStat;
-    if (lastUsage.find(allotmentId) == lastUsage.end() ||
-        lastTime.find(allotmentId) == lastTime.end()) {
-      lastUsage[allotmentId] = newUsage;
-      lastTime[allotmentId] = readTime;
+    if (lastUsage.find(targetId) == lastUsage.end() ||
+        lastTime.find(targetId) == lastTime.end()) {
+      lastUsage[targetId] = newUsage;
+      lastTime[targetId] = readTime;
       continue;
     }
 
-    uint64_t oldUsage = lastUsage[allotmentId];
-    TimePoint oldTime = lastTime[allotmentId];
-    lastUsage[allotmentId] = newUsage;
-    lastTime[allotmentId] = readTime;
+    uint64_t oldUsage = lastUsage[targetId];
+    TimePoint oldTime = lastTime[targetId];
+    lastUsage[targetId] = newUsage;
+    lastTime[targetId] = readTime;
 
     uint64_t wallDelta = std::chrono::duration_cast<std::chrono::microseconds>(
                              readTime - oldTime)
@@ -502,8 +492,7 @@ void CPUTimeMonitor::processCgroupUsage(
       // log on major tick only to avoid spam
       if (TTicker::is_major_tick(mask)) {
         LOG(ERROR) << "Invalid cgroup usage at level: " << level
-                   << " allotmentId: " << allotmentId
-                   << " wallDelta: " << wallDelta
+                   << " targetId: " << targetId << " wallDelta: " << wallDelta
                    << " cgroupUsage: " << cgroupUsage
                    << " newUsage: " << newUsage << " oldUsage: " << oldUsage
                    << " coreCount: " << coreCount_;
@@ -511,7 +500,7 @@ void CPUTimeMonitor::processCgroupUsage(
       continue;
     }
 
-    line.emplace_back(allotmentId, cgroupUsage);
+    line.emplace_back(targetId, cgroupUsage);
   }
   if (!line.empty()) {
     frame.addSamples(line, tickTime);

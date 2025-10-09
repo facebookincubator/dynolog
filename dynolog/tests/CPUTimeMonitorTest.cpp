@@ -72,12 +72,12 @@ TEST_F(CPUTimeMonitorTest, testProcStat) {
 }
 
 TEST_F(CPUTimeMonitorTest, testCgroupCpuStat) {
-  std::string allotmentPath("/sys/fs/cgroup");
-  auto cpuUsage = readCgroupCpuStat(allotmentPath);
+  std::string targetPath("/sys/fs/cgroup");
+  auto cpuUsage = readCgroupCpuStat(targetPath);
   EXPECT_NE(cpuUsage, std::nullopt);
 }
 // Test the tick function
-TEST_F(CPUTimeMonitorTest, testAllotment) {
+TEST_F(CPUTimeMonitorTest, testTarget) {
   auto now = std::chrono::steady_clock::now();
   monitor->tick(major_tick_60s);
   EXPECT_EQ(procCPUTimeLast_()[0]["host"], allCoresReference[0]);
@@ -102,7 +102,7 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 1);
   EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 1);
 
-  auto checkStats = [&](const std::optional<std::string>& allotmentId =
+  auto checkStats = [&](const std::optional<std::string>& targetId =
                             std::nullopt,
                         double expected = coreCount) {
     for (int i = 0; i < 2; i++) {
@@ -110,7 +110,7 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
       EXPECT_NEAR(
           procCPUTimeMetricFrames_()[i]
               .slice(now, now + 60s)
-              ->series<double>(allotmentId.value_or("host"))
+              ->series<double>(targetId.value_or("host"))
               ->avg<double>(),
           expected,
           0.1);
@@ -118,34 +118,34 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
 
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            CPUTimeMonitor::Granularity::MINUTE, 60, allotmentId),
+            CPUTimeMonitor::Granularity::MINUTE, 60, targetId),
         expected,
         0.1);
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            CPUTimeMonitor::Granularity::SECOND, 60, allotmentId),
+            CPUTimeMonitor::Granularity::SECOND, 60, targetId),
         expected,
         0.1);
     EXPECT_NEAR(
         *monitor->getAvgCPUCoresUsage(
-            CPUTimeMonitor::Granularity::HUNDRED_MS, 60, allotmentId),
+            CPUTimeMonitor::Granularity::HUNDRED_MS, 60, targetId),
         expected,
         0.1);
 
     for (const auto& quant : {0.0, 0.1, 0.5, 0.9, 1.0}) {
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              CPUTimeMonitor::Granularity::MINUTE, 60, quant, allotmentId),
+              CPUTimeMonitor::Granularity::MINUTE, 60, quant, targetId),
           expected,
           0.1);
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              CPUTimeMonitor::Granularity::SECOND, 60, quant, allotmentId),
+              CPUTimeMonitor::Granularity::SECOND, 60, quant, targetId),
           expected,
           0.1);
       EXPECT_NEAR(
           *monitor->getQuantileCPUCoresUsage(
-              CPUTimeMonitor::Granularity::HUNDRED_MS, 60, quant, allotmentId),
+              CPUTimeMonitor::Granularity::HUNDRED_MS, 60, quant, targetId),
           expected,
           0.1);
     }
@@ -167,8 +167,8 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
 
   checkStats();
 
-  monitor->registerAllotment("allotment1", {});
-  monitor->registerAllotment("allotment2", {0, 1, 2, 3, 4, 5, 6, 7});
+  monitor->registerTarget("target1", {});
+  monitor->registerTarget("target2", {0, 1, 2, 3, 4, 5, 6, 7});
 
   monitor->tick(subminor_tick_100ms);
   EXPECT_EQ(procCPUTimeMetricFrames_()[0].length(), 1);
@@ -178,27 +178,27 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target2"),
       std::nullopt);
 
   monitor->tick(subminor_tick_100ms);
@@ -209,29 +209,29 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target2"),
       std::nullopt);
 
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target1"),
       coreCount,
       0.1);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target2"),
       8.0,
       0.1);
 
@@ -241,32 +241,32 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 6);
   checkStats();
 
-  // still don't expect allotments to have minutely data becase we only have 1
+  // still don't expect targets to have minutely data becase we only have 1
   // sample
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target2"),
       std::nullopt);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target1"),
       coreCount,
       0.1);
   EXPECT_NEAR(
       *monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target2"),
       8.0,
       0.1);
 
@@ -275,54 +275,54 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
   EXPECT_EQ(procCPUTimeMetricFrames_()[1].length(), 4);
   EXPECT_EQ(procCPUTimeMetricFrames_()[2].length(), 7);
 
-  // Now all allotments have data for all granularities
+  // Now all targets have data for all granularities
   checkStats();
-  checkStats("allotment1");
-  checkStats("allotment2", 8.0);
+  checkStats("target1");
+  checkStats("target2", 8.0);
 
-  monitor->deRegisterAllotment("allotment1");
+  monitor->deRegisterTarget("target1");
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target1"),
       std::nullopt);
 
   monitor->tick(major_tick_60s);
   checkStats();
-  checkStats("allotment2", 8.0);
+  checkStats("target2", 8.0);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target1"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment1"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target1"),
       std::nullopt);
 
-  monitor->deRegisterAllotment("allotment2");
+  monitor->deRegisterTarget("target2");
 
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::MINUTE, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::MINUTE, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::SECOND, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::SECOND, 60, "target2"),
       std::nullopt);
   EXPECT_EQ(
       monitor->getAvgCPUCoresUsage(
-          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "allotment2"),
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "target2"),
       std::nullopt);
 
   monitor->tick(major_tick_60s);
@@ -336,20 +336,20 @@ TEST_F(CPUTimeMonitorTest, testAllotment) {
 // Test cgroup CPU usage processing
 TEST_F(CPUTimeMonitorTest, testCgroupUsageProcessing) {
   auto now = std::chrono::steady_clock::now();
-  auto hostAllotment = "host";
-  auto allotment2 = "cgroup_allotment2";
+  auto hostTarget = "host";
+  auto target2 = "cgroup_target2";
 
-  // Register allotments with cgroup paths
-  monitor->registerAllotment(allotment2, {0, 1, 2, 3}, "/sys/fs/cgroup");
+  // Register targets with cgroup paths
+  monitor->registerTarget(target2, {0, 1, 2, 3}, "/sys/fs/cgroup");
 
   // First tick - should initialize but not generate metrics (need delta)
   monitor->tick(major_tick_60s);
 
   // Check that cgroup data structures are initialized
   for (int i = 0; i < 3; i++) {
-    for (const auto& allotmentId : {hostAllotment, allotment2}) {
-      EXPECT_TRUE(cgroupUsageLast_()[i].count(allotmentId));
-      EXPECT_TRUE(cgroupTimeLast_()[i].count(allotmentId));
+    for (const auto& targetId : {hostTarget, target2}) {
+      EXPECT_TRUE(cgroupUsageLast_()[i].count(targetId));
+      EXPECT_TRUE(cgroupTimeLast_()[i].count(targetId));
     }
     // No metrics should be generated yet (need at least 2 ticks for delta)
     EXPECT_EQ(cgroupUsageMetricFrames_()[i].length(), 0);
@@ -378,32 +378,32 @@ TEST_F(CPUTimeMonitorTest, testCgroupUsageProcessing) {
   auto slice = cgroupUsageMetricFrames_()[2].slice(now, now + 60s);
   EXPECT_NE(slice, std::nullopt);
 
-  auto series1 = slice->series<double>(hostAllotment);
-  auto series2 = slice->series<double>(allotment2);
+  auto series1 = slice->series<double>(hostTarget);
+  auto series2 = slice->series<double>(target2);
   EXPECT_NE(series1, std::nullopt);
   EXPECT_NE(series2, std::nullopt);
   EXPECT_GT(series1->size(), 0);
   EXPECT_GT(series2->size(), 0);
 
   // Test deregistration cleans up cgroup data
-  monitor->deRegisterAllotment(allotment2);
-  EXPECT_FALSE(cgroupUsageLast_()[0].count(allotment2));
-  EXPECT_FALSE(cgroupUsageLast_()[1].count(allotment2));
-  EXPECT_FALSE(cgroupUsageLast_()[2].count(allotment2));
+  monitor->deRegisterTarget(target2);
+  EXPECT_FALSE(cgroupUsageLast_()[0].count(target2));
+  EXPECT_FALSE(cgroupUsageLast_()[1].count(target2));
+  EXPECT_FALSE(cgroupUsageLast_()[2].count(target2));
 
-  // host allotment should still exist
-  EXPECT_TRUE(cgroupUsageLast_()[0].count(hostAllotment));
-  EXPECT_TRUE(cgroupUsageLast_()[1].count(hostAllotment));
-  EXPECT_TRUE(cgroupUsageLast_()[2].count(hostAllotment));
+  // host target should still exist
+  EXPECT_TRUE(cgroupUsageLast_()[0].count(hostTarget));
+  EXPECT_TRUE(cgroupUsageLast_()[1].count(hostTarget));
+  EXPECT_TRUE(cgroupUsageLast_()[2].count(hostTarget));
 }
 
-// Test cgroup processing with mixed allotments (some with cgroup paths, some
+// Test cgroup processing with mixed targets (some with cgroup paths, some
 // without)
-TEST_F(CPUTimeMonitorTest, testMixedAllotments) {
-  // Register mixed allotments
-  monitor->registerAllotment("proc_only", {0, 1});
-  monitor->registerAllotment("both_no_cpuset", {}, "/sys/fs/cgroup");
-  monitor->registerAllotment("both", {2, 3, 4}, "/sys/fs/cgroup");
+TEST_F(CPUTimeMonitorTest, testMixedTargets) {
+  // Register mixed targets
+  monitor->registerTarget("proc_only", {0, 1});
+  monitor->registerTarget("both_no_cpuset", {}, "/sys/fs/cgroup");
+  monitor->registerTarget("both", {2, 3, 4}, "/sys/fs/cgroup");
 
   // Multiple ticks to generate data
   monitor->tick(major_tick_60s);
@@ -411,11 +411,11 @@ TEST_F(CPUTimeMonitorTest, testMixedAllotments) {
   monitor->tick(minor_tick_1s);
   monitor->tick(subminor_tick_100ms);
 
-  // Verify proc-only allotment has CPU time data but no cgroup data
+  // Verify proc-only target has CPU time data but no cgroup data
   EXPECT_TRUE(procCPUTimeLast_()[0].count("proc_only"));
   EXPECT_FALSE(cgroupUsageLast_()[0].count("proc_only"));
 
-  // Verify cgroup allotments have both types of data
+  // Verify cgroup targets have both types of data
   EXPECT_TRUE(procCPUTimeLast_()[0].count("both_no_cpuset"));
   EXPECT_TRUE(cgroupUsageLast_()[0].count("both_no_cpuset"));
 
@@ -423,14 +423,14 @@ TEST_F(CPUTimeMonitorTest, testMixedAllotments) {
   EXPECT_TRUE(cgroupUsageLast_()[0].count("both"));
 
   // Clean up
-  monitor->deRegisterAllotment("proc_only");
-  monitor->deRegisterAllotment("both_no_cpuset");
-  monitor->deRegisterAllotment("both");
+  monitor->deRegisterTarget("proc_only");
+  monitor->deRegisterTarget("both_no_cpuset");
+  monitor->deRegisterTarget("both");
 }
 
 TEST_F(CPUTimeMonitorTest, testInvalidCgroupPath) {
   // Test with invalid cgroup path
-  monitor->registerAllotment("invalid_path", {}, "/invalid/cgroup/path");
+  monitor->registerTarget("invalid_path", {}, "/invalid/cgroup/path");
 
   // Should not crash, but won't generate cgroup metrics
   monitor->tick(major_tick_60s);
@@ -440,13 +440,13 @@ TEST_F(CPUTimeMonitorTest, testInvalidCgroupPath) {
   EXPECT_TRUE(procCPUTimeLast_()[0].count("invalid_path"));
   EXPECT_FALSE(cgroupUsageLast_()[0].count("invalid_path"));
 
-  monitor->deRegisterAllotment("invalid_path");
+  monitor->deRegisterTarget("invalid_path");
 }
 
 // Test data source selection functionality
 TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
-  // Register allotment with cgroup path
-  monitor->registerAllotment("test_allotment", {}, "/sys/fs/cgroup");
+  // Register target with cgroup path
+  monitor->registerTarget("test_target", {}, "/sys/fs/cgroup");
 
   // Generate some data
   monitor->tick(major_tick_60s);
@@ -456,28 +456,28 @@ TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
 
   // Test default behavior (should use PROC_STAT)
   auto procAvg = monitor->getAvgCPUCoresUsage(
-      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_allotment");
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_target");
   auto procQuantile = monitor->getQuantileCPUCoresUsage(
-      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, 0.5, "test_allotment");
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, 0.5, "test_target");
   auto procRaw = monitor->getRawCPUCoresUsage(
-      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_allotment");
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, "test_target");
 
   // Test explicit PROC_STAT
   auto procAvgExplicit = monitor->getAvgCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
   auto procQuantileExplicit = monitor->getQuantileCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
       0.5,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
   auto procRawExplicit = monitor->getRawCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
 
   // Default and explicit PROC_STAT should be the same
@@ -489,18 +489,18 @@ TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
   auto cgroupAvg = monitor->getAvgCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
   auto cgroupQuantile = monitor->getQuantileCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
       0.5,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
   auto cgroupRaw = monitor->getRawCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
 
   // All should have values (assuming cgroup data is available)
@@ -517,7 +517,7 @@ TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
   EXPECT_NE(procAvg, cgroupAvg);
   EXPECT_NE(procQuantile, cgroupQuantile);
 
-  // Test with host allotment (should work with both data sources)
+  // Test with host target (should work with both data sources)
   auto hostProcAvg = monitor->getAvgCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
@@ -532,7 +532,7 @@ TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
       CPUTimeMonitor::DataSource::CGROUP_STAT);
   EXPECT_NE(hostCgroupAvg, std::nullopt);
 
-  monitor->deRegisterAllotment("test_allotment");
+  monitor->deRegisterTarget("test_target");
 }
 
 // Test feature flag behavior - when readCgroupStat is disabled, should always
@@ -548,8 +548,8 @@ TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
       getenv("TESTROOT"),
       true);
 
-  // Register allotment with cgroup path
-  disabledMonitor->registerAllotment("test_allotment", {}, "/sys/fs/cgroup");
+  // Register target with cgroup path
+  disabledMonitor->registerTarget("test_target", {}, "/sys/fs/cgroup");
 
   // Generate some data
   disabledMonitor->tick(major_tick_60s);
@@ -562,13 +562,13 @@ TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
   auto procAvg = disabledMonitor->getAvgCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
 
   auto cgroupRequestedAvg = disabledMonitor->getAvgCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
 
   // Both should return the same value (proc data) since feature flag is
@@ -580,14 +580,14 @@ TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
       0.5,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
 
   auto cgroupRequestedQuantile = disabledMonitor->getQuantileCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
       0.5,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
 
   EXPECT_EQ(procQuantile, cgroupRequestedQuantile);
@@ -596,18 +596,18 @@ TEST_F(CPUTimeMonitorTest, testFeatureFlagFallback) {
   auto procRaw = disabledMonitor->getRawCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::PROC_STAT);
 
   auto cgroupRequestedRaw = disabledMonitor->getRawCPUCoresUsage(
       CPUTimeMonitor::Granularity::HUNDRED_MS,
       60,
-      "test_allotment",
+      "test_target",
       CPUTimeMonitor::DataSource::CGROUP_STAT);
 
   EXPECT_EQ(procRaw, cgroupRequestedRaw);
 
-  disabledMonitor->deRegisterAllotment("test_allotment");
+  disabledMonitor->deRegisterTarget("test_target");
 }
 
 } // namespace dynolog
