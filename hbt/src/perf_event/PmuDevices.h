@@ -8,9 +8,7 @@
 #include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/PmuEvent.h"
 
-#include <bitset>
 #include <cstdint>
-#include <limits>
 #include <map>
 #include <memory>
 #include <numeric>
@@ -21,8 +19,24 @@
 namespace facebook::hbt::perf_event {
 
 namespace uncore_scope {
-struct Host {};
-using Scope = std::variant<Host>;
+struct Host {
+  bool operator==(const Host&) const {
+    return true;
+  }
+  bool operator<(const Host&) const {
+    return false;
+  }
+};
+struct CpuSocket {
+  uint32_t socket_id;
+  bool operator==(const CpuSocket& other) const {
+    return socket_id == other.socket_id;
+  }
+  bool operator<(const CpuSocket& other) const {
+    return socket_id < other.socket_id;
+  }
+};
+using Scope = std::variant<Host, CpuSocket>;
 } // namespace uncore_scope
 
 inline std::string toCanonicalEventId(EventId ev_id) {
@@ -313,10 +327,12 @@ class PmuDeviceManager {
   const CpuInfo cpuInfo;
 
   explicit PmuDeviceManager(CpuInfo cpuInfoIn)
-      : cpuInfo(std::move(cpuInfoIn)), rootDir_() {}
+      : PmuDeviceManager(std::move(cpuInfoIn), "") {}
 
-  PmuDeviceManager(CpuInfo cpuInfoIn, std::string rootDir)
-      : cpuInfo(std::move(cpuInfoIn)), rootDir_(std::move(rootDir)) {}
+  PmuDeviceManager(CpuInfo cpuInfoIn, const std::string& rootDir)
+      : cpuInfo(std::move(cpuInfoIn)),
+        rootDir_(rootDir),
+        cpuSocketToCores_(getSocketCoreMapFromSysfs(rootDir)) {}
 
   // Sync PMUs exposed in /sys/devices with those in pmu_groups_.
   void loadSysFsPmus();
@@ -420,6 +436,7 @@ class PmuDeviceManager {
  protected:
   TPmuGroups pmu_groups_;
   const std::string rootDir_;
+  const std::vector<std::vector<uint32_t>> cpuSocketToCores_;
 
   void updateSysFsPmus_();
 };
