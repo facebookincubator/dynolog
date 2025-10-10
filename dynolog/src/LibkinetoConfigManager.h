@@ -18,6 +18,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include "dynolog/src/LibkinetoJobRegistry.h"
 #include "dynolog/src/LibkinetoTypes.h"
 
 namespace dynolog {
@@ -53,13 +54,6 @@ class LibkinetoConfigManager {
   int processCount(const std::string& jobId) const;
 
  protected:
-  struct LibkinetoProcess {
-    int32_t pid;
-    std::chrono::system_clock::time_point lastRequestTime;
-    std::string eventProfilerConfig;
-    std::string activityProfilerConfig;
-  };
-
   // A few callbacks for additional instrumentation.
   virtual void onRegisterProcess(const std::set<int32_t>& /*pids*/) {}
 
@@ -68,10 +62,6 @@ class LibkinetoConfigManager {
   virtual void onSetOnDemandConfig(const std::set<int32_t>& /*pids*/) {}
 
   virtual void onProcessCleanup(const std::set<int32_t>& /*pids*/) {}
-
-  // Map of pid ancestry -> LibkinetoProcess
-  using ProcessMap = std::map<std::set<int32_t>, LibkinetoProcess>;
-  std::map<std::string, ProcessMap> jobs_;
 
   // Map of gpu id -> pids
   using InstancesPerGpuMap = std::map<int32_t, std::set<int32_t>>;
