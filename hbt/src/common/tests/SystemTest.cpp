@@ -4,6 +4,7 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/common/System.h"
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 using namespace facebook::hbt;
@@ -290,4 +291,29 @@ TEST(SystemTest, GetHostNameTest) {
   auto hostname = getHostName();
   EXPECT_GT(hostname.size(), 0);
   HBT_LOG_INFO() << "hostname = " << hostname;
+}
+
+TEST(SystemTest, GetSocketCoreMapFromSysfsTest) {
+  // Create a mock sysfs directory structure for testing
+  const char* testRootEnv = getenv("TESTROOT");
+  if (!testRootEnv) {
+    GTEST_SKIP() << "TESTROOT environment variable not set, skipping test";
+  }
+  std::string testRootDir = testRootEnv;
+
+  // Test with the mock filesystem - uses arbitrary physical package IDs
+  // (285212672 and 268435456) which get normalized to sequential socket IDs
+  auto result = getSocketCoreMapFromSysfs(testRootDir);
+
+  // Verify the result structure
+  ASSERT_EQ(result.size(), 2) << "Expected exactly 2 sockets";
+
+  // Physical package IDs are normalized to sequential socket IDs:
+  // - CPUs 0-7 (package 285212672) → socket 0
+  // - CPUs 8-15 (package 268435456) → socket 1
+  EXPECT_THAT(result[0], testing::ElementsAre(0, 1, 2, 3, 4, 5, 6, 7))
+      << "Socket 0 should have cores 0-7 in order";
+
+  EXPECT_THAT(result[1], testing::ElementsAre(8, 9, 10, 11, 12, 13, 14, 15))
+      << "Socket 1 should have cores 8-15 in order";
 }

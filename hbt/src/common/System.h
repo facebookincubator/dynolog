@@ -607,6 +607,11 @@ inline int readIntFromFile(const std::string& filepath) {
   return 0;
 }
 
+// Read CPU Socket to CPU ID map from sysfs. Returns a vector where each
+// index is a socket ID and the value is a vector of CPU IDs in that socket.
+std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
+    const std::string& rootdir = "/");
+
 //
 // System functions
 //

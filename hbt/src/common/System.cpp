@@ -76,6 +76,55 @@ std::pair<std::error_code, std::vector<unsigned char>> readProcFsByteStr(
   }
 }
 
+std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
+    const std::string& rootdir) {
+  std::vector<std::vector<uint32_t>> socketCoreMap;
+  std::vector<uint32_t> socketCores;
+  std::map<uint32_t, uint32_t> cpuToPackageId;
+  std::filesystem::path cpuPath = "/";
+  if (!rootdir.empty()) {
+    cpuPath = rootdir;
+  }
+  cpuPath /= "sys/devices/system/cpu/";
+  for (const auto& entry : std::filesystem::directory_iterator(cpuPath)) {
+    std::string dirname = entry.path().filename().string();
+    if (dirname.find("cpu") == 0 && dirname.length() > 3) {
+      // Extract the substring after "cpu" and validate it's a valid number
+      std::string cpuIdStr = dirname.substr(3);
+      if (std::all_of(cpuIdStr.begin(), cpuIdStr.end(), ::isdigit)) {
+        uint32_t cpuId = static_cast<uint32_t>(std::stoi(dirname.substr(3)));
+        std::filesystem::path packageIdPath =
+            entry.path() / "topology/physical_package_id";
+        if (std::filesystem::exists(packageIdPath)) {
+          uint32_t packageId;
+          std::ifstream packageIdFile(packageIdPath);
+          if (!packageIdFile.is_open() || !(packageIdFile >> packageId)) {
+            HBT_LOG_ERROR() << "Failed to read package id for cpu " << cpuId;
+            continue;
+          }
+          cpuToPackageId[cpuId] = packageId;
+        }
+      }
+    }
+  }
+  std::unordered_map<uint32_t, uint32_t> packageIdToSocketId;
+  // Note packageId may not be the same as socketId on some systems. We
+  // normalize them based on their corresponding cpuIds.
+  for (const auto& [cpuId, packageId] : cpuToPackageId) {
+    auto it = packageIdToSocketId.find(packageId);
+    if (it == packageIdToSocketId.end()) {
+      // Allocate a new socketId for this packageId.
+      packageIdToSocketId[packageId] =
+          static_cast<uint32_t>(socketCoreMap.size());
+      socketCoreMap.emplace_back(std::vector<uint32_t>{cpuId});
+    } else {
+      // Use the existing vector via the iterator
+      socketCoreMap[it->second].push_back(cpuId);
+    }
+  }
+  return socketCoreMap;
+}
+
 std::string removeBlanks(std::string s) {
   // Remove blanks.
   s.erase(
