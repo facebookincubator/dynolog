@@ -28,6 +28,7 @@ class MPMCQueueProducerWrapper {
   MPMCQueueProducerWrapper& operator=(MPMCQueueProducerWrapper&&) = default;
   MPMCQueueProducerWrapper& operator=(const MPMCQueueProducerWrapper&) =
       default;
+  ~MPMCQueueProducerWrapper() = default;
 
   size_t tryWrite(const T& data) {
     return queuePtr->write(data);
