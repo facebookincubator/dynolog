@@ -53,6 +53,11 @@ class RdmaMonitor {
     monitors_.clear();
   }
 
+  RdmaMonitor(const RdmaMonitor&) = delete;
+  RdmaMonitor& operator=(const RdmaMonitor&) = delete;
+  RdmaMonitor(RdmaMonitor&&) = default;
+  RdmaMonitor& operator=(RdmaMonitor&&) = default;
+
   [[nodiscard]] bool setupRdmaMonitor();
   [[nodiscard]] bool sampleRdmaMonitor(
       std::map<std::string, int64_t>& rdmaCounterMap);
