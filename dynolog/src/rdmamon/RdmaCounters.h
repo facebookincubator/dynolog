@@ -43,6 +43,11 @@ class RdmaCounters {
     rdma_counters_.clear();
   }
 
+  RdmaCounters(const RdmaCounters&) = delete;
+  RdmaCounters& operator=(const RdmaCounters&) = delete;
+  RdmaCounters(RdmaCounters&&) = default;
+  RdmaCounters& operator=(RdmaCounters&&) = default;
+
   bool setupRdmaCounters();
   bool sampleRdmaCounters(std::map<std::string, int64_t>& rdmaCountersMap);
 
