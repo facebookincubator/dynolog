@@ -13,7 +13,7 @@ namespace facebook::hbt::perf_event {
 class MockPerUncoreCountReader : public PerUncoreCountReader {
  public:
   MockPerUncoreCountReader(
-      uncore_scope::Scope scope,
+      std::vector<uncore_scope::Scope> scope,
       std::shared_ptr<const MetricDesc> metric_desc_in,
       std::shared_ptr<const PmuDeviceManager> pmu_manager_in)
       : PerUncoreCountReader(scope, metric_desc_in, pmu_manager_in) {}
@@ -48,7 +48,7 @@ class MockPerUncoreCountReaderFactory : public PerUncoreCountReaderFactory {
   ~MockPerUncoreCountReaderFactory() override = default;
   std::unique_ptr<PerUncoreCountReader> make(
       const std::string& element_id,
-      uncore_scope::Scope scope,
+      const std::vector<uncore_scope::Scope>& scope,
       std::shared_ptr<const MetricDesc> metric_desc,
       std::shared_ptr<const PmuDeviceManager> pmu_manager) override {
     auto mockReader = std::make_unique<MockPerUncoreCountReader>(

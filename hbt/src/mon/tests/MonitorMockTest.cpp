@@ -222,14 +222,16 @@ TEST(UncoreCountReader, ReadAllUncoreCounts) {
       "HW_UNCORE_MEM_BW_READ",
       metrics->getMetricDesc("HW_UNCORE_MEM_BW_READ"),
       pmu_manager,
-      hbt::perf_event::uncore_scope::Host{});
+      std::vector<hbt::perf_event::uncore_scope::Scope>{
+          hbt::perf_event::uncore_scope::Host{}});
 
   mon.emplaceUncoreCountReader(
       std::make_optional<std::string>("imc_bandwidth"),
       "HW_UNCORE_MEM_BW_WRITE",
       metrics->getMetricDesc("HW_UNCORE_MEM_BW_WRITE"),
       pmu_manager,
-      hbt::perf_event::uncore_scope::Host{});
+      std::vector<hbt::perf_event::uncore_scope::Scope>{
+          hbt::perf_event::uncore_scope::Host{}});
 
   EXPECT_TRUE(mon.open());
   EXPECT_TRUE(mon.enable());

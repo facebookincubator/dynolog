@@ -2145,7 +2145,9 @@ void addUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
   // TODO: Add x86_64 path in future
 }
 
-void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+void addArmUncoreMetrics(
+    std::shared_ptr<Metrics>& metrics,
+    uint32_t cpuSockets) {
   metrics->add(std::make_shared<MetricDesc>(
       "HW_SCF_CYCLES",
       "Cycles on SCF uncore",
@@ -2417,6 +2419,68 @@ void addArmUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
       100'000'000,
       System::Permissions{},
       std::vector<std::string>{}));
+
+  // Socket-specific metrics for remote socket read latency measurement
+  // Only add these metrics when there are multiple sockets (socket count > 1)
+  if (cpuSockets > 1) {
+    for (uint32_t socketId = 0; socketId < cpuSockets; socketId++) {
+      // Outstanding read requests metric for each socket
+      std::string rdOutstandingName =
+          "HW_SOCKET_" + std::to_string(socketId) + "_RD_OUTSTANDING";
+      std::string rdOutstandingDesc = "Outstanding read requests to Socket " +
+          std::to_string(socketId) + " memory from remote sockets";
+      std::string rdOutstandingLongDesc =
+          "Outstanding read requests directed to Socket " +
+          std::to_string(socketId) +
+          " memory controller from remote sockets. Used for measuring remote socket read latency.";
+      std::string rdOutstandingEventName =
+          "socket_" + std::to_string(socketId) + "_rd_outstanding";
+
+      metrics->add(std::make_shared<MetricDesc>(
+          rdOutstandingName,
+          rdOutstandingDesc,
+          rdOutstandingLongDesc,
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   rdOutstandingEventName,
+                   PmuType::nvidia_scf_pmu,
+                   rdOutstandingEventName,
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+      // Read access requests metric for each socket
+      std::string rdAccessName =
+          "HW_SOCKET_" + std::to_string(socketId) + "_RD_ACCESS";
+      std::string rdAccessDesc = "Read access requests to Socket " +
+          std::to_string(socketId) + " memory from remote sockets";
+      std::string rdAccessLongDesc =
+          "Read access requests directed to Socket " +
+          std::to_string(socketId) +
+          " memory controller from remote sockets. Used for measuring remote socket read latency.";
+      std::string rdAccessEventName =
+          "socket_" + std::to_string(socketId) + "_rd_access";
+
+      metrics->add(std::make_shared<MetricDesc>(
+          rdAccessName,
+          rdAccessDesc,
+          rdAccessLongDesc,
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   rdAccessEventName,
+                   PmuType::nvidia_scf_pmu,
+                   rdAccessEventName,
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+    }
+  }
 }
 
 // Uncore events for modern Intel architectures using PerfCounterManagerHbt
