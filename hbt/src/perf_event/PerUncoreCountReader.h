@@ -83,7 +83,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
   }
 
   PerUncoreCountReader(
-      uncore_scope::Scope scope,
+      const std::vector<uncore_scope::Scope>& scopes,
       std::shared_ptr<const MetricDesc> metric_desc_in,
       std::shared_ptr<const PmuDeviceManager> pmu_manager_in)
       : TBase{nullptr},
@@ -95,16 +95,21 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     // theoritically, uncore events are often not belonged to a certain CPU.
     // however, linux perf system uses CPU as a part of the identifier to
     // identify a certain uncore PMU device.
-    auto per_uncore_event_confs =
-        metric_desc->makePerUncoreConfs(scope, *pmu_manager);
+    for (const auto& scope : scopes) {
+      auto per_uncore_event_confs =
+          metric_desc->makePerUncoreConfs(scope, *pmu_manager);
 
-    for (const auto& [perf_pmu, conf] : per_uncore_event_confs) {
-      const auto& [cpu, pmu] = perf_pmu;
-      UncoreDeviceId id(cpu, pmu->getPmuId());
-      this->generators_[id.toInt()] = std::make_shared<UncoreCountReader>(
-          metric_desc->eventNicknames(pmu_manager->cpuInfo.cpu_arch),
-          cpu,
-          conf);
+      for (const auto& [perf_pmu, conf] : per_uncore_event_confs) {
+        const auto& [cpu, pmu] = perf_pmu;
+        int id = UncoreDeviceId(cpu, pmu->getPmuId()).toInt();
+        if (this->generators_.find(id) == this->generators_.end()) {
+          this->generators_[id] = std::make_shared<UncoreCountReader>(
+              metric_desc->eventNicknames(pmu_manager->cpuInfo.cpu_arch),
+              cpu,
+              conf);
+        }
+        per_scope_cpu_id[scope].insert(cpu);
+      }
     }
   }
   virtual ~PerUncoreCountReader() = default;
@@ -210,15 +215,17 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     return TBase::readPerPerfEventsGroupOnCpu(cpu);
   }
 
+  const std::map<uncore_scope::Scope, std::set<CpuId>>& listScopeCpus() const {
+    return per_scope_cpu_id;
+  }
+
   std::ostream& printStatus(std::ostream& os) const {
     os << "Uncore Count Reader \"" << metric_desc->id;
     if (this->isEnabled()) {
       os << "\" active.\n";
-      auto val = this->read();
-      if (val.has_value()) {
-        os << "*val" << "\n";
-      } else {
-        os << " Failed to read\n";
+      auto vals = this->readPerPerfEventsGroup();
+      for (const auto& val : vals) {
+        os << val << "\n";
       }
     } else {
       os << "\" inactive.\n";
@@ -228,6 +235,7 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
 
   const std::shared_ptr<const PmuDeviceManager> pmu_manager;
   const std::shared_ptr<const MetricDesc> metric_desc;
+  std::map<uncore_scope::Scope, std::set<CpuId>> per_scope_cpu_id;
 };
 
 class PerUncoreCountReaderFactory {
@@ -236,11 +244,11 @@ class PerUncoreCountReaderFactory {
   virtual ~PerUncoreCountReaderFactory() = default;
   virtual std::unique_ptr<PerUncoreCountReader> make(
       const std::string& /*element_id*/,
-      uncore_scope::Scope scope,
+      const std::vector<uncore_scope::Scope>& scopes,
       std::shared_ptr<const MetricDesc> metric_desc,
       std::shared_ptr<const PmuDeviceManager> pmu_manager) {
     return std::make_unique<PerUncoreCountReader>(
-        scope, metric_desc, pmu_manager);
+        scopes, metric_desc, pmu_manager);
   }
 };
 

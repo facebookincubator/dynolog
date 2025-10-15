@@ -11,7 +11,6 @@
 #include <filesystem>
 
 namespace fs = std::filesystem;
-
 namespace facebook::hbt::perf_event {
 
 /// Get EventDefs grouped by preffix of event_id until first dot.
@@ -568,8 +567,6 @@ std::set<std::string> PmuDeviceManager::getPmuNames() const {
 std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
     PmuType pmu_type,
     uncore_scope::Scope scope) const {
-  HBT_ARG_CHECK(std::holds_alternative<uncore_scope::Host>(scope))
-      << "Only Host scope supported";
   auto it = pmu_groups_.find(pmu_type);
   HBT_ARG_CHECK(it != pmu_groups_.end())
       << "Invalid pmu_type: " + PmuTypeToStr(pmu_type);
@@ -582,6 +579,20 @@ std::vector<TPerfPmuDevice> PmuDeviceManager::getPerfPmuGroupByScope(
       continue;
     }
     for_each_cpu_set_t(cpu, device->getCpuMask().value()) {
+      // Filter by CPU socket if scope is CpuSocket
+      if (std::holds_alternative<uncore_scope::CpuSocket>(scope)) {
+        uint32_t socketId = std::get<uncore_scope::CpuSocket>(scope).socket_id;
+        if (socketId >= cpuSocketToCores_.size()) {
+          HBT_LOG_ERROR() << "Invalid socket id: " << socketId;
+          continue;
+        }
+        // Skip this CPU if it doesn't belong to the specified socket. Note that
+        // cpus are sorted.
+        const auto& cpus = cpuSocketToCores_.at(socketId);
+        if (!std::binary_search(cpus.begin(), cpus.end(), cpu)) {
+          continue;
+        }
+      }
       perf_pmu_group.emplace_back(cpu, device);
     }
   }

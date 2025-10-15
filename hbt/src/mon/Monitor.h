@@ -307,7 +307,6 @@ class Monitor {
     HBT_LOG_WARNING() << fmt::format("No CountReader with id {}", elem_id);
     return std::nullopt;
   }
-
   std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>
   readAllUncoreCountsPerPerfEvent() const {
     std::lock_guard<std::mutex> lock{mutex_};
@@ -319,52 +318,198 @@ class Monitor {
     return rvs;
   }
 
-  // migrage current thread to the CPU that owns specific uncore perf events
-  // before reading to avoid IPI before CPUs.
-  // **Warning:** Invoking this function may cause one or more context switches,
-  // potentially resulting in significant performance degradation compared to a
-  // standard read function.
-  std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>
-  readAllUncoreCountsPerPerfEventOnLocalCpu() const {
-    std::lock_guard<std::mutex> lock{mutex_};
-    std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>> rvs;
-    // group by CPU first to minimize # of thread migration required
-    std::set<CpuId> cpus;
-    for (const auto& [k, cr] : uncore_count_readers_) {
-      HBT_THROW_ASSERT_IF(cr == nullptr);
-      cpus.merge(cr->listCpus());
+ private:
+  // Helper function that does the CPU reading and returns per-CPU results
+  // This is the core implementation that both simple and grouped methods use
+  std::map<CpuId, std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+  readUncoreCountsWithCpuAffinity_(const std::set<CpuId>& cpus) const {
+    if (cpus.empty()) {
+      return {};
     }
+    std::map<
+        CpuId,
+        std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+        perCpuResults;
     cpu_set_t prev_mask, mask;
     CPU_ZERO(&prev_mask);
     if (sched_getaffinity(0, sizeof(cpu_set_t), &prev_mask) != 0) {
       HBT_LOG_ERROR() << "Failed to get CPU affinity: " << errno;
-      return {};
+      return perCpuResults;
     }
+
     for (auto cpu : cpus) {
       CPU_ZERO(&mask);
       CPU_SET(cpu, &mask);
       if (sched_setaffinity(0, sizeof(mask), &mask) != 0) {
         HBT_LOG_ERROR() << "Failed to set sched affinity on CPU " << cpu;
         // all or nothing
-        return {};
+        return perCpuResults;
       }
-      // read perf counter value per CPU per per hbt metric
-      // then merge values from the same hbt metric and different CPU to a
-      // single list
+
+      // Read perf counter value per CPU per HBT metric
       for (const auto& [k, cr] : uncore_count_readers_) {
         auto counters = cr->readPerPerfEventsGroupOnCpu(cpu);
-        auto& list = rvs[k];
-        std::for_each(
-            counters.begin(), counters.end(), [&list](const auto& pair) {
-              list.push_back(pair.second);
-            });
+        for (const auto& [_, readValue] : counters) {
+          perCpuResults[cpu][k].push_back(readValue);
+        }
       }
     }
-    // restore previous CPU affinity
+
+    // Restore previous CPU affinity
     if (sched_setaffinity(0, sizeof(prev_mask), &prev_mask) != 0) {
-      HBT_LOG_ERROR() << "Failed to restore to pervious affinity mask";
+      HBT_LOG_ERROR() << "Failed to restore to previous affinity mask";
+    }
+    return perCpuResults;
+  }
+
+ public:
+  // Migrate current thread to the CPU that owns specific uncore perf events
+  // before reading to avoid IPI between CPUs.
+  // **Warning:** Invoking this function may cause one or more context switches,
+  // potentially resulting in significant performance degradation compared to a
+  // standard read function.
+  std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>
+  readAllUncoreCountsPerPerfEventOnLocalCpu() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+    // Group by CPU first to minimize # of thread migration required
+    std::set<CpuId> cpus;
+    for (const auto& [k, cr] : uncore_count_readers_) {
+      HBT_THROW_ASSERT_IF(cr == nullptr);
+      cpus.merge(cr->listCpus());
+    }
+
+    // Use the helper function to read counters from all CPUs with CPU affinity
+    // handling
+    std::map<
+        CpuId,
+        std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+        perCpuResults = readUncoreCountsWithCpuAffinity_(cpus);
+
+    // Aggregate results across all CPUs
+    std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>> rvs;
+    for (const auto& [cpu, cpuResults] : perCpuResults) {
+      for (const auto& [elemId, readValues] : cpuResults) {
+        auto& list = rvs[elemId];
+        list.insert(list.end(), readValues.begin(), readValues.end());
+      }
     }
     return rvs;
+  }
+
+ private:
+  // Helper function to collect CPUs and build CPU-to-scope mapping
+  std::pair<
+      std::set<CpuId>,
+      std::map<CpuId, std::set<perf_event::uncore_scope::Scope>>>
+  collectCpusAndScopeMapping_() const {
+    std::set<CpuId> allCpus;
+    std::map<CpuId, std::set<perf_event::uncore_scope::Scope>> cpuToScopes;
+
+    for (const auto& [k, cr] : uncore_count_readers_) {
+      allCpus.merge(cr->listCpus());
+      // Get all available scopes for this count reader
+      // We need to check each scope to see which CPUs belong to it
+      for (const auto& [scope, cpuSet] : cr->listScopeCpus()) {
+        for (CpuId cpu : cpuSet) {
+          cpuToScopes[cpu].insert(scope);
+        }
+      }
+    }
+
+    return {std::move(allCpus), std::move(cpuToScopes)};
+  }
+
+  // Helper function to group per-CPU results by scope
+  std::map<
+      perf_event::uncore_scope::Scope,
+      std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+  groupResultsByScope_(
+      const std::map<
+          CpuId,
+          std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>&
+          perCpuResults,
+      const std::map<CpuId, std::set<perf_event::uncore_scope::Scope>>&
+          cpuToScopes) const {
+    std::map<
+        perf_event::uncore_scope::Scope,
+        std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+        groupedResults;
+
+    for (const auto& [cpu, cpuResults] : perCpuResults) {
+      if (auto it = cpuToScopes.find(cpu); it != cpuToScopes.end()) {
+        for (const auto& scope : it->second) {
+          for (const auto& [elemId, readValues] : cpuResults) {
+            auto& scopeResults = groupedResults[scope][elemId];
+            scopeResults.insert(
+                scopeResults.end(), readValues.begin(), readValues.end());
+          }
+        }
+      }
+    }
+
+    return groupedResults;
+  }
+
+  // Helper function to read per-CPU results without CPU affinity changes
+  std::map<CpuId, std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+  readUncoreCountsPerCpu_(const std::set<CpuId>& allCpus) const {
+    std::map<
+        CpuId,
+        std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+        perCpuResults;
+
+    for (CpuId cpu : allCpus) {
+      for (const auto& [elemId, cr] : uncore_count_readers_) {
+        HBT_THROW_ASSERT_IF(cr == nullptr);
+        auto counters = cr->readPerPerfEventsGroupOnCpu(cpu);
+        for (const auto& [_, readValue] : counters) {
+          perCpuResults[cpu][elemId].push_back(readValue);
+        }
+      }
+    }
+
+    return perCpuResults;
+  }
+
+ public:
+  std::map<
+      perf_event::uncore_scope::Scope,
+      std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+  readAllUncoreCountsPerPerfEventByScope() {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    // Collect CPUs and build CPU-to-scope mapping
+    auto [allCpus, cpuToScopes] = collectCpusAndScopeMapping_();
+
+    // Read per-CPU results without changing CPU affinity
+    auto perCpuResults = readUncoreCountsPerCpu_(allCpus);
+
+    // Group results by scope
+    return groupResultsByScope_(perCpuResults, cpuToScopes);
+  }
+
+  // Read all uncore counters per perf event on local CPU and group results by
+  // scope. This is an optimized version that reads each CPU only once and
+  // groups results by their corresponding scopes (e.g., CPU0 might be for both
+  // Host and Socket1).
+  // **Warning:** Invoking this function may cause one or more context switches,
+  // potentially resulting in significant performance degradation compared to a
+  // standard read function.
+  std::map<
+      perf_event::uncore_scope::Scope,
+      std::map<ElemId, std::vector<TUncoreCountReader::ReadValues>>>
+  readAllUncoreCountsPerPerfEventByScopeOnLocalCpu() const {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    // Collect CPUs and build CPU-to-scope mapping
+    auto [allCpus, cpuToScopes] = collectCpusAndScopeMapping_();
+
+    // Use the helper function to read counters from all CPUs with CPU affinity
+    // handling
+    auto perCpuResults = readUncoreCountsWithCpuAffinity_(allCpus);
+
+    // Group results by scope
+    return groupResultsByScope_(perCpuResults, cpuToScopes);
   }
 
   /// Read counts for all uncore events opened in counting mode
@@ -489,7 +634,7 @@ class Monitor {
       const ElemId& elem_id,
       std::shared_ptr<const perf_event::MetricDesc> metric_desc,
       std::shared_ptr<const perf_event::PmuDeviceManager> pmu_manager,
-      perf_event::uncore_scope::Scope scope) {
+      const std::vector<perf_event::uncore_scope::Scope>& scopes) {
     try {
       std::lock_guard<std::mutex> lock{mutex_};
 
@@ -504,7 +649,11 @@ class Monitor {
       auto [it, emplaced] = uncore_count_readers_.emplace(
           elem_id,
           uncore_count_reader_factory_->make(
-              elem_id, scope, metric_desc, pmu_manager));
+              elem_id, scopes, metric_desc, pmu_manager));
+      for (auto& scope : scopes) {
+        // Keep track of element ids for each scope.
+        uncore_scope_ids_[scope].insert(elem_id);
+      }
 
       // Transition newly emplaced PerUncoreCountReader to Monitor's state.
       sync_();
@@ -749,6 +898,7 @@ class Monitor {
       cpu_count_readers_;
   std::unordered_map<ElemId, std::shared_ptr<TUncoreCountReader>>
       uncore_count_readers_;
+  std::map<perf_event::uncore_scope::Scope, std::set<ElemId>> uncore_scope_ids_;
 
 #ifdef HBT_ENABLE_BPERF
   std::unordered_map<ElemId, std::shared_ptr<TBPerfCountReader>>
