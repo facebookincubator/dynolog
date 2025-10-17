@@ -7,9 +7,20 @@
 
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
 
+#include <gflags/gflags.h>
 #include <unistd.h>
 #include <iostream>
 #include <thread>
+
+DEFINE_int32(
+    update_interval_ms,
+    1000,
+    "Update interval in milliseconds for RDC metrics collection");
+DEFINE_int32(
+    max_keep_age_seconds,
+    10,
+    "Maximum age in seconds to keep RDC samples");
+DEFINE_int32(max_keep_samples, 100, "Maximum number of samples to keep");
 
 static std::vector<rdc_field_t> kRdcWatchedFields = {
     RDC_FI_GPU_UTIL,
@@ -43,8 +54,14 @@ static std::vector<rdc_field_t> kRdcWatchedFields = {
     RDC_FI_PROF_KFD_ID,
     RDC_FI_PROF_SIMD_UTILIZATION};
 
-int main() {
-  dynolog::gpumon::RdcWrapper rdcWrapper(kRdcWatchedFields);
+int main(int argc, char** argv) {
+  gflags::ParseCommandLineFlags(&argc, &argv, true);
+
+  dynolog::gpumon::RdcWrapper rdcWrapper(
+      kRdcWatchedFields,
+      std::chrono::milliseconds(FLAGS_update_interval_ms),
+      std::chrono::seconds(FLAGS_max_keep_age_seconds),
+      FLAGS_max_keep_samples);
   auto entities = rdcWrapper.getMonitoredEntities();
 
   auto worker = std::thread([&]() {
