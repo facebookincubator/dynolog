@@ -14,8 +14,8 @@
 #include <fstream>
 #include <iterator>
 #include <thread>
-#include <type_traits>
 #include <utility>
+#include "dynolog/src/LibkinetoJobRegistry.h"
 #include "hbt/src/common/System.h"
 #ifdef __linux__
 #include <sys/prctl.h>
@@ -122,34 +122,77 @@ void LibkinetoConfigManager::refreshBaseConfig() {
 }
 
 void LibkinetoConfigManager::runGc() {
+  auto registry = LibkinetoJobRegistry::getInstance();
+  std::lock_guard<std::mutex> guard(registry->getMutex());
+
+  auto& jobs = registry->getAllJobs();
   auto t = std::chrono::system_clock::now();
-  int job_count = jobs_.size();
-  for (auto job_it = jobs_.begin(); job_it != jobs_.end();) {
+  int job_count = static_cast<int>(jobs.size());
+  int total_processes_before = 0;
+  int total_processes_after = 0;
+  int processes_removed = 0;
+
+  // Count total processes before GC
+  for (const auto& [jobId, procs] : jobs) {
+    total_processes_before += static_cast<int>(procs.size());
+  }
+
+  LOG(INFO) << fmt::format(
+      "Starting GC: {} job(s), {} total process group(s)",
+      job_count,
+      total_processes_before);
+
+  for (auto job_it = jobs.begin(); job_it != jobs.end();) {
     auto& procs = job_it->second;
+    LOG(INFO) << fmt::format(
+        "GC: Checking job '{}' with {} process group(s)",
+        job_it->first,
+        procs.size());
+
     for (auto proc_it = procs.begin(); proc_it != procs.end();) {
       struct LibkinetoProcess& proc = proc_it->second;
-      if ((t - proc.lastRequestTime) > kKeepAliveTimeSecs) {
+      auto time_since_last_request =
+          std::chrono::duration_cast<std::chrono::seconds>(
+              t - proc.lastRequestTime);
+
+      if (time_since_last_request > kKeepAliveTimeSecs) {
         LOG(INFO) << fmt::format(
-            "Stopped tracking process ({}) from job {}",
+            "GC: Removing process ({}) from job '{}' (last seen {} seconds ago, threshold is {} seconds)",
             fmt::join(proc_it->first, ","),
-            job_it->first);
+            job_it->first,
+            time_since_last_request.count(),
+            kKeepAliveTimeSecs.count());
         onProcessCleanup(proc_it->first);
         proc_it = procs.erase(proc_it);
+        processes_removed++;
       } else {
+        LOG(INFO) << fmt::format(
+            "GC: Keeping process ({}) from job '{}' (last seen {} seconds ago)",
+            fmt::join(proc_it->first, ","),
+            job_it->first,
+            time_since_last_request.count());
         proc_it++;
       }
     }
     if (procs.empty()) {
-      LOG(INFO) << "Stopped tracking job " << job_it->first;
+      LOG(INFO) << fmt::format("GC: Removing empty job '{}'", job_it->first);
       jobInstancesPerGpu_.erase(job_it->first);
-      job_it = jobs_.erase(job_it);
+      job_it = jobs.erase(job_it);
     } else {
       job_it++;
     }
   }
-  if (job_count != jobs_.size()) {
-    LOG(INFO) << "Tracked jobs: " << jobs_.size();
+
+  // Count total processes after GC
+  for (const auto& [jobId, procs] : jobs) {
+    total_processes_after += static_cast<int>(procs.size());
   }
+
+  LOG(INFO) << fmt::format(
+      "GC completed: Removed {} process group(s), {} job(s) remaining with {} total process group(s)",
+      processes_removed,
+      jobs.size(),
+      total_processes_after);
 }
 
 int32_t LibkinetoConfigManager::registerLibkinetoContext(
@@ -178,11 +221,15 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
       jobId,
       fmt::join(pids, ","),
       configType);
+
   std::string ret;
   std::set<int32_t> pids_set(pids.begin(), pids.end());
-  std::lock_guard<std::mutex> guard(mutex_);
+  auto registry = LibkinetoJobRegistry::getInstance();
+  std::lock_guard<std::mutex> guard(registry->getMutex());
 
-  auto _emplace_result = jobs_[jobId].emplace(pids_set, LibkinetoProcess{});
+  auto& jobs = registry->getAllJobs();
+
+  auto _emplace_result = jobs[jobId].emplace(pids_set, LibkinetoProcess{});
   const auto& it = _emplace_result.first;
   bool newProcess = _emplace_result.second;
   struct LibkinetoProcess& process = it->second;
@@ -195,24 +242,43 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
     // pids are being profiled.
     process.pid = pids[0]; // Remember child (leaf) process
     LOG(INFO) << fmt::format(
-        "Registered process ({}) for job {}.", fmt::join(pids, ", "), jobId);
+        "Registered process ({}) for job '{}'. Leaf PID: {}",
+        fmt::join(pids, ", "),
+        jobId,
+        process.pid);
 
     onRegisterProcess(pids_set);
   }
-  if (configType & int(LibkinetoConfigType::EVENTS) &&
-      !process.eventProfilerConfig.empty()) {
-    ret += process.eventProfilerConfig + "\n";
-    process.eventProfilerConfig.clear();
+
+  bool hasEventConfig = !process.eventProfilerConfig.empty();
+  bool hasActivityConfig = !process.activityProfilerConfig.empty();
+
+  if (configType & int(LibkinetoConfigType::EVENTS)) {
+    if (hasEventConfig) {
+      LOG(INFO) << fmt::format(
+          "Returning event profiler config for process ({}) in job '{}'",
+          fmt::join(pids, ", "),
+          jobId);
+      ret += process.eventProfilerConfig + "\n";
+      process.eventProfilerConfig.clear();
+    }
   }
 
-  if (configType & int(LibkinetoConfigType::ACTIVITIES) &&
-      !process.activityProfilerConfig.empty()) {
-    ret += process.activityProfilerConfig + "\n";
-    process.activityProfilerConfig.clear();
+  if (configType & int(LibkinetoConfigType::ACTIVITIES)) {
+    if (hasActivityConfig) {
+      LOG(INFO) << fmt::format(
+          "Returning activity profiler config for process ({}) in job '{}'",
+          fmt::join(pids, ", "),
+          jobId);
+      ret += process.activityProfilerConfig + "\n";
+      process.activityProfilerConfig.clear();
+    }
   }
+
   // Track last request time so we know which libkineto instances
   // are currently active.
   process.lastRequestTime = std::chrono::system_clock::now();
+
   return ret;
 }
 
@@ -284,8 +350,26 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   // accounted for.
   bool traceAllPids = nPids == 0 || (nPids == 1 && *pids.begin() == 0);
   {
-    std::lock_guard<std::mutex> guard(mutex_);
-    if (auto it = jobs_.find(jobId); it != jobs_.end()) {
+    auto registry = LibkinetoJobRegistry::getInstance();
+    std::lock_guard<std::mutex> guard(registry->getMutex());
+    auto& jobs = registry->getAllJobs();
+
+    // Debug: Log all currently tracked jobs and processes INSIDE the lock
+    LOG(INFO) << fmt::format("Currently tracking {} job(s)", jobs.size());
+    for (const auto& [tracked_jobId, processMap] : jobs) {
+      LOG(INFO) << fmt::format(
+          "  Job ID '{}': {} process group(s)",
+          tracked_jobId,
+          processMap.size());
+      for (const auto& [pids_set, proc] : processMap) {
+        LOG(INFO) << fmt::format(
+            "    Process: ({}) [leaf PID: {}]",
+            fmt::join(pids_set, ","),
+            proc.pid);
+      }
+    }
+
+    if (auto it = jobs.find(jobId); it != jobs.end()) {
       auto& processes = it->second;
       for (auto& pair : processes) {
         for (const auto& pid : pair.first) {
@@ -323,12 +407,8 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
 }
 
 int LibkinetoConfigManager::processCount(const std::string& jobId) const {
-  int count = 0;
-  std::lock_guard<std::mutex> guard(mutex_);
-  auto it = jobs_.find(jobId);
-  if (it != jobs_.end()) {
-    count = it->second.size();
-  }
+  auto registry = LibkinetoJobRegistry::getInstance();
+  int count = static_cast<int>(registry->getProcessCount(jobId));
   LOG(INFO) << "Process count for job ID " << jobId << ": " << count;
   return count;
 }
