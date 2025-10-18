@@ -2197,6 +2197,38 @@ void addArmUncoreMetrics(
       std::vector<std::string>{}));
 
   metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_REMOTE_READ_BEATS",
+      "Read memory beats (32 byte chunks) from SCF to remote CPU memory.",
+      "Read memory beats (32 byte chunks) from SCF to remote CPU memory.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_remote_read_chunks",
+               PmuType::nvidia_scf_pmu,
+               "remote_socket_rd_data",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
+      "HW_SCF_CPU_REMOTE_WRITE_BYTES",
+      "Counts the total number of bytes transferred to remote sockets' memory.",
+      "Counts the total number of bytes transferred, to Remote sockets' memory by Write-backs, Write-unique, non-coherent Writes, and all atomics. For the non-coherent Writes, number of bytes is based on size field.",
+      std::map<TOptCpuArch, EventRefs>{
+          {CpuArch::NEOVERSE_V2,
+           EventRefs{EventRef{
+               "scf_cpu_remote_write_bytes",
+               PmuType::nvidia_scf_pmu,
+               "remote_socket_wr_total_bytes",
+               EventExtraAttr{},
+               {}}}}},
+      100'000'000,
+      System::Permissions{},
+      std::vector<std::string>{}));
+
+  metrics->add(std::make_shared<MetricDesc>(
       "HW_SCF_CPU_WB_ACCESS",
       "Write-back requests from SCF to local CPU memory.",
       "Write-back requests from SCF to local CPU memory.",
@@ -2424,61 +2456,79 @@ void addArmUncoreMetrics(
   // Only add these metrics when there are multiple sockets (socket count > 1)
   if (cpuSockets > 1) {
     for (uint32_t socketId = 0; socketId < cpuSockets; socketId++) {
-      // Outstanding read requests metric for each socket
-      std::string rdOutstandingName =
-          "HW_SOCKET_" + std::to_string(socketId) + "_RD_OUTSTANDING";
-      std::string rdOutstandingDesc = "Outstanding read requests to Socket " +
-          std::to_string(socketId) + " memory from remote sockets";
-      std::string rdOutstandingLongDesc =
-          "Outstanding read requests directed to Socket " +
-          std::to_string(socketId) +
-          " memory controller from remote sockets. Used for measuring remote socket read latency.";
-      std::string rdOutstandingEventName =
-          "socket_" + std::to_string(socketId) + "_rd_outstanding";
+      // Define metric templates for socket-specific metrics
+      struct SocketMetricTemplate {
+        std::string nameSuffix;
+        std::string descTemplate;
+        std::string longDescTemplate;
+        std::string eventNameTemplate;
+      };
 
-      metrics->add(std::make_shared<MetricDesc>(
-          rdOutstandingName,
-          rdOutstandingDesc,
-          rdOutstandingLongDesc,
-          std::map<TOptCpuArch, EventRefs>{
-              {CpuArch::NEOVERSE_V2,
-               EventRefs{EventRef{
-                   rdOutstandingEventName,
-                   PmuType::nvidia_scf_pmu,
-                   rdOutstandingEventName,
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
+      std::vector<SocketMetricTemplate> socketMetricTemplates = {
+          {"_RD_OUTSTANDING",
+           "Outstanding read requests to Socket {} memory from remote sockets",
+           "Outstanding read requests directed to Socket {} memory controller from remote sockets. Used for measuring remote socket read latency.",
+           "socket_{}_rd_outstanding"},
+          {"_RD_DATA",
+           "Counts the total number of SCF Read data beats transferred from CNVLINK Socket {} memory or NVLINK-C2C socket {} memory to Local CPU. Each data beat transfers up to 32 bytes.",
+           "Counts the total number of SCF Read data beats transferred from CNVLINK Socket {} memory or NVLINK-C2C socket {} memory to Local CPU. Each data beat transfers up to 32 bytes.",
+           "socket_{}_rd_data"},
+          {"_WB_DATA",
+           "Counts the total number of SCF Write-back data beats transferred from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory (excluding Write-unique/non-coherent Writes). Each wb_data beat transfers 32 bytes of data.",
+           "Counts the total number of SCF Write-back data beats transferred from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory (excluding Write-unique/non-coherent Writes). Each wb_data beat transfers 32 bytes of data.",
+           "socket_{}_wb_data"},
+          {"_WR_DATA",
+           "Counts the total number of bytes transferred, based on size field, for SCF Write-unique and non-coherent Writes from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "Counts the total number of bytes transferred, based on size field, for SCF Write-unique and non-coherent Writes from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "socket_{}_wr_data"},
+          {"_RD_ACCESS",
+           "Counts the number of SCF Read accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory. Increments by total new Read accesses each cycle.",
+           "Counts the number of SCF Read accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory. Increments by total new Read accesses each cycle.",
+           "socket_{}_rd_access"},
+          {"_WB_ACCESS",
+           "Count all Write-back (clean and dirty) accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "Count all Write-back (clean and dirty) accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "socket_{}_wb_access"},
+          {"_WR_ACCESS",
+           "Count the Write-unique and non-coherent Write accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "Count the Write-unique and non-coherent Write accesses from Local CPU to CNVLINK socket {} memory or NVLINK-C2C socket {} memory.",
+           "socket_{}_wr_access"}};
 
-      // Read access requests metric for each socket
-      std::string rdAccessName =
-          "HW_SOCKET_" + std::to_string(socketId) + "_RD_ACCESS";
-      std::string rdAccessDesc = "Read access requests to Socket " +
-          std::to_string(socketId) + " memory from remote sockets";
-      std::string rdAccessLongDesc =
-          "Read access requests directed to Socket " +
-          std::to_string(socketId) +
-          " memory controller from remote sockets. Used for measuring remote socket read latency.";
-      std::string rdAccessEventName =
-          "socket_" + std::to_string(socketId) + "_rd_access";
+      // Register metrics using templates
+      for (size_t i = 0; i < socketMetricTemplates.size(); ++i) {
+        const auto& tmpl = socketMetricTemplates[i];
+        std::string metricName =
+            "HW_SOCKET_" + std::to_string(socketId) + tmpl.nameSuffix;
 
-      metrics->add(std::make_shared<MetricDesc>(
-          rdAccessName,
-          rdAccessDesc,
-          rdAccessLongDesc,
-          std::map<TOptCpuArch, EventRefs>{
-              {CpuArch::NEOVERSE_V2,
-               EventRefs{EventRef{
-                   rdAccessEventName,
-                   PmuType::nvidia_scf_pmu,
-                   rdAccessEventName,
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
+        // Format description strings by replacing {} with socketId
+        auto replaceSocketId = [socketId](std::string str) {
+          size_t pos = 0;
+          while ((pos = str.find("{}")) != std::string::npos) {
+            str.replace(pos, 2, std::to_string(socketId));
+          }
+          return str;
+        };
+        // Replace {} placeholders with socketId
+        std::string desc = replaceSocketId(tmpl.descTemplate);
+        std::string longDesc = replaceSocketId(tmpl.longDescTemplate);
+        std::string eventName = replaceSocketId(tmpl.eventNameTemplate);
+
+        metrics->add(std::make_shared<MetricDesc>(
+            metricName,
+            desc,
+            longDesc,
+            std::map<TOptCpuArch, EventRefs>{
+                {CpuArch::NEOVERSE_V2,
+                 EventRefs{EventRef{
+                     eventName,
+                     PmuType::nvidia_scf_pmu,
+                     eventName,
+                     EventExtraAttr{},
+                     {}}}}},
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+      }
     }
   }
 }
