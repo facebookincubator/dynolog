@@ -69,13 +69,13 @@ BPerfEventsGroup::BPerfEventsGroup(
       bpf_pinned_map_dir_(bpf_pinned_map_dir) {
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
-        .size = sizeof(attr),
         .type = conf.configs.type,
+        .size = sizeof(attr),
         .config = conf.configs.config,
-        .config1 = conf.configs.config1,
-        .config2 = conf.configs.config2,
         .read_format =
-            PERF_FORMAT_TOTAL_TIME_ENABLED | PERF_FORMAT_TOTAL_TIME_RUNNING};
+            PERF_FORMAT_TOTAL_TIME_ENABLED | PERF_FORMAT_TOTAL_TIME_RUNNING,
+        .config1 = conf.configs.config1,
+        .config2 = conf.configs.config2};
     attrs_.push_back(attr);
   }
   cpu_cnt_ = ::libbpf_num_possible_cpus();
