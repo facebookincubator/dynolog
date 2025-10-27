@@ -89,8 +89,9 @@ std::vector<std::shared_ptr<LogicalDevice>> LogicalDevice::parseTopologyNodes(
 
       // Only include nodes that have SIMD units (actual GPUs) and all of the
       // required properties
-      devices.push_back(std::make_shared<LogicalDevice>(
-          kfdNodeId, uniqueId.value(), minorId.value()));
+      devices.push_back(
+          std::make_shared<LogicalDevice>(
+              kfdNodeId, uniqueId.value(), minorId.value()));
     }
   } catch (const std::exception& e) {
     LOG(ERROR) << "Error parsing topology nodes: " << e.what();

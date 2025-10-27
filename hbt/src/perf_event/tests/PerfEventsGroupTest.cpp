@@ -45,12 +45,13 @@ EventConfs constructIntelPTEventConfs() {
     HBT_LOG_INFO() << "Machine doesn't support pt/branch event.";
     return event_confs;
   }
-  event_confs.push_back(EventConf{
-      .id = "test_intel_pt",
-      .configs = EventConfigs{
-          .type = (uint32_t)type,
-          .config = (1u << pt_event) | (1u << branch_event),
-      }});
+  event_confs.push_back(
+      EventConf{
+          .id = "test_intel_pt",
+          .configs = EventConfigs{
+              .type = (uint32_t)type,
+              .config = (1u << pt_event) | (1u << branch_event),
+          }});
   return event_confs;
 }
 

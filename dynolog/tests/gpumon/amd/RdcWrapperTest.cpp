@@ -41,7 +41,9 @@ TEST(RdcWrapperTest, testRdcRuntimeContextSynchronized) {
     EXPECT_FALSE(b.try_lock());
   }
 
-  { auto a = t.rlock(); }
+  {
+    auto a = t.rlock();
+  }
   // lock released outside of scope
   std::unique_lock<std::shared_mutex> b(t.getMutex(), std::defer_lock);
   EXPECT_TRUE(b.try_lock());

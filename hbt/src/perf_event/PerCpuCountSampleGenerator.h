@@ -123,8 +123,8 @@ class CpuCountSampleGenerator final
     return 0;
   }
 
-  ssize_t handleRecordRead(const mode::Sampling::Read& r
-                           __attribute__((unused))) noexcept {
+  ssize_t handleRecordRead(
+      const mode::Sampling::Read& r __attribute__((unused))) noexcept {
     /// XXX: Do nothing, implement in the future.
     return 0;
   }

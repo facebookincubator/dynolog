@@ -224,8 +224,9 @@ auto makeBinaryTree(std::vector<std::unique_ptr<TInputNode>>& streams) {
 
   for (size_t i = 0; i < num_streams; i += 2) {
     if (i + 1 < num_streams) {
-      nodes.emplace_back(std::make_unique<TNode>(
-          std::move(streams.at(i)), std::move(streams.at(i + 1))));
+      nodes.emplace_back(
+          std::make_unique<TNode>(
+              std::move(streams.at(i)), std::move(streams.at(i + 1))));
     } else {
       nodes.emplace_back(
           std::make_unique<TNode>(std::move(streams.at(i)), nullptr));

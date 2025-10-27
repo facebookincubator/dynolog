@@ -161,16 +161,19 @@ class Ticker {
         const TFunc& f,
         const std::vector<double>& subminor_tick_sample_rates) {
       if (subminor_tick_sample_rates.size() > _subtick_levels) {
-        throw std::runtime_error(std::string(
-            "config is invalid because there are more sample_rates (" +
-            std::to_string(subminor_tick_sample_rates.size()) +
-            ") than tick levels (" + std::to_string(_subtick_levels) + ")"));
+        throw std::runtime_error(
+            std::string(
+                "config is invalid because there are more sample_rates (" +
+                std::to_string(subminor_tick_sample_rates.size()) +
+                ") than tick levels (" + std::to_string(_subtick_levels) +
+                ")"));
       }
       for (const auto& rate : subminor_tick_sample_rates) {
         if (rate < 0.0 || rate > 1.0) {
-          throw std::runtime_error(std::string(
-              "config is invalid because sample_rates (" +
-              std::to_string(rate) + ") are not between 0.0 and 1.0"));
+          throw std::runtime_error(
+              std::string(
+                  "config is invalid because sample_rates (" +
+                  std::to_string(rate) + ") are not between 0.0 and 1.0"));
         }
       }
       std::array<double, _subtick_levels> sample_rates_array;

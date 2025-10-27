@@ -126,8 +126,9 @@ class PerCpuSliceGeneratorConstNumCpus {
 
       auto thread_sw_gen = per_cpu_thread_generator_->getCpuGeneratorPtr(cpu);
       auto thread_sw_cpu_rb = thread_sw_gen->getOutput();
-      thread_sw_streams.push_back(std::make_unique<TThreadSwitchStream>(
-          thread_sw_cpu_rb, thread_sw_gen));
+      thread_sw_streams.push_back(
+          std::make_unique<TThreadSwitchStream>(
+              thread_sw_cpu_rb, thread_sw_gen));
 
       auto phases_cpu_rb = phases_per_cpu_rb_->getCpuRingBuffer(cpu);
       phase_streams.push_back(

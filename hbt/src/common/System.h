@@ -313,11 +313,12 @@ struct CpuInfo {
       uint32_t cpu_step_num,
       uint32_t vendor_id_int = 0)
       : cpu_family(perf_event::makeCpuFamily(cpu_family_num)),
-        cpu_arch(perf_event::makeCpuArch(
-            vendor_id_int,
-            cpu_family_num,
-            cpu_model_num,
-            cpu_step_num)),
+        cpu_arch(
+            perf_event::makeCpuArch(
+                vendor_id_int,
+                cpu_family_num,
+                cpu_model_num,
+                cpu_step_num)),
         vendor_id_int(vendor_id_int),
         vendor_id(std::move(vendor_id)),
         cpu_family_num(cpu_family_num),

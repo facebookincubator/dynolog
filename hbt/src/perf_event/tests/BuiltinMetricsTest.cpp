@@ -178,32 +178,35 @@ TEST_F(BuiltinMetricsTest, TracepointEvents) {
 }
 
 TEST_F(BuiltinMetricsTest, CanonicalEventName) {
-  pmu_manager->addEvent(std::make_shared<EventDef>(
-      PmuType::generic_hardware,
-      "Dummy-EVENT",
-      EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
-      "Dummy event for testing canonical name.",
-      "Dummy event for testing canonical name."));
+  pmu_manager->addEvent(
+      std::make_shared<EventDef>(
+          PmuType::generic_hardware,
+          "Dummy-EVENT",
+          EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
+          "Dummy event for testing canonical name.",
+          "Dummy event for testing canonical name."));
   auto dummy_event = pmu_manager->findEventDef(
       "dummy_event", std::nullopt, "generic_hardware");
   EXPECT_NE(dummy_event, nullptr);
-  pmu_manager->addEvent(std::make_shared<EventDef>(
-      PmuType::generic_hardware,
-      "dummy-event2",
-      EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
-      "Dummy event2 for testing canonical name.",
-      "Dummy event2 for testing canonical name."));
+  pmu_manager->addEvent(
+      std::make_shared<EventDef>(
+          PmuType::generic_hardware,
+          "dummy-event2",
+          EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
+          "Dummy event2 for testing canonical name.",
+          "Dummy event2 for testing canonical name."));
   // test duplicated aliases would not fail
   std::vector<EventId> aliases = {"alias", "alias"};
   pmu_manager->addAliases("dummy-event2", aliases);
   auto dummy_event2 = pmu_manager->findEventDef("dummy_event2");
   EXPECT_NE(dummy_event2, nullptr);
-  pmu_manager->addEvent(std::make_shared<EventDef>(
-      PmuType::generic_hardware,
-      "DUMMYEVENT3",
-      EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
-      "Dummy event3 for testing canonical name.",
-      "Dummy event3 for testing canonical name."));
+  pmu_manager->addEvent(
+      std::make_shared<EventDef>(
+          PmuType::generic_hardware,
+          "DUMMYEVENT3",
+          EventDef::Encoding{.code = PERF_COUNT_HW_BRANCH_MISSES},
+          "Dummy event3 for testing canonical name.",
+          "Dummy event3 for testing canonical name."));
   auto dummy_event3 = pmu_manager->findEventDef("dummyevent3");
   EXPECT_NE(dummy_event3, nullptr);
   // test when user enters non-canonical event alias

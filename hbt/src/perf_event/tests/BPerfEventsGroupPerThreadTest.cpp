@@ -313,7 +313,7 @@ TEST(BPerfEventsGroupPerThreadTest, TestConcurrentReader) {
 
   std::vector<std::unique_ptr<std::thread>> threads;
   int concurrentThreads = BPERF_MAX_THREAD_READER + 1;
-  struct rlimit rl {};
+  struct rlimit rl{};
   // we will need at least 2 fds per thread, then 2 fds for global perf events
   rl.rlim_cur = 2 * concurrentThreads + 100;
   rl.rlim_max = 2 * concurrentThreads + 100;

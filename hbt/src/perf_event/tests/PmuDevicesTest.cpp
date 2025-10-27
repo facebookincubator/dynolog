@@ -28,12 +28,14 @@ auto default_pmu_manager() {
       "A Dummy PMU device",
       true);
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy_event", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-      "dummy brief desc",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy_event", // Event ID,
+          EventDef::Encoding{
+              .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+          "dummy brief desc",
+          "dummy full desc"));
 
   // Create an event with aliases.
   pmu->addEvent(
@@ -69,31 +71,35 @@ TEST_F(PmuDevicesTest, EventRegistration) {
 
   // An event with an invalid name.
   ASSERT_THROW(
-      pmu->addEvent(std::make_unique<EventDef>(
-          PmuType::software,
-          "dummy_ev ent", // Event ID,
-          EventDef::Encoding{
-              .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-          "dummy brief desc",
-          "dummy full desc")),
+      pmu->addEvent(
+          std::make_unique<EventDef>(
+              PmuType::software,
+              "dummy_ev ent", // Event ID,
+              EventDef::Encoding{
+                  .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+              "dummy brief desc",
+              "dummy full desc")),
       std::invalid_argument);
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy_event", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-      "dummy brief desc",
-      "dummy full desc"));
-
-  ASSERT_THROW(
-      pmu->addEvent(std::make_unique<EventDef>(
+  pmu->addEvent(
+      std::make_unique<EventDef>(
           PmuType::software,
           "dummy_event", // Event ID,
           EventDef::Encoding{
               .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
           "dummy brief desc",
-          "dummy full desc")),
+          "dummy full desc"));
+
+  ASSERT_THROW(
+      pmu->addEvent(
+          std::make_unique<EventDef>(
+              PmuType::software,
+              "dummy_event", // Event ID,
+              EventDef::Encoding{
+                  .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+              "dummy brief desc",
+              "dummy full desc")),
       std::invalid_argument);
 
   // Find the event definition, the PMU name is optional.
@@ -150,12 +156,14 @@ TEST_F(PmuDevicesTest, PerfEventAttr) {
   pmu_manager->addPmu(pmu);
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy_event", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-      "dummy brief desc",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy_event", // Event ID,
+          EventDef::Encoding{
+              .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+          "dummy brief desc",
+          "dummy full desc"));
 
   auto ev_def = pmu_manager->findEventDef("dummy-event", std::nullopt);
   EXPECT_TRUE(ev_def != nullptr);
@@ -214,12 +222,14 @@ TEST_F(PmuDevicesTest, PerfEventAttrPrecise) {
   pmu_manager->addPmu(pmu);
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy_event", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-      "dummy brief desc",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy_event", // Event ID,
+          EventDef::Encoding{
+              .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+          "dummy brief desc",
+          "dummy full desc"));
 
   auto ev_def = pmu_manager->findEventDef("dummy-event", std::nullopt);
   EXPECT_TRUE(ev_def != nullptr);
@@ -277,28 +287,34 @@ TEST_F(PmuDevicesTest, LibPfm4Groups) {
   pmu_manager->addPmu(pmu);
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy.event0", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
-      "desc; ev0",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy.event0", // Event ID,
+          EventDef::Encoding{
+              .code = 10, .umask = 0x3, .inv = true, .cmask = 0xcc},
+          "desc; ev0",
+          "dummy full desc"));
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy.event1", // Event ID,
-      EventDef::Encoding{.code = 10, .umask = 0x4, .inv = false, .cmask = 0xcc},
-      "desc; ev1",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy.event1", // Event ID,
+          EventDef::Encoding{
+              .code = 10, .umask = 0x4, .inv = false, .cmask = 0xcc},
+          "desc; ev1",
+          "dummy full desc"));
 
   // Create an event.
-  pmu->addEvent(std::make_unique<EventDef>(
-      PmuType::software,
-      "dummy.nosamegroup", // Event ID,
-      EventDef::Encoding{.code = 11, .umask = 0x4, .inv = false, .cmask = 0xcc},
-      "desc other group",
-      "dummy full desc"));
+  pmu->addEvent(
+      std::make_unique<EventDef>(
+          PmuType::software,
+          "dummy.nosamegroup", // Event ID,
+          EventDef::Encoding{
+              .code = 11, .umask = 0x4, .inv = false, .cmask = 0xcc},
+          "desc other group",
+          "dummy full desc"));
 
   {
     auto ev_def = pmu_manager->findEventDef("dummy.event0", std::nullopt);

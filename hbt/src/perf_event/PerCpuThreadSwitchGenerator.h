@@ -383,18 +383,21 @@ class CpuThreadSwitchGenerator final
     // There is a context swith only period in between that could be captured.
     if (r.isSwitchOut()) {
       if (r.isSwitchOutPreempt()) {
-        ret = output_producer_.write(tagstack::Event::makeSwitchOutPreempt(
-            new_tstamp, tid_level_, comp_unit_id_));
+        ret = output_producer_.write(
+            tagstack::Event::makeSwitchOutPreempt(
+                new_tstamp, tid_level_, comp_unit_id_));
       } else {
-        ret = output_producer_.write(tagstack::Event::makeSwitchOutYield(
-            new_tstamp, tid_level_, comp_unit_id_));
+        ret = output_producer_.write(
+            tagstack::Event::makeSwitchOutYield(
+                new_tstamp, tid_level_, comp_unit_id_));
       }
     } else {
       // This will be a new vid (if record's event can be written in output).
       auto [vid, is_new_vid] =
           thread_stats_->selectNextVid(static_cast<pid_t>(r.sample_id.tid));
-      ret = output_producer_.write(tagstack::Event::makeSwitchIn(
-          new_tstamp, tid_level_, vid, comp_unit_id_));
+      ret = output_producer_.write(
+          tagstack::Event::makeSwitchIn(
+              new_tstamp, tid_level_, vid, comp_unit_id_));
       if (__hbt_unlikely(is_new_vid && ret >= 0)) {
         // Add ThreadInfo if this is a new vid.
         pid_t pid = static_cast<pid_t>(r.sample_id.pid);

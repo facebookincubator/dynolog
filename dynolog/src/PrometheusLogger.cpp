@@ -32,10 +32,11 @@ inline auto& buildGaugeFromMetric(const MetricDesc& m, Registry& registry) {
 }
 
 PrometheusManager::PrometheusManager()
-    : exposer_(fmt::format(
-          "{}:{}",
-          FLAGS_prometheus_address,
-          FLAGS_prometheus_port)) {
+    : exposer_(
+          fmt::format(
+              "{}:{}",
+              FLAGS_prometheus_address,
+              FLAGS_prometheus_port)) {
   LOG(INFO) << "Prometheus HTTP server listening at "
             << FLAGS_prometheus_address << ":" << FLAGS_prometheus_port;
 

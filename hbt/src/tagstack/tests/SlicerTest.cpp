@@ -51,12 +51,13 @@ void expectExistsEqual(
 
 TEST(SliceMapTest, Lifetime) {
   SlicesMap m;
-  m.write(Slice::makeSlice(
-      100,
-      10000,
-      1,
-      Slice::TransitionType::Analysis,
-      Slice::TransitionType::PhaseChange));
+  m.write(
+      Slice::makeSlice(
+          100,
+          10000,
+          1,
+          Slice::TransitionType::Analysis,
+          Slice::TransitionType::PhaseChange));
 }
 
 TEST(TagStackSlice, 1LevelsOnePhaseWithThreadSwOut) {

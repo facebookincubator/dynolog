@@ -74,10 +74,10 @@ class MetricFrameBase {
     auto tsVector = ts.getTimeVector();
     textTable.emplace_back(ts.length() + 1);
     for (size_t i = 0; i < tsVector.size(); i++) {
-      textTable.back()[i + 1] =
-          std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
-                             tsVector[i].time_since_epoch())
-                             .count());
+      textTable.back()[i + 1] = std::to_string(
+          std::chrono::duration_cast<std::chrono::milliseconds>(
+              tsVector[i].time_since_epoch())
+              .count());
     }
     for (auto it = begin; it != end; it++) {
       textTable.emplace_back();

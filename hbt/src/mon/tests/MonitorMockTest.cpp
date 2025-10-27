@@ -15,13 +15,14 @@ TEST(CpuCountReader, ReadAllCpuCounts) {
   auto cpu_info = CpuInfo("Intel", 6, 207, 0);
   auto cpu_set = CpuSet::makeFromCpusList("0,1,2,3");
   auto pmu_manager = std::make_shared<perf_event::PmuDeviceManager>(cpu_info);
-  pmu_manager->addPmu(std::make_shared<perf_event::PmuDevice>(
-      PmuTypeToStr(perf_event::PmuType::generic_hardware),
-      perf_event::PmuType::generic_hardware,
-      std::nullopt,
-      PERF_TYPE_HARDWARE,
-      "PMU of Generic Hardware Events",
-      false));
+  pmu_manager->addPmu(
+      std::make_shared<perf_event::PmuDevice>(
+          PmuTypeToStr(perf_event::PmuType::generic_hardware),
+          perf_event::PmuType::generic_hardware,
+          std::nullopt,
+          PERF_TYPE_HARDWARE,
+          "PMU of Generic Hardware Events",
+          false));
   pmu_manager->addEvent(
       std::make_shared<perf_event::EventDef>(
           perf_event::PmuType::generic_hardware,
@@ -134,37 +135,40 @@ TEST(UncoreCountReader, ReadAllUncoreCounts) {
   auto cpu_info = CpuInfo("Intel", 6, 207, 0);
   auto cpu_set = CpuSet::makeFromCpusList("0,20");
   auto pmu_manager = std::make_shared<perf_event::PmuDeviceManager>(cpu_info);
-  pmu_manager->addPmu(std::make_shared<perf_event::PmuDevice>(
-      PmuTypeToStr(perf_event::PmuType::uncore_imc),
-      perf_event::PmuType::uncore_imc,
-      /*pmu_device_enumeration=*/0,
-      /*perf_pmu_id=*/14,
-      "uncore_imc_0",
-      /*in_sysfs=*/true,
-      /*cpu_mask=*/cpu_set.cpu_set));
+  pmu_manager->addPmu(
+      std::make_shared<perf_event::PmuDevice>(
+          PmuTypeToStr(perf_event::PmuType::uncore_imc),
+          perf_event::PmuType::uncore_imc,
+          /*pmu_device_enumeration=*/0,
+          /*perf_pmu_id=*/14,
+          "uncore_imc_0",
+          /*in_sysfs=*/true,
+          /*cpu_mask=*/cpu_set.cpu_set));
 
-  pmu_manager->addEvent(std::make_shared<perf_event::EventDef>(
-      perf_event::PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT.RD",
-      perf_event::EventDef::Encoding{.code = 0x4, .umask = 0x3},
-      R"(DRAM RD_CAS and WR_CAS Commands.; All DRAM Reads (RD_CAS + Underfills))",
-      R"(DRAM RD_CAS and WR_CAS Commands; Counts the total number of DRAM Read CAS commands issued on this channel (including underfills).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      perf_event::EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-  pmu_manager->addEvent(std::make_shared<perf_event::EventDef>(
-      perf_event::PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT.WR",
-      perf_event::EventDef::Encoding{.code = 0x4, .umask = 0xC},
-      R"(DRAM RD_CAS and WR_CAS Commands.; All DRAM WR_CAS (both Modes))",
-      R"(DRAM RD_CAS and WR_CAS Commands; Counts the total number of DRAM Write CAS commands issued on this channel.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      perf_event::EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::uncore_imc,
+          "UNC_M_CAS_COUNT.RD",
+          perf_event::EventDef::Encoding{.code = 0x4, .umask = 0x3},
+          R"(DRAM RD_CAS and WR_CAS Commands.; All DRAM Reads (RD_CAS + Underfills))",
+          R"(DRAM RD_CAS and WR_CAS Commands; Counts the total number of DRAM Read CAS commands issued on this channel (including underfills).)",
+          std::nullopt,
+          std::nullopt, // ScaleUnit
+          perf_event::EventDef::IntelFeatures{},
+          std::nullopt // Errata
+          ));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::uncore_imc,
+          "UNC_M_CAS_COUNT.WR",
+          perf_event::EventDef::Encoding{.code = 0x4, .umask = 0xC},
+          R"(DRAM RD_CAS and WR_CAS Commands.; All DRAM WR_CAS (both Modes))",
+          R"(DRAM RD_CAS and WR_CAS Commands; Counts the total number of DRAM Write CAS commands issued on this channel.)",
+          std::nullopt,
+          std::nullopt, // ScaleUnit
+          perf_event::EventDef::IntelFeatures{},
+          std::nullopt // Errata
+          ));
 
   auto metrics = std::make_shared<perf_event::Metrics>();
   perf_event::addIntelUncoreMetrics(metrics);
