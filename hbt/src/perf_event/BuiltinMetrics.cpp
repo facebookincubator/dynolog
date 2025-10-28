@@ -1766,6 +1766,23 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_LL_CACHE_MISS_RD",
+          "Last level cache miss read",
+          "Counts the number of read transactions that a processor core requests from memory but are not found in the Last-Level cache (L3 cache).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "    ",
+                   PmuType::armv8_pmuv3,
+                   "ll_cache_miss_rd",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
