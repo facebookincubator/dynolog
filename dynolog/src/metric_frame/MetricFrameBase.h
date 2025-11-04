@@ -7,14 +7,20 @@
 
 #pragma once
 
+#include <chrono>
+#include <functional>
+#include <map>
+#include <memory>
+#include <optional>
+#include <ostream>
+#include <string>
+#include <variant>
+#include <vector>
+
+#include "dynolog/src/metric_frame/ExtraTypes.h"
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
 #include "dynolog/src/metric_frame/TextTable.h"
-
-#include <chrono>
-#include <memory>
-#include <string>
-#include <variant>
 
 namespace facebook::dynolog {
 
@@ -215,5 +221,181 @@ class MetricFrameSlice {
 };
 
 std::ostream& operator<<(std::ostream& s, const MetricFrameBase& frame);
+
+// validation rule types
+enum class Type {
+  GREATER_EQUAL_THAN, // value >= target_value
+  LESS_EQUAL_THAN, // value <= target_value
+  LESS_THAN, // value < target_value
+  GREATER_THAN, // value > target_value
+};
+
+class ValidationRule {
+ public:
+  // Validation rule types
+  explicit ValidationRule(Type type, double targetValue);
+
+  // generate a validation rule with min/max range
+  static ValidationRule greaterEqualThan(double minValue);
+  static ValidationRule lessEqualThan(double maxValue);
+  static ValidationRule greaterThan(double targetValue);
+  static ValidationRule lessThan(double targetValue);
+
+  // Validate a value against its validation rule
+  bool validate(double value, ValidationRule validationRule) const;
+
+ private:
+  Type type_;
+  double targetValue_;
+};
+
+// Metric info enum types
+enum class MFBMetricName {
+  CPU_UTIL,
+  CPU_CORES_USAGE,
+  CPU_CORES_LIMIT,
+  CPU_CYCLES_USAGE,
+  CPU_INSTRUCTIONS_USAGE,
+  CPU_BUSY_MS,
+  USER_CPU_CORES,
+  SYS_CPU_CORES,
+  MEM_FOOTPRINT,
+  MEM_ANON_FOOTPRINT,
+  MEM_FILE_FOOTPRINT,
+  CPU_SATURATION
+};
+
+enum class MFBScope {
+  HOST,
+  TW_TASK,
+  ALLOTMENT,
+};
+
+enum class MFBGranularity {
+  ALL,
+  HUNDRED_MS,
+  SECOND,
+  MINUTE,
+  FIVE_SECONDS,
+  FIFTEEN_SECONDS,
+};
+
+enum class MFBAggregation {
+  NONE,
+  AVG,
+  MIN,
+  MAX,
+  P90,
+  P95,
+  P99,
+};
+
+enum class MFBIdentifier {
+  HOST_NAME,
+  TW_TASK_HANDLE,
+};
+
+struct MFBDynoLogSchematizedResponseRow {
+  std::string metric_name;
+  MFBGranularity granularity;
+  double metric_value;
+  MFBScope scope;
+  MFBAggregation aggregation;
+  std::string identifier;
+  int64_t interval;
+};
+
+struct MFBDynoLogSchematizedResponse {
+  std::vector<MFBDynoLogSchematizedResponseRow> responseRow;
+  std::vector<std::string> error_messages;
+};
+
+// Criticality levels for metrics
+enum class Criticality {
+  LOW,
+  HIGH,
+};
+
+// Include/exclude category for metrics
+enum class Category {
+  LST,
+  LSST,
+  CPU_ARCH,
+  CPU_MODEL,
+  KERNEL_VERSION,
+};
+
+// Templated handler function - ResponseType is specified when creating
+// handlers
+template <typename ResponseType>
+using HandlerFunc = std::function<void(
+    ResponseType&,
+    MFBIdentifier&,
+    MFBGranularity,
+    MFBAggregation,
+    uint64_t)>;
+
+using MFBHandlerFunc = HandlerFunc<MFBDynoLogSchematizedResponse>;
+
+class MetricInfo {
+ public:
+  MetricInfo(
+      MFBMetricName metricName,
+      std::vector<MFBGranularity> granularities,
+      std::vector<MFBAggregation> aggregations,
+      MFBAggregation defaultAggregation,
+      MFBHandlerFunc handler,
+      std::vector<ValidationRule> validationRules,
+      std::map<Category, std::vector<std::string>> inclusion,
+      std::map<Category, std::vector<std::string>> exclusion,
+      Criticality criticality);
+
+  ~MetricInfo() = default;
+  MetricInfo(const MetricInfo&) = default;
+  MetricInfo& operator=(const MetricInfo&) = default;
+  MetricInfo(MetricInfo&&) = default;
+  MetricInfo& operator=(MetricInfo&&) = default;
+
+  const MFBMetricName& metricName() const;
+  const std::vector<MFBGranularity>& granularities() const;
+  const std::vector<MFBAggregation>& aggregations() const;
+  const MFBAggregation& defaultAggregation() const;
+  MFBHandlerFunc handler() const;
+  const std::vector<ValidationRule>& validationRules() const;
+  const std::map<Category, std::vector<std::string>>& inclusion() const;
+  const std::map<Category, std::vector<std::string>>& exclusion() const;
+  Criticality criticality() const;
+
+ private:
+  MFBMetricName metricName_;
+  std::vector<MFBGranularity> granularities_;
+  std::vector<MFBAggregation> aggregations_;
+  MFBAggregation defaultAggregation_;
+  MFBHandlerFunc handler_;
+  std::vector<ValidationRule> validationRules_;
+  std::map<Category, std::vector<std::string>> inclusion_;
+  std::map<Category, std::vector<std::string>> exclusion_;
+  Criticality criticality_;
+};
+
+class MetricInfoMap {
+ public:
+  explicit MetricInfoMap(std::map<MFBMetricName, MetricInfo> metricInfoMap);
+
+  // Get the entire map
+  const std::map<MFBMetricName, MetricInfo>& getMetricInfoMap() const;
+
+  // Get MetricInfo for a specific metric name
+  std::optional<MetricInfo> getMetricInfo(MFBMetricName metricName) const;
+
+  // Check if a metric is registered
+  bool contains(MFBMetricName metricName) const;
+
+  // Add or update a MetricInfo
+  void add(MFBMetricName metricName, const MetricInfo& metricInfo);
+
+ private:
+  std::map<MFBMetricName, MetricInfo> metricInfoMap_;
+};
 
 } // namespace facebook::dynolog
