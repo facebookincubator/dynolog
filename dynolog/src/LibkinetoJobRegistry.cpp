@@ -19,56 +19,28 @@ std::shared_ptr<LibkinetoJobRegistry> LibkinetoJobRegistry::getInstance() {
 std::pair<LibkinetoProcess&, bool>
 LibkinetoJobRegistry::registerOrUpdateProcess(
     const std::string& jobId,
-    const std::set<int32_t>& pids) {
-  std::lock_guard<std::mutex> guard(mutex_);
-  auto result = jobs_[jobId].emplace(pids, LibkinetoProcess{});
-  return {result.first->second, result.second};
-}
-
-std::optional<
-    std::reference_wrapper<std::map<std::set<int32_t>, LibkinetoProcess>>>
-LibkinetoJobRegistry::findJob(const std::string& jobId) {
-  std::lock_guard<std::mutex> guard(mutex_);
-  auto it = jobs_.find(jobId);
-  if (it != jobs_.end()) {
-    return std::ref(it->second);
+    const std::set<int32_t>& pids_set,
+    const std::vector<int32_t>& pids) {
+  // Caller must hold mutex_, ie acquire it separately via getMutex()
+  auto result = jobs_[jobId].emplace(pids_set, LibkinetoProcess{});
+  if (result.second) {
+    // New process - store the ordered PID ancestry
+    result.first->second.pids = pids;
+    result.first->second.pid = pids[0]; // Leaf PID
   }
-  return std::nullopt;
+  return {result.first->second, result.second};
 }
 
 std::map<std::string, std::map<std::set<int32_t>, LibkinetoProcess>>&
 LibkinetoJobRegistry::getAllJobs() {
-  // Caller must hold mutex or acquire it separately via getMutex()
+  // Caller must hold mutex_, ie acquire it separately via getMutex()
   return jobs_;
-}
-
-void LibkinetoJobRegistry::removeJob(const std::string& jobId) {
-  std::lock_guard<std::mutex> guard(mutex_);
-  jobs_.erase(jobId);
-}
-
-void LibkinetoJobRegistry::removeProcess(
-    const std::string& jobId,
-    const std::set<int32_t>& pids) {
-  std::lock_guard<std::mutex> guard(mutex_);
-  auto it = jobs_.find(jobId);
-  if (it != jobs_.end()) {
-    it->second.erase(pids);
-    if (it->second.empty()) {
-      jobs_.erase(it);
-    }
-  }
 }
 
 size_t LibkinetoJobRegistry::getProcessCount(const std::string& jobId) const {
   std::lock_guard<std::mutex> guard(mutex_);
   auto it = jobs_.find(jobId);
   return it != jobs_.end() ? it->second.size() : 0;
-}
-
-size_t LibkinetoJobRegistry::getJobCount() const {
-  std::lock_guard<std::mutex> guard(mutex_);
-  return jobs_.size();
 }
 
 } // namespace dynolog

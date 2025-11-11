@@ -215,37 +215,34 @@ int32_t LibkinetoConfigManager::registerLibkinetoContext(
 std::string LibkinetoConfigManager::obtainOnDemandConfig(
     const std::string& jobId,
     const std::vector<int32_t>& pids,
-    int32_t configType) {
+    int32_t configType,
+    const std::string& category) {
   VLOG(2) << fmt::format(
-      "obtainOnDemandConfig({}, ({}), {})",
+      "obtainOnDemandConfig({}, ({}), {}, {})",
       jobId,
       fmt::join(pids, ","),
-      configType);
+      configType,
+      category);
 
   std::string ret;
   std::set<int32_t> pids_set(pids.begin(), pids.end());
   auto registry = LibkinetoJobRegistry::getInstance();
   std::lock_guard<std::mutex> guard(registry->getMutex());
 
-  auto& jobs = registry->getAllJobs();
-
-  auto _emplace_result = jobs[jobId].emplace(pids_set, LibkinetoProcess{});
-  const auto& it = _emplace_result.first;
-  bool newProcess = _emplace_result.second;
-  struct LibkinetoProcess& process = it->second;
+  auto [process, newProcess] =
+      registry->registerOrUpdateProcess(jobId, pids_set, pids);
 
   if (newProcess) {
     // First time - intialize!
     // 'pids' is an ordered ancestor list starting with the
     // child (leaf) process, i.e. the one making this request.
-    // Keep a copy of this pid so that clients can know which
-    // pids are being profiled.
-    process.pid = pids[0]; // Remember child (leaf) process
+    process.pid_ipc_channel_used = category;
     LOG(INFO) << fmt::format(
-        "Registered process ({}) for job '{}'. Leaf PID: {}",
+        "Registered process ({}) for job '{}'. Leaf PID: {}. Request channel: {}",
         fmt::join(pids, ", "),
         jobId,
-        process.pid);
+        process.pid,
+        category);
 
     onRegisterProcess(pids_set);
   }
@@ -340,6 +337,7 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   GpuProfilerResult res;
   res.activityProfilersBusy = 0;
   res.eventProfilersBusy = 0;
+  res.manifoldChromeTrace = false; // Default to false
 
   size_t nPids = pids.size();
   // For backwards compatibility with older versions of the dyno CLI,
@@ -376,6 +374,10 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
           // Trace the process if we find a match or target pids is empty.
           if (traceAllPids || pids.find(pid) != pids.end()) {
             auto& process = pair.second;
+            // Set manifoldChromeTrace to true if category is "thrift"
+            if (process.pid_ipc_channel_used == "thrift") {
+              res.manifoldChromeTrace = true;
+            }
             setOnDemandConfigForProcess(
                 res, process, config, configType, limit);
             // the user could provide multiple pids that belong to the same the
