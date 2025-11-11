@@ -227,20 +227,13 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
   auto registry = LibkinetoJobRegistry::getInstance();
   std::lock_guard<std::mutex> guard(registry->getMutex());
 
-  auto& jobs = registry->getAllJobs();
-
-  auto _emplace_result = jobs[jobId].emplace(pids_set, LibkinetoProcess{});
-  const auto& it = _emplace_result.first;
-  bool newProcess = _emplace_result.second;
-  struct LibkinetoProcess& process = it->second;
+  auto [process, newProcess] =
+      registry->registerOrUpdateProcess(jobId, pids_set, pids);
 
   if (newProcess) {
     // First time - intialize!
     // 'pids' is an ordered ancestor list starting with the
     // child (leaf) process, i.e. the one making this request.
-    // Keep a copy of this pid so that clients can know which
-    // pids are being profiled.
-    process.pid = pids[0]; // Remember child (leaf) process
     LOG(INFO) << fmt::format(
         "Registered process ({}) for job '{}'. Leaf PID: {}",
         fmt::join(pids, ", "),

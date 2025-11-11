@@ -11,15 +11,16 @@
 #include <map>
 #include <memory>
 #include <mutex>
-#include <optional>
 #include <set>
 #include <string>
+#include <vector>
 
 namespace dynolog {
 
 // Represents a single libkineto process instance
 struct LibkinetoProcess {
   int32_t pid = 0; // Leaf process ID
+  std::vector<int32_t> pids; // Ordered PID ancestry (leaf at index 0)
   std::string eventProfilerConfig;
   std::string activityProfilerConfig;
   std::chrono::time_point<std::chrono::system_clock> lastRequestTime;
@@ -38,30 +39,15 @@ class LibkinetoJobRegistry {
   // Returns: pair<LibkinetoProcess&, bool> where bool is true if new process
   std::pair<LibkinetoProcess&, bool> registerOrUpdateProcess(
       const std::string& jobId,
-      const std::set<int32_t>& pids);
-
-  // Find processes for a job
-  // Returns optional reference to the process map for the job, or nullopt if
-  // not found
-  std::optional<
-      std::reference_wrapper<std::map<std::set<int32_t>, LibkinetoProcess>>>
-  findJob(const std::string& jobId);
+      const std::set<int32_t>& pids_set,
+      const std::vector<int32_t>& pids);
 
   // Get all jobs (for iteration)
   std::map<std::string, std::map<std::set<int32_t>, LibkinetoProcess>>&
   getAllJobs();
 
-  // Remove a job entirely
-  void removeJob(const std::string& jobId);
-
-  // Remove a specific process group from a job
-  void removeProcess(const std::string& jobId, const std::set<int32_t>& pids);
-
   // Get count of process groups for a job
   size_t getProcessCount(const std::string& jobId) const;
-
-  // Get total number of jobs
-  size_t getJobCount() const;
 
   // Get the mutex for external synchronization if needed
   std::mutex& getMutex() {
