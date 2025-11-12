@@ -17,7 +17,6 @@
 #include <fstream>
 #include <optional>
 #include <stdexcept>
-#include <unordered_map>
 
 namespace dynolog {
 namespace gpumon {
@@ -131,7 +130,37 @@ std::shared_ptr<PhysicalDevice> PhysicalDevice::createFromPciDir(
   std::getline(xgmiIdFile, xgmiIdStr);
   int xgmiId = std::stoi(xgmiIdStr);
 
-  return std::make_shared<PhysicalDevice>(uniqueId, pciDir.filename(), xgmiId);
+  // Parse minor ID from drm/renderD*/uevent
+  int minorId = -1;
+  std::filesystem::path drmPath = pciDir / "drm";
+  try {
+    if (std::filesystem::exists(drmPath) &&
+        std::filesystem::is_directory(drmPath)) {
+      for (const auto& entry : std::filesystem::directory_iterator(drmPath)) {
+        if (entry.is_directory() &&
+            entry.path().filename().string().rfind("render", 0) == 0) {
+          std::filesystem::path ueventPath = entry.path() / "uevent";
+          std::ifstream ueventFile(ueventPath);
+          if (ueventFile) {
+            std::string line;
+            while (std::getline(ueventFile, line)) {
+              if (line.rfind("MINOR=", 0) == 0) {
+                minorId = std::stoi(line.substr(6));
+                break;
+              }
+            }
+          }
+          break;
+        }
+      }
+    }
+  } catch (const std::exception& e) {
+    LOG(ERROR) << "Failed to parse minor ID from " << drmPath << ": "
+               << e.what();
+  }
+
+  return std::make_shared<PhysicalDevice>(
+      uniqueId, pciDir.filename(), xgmiId, minorId);
 }
 
 std::vector<std::shared_ptr<PhysicalDevice>> PhysicalDevice::parsePciDevices(
@@ -165,6 +194,14 @@ std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(
     for (const auto& logical : logicalDevices) {
       if (physical->getUniqueId() == logical->getUniqueId()) {
         physical->addLogicalDevice(logical);
+      }
+    }
+    // Fallback to minor id if no matched unique id for some reason
+    if (physical->getLogicalDevices().empty()) {
+      for (const auto& logical : logicalDevices) {
+        if (logical->getMinorId() / 8 == physical->getMinorId() / 8) {
+          physical->addLogicalDevice(logical);
+        }
       }
     }
   }

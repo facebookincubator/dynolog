@@ -60,11 +60,13 @@ TEST_F(AmdDeviceTopologyTest, ParsePci) {
   EXPECT_EQ(devices[0]->getUniqueId(), 9847564688237960509ULL);
   EXPECT_EQ(devices[0]->getPciAddr(), "pci_addr_1");
   EXPECT_EQ(devices[0]->getOamId(), 0);
+  EXPECT_EQ(devices[0]->getMinorId(), 128);
 
   // Check device 2
   EXPECT_EQ(devices[1]->getUniqueId(), 9847564688237960510ULL);
   EXPECT_EQ(devices[1]->getPciAddr(), "pci_addr_2");
   EXPECT_EQ(devices[1]->getOamId(), 1);
+  EXPECT_EQ(devices[1]->getMinorId(), 129);
 }
 
 TEST_F(AmdDeviceTopologyTest, BuildTopology) {
