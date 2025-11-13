@@ -76,14 +76,22 @@ class PhysicalDevice {
     return oamId_;
   }
 
-  PhysicalDevice(uint64_t uniqueId, std::string pciAddr, int oamId)
-      : uniqueId_(uniqueId), pciAddr_(std::move(pciAddr)), oamId_(oamId) {}
+  int getMinorId() const {
+    return minorId_;
+  }
+
+  PhysicalDevice(uint64_t uniqueId, std::string pciAddr, int oamId, int minorId)
+      : uniqueId_(uniqueId),
+        pciAddr_(std::move(pciAddr)),
+        oamId_(oamId),
+        minorId_{minorId} {}
 
  protected:
   std::vector<std::shared_ptr<LogicalDevice>> logicalDevices_;
   uint64_t uniqueId_;
   std::string pciAddr_;
   int oamId_;
+  int minorId_;
 };
 
 std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(

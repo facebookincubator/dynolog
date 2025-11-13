@@ -1,0 +1,4 @@
+MAJOR=226
+MINOR=128
+DEVNAME=dri/renderD128
+DEVTYPE=drm_minor
