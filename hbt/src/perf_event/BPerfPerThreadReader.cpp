@@ -78,8 +78,14 @@ int BPerfPerThreadReader::enable() {
   if (getDataSize_() != 0) {
     goto error;
   }
-
-  tid_fd = static_cast<int>(syscall(SYS_pidfd_open, gettid(), 0));
+#ifndef PIDFD_THREAD
+// https://github.com/torvalds/linux/blob/7254a2b52279091683e0228095118ee69ce9742f/include/uapi/linux/pidfd.h#L12
+// this macro was added in kernel 6.9
+// not all building envs have this macro, so we need to define it ourselves in
+// case it's missing
+#define PIDFD_THREAD O_EXCL
+#endif
+  tid_fd = static_cast<int>(syscall(SYS_pidfd_open, gettid(), PIDFD_THREAD));
   if (tid_fd < 0) {
     HBT_LOG_ERROR() << "cannot get tid_fd of current thread: " << errno;
     goto error;
