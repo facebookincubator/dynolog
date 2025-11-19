@@ -182,8 +182,9 @@ void PhysicalDevice::addLogicalDevice(std::shared_ptr<LogicalDevice> device) {
 
 std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(
     std::vector<std::string> pciAddrs,
-    const std::filesystem::path& kfdRoot,
-    const std::filesystem::path& pciRoot) {
+    const std::filesystem::path& sysFsRootPath) {
+  const auto kfdRoot = sysFsRootPath / "sys/class/kfd";
+  const auto pciRoot = sysFsRootPath / "sys/bus/pci/drivers/amdgpu";
   // Parse logical device info from KFD interface
   auto logicalDevices = LogicalDevice::parseTopologyNodes(kfdRoot);
   // Parse physical device info from PCI sysfs interface
