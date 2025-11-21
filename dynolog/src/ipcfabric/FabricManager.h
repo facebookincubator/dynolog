@@ -85,6 +85,9 @@ class FabricManager {
  public:
   FabricManager(const FabricManager&) = delete;
   FabricManager& operator=(const FabricManager&) = delete;
+  FabricManager(FabricManager&&) = delete;
+  FabricManager& operator=(FabricManager&&) = delete;
+  ~FabricManager() = default;
 
   static std::unique_ptr<FabricManager> factory(
       const std::string& endpoint_name = "") {
