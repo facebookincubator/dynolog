@@ -71,7 +71,7 @@ TEST_F(AmdDeviceTopologyTest, ParsePci) {
 
 TEST_F(AmdDeviceTopologyTest, BuildTopology) {
   auto devices = amdgpu::buildAmdDeviceTopology(
-      {"pci_addr_1", "pci_addr_2"}, kfdRoot, pciRoot);
+      {"pci_addr_1", "pci_addr_2"}, get_test_root());
   EXPECT_EQ(devices[0]->getLogicalDevices().size(), 1);
   EXPECT_EQ(devices[1]->getLogicalDevices().size(), 2);
 }

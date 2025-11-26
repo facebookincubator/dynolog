@@ -96,9 +96,7 @@ class PhysicalDevice {
 
 std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(
     std::vector<std::string> pciAddrs,
-    const std::filesystem::path& kfdRoot = "/sys/class/kfd",
-    const std::filesystem::path& pciRoot = "/sys/bus/pci/drivers/amdgpu");
-
+    const std::filesystem::path& sysFsRootPath = "/");
 } // namespace amdgpu
 } // namespace gpumon
 } // namespace dynolog
