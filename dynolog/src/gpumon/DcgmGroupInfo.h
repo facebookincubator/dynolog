@@ -24,6 +24,10 @@ constexpr char kDcgmDefaultFieldIds[] =
 class DcgmGroupInfo {
  public:
   ~DcgmGroupInfo();
+  DcgmGroupInfo(const DcgmGroupInfo&) = delete;
+  DcgmGroupInfo& operator=(const DcgmGroupInfo&) = delete;
+  DcgmGroupInfo(DcgmGroupInfo&&) = delete;
+  DcgmGroupInfo& operator=(DcgmGroupInfo&&) = delete;
   static std::shared_ptr<DcgmGroupInfo> factory(
       const std::string& fields_str,
       int updateIntervalMs);
