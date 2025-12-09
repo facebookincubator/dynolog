@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <memory>
 #include <optional>
-#include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 
 namespace facebook::hbt::perf_event {
