@@ -579,8 +579,12 @@ std::ostream& operator<<(std::ostream& os, const GroupReadValues<TMode>& gv) {
              gv.getRawCounts());
 }
 
-static_assert(std::is_pod_v<GroupReadValues<mode::Counting>::T>);
-static_assert(std::is_pod_v<GroupReadValues<mode::Sampling>::T>);
+static_assert(
+    std::is_standard_layout_v<GroupReadValues<mode::Counting>::T> &&
+    std::is_trivial_v<GroupReadValues<mode::Counting>::T>);
+static_assert(
+    std::is_standard_layout_v<GroupReadValues<mode::Sampling>::T> &&
+    std::is_trivial_v<GroupReadValues<mode::Sampling>::T>);
 
 /// CRTP to eliminate record handling overhead.
 ///
