@@ -195,10 +195,9 @@ constexpr PmuMsr kRetiredFarControlTransfer{.amdCore = {.event = 0xc6}};
 // TLB
 constexpr PmuMsr kDTlbMisses{.amdCore = {.event = 0x45, .unitMask = 0xf0}};
 constexpr PmuMsr kDTlbAccesses{.amdCore = {.event = 0x45, .unitMask = 0xff}};
-constexpr PmuMsr kITlbMisses{.amdCore = {.event = 0x85, .unitMask = 0xf}};
-constexpr PmuMsr kITlbAccesses{.amdCore = {.event = 0x84}};
 constexpr PmuMsr kLoadPlusStoreDtlbMisses{
     .amdCore = {.event = 0x45, .unitMask = 0x0f}};
+constexpr PmuMsr kITlbMisses{.amdCore = {.event = 0x85, .unitMask = 0xf}};
 
 // Stall cycles
 // Found in kernel perf_events
