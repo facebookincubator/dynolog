@@ -139,6 +139,15 @@ constexpr PmuMsr kLsHwPfDcFillsDramIoFar{
 // L1 iCache
 constexpr PmuMsr kL1ICacheFillMisses{
     .amdCore = {.event = 0x64, .unitMask = 0x7}}; // Same as e=0x60,u=0x10
+constexpr PmuMsr kL1ICacheInstrFetches{.amdCore = {.event = 0x80}};
+constexpr PmuMsr kL1ICacheInstrFetchesMisses{.amdCore = {.event = 0x81}};
+
+// L1 dCache
+constexpr PmuMsr kL1DCacheAccesses{.amdCore = {.event = 0x40}};
+constexpr PmuMsr kL1DCacheAcceses =
+    kL1DCacheAccesses; // Typo alias for backward compatibility
+constexpr PmuMsr kL1DCacheMisses{
+    .amdCore = {.event = 0x41, .unitMask = 0x1f}}; // AMD recommended way
 
 // L2 Cache
 constexpr PmuMsr kL2ICacheFillMisses{

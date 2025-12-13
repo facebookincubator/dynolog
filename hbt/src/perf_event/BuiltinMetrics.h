@@ -16,6 +16,7 @@ std::shared_ptr<PmuDeviceManager> makePmuDeviceManager();
 void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager);
 std::shared_ptr<Metrics> makeAvailableMetrics();
 std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info);
+void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addUncoreMetrics(std::shared_ptr<Metrics>& metrics);
