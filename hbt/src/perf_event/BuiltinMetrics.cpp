@@ -1647,6 +1647,95 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
   return metrics;
 }
 
+void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
+  // L1 Instruction Cache Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_ICACHE_FILL_MISSES",
+          "L1 instruction cache fill misses",
+          "Counts any instruction fill misses in the cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_icache_fill_misses",
+                   PmuType::cpu,
+                   "l1_icache_fill_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_ICACHE_INSTR_FETCHES",
+          "L1 instruction cache instruction fetches",
+          "L1 instruction cache instruction fetches.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_icache_instr_fetches",
+                   PmuType::cpu,
+                   "l1_icache_instr_fetches",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_ICACHE_INSTR_FETCHES_MISSES",
+          "L1 instruction cache instruction fetch misses",
+          "L1 instruction cache instruction fetch misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_icache_instr_fetches_misses",
+                   PmuType::cpu,
+                   "l1_icache_instr_fetches_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // L1 Data Cache Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_DCACHE_MISSES",
+          "L1 data cache misses",
+          "L1 data cache misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_dcache_misses",
+                   PmuType::cpu,
+                   "l1_dcache_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_DCACHE_ACCESSES",
+          "L1 data cache accesses",
+          "L1 data cache accesses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_dcache_accesses",
+                   PmuType::cpu,
+                   "l1_dcache_accesses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+}
+
 void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
   metrics->add(
       std::make_shared<MetricDesc>(

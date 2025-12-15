@@ -10,6 +10,55 @@
 
 namespace facebook::hbt::perf_event {
 
+void addCoreEvents(PmuDeviceManager& pmu_manager) {
+  // L1 Instruction Cache
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_icache_fill_misses",
+          EventDef::Encoding{.code = amd_msr::kL1ICacheFillMisses.val},
+          "L1 instruction cache fill misses.",
+          "L1 instruction cache fill misses from L2 cache."),
+      std::vector<EventId>({"l1-icache-fill-misses"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_icache_instr_fetches",
+          EventDef::Encoding{.code = amd_msr::kL1ICacheInstrFetches.val},
+          "L1 instruction cache instruction fetches.",
+          "L1 instruction cache instruction fetches."),
+      std::vector<EventId>({"l1-icache-instr-fetches"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_icache_instr_fetches_misses",
+          EventDef::Encoding{.code = amd_msr::kL1ICacheInstrFetchesMisses.val},
+          "L1 instruction cache instruction fetch misses.",
+          "L1 instruction cache instruction fetch misses."),
+      std::vector<EventId>({"l1-icache-instr-fetches-misses"}));
+
+  // L1 Data Cache
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_dcache_misses",
+          EventDef::Encoding{.code = amd_msr::kL1DCacheMisses.val},
+          "L1 data cache misses.",
+          "L1 data cache misses."),
+      std::vector<EventId>({"l1-dcache-misses"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "l1_dcache_accesses",
+          EventDef::Encoding{.code = amd_msr::kL1DCacheAcceses.val},
+          "L1 data cache accesses.",
+          "L1 data cache accesses."),
+      std::vector<EventId>({"l1-dcache-accesses"}));
+}
+
 namespace milan {
 
 void addEvents(PmuDeviceManager& pmu_manager) {
@@ -331,6 +380,8 @@ void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
 } // namespace turin
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
+  // Add AMD core L1 - common across all architectures
+  addCoreEvents(pmu_manager);
   // When multiple families/models are in the fleet, add a switch stmt similar
   // to addEvents in json_events/generated/intel/JsonEvents.h
   switch (cpu_info.cpu_arch) {
