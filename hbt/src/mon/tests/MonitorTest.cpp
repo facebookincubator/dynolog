@@ -211,11 +211,11 @@ void runSlices(std::vector<CpuId> cpus) {
 
   // Functor that loads events.
   size_t total = 0;
-  auto func = [&](CpuId cpu,
-                  int count_idx,
-                  const std::vector<std::string>& eventNicknames,
-                  TimeStamp tstamp,
-                  TimeStamp duration,
+  auto func = [&](CpuId /* cpu */,
+                  int /* count_idx */,
+                  const std::vector<std::string>& /* eventNicknames */,
+                  TimeStamp /* tstamp */,
+                  TimeStamp /* duration */,
                   uint64_t const* count_ptr,
                   const auto kNumEvents) {
     for (int eventIndex = 0; eventIndex < kNumEvents; eventIndex++) {
