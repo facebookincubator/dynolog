@@ -1734,6 +1734,594 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  // L2 Cache Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_ICACHE_FILL_MISSES",
+          "L2 instruction cache fill misses",
+          "L2 instruction cache fill misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_icache_fill_misses",
+                   PmuType::cpu,
+                   "l2_icache_fill_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_DCACHE_ACCESSES",
+          "L2 data cache accesses",
+          "L2 data cache accesses excluding L2 prefetcher.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_dcache_accesses",
+                   PmuType::cpu,
+                   "l2_dcache_accesses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_DCACHE_MISSES",
+          "L2 data cache misses",
+          "L2 data cache misses excluding L2 prefetcher.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_dcache_misses",
+                   PmuType::cpu,
+                   "l2_dcache_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // L2 with Prefetcher Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_ACCESSES",
+          "L2 cache accesses",
+          "L2 cache accesses including L2 prefetcher.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_accesses",
+                   PmuType::cpu,
+                   "l2_accesses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_MISSES",
+          "L2 cache misses",
+          "L2 cache misses including L2 prefetcher.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_misses",
+                   PmuType::cpu,
+                   "l2_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_PREFETCHER_HITS_IN_L2",
+          "L2 prefetcher hits in L2",
+          "L2 prefetcher requests that hit in L2 cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_prefetcher_hits_in_l2",
+                   PmuType::cpu,
+                   "l2_prefetcher_hits_in_l2",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_PREFETCHER_HITS_IN_L3",
+          "L2 prefetcher hits in L3",
+          "L2 prefetcher requests that hit in L3 cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_prefetcher_hits_in_l3",
+                   PmuType::cpu,
+                   "l2_prefetcher_hits_in_l3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L2_PREFETCHER_MISSES_IN_L3",
+          "L2 prefetcher misses in L3",
+          "L2 prefetcher requests that miss in L3 cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l2_prefetcher_misses_in_l3",
+                   PmuType::cpu,
+                   "l2_prefetcher_misses_in_l3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // FLOPS Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_X87_FLOPS",
+          "Retired x87 floating-point operations",
+          "Retired x87 floating-point operations.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "retired_x87_flops",
+                   PmuType::cpu,
+                   "retired_x87_flops",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Branch Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_BRANCH_INSTRUCTIONS",
+          "Retired branch instructions",
+          "Retired branch instructions.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "retired_branch_instructions",
+                   PmuType::cpu,
+                   "retired_branch_instructions",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_BRANCH_MISPRED",
+          "Retired branch instructions mispredicted",
+          "Retired branch instructions mispredicted.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "retired_branch_mispred",
+                   PmuType::cpu,
+                   "retired_branch_mispred",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_FAR_CONTROL_TRANSFER",
+          "Retired far control transfers",
+          "Retired far control transfers.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "retired_far_control_transfer",
+                   PmuType::cpu,
+                   "retired_far_control_transfer",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // TLB Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_DTLB_MISSES",
+          "Data TLB misses",
+          "Data TLB misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "dtlb_misses",
+                   PmuType::cpu,
+                   "dtlb_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_DTLB_ACCESSES",
+          "Data TLB accesses",
+          "Data TLB accesses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "dtlb_accesses",
+                   PmuType::cpu,
+                   "dtlb_accesses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_ITLB_MISSES",
+          "Instruction TLB misses",
+          "Instruction TLB misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "itlb_misses",
+                   PmuType::cpu,
+                   "itlb_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_ITLB_ACCESSES",
+          "Instruction TLB accesses",
+          "Instruction TLB accesses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "itlb_accesses",
+                   PmuType::cpu,
+                   "itlb_accesses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_LOAD_PLUS_STORE_DTLB_MISSES",
+          "Load and store data TLB misses",
+          "Load and store data TLB misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "load_plus_store_dtlb_misses",
+                   PmuType::cpu,
+                   "load_plus_store_dtlb_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Stall Cycles Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_STALLED_CYCLES_BACK_PRESSURE",
+          "Stalled cycles due to back pressure",
+          "Stalled cycles due to back pressure.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "stalled_cycles_back_pressure",
+                   PmuType::cpu,
+                   "stalled_cycles_back_pressure",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_STALLED_CYCLES_IDQ_EMPTY",
+          "Stalled cycles due to IDQ empty",
+          "Stalled cycles due to instruction decode queue empty.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "stalled_cycles_idq_empty",
+                   PmuType::cpu,
+                   "stalled_cycles_idq_empty",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_STALLED_CYCLES_ANY",
+          "Stalled cycles due to any reason",
+          "Stalled cycles due to any reason.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "stalled_cycles_any",
+                   PmuType::cpu,
+                   "stalled_cycles_any",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // IC Cache Fill Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_IC_CACHE_FILL_L2",
+          "Instruction cache fills from L2",
+          "Instruction cache fills from L2 cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ic_cache_fill_l2",
+                   PmuType::cpu,
+                   "ic_cache_fill_l2",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_IC_CACHE_FILL_SYS",
+          "Instruction cache fills from system",
+          "Instruction cache fills from system memory.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ic_cache_fill_sys",
+                   PmuType::cpu,
+                   "ic_cache_fill_sys",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // MAB Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_LS_ALLOC_MAB_COUNT",
+          "Load-store MAB allocations",
+          "Load-store miss address buffer allocations.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ls_alloc_mab_count",
+                   PmuType::cpu,
+                   "ls_alloc_mab_count",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_LS_MAB_ALLOC_PIPES",
+          "Load-store MAB allocated to pipes",
+          "Load-store miss address buffer allocated to pipes.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ls_mab_alloc_pipes",
+                   PmuType::cpu,
+                   "ls_mab_alloc_pipes",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_IC_MAB_REQUEST",
+          "Instruction cache MAB requests",
+          "Instruction cache miss address buffer requests.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ic_mab_request",
+                   PmuType::cpu,
+                   "ic_mab_request",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_IC_MAB_REQUESTS_PREFETCH",
+          "Instruction cache MAB prefetch requests",
+          "Instruction cache miss address buffer prefetch requests.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ic_mab_requests_prefetch",
+                   PmuType::cpu,
+                   "ic_mab_requests_prefetch",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_IC_MAB_REQUESTS_DEMAND",
+          "Instruction cache MAB demand requests",
+          "Instruction cache miss address buffer demand requests.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "ic_mab_requests_demand",
+                   PmuType::cpu,
+                   "ic_mab_requests_demand",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Uops Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_UOPS",
+          "Retired micro-ops",
+          "Retired micro-operations.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "retired_uops",
+                   PmuType::cpu,
+                   "retired_uops",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_DE_UOPS_DISPATCHED_OP_CACHE",
+          "Micro-ops dispatched from op cache",
+          "Micro-operations dispatched from op cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "de_uops_dispatched_op_cache",
+                   PmuType::cpu,
+                   "de_uops_dispatched_op_cache",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_DE_UOPS_DISPATCHED_DECODER",
+          "Micro-ops dispatched from decoder",
+          "Micro-operations dispatched from decoder.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "de_uops_dispatched_decoder",
+                   PmuType::cpu,
+                   "de_uops_dispatched_decoder",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Dispatch Slots Metrics (Zen4 stall events)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_DISPATCH_SLOTS",
+          "Dispatch slots",
+          "Dispatch slots available (same as unhalted cycles).",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "dispatch_slots",
+                   PmuType::cpu,
+                   "dispatch_slots",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_FRONTEND_BOUND_STALLS",
+          "Frontend bound stalls",
+          "Stall cycles due to frontend bound conditions (Zen4).",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "frontend_bound_stalls",
+                   PmuType::cpu,
+                   "frontend_bound_stalls",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_BACKEND_BOUND_STALLS",
+          "Backend bound stalls",
+          "Stall cycles due to backend bound conditions (Zen4).",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "backend_bound_stalls",
+                   PmuType::cpu,
+                   "backend_bound_stalls",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_SMT_CONTENTION_STALLS",
+          "SMT contention stalls",
+          "Stall cycles due to SMT contention (Zen4).",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "smt_contention_stalls",
+                   PmuType::cpu,
+                   "smt_contention_stalls",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {

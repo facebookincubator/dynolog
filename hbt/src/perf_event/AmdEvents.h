@@ -203,6 +203,7 @@ constexpr PmuMsr kRetiredFarControlTransfer{.amdCore = {.event = 0xc6}};
 
 // TLB
 constexpr PmuMsr kDTlbMisses{.amdCore = {.event = 0x45, .unitMask = 0xf0}};
+constexpr PmuMsr kITlbAccesses{.amdCore = {.event = 0x84}};
 constexpr PmuMsr kDTlbAccesses{.amdCore = {.event = 0x45, .unitMask = 0xff}};
 constexpr PmuMsr kLoadPlusStoreDtlbMisses{
     .amdCore = {.event = 0x45, .unitMask = 0x0f}};
@@ -246,6 +247,7 @@ constexpr PmuMsr kIcCacheFillSys{.amdCore = {.event = 0x83}};
 // MAB Latency
 constexpr PmuMsr kLsAllocMabCount{.amdCore = {.event = 0x5f}};
 constexpr PmuMsr kLsMabAllocPipes{.amdCore = {.event = 0x41, .unitMask = 0x1f}};
+constexpr PmuMsr kIcMabRequest{.amdCore = {.event = 0x80, .event_11_8 = 0x2}};
 constexpr PmuMsr kIcMabRequestsPrefetch{
     .amdCore = {.event = 0x84, .event_11_8 = 0x2}};
 constexpr PmuMsr kIcMabRequestsDemad{
