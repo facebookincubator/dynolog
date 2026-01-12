@@ -174,7 +174,7 @@ class TraceCollector {
     sync_();
   }
 
-  void openForCpu(CpuId cpu) {
+  void openForCpu(CpuId /* cpu */) {
     HBT_THROW_EINVAL()
         << "openForCpu() << is not implemented for TraceCollector";
   }
@@ -186,7 +186,7 @@ class TraceCollector {
     return state_ == State::Open || state_ == State::Enabled;
   }
 
-  bool isOpenOnCpu(CpuId cpu) const {
+  bool isOpenOnCpu(CpuId /* cpu */) const {
     HBT_THROW_EINVAL()
         << "isOpenOnCpu() << is not implemented for TraceCollector";
     return false;
@@ -199,7 +199,7 @@ class TraceCollector {
     sync_();
   }
 
-  void closeForCpu(CpuId cpu) {
+  void closeForCpu(CpuId /* cpu */) {
     HBT_THROW_EINVAL() << "closeForCpu() is not implemented for TraceCollector";
   }
 
@@ -211,7 +211,7 @@ class TraceCollector {
     sync_();
   }
 
-  void enableForCpu(bool reset, CpuId cpu) {
+  void enableForCpu(bool /* reset */, CpuId /* cpu */) {
     HBT_THROW_EINVAL()
         << "enableForCpu() is not implemented for TraceCollector";
   }
@@ -222,7 +222,7 @@ class TraceCollector {
     return state_ == State::Enabled;
   }
 
-  bool isEnabledOnCpu(CpuId cpu) const {
+  bool isEnabledOnCpu(CpuId /* cpu */) const {
     HBT_THROW_EINVAL()
         << "isEnabledOnCpu() << is not implemented for TraceCollector";
     return false;
@@ -235,7 +235,7 @@ class TraceCollector {
     sync_();
   }
 
-  void disableForCpu(CpuId cpu) {
+  void disableForCpu(CpuId /* cpu */) {
     HBT_THROW_EINVAL()
         << "disableForCpu() is not implemented for TraceCollector";
   }
