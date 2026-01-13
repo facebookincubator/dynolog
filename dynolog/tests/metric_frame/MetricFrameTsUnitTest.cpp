@@ -60,6 +60,12 @@ void smokeTest(MetricFrameTsUnitInterface& i) {
   EXPECT_EQ(res.end.offset, 2);
   EXPECT_EQ(res.end.time, now);
 
+  resMaybe = i.getLatest(3);
+  EXPECT_EQ(resMaybe->start.time, now - 120s);
+  EXPECT_EQ(resMaybe->end.time, now);
+  EXPECT_EQ(resMaybe->start.offset, 0);
+  EXPECT_EQ(resMaybe->end.offset, 2);
+
   auto timeVector = i.getTimeVector();
   EXPECT_EQ(timeVector.size(), 3);
   EXPECT_EQ(timeVector[0], now - 120s);
@@ -79,6 +85,7 @@ void emptyFrame(MetricFrameTsUnitInterface& i) {
   auto resMaybe = i.getRange(now - 120s, now);
   EXPECT_FALSE(resMaybe.has_value());
   EXPECT_FALSE(i.getLatest().has_value());
+  EXPECT_FALSE(i.getLatest(1).has_value());
   EXPECT_FALSE(i.lastSampleTime().has_value());
   EXPECT_FALSE(i.firstSampleTime().has_value());
   EXPECT_EQ(i.length(), 0);
@@ -90,18 +97,6 @@ TEST(MetricFrameTsUnitTest, emptyFrame) {
   emptyFrame(t);
   MetricFrameTsUnitTest t2;
   emptyFrame(t2);
-}
-
-void getLatest(
-    MetricFrameTsUnitInterface& i,
-    std::chrono::steady_clock::time_point now) {
-  auto latest = i.getLatest();
-  ASSERT_TRUE(latest.has_value());
-
-  EXPECT_EQ(latest->start.time, now);
-  EXPECT_EQ(latest->end.time, now);
-  EXPECT_EQ(latest->start.offset, 2);
-  EXPECT_EQ(latest->end.offset, 2);
 }
 
 void interpolationPolicies(

@@ -42,6 +42,7 @@ class MetricFrameTsUnitInterface {
   virtual size_t length() const = 0;
   virtual size_t maxLength() const = 0;
   virtual std::optional<MetricFrameRange> getLatest() const = 0;
+  virtual std::optional<MetricFrameRange> getLatest(size_t n) const = 0;
   virtual std::optional<MetricFrameRange> getRange(
       TimePoint startTime,
       TimePoint endTime,
