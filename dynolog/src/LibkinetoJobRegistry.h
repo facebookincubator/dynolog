@@ -24,6 +24,7 @@ struct LibkinetoProcess {
   std::string eventProfilerConfig;
   std::string activityProfilerConfig;
   std::chrono::time_point<std::chrono::system_clock> lastRequestTime;
+  std::string pid_ipc_channel_used; // IPC channel used ("ipc" or "thrift")
 };
 
 // Shared singleton registry for tracking libkineto processes across jobs
