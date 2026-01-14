@@ -2460,6 +2460,57 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_DTLB_WALK",
+          "Data TLB walk",
+          "Counts data TLB walks caused by misses in the data TLB.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "dtlb_walk",
+                   PmuType::armv8_pmuv3,
+                   "dtlb_walk",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_ITLB_WALK",
+          "Instruction TLB walk",
+          "Counts instruction TLB walks caused by misses in the instruction TLB.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "itlb_walk",
+                   PmuType::armv8_pmuv3,
+                   "itlb_walk",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_BR_MIS_PRED",
+          "Branch mispredicted",
+          "Counts mispredicted or not predicted branch speculatively executed.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "br_mis_pred",
+                   PmuType::armv8_pmuv3,
+                   "br_mis_pred",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
