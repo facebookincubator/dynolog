@@ -47,6 +47,12 @@ void KernelCollector::log(Logger& log) {
   log.logInt("cpu_x_ms", ticksToMs(cpuDelta_.x));
   log.logInt("cpu_y_ms", ticksToMs(cpuDelta_.y));
   log.logInt("cpu_z_ms", ticksToMs(cpuDelta_.z));
+  log.logInt("cpu_guest_ms", ticksToMs(cpuDelta_.g));
+  log.logInt("cpu_guest_nice_ms", ticksToMs(cpuDelta_.gn));
+
+  // Guest utilization in percentage (time spent running virtual CPUs)
+  log.logFloat("cpu_guest", cpuDelta_.g / total_ticks * 100.0);
+  log.logFloat("cpu_guest_nice", cpuDelta_.gn / total_ticks * 100.0);
 
   if (numCpuSockets_ > 1) {
     for (int i = 0; i < numCpuSockets_; i++) {
