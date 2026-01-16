@@ -22,8 +22,8 @@ using TIC_t = unsigned long long;
 // calculations.  It exists primarily for SMP support but serves
 // all environments.
 struct CpuTime {
-  TIC_t u = 0, n = 0, s = 0, i = 0, w = 0, x = 0, y = 0,
-        z = 0; // as represented in /proc/stat
+  TIC_t u = 0, n = 0, s = 0, i = 0, w = 0, x = 0, y = 0, z = 0, g = 0,
+        gn = 0; // as represented in /proc/stat
   /*
    * u - user: normal processes executing in user mode
    * n - nice: niced processes executing in user mode
@@ -32,7 +32,9 @@ struct CpuTime {
    * w - iowait: waiting for I/O to complete
    * x - irq: servicing interrupts
    * y - softirq: servicing softirqs
-   * z - unused?
+   * z - steal: stolen by hypervisor
+   * g - guest: time running in guest VM (included in u)
+   * gn - guest_nice: time running a niced guest (included in n)
    */
 
   CpuTime operator-(const CpuTime& prev) const {
@@ -45,6 +47,8 @@ struct CpuTime {
         .x = x - prev.x,
         .y = y - prev.y,
         .z = z - prev.z,
+        .g = g - prev.g,
+        .gn = gn - prev.gn,
     };
   }
 
@@ -57,9 +61,16 @@ struct CpuTime {
     x += other.x;
     y += other.y;
     z += other.z;
+    g += other.g;
+    gn += other.gn;
   }
 
   TIC_t total() const {
+    // NOTE: guest (g) is already included in user (u), and
+    // guest_nice (gn) is already included in nice (n).
+    // So: (u - g) + (n - gn) + s + i + w + x + y + z + g + gn
+    //   = u + n + s + i + w + x + y + z
+    // We do NOT add g and gn again to avoid double-counting.
     return u + n + s + i + w + x + y + z;
   }
 };

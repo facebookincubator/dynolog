@@ -55,7 +55,8 @@ TEST(KernelCollecterTest, CpuStatsTest) {
   EXPECT_EQ(kb.perCoreCpuTime_.size(), 32);
   EXPECT_EQ(kb.cpuCoresTotal_, 32);
 
-  // cpu0 85923288 7559744 25071792 1175164067 39404260 4319 4746442 0 0 0
+  // cpu0 85923288 7559744 25071792 1175164067 39404260 4319 4746442 0 1000000
+  // 100000
   EXPECT_EQ(kb.perCoreCpuTime_[0].u, 85923288);
   EXPECT_EQ(kb.perCoreCpuTime_[0].n, 7559744);
   EXPECT_EQ(kb.perCoreCpuTime_[0].s, 25071792);
@@ -64,6 +65,8 @@ TEST(KernelCollecterTest, CpuStatsTest) {
   EXPECT_EQ(kb.perCoreCpuTime_[0].x, 4319);
   EXPECT_EQ(kb.perCoreCpuTime_[0].y, 4746442);
   EXPECT_EQ(kb.perCoreCpuTime_[0].z, 0);
+  EXPECT_EQ(kb.perCoreCpuTime_[0].g, 1000000); // guest time
+  EXPECT_EQ(kb.perCoreCpuTime_[0].gn, 100000); // guest_nice time
   // cpu31 6316214 2669639 4209634 1332212631 698635 0 25283 0 0 0
   EXPECT_EQ(kb.perCoreCpuTime_[31].u, 6316214);
   EXPECT_EQ(kb.perCoreCpuTime_[31].n, 2669639);

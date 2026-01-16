@@ -93,7 +93,10 @@ void KernelCollectorBase::readCpuStats() {
       .w = stats.cpus.total.iowait,
       .x = stats.cpus.total.irq,
       .y = stats.cpus.total.softirq,
-      .z = stats.cpus.total.guest,
+      .z = stats.cpus.total.steal,
+      .g = stats.cpus.total.guest,
+      .gn = stats.cpus.total.guest_nice,
+
   };
 
   // update delta
@@ -118,7 +121,9 @@ void KernelCollectorBase::readCpuStats() {
     coreCpu.w = cpu.iowait;
     coreCpu.x = cpu.irq;
     coreCpu.y = cpu.softirq;
-    coreCpu.z = cpu.guest;
+    coreCpu.z = cpu.steal;
+    coreCpu.g = cpu.guest;
+    coreCpu.gn = cpu.guest_nice;
 
     int node = core / (cpuCoresTotal_ / numCpuSockets_);
     nodeCpuTime_[node] += coreCpu;
