@@ -25,6 +25,7 @@ struct GpuProfilerResult {
   std::vector<int32_t> activityProfilersTriggered;
   int32_t eventProfilersBusy;
   int32_t activityProfilersBusy;
+  bool manifoldChromeTrace;
 };
 
 } // namespace dynolog

@@ -40,7 +40,8 @@ class LibkinetoConfigManager {
   std::string obtainOnDemandConfig(
       const std::string& jobId,
       const std::vector<int32_t>& pids,
-      int32_t configType);
+      int32_t configType,
+      const std::string& category = "ipc");
 
   GpuProfilerResult setOnDemandConfig(
       const std::string& jobId,
