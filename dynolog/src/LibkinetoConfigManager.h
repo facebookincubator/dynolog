@@ -30,6 +30,7 @@ class LibkinetoConfigManager {
 
   int32_t
   registerLibkinetoContext(const std::string& jobId, int32_t pid, int32_t gpu);
+
   static std::shared_ptr<LibkinetoConfigManager> getInstance();
 
   std::string getBaseConfig() {
@@ -40,7 +41,8 @@ class LibkinetoConfigManager {
   std::string obtainOnDemandConfig(
       const std::string& jobId,
       const std::vector<int32_t>& pids,
-      int32_t configType);
+      int32_t configType,
+      std::optional<uint64_t> pidNamespaceId = std::nullopt);
 
   GpuProfilerResult setOnDemandConfig(
       const std::string& jobId,
@@ -67,6 +69,7 @@ class LibkinetoConfigManager {
   using InstancesPerGpuMap = std::map<int32_t, std::set<int32_t>>;
   // Job id -> InstancesPerGpu
   std::map<std::string, InstancesPerGpuMap> jobInstancesPerGpu_;
+
   mutable std::mutex mutex_;
 
   void setOnDemandConfigForProcess(

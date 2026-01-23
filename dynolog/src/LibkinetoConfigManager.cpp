@@ -215,7 +215,8 @@ int32_t LibkinetoConfigManager::registerLibkinetoContext(
 std::string LibkinetoConfigManager::obtainOnDemandConfig(
     const std::string& jobId,
     const std::vector<int32_t>& pids,
-    int32_t configType) {
+    int32_t configType,
+    std::optional<uint64_t> pidNamespaceId) {
   VLOG(2) << fmt::format(
       "obtainOnDemandConfig({}, ({}), {})",
       jobId,
@@ -239,6 +240,16 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
         fmt::join(pids, ", "),
         jobId,
         process.pid);
+
+    // Store namespace ID if provided
+    if (pidNamespaceId) {
+      process.pidNamespaceId = *pidNamespaceId;
+      LOG(INFO) << fmt::format(
+          "Stored namespace ID {} for process {} in job '{}'",
+          *pidNamespaceId,
+          process.pid,
+          jobId);
+    }
 
     onRegisterProcess(pids_set);
   }

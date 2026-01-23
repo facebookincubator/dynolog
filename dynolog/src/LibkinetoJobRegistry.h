@@ -11,6 +11,7 @@
 #include <map>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <set>
 #include <string>
 #include <vector>
@@ -21,6 +22,7 @@ namespace dynolog {
 struct LibkinetoProcess {
   int32_t pid = 0; // Leaf process ID
   std::vector<int32_t> pids; // Ordered PID ancestry (leaf at index 0)
+  std::optional<uint64_t> pidNamespaceId; // PID namespace ID
   std::string eventProfilerConfig;
   std::string activityProfilerConfig;
   std::chrono::time_point<std::chrono::system_clock> lastRequestTime;
