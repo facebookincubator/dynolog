@@ -28,6 +28,10 @@ class BPerfPerThreadReader {
       const std::vector<std::filesystem::path>& bpf_pinned_map_dirs,
       int event_cnt);
   ~BPerfPerThreadReader();
+  BPerfPerThreadReader(const BPerfPerThreadReader&) = delete;
+  BPerfPerThreadReader& operator=(const BPerfPerThreadReader&) = delete;
+  BPerfPerThreadReader(BPerfPerThreadReader&&) = delete;
+  BPerfPerThreadReader& operator=(BPerfPerThreadReader&&) = delete;
   int read(struct BPerfThreadData* data);
   int enable();
   void disable();
