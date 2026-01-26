@@ -118,6 +118,10 @@ struct ContextSwitch {
     struct sample_id_t sample_id;
 
     Lost(const Lost&) = delete;
+    Lost& operator=(const Lost&) = delete;
+    Lost(Lost&&) = delete;
+    Lost& operator=(Lost&&) = delete;
+    ~Lost() = default;
   };
 
   /// PERF_RECORD_MISC_COMM_EXEC.
@@ -169,6 +173,10 @@ struct ContextSwitch {
     struct sample_id_t sample_id;
 
     SwitchCpuWide(const SwitchCpuWide&) = delete;
+    SwitchCpuWide& operator=(const SwitchCpuWide&) = delete;
+    SwitchCpuWide(SwitchCpuWide&&) = delete;
+    SwitchCpuWide& operator=(SwitchCpuWide&&) = delete;
+    ~SwitchCpuWide() = default;
 
     bool isSwitchIn() const {
       return !isSwitchOut();
@@ -240,6 +248,10 @@ struct Sampling {
     uint64_t num_lost;
 
     Lost(const Lost&) = delete;
+    Lost& operator=(const Lost&) = delete;
+    Lost(Lost&&) = delete;
+    Lost& operator=(Lost&&) = delete;
+    ~Lost() = default;
   };
 
   /// PERF_RECORD_COMM.
@@ -279,6 +291,10 @@ struct Sampling {
     uint64_t value[];
 
     Sample(const Sample&) = delete;
+    Sample& operator=(const Sample&) = delete;
+    Sample(Sample&&) = delete;
+    Sample& operator=(Sample&&) = delete;
+    ~Sample() = default;
   };
 
   /// PERF_RECORD_AUX.
@@ -598,6 +614,9 @@ class PerfEventsGroupBase {
   static constexpr size_t kPerfEventAttrSize = sizeof(perf_event_attr);
 
   PerfEventsGroupBase(const PerfEventsGroupBase&) = delete;
+  PerfEventsGroupBase& operator=(const PerfEventsGroupBase&) = delete;
+  PerfEventsGroupBase(PerfEventsGroupBase&&) = delete;
+  PerfEventsGroupBase& operator=(PerfEventsGroupBase&&) = delete;
 
   PerfEventsGroupBase(
       CpuId cpu,
@@ -706,6 +725,9 @@ class PerfEventsGroup : public PerfEventsGroupBase<TImpl, TMode_> {
   static constexpr size_t kPerfEventAttrSize = sizeof(perf_event_attr);
 
   PerfEventsGroup(const PerfEventsGroup&) = delete;
+  PerfEventsGroup& operator=(const PerfEventsGroup&) = delete;
+  PerfEventsGroup(PerfEventsGroup&&) = delete;
+  PerfEventsGroup& operator=(PerfEventsGroup&&) = delete;
 
   using PerfEventsGroupBase<TImpl, TMode_>::PerfEventsGroupBase;
 
