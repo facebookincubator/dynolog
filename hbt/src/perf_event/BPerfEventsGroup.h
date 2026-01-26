@@ -42,6 +42,10 @@ class BPerfEventsGroup {
       const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/");
 
   ~BPerfEventsGroup();
+  BPerfEventsGroup(const BPerfEventsGroup&) = delete;
+  BPerfEventsGroup& operator=(const BPerfEventsGroup&) = delete;
+  BPerfEventsGroup(BPerfEventsGroup&&) = delete;
+  BPerfEventsGroup& operator=(BPerfEventsGroup&&) = delete;
 
   size_t getNumEvents() const;
   bool open();

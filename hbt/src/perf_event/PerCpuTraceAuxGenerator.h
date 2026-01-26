@@ -56,6 +56,7 @@ struct AuxSpaceData {
   AuxSpaceData& operator=(AuxSpaceData&&) = default;
   explicit AuxSpaceData(const AuxSpaceData&) = default;
   AuxSpaceData& operator=(const AuxSpaceData&) = delete;
+  ~AuxSpaceData() = default;
   // Bytes of the Aux buffer
   std::vector<uint8_t> data;
 };

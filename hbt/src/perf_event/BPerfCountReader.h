@@ -46,6 +46,10 @@ class BPerfCountReader {
   BPerfEventsGroup* getBPerfEventsGroup() const;
 
   ~BPerfCountReader();
+  BPerfCountReader(const BPerfCountReader&) = delete;
+  BPerfCountReader& operator=(const BPerfCountReader&) = delete;
+  BPerfCountReader(BPerfCountReader&&) = delete;
+  BPerfCountReader& operator=(BPerfCountReader&&) = delete;
 
  protected:
   // Use raw pointer because BPerfEventsGroup is only a forward declaration

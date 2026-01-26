@@ -78,6 +78,9 @@ struct MetricDesc {
 
   MetricDesc(const MetricDesc&) = delete;
   MetricDesc(MetricDesc&&) = delete;
+  MetricDesc& operator=(const MetricDesc&) = delete;
+  MetricDesc& operator=(MetricDesc&&) = delete;
+  ~MetricDesc() = default;
 
   /// Make EventConfs for each CPU in mon_cpus.
   EventConfs makeNoCpuTopologyConfs(const PmuDeviceManager& pmu_manager) const {
@@ -219,6 +222,9 @@ class Metrics {
 
   Metrics(const Metrics&) = delete;
   Metrics(Metrics&&) = delete;
+  Metrics& operator=(const Metrics&) = delete;
+  Metrics& operator=(Metrics&&) = delete;
+  ~Metrics() = default;
 
   auto getMetricIDs() const {
     std::vector<MetricId> ids;
