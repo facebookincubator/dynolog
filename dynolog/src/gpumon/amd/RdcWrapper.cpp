@@ -173,9 +173,31 @@ std::vector<uint32_t> RdcWrapper::getMonitoredEntities() {
   return getMonitoredEntities_(contextRlocked.data);
 }
 
+std::vector<uint32_t> RdcWrapper::getMonitoredPartitionsEntities() {
+  auto contextRlocked = context_.rlock();
+  return getMonitoredPartitionsEntities_(contextRlocked.data);
+}
+
+std::vector<uint32_t> RdcWrapper::getMonitoredPartitionsEntities_(
+    RdcRuntimeContext& context) {
+  return context.monitoredPartitionsEntities_;
+}
+
 std::vector<uint32_t> RdcWrapper::getMonitoredEntities_(
     RdcRuntimeContext& context) {
-  return context.monitoredEntities_;
+  std::vector<uint32_t> entities;
+  entities.reserve(
+      context.monitoredDeviceEntities_.size() +
+      context.monitoredPartitionsEntities_.size());
+  entities.insert(
+      entities.end(),
+      context.monitoredDeviceEntities_.begin(),
+      context.monitoredDeviceEntities_.end());
+  entities.insert(
+      entities.end(),
+      context.monitoredPartitionsEntities_.begin(),
+      context.monitoredPartitionsEntities_.end());
+  return entities;
 }
 
 std::vector<uint32_t> RdcWrapper::listDeviceIds_(RdcRuntimeContext& context) {
@@ -240,7 +262,7 @@ void RdcWrapper::initGpu_(RdcRuntimeContext& context) {
           "rdc_group_gpu_add() failed when adding GPU to group with error code: " +
           std::to_string(result));
     }
-    context.monitoredEntities_.push_back(dev);
+    context.monitoredDeviceEntities_.push_back(dev);
   }
   // create GPU field group
   for (rdc_field_t metric : context.enabledMetrics_) {
@@ -300,7 +322,7 @@ void RdcWrapper::initPartition_(RdcRuntimeContext& context) {
           "rdc_group_gpu_add() failed when adding partition to group with error code: " +
           std::to_string(result));
     }
-    context.monitoredEntities_.push_back(partition);
+    context.monitoredPartitionsEntities_.push_back(partition);
   }
   // create partition field group
   std::vector<rdc_field_t> partitionEnabledMetrics;
