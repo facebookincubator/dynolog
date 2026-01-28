@@ -26,7 +26,8 @@ using RdcMetricsMap = std::unordered_map<rdc_field_t, RdcMetricsValue>;
 struct RdcRuntimeContext {
   std::vector<rdc_field_t> enabledMetrics_;
   // entity = physical GPUs + partitions
-  std::vector<uint32_t> monitoredEntities_;
+  std::vector<uint32_t> monitoredDeviceEntities_;
+  std::vector<uint32_t> monitoredPartitionsEntities_;
   rdc_handle_t rdcHandle_;
   rdc_gpu_group_t gpuGroupId_;
   rdc_gpu_group_t partitionGroupId_{};
@@ -86,12 +87,15 @@ class RdcWrapper {
   void clean();
   RdcMetricsMap getRdcMetricsForDevice(uint32_t device);
   std::vector<uint32_t> getMonitoredEntities();
+  std::vector<uint32_t> getMonitoredPartitionsEntities();
 
  protected:
   void init_(
       std::vector<rdc_field_t> enabledMetrics,
       RdcRuntimeContextWithWLock& context);
   void clean_(RdcRuntimeContextWithWLock& context);
+  std::vector<uint32_t> getMonitoredPartitionsEntities_(
+      RdcRuntimeContext& context);
   std::vector<uint32_t> getMonitoredEntities_(RdcRuntimeContext& context);
   std::vector<uint32_t> listDeviceIds_(RdcRuntimeContext& context);
   std::vector<uint32_t> listPartitionIds_(RdcRuntimeContext& context);
