@@ -52,6 +52,7 @@ class MetricFrameBase {
       MATCH_POLICY endTimePolicy = MATCH_POLICY::CLOSEST) const;
   // this returns a slice only containing the latest sample regardless of time
   std::optional<MetricFrameSlice> latest() const;
+  std::optional<MetricFrameSlice> latest(size_t n) const;
   virtual size_t width() const = 0;
   virtual std::optional<MetricSeriesVar> series(
       const std::string& name) const = 0;
