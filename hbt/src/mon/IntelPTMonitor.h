@@ -65,7 +65,7 @@ class IntelPTMonitor {
     sync_();
   }
 
-  void openForCpu(CpuId cpu) {
+  void openForCpu(CpuId /*unused*/) {
     HBT_THROW_EINVAL() << "openForCpu() is not implemented for IntelPTMonitor";
   }
 
@@ -86,7 +86,7 @@ class IntelPTMonitor {
     sync_();
   }
 
-  void closeForCpu(CpuId cpu) {
+  void closeForCpu(CpuId /*unused*/) {
     HBT_THROW_EINVAL() << "closeForCpu() is not implemented for IntelPTMonitor";
   }
 
