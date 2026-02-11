@@ -1176,8 +1176,8 @@ void tryOpen_(TGen& gen, Args&&... args) {
   }
 }
 
-template <class TMonitor, class TGen, class... Args>
-void tryOpenForCpu_(TGen& gen, CpuId cpu, Args&&... args) {
+template <class TMonitor, class TGen>
+void tryOpenForCpu_(TGen& gen, CpuId cpu) {
   if (!gen.isOpenOnCpu(cpu)) {
     gen.openForCpu(cpu);
   }
