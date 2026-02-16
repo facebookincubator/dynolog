@@ -188,8 +188,7 @@ std::vector<std::shared_ptr<PhysicalDevice>> buildAmdDeviceTopology(
   // Parse logical device info from KFD interface
   auto logicalDevices = LogicalDevice::parseTopologyNodes(kfdRoot);
   // Parse physical device info from PCI sysfs interface
-  auto physicalDevices =
-      PhysicalDevice::parsePciDevices(std::move(pciAddrs), pciRoot);
+  auto physicalDevices = PhysicalDevice::parsePciDevices(pciAddrs, pciRoot);
   // Correlate logical and physical devices using uniqueId
   for (const auto& physical : physicalDevices) {
     for (const auto& logical : logicalDevices) {
