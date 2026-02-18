@@ -2452,7 +2452,7 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           std::map<TOptCpuArch, EventRefs>{
               {CpuArch::NEOVERSE_V2,
                EventRefs{EventRef{
-                   "    ",
+                   "ll_cache_miss_rd",
                    PmuType::armv8_pmuv3,
                    "ll_cache_miss_rd",
                    EventExtraAttr{},
@@ -2506,6 +2506,26 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "br_mis_pred",
                    PmuType::armv8_pmuv3,
                    "br_mis_pred",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_BACKEND_MEM",
+          "Backend memory stalls",
+          "Counts cycles where no operation is issued due to the backend "
+          "stalling on memory operations. This is the AMUv1 STALL_BACKEND_MEM "
+          "event (0x4005) that tracks memory-related backend stalls, useful "
+          "for calculating LLC miss latency.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_backend_mem",
+                   PmuType::armv8_pmuv3,
+                   "stall_backend_mem",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
