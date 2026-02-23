@@ -58,14 +58,18 @@ size_t MetricFrameTsUnit::maxLength() const {
 }
 
 std::optional<MetricFrameRange> MetricFrameTsUnit::getLatest() const {
-  if (timeSeries_.size() == 0) {
+  return getLatest(1);
+}
+
+std::optional<MetricFrameRange> MetricFrameTsUnit::getLatest(size_t n) const {
+  if (timeSeries_.size() < n) {
     return std::nullopt;
   }
   return MetricFrameRange{
       .start =
           MetricFrameOffset{
-              .offset = timeSeries_.size() - 1,
-              .time = *(timeSeries_.end() - 1)},
+              .offset = timeSeries_.size() - n,
+              .time = *(timeSeries_.end() - n)},
       .end =
           MetricFrameOffset{
               .offset = timeSeries_.size() - 1,
@@ -188,13 +192,19 @@ size_t MetricFrameTsUnitFixInterval::maxLength() const {
 
 std::optional<MetricFrameRange> MetricFrameTsUnitFixInterval::getLatest()
     const {
-  if (sampleCount_ == 0) {
+  return getLatest(1);
+}
+
+std::optional<MetricFrameRange> MetricFrameTsUnitFixInterval::getLatest(
+    size_t n) const {
+  if (sampleCount_ < n) {
     return std::nullopt;
   }
   return MetricFrameRange{
       .start =
           MetricFrameOffset{
-              .offset = sampleCount_ - 1, .time = lastSampleTime_},
+              .offset = sampleCount_ - n,
+              .time = lastSampleTime_ - (n - 1) * interval_},
       .end = MetricFrameOffset{
           .offset = sampleCount_ - 1, .time = lastSampleTime_}};
 }
