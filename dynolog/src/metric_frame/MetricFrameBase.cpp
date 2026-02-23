@@ -55,11 +55,15 @@ std::optional<MetricFrameSlice> MetricFrameBase::slice(
 }
 
 std::optional<MetricFrameSlice> MetricFrameBase::latest() const {
-  auto rangeMaybe = ts_->getLatest();
+  return latest(1);
+}
+
+std::optional<MetricFrameSlice> MetricFrameBase::latest(size_t n) const {
+  auto rangeMaybe = ts_->getLatest(n);
   if (!rangeMaybe.has_value()) {
     return std::nullopt;
   }
-  return MetricFrameSlice(*this, ts_->getLatest().value());
+  return MetricFrameSlice(*this, ts_->getLatest(n).value());
 }
 
 template <bool flag = false>

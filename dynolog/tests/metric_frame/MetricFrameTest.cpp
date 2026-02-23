@@ -117,6 +117,12 @@ TEST(MetricSeriesSliceTest, metricFrameMapSmokeTest) {
   EXPECT_EQ(latestSlice->duration(), 0s);
   EXPECT_EQ(latestSlice->series<int64_t>("metric1")->raw()[0], 52);
 
+  auto latestSlice3 = frameMap.latest(3);
+  ASSERT_TRUE(latestSlice3.has_value());
+  EXPECT_EQ(latestSlice3->length(), 3);
+  EXPECT_EQ(latestSlice3->duration(), 120s);
+  EXPECT_EQ(latestSlice3->series<int64_t>("metric1")->diff(), 2);
+
   ASSERT_TRUE(frameMap.slice(now + 100s, now + 400s).has_value());
   auto frameSlice = frameMap.slice(now + 100s, now + 400s).value();
 
@@ -207,6 +213,12 @@ TEST(MetricSeriesSliceTest, metricFrameVectorSmokeTest) {
   EXPECT_EQ(latestSlice->length(), 1);
   EXPECT_EQ(latestSlice->duration(), 0s);
   EXPECT_EQ(latestSlice->series<int64_t>(0)->raw()[0], 52);
+
+  auto latestSlice3 = frameVector.latest(3);
+  ASSERT_TRUE(latestSlice3.has_value());
+  EXPECT_EQ(latestSlice3->length(), 3);
+  EXPECT_EQ(latestSlice3->duration(), 120s);
+  EXPECT_EQ(latestSlice3->series<int64_t>(0)->diff(), 2);
 
   ASSERT_TRUE(frameVector.slice(now + 100s, now + 400s).has_value());
   auto frameSlice = frameVector.slice(now + 100s, now + 400s).value();
