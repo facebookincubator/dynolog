@@ -32,14 +32,16 @@ class BPerfEventsGroup {
       int cgroup_update_level,
       bool support_per_thread = false,
       const std::string& pin_name = "",
-      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/");
+      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/",
+      bool pin_links = false);
   BPerfEventsGroup(
       const MetricDesc& metric,
       const PmuDeviceManager& pmu_manager,
       int cgroup_update_level,
       bool support_per_thread = false,
       const std::string& pin_name = "",
-      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/");
+      const std::filesystem::path& bpf_pinned_map_dir = "/sys/fs/bpf/",
+      bool pin_links = false);
 
   ~BPerfEventsGroup();
   BPerfEventsGroup(const BPerfEventsGroup&) = delete;
@@ -56,6 +58,14 @@ class BPerfEventsGroup {
   bool isEnabled() const {
     return enabled_;
   }
+  bool pinLinks();
+  bool shouldRecreateLinks();
+  bool restoreFromLinks();
+  // cleanupLinks() will not be called in destructor, to ensure thread-level
+  // BPerf could persist even after dynolog terminates
+  // it will be called when we want to explicitly cleanup thread-level BPerf on
+  // this host
+  void cleanupLinks();
 
   bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd, int cgroup_update_level);
   bool removeCgroup(__u64 id);
@@ -92,7 +102,13 @@ class BPerfEventsGroup {
 
   bool opened_ = false;
   bool enabled_ = false;
+  bool from_pinned_ = false;
   int cpu_cnt_;
+  // Perf event file descriptors for each CPU.
+  // Note: This vector may be empty when BPerfEventsGroup is restored from
+  // pinned BPF links, even if perf events exist. In that case, the perf events
+  // are stored in the "events" BPF map and cannot be extracted as file
+  // descriptors in this process.
   std::vector<int> pe_fds_;
   int cgroup_update_level_;
 
@@ -147,6 +163,8 @@ class BPerfEventsGroup {
 
   // For per thread monitoring
   bool per_thread_;
+  // Pin BPF programs to bpffs so they persist after dynolog exits
+  bool pin_links_;
   const std::string pin_name_;
   const std::filesystem::path bpf_pinned_map_dir_;
 
@@ -156,7 +174,7 @@ class BPerfEventsGroup {
 
   ::bpf_link* register_thread_link_ = nullptr;
   ::bpf_link* unregister_thread_link_ = nullptr;
-  int per_thread_data_size_ = 0;
+  size_t per_thread_data_size_ = 0;
   ::bpf_link* pmu_enable_exit_link_ = nullptr;
   struct bperf_leader_cgroup* skel_ = nullptr;
 };
