@@ -6,6 +6,7 @@
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
 #include <bpf/bpf.h>
 #include <bpf/libbpf.h>
+#include <sys/xattr.h>
 #include <unistd.h>
 #include <algorithm>
 #include <memory>
@@ -13,6 +14,21 @@
 #include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 
 namespace facebook::hbt::perf_event {
+
+const static std::string kRegisterLink = "dyno_bperf_register";
+const static std::string kUnregisterLink = "dyno_bperf_unregister";
+const static std::string kPmuEnableExit = "dyno_bperf_pmu_enable";
+const static std::string kContextSwitch = "dyno_bperf_context_switch";
+const static std::string kTrigger = "dyno_bperf_trigger";
+
+static inline std::string makePinPath(
+    const std::string& base,
+    const std::string& pin_name) {
+  if (pin_name.empty()) {
+    return base;
+  }
+  return fmt::format("{}_{}", base, pin_name);
+}
 
 static inline __u32 bpf_link_get_id(int fd) {
   struct bpf_link_info link_info = {
@@ -44,6 +60,81 @@ static inline __u32 bpf_map_get_id(int fd) {
   return map_info.id;
 }
 
+static inline std::string bpf_map_get_name(int fd) {
+  struct bpf_map_info map_info = {};
+  __u32 map_info_len = sizeof(map_info);
+
+  if (bpf_obj_get_info_by_fd(fd, &map_info, &map_info_len) != 0) {
+    return "";
+  }
+  return std::string(map_info.name);
+}
+
+// Given a bpf_link fd, find the map fd by name from the associated program
+static int bpf_link_get_map_fd_by_name(int link_fd, const std::string& name) {
+  int prog_fd = -1;
+  int result = -1;
+
+  // Get the program ID from the link
+  __u32 prog_id = bpf_link_get_prog_id(link_fd);
+  if (prog_id == 0) {
+    goto error;
+  }
+
+  // Get the program fd from the program ID
+  prog_fd = ::bpf_prog_get_fd_by_id(prog_id);
+  if (prog_fd < 0) {
+    goto error;
+  }
+
+  {
+    // Get the number of maps from the program
+    struct bpf_prog_info prog_info = {};
+    __u32 prog_info_len = sizeof(prog_info);
+    if (::bpf_obj_get_info_by_fd(prog_fd, &prog_info, &prog_info_len) != 0) {
+      goto error;
+    }
+
+    __u32 nr_map_ids = prog_info.nr_map_ids;
+    if (nr_map_ids == 0) {
+      goto error;
+    }
+
+    // Get all map IDs from the program
+    std::vector<__u32> map_ids(nr_map_ids);
+    prog_info = {};
+    prog_info.nr_map_ids = nr_map_ids;
+    prog_info.map_ids = reinterpret_cast<__u64>(map_ids.data());
+    prog_info_len = sizeof(prog_info);
+
+    if (::bpf_obj_get_info_by_fd(prog_fd, &prog_info, &prog_info_len) != 0) {
+      goto error;
+    }
+
+    // Find the map with the matching name
+    for (__u32 map_id : map_ids) {
+      int map_fd = ::bpf_map_get_fd_by_id(map_id);
+      if (map_fd < 0) {
+        continue;
+      }
+
+      std::string map_name = bpf_map_get_name(map_fd);
+      if (map_name == name) {
+        result = map_fd;
+        goto done;
+      }
+      ::close(map_fd);
+    }
+  }
+
+error:
+done:
+  if (prog_fd >= 0) {
+    ::close(prog_fd);
+  }
+  return result;
+}
+
 static inline __u32 bpf_prog_get_id(int fd) {
   struct bpf_prog_info prog_info = {
       .id = 0,
@@ -60,12 +151,17 @@ BPerfEventsGroup::BPerfEventsGroup(
     int cgroup_update_level,
     bool support_per_thread,
     const std::string& pin_name,
-    const std::filesystem::path& bpf_pinned_map_dir)
+    const std::filesystem::path& bpf_pinned_map_dir,
+    bool pin_links)
     : confs_(confs),
       cgroup_update_level_(cgroup_update_level),
       per_thread_(support_per_thread),
+      pin_links_(pin_links),
       pin_name_(pin_name),
       bpf_pinned_map_dir_(bpf_pinned_map_dir) {
+  if (!pin_links_) {
+    cleanupLinks();
+  }
   for (const auto& conf : confs_) {
     struct perf_event_attr attr = {
         .type = conf.configs.type,
@@ -78,6 +174,8 @@ BPerfEventsGroup::BPerfEventsGroup(
     attrs_.push_back(attr);
   }
   cpu_cnt_ = ::libbpf_num_possible_cpus();
+  from_pinned_ = restoreFromLinks();
+  HBT_LOG_INFO() << "Restored bpf links: " << from_pinned_;
 }
 
 BPerfEventsGroup::BPerfEventsGroup(
@@ -86,13 +184,15 @@ BPerfEventsGroup::BPerfEventsGroup(
     int cgroup_update_level,
     bool support_per_thread,
     const std::string& pin_name,
-    const std::filesystem::path& bpf_pinned_map_dir)
+    const std::filesystem::path& bpf_pinned_map_dir,
+    bool pin_links)
     : BPerfEventsGroup(
           metric.makeNoCpuTopologyConfs(pmu_manager),
           cgroup_update_level,
           support_per_thread,
           pin_name,
-          bpf_pinned_map_dir) {}
+          bpf_pinned_map_dir,
+          pin_links) {}
 inline ino_t mapFdWrapperPtrIntoInode(
     const std::shared_ptr<FdWrapper>& fd_wrapper) {
   if (fd_wrapper == nullptr) {
@@ -152,7 +252,7 @@ bool BPerfEventsGroup::removeCgroup(__u64 id) {
 }
 
 bool BPerfEventsGroup::disable() {
-  if (!enabled_) {
+  if (!enabled_ || from_pinned_) {
     return false;
   }
   syncGlobal_();
@@ -230,6 +330,11 @@ bool BPerfEventsGroup::isOpen() const {
     HBT_LOG_WARNING()
         << "Failed to attach leader prog to ctx switch tracepoint";
     return false;
+  }
+  if (pin_links_) {
+    if (!pinLinks()) {
+      HBT_LOG_WARNING() << "Failed to pin bpf links";
+    }
   }
   // set proper offset_
   ::memset(offsets_, 0, sizeof(offsets_));
@@ -669,6 +774,201 @@ out:
   ::close(iter_fd);
   ::bpf_link__destroy(link);
   return err;
+}
+
+bool BPerfEventsGroup::pinLinks() {
+  if (!register_thread_link_ || !unregister_thread_link_ ||
+      !pmu_enable_exit_link_ || !leader_link_ || trigger_prog_fd_ < 0) {
+    HBT_LOG_ERROR() << "thread-level BPerf progs have not been attached yet";
+    return false;
+  }
+  if (bpf_link__pin(
+          register_thread_link_,
+          (bpf_pinned_map_dir_ / makePinPath(kRegisterLink, pin_name_))
+              .c_str()) != 0) {
+    HBT_LOG_ERROR() << "failed to pin bpf link "
+                    << bpf_pinned_map_dir_ /
+            makePinPath(kRegisterLink, pin_name_);
+    goto error;
+  }
+  if (bpf_link__pin(
+          unregister_thread_link_,
+          (bpf_pinned_map_dir_ / makePinPath(kUnregisterLink, pin_name_))
+              .c_str()) != 0) {
+    HBT_LOG_ERROR() << "failed to pin bpf link "
+                    << bpf_pinned_map_dir_ /
+            makePinPath(kUnregisterLink, pin_name_);
+    goto error;
+  }
+  if (bpf_link__pin(
+          pmu_enable_exit_link_,
+          (bpf_pinned_map_dir_ / makePinPath(kPmuEnableExit, pin_name_))
+              .c_str()) != 0) {
+    HBT_LOG_ERROR() << "failed to pin bpf link "
+                    << bpf_pinned_map_dir_ /
+            makePinPath(kPmuEnableExit, pin_name_);
+    goto error;
+  }
+  if (bpf_link__pin(
+          leader_link_,
+          (bpf_pinned_map_dir_ / makePinPath(kContextSwitch, pin_name_))
+              .c_str()) != 0) {
+    HBT_LOG_ERROR() << "failed to pin bpf link "
+                    << bpf_pinned_map_dir_ /
+            makePinPath(kContextSwitch, pin_name_);
+    goto error;
+  }
+  if (bpf_obj_pin(
+          trigger_prog_fd_,
+          (bpf_pinned_map_dir_ / makePinPath(kTrigger, pin_name_)).c_str()) !=
+      0) {
+    HBT_LOG_ERROR() << "failed to pin bpf prog "
+                    << bpf_pinned_map_dir_ / makePinPath(kTrigger, pin_name_);
+    goto error;
+  }
+  return true;
+
+error:
+  cleanupLinks();
+  return false;
+}
+
+void BPerfEventsGroup::cleanupLinks() {
+  if (register_thread_link_) {
+    bpf_link__unpin(register_thread_link_);
+    register_thread_link_ = nullptr;
+  } else {
+    ::unlink(
+        (bpf_pinned_map_dir_ / makePinPath(kRegisterLink, pin_name_)).c_str());
+  }
+  if (unregister_thread_link_) {
+    bpf_link__unpin(unregister_thread_link_);
+    unregister_thread_link_ = nullptr;
+  } else {
+    ::unlink((bpf_pinned_map_dir_ / makePinPath(kUnregisterLink, pin_name_))
+                 .c_str());
+  }
+  if (pmu_enable_exit_link_) {
+    bpf_link__unpin(pmu_enable_exit_link_);
+    pmu_enable_exit_link_ = nullptr;
+  } else {
+    ::unlink(
+        (bpf_pinned_map_dir_ / makePinPath(kPmuEnableExit, pin_name_)).c_str());
+  }
+  if (leader_link_) {
+    bpf_link__unpin(leader_link_);
+    leader_link_ = nullptr;
+  } else {
+    ::unlink(
+        (bpf_pinned_map_dir_ / makePinPath(kContextSwitch, pin_name_)).c_str());
+  }
+  ::unlink((bpf_pinned_map_dir_ / makePinPath(kTrigger, pin_name_)).c_str());
+
+  this->close();
+}
+
+// TODO @alston64: we will need this function to handle version change
+bool BPerfEventsGroup::shouldRecreateLinks() {
+  return false;
+}
+
+bool BPerfEventsGroup::restoreFromLinks() {
+  int leader_link_fd = -1;
+  if (register_thread_link_ || unregister_thread_link_ ||
+      pmu_enable_exit_link_ || leader_link_ || trigger_prog_fd_ >= 0) {
+    HBT_LOG_ERROR() << "links are already created";
+    return false;
+  }
+  if (shouldRecreateLinks()) {
+    HBT_LOG_INFO() << "version has changed. Recreating links";
+    goto error;
+  }
+  register_thread_link_ = bpf_link__open(
+      (bpf_pinned_map_dir_ / makePinPath(kRegisterLink, pin_name_)).c_str());
+  if (!register_thread_link_) {
+    HBT_LOG_ERROR() << "failed to open bpf register_thread_link_";
+    goto error;
+  }
+  unregister_thread_link_ = bpf_link__open(
+      (bpf_pinned_map_dir_ / makePinPath(kUnregisterLink, pin_name_)).c_str());
+  if (!unregister_thread_link_) {
+    HBT_LOG_ERROR() << "failed to open bpf unregister_thread_link_";
+    goto error;
+  }
+  pmu_enable_exit_link_ = bpf_link__open(
+      (bpf_pinned_map_dir_ / makePinPath(kPmuEnableExit, pin_name_)).c_str());
+  if (!pmu_enable_exit_link_) {
+    HBT_LOG_ERROR() << "failed to open bpf pmu_enable_exit_link_";
+    goto error;
+  }
+  leader_link_ = bpf_link__open(
+      (bpf_pinned_map_dir_ / makePinPath(kContextSwitch, pin_name_)).c_str());
+  if (!leader_link_) {
+    HBT_LOG_ERROR() << "failed to open bpf leader_link_";
+    goto error;
+  }
+  trigger_prog_fd_ = bpf_obj_get(
+      (bpf_pinned_map_dir_ / makePinPath(kTrigger, pin_name_)).c_str());
+  if (trigger_prog_fd_ < 0) {
+    HBT_LOG_ERROR() << "failed to open bpf trigger_prog_fd_";
+    goto error;
+  }
+
+  leader_link_fd = bpf_link__fd(leader_link_);
+  if (leader_link_fd < 0) {
+    HBT_LOG_ERROR() << "failed to get leader link fd";
+    goto error;
+  }
+
+  global_output_fd_ =
+      bpf_link_get_map_fd_by_name(leader_link_fd, "global_output");
+  if (global_output_fd_ < 0) {
+    HBT_LOG_ERROR() << "failed to find global_output map from leader link";
+    goto error;
+  }
+
+  cgroup_output_fd_ =
+      bpf_link_get_map_fd_by_name(leader_link_fd, "cgroup_output");
+  if (cgroup_output_fd_ < 0) {
+    HBT_LOG_ERROR() << "failed to find cgroup_output map from leader link";
+    goto error;
+  }
+
+  per_thread_data_size_ = sizeof(struct bperf_thread_data) +
+      sizeof(struct bperf_perf_event_data) * confs_.size();
+  /* roundup to 64 byte aligned */
+  per_thread_data_size_ = bperf_roundup(per_thread_data_size_, 64);
+
+  opened_ = true;
+  enabled_ = true;
+
+  ::close(leader_link_fd);
+
+  return true;
+
+error:
+
+  ::close(leader_link_fd);
+
+  opened_ = false;
+  enabled_ = false;
+  ::close(global_output_fd_);
+  global_output_fd_ = -1;
+  ::close(cgroup_output_fd_);
+  cgroup_output_fd_ = -1;
+  pe_fds_.clear();
+  ::close(trigger_prog_fd_);
+  trigger_prog_fd_ = -1;
+  bpf_link__destroy(leader_link_);
+  leader_link_ = nullptr;
+  bpf_link__destroy(register_thread_link_);
+  register_thread_link_ = nullptr;
+  bpf_link__destroy(unregister_thread_link_);
+  unregister_thread_link_ = nullptr;
+  bpf_link__destroy(pmu_enable_exit_link_);
+  pmu_enable_exit_link_ = nullptr;
+
+  return false;
 }
 
 } // namespace facebook::hbt::perf_event
