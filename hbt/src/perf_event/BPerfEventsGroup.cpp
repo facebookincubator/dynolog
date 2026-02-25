@@ -212,7 +212,7 @@ size_t BPerfEventsGroup::getNumEvents() const {
 bool BPerfEventsGroup::addCgroup(
     std::shared_ptr<hbt::FdWrapper> fd,
     int cgroup_update_level) {
-  if (cgroup_update_level != cgroup_update_level_) {
+  if (cgroup_update_level_ > 0 && cgroup_update_level != cgroup_update_level_) {
     HBT_LOG_ERROR() << "BPerfEventsGroup will only track cgroups at level "
                     << cgroup_update_level_
                     << ", but addCgroup() ask to add a cgroup at level "
@@ -233,6 +233,7 @@ bool BPerfEventsGroup::addCgroup(
   }
 
   cgroup_fds_.insert({id, std::move(fd)});
+  invalidateCgroupCache();
   return true;
 }
 
@@ -249,6 +250,12 @@ bool BPerfEventsGroup::removeCgroup(__u64 id) {
 
   cgroup_fds_.erase(id);
   return true;
+}
+
+void BPerfEventsGroup::invalidateCgroupCache() {
+  if (enabled_) {
+    skel_->bss->cur_cgroup_cache_version += 1;
+  }
 }
 
 bool BPerfEventsGroup::disable() {

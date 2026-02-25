@@ -68,10 +68,23 @@ struct {
   __uint(max_entries, BPERF_MAX_GROUP_SIZE);
 } event_data SEC(".maps");
 
+struct cgroup_cache_entry {
+  __u64 tracked_cgroup_id;
+  int version;
+};
+
+struct {
+  __uint(type, BPF_MAP_TYPE_CGRP_STORAGE);
+  __uint(map_flags, BPF_F_NO_PREALLOC);
+  __type(key, int);
+  __type(value, struct cgroup_cache_entry);
+} per_cgroup_cache SEC(".maps");
+
 const volatile int event_cnt = 0;
 const volatile int task_counting_enabled = 0;
 int cpu_cnt = 0;
 int cgroup_update_level = 0;
+int cur_cgroup_cache_version = 0;
 
 static __always_inline __u64 event_prev_count(struct perf_event *event) {
   /*
@@ -155,14 +168,74 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
   update_task_offset(next_data, now);
 }
 
-static void update_cgroup_output(struct bpf_perf_event_value* diff_val,
-                                 struct task_struct *task) {
+static __u64 lookup_tracked_cgroup_id(struct task_struct *task) {
+  int level;
+  struct cgroup* cgrp;
+  cgrp = task->cgroups->dfl_cgrp;
+  for (level = 0; level < MAX_CGROUP_LEVELS; level++) {
+    __u64 id = cgrp->kn->id;
+    struct bpf_perf_event_value* val;
+
+    cgrp = bpf_rdonly_cast(cgrp->self.parent,
+                           bpf_core_type_id_kernel(struct cgroup));
+    if (cgrp == NULL)
+      break;
+
+    val = bpf_map_lookup_elem(&cgroup_output, &id);
+    if (!val)
+      continue;
+    return id;
+  }
+  return 0;
+}
+
+static struct bpf_perf_event_value* get_cgroup_perf_event_value(struct task_struct *task) {
   struct bpf_perf_event_value* val;
   __u64 id;
-  __u32 i;
-
-  id  = bpf_get_current_ancestor_cgroup_id(cgroup_update_level);
+  struct cgroup_cache_entry *cgroup_cache = bpf_cgrp_storage_get(&per_cgroup_cache, task->cgroups->dfl_cgrp, NULL, 0);
+  int latest_version = cur_cgroup_cache_version;
+  if (cgroup_cache && cgroup_cache->version == latest_version) {
+    /*
+     * fast path. this cgroup has been evaluated before and the cache is up to date.
+     */
+    id = cgroup_cache->tracked_cgroup_id;
+    if (id == 0)
+      return NULL;
+  } else {
+    /*
+     * slow path. we will need to walk along the cgroup tree to find if any ancestor cgroup is being tracked.
+     */
+    if (cgroup_update_level > 0) {
+      /*
+       * if cgroup_update_level is set before bpf is loaded, then we could jump to the tracked cgroup with the provided level info.
+       */
+      id = bpf_get_current_ancestor_cgroup_id(cgroup_update_level);
+      /*
+       * else we need to walk up the cgroup tree and evaluate each node on the path.
+       */
+    } else {
+      id = lookup_tracked_cgroup_id(task);
+    }
+    cgroup_cache = bpf_cgrp_storage_get(&per_cgroup_cache, task->cgroups->dfl_cgrp, 0, BPF_LOCAL_STORAGE_GET_F_CREATE);
+  }
   val = bpf_map_lookup_elem(&cgroup_output, &id);
+  /*
+   * update cache if possible.
+   */
+  if (!val)
+    id = 0;
+  if (cgroup_cache) {
+    cgroup_cache->version = latest_version;
+    cgroup_cache->tracked_cgroup_id = id;
+  }
+  
+  return val;
+}
+
+static void update_cgroup_output(struct bpf_perf_event_value* diff_val,
+                                 struct task_struct *task) {
+  int i;
+  struct bpf_perf_event_value* val = get_cgroup_perf_event_value(task);
   if (!val)
     return;
 
