@@ -2495,6 +2495,111 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           System::Permissions{},
           std::vector<std::string>{}));
 
+  // L1 Data TLB events
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1D_TLB",
+          "L1 data TLB access",
+          "Counts the number of L1 data TLB accesses. This is event 0x25.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1d_tlb",
+                   PmuType::armv8_pmuv3,
+                   "l1d_tlb",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1D_TLB_REFILL",
+          "L1 data TLB refill",
+          "Counts the number of L1 data TLB refills (misses). This is event 0x05.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1d_tlb_refill",
+                   PmuType::armv8_pmuv3,
+                   "l1d_tlb_refill",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // L1 Instruction TLB events
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1I_TLB",
+          "L1 instruction TLB access",
+          "Counts the number of L1 instruction TLB accesses. This is event 0x26.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1i_tlb",
+                   PmuType::armv8_pmuv3,
+                   "l1i_tlb",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1I_TLB_REFILL",
+          "L1 instruction TLB refill",
+          "Counts the number of L1 instruction TLB refills (misses). This is event 0x02.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1i_tlb_refill",
+                   PmuType::armv8_pmuv3,
+                   "l1i_tlb_refill",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // L2 unified TLB events
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L2D_TLB",
+          "L2 data TLB access",
+          "Counts the number of L2 unified TLB accesses. This is event 0x2F.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l2d_tlb",
+                   PmuType::armv8_pmuv3,
+                   "l2d_tlb",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L2D_TLB_REFILL",
+          "L2 data TLB refill",
+          "Counts the number of L2 unified TLB refills (misses). This is event 0x2D.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l2d_tlb_refill",
+                   PmuType::armv8_pmuv3,
+                   "l2d_tlb_refill",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
   metrics->add(
       std::make_shared<MetricDesc>(
           "HW_CORE_BR_MIS_PRED",
