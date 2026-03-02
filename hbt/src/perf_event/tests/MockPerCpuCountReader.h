@@ -13,7 +13,7 @@ namespace facebook::hbt::perf_event {
 class MockPerCpuCountReader : public PerCpuCountReader {
  public:
   MockPerCpuCountReader(
-      const CpuSet& mon_cpus,
+      const CpuSet& /* mon_cpus */,
       std::shared_ptr<const MetricDesc> metric_desc,
       std::shared_ptr<const PmuDeviceManager> pmu_manager,
       std::shared_ptr<FdWrapper> cgroup_fd_wrapper)
