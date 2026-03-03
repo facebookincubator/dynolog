@@ -51,7 +51,11 @@ static std::vector<rdc_field_t> kRdcWatchedFields = {
     RDC_FI_XGMI_5_WRITE_KB,
     RDC_FI_XGMI_6_WRITE_KB,
     RDC_FI_XGMI_7_WRITE_KB,
+#if FB_ROCM_VERSION >= 70000
+    RDC_FI_KFD_ID,
+#else
     RDC_FI_PROF_KFD_ID,
+#endif
     RDC_FI_PROF_SIMD_UTILIZATION};
 
 int main(int argc, char** argv) {
