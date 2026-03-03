@@ -3108,7 +3108,7 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           std::vector<std::string>{}));
 }
 
-void addUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+void addUncoreMetrics([[maybe_unused]] std::shared_ptr<Metrics>& metrics) {
 #ifdef __aarch64__
   addArmUncoreMetrics(metrics);
 #endif
