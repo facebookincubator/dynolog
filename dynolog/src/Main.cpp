@@ -14,6 +14,7 @@
 #include <thread>
 #include "dynolog/src/CompositeLogger.h"
 #include "dynolog/src/FBRelayLogger.h"
+#include "dynolog/src/UdsRelayLogger.h"
 #include "dynolog/src/KernelCollector.h"
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/ODSJsonLogger.h"
@@ -39,6 +40,7 @@ DEFINE_bool(use_JSON, false, "Emit metrics to JSON file through JSON logger");
 DEFINE_bool(use_prometheus, false, "Emit metrics to Prometheus");
 #endif
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
+DEFINE_bool(use_udsrelay, false, "Emit metrics to UDS Relay");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
 DEFINE_bool(use_scuba, false, "Emit metrics to Scuba through Scuba logger");
 DEFINE_int32(
@@ -72,6 +74,9 @@ std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
 #endif
   if (FLAGS_use_fbrelay) {
     loggers.push_back(std::make_unique<FBRelayLogger>());
+  }
+  if (FLAGS_use_udsrelay) {
+    loggers.push_back(std::make_unique<UdsRelayLogger>());
   }
   if (FLAGS_use_ODS) {
     loggers.push_back(std::make_unique<ODSJsonLogger>());
@@ -169,6 +174,12 @@ int main(int argc, char** argv) {
 
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
   std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread, pm_thread;
+  std::unique_ptr<UdsSocketWrapper> uds_socket;
+
+  if (FLAGS_use_udsrelay) {
+    uds_socket = std::make_unique<UdsSocketWrapper>(
+        FLAGS_udsrelay_socket_path);
+  }
 
   if (FLAGS_enable_ipc_monitor) {
     LOG(INFO) << "Starting IPC Monitor";
@@ -208,6 +219,10 @@ int main(int argc, char** argv) {
   }
 
   server->stop();
+
+  if (FLAGS_use_udsrelay) {
+    uds_socket->close();
+  }
 
   return 0;
 }
