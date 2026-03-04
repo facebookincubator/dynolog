@@ -75,6 +75,7 @@ void UdsRelayLogger::finalize() {
 
 UdsSocketWrapper::UdsSocketWrapper(const std::string& socket_path) {
   if (sock_fd_ < 0) {
+    success_ = true;
     sock_fd_ = ::socket(AF_UNIX, SOCK_STREAM, 0);
 
     if (sock_fd_ < 0) {
@@ -94,6 +95,13 @@ UdsSocketWrapper::UdsSocketWrapper(const std::string& socket_path) {
       return;
     }
     std::strncpy(serv_addr.sun_path, socket_path.c_str(), sizeof(serv_addr.sun_path) - 1);
+
+    if (::access(socket_path.c_str(), F_OK) != 0) {
+      LOG(WARNING) << "Socket file does not exist: " << socket_path;
+      ::close(sock_fd_);
+      sock_fd_ = -1;
+      return;
+    }
 
     if (::connect(sock_fd_, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
       LOG(ERROR) << "Unix domain socket connection failed to " << socket_path;
