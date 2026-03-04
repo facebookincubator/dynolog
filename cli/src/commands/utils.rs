@@ -28,8 +28,7 @@ pub fn get_resp(mut client: &TcpStream) -> Result<String> {
 
     println!("response length = {}", resp_len);
 
-    let mut resp_str = Vec::<u8>::new();
-    resp_str.resize(resp_len, 0);
+    let mut resp_str = vec![0; resp_len];
 
     client.read_exact(resp_str.as_mut_slice())?;
 
