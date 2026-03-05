@@ -42,7 +42,6 @@ void UdsRelayLogger::finalize() {
   std::time_t now = std::chrono::system_clock::to_time_t(ts_);
 
   if (!socket || !socket->success()) {
-    LOG(WARNING) << "Failed to connect to UDS Relay";
     initSocket();
     return;
   }
@@ -75,7 +74,13 @@ void UdsRelayLogger::finalize() {
 
 UdsSocketWrapper::UdsSocketWrapper(const std::string& socket_path) {
   if (sock_fd_ < 0) {
-    success_ = true;
+    auto now = std::chrono::steady_clock::now();
+    if (now - lastConnectAttempt_ < std::chrono::seconds(kReconnectIntervalS)) {
+      return;
+    }
+    lastConnectAttempt_ = now;
+
+    success_ = false;
     sock_fd_ = ::socket(AF_UNIX, SOCK_STREAM, 0);
 
     if (sock_fd_ < 0) {
@@ -94,7 +99,8 @@ UdsSocketWrapper::UdsSocketWrapper(const std::string& socket_path) {
       sock_fd_ = -1;
       return;
     }
-    std::strncpy(serv_addr.sun_path, socket_path.c_str(), sizeof(serv_addr.sun_path) - 1);
+    std::strncpy(serv_addr.sun_path, socket_path.c_str(), 
+      sizeof(serv_addr.sun_path) - 1);
 
     if (::access(socket_path.c_str(), F_OK) != 0) {
       LOG(WARNING) << "Socket file does not exist: " << socket_path;
@@ -103,7 +109,8 @@ UdsSocketWrapper::UdsSocketWrapper(const std::string& socket_path) {
       return;
     }
 
-    if (::connect(sock_fd_, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+    if (::connect(sock_fd_, (struct sockaddr*)&serv_addr,
+        sizeof(serv_addr)) < 0) {
       LOG(ERROR) << "Unix domain socket connection failed to " << socket_path;
       std::perror("connect()");
       ::close(sock_fd_);

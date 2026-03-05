@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <chrono>
 #include <map>
 #include <memory>
 #include <mutex>
@@ -30,9 +31,11 @@ class UdsSocketWrapper {
   bool send(const std::string& category, const std::string& msg);
 
  private:
+  static constexpr int kReconnectIntervalS = 120;
   static inline int sock_fd_ = -1;
   static inline bool success_ = false;
   static inline std::mutex mutex_;
+  static inline std::chrono::steady_clock::time_point lastConnectAttempt_{};
 };
 
 // A logger that sends JSON metrics over a Unix domain socket.
