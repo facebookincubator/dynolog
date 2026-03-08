@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#pragma once
+
 #include <asm/unistd.h>
 #include <stdlib.h>
 #include <sys/socket.h>
