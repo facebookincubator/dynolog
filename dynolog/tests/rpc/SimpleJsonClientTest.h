@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#pragma once
+
 #include <arpa/inet.h>
 #include <glog/logging.h>
 #include <stdio.h>
