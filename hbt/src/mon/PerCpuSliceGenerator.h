@@ -309,7 +309,7 @@ class PerCpuSliceGenerator {
   static constexpr size_t kWriteByteSize = CanonicalT::TSlicer::kWriteByteSize;
 
   template <class... Args>
-  PerCpuSliceGenerator(
+  explicit PerCpuSliceGenerator(
       std::shared_ptr<TPhasesPerCpuRingBuffer> phases_per_cpu_rb,
       Args&&... args) {
     const auto& cpu_set = phases_per_cpu_rb->getCpuSet();
