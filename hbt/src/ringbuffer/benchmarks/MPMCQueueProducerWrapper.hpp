@@ -22,7 +22,7 @@ class MPMCQueueProducerWrapper {
   TQueuePtr queuePtr;
 
  public:
-  MPMCQueueProducerWrapper(TQueuePtr qPtr) : queuePtr(qPtr) {}
+  explicit MPMCQueueProducerWrapper(TQueuePtr qPtr) : queuePtr(qPtr) {}
   MPMCQueueProducerWrapper(const MPMCQueueProducerWrapper&) = delete;
   MPMCQueueProducerWrapper(MPMCQueueProducerWrapper&&) = default;
   MPMCQueueProducerWrapper& operator=(MPMCQueueProducerWrapper&&) = default;
