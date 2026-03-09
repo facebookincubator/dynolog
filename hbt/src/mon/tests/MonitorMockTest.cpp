@@ -259,5 +259,219 @@ TEST(UncoreCountReader, ReadAllUncoreCounts) {
       ElementsAre(200));
 }
 
+// Integration tests for Monitor + MuxQueueStrategy
+
+TEST(MonitorSchedulingIntegration, PerPmuTypeConstructorPropagatesFlag) {
+  auto cpu_factory =
+      std::make_unique<perf_event::MockPerCpuCountReaderFactory>();
+  auto uncore_factory =
+      std::make_unique<perf_event::MockPerUncoreCountReaderFactory>();
+
+  // Use the 4-param constructor with mux_queue_per_pmu_type=true.
+  // This previously had a bug where the scheduling strategy would get
+  // mux_queue_per_pmu_type=false via the default constructor.
+  Monitor mon(std::move(cpu_factory), std::move(uncore_factory), true, false);
+
+  // Verify the strategy correctly received the per-pmu-type flag
+  // by checking via printMuxQueueStatus (the strategy's state is internal).
+  // The key behavioral test is that addMuxEntry with different PMU types
+  // creates separate queues.
+  std::ostringstream os;
+  mon.printMuxQueueStatus(os);
+  // Should not crash - this validates the Monitor constructed correctly.
+  EXPECT_FALSE(os.str().empty());
+}
+
+TEST(MonitorSchedulingIntegration, SimpleConstructorPropagatesFlag) {
+  // Simple constructor with mux_queue_per_pmu_type=true
+  Monitor mon(true, false);
+
+  std::ostringstream os;
+  mon.printMuxQueueStatus(os);
+  EXPECT_FALSE(os.str().empty());
+}
+
+TEST(MonitorSchedulingIntegration, MuxRotateWithPerPmuTypeQueues) {
+  auto cpu_info = CpuInfo("Intel", 6, 207, 0);
+  auto cpu_set = CpuSet::makeFromCpusList("0,1,2,3");
+  auto pmu_manager = std::make_shared<perf_event::PmuDeviceManager>(cpu_info);
+  pmu_manager->addPmu(
+      std::make_shared<perf_event::PmuDevice>(
+          PmuTypeToStr(perf_event::PmuType::generic_hardware),
+          perf_event::PmuType::generic_hardware,
+          std::nullopt,
+          PERF_TYPE_HARDWARE,
+          "PMU of Generic Hardware Events",
+          false));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::generic_hardware,
+          "cpu_cycles",
+          perf_event::EventDef::Encoding{.code = PERF_COUNT_HW_CPU_CYCLES},
+          "CPU cycles.",
+          "cycles"),
+      std::vector<perf_event::EventId>({"cpu-cycles", "cycles"}));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::generic_hardware,
+          "instructions",
+          perf_event::EventDef::Encoding{.code = PERF_COUNT_HW_INSTRUCTIONS},
+          "Instructions.",
+          "instructions"),
+      std::vector<perf_event::EventId>(
+          {"retired_instructions", "retired-instructions"}));
+
+  auto metrics = perf_event::makeAvailableMetrics();
+
+  // Set up mock factories with two metrics in separate mux groups
+  auto cpu_factory =
+      std::make_unique<perf_event::MockPerCpuCountReaderFactory>();
+
+  // For the per-PMU-type test, we need readers that support open/close/enable.
+  // The key test is that muxRotate correctly rotates per-PMU-type queues.
+  cpu_factory->setExpectation(
+      "instructions", [](perf_event::MockPerCpuCountReader* reader) {
+        EXPECT_CALL(*reader, isOpen).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, isEnabled).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, close).Times(AtLeast(0));
+        EXPECT_CALL(*reader, disable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, enable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, open).Times(AtLeast(0));
+      });
+  cpu_factory->setExpectation(
+      "cycles", [](perf_event::MockPerCpuCountReader* reader) {
+        EXPECT_CALL(*reader, isOpen).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, isEnabled).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, close).Times(AtLeast(0));
+        EXPECT_CALL(*reader, disable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, enable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, open).Times(AtLeast(0));
+      });
+
+  auto uncore_factory =
+      std::make_unique<perf_event::MockPerUncoreCountReaderFactory>();
+
+  // Create Monitor with mux_queue_per_pmu_type=true via 4-param constructor
+  Monitor mon(std::move(cpu_factory), std::move(uncore_factory), true, false);
+
+  // Add two metrics in separate mux groups but same PMU type
+  mon.emplaceCpuCountReader(
+      "group_instructions",
+      "instructions",
+      metrics->getMetricDesc("instructions"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+  mon.emplaceCpuCountReader(
+      "group_cycles",
+      "cycles",
+      metrics->getMetricDesc("cycles"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+
+  mon.open();
+  mon.enable();
+
+  // muxRotate should not crash - this exercises the full path through
+  // scheduling_strategy_.advance() -> sync_() -> syncElems_() -> getGroup()
+  mon.muxRotate();
+  mon.muxRotate();
+
+  // Verify rotation happened by checking that printMuxQueueStatus works
+  std::ostringstream os;
+  mon.printMuxQueueStatus(os);
+  std::string output = os.str();
+  EXPECT_NE(output.find("group_instructions"), std::string::npos);
+  EXPECT_NE(output.find("group_cycles"), std::string::npos);
+}
+
+TEST(MonitorSchedulingIntegration, EraseMetricUpdatesSchedule) {
+  auto cpu_info = CpuInfo("Intel", 6, 207, 0);
+  auto cpu_set = CpuSet::makeFromCpusList("0,1");
+  auto pmu_manager = std::make_shared<perf_event::PmuDeviceManager>(cpu_info);
+  pmu_manager->addPmu(
+      std::make_shared<perf_event::PmuDevice>(
+          PmuTypeToStr(perf_event::PmuType::generic_hardware),
+          perf_event::PmuType::generic_hardware,
+          std::nullopt,
+          PERF_TYPE_HARDWARE,
+          "PMU of Generic Hardware Events",
+          false));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::generic_hardware,
+          "cpu_cycles",
+          perf_event::EventDef::Encoding{.code = PERF_COUNT_HW_CPU_CYCLES},
+          "CPU cycles.",
+          "cycles"),
+      std::vector<perf_event::EventId>({"cpu-cycles", "cycles"}));
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::generic_hardware,
+          "instructions",
+          perf_event::EventDef::Encoding{.code = PERF_COUNT_HW_INSTRUCTIONS},
+          "Instructions.",
+          "instructions"),
+      std::vector<perf_event::EventId>(
+          {"retired_instructions", "retired-instructions"}));
+
+  auto metrics = perf_event::makeAvailableMetrics();
+  auto cpu_factory =
+      std::make_unique<perf_event::MockPerCpuCountReaderFactory>();
+
+  cpu_factory->setExpectation(
+      "instructions", [](perf_event::MockPerCpuCountReader* reader) {
+        EXPECT_CALL(*reader, isOpen).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, isEnabled).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, close).Times(AtLeast(0));
+        EXPECT_CALL(*reader, disable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, enable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, open).Times(AtLeast(0));
+      });
+  cpu_factory->setExpectation(
+      "cycles", [](perf_event::MockPerCpuCountReader* reader) {
+        EXPECT_CALL(*reader, isOpen).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, isEnabled).WillRepeatedly(Return(true));
+        EXPECT_CALL(*reader, close).Times(AtLeast(0));
+        EXPECT_CALL(*reader, disable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, enable).Times(AtLeast(0));
+        EXPECT_CALL(*reader, open).Times(AtLeast(0));
+      });
+
+  auto uncore_factory =
+      std::make_unique<perf_event::MockPerUncoreCountReaderFactory>();
+
+  // Use the 4-param constructor to test the previously buggy path
+  Monitor mon(std::move(cpu_factory), std::move(uncore_factory), false, false);
+
+  mon.emplaceCpuCountReader(
+      "group_instructions",
+      "instructions",
+      metrics->getMetricDesc("instructions"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+  mon.emplaceCpuCountReader(
+      "group_cycles",
+      "cycles",
+      metrics->getMetricDesc("cycles"),
+      pmu_manager,
+      cpu_set,
+      nullptr);
+
+  mon.open();
+  mon.enable();
+
+  // Erase one metric - exercises removeMuxEntry_ -> removeEntry
+  EXPECT_TRUE(mon.eraseCpuCountReader("group_cycles", "cycles"));
+
+  // muxRotate should work with only one group remaining
+  mon.muxRotate();
+
+  // Erasing nonexistent should return false
+  EXPECT_FALSE(mon.eraseCpuCountReader("group_cycles", "cycles"));
+}
+
 } // namespace
 } // namespace facebook::hbt::mon

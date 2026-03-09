@@ -12,6 +12,7 @@
 #include "hbt/src/common/System.h"
 #include "hbt/src/mon/IntelPTMonitor.h"
 #include "hbt/src/mon/MonData.h"
+#include "hbt/src/mon/MuxQueueStrategy.h"
 #include "hbt/src/perf_event/PerCpuCountReader.h"
 #include "hbt/src/perf_event/PerUncoreCountReader.h"
 
@@ -47,9 +48,13 @@ struct ManagedBPerfEventInfo {
 /// front of each MuxQueue will be enabled independently.
 /// All elements in the queue are opened when the queue is open, regadless of
 /// their position in the queue.
+/// The scheduling strategy can be customized via the SchedulingStrategyType
+/// template parameter. The default is MuxQueueStrategy which provides
+/// round-robin scheduling.
 template <
     class MuxGroupIdType = std::optional<std::string>,
-    class ElemIdType = std::string>
+    class ElemIdType = std::string,
+    class SchedulingStrategyType = MuxQueueStrategy<MuxGroupIdType, ElemIdType>>
 class Monitor {
   enum class State {
     Closed, // No perf_events are opened. Queue is inactive.
@@ -68,24 +73,30 @@ class Monitor {
   using ElemId = ElemIdType;
   using MuxGroupId = MuxGroupIdType;
   using MuxGroup = std::set<ElemId>;
+  using SchedulingStrategy = SchedulingStrategyType;
 
   void muxRotate(bool uncore_local = false, bool core_local = false) {
     std::lock_guard<std::mutex> lock{mutex_};
-    for (auto& [pmu_type, queue] : mux_queue_) {
-      if (queue.empty()) {
-        return;
-      }
-      std::rotate(queue.rbegin(), queue.rbegin() + 1, queue.rend());
-    }
+    scheduling_strategy_.advance();
     sync_(uncore_local, core_local);
+  }
+
+  /// Configure schedule for a specific mux group.
+  /// This is used by TimeSlotStrategy to set per-group sampling frequency.
+  /// For MuxQueueStrategy, this is a no-op.
+  bool configureSchedule(
+      const MuxGroupId& mux_group_id,
+      const ScheduleConfig& config) {
+    std::lock_guard<std::mutex> lock{mutex_};
+    return scheduling_strategy_.configureSchedule(mux_group_id, config);
   }
 
   explicit Monitor(bool mux_queue_per_pmu_type = false, bool reset = true)
       : Monitor(
             std::make_unique<perf_event::PerCpuCountReaderFactory>(),
             std::make_unique<perf_event::PerUncoreCountReaderFactory>(),
-            mux_queue_per_pmu_type,
-            reset) {}
+            reset,
+            SchedulingStrategy(mux_queue_per_pmu_type)) {}
 
   Monitor(
       std::unique_ptr<perf_event::PerCpuCountReaderFactory>
@@ -94,9 +105,22 @@ class Monitor {
           uncore_count_reader_factory,
       bool mux_queue_per_pmu_type,
       bool reset)
+      : Monitor(
+            std::move(cpu_count_reader_factory),
+            std::move(uncore_count_reader_factory),
+            reset,
+            SchedulingStrategy(mux_queue_per_pmu_type)) {}
+
+  Monitor(
+      std::unique_ptr<perf_event::PerCpuCountReaderFactory>
+          cpu_count_reader_factory,
+      std::unique_ptr<perf_event::PerUncoreCountReaderFactory>
+          uncore_count_reader_factory,
+      bool reset,
+      SchedulingStrategy scheduling_strategy)
       : cpu_count_reader_factory_(std::move(cpu_count_reader_factory)),
         uncore_count_reader_factory_(std::move(uncore_count_reader_factory)),
-        mux_queue_per_pmu_type_{mux_queue_per_pmu_type},
+        scheduling_strategy_(std::move(scheduling_strategy)),
         reset_{reset} {}
 
   bool open() {
@@ -918,13 +942,8 @@ class Monitor {
   /// and IntelPTMonitors in it.
   std::unordered_map<ElemId, std::shared_ptr<IntelPTMonitor>> ipt_monitors_;
 
-  std::unordered_map<MuxGroupId, MuxGroup> mux_groups_;
-
-  std::
-      unordered_map<std::optional<perf_event::PmuType>, std::vector<MuxGroupId>>
-          mux_queue_;
-
-  bool mux_queue_per_pmu_type_;
+  /// The scheduling strategy determines which MuxGroups are enabled.
+  SchedulingStrategy scheduling_strategy_;
 
   // Whether reset a counter's value to 0 at the moment when state is transited
   // to State::Enabled.
@@ -937,19 +956,13 @@ class Monitor {
   mutable std::mutex mutex_;
 
   std::unordered_set<MuxGroupId> getEnabledMuxGroupId_() const {
-    std::unordered_set<MuxGroupId> ret;
-    for (const auto& [perf_event_type, queue] : mux_queue_) {
-      if (queue.size() > 0) {
-        ret.insert(queue.front());
-      }
-    }
-    return ret;
+    return scheduling_strategy_.getEnabledGroupIds();
   }
 
   std::optional<perf_event::PmuType> getPmuTypeOfMetric(
       const perf_event::MetricDesc& metric_desc,
       const perf_event::PmuDeviceManager& pmu_manager) const {
-    if (mux_queue_per_pmu_type_) {
+    if (scheduling_strategy_.isMuxQueuePerPmuType()) {
       auto event_refs = metric_desc.getEventRefs(pmu_manager.cpuInfo.cpu_arch);
       HBT_THROW_ASSERT_IF(!event_refs.has_value() || event_refs.value().empty())
           << "No event refs found for metric " << metric_desc;
@@ -1004,38 +1017,13 @@ class Monitor {
       const MuxGroupId& mux_group_id,
       const ElemId& elem_id,
       std::optional<perf_event::PmuType> pmu_type) {
-    auto& g = mux_groups_[mux_group_id];
-    if (g.empty()) {
-      mux_queue_[pmu_type].push_back(mux_group_id);
-    }
-    g.insert(elem_id);
+    scheduling_strategy_.addEntry(mux_group_id, elem_id, pmu_type);
     sync_();
   }
 
   bool removeMuxEntry_(const MuxGroupId& mux_group_id, const ElemId& elem_id) {
-    if (!mux_groups_.count(mux_group_id) ||
-        !mux_groups_[mux_group_id].count(elem_id)) {
+    if (!scheduling_strategy_.removeEntry(mux_group_id, elem_id)) {
       return false;
-    }
-    auto& g = mux_groups_[mux_group_id];
-    g.erase(elem_id);
-    if (g.empty()) {
-      bool removed = false;
-      mux_groups_.erase(mux_group_id);
-      for (auto& [pmu_type, queue] : mux_queue_) {
-        const auto groupIdIt =
-            std::find(queue.begin(), queue.end(), mux_group_id);
-        if (groupIdIt == queue.cend()) {
-          continue;
-        }
-        queue.erase(groupIdIt);
-        removed = true;
-      }
-      if (!removed) {
-        HBT_THROW_ASSERT() << "mux_group_id \""
-                           << mux_group_id.value_or("nullopt")
-                           << "\" exists in mux_groups_ but not in mux_queue_";
-      }
     }
     sync_();
     return true;
@@ -1043,8 +1031,9 @@ class Monitor {
 };
 
 #ifdef HBT_ENABLE_TRACING
-template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printTraceMonitorsStatus(
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+std::ostream&
+Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::printTraceMonitorsStatus(
     std::ostream& os,
     const cpu_set_t& cpus) const {
   std::lock_guard<std::mutex> lock{mutex_};
@@ -1059,8 +1048,9 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printTraceMonitorsStatus(
 }
 #endif // HBT_ENABLE_TRACING
 
-template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printCpuCountReadersStatus(
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+std::ostream&
+Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::printCpuCountReadersStatus(
     std::ostream& os,
     const cpu_set_t& cpus) const {
   std::lock_guard<std::mutex> lock{mutex_};
@@ -1082,9 +1072,9 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printCpuCountReadersStatus(
   return os;
 }
 
-template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printUncoreCountReadersStatus(
-    std::ostream& os) const {
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+std::ostream& Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::
+    printUncoreCountReadersStatus(std::ostream& os) const {
   std::lock_guard<std::mutex> lock{mutex_};
   if (uncore_count_readers_.empty()) {
     os << "\nNo Uncore Count Readers\n";
@@ -1105,9 +1095,9 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printUncoreCountReadersStatus(
 }
 
 #ifdef HBT_ENABLE_BPERF
-template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printBPerfCountReadersStatus(
-    std::ostream& os) const {
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+std::ostream& Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::
+    printBPerfCountReadersStatus(std::ostream& os) const {
   std::lock_guard<std::mutex> lock{mutex_};
   if (bperf_count_readers_.size() == 0) {
     os << "\nNo BPerf Count Readers\n";
@@ -1127,8 +1117,9 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printBPerfCountReadersStatus(
 }
 #endif // HBT_ENABLE_BPERF
 
-template <class MuxGroupId, class ElemId>
-std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+std::ostream&
+Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::printMuxQueueStatus(
     std::ostream& os) const {
   std::lock_guard<std::mutex> lock{mutex_};
   os << "MuxQueue: ";
@@ -1145,21 +1136,7 @@ std::ostream& Monitor<MuxGroupId, ElemId>::printMuxQueueStatus(
       break;
   }
   os << "\n";
-  if (mux_queue_.empty()) {
-    os << " <No Groups>";
-    return os;
-  }
-  for (const auto& [pmu_type, queue] : mux_queue_) {
-    if (pmu_type.has_value()) {
-      os << '[' << perf_event::PmuTypeToStr(pmu_type.value()) << ']' << '\n';
-    } else {
-      os << '[' << "all_pmus" << ']' << "\n";
-    }
-    for (const auto& g_id : queue) {
-      os << fmt::format(
-          " <{}: {}>", g_id.value_or("<None>"), mux_groups_.at(g_id));
-    }
-  }
+  scheduling_strategy_.printStatus(os);
   return os;
 }
 
@@ -1225,9 +1202,9 @@ void tryDisableForCpu_(TGen& gen, CpuId cpu) {
   }
 }
 
-template <class MuxGroupId, class ElemId>
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
 template <class TElemType>
-void Monitor<MuxGroupId, ElemId>::commitElemChange_(
+void Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::commitElemChange_(
     const std::vector<TElemType*>& to_close,
     const std::vector<TElemType*>& to_open,
     const std::vector<TElemType*>& to_enable) {
@@ -1255,12 +1232,13 @@ void Monitor<MuxGroupId, ElemId>::commitElemChange_(
   }
 }
 
-template <class MuxGroupId, class ElemId>
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
 template <class TElemType>
-void Monitor<MuxGroupId, ElemId>::commitElemChangeOnLocalCpu_(
-    const std::vector<TElemType*>& to_close,
-    const std::vector<TElemType*>& to_open,
-    const std::vector<TElemType*>& to_enable) {
+void Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::
+    commitElemChangeOnLocalCpu_(
+        const std::vector<TElemType*>& to_close,
+        const std::vector<TElemType*>& to_open,
+        const std::vector<TElemType*>& to_enable) {
   using TMonitor = std::decay_t<decltype(*this)>;
   std::set<CpuId> cpus;
   for (const auto& elem : to_close) {
@@ -1305,8 +1283,8 @@ void Monitor<MuxGroupId, ElemId>::commitElemChangeOnLocalCpu_(
 }
 
 #ifdef HBT_ENABLE_BPERF
-template <class MuxGroupId, class ElemId>
-void Monitor<MuxGroupId, ElemId>::syncElems_(
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+void Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::syncElems_(
     std::unordered_map<MuxGroupId, TBPerfEventsGroup*>& bperf_events,
     bool on_local_cpu) {
   HBT_ARG_CHECK_EQ(on_local_cpu, false)
@@ -1322,7 +1300,7 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
         to_open.push_back(bperf_events_group);
         break;
       case State::Enabled:
-        HBT_DCHECK_GT(mux_queue_.size(), 0);
+        HBT_DCHECK(!scheduling_strategy_.empty());
         // Only enable if it's at front of its multiplexing queue.
         if (active_mux_ids.count(mux)) {
           to_enable.push_back(bperf_events_group);
@@ -1338,9 +1316,9 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
 
 /// Transition all elements (TraceMonitors, PerCpuCountReaders,
 /// and BPerfCountReaders) inside elems_container to state.
-template <class MuxGroupId, class ElemId>
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
 template <class TContainer>
-void Monitor<MuxGroupId, ElemId>::syncElems_(
+void Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::syncElems_(
     TContainer& elems_container,
     bool on_local_cpu) {
   using TElemSmartPtrType = std::decay_t<typename TContainer::mapped_type>;
@@ -1349,8 +1327,8 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
   MuxGroup enabled_elems;
   auto active_mux_ids = getEnabledMuxGroupId_();
   for (const auto& mux_id : active_mux_ids) {
-    enabled_elems.insert(
-        mux_groups_.at(mux_id).begin(), mux_groups_.at(mux_id).end());
+    const auto& group = scheduling_strategy_.getGroup(mux_id);
+    enabled_elems.insert(group.begin(), group.end());
   }
   std::vector<TElemType*> elem_to_close, elem_to_open, elem_to_enable;
   for (auto& [k, elem_ptr] : elems_container) {
@@ -1380,10 +1358,12 @@ void Monitor<MuxGroupId, ElemId>::syncElems_(
 
 /// Transitions (enable/disable, open/close)
 /// all components in Monitor to the new state.
-template <class MuxGroupId, class ElemId>
-void Monitor<MuxGroupId, ElemId>::sync_(bool uncore_local, bool core_local) {
-  if (mux_queue_.empty()) {
-    // Empty queues have no elements to sync.
+template <class MuxGroupId, class ElemId, class SchedulingStrategyType>
+void Monitor<MuxGroupId, ElemId, SchedulingStrategyType>::sync_(
+    bool uncore_local,
+    bool core_local) {
+  if (scheduling_strategy_.empty()) {
+    // Empty schedule has no elements to sync.
     return;
   }
 #ifdef HBT_ENABLE_TRACING
