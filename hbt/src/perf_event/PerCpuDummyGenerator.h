@@ -34,7 +34,7 @@ class CpuDummyGenerator final
           .type = PERF_TYPE_SOFTWARE,
           .config = PERF_COUNT_SW_DUMMY}}};
 
-  CpuDummyGenerator(CpuId cpu) : TBase{cpu, -1, -1, event_confs} {}
+  explicit CpuDummyGenerator(CpuId cpu) : TBase{cpu, -1, -1, event_confs} {}
 
   void enableImpl() noexcept {}
 
