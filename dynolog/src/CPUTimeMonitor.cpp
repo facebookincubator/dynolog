@@ -14,6 +14,47 @@ enum { IDX_MIN = 0, IDX_SEC = 1, IDX_HUNDRED_MS = 2 };
 
 namespace facebook::dynolog {
 
+// Series key suffixes for CPU breakdown metrics
+static const std::string kBreakdownIdle = ".idle";
+static const std::string kBreakdownSoftirq = ".softirq";
+static const std::string kBreakdownIowait = ".iowait";
+static const std::string kBreakdownHardirq = ".hardirq";
+
+// All breakdown suffixes in a single list to avoid iterating in multiple
+// places.
+static const std::vector<std::string> kBreakdownSuffixes = {
+    kBreakdownIdle,
+    kBreakdownSoftirq,
+    kBreakdownIowait,
+    kBreakdownHardirq};
+
+// Helper to add breakdown series for a target to a MetricFrameMap.
+static void addBreakdownSeries(
+    MetricFrameMap& frame,
+    const std::string& targetId) {
+  for (const auto& suffix : kBreakdownSuffixes) {
+    std::string key = targetId + suffix;
+    frame.addSeries(
+        key,
+        std::make_shared<MetricSeries<double>>(frame.maxLength(), key, ""));
+  }
+}
+
+static const std::string& breakdownSuffix(
+    CPUTimeMonitor::CpuBreakdown breakdown) {
+  switch (breakdown) {
+    case CPUTimeMonitor::CpuBreakdown::IDLE:
+      return kBreakdownIdle;
+    case CPUTimeMonitor::CpuBreakdown::SOFTIRQ:
+      return kBreakdownSoftirq;
+    case CPUTimeMonitor::CpuBreakdown::IOWAIT:
+      return kBreakdownIowait;
+    case CPUTimeMonitor::CpuBreakdown::HARDIRQ:
+      return kBreakdownHardirq;
+  }
+  return kBreakdownIdle; // unreachable
+}
+
 constexpr int kRingbufferSizeMinutes = 6;
 static const std::string kHostCgroupPath = "/sys/fs/cgroup";
 
@@ -60,6 +101,7 @@ CPUTimeMonitor::CPUTimeMonitor(
     frame.addSeries(
         "host",
         std::make_shared<MetricSeries<double>>(frame.maxLength(), "host", ""));
+    addBreakdownSeries(frame, "host");
   }
   if (readCgroupStat_) {
     for (auto& frame : cgroupUsageMetricFrames_) {
@@ -144,6 +186,44 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
   return series->raw();
 }
 
+std::optional<double> CPUTimeMonitor::getCpuBreakdownAvg(
+    Granularity gran,
+    uint64_t seconds_ago,
+    CpuBreakdown breakdown,
+    const std::optional<std::string>& targetId) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  int level = 0;
+  switch (gran) {
+    case Granularity::MINUTE:
+      level = IDX_MIN;
+      break;
+    case Granularity::SECOND:
+      level = IDX_SEC;
+      break;
+    case Granularity::HUNDRED_MS:
+      level = IDX_HUNDRED_MS;
+      break;
+    default:
+      return std::nullopt;
+  }
+
+  auto& frame = procUsageMetricFrames_[level];
+  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  // targetId identifies the monitoring target (e.g., an allotment UUID).
+  // "host" is the default prefix representing whole-host aggregate data.
+  std::string key = targetId.value_or("host") + breakdownSuffix(breakdown);
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  return series->avg<double>();
+}
+
 std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
     Granularity gran,
     DataSource dataSource) {
@@ -170,7 +250,8 @@ std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
 
 void CPUTimeMonitor::tick(TMask mask) {
   TimePoint tickTime = std::chrono::steady_clock::now();
-  std::vector<uint64_t> idleTime = readProcStat(!targetsNeedPerCore_.empty());
+  std::vector<::dynolog::CpuTime> cpuTimeData =
+      readProcStat(!targetsNeedPerCore_.empty());
   TimePoint measureTime = std::chrono::steady_clock::now();
 
   std::map<std::string, std::tuple<TimePoint, uint64_t>> cgroupCpuStats;
@@ -190,18 +271,18 @@ void CPUTimeMonitor::tick(TMask mask) {
 
   if (TTicker::is_major_tick(mask)) {
     // every 60s
-    processProcUsage(IDX_MIN, idleTime, tickTime, measureTime, mask);
+    processProcUsage(IDX_MIN, cpuTimeData, tickTime, measureTime, mask);
     processCgroupUsage(IDX_MIN, cgroupCpuStats, measureTime, mask);
   }
   // a tick can be both major and minor
   if (TTicker::is_minor_tick(mask)) {
     // every 1s
-    processProcUsage(IDX_SEC, idleTime, tickTime, measureTime, mask);
+    processProcUsage(IDX_SEC, cpuTimeData, tickTime, measureTime, mask);
     processCgroupUsage(IDX_SEC, cgroupCpuStats, measureTime, mask);
   }
   if (TTicker::is_subminor_tick(mask, 0)) {
     // every 100ms
-    processProcUsage(IDX_HUNDRED_MS, idleTime, tickTime, measureTime, mask);
+    processProcUsage(IDX_HUNDRED_MS, cpuTimeData, tickTime, measureTime, mask);
     processCgroupUsage(IDX_HUNDRED_MS, cgroupCpuStats, measureTime, mask);
   }
 }
@@ -240,6 +321,7 @@ void CPUTimeMonitor::registerTarget(
         targetId,
         std::make_shared<MetricSeries<double>>(
             frame.maxLength(), targetId, ""));
+    addBreakdownSeries(frame, targetId);
   }
   for (auto& frame : cgroupUsageMetricFrames_) {
     frame.addSeries(
@@ -265,6 +347,9 @@ void CPUTimeMonitor::deRegisterTarget(const std::string& targetId) {
   }
   for (auto& frame : procUsageMetricFrames_) {
     frame.eraseSeries(targetId);
+    for (const auto& suffix : kBreakdownSuffixes) {
+      frame.eraseSeries(targetId + suffix);
+    }
   }
   for (auto& frame : cgroupUsageMetricFrames_) {
     frame.eraseSeries(targetId);
@@ -301,13 +386,14 @@ std::optional<uint64_t> CPUTimeMonitor::readCgroupCpuStat(
   return usage;
 }
 
-std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
+std::vector<::dynolog::CpuTime> CPUTimeMonitor::readProcStat(
+    bool read_per_core) {
   // based on KernelMonitor.cpp
   // For unclear reasons, a C++ implementation is rather slower
   static FILE* fp = nullptr;
   char buf[320];
 
-  std::vector<uint64_t> ret;
+  std::vector<::dynolog::CpuTime> ret;
 
   if (!fp) {
     const auto& path = rootDir_ + "/proc/stat";
@@ -333,25 +419,37 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
     return {};
   }
 
-  auto readIdle = [&]() -> std::optional<uint64_t> {
+  auto readCpuLine = [&]() -> std::optional<::dynolog::CpuTime> {
     if (!fgets(buf, sizeof(buf), fp)) {
       LOG(ERROR) << "Error reading /proc/stat";
       return std::nullopt;
     }
-    unsigned long long idle = 0;
-    int num = 0;
-    num = sscanf(buf, "%*s %*s %*s %*s %Lu", &idle);
-    if (num != 1) {
-      LOG(ERROR) << "Error parsing /proc/stat";
+    ::dynolog::CpuTime ct{};
+    // /proc/stat format: cpu[N] user nice system idle iowait irq softirq
+    // [steal] [guest] [guest_nice]
+    // We only parse through softirq (field 7) since we don't need
+    // steal/guest/guest_nice.
+    int num = sscanf(
+        buf,
+        "%*s %Lu %Lu %Lu %Lu %Lu %Lu %Lu",
+        &ct.u,
+        &ct.n,
+        &ct.s,
+        &ct.i,
+        &ct.w,
+        &ct.x,
+        &ct.y);
+    if (num < 4) {
+      LOG(ERROR) << "Error parsing /proc/stat, got " << num << " fields";
       return std::nullopt;
     }
-    return idle;
+    return ct;
   };
 
   // First line is an aggregation over all CPUs
-  auto system_idle = readIdle();
-  if (system_idle != std::nullopt) {
-    ret.push_back(*system_idle);
+  auto systemCpuTime = readCpuLine();
+  if (systemCpuTime != std::nullopt) {
+    ret.push_back(*systemCpuTime);
   }
   if (!read_per_core) {
     return ret;
@@ -359,11 +457,11 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
 
   uint64_t lines = 0;
   while (lines < coreCount_) {
-    auto perCoreIdle = readIdle();
-    if (!perCoreIdle) {
+    auto perCoreCpuTime = readCpuLine();
+    if (!perCoreCpuTime) {
       return {};
     }
-    ret.push_back(*perCoreIdle);
+    ret.push_back(*perCoreCpuTime);
     ++lines;
   }
   return ret;
@@ -371,11 +469,11 @@ std::vector<uint64_t> CPUTimeMonitor::readProcStat(bool read_per_core) {
 
 void CPUTimeMonitor::processProcUsage(
     int level,
-    const std::vector<uint64_t>& idleTime,
+    const std::vector<::dynolog::CpuTime>& cpuTimeData,
     TimePoint tickTime,
     TimePoint measureTime,
     TMask mask) {
-  if (idleTime.empty()) {
+  if (cpuTimeData.empty()) {
     return;
   }
   auto& frame = procUsageMetricFrames_[level];
@@ -384,23 +482,26 @@ void CPUTimeMonitor::processProcUsage(
   MapSamplesT line;
 
   for (const auto& [targetId, cpuSet] : targetToCpuSet_) {
-    uint64_t newVal = idleTime[0];
+    // Aggregate CpuTime over the target's assigned cores
+    ::dynolog::CpuTime newCt;
     uint64_t coreCount = coreCount_;
-    if (!cpuSet.empty()) {
-      newVal = 0;
+    if (cpuSet.empty()) {
+      newCt = cpuTimeData[0];
+    } else {
       for (const auto& cpu : cpuSet) {
-        newVal += idleTime[cpu + 1]; // zeroth line is system-wide
+        newCt += cpuTimeData[cpu + 1]; // zeroth entry is system-wide
       }
       coreCount = cpuSet.size();
     }
+
     if (lastCpuTime.find(targetId) == lastCpuTime.end()) {
-      lastCpuTime[targetId] = newVal;
+      lastCpuTime[targetId] = newCt;
       continue;
     }
-    uint64_t lastVal = lastCpuTime[targetId];
+    ::dynolog::CpuTime lastCt = lastCpuTime[targetId];
     uint64_t idleDelta =
-        (newVal - lastVal) * 10; // /proc/stat reports in 10ms, convert to ms
-    lastCpuTime[targetId] = newVal;
+        (newCt.i - lastCt.i) * 10; // /proc/stat reports in 10ms, convert to ms
+    lastCpuTime[targetId] = newCt;
 
     uint64_t wallDelta = std::chrono::duration_cast<std::chrono::milliseconds>(
                              measureTime - lastTickTime)
@@ -425,21 +526,56 @@ void CPUTimeMonitor::processProcUsage(
         LOG(ERROR) << "Invalid CPU cores usage at level: " << level
                    << " targetId: " << targetId << " wallDelta: " << wallDelta
                    << " CPUCoresUsage: " << CPUCoresUsage
-                   << " idleDelta: " << idleDelta << " newVal: " << newVal
-                   << " lastVal: " << lastVal << " coreCount: " << coreCount
+                   << " idleDelta: " << idleDelta << " newVal: " << newCt.i
+                   << " lastVal: " << lastCt.i << " coreCount: " << coreCount
                    << " data: "
                    << std::accumulate(
-                          idleTime.begin(),
-                          idleTime.end(),
+                          cpuTimeData.begin(),
+                          cpuTimeData.end(),
                           std::string(),
-                          [](const std::string& a, const uint64_t& b) {
-                            return a + " " + std::to_string(b);
+                          [](const std::string& a,
+                             const ::dynolog::CpuTime& b) {
+                            return a + " " + std::to_string(b.i);
                           });
       }
       continue;
     }
 
     line.emplace_back(targetId, CPUCoresUsage);
+
+    // Compute raw CPU breakdown values (in cores) for idle, softirq, iowait,
+    // hardirq. Each is: field_delta_jiffies * 10ms / wallDelta_ms = cores.
+    // Counter wrap is extremely unlikely for /proc/stat jiffies counters but
+    // skip if detected to avoid producing incorrect values.
+    double msPerJiffy = 10.0;
+    auto safeDelta = [](uint64_t newVal,
+                        uint64_t oldVal) -> std::optional<uint64_t> {
+      if (newVal < oldVal) {
+        return std::nullopt;
+      }
+      return newVal - oldVal;
+    };
+
+    auto idleDeltaOpt = safeDelta(newCt.i, lastCt.i);
+    auto softirqDeltaOpt = safeDelta(newCt.y, lastCt.y);
+    auto iowaitDeltaOpt = safeDelta(newCt.w, lastCt.w);
+    auto hardirqDeltaOpt = safeDelta(newCt.x, lastCt.x);
+
+    if (idleDeltaOpt && softirqDeltaOpt && iowaitDeltaOpt && hardirqDeltaOpt) {
+      double idleCores =
+          static_cast<double>(*idleDeltaOpt) * msPerJiffy / wallDelta;
+      double softirqCores =
+          static_cast<double>(*softirqDeltaOpt) * msPerJiffy / wallDelta;
+      double iowaitCores =
+          static_cast<double>(*iowaitDeltaOpt) * msPerJiffy / wallDelta;
+      double hardirqCores =
+          static_cast<double>(*hardirqDeltaOpt) * msPerJiffy / wallDelta;
+
+      line.emplace_back(targetId + kBreakdownIdle, idleCores);
+      line.emplace_back(targetId + kBreakdownSoftirq, softirqCores);
+      line.emplace_back(targetId + kBreakdownIowait, iowaitCores);
+      line.emplace_back(targetId + kBreakdownHardirq, hardirqCores);
+    }
   }
   if (!line.empty()) {
     frame.addSamples(line, tickTime);

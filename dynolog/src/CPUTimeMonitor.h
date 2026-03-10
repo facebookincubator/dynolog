@@ -14,6 +14,7 @@
 #include <thread>
 #include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/Ticker.h"
+#include "dynolog/src/Types.h"
 
 namespace facebook::dynolog {
 
@@ -59,6 +60,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   enum class Granularity { MINUTE, SECOND, HUNDRED_MS };
   enum class DataSource { PROC_STAT, CGROUP_STAT };
+  enum class CpuBreakdown { IDLE, SOFTIRQ, IOWAIT, HARDIRQ };
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
@@ -95,13 +97,21 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
+  // Get the average CPU breakdown value (idle, softirq, iowait, hardirq)
+  // for a target over the specified time window. Returns raw cores used.
+  std::optional<double> getCpuBreakdownAvg(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
  private:
-  // Reads Idle time from /proc/stat
+  // Reads CPU time data from /proc/stat
   // If read_per_core is true, reads per-core data in addition to the
   // all-core data (first element)
   enum class Statistic { AVG, QUANTILE };
 
-  std::vector<uint64_t> readProcStat(bool read_per_core = false);
+  std::vector<::dynolog::CpuTime> readProcStat(bool read_per_core = false);
   std::optional<uint64_t> readCgroupCpuStat(const std::string& cgroupPath);
   std::optional<double> getStat(
       Granularity gran,
@@ -113,7 +123,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   void processProcUsage(
       int level,
-      const std::vector<uint64_t>& idleTime,
+      const std::vector<::dynolog::CpuTime>& cpuTimeData,
       TimePoint measure_time_lo,
       TimePoint measure_time_hi,
       TMask mask);
@@ -138,8 +148,10 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
   std::map<std::string, std::string> targetCgroupPaths_;
 
   // Proc stat tracking. Index 0 is minute, 1 is second, 2 is 100ms
+  // Contains both CPU usage series (keyed by targetId) and breakdown series
+  // (keyed by "targetId.idle", "targetId.softirq", etc.)
   std::array<MetricFrameMap, 3> procUsageMetricFrames_;
-  std::array<std::map<std::string, uint64_t>, 3> procCpuTimeLast_;
+  std::array<std::map<std::string, ::dynolog::CpuTime>, 3> procCpuTimeLast_;
   std::array<TimePoint, 3> procTimeLast_;
 
   // Cgroup stat tracking. Index 0 is minute, 1 is second, 2 is 100ms
