@@ -61,6 +61,11 @@ bool EthtoolCounters::sampleEthtoolCounters(
     return false;
   }
 #else
+  if (copy_sz > stats_sz_) {
+    LOG_EVERY_N(WARNING, 100)
+        << "Unable to copy current stats due to insufficient space";
+    return false;
+  }
   memcpy(prev_eth_stats_, cur_eth_stats_, copy_sz);
 #endif // FBCODE
   return true;
