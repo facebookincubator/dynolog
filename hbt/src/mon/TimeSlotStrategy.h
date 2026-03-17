@@ -46,16 +46,20 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
   using ElemId = typename Base::ElemId;
   using MuxGroup = typename Base::MuxGroup;
 
+  static constexpr uint32_t kDefaultCycleDurationSeconds = 60;
+  static constexpr uint32_t kDefaultEnablesPerCycle = 2;
+
   /// Constructor. cycle_duration_seconds is the duration of a scheduling
   /// cycle in seconds.
-  explicit TimeSlotStrategy(uint32_t cycle_duration_seconds = 60)
+  explicit TimeSlotStrategy(
+      uint32_t cycle_duration_seconds = kDefaultCycleDurationSeconds)
       : cycle_duration_seconds_{cycle_duration_seconds} {}
 
   /// Constructor for Monitor compatibility (ignores bool, uses default cycle).
   /// This matches the MuxQueueStrategy constructor signature that Monitor uses.
   /// NOLINTNEXTLINE(google-explicit-constructor)
   explicit TimeSlotStrategy(bool /* mux_queue_per_pmu_type */)
-      : cycle_duration_seconds_{60} {}
+      : cycle_duration_seconds_{kDefaultCycleDurationSeconds} {}
 
   void addEntry(
       const MuxGroupId& mux_group_id,
@@ -66,10 +70,10 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
     g.insert(elem_id);
 
     if (was_empty) {
-      // New group - add with default configuration (1 enable per cycle)
+      // New group - add with default configuration
       if (!schedule_configs_.count(mux_group_id)) {
         schedule_configs_[mux_group_id] =
-            ScheduleConfig{1, cycle_duration_seconds_};
+            ScheduleConfig{kDefaultEnablesPerCycle, cycle_duration_seconds_};
       }
       needs_rebuild_ = true;
     }
@@ -230,7 +234,7 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
     std::vector<std::pair<MuxGroupId, uint32_t>> requirements;
     for (const auto& [group_id, _] : mux_groups_) {
       auto config_it = schedule_configs_.find(group_id);
-      uint32_t slots_needed = 1; // default
+      uint32_t slots_needed = kDefaultEnablesPerCycle;
       if (config_it != schedule_configs_.end()) {
         slots_needed = std::min(
             config_it->second.enablesPerCycle, cycle_duration_seconds_);

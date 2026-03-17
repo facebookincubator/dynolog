@@ -66,25 +66,24 @@ TEST_F(TimeSlotStrategyTest, RemoveNonexistentEntryReturnsFalse) {
   EXPECT_FALSE(strategy_.removeEntry("nonexistent_group", "elem1"));
 }
 
-TEST_F(TimeSlotStrategyTest, DefaultConfigurationOneSamplePerCycle) {
+TEST_F(TimeSlotStrategyTest, DefaultConfigurationTwoSamplesPerCycle) {
   strategy_.addEntry("group1", "elem1", std::nullopt);
 
   // Trigger schedule rebuild
   strategy_.advance();
 
-  // Should be enabled at some point in the cycle
-  bool found_enabled = false;
+  // Count how many slots the group is enabled in a full cycle
+  size_t enabled_count = 0;
   for (size_t i = 0; i < 60; ++i) {
     auto enabled = strategy_.getEnabledGroupIds();
     if (enabled.count("group1")) {
-      found_enabled = true;
-      break;
+      ++enabled_count;
     }
     strategy_.advance();
   }
 
-  EXPECT_TRUE(found_enabled)
-      << "Group should be enabled at least once per cycle";
+  EXPECT_EQ(enabled_count, 2)
+      << "Group should be enabled kDefaultEnablesPerCycle times per cycle";
 }
 
 TEST_F(TimeSlotStrategyTest, ConfigureScheduleIncreasesFrequency) {
