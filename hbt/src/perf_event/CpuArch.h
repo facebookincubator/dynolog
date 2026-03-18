@@ -111,6 +111,8 @@ inline CpuArch makeCpuArchArm(
           return CpuArch::NEOVERSE_N2;
         case 0xD4F:
           return CpuArch::NEOVERSE_V2;
+        case 0xD84:
+          return CpuArch::NEOVERSE_V3;
         default:
           return CpuArch::UNKNOWN;
       }

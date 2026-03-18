@@ -15,6 +15,7 @@ enum class CpuArch {
   NEOVERSE_N1,
   NEOVERSE_N2,
   NEOVERSE_V2,
+  NEOVERSE_V3,
   AMPERE_ONE,
   // AMD Architectures
   MILAN,
@@ -52,6 +53,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "NEOVERSE_N2";
     case CpuArch::NEOVERSE_V2:
       return os << "NEOVERSE_V2";
+    case CpuArch::NEOVERSE_V3:
+      return os << "NEOVERSE_V3";
     case CpuArch::AMPERE_ONE:
       return os << "AMPERE_ONE";
     case CpuArch::MILAN:
