@@ -130,6 +130,7 @@ void addArmEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // to addEvents in json_events/generated/intel/JsonEvents.h
   switch (cpu_info.cpu_arch) {
     case CpuArch::NEOVERSE_V2:
+    case CpuArch::NEOVERSE_V3:
       // With ARM, multiple CPUs can use the same CPU Core, but have different
       // uncores
       // TODO: Provide SoC breakdown in addition to CPU model
