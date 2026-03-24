@@ -2749,6 +2749,23 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
 
   metrics->add(
       std::make_shared<MetricDesc>(
+          "HW_CORE_BR_RETIRED",
+          "Branch retired",
+          "Counts architecturally executed branch instructions. This is event 0x21.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "br_retired",
+                   PmuType::armv8_pmuv3,
+                   "br_retired",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
           "HW_CORE_STALL_BACKEND_MEM",
           "Backend memory stalls",
           "Counts cycles where no operation is issued due to the backend "
