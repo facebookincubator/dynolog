@@ -30,16 +30,6 @@ static inline std::string makePinPath(
   return fmt::format("{}_{}", base, pin_name);
 }
 
-static inline __u32 bpf_link_get_id(int fd) {
-  struct bpf_link_info link_info = {
-      .id = 0,
-  };
-  __u32 link_info_len = sizeof(link_info);
-
-  bpf_obj_get_info_by_fd(fd, &link_info, &link_info_len);
-  return link_info.id;
-}
-
 static inline __u32 bpf_link_get_prog_id(int fd) {
   struct bpf_link_info link_info = {
       .id = 0,
@@ -133,16 +123,6 @@ done:
     ::close(prog_fd);
   }
   return result;
-}
-
-static inline __u32 bpf_prog_get_id(int fd) {
-  struct bpf_prog_info prog_info = {
-      .id = 0,
-  };
-  __u32 prog_info_len = sizeof(prog_info);
-
-  bpf_obj_get_info_by_fd(fd, &prog_info, &prog_info_len);
-  return prog_info.id;
 }
 
 /// name: Path of ebpf map
