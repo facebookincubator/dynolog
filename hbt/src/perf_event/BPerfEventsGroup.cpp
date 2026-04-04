@@ -817,34 +817,35 @@ void BPerfEventsGroup::cleanupLinks() {
   if (register_thread_link_) {
     bpf_link__unpin(register_thread_link_);
     register_thread_link_ = nullptr;
-  } else {
-    ::unlink(
-        (bpf_pinned_map_dir_ / makePinPath(kRegisterLink, pin_name_)).c_str());
   }
   if (unregister_thread_link_) {
     bpf_link__unpin(unregister_thread_link_);
     unregister_thread_link_ = nullptr;
-  } else {
-    ::unlink((bpf_pinned_map_dir_ / makePinPath(kUnregisterLink, pin_name_))
-                 .c_str());
   }
   if (pmu_enable_exit_link_) {
     bpf_link__unpin(pmu_enable_exit_link_);
     pmu_enable_exit_link_ = nullptr;
-  } else {
-    ::unlink(
-        (bpf_pinned_map_dir_ / makePinPath(kPmuEnableExit, pin_name_)).c_str());
   }
   if (leader_link_) {
     bpf_link__unpin(leader_link_);
     leader_link_ = nullptr;
-  } else {
-    ::unlink(
-        (bpf_pinned_map_dir_ / makePinPath(kContextSwitch, pin_name_)).c_str());
   }
-  ::unlink((bpf_pinned_map_dir_ / makePinPath(kTrigger, pin_name_)).c_str());
 
+  cleanupPinnedLinks(pin_name_, bpf_pinned_map_dir_);
   this->close();
+}
+
+void BPerfEventsGroup::cleanupPinnedLinks(
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir) {
+  ::unlink((bpf_pinned_map_dir / makePinPath(kRegisterLink, pin_name)).c_str());
+  ::unlink(
+      (bpf_pinned_map_dir / makePinPath(kUnregisterLink, pin_name)).c_str());
+  ::unlink(
+      (bpf_pinned_map_dir / makePinPath(kPmuEnableExit, pin_name)).c_str());
+  ::unlink(
+      (bpf_pinned_map_dir / makePinPath(kContextSwitch, pin_name)).c_str());
+  ::unlink((bpf_pinned_map_dir / makePinPath(kTrigger, pin_name)).c_str());
 }
 
 // TODO @alston64: we will need this function to handle version change

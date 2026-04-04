@@ -66,6 +66,11 @@ class BPerfEventsGroup {
   // it will be called when we want to explicitly cleanup thread-level BPerf on
   // this host
   void cleanupLinks();
+  // Removes pinned BPF links from bpffs for the given pin_name in the
+  // specified pinned map directory.
+  static void cleanupPinnedLinks(
+      const std::string& pin_name,
+      const std::filesystem::path& bpf_pinned_map_dir);
 
   bool addCgroup(std::shared_ptr<hbt::FdWrapper> fd, int cgroup_update_level);
   bool removeCgroup(__u64 id);
