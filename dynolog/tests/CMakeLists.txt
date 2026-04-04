@@ -6,6 +6,7 @@
 include(${PROJECT_SOURCE_DIR}/testing/BuildTests.cmake)
 
 dynolog_add_test(KernelCollecterTest KernelCollecterTest.cpp)
+dynolog_add_test(EthtoolStatsReaderTest EthtoolStatsReaderTest.cpp)
 if(USE_PROMETHEUS)
   add_definitions(-DUSE_PROMETHEUS)
   dynolog_add_test(PrometheusLoggerTest PrometheusLoggerTest.cpp)

@@ -5,22 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// This source code is licensed under the MIT license found in the
-// LICENSE file in the root directory of this source tree.
-
 #include <fmt/format.h>
-#include <gflags/gflags.h>
 
 #include "dynolog/src/rdmamon/EthtoolCounters.h"
-
-#ifdef FBCODE
-#include "secure_lib/secure_string.h"
-#endif // FBCODE
 
 namespace dynolog::rdmamon {
 
 bool EthtoolCounters::setupEthtoolCounters() {
-  const std::vector<std::string> eth_counter_names_ = {
+  const std::vector<std::string> counterNames = {
       "tx_pause_ctrl_phy",
       "tx_prio0_pause",
       "tx_prio1_pause",
@@ -33,41 +25,42 @@ bool EthtoolCounters::setupEthtoolCounters() {
       "tx_pause_storm_warning_events",
       "tx_pause_storm_error_events",
   };
-  return setup_ethtool_counters(eth_counter_names_);
+
+  if (!reader_.init(ifname_)) {
+    return false;
+  }
+
+  for (size_t i = 0; i < reader_.size(); i++) {
+    for (const auto& name : counterNames) {
+      if (reader_.name(i) == name) {
+        eth_counters_[name] = i;
+        break;
+      }
+    }
+  }
+
+  prevValues_.resize(reader_.size(), 0);
+  return true;
 }
 
 bool EthtoolCounters::sampleEthtoolCounters(
     std::map<std::string, int64_t>& countersMap) {
-  if (!get_current_ethtool_counters()) {
+  if (!reader_.sample()) {
     return false;
   }
 
   if (!first_sample_) {
-    for (auto& eth_counter : eth_counters_) {
-      int64_t diff = cur_eth_stats_->data[eth_counter.second] -
-          prev_eth_stats_->data[eth_counter.second];
-      const auto key = fmt::format("{}.{}", ifname_, eth_counter.first);
-      countersMap[key] = diff;
+    for (const auto& [name, idx] : eth_counters_) {
+      int64_t diff = static_cast<int64_t>(reader_.value(idx)) -
+          static_cast<int64_t>(prevValues_[idx]);
+      countersMap[fmt::format("{}.{}", ifname_, name)] = diff;
     }
   }
   first_sample_ = false;
-  size_t copy_sz =
-      (gstrings_->len * sizeof(uint64_t)) + sizeof(struct ethtool_stats);
-#ifdef FBCODE
-  if (try_checked_memcpy(prev_eth_stats_, stats_sz_, cur_eth_stats_, copy_sz) !=
-      0) {
-    LOG_EVERY_N(WARNING, 100)
-        << "Uanble to copy current stats due to insufficient space";
-    return false;
+
+  for (size_t i = 0; i < reader_.size(); i++) {
+    prevValues_[i] = reader_.value(i);
   }
-#else
-  if (copy_sz > stats_sz_) {
-    LOG_EVERY_N(WARNING, 100)
-        << "Unable to copy current stats due to insufficient space";
-    return false;
-  }
-  memcpy(prev_eth_stats_, cur_eth_stats_, copy_sz);
-#endif // FBCODE
   return true;
 }
 
