@@ -133,6 +133,8 @@ constexpr PmuMsr kLsAnyFillsFromSysDramIoFar{
     .amdCore = {.event = 0x44, .unitMask = 0x40}};
 constexpr PmuMsr kLsSwPfDcFillsDramIoFar{
     .amdCore = {.event = 0x59, .unitMask = 0x40}};
+constexpr PmuMsr kLsSwPfDcFillsAll{
+    .amdCore = {.event = 0x59, .unitMask = 0xdf}};
 constexpr PmuMsr kLsHwPfDcFillsDramIoFar{
     .amdCore = {.event = 0x5a, .unitMask = 0x40}};
 
