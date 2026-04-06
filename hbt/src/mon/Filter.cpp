@@ -176,7 +176,10 @@ CuSel ByTimeStamp::filterSlices(const CuSel& sel, const CuMonData& cu_md)
   auto [rstart, rend] = range.value();
   HBT_DCHECK_LE(rstart, rend);
   size_t num = sel.sel_slices->size();
-  HBT_DCHECK_GT(num, 0);
+  if (num == 0) {
+    HBT_LOG_ERROR() << "sel_slices is empty in filterSlices";
+    return sel;
+  }
   // Inclusive indices.
   size_t start_idx = 0, end_idx = num - 1;
   if (start != kInvalidTimeStamp) {
