@@ -117,9 +117,13 @@ std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
       packageIdToSocketId[packageId] =
           static_cast<uint32_t>(socketCoreMap.size());
       socketCoreMap.emplace_back(std::vector<uint32_t>{cpuId});
-    } else {
-      // Use the existing vector via the iterator
+    } else if (it->second < socketCoreMap.size()) {
       socketCoreMap[it->second].push_back(cpuId);
+    } else {
+      HBT_LOG_ERROR() << "Invalid socket index " << it->second << " for cpu "
+                      << cpuId
+                      << " (socketCoreMap size: " << socketCoreMap.size()
+                      << ")";
     }
   }
   return socketCoreMap;
