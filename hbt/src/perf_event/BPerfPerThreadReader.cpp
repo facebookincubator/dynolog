@@ -5,10 +5,50 @@
 
 #include "hbt/src/perf_event/BPerfPerThreadReader.h"
 #include <bpf/bpf.h>
+#include <sys/syscall.h>
 #include <time.h>
+#include <unistd.h>
+
+#include <cstdarg>
+#include <cstdio>
+#include <ctime>
+
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
 
 namespace facebook::hbt::perf_event {
+
+namespace {
+
+// Debug logger that writes to /tmp/bperf_per_thread_debug.log.
+// Thread-safe via per-call fopen/fclose (acceptable for debug only).
+void bperfPerThreadDebugLog(const char* fmt_str, ...) {
+  FILE* f = fopen("/tmp/bperf_per_thread_debug.log", "a");
+  if (!f)
+    return;
+  struct timespec ts{};
+  clock_gettime(CLOCK_REALTIME, &ts);
+  struct tm tm{};
+  localtime_r(&ts.tv_sec, &tm);
+  fprintf(
+      f,
+      "[%04d-%02d-%02d %02d:%02d:%02d.%06ld] [tid=%ld] ",
+      tm.tm_year + 1900,
+      tm.tm_mon + 1,
+      tm.tm_mday,
+      tm.tm_hour,
+      tm.tm_min,
+      tm.tm_sec,
+      ts.tv_nsec / 1000,
+      syscall(SYS_gettid));
+  va_list args;
+  va_start(args, fmt_str);
+  vfprintf(f, fmt_str, args);
+  va_end(args);
+  fprintf(f, "\n");
+  fclose(f);
+}
+
+} // namespace
 
 BPerfPerThreadReader::BPerfPerThreadReader(
     std::string pin_name,
@@ -225,6 +265,20 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     barrier();
   } while (lock != data_->lock);
 
+  for (i = 0; i < event_cnt_; i++) {
+    bperfPerThreadDebugLog(
+        "READ event[%d]: bpf_map={output_value.counter=%llu, "
+        "output_value.enabled=%llu, output_value.running=%llu, "
+        "idx=%d, offset=%llu} rdpmc=%llu",
+        i,
+        (unsigned long long)raw_event_data[i].output_value.counter,
+        (unsigned long long)raw_event_data[i].output_value.enabled,
+        (unsigned long long)raw_event_data[i].output_value.running,
+        raw_event_data[i].idx,
+        (unsigned long long)raw_event_data[i].offset,
+        (unsigned long long)pmc_val[i]);
+  }
+
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
   time_after_offset_update =
@@ -243,6 +297,20 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       data->values[i].counter += pmc_val[i] - raw_event_data[i].offset;
       data->values[i].running += time_after_offset_update;
     }
+    bperfPerThreadDebugLog(
+        "COMPUTED event[%d]: final={counter=%llu, enabled=%llu, running=%llu} "
+        "rdpmc_contribution=%lld (rdpmc=%llu - offset=%llu) "
+        "time_after_offset_update=%llu",
+        i,
+        (unsigned long long)data->values[i].counter,
+        (unsigned long long)data->values[i].enabled,
+        (unsigned long long)data->values[i].running,
+        raw_event_data[i].idx
+            ? (long long)(pmc_val[i] - raw_event_data[i].offset)
+            : 0LL,
+        (unsigned long long)pmc_val[i],
+        (unsigned long long)raw_event_data[i].offset,
+        (unsigned long long)time_after_offset_update);
   }
   if (leadExited(data->values[0].counter)) {
     disable();
