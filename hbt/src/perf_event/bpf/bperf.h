@@ -48,6 +48,11 @@ struct bperf_thread_metadata {
   __u32 thread_data_size; /* sizeof(bperf_thread_data) */
   __u32 event_data_size; /* sizeof(bperf_perf_event_data) */
   __u32 event_cnt;
+  /* notifies BPerfPerThreadReader that the BPF programs supporting per-thread
+   * BPerf event updates have been stopped. When disabled, the values in the
+   * per-thread BPF map are no longer being updated and should not be trusted.
+   */
+#define BPERF_FLAG_ENABLED (1 << 0)
   __u32 flags;
 };
 
@@ -71,6 +76,10 @@ struct bperf_thread_data {
 
   struct bperf_perf_event_data events[];
 };
+
+#define BPERF_MAX_THREAD_DATA_SIZE    \
+  (sizeof(struct bperf_thread_data) + \
+   sizeof(struct bperf_perf_event_data) * BPERF_MAX_GROUP_SIZE)
 
 inline int bperf_roundup(int size, int align) {
   return (size + align - 1) / align * align;

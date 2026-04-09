@@ -60,6 +60,8 @@ class BPerfPerThreadReader {
   // Previous reading of event 0, used to detect when the lead exits
   __u64 prev_counter_zero_;
   bool leadExited(__u64 counter_zero);
+  // check if the bpf program supporting per-thread bperf is still running
+  bool isLeaderRunning_();
 };
 
 } // namespace facebook::hbt::perf_event
