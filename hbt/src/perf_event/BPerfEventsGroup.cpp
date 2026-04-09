@@ -614,6 +614,12 @@ int BPerfEventsGroup::readPerCpu(
 
   auto values = readFromBpf_(fd, id);
 
+  if (values.empty()) {
+    HBT_LOG_ERROR() << "readPerCpu: cannot look up key " << id
+                    << " from output map";
+    return -1;
+  }
+
   for (size_t e = 0; e < event_cnt; e++) {
     for (int c = 0; c < cpu_cnt_; c++) {
       int idx = c * BPERF_MAX_GROUP_SIZE + e;
