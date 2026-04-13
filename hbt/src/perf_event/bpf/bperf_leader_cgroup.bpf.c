@@ -264,8 +264,6 @@ struct {
   __type(value, idx_t);
 } per_thread_idx SEC(".maps");
 
-#define BPERF_MAX_THREAD_DATA_SIZE (sizeof(struct bperf_thread_data) + \
-                                    sizeof(struct bperf_perf_event_data) * BPERF_MAX_GROUP_SIZE)
 struct {
   __uint(type, BPF_MAP_TYPE_ARRAY);
   __uint(key_size, sizeof(int));
