@@ -66,7 +66,12 @@ class BPerfEventsGroup {
   // it will be called when we want to explicitly cleanup thread-level BPerf on
   // this host
   void cleanupLinks();
-  // Removes pinned BPF links from bpffs for the given pin_name in the
+  // sets the enabled field in per-thread metadata to 0, notifying
+  // BPerfPerThreadReader that per-thread BPerf data is no longer being updated.
+  static void disablePerThreadMetadata(
+      const std::string& pin_name,
+      const std::filesystem::path& bpf_pinned_map_dir);
+  // removes pinned BPF links from bpffs for the given pin_name in the
   // specified pinned map directory.
   static void cleanupPinnedLinks(
       const std::string& pin_name,

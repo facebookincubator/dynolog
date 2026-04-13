@@ -114,6 +114,12 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
+  if (!isLeaderRunning_()) {
+    HBT_LOG_ERROR() << "per-thread bperf leader program is no longer running, "
+                    << "BPERF_FLAG_ENABLED is not set in metadata flags";
+    goto error;
+  }
+
   metadata = (struct bperf_thread_metadata*)mmap_ptr_;
 
   ::close(tid_fd);
@@ -207,6 +213,11 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     return -1;
   }
 
+  if (!isLeaderRunning_()) {
+    disable();
+    return -1;
+  }
+
   do {
     lock = data_->lock;
     barrier();
@@ -232,9 +243,6 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   data->cpuTime =
       raw_thread_data.runtime_until_offset_update + time_after_offset_update;
 
-  // TODO: Detect when the lead program stops. It is a bit tricky, as
-  //       it may look like current thread is always running.
-  //       This will be easier once with some perf event.
   for (i = 0; i < event_cnt_; i++) {
     data->values[i] = raw_event_data[i].output_value;
     data->values[i].enabled += time_after_offset_update;
@@ -262,6 +270,14 @@ bool BPerfPerThreadReader::leadExited(__u64 counter_zero) {
   ret = counter_zero == prev_counter_zero_;
   prev_counter_zero_ = counter_zero;
   return ret;
+}
+
+bool BPerfPerThreadReader::isLeaderRunning_() {
+  if (!mmap_ptr_) {
+    return false;
+  }
+  auto* metadata = (struct bperf_thread_metadata*)mmap_ptr_;
+  return metadata->flags & BPERF_FLAG_ENABLED;
 }
 
 } // namespace facebook::hbt::perf_event

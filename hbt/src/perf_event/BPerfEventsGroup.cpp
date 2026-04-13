@@ -498,7 +498,7 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
   metadata->thread_data_size = sizeof(struct bperf_thread_data);
   metadata->event_data_size = sizeof(struct bperf_perf_event_data);
   metadata->event_cnt = skel->rodata->event_cnt;
-  metadata->flags = 0;
+  metadata->flags = BPERF_FLAG_ENABLED;
 
   err = ::bpf_map__update_elem(
       skel->maps.per_thread_data,
@@ -820,6 +820,8 @@ error:
 }
 
 void BPerfEventsGroup::cleanupLinks() {
+  // stop register/unregister first to prevent new readers and
+  // avoid other modifiers of the bpf map
   if (register_thread_link_) {
     bpf_link__unpin(register_thread_link_);
     register_thread_link_ = nullptr;
@@ -828,6 +830,9 @@ void BPerfEventsGroup::cleanupLinks() {
     bpf_link__unpin(unregister_thread_link_);
     unregister_thread_link_ = nullptr;
   }
+
+  disablePerThreadMetadata(pin_name_, bpf_pinned_map_dir_);
+
   if (pmu_enable_exit_link_) {
     bpf_link__unpin(pmu_enable_exit_link_);
     pmu_enable_exit_link_ = nullptr;
@@ -841,12 +846,38 @@ void BPerfEventsGroup::cleanupLinks() {
   this->close();
 }
 
+void BPerfEventsGroup::disablePerThreadMetadata(
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir) {
+  auto path = bpf_pinned_map_dir /
+      BPerfEventsGroup::perThreadArrayMapFileName(pin_name);
+  int map_fd = ::bpf_obj_get(path.c_str());
+  if (map_fd < 0) {
+    return;
+  }
+  int zero = 0;
+  char buf[BPERF_MAX_THREAD_DATA_SIZE] = {};
+  auto* metadata = reinterpret_cast<struct bperf_thread_metadata*>(buf);
+  if (::bpf_map_lookup_elem(map_fd, &zero, buf) == 0) {
+    metadata->flags &= ~BPERF_FLAG_ENABLED;
+    if (::bpf_map_update_elem(map_fd, &zero, buf, BPF_ANY)) {
+      HBT_LOG_WARNING() << "failed to disable per-thread metadata";
+    }
+  }
+  ::close(map_fd);
+}
+
 void BPerfEventsGroup::cleanupPinnedLinks(
     const std::string& pin_name,
     const std::filesystem::path& bpf_pinned_map_dir) {
+  // unlink register/unregister first to prevent new readers and
+  // avoid other modifiers of the bpf map
   ::unlink((bpf_pinned_map_dir / makePinPath(kRegisterLink, pin_name)).c_str());
   ::unlink(
       (bpf_pinned_map_dir / makePinPath(kUnregisterLink, pin_name)).c_str());
+
+  disablePerThreadMetadata(pin_name, bpf_pinned_map_dir);
+
   ::unlink(
       (bpf_pinned_map_dir / makePinPath(kPmuEnableExit, pin_name)).c_str());
   ::unlink(
