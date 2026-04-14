@@ -50,7 +50,7 @@ class SimpleJsonServerBase {
   void loop() noexcept;
 
   // implement processing of request using the handler
-  virtual std::string processOneImpl(const std::string& request_str) {
+  virtual std::string processOneImpl(const std::string& /* request_str */) {
     return "";
   }
 
