@@ -2790,6 +2790,58 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_FRONTEND",
+          "Frontend stalled cycles",
+          "Counts cycles where no operation is dispatched because the "
+          "frontend could not deliver an instruction. ARMv8 architectural "
+          "event STALL_FRONTEND (0x0023).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_frontend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_frontend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_BACKEND",
+          "Backend stalled cycles",
+          "Counts cycles where no operation is dispatched because the "
+          "backend is unable to accept operations. ARMv8 architectural "
+          "event STALL_BACKEND (0x0024).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_backend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_backend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
