@@ -97,10 +97,45 @@ int create_perf_event_fd(pid_t pid) {
   return fd;
 }
 
+// Returns true if hardware perf counters are functional on this system.
+// In VMs or environments without PMU support, perf_event_open may succeed
+// but the counters return 0. If perf_event_open is blocked entirely
+// (e.g., seccomp, perf_event_paranoid=3), returns false gracefully.
+bool isPerfEventFunctional() {
+  struct perf_event_attr pe = {};
+  pe.type = PERF_TYPE_HARDWARE;
+  pe.size = sizeof(struct perf_event_attr);
+  pe.config = PERF_COUNT_HW_INSTRUCTIONS;
+  pe.disabled = 1;
+  pe.exclude_kernel = 1;
+  pe.exclude_hv = 1;
+
+  int fd = static_cast<int>(perf_event_open(&pe, 0, -1, -1, 0));
+  if (fd == -1) {
+    return false;
+  }
+
+  ioctl(fd, PERF_EVENT_IOC_RESET, 0);
+  ioctl(fd, PERF_EVENT_IOC_ENABLE, 0);
+
+  // Do some work to generate instructions
+  int sum = 0;
+  for (int i = 0; i < 1000; i++) {
+    sum += i;
+    asm volatile("" : : "r"(sum) : "memory");
+  }
+
+  ioctl(fd, PERF_EVENT_IOC_DISABLE, 0);
+  long long count = 0;
+  read(fd, &count, sizeof(long long));
+  close(fd);
+  return count > 0;
+}
+
 TEST(Endpoint, PerfEventFdAndDataOneWay) {
-  // Disabled on CI
-  if (std::getenv("GITHUB_WORKFLOW") != nullptr) {
-    GTEST_SKIP() << "Skipping perf_event related test on CI";
+  if (!isPerfEventFunctional()) {
+    GTEST_SKIP()
+        << "Skipping: hardware perf counters not functional in this environment";
   }
 
   static const unsigned kNumRetries = 10;
