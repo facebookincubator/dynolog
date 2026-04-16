@@ -394,6 +394,7 @@ std::vector<::dynolog::CpuTime> CPUTimeMonitor::readProcStat(
   char buf[320];
 
   std::vector<::dynolog::CpuTime> ret;
+  ret.reserve(read_per_core ? 1 + coreCount_ : 1);
 
   if (!fp) {
     const auto& path = rootDir_ + "/proc/stat";
