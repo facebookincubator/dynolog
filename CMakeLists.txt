@@ -21,6 +21,10 @@ if(USE_PROMETHEUS)
   find_package(prometheus-cpp CONFIG REQUIRED)
 endif()
 
+option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
+libprotobuf-dev and libcurl4-openssl-dev on the system"
+OFF)
+
 file(READ "version.txt" DYNOLOG_VERSION)
 string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)
 
@@ -75,6 +79,21 @@ target_link_libraries(dynolog_lib PUBLIC gflags::gflags)
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(third_party/json)
 target_link_libraries(dynolog_lib PUBLIC nlohmann_json::nlohmann_json)
+
+# OTel add_subdirectory placed after third_party/json so that
+# opentelemetry-cpp detects the existing nlohmann_json target
+# and after CMAKE_CXX_STANDARD is set.
+if(USE_OTEL)
+  set(WITH_OTLP_HTTP ON CACHE BOOL "")
+  set(WITH_OTLP_GRPC OFF CACHE BOOL "")
+  set(WITH_OTLP_FILE OFF CACHE BOOL "")
+  set(WITH_EXAMPLES OFF CACHE BOOL "")
+  set(BUILD_TESTING OFF CACHE BOOL "")
+  set(WITH_BENCHMARK OFF CACHE BOOL "")
+  set(WITH_PROMETHEUS OFF CACHE BOOL "")
+  set(OTELCPP_MAINTAINER_MODE OFF CACHE BOOL "")
+  add_subdirectory(third_party/opentelemetry-cpp)
+endif()
 
 add_subdirectory(third_party/pfs)
 target_include_directories(dynolog_lib PUBLIC third_party/pfs/include)

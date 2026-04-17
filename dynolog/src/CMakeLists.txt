@@ -28,6 +28,15 @@ if(USE_PROMETHEUS)
   target_link_libraries(dynolog_lib PRIVATE prometheus-cpp::pull)
 endif()
 
+if(USE_OTEL)
+  target_compile_definitions(dynolog_lib PRIVATE USE_OTEL)
+  target_link_libraries(dynolog_lib PRIVATE
+    opentelemetry_api
+    opentelemetry_sdk
+    opentelemetry_exporter_otlp_http_log
+    opentelemetry_logs)
+endif()
+
 target_link_libraries(dynolog_lib PUBLIC Monitor)
 target_link_libraries(dynolog_lib PUBLIC BuiltinMetrics)
 target_link_libraries(dynolog_lib PUBLIC metric_frame)
