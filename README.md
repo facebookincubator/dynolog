@@ -179,7 +179,7 @@ git submodule update --init --recursive
 
 ### Requirements<!-- {#requirements} -->
 
-This project mainly depends on C++17 and Rust compiler tool chains. Other dependencies include cmake and the ninja build system.
+This project mainly depends on C++20 and Rust compiler tool chains. Other dependencies include cmake and the ninja build system.
 We have tested dynolog works with the following versions of C++ and Rust toolchains
 
 <table>
@@ -192,7 +192,7 @@ We have tested dynolog works with the following versions of C++ and Rust toolcha
   <tr>
    <td>C++
    </td>
-   <td>gcc 8.5.0+
+   <td>gcc 10+ or clang 10+
    </td>
   </tr>
   <tr>
