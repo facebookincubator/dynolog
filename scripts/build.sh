@@ -36,12 +36,34 @@ then
   popd
 fi
 
+## Build with OpenTelemetry if enabled
+BUILD_OTEL="${BUILD_OTEL:-0}"
+USE_OTEL="OFF"
+if [ "${BUILD_OTEL}" -eq 1 ]; then
+  if ! pkg-config --exists protobuf 2>/dev/null; then
+    echo "Error: protobuf not found. Install with:"
+    echo "  apt-get install libprotobuf-dev protobuf-compiler  # Debian/Ubuntu"
+    echo "  dnf install protobuf-devel protobuf-compiler       # Fedora/RHEL"
+    exit 1
+  fi
+  if ! pkg-config --exists libcurl 2>/dev/null; then
+    echo "Error: libcurl not found. Install with:"
+    echo "  apt-get install libcurl4-openssl-dev               # Debian/Ubuntu"
+    echo "  dnf install libcurl-devel                          # Fedora/RHEL"
+    exit 1
+  fi
+  pushd ./third_party/opentelemetry-cpp
+  git submodule init && git submodule update
+  popd
+  USE_OTEL="ON"
+fi
+
 ## Build dynolog
 echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
-cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" \
+cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
   -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
