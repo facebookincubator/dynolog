@@ -61,6 +61,7 @@ class DcgmGroupInfo {
       1; // Default to 1, will be set to 0 when DCGM_INT64_BLANK is detected
   int deviceCount_ = 0;
   bool profEnabled_ = false;
+  bool standaloneMode_ = false;
   int updateIntervalMs_;
   dcgmReturn_t errorCode_{DCGM_ST_OK};
   dcgmReturn_t retCode_{DCGM_ST_OK};

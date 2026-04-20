@@ -177,6 +177,22 @@ dcgmReturn_t dcgmStartEmbedded_stub(
     dcgmHandle_t* pDcgmHandle);
 
 /**
+ * Connect to a stand-alone host engine process (nv-hostengine).
+ *
+ * @param ipAddress    IN: IP address with optional port (e.g.,
+ * "localhost:5555")
+ * @param pDcgmHandle OUT: DCGM Handle of the remote host engine
+ */
+dcgmReturn_t dcgmConnect_stub(const char* ipAddress, dcgmHandle_t* pDcgmHandle);
+
+/**
+ * Disconnect from a stand-alone host engine.
+ *
+ * @param pDcgmHandle IN: DCGM Handle from dcgmConnect
+ */
+dcgmReturn_t dcgmDisconnect_stub(dcgmHandle_t pDcgmHandle);
+
+/**
  * Request that DCGM start recording updates for a given field collection.
  *
  * Note that the first update of the field will not occur until the next field

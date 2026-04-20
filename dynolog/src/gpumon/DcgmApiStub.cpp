@@ -89,6 +89,9 @@ struct dcgmApi {
       void* userData);
   dcgmReturn_t (*dcgmShutdown)(){};
   dcgmReturn_t (*dcgmStopEmbedded)(dcgmHandle_t pDcgmHandle);
+  dcgmReturn_t (
+      *dcgmConnect)(const char* ipAddress, dcgmHandle_t* pDcgmHandle){};
+  dcgmReturn_t (*dcgmDisconnect)(dcgmHandle_t pDcgmHandle){};
   dcgmReturn_t (*dcgmProfGetSupportedMetricGroups)(
       dcgmHandle_t pDcgmHandle,
       dcgmProfGetMetricGroups_t* metricGroups);
@@ -185,6 +188,8 @@ dcgmApi* getDcgmAPI() {
     SETAPI(dcgmGetLatestValues_v2);
     SETAPI(dcgmShutdown);
     SETAPI(dcgmStopEmbedded);
+    SETAPI(dcgmConnect);
+    SETAPI(dcgmDisconnect);
     SETAPI(dcgmProfGetSupportedMetricGroups);
     if (api.dcgm_major_version < 3) {
       SETAPI(dcgmProfWatchFields);
@@ -367,6 +372,24 @@ dcgmReturn_t dcgmShutdown_stub() {
 dcgmReturn_t dcgmStopEmbedded_stub(dcgmHandle_t pDcgmHandle) {
   if (auto api = detail::getDcgmAPI(); api) {
     return api->dcgmStopEmbedded(pDcgmHandle);
+  }
+  log_missing_api(__func__);
+  return DCGM_ST_LIBRARY_NOT_FOUND;
+}
+
+dcgmReturn_t dcgmConnect_stub(
+    const char* ipAddress,
+    dcgmHandle_t* pDcgmHandle) {
+  if (auto api = detail::getDcgmAPI(); api) {
+    return api->dcgmConnect(ipAddress, pDcgmHandle);
+  }
+  log_missing_api(__func__);
+  return DCGM_ST_LIBRARY_NOT_FOUND;
+}
+
+dcgmReturn_t dcgmDisconnect_stub(dcgmHandle_t pDcgmHandle) {
+  if (auto api = detail::getDcgmAPI(); api) {
+    return api->dcgmDisconnect(pDcgmHandle);
   }
   log_missing_api(__func__);
   return DCGM_ST_LIBRARY_NOT_FOUND;

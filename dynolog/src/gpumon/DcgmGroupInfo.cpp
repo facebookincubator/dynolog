@@ -27,6 +27,12 @@ DEFINE_string(
     kDcgmDefaultFieldIds,
     "The field ids to monitor on DCGM (GPUs), comma separated");
 
+DEFINE_string(
+    dcgm_standalone_address,
+    "",
+    "Connect to a standalone DCGM hostengine at this address "
+    "(e.g., localhost:5555). When empty, starts an embedded hostengine.");
+
 constexpr double maxKeepAgeSec = 2;
 constexpr int maxKeepSamples = 2;
 const std::string groupName = "DcgmGroupInfo";
@@ -149,12 +155,32 @@ void DcgmGroupInfo::init() {
   if (retCode_ = dcgmInit_stub(); retCode_ != DCGM_ST_OK) {
     errorCode_ = retCode_;
     LOG(ERROR) << "Failed to init dcgm, dcgmInit() returned: " << retCode_;
+    return;
   }
 
-  if (retCode_ = dcgmStartEmbedded_stub(DCGM_OPERATION_MODE_AUTO, &dcgmHandle_);
-      retCode_ != DCGM_ST_OK) {
-    errorCode_ = retCode_;
-    LOG(ERROR) << "Failed dcgmStartEmbedded() return: " << retCode_;
+  if (!FLAGS_dcgm_standalone_address.empty()) {
+    // Standalone mode: connect to an existing nv-hostengine
+    standaloneMode_ = true;
+    LOG(INFO) << "Connecting to standalone DCGM hostengine at "
+              << FLAGS_dcgm_standalone_address;
+    if (retCode_ = dcgmConnect_stub(
+            FLAGS_dcgm_standalone_address.c_str(), &dcgmHandle_);
+        retCode_ != DCGM_ST_OK) {
+      errorCode_ = retCode_;
+      LOG(ERROR) << "Failed dcgmConnect() to " << FLAGS_dcgm_standalone_address
+                 << ", return: " << retCode_;
+    } else {
+      LOG(INFO) << "Connected to standalone DCGM hostengine";
+    }
+  } else {
+    // Embedded mode: start an in-process hostengine
+    standaloneMode_ = false;
+    if (retCode_ =
+            dcgmStartEmbedded_stub(DCGM_OPERATION_MODE_AUTO, &dcgmHandle_);
+        retCode_ != DCGM_ST_OK) {
+      errorCode_ = retCode_;
+      LOG(ERROR) << "Failed dcgmStartEmbedded() return: " << retCode_;
+    }
   }
 }
 
@@ -440,11 +466,20 @@ DcgmGroupInfo::~DcgmGroupInfo() {
   } else {
     LOG(INFO) << "Destroyed group " << groupId_;
   }
-  if (retCode_ = dcgmStopEmbedded_stub(dcgmHandle_); retCode_ != DCGM_ST_OK) {
-    errorCode_ = retCode_;
-    LOG(ERROR) << "Failed dcgmStopEmbedded() return: " << retCode_;
+  if (standaloneMode_) {
+    if (retCode_ = dcgmDisconnect_stub(dcgmHandle_); retCode_ != DCGM_ST_OK) {
+      errorCode_ = retCode_;
+      LOG(ERROR) << "Failed dcgmDisconnect() return: " << retCode_;
+    } else {
+      LOG(INFO) << "Disconnected from standalone hostengine";
+    }
   } else {
-    LOG(INFO) << "Stopped embedded mode";
+    if (retCode_ = dcgmStopEmbedded_stub(dcgmHandle_); retCode_ != DCGM_ST_OK) {
+      errorCode_ = retCode_;
+      LOG(ERROR) << "Failed dcgmStopEmbedded() return: " << retCode_;
+    } else {
+      LOG(INFO) << "Stopped embedded mode";
+    }
   }
   if (retCode_ = dcgmShutdown_stub(); retCode_ != DCGM_ST_OK) {
     errorCode_ = retCode_;
