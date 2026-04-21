@@ -3337,6 +3337,32 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  // Intel software prefetch counter (SPR/EMR)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_SW_PREFETCH_ACCESS_ANY",
+          "Software prefetch instructions executed",
+          "Counts PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or "
+          "PREFETCHT2 instructions executed. Event SW_PREFETCH_ACCESS.ANY.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SPR,
+               EventRefs{EventRef{
+                   "sw_prefetch_access_any",
+                   PmuType::cpu,
+                   "SW_PREFETCH_ACCESS.ANY",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "sw_prefetch_access_any",
+                   PmuType::cpu,
+                   "SW_PREFETCH_ACCESS.ANY",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addUncoreMetrics([[maybe_unused]] std::shared_ptr<Metrics>& metrics) {
