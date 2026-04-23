@@ -498,7 +498,7 @@ int BPerfEventsGroup::preparePerThreadBPerf_(bperf_leader_cgroup* skel) {
   metadata->thread_data_size = sizeof(struct bperf_thread_data);
   metadata->event_data_size = sizeof(struct bperf_perf_event_data);
   metadata->event_cnt = skel->rodata->event_cnt;
-  metadata->flags = BPERF_FLAG_ENABLED;
+  metadata->flags = bperf_flags_set_enabled(metadata->flags);
 
   err = ::bpf_map__update_elem(
       skel->maps.per_thread_data,
@@ -859,7 +859,7 @@ void BPerfEventsGroup::disablePerThreadMetadata(
   char buf[BPERF_MAX_THREAD_DATA_SIZE] = {};
   auto* metadata = reinterpret_cast<struct bperf_thread_metadata*>(buf);
   if (::bpf_map_lookup_elem(map_fd, &zero, buf) == 0) {
-    metadata->flags &= ~BPERF_FLAG_ENABLED;
+    metadata->flags = bperf_flags_clear_enabled(metadata->flags);
     if (::bpf_map_update_elem(map_fd, &zero, buf, BPF_ANY)) {
       HBT_LOG_WARNING() << "failed to disable per-thread metadata";
     }

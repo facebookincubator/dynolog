@@ -213,7 +213,17 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     return -1;
   }
 
-  if (!isLeaderRunning_()) {
+  // isLeaderRunning_() does a single atomic load of metadata->flags and
+  // gives us both the enabled-bit and a snapshot of the version counter
+  // from that same load. The writer bumps this version every time
+  // BPERF_FLAG_ENABLED changes, so we can detect below (after the
+  // do-while loop has finished reading from data_) whether the leader
+  // has been disabled in the meantime. If it has, anything we read from
+  // the mmapped data_ region (lock, tsc_param, raw_thread_data,
+  // raw_event_data) and the rdpmc results may be stale or invalid, so
+  // we bail out.
+  __u32 enabled_version = 0;
+  if (!isLeaderRunning_(&enabled_version)) {
     disable();
     return -1;
   }
@@ -235,6 +245,18 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     }
     barrier();
   } while (lock != data_->lock);
+
+  // After all reads from data_ (including event data and rdpmc), verify
+  // that BPERF_FLAG_ENABLED has not been toggled since the initial flags
+  // snapshot above. This guards every value we sampled from the mmapped
+  // data_ region above; if a disable happened in between, those values
+  // (lock, tsc_param, raw_thread_data, raw_event_data) and the rdpmc
+  // results may be stale or invalid, so we bail out.
+  barrier();
+  if (flagsVersion_() != enabled_version) {
+    disable();
+    return -1;
+  }
 
   data->monoTime = (((__uint128_t)tsc * p.multi) >> p.shift) + p.offset +
       initial_clock_drift_;
@@ -272,12 +294,31 @@ bool BPerfPerThreadReader::leadExited(__u64 counter_zero) {
   return ret;
 }
 
-bool BPerfPerThreadReader::isLeaderRunning_() {
+bool BPerfPerThreadReader::isLeaderRunning_(__u32* version_out) {
   if (!mmap_ptr_) {
+    if (version_out) {
+      *version_out = 0;
+    }
     return false;
   }
   auto* metadata = (struct bperf_thread_metadata*)mmap_ptr_;
-  return metadata->flags & BPERF_FLAG_ENABLED;
+  // Single 32-bit load. From this one snapshot we derive both the
+  // enabled-bit and the version counter, so the caller cannot observe
+  // an inconsistent pair (e.g. enabled=true with a stale version that
+  // gets bumped immediately after).
+  const __u32 flags = metadata->flags;
+  if (version_out) {
+    *version_out = bperf_flags_version(flags);
+  }
+  return bperf_flags_is_enabled(flags);
+}
+
+__u32 BPerfPerThreadReader::flagsVersion_() {
+  if (!mmap_ptr_) {
+    return 0;
+  }
+  auto* metadata = (struct bperf_thread_metadata*)mmap_ptr_;
+  return bperf_flags_version(metadata->flags);
 }
 
 } // namespace facebook::hbt::perf_event
