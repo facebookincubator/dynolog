@@ -28,6 +28,9 @@
 #ifdef USE_PROMETHEUS
 #include "dynolog/src/PrometheusLogger.h"
 #endif
+#ifdef USE_OTEL
+#include "dynolog/src/OtlpLogger.h"
+#endif
 
 using namespace dynolog;
 using json = nlohmann::json;
@@ -41,6 +44,12 @@ DEFINE_bool(use_prometheus, false, "Emit metrics to Prometheus");
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
 DEFINE_bool(use_scuba, false, "Emit metrics to Scuba through Scuba logger");
+#ifdef USE_OTEL
+DEFINE_bool(
+    use_otel,
+    false,
+    "Emit metrics via OTLP to an OpenTelemetry collector");
+#endif
 DEFINE_int32(
     kernel_monitor_reporting_interval_s,
     60,
@@ -82,6 +91,11 @@ std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
   if (FLAGS_use_scuba && !scribe_category.empty()) {
     loggers.push_back(std::make_unique<ScubaLogger>(scribe_category));
   }
+#ifdef USE_OTEL
+  if (FLAGS_use_otel) {
+    loggers.push_back(std::make_unique<OtlpLogger>());
+  }
+#endif
   return std::make_unique<CompositeLogger>(std::move(loggers));
 }
 

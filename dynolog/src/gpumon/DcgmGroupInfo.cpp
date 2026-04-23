@@ -56,7 +56,8 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_DEV_MINOR_NUMBER, "minor_id"},
     {DCGM_FI_DEV_GPU_UTIL, "gpu_device_utilization"},
     {DCGM_FI_DEV_MEM_COPY_UTIL, "gpu_memory_utilization"},
-    {DCGM_FI_DEV_POWER_USAGE, "gpu_power_draw"}};
+    {DCGM_FI_DEV_POWER_USAGE, "gpu_power_draw"},
+    {DCGM_FI_DEV_NAME, "gpu_name"}};
 
 // Mapping of attribution environment variable name to scuba column name
 std::unordered_map<std::string, std::string> attributionEnvVarsToScubaColumns{
@@ -316,11 +317,13 @@ void DcgmGroupInfo::update() {
       LOG(INFO) << "Got " << dcgmValues.size() << " GPU records";
       metricsMapDouble_.clear();
       metricsMapInt_.clear();
+      metricsMapString_.clear();
       for (auto& [entity, readValues] : dcgmValues) {
         LOG(INFO) << "Got " << readValues.size()
                   << " values for entity: " << entity;
         std::unordered_map<std::string, double> metricsDouble;
         std::unordered_map<std::string, int64_t> metricsInt;
+        std::unordered_map<std::string, std::string> metricsString;
         // sample invalid caused by DCGM bug
         // field failed at query stage will have DCGM_*_BLANK value
         bool blank_value_field = false;
@@ -348,6 +351,8 @@ void DcgmGroupInfo::update() {
                 blank_value_field = true;
               }
               metricsInt[FieldIdToName[v.fieldId]] = v.value.i64;
+            } else if (v.fieldType == 's') {
+              metricsString[FieldIdToName[v.fieldId]] = v.value.str;
             }
           }
         }
@@ -355,6 +360,7 @@ void DcgmGroupInfo::update() {
         rpcStatus_ = blank_value_field ? 0 : 1;
         metricsMapDouble_[entity.m_entityId] = metricsDouble;
         metricsMapInt_[entity.m_entityId] = metricsInt;
+        metricsMapString_[entity.m_entityId] = metricsString;
       }
 
       if (FLAGS_enable_env_var_attribution) {
@@ -393,6 +399,11 @@ void DcgmGroupInfo::log(Logger& logger) {
     }
     if (envMetadataMapString_.find(index) != envMetadataMapString_.end()) {
       for (const auto& [key, val] : envMetadataMapString_[index]) {
+        logger.logStr(key, val);
+      }
+    }
+    if (metricsMapString_.find(index) != metricsMapString_.end()) {
+      for (const auto& [key, val] : metricsMapString_[index]) {
         logger.logStr(key, val);
       }
     }
