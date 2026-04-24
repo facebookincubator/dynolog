@@ -60,8 +60,17 @@ class BPerfPerThreadReader {
   // Previous reading of event 0, used to detect when the lead exits
   __u64 prev_counter_zero_;
   bool leadExited(__u64 counter_zero);
-  // check if the bpf program supporting per-thread bperf is still running
-  bool isLeaderRunning_();
+  // Checks whether the bpf program supporting per-thread bperf is still
+  // running. If `version_out` is non-null, the 8-bit version stored in
+  // bits 0-7 of the metadata flags is written to it from the SAME
+  // atomic 32-bit load of `metadata->flags` that produced the return
+  // value, so the caller gets a consistent snapshot of both
+  // BPERF_FLAG_ENABLED and the version counter.
+  bool isLeaderRunning_(__u32* version_out = nullptr);
+  // returns the 8-bit version stored in the metadata flags. The version is
+  // bumped by the writer every time BPERF_FLAG_ENABLED changes, so readers
+  // can detect a flag transition that occurred between two reads.
+  __u32 flagsVersion_();
 };
 
 } // namespace facebook::hbt::perf_event

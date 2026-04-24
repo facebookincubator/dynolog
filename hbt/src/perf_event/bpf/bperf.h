@@ -48,13 +48,57 @@ struct bperf_thread_metadata {
   __u32 thread_data_size; /* sizeof(bperf_thread_data) */
   __u32 event_data_size; /* sizeof(bperf_perf_event_data) */
   __u32 event_cnt;
-  /* notifies BPerfPerThreadReader that the BPF programs supporting per-thread
-   * BPerf event updates have been stopped. When disabled, the values in the
-   * per-thread BPF map are no longer being updated and should not be trusted.
+  /* Layout of `flags`:
+   *   bits 0-7  : 8-bit version counter, bumped on every change of
+   *               BPERF_FLAG_ENABLED.
+   *   bit 8     : BPERF_FLAG_ENABLED. Notifies BPerfPerThreadReader that
+   *               the BPF programs supporting per-thread BPerf event
+   *               updates have been stopped. When disabled, the values in
+   *               the per-thread BPF map are no longer being updated and
+   *               should not be trusted.
+   *
+   * The version allows readers to detect a transition of BPERF_FLAG_ENABLED
+   * that happened in between an earlier check and a subsequent rdpmc().
+   *
+   * Only one thread (the dynolog main thread) ever modifies `flags`,
+   * so the variable assignment does not need to be atomic. Use the
+   * bperf_flags_*() helpers below to keep the version counter in sync
+   * with BPERF_FLAG_ENABLED.
    */
-#define BPERF_FLAG_ENABLED (1 << 0)
+#define BPERF_FLAG_VERSION_MASK 0xFFu
+#define BPERF_FLAG_ENABLED (1u << 8)
   __u32 flags;
 };
+
+/* Returns the 8-bit version stored in bits 0-7 of `flags`. */
+static inline __u32 bperf_flags_version(__u32 flags) {
+  return flags & BPERF_FLAG_VERSION_MASK;
+}
+
+/* Returns true if BPERF_FLAG_ENABLED (bit 8) is set in `flags`. */
+static inline int bperf_flags_is_enabled(__u32 flags) {
+  return (flags & BPERF_FLAG_ENABLED) != 0;
+}
+
+/* Returns a new value of `flags` with BPERF_FLAG_ENABLED set and the
+ * version bumped by 1.
+ */
+static inline __u32 bperf_flags_set_enabled(__u32 flags) {
+  __u32 next_version =
+      (bperf_flags_version(flags) + 1u) & BPERF_FLAG_VERSION_MASK;
+  return (flags & ~(BPERF_FLAG_VERSION_MASK | BPERF_FLAG_ENABLED)) |
+      BPERF_FLAG_ENABLED | next_version;
+}
+
+/* Returns a new value of `flags` with BPERF_FLAG_ENABLED cleared and the
+ * version bumped by 1.
+ */
+static inline __u32 bperf_flags_clear_enabled(__u32 flags) {
+  __u32 next_version =
+      (bperf_flags_version(flags) + 1u) & BPERF_FLAG_VERSION_MASK;
+  return (flags & ~(BPERF_FLAG_VERSION_MASK | BPERF_FLAG_ENABLED)) |
+      next_version;
+}
 
 /* BPerfEventsGroup may have variable number of perf events.
  * Therefore, the bperf_thread_data used for each thread may
