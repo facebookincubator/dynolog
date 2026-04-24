@@ -3260,6 +3260,158 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  // Intel TOPDOWN fixed counters (SPR/EMR only)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TOPDOWN_SLOTS",
+          "Total pipeline slots available",
+          "Counts total pipeline slots available per cycle. "
+          "Uses the TOPDOWN.SLOTS fixed counter on SPR/EMR.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SPR,
+               EventRefs{EventRef{
+                   "topdown_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.SLOTS",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TOPDOWN_BACKEND_BOUND_SLOTS",
+          "Pipeline slots stalled due to backend",
+          "Counts pipeline slots wasted because the backend could not "
+          "accept micro-ops.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SPR,
+               EventRefs{EventRef{
+                   "topdown_backend_bound_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BACKEND_BOUND_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_backend_bound_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BACKEND_BOUND_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::SRF,
+               EventRefs{EventRef{
+                   "topdown_be_bound_all_p",
+                   PmuType::cpu,
+                   "TOPDOWN_BE_BOUND.ALL_P",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TOPDOWN_BAD_SPEC_SLOTS",
+          "Pipeline slots wasted due to bad speculation",
+          "Counts pipeline slots wasted due to incorrect speculation "
+          "(branch mispredictions, machine clears).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SPR,
+               EventRefs{EventRef{
+                   "topdown_bad_spec_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BAD_SPEC_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_bad_spec_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BAD_SPEC_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::SRF,
+               EventRefs{EventRef{
+                   "topdown_bad_speculation_all_p",
+                   PmuType::cpu,
+                   "TOPDOWN_BAD_SPECULATION.ALL_P",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Intel TOPDOWN frontend bound (SRF only)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TOPDOWN_FE_BOUND_SLOTS",
+          "Pipeline slots stalled due to frontend",
+          "Counts retirement slots not consumed due to front end stalls.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SRF,
+               EventRefs{EventRef{
+                   "topdown_fe_bound_all_p",
+                   PmuType::cpu,
+                   "TOPDOWN_FE_BOUND.ALL_P",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Intel TOPDOWN retiring (SRF only)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TOPDOWN_RETIRING_SLOTS",
+          "Consumed retirement slots",
+          "Counts the number of consumed retirement slots.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SRF,
+               EventRefs{EventRef{
+                   "topdown_retiring_all_p",
+                   PmuType::cpu,
+                   "TOPDOWN_RETIRING.ALL_P",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Intel software prefetch counter (SPR/EMR)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_SW_PREFETCH_ACCESS_ANY",
+          "Software prefetch instructions executed",
+          "Counts PREFETCHNTA, PREFETCHW, PREFETCHT0, PREFETCHT1 or "
+          "PREFETCHT2 instructions executed. Event SW_PREFETCH_ACCESS.ANY.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::SPR,
+               EventRefs{EventRef{
+                   "sw_prefetch_access_any",
+                   PmuType::cpu,
+                   "SW_PREFETCH_ACCESS.ANY",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "sw_prefetch_access_any",
+                   PmuType::cpu,
+                   "SW_PREFETCH_ACCESS.ANY",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addUncoreMetrics([[maybe_unused]] std::shared_ptr<Metrics>& metrics) {
