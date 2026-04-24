@@ -2790,6 +2790,250 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_FRONTEND",
+          "Frontend stalled cycles",
+          "Counts cycles where no operation is dispatched because the "
+          "frontend could not deliver an instruction. ARMv8 architectural "
+          "event STALL_FRONTEND (0x0023).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_frontend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_frontend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_BACKEND",
+          "Backend stalled cycles",
+          "Counts cycles where no operation is dispatched because the "
+          "backend is unable to accept operations. ARMv8 architectural "
+          "event STALL_BACKEND (0x0024).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_backend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_backend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // ARM TopDown Level 1 slot-based events
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_OP_RETIRED",
+          "Operations architecturally executed",
+          "Counts micro-operations that are architecturally executed. "
+          "ARMv8 PMU event OP_RETIRED (0x003A).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "op_retired",
+                   PmuType::armv8_pmuv3,
+                   "op_retired",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "op_retired",
+                   PmuType::armv8_pmuv3,
+                   "op_retired",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_OP_SPEC",
+          "Operations speculatively executed",
+          "Counts micro-operations that are speculatively executed. "
+          "ARMv8 PMU event OP_SPEC (0x003B).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "op_spec",
+                   PmuType::armv8_pmuv3,
+                   "op_spec",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "op_spec",
+                   PmuType::armv8_pmuv3,
+                   "op_spec",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_SLOT_FRONTEND",
+          "Slot stalled due to frontend",
+          "Counts pipeline slots not used because the frontend could not "
+          "deliver an operation. ARMv8 PMU event STALL_SLOT_FRONTEND (0x003E).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_slot_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_slot_frontend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_slot_frontend",
+                   PmuType::armv8_pmuv3,
+                   "stall_slot_frontend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_SLOT_BACKEND",
+          "Slot stalled due to backend",
+          "Counts pipeline slots not used because the backend could not "
+          "accept an operation. ARMv8 PMU event STALL_SLOT_BACKEND (0x003D).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "stall_slot_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_slot_backend",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "stall_slot_backend",
+                   PmuType::armv8_pmuv3,
+                   "stall_slot_backend",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // ARM software prefetch events (Neoverse V3 only)
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_PRF_SPEC",
+          "Software prefetch instructions speculatively executed",
+          "Counts software prefetch instructions (PRFM) that are "
+          "speculatively executed. ARMv8 PMU event PRF_SPEC (0x1020).",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "prf_spec",
+                   PmuType::armv8_pmuv3,
+                   "prf_spec",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1D_CACHE_PRFM",
+          "L1D cache software prefetch accesses",
+          "Counts software prefetch accesses targeting L1D cache. "
+          "ARMv8 PMU event L1D_CACHE_PRFM.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l1d_cache_prfm",
+                   PmuType::armv8_pmuv3,
+                   "l1d_cache_prfm",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1D_CACHE_REFILL_PRFM",
+          "L1D cache refills caused by software prefetch",
+          "Counts L1D cache refills caused by software prefetch instructions. "
+          "ARMv8 PMU event L1D_CACHE_REFILL_PRFM.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l1d_cache_refill_prfm",
+                   PmuType::armv8_pmuv3,
+                   "l1d_cache_refill_prfm",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L2D_CACHE_PRFM",
+          "L2D cache software prefetch accesses",
+          "Counts software prefetch accesses targeting L2D cache. "
+          "ARMv8 PMU event L2D_CACHE_PRFM.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l2d_cache_prfm",
+                   PmuType::armv8_pmuv3,
+                   "l2d_cache_prfm",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L2D_CACHE_REFILL_PRFM",
+          "L2D cache refills caused by software prefetch",
+          "Counts L2D cache refills caused by software prefetch instructions. "
+          "ARMv8 PMU event L2D_CACHE_REFILL_PRFM.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l2d_cache_refill_prfm",
+                   PmuType::armv8_pmuv3,
+                   "l2d_cache_refill_prfm",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
 }
 
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
