@@ -18,6 +18,10 @@
 #include <system_error>
 #include <thread>
 
+#if defined(__i386__) || defined(__x86_64__)
+#include <cpuid.h>
+#endif
+
 namespace facebook::hbt {
 
 constexpr const char* kArmMidrFile =
@@ -412,6 +416,25 @@ CpuInfo readCpu(std::ifstream& s) {
   return CpuInfo(vendor_id, cpu_family, cpu_model, cpu_step);
 }
 
+#if defined(__x86_64__)
+CpuFeatures detectCpuFeaturesX86(const std::string& vendor_id) {
+  CpuFeatures features;
+  if (vendor_id != "AuthenticAMD") {
+    return features;
+  }
+
+  unsigned int eax = 0, ebx = 0, ecx = 0, edx = 0;
+  if (__get_cpuid(0x80000000, &eax, &ebx, &ecx, &edx) && eax >= 0x80000022) {
+    __cpuid_count(0x80000022, 0, eax, ebx, ecx, edx);
+    features.amd_perfmon_v2 = eax & (1u << 0);
+    features.amd_lbr_v2 = eax & (1u << 1);
+    features.amd_lbr_pmc_freeze = eax & (1u << 2);
+  }
+
+  return features;
+}
+#endif
+
 CpuInfo readCpuArm() {
   std::string vendor_id;
   uint32_t cpu_family = 0, cpu_model = 0, cpu_step = 0;
@@ -464,8 +487,21 @@ CpuInfo CpuInfo::load() {
   std::ifstream s("/proc/cpuinfo");
 
   // Only read CPU 0.
-  return readCpu(s);
+  auto info = readCpu(s);
+#if defined(__x86_64__)
+  info.features = detectCpuFeaturesX86(info.vendor_id);
 #endif
+  return info;
+#endif
+}
+
+std::ostream& operator<<(std::ostream& os, const CpuFeatures& features) {
+  os << fmt::format(
+      "<CpuFeatures amd_perfmon_v2: {} amd_lbr_v2: {} amd_lbr_pmc_freeze: {}>",
+      features.amd_perfmon_v2,
+      features.amd_lbr_v2,
+      features.amd_lbr_pmc_freeze);
+  return os;
 }
 
 std::ostream& operator<<(std::ostream& os, const CpuInfo& cpu_info) {
@@ -477,6 +513,7 @@ std::ostream& operator<<(std::ostream& os, const CpuInfo& cpu_info) {
       fmt::underlying(cpu_info.cpu_arch),
       cpu_info.cpu_model_num,
       cpu_info.cpu_step_num);
+  os << " " << cpu_info.features;
   return os;
 }
 
