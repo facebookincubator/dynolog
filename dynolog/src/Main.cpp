@@ -114,9 +114,14 @@ void kernel_monitor_loop() {
     auto wakeup_timepoint =
         next_wakeup(FLAGS_kernel_monitor_reporting_interval_s);
 
-    kc.step();
-    kc.log(*logger);
-    logger->finalize();
+    try {
+      kc.step();
+      kc.log(*logger);
+      logger->finalize();
+    } catch (const std::system_error& e) {
+      LOG(ERROR) << "Kernel monitor error: " << e.what()
+                 << " (code=" << e.code() << "). Skipping cycle.";
+    }
 
     /* sleep override */
     std::this_thread::sleep_until(wakeup_timepoint);
