@@ -59,6 +59,12 @@ class BPerfPerThreadReader {
   int dummy_pe_fd_ = -1;
   void* dummy_pe_mmap_ = nullptr;
   bool enabled_ = false;
+  // True when the leader's bperf_thread_data layout includes
+  // cumulative_sched_delay_ns. When false (old leader paired with a newer
+  // reader), the field's offset in the new struct overlaps the first PMC
+  // counter in the old layout, so reading it would return a misaligned
+  // PMC value. In that case read() returns schedDelay = 0.
+  bool sched_delay_supported_ = false;
   // Previous reading of event 0, used to detect when the lead exits
   __u64 prev_counter_zero_;
   bool leadExited(__u64 counter_zero);

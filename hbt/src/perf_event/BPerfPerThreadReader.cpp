@@ -125,6 +125,14 @@ int BPerfPerThreadReader::enable() {
   ::close(tid_fd);
   ::close(idx_fd);
 
+  // Detect whether the leader's layout includes cumulative_sched_delay_ns.
+  // metadata->thread_data_size is the leader's sizeof(bperf_thread_data);
+  // it is large enough to cover the field iff the leader was built after
+  // the field was added.
+  sched_delay_supported_ = metadata->thread_data_size >=
+      offsetof(struct bperf_thread_data, cumulative_sched_delay_ns) +
+          sizeof(__u64);
+
   data_ = (struct bperf_thread_data*)((unsigned long long)mmap_ptr_ +
                                       idx * data_size_);
 
@@ -191,6 +199,7 @@ void BPerfPerThreadReader::disable() {
   dummy_pe_mmap_ = nullptr;
   ::close(dummy_pe_fd_);
   dummy_pe_fd_ = -1;
+  sched_delay_supported_ = false;
   enabled_ = false;
 }
 
@@ -264,7 +273,8 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       data->monoTime - raw_thread_data.offset_update_time;
   data->cpuTime =
       raw_thread_data.runtime_until_offset_update + time_after_offset_update;
-  data->schedDelay = raw_thread_data.cumulative_sched_delay_ns;
+  data->schedDelay =
+      sched_delay_supported_ ? raw_thread_data.cumulative_sched_delay_ns : 0;
 
   for (i = 0; i < event_cnt_; i++) {
     data->values[i] = raw_event_data[i].output_value;
