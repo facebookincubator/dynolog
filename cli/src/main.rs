@@ -19,20 +19,20 @@ use commands::gputrace::GpuTraceOptions;
 use commands::gputrace::GpuTraceTriggerConfig;
 use commands::*;
 
-/// Instructions on adding a new Dyno CLI command:
-///
-/// 1. Add a new variant to the `Command` enum.
-///    Please include a description of the command and, if applicable, its flags/subcommands.
-///
-/// 2. Create a new file for the command's implementation in the commands/ directory (ie
-///    commands/status.rs). This new file is where the command should be implemented.
-///    Make the new command's module accessible from this file by adding
-///    a new line with `pub mod <newfile>;` to commands/mod.rs.
-///
-///
-/// 3. Add a branch to the match statement in main() to handle the new enum variant (from step 1).
-///    From here, invoke the handling logic defined in the new file (from step 2). In an effort to keep
-///    the command dispatching logic clear and concise, please keep the code in the match branch to a minimum.
+// Instructions on adding a new Dyno CLI command:
+//
+// 1. Add a new variant to the `Command` enum.
+//    Please include a description of the command and, if applicable, its flags/subcommands.
+//
+// 2. Create a new file for the command's implementation in the commands/ directory (ie
+//    commands/status.rs). This new file is where the command should be implemented.
+//    Make the new command's module accessible from this file by adding
+//    a new line with `pub mod <newfile>;` to commands/mod.rs.
+//
+//
+// 3. Add a branch to the match statement in main() to handle the new enum variant (from step 1).
+//    From here, invoke the handling logic defined in the new file (from step 2). In an effort to keep
+//    the command dispatching logic clear and concise, please keep the code in the match branch to a minimum.
 
 const DYNO_PORT: u16 = 1778;
 
