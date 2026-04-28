@@ -118,6 +118,12 @@ struct bperf_thread_data {
   /* runtime = runtime_until_offset_update + tsc_time - offset_time; */
   __u64 runtime_until_offset_update;
 
+  /* Snapshot of task->sched_info.run_delay (cumulative runqueue wait, ns).
+   * Same value as field 2 of /proc/<pid>/task/<tid>/schedstat. 0 on
+   * kernels without CONFIG_SCHED_INFO.
+   */
+  __u64 cumulative_sched_delay_ns;
+
   struct bperf_perf_event_data events[];
 };
 
