@@ -18,6 +18,8 @@ namespace facebook::hbt::perf_event {
 struct BPerfThreadData {
   __u64 cpuTime;
   __u64 monoTime;
+  // Cumulative runqueue wait (ns); see cumulative_sched_delay_ns in bperf.h.
+  __u64 schedDelay;
   struct bpf_perf_event_value values[BPERF_MAX_GROUP_SIZE];
 };
 

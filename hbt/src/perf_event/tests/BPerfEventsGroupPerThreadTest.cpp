@@ -8,10 +8,16 @@
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 
 #include <gtest/gtest.h>
+#include <sched.h>
 #include <sys/resource.h>
+#include <sys/syscall.h>
 #include <time.h>
 #include <unistd.h>
+#include <atomic>
 #include <chrono>
+#include <fstream>
+#include <optional>
+#include <string>
 #include <thread>
 
 using namespace facebook::hbt;
@@ -334,4 +340,109 @@ TEST(BPerfEventsGroupPerThreadTest, TestConcurrentReader) {
 
   EXPECT_EQ(successed, BPERF_MAX_THREAD_READER);
   EXPECT_EQ(failed, 1);
+}
+
+namespace {
+
+bool pinToCpu(int cpu) {
+  cpu_set_t set;
+  CPU_ZERO(&set);
+  CPU_SET(cpu, &set);
+  return sched_setaffinity(0, sizeof(set), &set) == 0;
+}
+
+void spinUntil(const std::atomic<bool>& stop) {
+  volatile __u64 sink = 0;
+  while (!stop.load(std::memory_order_relaxed)) {
+    for (int i = 0; i < 10000; i++) {
+      sink += i;
+    }
+  }
+}
+
+// run_delay (field 2) from /proc/self/task/<tid>/schedstat; nullopt if
+// the file is absent (kernel built without CONFIG_SCHED_INFO).
+std::optional<__u64> readKernelRunDelayNs() {
+  pid_t tid = static_cast<pid_t>(syscall(SYS_gettid));
+  std::ifstream f("/proc/self/task/" + std::to_string(tid) + "/schedstat");
+  if (!f) {
+    return std::nullopt;
+  }
+  __u64 run_time = 0, run_delay = 0, pcount = 0;
+  f >> run_time >> run_delay >> pcount;
+  return run_delay;
+}
+
+} // namespace
+
+TEST(BPerfEventsGroupPerThreadTest, TestSchedDelay) {
+  auto pmu_manager = makePmuDeviceManager();
+  auto pmu = pmu_manager->findPmuDeviceByName("generic_hardware");
+  auto ev_def = pmu_manager->findEventDef("cycles");
+  if (!ev_def) {
+    GTEST_SKIP() << "Cannot find event cycles";
+  }
+  auto ev_conf =
+      pmu->makeConf(ev_def->id, EventExtraAttr(), EventValueTransforms());
+
+  auto system = BPerfEventsGroup(EventConfs({ev_conf}), 0, true, "cycles");
+  ASSERT_EQ(system.open(), true);
+
+  if (!pinToCpu(0)) {
+    GTEST_SKIP() << "sched_setaffinity failed; skipping";
+  }
+
+  if (!readKernelRunDelayNs().has_value()) {
+    GTEST_SKIP() << "/proc/self/task/<tid>/schedstat absent; "
+                    "cannot cross-validate";
+  }
+
+  auto reader = createReader();
+
+  // Warmup so the reader sees at least one sched_switch_in before we read.
+  std::this_thread::sleep_for(std::chrono::milliseconds(20));
+
+  // Invariant at each checkpoint: bperf <= kernel. bperf is read first; if
+  // the thread is preempted between the two reads, kernel run_delay grows
+  // ahead while our local snapshot stays the same.
+  BPerfThreadData before{};
+  ASSERT_EQ(reader->read(&before), 0);
+  __u64 kernelBefore = readKernelRunDelayNs().value_or(0);
+  GTEST_LOG_(INFO) << "[before] schedDelay = " << before.schedDelay
+                   << " kernel run_delay = " << kernelBefore;
+  EXPECT_LE(before.schedDelay, kernelBefore);
+
+  constexpr int kNumStressors = 4;
+  std::atomic<bool> stop{false};
+  std::vector<std::thread> stressors;
+  stressors.reserve(kNumStressors);
+  for (int i = 0; i < kNumStressors; i++) {
+    stressors.emplace_back([&stop]() {
+      pinToCpu(0);
+      spinUntil(stop);
+    });
+  }
+
+  for (int i = 0; i < 20; i++) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  }
+
+  BPerfThreadData after{};
+  ASSERT_EQ(reader->read(&after), 0);
+  __u64 kernelAfter = readKernelRunDelayNs().value_or(0);
+  GTEST_LOG_(INFO) << "[after]  schedDelay = " << after.schedDelay
+                   << " kernel run_delay = " << kernelAfter;
+  EXPECT_LE(after.schedDelay, kernelAfter);
+
+  stop = true;
+  for (auto& t : stressors) {
+    t.join();
+  }
+
+  EXPECT_GT(after.schedDelay, before.schedDelay);
+  GTEST_LOG_(INFO) << "schedDelay grew by "
+                   << (after.schedDelay - before.schedDelay) << " ns";
+
+  reader->disable();
+  system.disable();
 }

@@ -88,6 +88,7 @@ static void bperf_thread_data_init(struct bperf_thread_data *data) {
   int i;
   data->lock = 1;
   data->runtime_until_offset_update = 0;
+  data->cumulative_sched_delay_ns = 0;
   for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
     data->events[i].output_value.counter = 0;
     data->events[i].output_value.enabled = 0;
@@ -98,6 +99,17 @@ static void bperf_thread_data_init(struct bperf_thread_data *data) {
 int __always_inline bperf_perf_event_index(struct perf_event *event);
 __always_inline struct bperf_thread_data* get_bperf_thread_data(struct task_struct *task);
 static int __always_inline bperf_update_thread_time(struct bperf_thread_data *data);
+
+/* Snapshot task->sched_info.run_delay into cumulative_sched_delay_ns.
+ * Caller bumps data->lock. CO-RE-guarded so the program still loads on
+ * kernels without CONFIG_SCHED_INFO (cumulative_sched_delay_ns stays 0).
+ */
+static __always_inline void snapshot_sched_delay(struct task_struct *task,
+                                                 struct bperf_thread_data *data) {
+  if (bpf_core_field_exists(task->sched_info)) {
+    data->cumulative_sched_delay_ns = task->sched_info.run_delay;
+  }
+}
 
 static void add_diff_to_task_accumulate(struct bpf_perf_event_value* diff_val, struct bperf_thread_data *data, __u64 now) {
   int i;
@@ -110,12 +122,14 @@ static void add_diff_to_task_accumulate(struct bpf_perf_event_value* diff_val, s
   }
 }
 
-static void update_task_offset(struct bperf_thread_data *data, __u64 now) {
+static void update_task_offset(struct bperf_thread_data *data,
+                               struct task_struct *task, __u64 now) {
   struct pe_data *pe_data;
   int i;
 
   data->lock += 1;
   data->offset_update_time = now;
+  snapshot_sched_delay(task, data);
   bperf_update_thread_time(data);
 
   for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
@@ -152,7 +166,7 @@ static void update_task_output(struct bpf_perf_event_value* diff_val, struct tas
   next_data = get_bperf_thread_data(next);
   if (!next_data)
     return;
-  update_task_offset(next_data, now);
+  update_task_offset(next_data, next, now);
 }
 
 static void update_cgroup_output(struct bpf_perf_event_value* diff_val,

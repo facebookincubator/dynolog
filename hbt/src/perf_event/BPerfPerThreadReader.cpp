@@ -264,6 +264,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       data->monoTime - raw_thread_data.offset_update_time;
   data->cpuTime =
       raw_thread_data.runtime_until_offset_update + time_after_offset_update;
+  data->schedDelay = raw_thread_data.cumulative_sched_delay_ns;
 
   for (i = 0; i < event_cnt_; i++) {
     data->values[i] = raw_event_data[i].output_value;
