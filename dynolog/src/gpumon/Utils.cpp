@@ -61,12 +61,16 @@ std::unordered_map<std::string, std::string> getMetadataForPid(
   if (pid < 0) {
     return varsMap;
   }
-  auto task = pfs::procfs().get_task(pid);
-  auto env = task.get_environ();
-  for (const auto& key : keysMap) {
-    if (auto val = env.find(key.first); val != env.end()) {
-      varsMap[key.second] = val->second;
+  try {
+    auto task = pfs::procfs().get_task(pid);
+    auto env = task.get_environ();
+    for (const auto& key : keysMap) {
+      if (auto val = env.find(key.first); val != env.end()) {
+        varsMap[key.second] = val->second;
+      }
     }
+  } catch (const std::system_error& e) {
+    LOG(WARNING) << "Could not read env for pid " << pid << ": " << e.what();
   }
   return varsMap;
 }
