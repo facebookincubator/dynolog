@@ -8,6 +8,7 @@
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <unistd.h>
 #include <cstdint>
 #include <map>
 #include <mutex>
@@ -35,8 +36,12 @@ DEFINE_string(
 
 constexpr double maxKeepAgeSec = 2;
 constexpr int maxKeepSamples = 2;
-const std::string groupName = "DcgmGroupInfo";
-const std::string fieldGroupName = "DcgmFieldGroup";
+
+// DCGM field group names must be unique per client on a shared hostengine.
+// Include PID to avoid collisions with other DCGM clients (e.g.,
+// dcgm-exporter).
+const std::string groupName = "DcgmGroupInfo_" + std::to_string(getpid());
+const std::string fieldGroupName = "DcgmFieldGroup_" + std::to_string(getpid());
 
 // fieldId -> metricName in metric cache
 std::unordered_map<unsigned short, std::string> FieldIdToName{
