@@ -99,6 +99,7 @@ enum class PmuType : uint16_t {
 };
 
 std::string PmuTypeToStr(PmuType /*pmu_type*/);
+PmuType PmuTypeFromStr(const std::string& /*pmu_type_str*/);
 
 enum class ScaleUnit {
   Bytes, // Bytes
