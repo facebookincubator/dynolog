@@ -481,6 +481,7 @@ void CPUTimeMonitor::processProcUsage(
   auto& lastCpuTime = procCpuTimeLast_[level];
   auto& lastTickTime = procTimeLast_[level];
   MapSamplesT line;
+  line.reserve(targetToCpuSet_.size() * 5);
 
   for (const auto& [targetId, cpuSet] : targetToCpuSet_) {
     // Aggregate CpuTime over the target's assigned cores
