@@ -9,6 +9,8 @@
 
 #include <folly/system/HardwareConcurrency.h>
 #include <gtest/gtest.h>
+#include <atomic>
+#include <thread>
 
 using namespace ::testing;
 using namespace std::literals::chrono_literals;
@@ -843,6 +845,51 @@ TEST_F(CPUTimeMonitorTest, testDataSourceSelection) {
   EXPECT_NE(hostCgroupAvg, std::nullopt);
 
   monitor->deRegisterTarget("test_target");
+}
+
+TEST_F(CPUTimeMonitorTest, testConcurrentTickAndTargetUpdates) {
+  std::atomic<bool> start{false};
+  std::atomic<int> completedReads{0};
+  std::atomic<int> completedUpdates{0};
+  constexpr int kIterations = 200;
+
+  std::thread ticker([&] {
+    while (!start.load(std::memory_order_acquire)) {
+      std::this_thread::yield();
+    }
+    for (int i = 0; i < kIterations; ++i) {
+      monitor->tick(subminor_tick_100ms);
+      monitor->getQuantileCPUCoresUsage(
+          CPUTimeMonitor::Granularity::HUNDRED_MS, 60, 0.95, "race_target");
+      completedReads.fetch_add(1, std::memory_order_relaxed);
+    }
+  });
+
+  std::thread targetUpdater([&] {
+    while (!start.load(std::memory_order_acquire)) {
+      std::this_thread::yield();
+    }
+    for (int i = 0; i < kIterations; ++i) {
+      monitor->registerTarget("race_target", {0, 1, 2, 3});
+      monitor->deRegisterTarget("race_target");
+      completedUpdates.fetch_add(1, std::memory_order_relaxed);
+    }
+  });
+
+  start.store(true, std::memory_order_release);
+  ticker.join();
+  targetUpdater.join();
+
+  EXPECT_EQ(completedReads.load(), kIterations);
+  EXPECT_EQ(completedUpdates.load(), kIterations);
+
+  monitor->registerTarget("race_target", {0, 1, 2, 3});
+  monitor->tick(subminor_tick_100ms);
+  monitor->tick(subminor_tick_100ms);
+  const auto usage = monitor->getQuantileCPUCoresUsage(
+      CPUTimeMonitor::Granularity::HUNDRED_MS, 60, 0.95, "race_target");
+  ASSERT_TRUE(usage.has_value());
+  EXPECT_NEAR(usage.value(), 4.0, 0.1);
 }
 
 // Test feature flag behavior - when readCgroupStat is disabled, should always
