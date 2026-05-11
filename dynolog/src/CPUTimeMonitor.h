@@ -136,9 +136,8 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       TMask mask);
 
   static std::array<MetricFrameMap, 3> createMetricFrameArray();
-  std::optional<MetricFrameMap> getMetricFrame(
-      Granularity gran,
-      DataSource dataSource);
+  const MetricFrameMap* getMetricFrame(Granularity gran, DataSource dataSource)
+      const;
 
   std::string const rootDir_;
   uint64_t const coreCount_;

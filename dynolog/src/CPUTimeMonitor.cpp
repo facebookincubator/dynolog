@@ -124,8 +124,8 @@ std::optional<double> CPUTimeMonitor::getStat(
     DataSource dataSource) {
   TimePoint now = std::chrono::steady_clock::now();
   std::shared_lock lock(dataLock_);
-  auto frame = getMetricFrame(gran, dataSource);
-  if (!frame.has_value()) {
+  const auto* frame = getMetricFrame(gran, dataSource);
+  if (frame == nullptr) {
     return std::nullopt;
   }
   auto slice = frame->slice(now - std::chrono::seconds(seconds_ago), now);
@@ -170,8 +170,8 @@ std::vector<double> CPUTimeMonitor::getRawCPUCoresUsage(
     DataSource dataSource) {
   TimePoint now = std::chrono::steady_clock::now();
   std::shared_lock lock(dataLock_);
-  auto frame = getMetricFrame(gran, dataSource);
-  if (!frame.has_value()) {
+  const auto* frame = getMetricFrame(gran, dataSource);
+  if (frame == nullptr) {
     return {};
   }
   auto slice = frame->slice(now - std::chrono::seconds(seconds_ago), now);
@@ -224,9 +224,9 @@ std::optional<double> CPUTimeMonitor::getCpuBreakdownAvg(
   return series->avg<double>();
 }
 
-std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
+const MetricFrameMap* CPUTimeMonitor::getMetricFrame(
     Granularity gran,
-    DataSource dataSource) {
+    DataSource dataSource) const {
   int level = 0;
   switch (gran) {
     case Granularity::MINUTE:
@@ -239,19 +239,23 @@ std::optional<MetricFrameMap> CPUTimeMonitor::getMetricFrame(
       level = IDX_HUNDRED_MS;
       break;
     default:
-      return std::nullopt;
+      return nullptr;
   }
   // If readCgroupStat_ is disabled, always use PROC_STAT regardless of
   // requested dataSource
   return (readCgroupStat_ && dataSource == DataSource::CGROUP_STAT)
-      ? cgroupUsageMetricFrames_[level]
-      : procUsageMetricFrames_[level];
+      ? &cgroupUsageMetricFrames_[level]
+      : &procUsageMetricFrames_[level];
 }
 
 void CPUTimeMonitor::tick(TMask mask) {
   TimePoint tickTime = std::chrono::steady_clock::now();
-  std::vector<::dynolog::CpuTime> cpuTimeData =
-      readProcStat(!targetsNeedPerCore_.empty());
+  bool readPerCore = false;
+  {
+    std::shared_lock lock(dataLock_);
+    readPerCore = !targetsNeedPerCore_.empty();
+  }
+  std::vector<::dynolog::CpuTime> cpuTimeData = readProcStat(readPerCore);
   TimePoint measureTime = std::chrono::steady_clock::now();
 
   std::map<std::string, std::tuple<TimePoint, uint64_t>> cgroupCpuStats;
@@ -268,21 +272,31 @@ void CPUTimeMonitor::tick(TMask mask) {
   }
 
   std::unique_lock lock(dataLock_);
+  const bool hasPerCoreData = cpuTimeData.size() > coreCount_;
+  const bool canProcessProcUsage =
+      cpuTimeData.empty() || targetsNeedPerCore_.empty() || hasPerCoreData;
 
   if (TTicker::is_major_tick(mask)) {
     // every 60s
-    processProcUsage(IDX_MIN, cpuTimeData, tickTime, measureTime, mask);
+    if (canProcessProcUsage) {
+      processProcUsage(IDX_MIN, cpuTimeData, tickTime, measureTime, mask);
+    }
     processCgroupUsage(IDX_MIN, cgroupCpuStats, measureTime, mask);
   }
   // a tick can be both major and minor
   if (TTicker::is_minor_tick(mask)) {
     // every 1s
-    processProcUsage(IDX_SEC, cpuTimeData, tickTime, measureTime, mask);
+    if (canProcessProcUsage) {
+      processProcUsage(IDX_SEC, cpuTimeData, tickTime, measureTime, mask);
+    }
     processCgroupUsage(IDX_SEC, cgroupCpuStats, measureTime, mask);
   }
   if (TTicker::is_subminor_tick(mask, 0)) {
     // every 100ms
-    processProcUsage(IDX_HUNDRED_MS, cpuTimeData, tickTime, measureTime, mask);
+    if (canProcessProcUsage) {
+      processProcUsage(
+          IDX_HUNDRED_MS, cpuTimeData, tickTime, measureTime, mask);
+    }
     processCgroupUsage(IDX_HUNDRED_MS, cgroupCpuStats, measureTime, mask);
   }
 }
@@ -489,8 +503,22 @@ void CPUTimeMonitor::processProcUsage(
     if (cpuSet.empty()) {
       newCt = cpuTimeData[0];
     } else {
+      bool missingCpuData = false;
       for (const auto& cpu : cpuSet) {
+        if (cpu < 0 || static_cast<size_t>(cpu) + 1 >= cpuTimeData.size()) {
+          if (TTicker::is_major_tick(mask)) {
+            LOG(WARNING) << "Skipping CPU time sample for targetId: "
+                         << targetId << " because CPU " << cpu
+                         << " is missing from /proc/stat data with "
+                         << cpuTimeData.size() << " entries";
+          }
+          missingCpuData = true;
+          break;
+        }
         newCt += cpuTimeData[cpu + 1]; // zeroth entry is system-wide
+      }
+      if (missingCpuData) {
+        continue;
       }
       coreCount = cpuSet.size();
     }
