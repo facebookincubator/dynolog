@@ -259,6 +259,11 @@ void OtlpManager::emitLog(
   }
 
   record->SetTimestamp(opentelemetry::common::SystemTimestamp(ts));
+  record->SetAttribute(
+      "sample_time",
+      static_cast<int64_t>(std::chrono::duration_cast<std::chrono::seconds>(
+                               ts.time_since_epoch())
+                               .count()));
 
   for (const auto& [key, val] : numeric_attrs) {
     record->SetAttribute(key, val);
