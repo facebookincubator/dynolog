@@ -60,7 +60,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   enum class Granularity { MINUTE, SECOND, HUNDRED_MS };
   enum class DataSource { PROC_STAT, CGROUP_STAT };
-  enum class CpuBreakdown { IDLE, SOFTIRQ, IOWAIT, HARDIRQ };
+  enum class CpuBreakdown { IDLE, SOFTIRQ, IOWAIT, HARDIRQ, NICE };
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
@@ -97,13 +97,37 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
-  // Get the average CPU breakdown value (idle, softirq, iowait, hardirq)
+  // Get the average CPU breakdown value (idle, softirq, iowait, hardirq, nice)
   // for a target over the specified time window. Returns raw cores used.
   std::optional<double> getCpuBreakdownAvg(
       Granularity gran,
       uint64_t seconds_ago,
       CpuBreakdown breakdown,
       const std::optional<std::string>& targetId = std::nullopt);
+
+  std::optional<double> getCpuBreakdownMin(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
+  std::optional<double> getCpuBreakdownMax(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
+  std::optional<double> getMinCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
+  std::optional<double> getMaxCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
 
  private:
   // Reads CPU time data from /proc/stat

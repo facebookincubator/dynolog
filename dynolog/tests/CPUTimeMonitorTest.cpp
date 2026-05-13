@@ -1048,5 +1048,118 @@ TEST_F(CPUTimeMonitorTest, testBreakdownSeriesKeyPattern) {
   monitor->deRegisterTarget("key_test");
 }
 
+TEST_F(CPUTimeMonitorTest, testNiceBreakdownType) {
+  monitor->registerTarget("target_a", {0, 1, 2, 3});
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  auto avg = monitor->getCpuBreakdownAvg(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      CPUTimeMonitor::CpuBreakdown::NICE,
+      "target_a");
+  ASSERT_TRUE(avg.has_value());
+  EXPECT_DOUBLE_EQ(avg.value(), 0.0);
+
+  monitor->deRegisterTarget("target_a");
+
+  EXPECT_EQ(
+      monitor->getCpuBreakdownAvg(
+          CPUTimeMonitor::Granularity::MINUTE,
+          60,
+          CPUTimeMonitor::CpuBreakdown::NICE,
+          "target_a"),
+      std::nullopt);
+}
+
+TEST_F(CPUTimeMonitorTest, testBreakdownMinMax) {
+  monitor->registerTarget("minmax_test", {0, 1, 2, 3});
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  for (const auto& bd :
+       {CPUTimeMonitor::CpuBreakdown::IDLE,
+        CPUTimeMonitor::CpuBreakdown::SOFTIRQ,
+        CPUTimeMonitor::CpuBreakdown::IOWAIT,
+        CPUTimeMonitor::CpuBreakdown::HARDIRQ,
+        CPUTimeMonitor::CpuBreakdown::NICE}) {
+    auto minVal = monitor->getCpuBreakdownMin(
+        CPUTimeMonitor::Granularity::MINUTE, 60, bd, "minmax_test");
+    auto maxVal = monitor->getCpuBreakdownMax(
+        CPUTimeMonitor::Granularity::MINUTE, 60, bd, "minmax_test");
+    ASSERT_TRUE(minVal.has_value());
+    ASSERT_TRUE(maxVal.has_value());
+    EXPECT_LE(minVal.value(), maxVal.value());
+  }
+
+  monitor->deRegisterTarget("minmax_test");
+}
+
+TEST_F(CPUTimeMonitorTest, testMinMaxCPUCoresUsage) {
+  monitor->registerTarget("cores_test", {0, 1, 2, 3});
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  for (const auto& gran :
+       {CPUTimeMonitor::Granularity::MINUTE,
+        CPUTimeMonitor::Granularity::SECOND}) {
+    auto minVal = monitor->getMinCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+    auto maxVal = monitor->getMaxCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+    auto avgVal = monitor->getAvgCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+
+    ASSERT_TRUE(minVal.has_value());
+    ASSERT_TRUE(maxVal.has_value());
+    ASSERT_TRUE(avgVal.has_value());
+    EXPECT_LE(minVal.value(), avgVal.value());
+    EXPECT_LE(avgVal.value(), maxVal.value());
+  }
+
+  monitor->deRegisterTarget("cores_test");
+}
+
+TEST_F(CPUTimeMonitorTest, testMinMaxCgroupStatFallback) {
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  auto minProc = monitor->getMinCPUCoresUsage(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::PROC_STAT);
+  auto minCgroup = monitor->getMinCPUCoresUsage(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  ASSERT_TRUE(minProc.has_value());
+  ASSERT_TRUE(minCgroup.has_value());
+}
+
+TEST_F(CPUTimeMonitorTest, testBreakdownMinMaxNulloptAfterDeregister) {
+  monitor->registerTarget("dereg_test", {0, 1});
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  auto minBefore = monitor->getCpuBreakdownMin(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      CPUTimeMonitor::CpuBreakdown::NICE,
+      "dereg_test");
+  ASSERT_TRUE(minBefore.has_value());
+
+  monitor->deRegisterTarget("dereg_test");
+
+  auto minAfter = monitor->getCpuBreakdownMin(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      CPUTimeMonitor::CpuBreakdown::NICE,
+      "dereg_test");
+  EXPECT_EQ(minAfter, std::nullopt);
+}
+
 } // namespace dynolog
 } // namespace facebook
