@@ -8,6 +8,7 @@ add_definitions(-DDYNOLOG_VERSION=${DYNOLOG_VERSION} -DDYNOLOG_GIT_REV=${DYNOLOG
 
 message("Use Prometheus = ${USE_PROMETHEUS}")
 message("Use ODS Graph API = ${USE_ODS_GRAPH_API}")
+message("Use K8s pod-resources = ${USE_K8S_PODRESOURCES}")
 
 # our build script will first create a src/ dir where all source code will exist
 file(GLOB dynolog_src "*.h" "*.cpp")
@@ -49,6 +50,10 @@ target_link_libraries(dynolog_lib PUBLIC dynolog_ipcfabric_lib)
 # depends on ipcfabric
 add_subdirectory(tracing)
 target_link_libraries(dynolog_lib PUBLIC dynolog_ipcmonitor_lib)
+
+# K8s platform-discovery libs (no-op unless USE_K8S_PODRESOURCES=ON).
+# Must be added BEFORE gpumon so dynolog_dcgm_lib can link dynolog_k8s_lib.
+add_subdirectory(k8s)
 
 add_subdirectory(gpumon)
 target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib "-ldl")

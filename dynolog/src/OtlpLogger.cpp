@@ -224,8 +224,11 @@ OtlpManager::OtlpManager() {
   LOG(INFO) << "OTel OTLP logger initialized, endpoint=" << exporter_opts.url
             << ", host_name=" << hostname;
   for (const auto& [key, val] : res.GetAttributes()) {
-    // val is opentelemetry::sdk::common::OwnedAttributeValue
-    if (auto* s = std::get_if<std::string>(&val)) {
+    // val is opentelemetry::sdk::common::OwnedAttributeValue, which is a
+    // nostd::variant. Use the portable accessor so this works regardless of
+    // whether OTel is built with WITH_STL=ON (std::variant) or WITH_STL=OFF
+    // (absl::variant).
+    if (auto* s = opentelemetry::nostd::get_if<std::string>(&val)) {
       LOG(INFO) << "  resource attr: " << key << "=" << *s;
     }
   }

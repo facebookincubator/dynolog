@@ -23,4 +23,16 @@ std::unordered_map<std::string, std::string> getMetadataForPid(
     pid_t pid,
     const std::unordered_map<std::string, std::string>& keysMap);
 
+// Built-in default env-attribution map, used on bare-metal Slurm when
+// no --env_attribution_mappings_file is supplied.
+const std::unordered_map<std::string, std::string>&
+getDefaultEnvAttributionMap();
+
+// Loads a 2-column CSV of <env_var_name>,<output_column_name> rows.
+// Lines beginning with '#' and empty lines are ignored.
+// Returns the loaded map; on failure, returns the built-in default map and
+// logs a warning.
+std::unordered_map<std::string, std::string> loadEnvAttributionMap(
+    const std::string& path);
+
 } // namespace dynolog
