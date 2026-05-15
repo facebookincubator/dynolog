@@ -6,6 +6,7 @@
 #include "hbt/src/perf_event/BPerfPerThreadReader.h"
 #include <bpf/bpf.h>
 #include <time.h>
+#include <atomic>
 #include "hbt/src/perf_event/BPerfEventsGroup.h"
 
 namespace facebook::hbt::perf_event {
@@ -207,8 +208,6 @@ BPerfPerThreadReader::~BPerfPerThreadReader() {
   disable();
 }
 
-#define barrier() asm volatile("" ::: "memory")
-
 int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
   struct bperf_clock_param *ptr = &data_->tsc_param, p;
   struct bperf_thread_data raw_thread_data;
@@ -239,7 +238,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
 
   do {
     lock = data_->lock;
-    barrier();
+    std::atomic_thread_fence(std::memory_order_consume);
     tsc = rdtsc();
     p = *ptr;
     raw_thread_data = *data_;
@@ -252,7 +251,7 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
         pmc_val[i] = 0;
       }
     }
-    barrier();
+    std::atomic_thread_fence(std::memory_order_consume);
   } while (lock != data_->lock);
 
   // After all reads from data_ (including event data and rdpmc), verify
