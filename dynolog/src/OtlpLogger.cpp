@@ -11,9 +11,11 @@
 
 #include <opentelemetry/exporters/otlp/otlp_http_log_record_exporter_factory.h>
 #include <opentelemetry/exporters/otlp/otlp_http_log_record_exporter_options.h>
+#include <opentelemetry/exporters/otlp/otlp_log_recordable.h>
 #include <opentelemetry/sdk/logs/batch_log_record_processor_factory.h>
 #include <opentelemetry/sdk/logs/batch_log_record_processor_options.h>
 #include <opentelemetry/sdk/logs/logger_provider_factory.h>
+#include <opentelemetry/sdk/logs/multi_recordable.h>
 #include <opentelemetry/sdk/resource/resource.h>
 
 #include <glog/logging.h>
@@ -51,6 +53,9 @@ DEFINE_string(
     "Path to a CSV file defining DCGM metric name mappings. Each line is:\n"
     "  dcgm_name,output_name,scale_factor   (numeric metrics)\n"
     "  dcgm_name,output_name                (string metrics, no scale)\n"
+    "  dcgm_name,column[subkey]             (route into map<string,string>\n"
+    "                                        column at given subkey, e.g.\n"
+    "                                        error[dcgm_error])\n"
     "When empty, built-in default mappings are used (pass-through).");
 
 namespace dynolog {
@@ -58,12 +63,18 @@ namespace dynolog {
 namespace {
 
 // Parse the metric mappings file. Returns true if file was loaded.
-// Populates numeric_mappings (3-field lines) and string_mappings (2-field
-// lines).
+// Populates:
+//   - numeric_mappings: 3-field rows `dcgm,out,scale` (numeric rename + scale)
+//   - string_mappings:  2-field rows `dcgm,out`        (string rename)
+//   - map_mappings:     2-field rows `dcgm,col[sub]`   (route into kvlist
+//                                                       column at subkey)
+// The map vs. string distinction is detected by the `[subkey]` suffix on the
+// output name. Each row goes into exactly one of the three tables.
 bool loadMappingsFile(
     const std::string& path,
     std::unordered_map<std::string, MetricMapping>& numeric_mappings,
-    std::unordered_map<std::string, std::string>& string_mappings) {
+    std::unordered_map<std::string, std::string>& string_mappings,
+    std::unordered_map<std::string, MapMapping>& map_mappings) {
   std::ifstream file(path);
   if (!file.is_open()) {
     LOG(WARNING) << "Could not open otel_metric_mappings_file: " << path;
@@ -88,42 +99,75 @@ bool loadMappingsFile(
       } catch (const std::exception&) {
         LOG(WARNING) << "Invalid scale in mappings file: " << line;
       }
-    } else {
-      string_mappings[dcgm_name] = output_name;
+      continue;
     }
+    // 2-field row. Detect the `column[subkey]` map syntax. Any output name
+    // that contains '[' and ends with ']' is treated as an attempted map
+    // mapping; if the shape is malformed (e.g. `column[]`, `[subkey]`, or a
+    // subkey too short to fit between the brackets) we warn rather than
+    // silently routing it as a string mapping.
+    auto open_bracket = output_name.find('[');
+    if (open_bracket != std::string::npos && !output_name.empty() &&
+        output_name.back() == ']') {
+      if (open_bracket + 1 < output_name.size() - 1) {
+        std::string column = output_name.substr(0, open_bracket);
+        std::string subkey = output_name.substr(
+            open_bracket + 1, output_name.size() - open_bracket - 2);
+        if (!column.empty() && !subkey.empty()) {
+          LOG(INFO) << "OtlpLogger map mapping: '" << dcgm_name
+                    << "' -> column='" << column << "' subkey='" << subkey
+                    << "'";
+          map_mappings[dcgm_name] =
+              MapMapping{std::move(column), std::move(subkey)};
+          continue;
+        }
+      }
+      LOG(WARNING) << "Skipping malformed map mapping in line: " << line;
+      continue;
+    }
+    string_mappings[dcgm_name] = output_name;
   }
-  LOG(INFO) << "Loaded " << numeric_mappings.size() << " numeric and "
-            << string_mappings.size() << " string metric mappings from "
-            << path;
+  LOG(INFO) << "Loaded " << numeric_mappings.size() << " numeric, "
+            << string_mappings.size() << " string, and " << map_mappings.size()
+            << " map metric mappings from " << path;
   return true;
 }
 
 } // namespace
 
-const std::unordered_map<std::string, std::string>& getStringMappings() {
-  static const auto mappings = [] {
-    std::unordered_map<std::string, std::string> m;
+namespace {
+
+// All three mapping tables, parsed once from --otel_metric_mappings_file.
+struct Mappings {
+  std::unordered_map<std::string, MetricMapping> numeric;
+  std::unordered_map<std::string, std::string> string_;
+  std::unordered_map<std::string, MapMapping> map;
+};
+
+const Mappings& getMappings() {
+  static const Mappings mappings = [] {
+    Mappings m;
     if (!FLAGS_otel_metric_mappings_file.empty()) {
-      std::unordered_map<std::string, MetricMapping> unused;
-      loadMappingsFile(FLAGS_otel_metric_mappings_file, unused, m);
+      loadMappingsFile(
+          FLAGS_otel_metric_mappings_file, m.numeric, m.string_, m.map);
     }
-    // Default: pass-through (no renaming) when no file is provided.
     return m;
   }();
   return mappings;
 }
 
+} // namespace
+
+const std::unordered_map<std::string, std::string>& getStringMappings() {
+  return getMappings().string_;
+}
+
 const std::unordered_map<std::string, MetricMapping>& getMetricMappings() {
-  static const auto mappings = [] {
-    std::unordered_map<std::string, MetricMapping> m;
-    if (!FLAGS_otel_metric_mappings_file.empty()) {
-      std::unordered_map<std::string, std::string> unused;
-      loadMappingsFile(FLAGS_otel_metric_mappings_file, m, unused);
-    }
-    // Default: pass-through (no renaming) when no file is provided.
-    return m;
-  }();
-  return mappings;
+  return getMappings().numeric;
+}
+
+const std::unordered_map<std::string, MapMapping>& getMapMappings() {
+  return getMappings().map;
 }
 
 OtlpManager::OtlpManager() {
@@ -149,6 +193,11 @@ OtlpManager::OtlpManager() {
   processor_opts.max_export_batch_size = 512;
   auto processor = logs_sdk::BatchLogRecordProcessorFactory::Create(
       std::move(exporter), processor_opts);
+  // Stash a non-owning raw pointer to the processor BEFORE we hand ownership
+  // to the LoggerProvider. We need this as a lookup key in
+  // MultiRecordable::GetRecordable() at emit time. See OtlpLogger.h for why
+  // a direct dynamic_cast on the LogRecord doesn't work.
+  processor_raw_ = processor.get();
 
   // Resolve hostname: prefer K8S_NODE_NAME env var (Downward API) over
   // gethostname() which returns the pod name in containerized environments.
@@ -251,7 +300,10 @@ void OtlpManager::emitLog(
     Logger::Timestamp ts,
     const std::unordered_map<std::string, double>& numeric_attrs,
     const std::unordered_map<std::string, int64_t>& int_attrs,
-    const std::unordered_map<std::string, std::string>& string_attrs) {
+    const std::unordered_map<std::string, std::string>& string_attrs,
+    const std::unordered_map<
+        std::string,
+        std::unordered_map<std::string, std::string>>& map_attrs) {
   if (!logger_) {
     return;
   }
@@ -276,6 +328,41 @@ void OtlpManager::emitLog(
   }
   for (const auto& [key, val] : string_attrs) {
     record->SetAttribute(key, val);
+  }
+
+  // Emit kvlist_value attributes for LoggerConfig fields typed as
+  // map<string, string>. OTLP's canonical equivalent is a single attribute
+  // whose AnyValue is a kvlist_value containing one KeyValue per map entry.
+  // The public SetAttribute API has no map overload, so we drop down to the
+  // OTLP exporter's protobuf-backed recordable.
+  //
+  // The OTel SDK's LoggerContext ALWAYS wraps the processor list in a
+  // MultiLogRecordProcessor (even when we pass a single processor), so the
+  // record returned by CreateLogRecord() is a MultiRecordable.
+  if (!map_attrs.empty()) {
+    auto* multi =
+        dynamic_cast<opentelemetry::sdk::logs::MultiRecordable*>(record.get());
+    opentelemetry::exporter::otlp::OtlpLogRecordable* otlp = nullptr;
+    if (multi != nullptr && processor_raw_ != nullptr) {
+      const auto& inner = multi->GetRecordable(*processor_raw_);
+      otlp = dynamic_cast<opentelemetry::exporter::otlp::OtlpLogRecordable*>(
+          inner.get());
+    }
+    if (otlp != nullptr) {
+      for (const auto& [column, kvs] : map_attrs) {
+        if (kvs.empty()) {
+          continue;
+        }
+        auto* attr = otlp->log_record().add_attributes();
+        attr->set_key(column);
+        auto* kv_list = attr->mutable_value()->mutable_kvlist_value();
+        for (const auto& [k, v] : kvs) {
+          auto* entry = kv_list->add_values();
+          entry->set_key(k);
+          entry->mutable_value()->set_string_value(v);
+        }
+      }
+    }
   }
 
   logger_->EmitLogRecord(std::move(record));
@@ -303,11 +390,31 @@ void OtlpLogger::logStr(const std::string& key, const std::string& val) {
 
 void OtlpLogger::finalize() {
   const auto& mappings = getMetricMappings();
+  const auto& map_mappings = getMapMappings();
 
   std::unordered_map<std::string, double> mapped_floats;
   std::unordered_map<std::string, int64_t> mapped_ints;
+  // Keyed by map_column, then map_subkey -> stringified value.
+  std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
+      map_attrs;
+
+  // Helper: if `key` is registered as a map mapping, route the stringified
+  // value into the kvlist for the matching map column and return true (so
+  // the caller skips the flat-attr emission).
+  auto routeToMap = [&](const std::string& key,
+                        const std::string& value) -> bool {
+    auto it = map_mappings.find(key);
+    if (it == map_mappings.end()) {
+      return false;
+    }
+    map_attrs[it->second.map_column][it->second.map_subkey] = value;
+    return true;
+  };
 
   for (const auto& [key, val] : float_kvs_) {
+    if (routeToMap(key, std::to_string(val))) {
+      continue;
+    }
     auto it = mappings.find(key);
     if (it != mappings.end()) {
       mapped_floats[it->second.output_name] = val * it->second.scale_factor;
@@ -317,6 +424,9 @@ void OtlpLogger::finalize() {
   }
 
   for (const auto& [key, val] : int_kvs_) {
+    if (routeToMap(key, std::to_string(val))) {
+      continue;
+    }
     auto it = mappings.find(key);
     if (it != mappings.end()) {
       mapped_ints[it->second.output_name] =
@@ -330,6 +440,9 @@ void OtlpLogger::finalize() {
   const auto& str_mappings = getStringMappings();
   std::unordered_map<std::string, std::string> mapped_strings;
   for (const auto& [key, val] : string_kvs_) {
+    if (routeToMap(key, val)) {
+      continue;
+    }
     auto it = str_mappings.find(key);
     if (it != str_mappings.end()) {
       mapped_strings[it->second] = val;
@@ -339,7 +452,7 @@ void OtlpLogger::finalize() {
   }
 
   OtlpManager::singleton()->emitLog(
-      ts_, mapped_floats, mapped_ints, mapped_strings);
+      ts_, mapped_floats, mapped_ints, mapped_strings, map_attrs);
 
   float_kvs_.clear();
   int_kvs_.clear();
