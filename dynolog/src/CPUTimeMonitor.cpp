@@ -8,6 +8,7 @@
 #include "dynolog/src/CPUTimeMonitor.h"
 #include <dynolog/src/metric_frame/MetricFrameTsUnit.h>
 
+#include <algorithm>
 #include <utility>
 
 enum { IDX_MIN = 0, IDX_SEC = 1, IDX_HUNDRED_MS = 2 };
@@ -19,6 +20,7 @@ static const std::string kBreakdownIdle = ".idle";
 static const std::string kBreakdownSoftirq = ".softirq";
 static const std::string kBreakdownIowait = ".iowait";
 static const std::string kBreakdownHardirq = ".hardirq";
+static const std::string kBreakdownNice = ".nice";
 
 // All breakdown suffixes in a single list to avoid iterating in multiple
 // places.
@@ -26,7 +28,8 @@ static const std::vector<std::string> kBreakdownSuffixes = {
     kBreakdownIdle,
     kBreakdownSoftirq,
     kBreakdownIowait,
-    kBreakdownHardirq};
+    kBreakdownHardirq,
+    kBreakdownNice};
 
 // Helper to add breakdown series for a target to a MetricFrameMap.
 static void addBreakdownSeries(
@@ -51,12 +54,26 @@ static const std::string& breakdownSuffix(
       return kBreakdownIowait;
     case CPUTimeMonitor::CpuBreakdown::HARDIRQ:
       return kBreakdownHardirq;
+    case CPUTimeMonitor::CpuBreakdown::NICE:
+      return kBreakdownNice;
   }
   return kBreakdownIdle; // unreachable
 }
 
 constexpr int kRingbufferSizeMinutes = 6;
 static const std::string kHostCgroupPath = "/sys/fs/cgroup";
+
+static std::optional<int> granularityToLevel(CPUTimeMonitor::Granularity gran) {
+  switch (gran) {
+    case CPUTimeMonitor::Granularity::MINUTE:
+      return IDX_MIN;
+    case CPUTimeMonitor::Granularity::SECOND:
+      return IDX_SEC;
+    case CPUTimeMonitor::Granularity::HUNDRED_MS:
+      return IDX_HUNDRED_MS;
+  }
+  return std::nullopt;
+}
 
 std::array<MetricFrameMap, 3> CPUTimeMonitor::createMetricFrameArray() {
   return {
@@ -194,20 +211,11 @@ std::optional<double> CPUTimeMonitor::getCpuBreakdownAvg(
   TimePoint now = std::chrono::steady_clock::now();
   std::shared_lock lock(dataLock_);
 
-  int level = 0;
-  switch (gran) {
-    case Granularity::MINUTE:
-      level = IDX_MIN;
-      break;
-    case Granularity::SECOND:
-      level = IDX_SEC;
-      break;
-    case Granularity::HUNDRED_MS:
-      level = IDX_HUNDRED_MS;
-      break;
-    default:
-      return std::nullopt;
+  auto levelOpt = granularityToLevel(gran);
+  if (!levelOpt.has_value()) {
+    return std::nullopt;
   }
+  int level = *levelOpt;
 
   auto& frame = procUsageMetricFrames_[level];
   auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
@@ -246,6 +254,122 @@ const MetricFrameMap* CPUTimeMonitor::getMetricFrame(
   return (readCgroupStat_ && dataSource == DataSource::CGROUP_STAT)
       ? &cgroupUsageMetricFrames_[level]
       : &procUsageMetricFrames_[level];
+}
+
+std::optional<double> CPUTimeMonitor::getCpuBreakdownMin(
+    Granularity gran,
+    uint64_t seconds_ago,
+    CpuBreakdown breakdown,
+    const std::optional<std::string>& targetId) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  auto levelOpt = granularityToLevel(gran);
+  if (!levelOpt.has_value()) {
+    return std::nullopt;
+  }
+  int level = *levelOpt;
+
+  auto& frame = procUsageMetricFrames_[level];
+  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  std::string key = targetId.value_or("host") + breakdownSuffix(breakdown);
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  auto data = series->raw();
+  return *std::min_element(data.begin(), data.end());
+}
+
+std::optional<double> CPUTimeMonitor::getCpuBreakdownMax(
+    Granularity gran,
+    uint64_t seconds_ago,
+    CpuBreakdown breakdown,
+    const std::optional<std::string>& targetId) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  auto levelOpt = granularityToLevel(gran);
+  if (!levelOpt.has_value()) {
+    return std::nullopt;
+  }
+  int level = *levelOpt;
+
+  auto& frame = procUsageMetricFrames_[level];
+  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  std::string key = targetId.value_or("host") + breakdownSuffix(breakdown);
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  auto data = series->raw();
+  return *std::max_element(data.begin(), data.end());
+}
+
+std::optional<double> CPUTimeMonitor::getMinCPUCoresUsage(
+    Granularity gran,
+    uint64_t seconds_ago,
+    const std::optional<std::string>& targetId,
+    DataSource dataSource) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  auto levelOpt = granularityToLevel(gran);
+  if (!levelOpt.has_value()) {
+    return std::nullopt;
+  }
+  int level = *levelOpt;
+
+  auto& frame = (readCgroupStat_ && dataSource == DataSource::CGROUP_STAT)
+      ? cgroupUsageMetricFrames_[level]
+      : procUsageMetricFrames_[level];
+  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  std::string key = targetId.value_or("host");
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  auto data = series->raw();
+  return *std::min_element(data.begin(), data.end());
+}
+
+std::optional<double> CPUTimeMonitor::getMaxCPUCoresUsage(
+    Granularity gran,
+    uint64_t seconds_ago,
+    const std::optional<std::string>& targetId,
+    DataSource dataSource) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  auto levelOpt = granularityToLevel(gran);
+  if (!levelOpt.has_value()) {
+    return std::nullopt;
+  }
+  int level = *levelOpt;
+
+  auto& frame = (readCgroupStat_ && dataSource == DataSource::CGROUP_STAT)
+      ? cgroupUsageMetricFrames_[level]
+      : procUsageMetricFrames_[level];
+  auto slice = frame.slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  std::string key = targetId.value_or("host");
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  auto data = series->raw();
+  return *std::max_element(data.begin(), data.end());
 }
 
 void CPUTimeMonitor::tick(TMask mask) {
@@ -589,8 +713,10 @@ void CPUTimeMonitor::processProcUsage(
     auto softirqDeltaOpt = safeDelta(newCt.y, lastCt.y);
     auto iowaitDeltaOpt = safeDelta(newCt.w, lastCt.w);
     auto hardirqDeltaOpt = safeDelta(newCt.x, lastCt.x);
+    auto niceDeltaOpt = safeDelta(newCt.n, lastCt.n);
 
-    if (idleDeltaOpt && softirqDeltaOpt && iowaitDeltaOpt && hardirqDeltaOpt) {
+    if (idleDeltaOpt && softirqDeltaOpt && iowaitDeltaOpt && hardirqDeltaOpt &&
+        niceDeltaOpt) {
       double idleCores =
           static_cast<double>(*idleDeltaOpt) * msPerJiffy / wallDelta;
       double softirqCores =
@@ -599,11 +725,14 @@ void CPUTimeMonitor::processProcUsage(
           static_cast<double>(*iowaitDeltaOpt) * msPerJiffy / wallDelta;
       double hardirqCores =
           static_cast<double>(*hardirqDeltaOpt) * msPerJiffy / wallDelta;
+      double niceCores =
+          static_cast<double>(*niceDeltaOpt) * msPerJiffy / wallDelta;
 
       line.emplace_back(targetId + kBreakdownIdle, idleCores);
       line.emplace_back(targetId + kBreakdownSoftirq, softirqCores);
       line.emplace_back(targetId + kBreakdownIowait, iowaitCores);
       line.emplace_back(targetId + kBreakdownHardirq, hardirqCores);
+      line.emplace_back(targetId + kBreakdownNice, niceCores);
     }
   }
   if (!line.empty()) {
