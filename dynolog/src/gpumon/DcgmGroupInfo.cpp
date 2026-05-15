@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <cstdint>
 #include <map>
+#include <memory>
 #include <mutex>
 #include <sstream>
 #include <string>
@@ -20,6 +21,11 @@
 #include "dynolog/src/gpumon/Entity.h"
 #include "dynolog/src/gpumon/Utils.h"
 #include "dynolog/src/gpumon/dcgm_fields.h"
+
+#ifdef USE_K8S_PODRESOURCES
+#include "dynolog/src/k8s/K8sPodCache.h"
+#include "dynolog/src/k8s/PodResourcesClient.h"
+#endif
 
 namespace dynolog::gpumon {
 
@@ -62,20 +68,69 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_DEV_GPU_UTIL, "gpu_device_utilization"},
     {DCGM_FI_DEV_MEM_COPY_UTIL, "gpu_memory_utilization"},
     {DCGM_FI_DEV_POWER_USAGE, "gpu_power_draw"},
-    {DCGM_FI_DEV_NAME, "gpu_name"}};
+    {DCGM_FI_DEV_NAME, "gpu_name"},
+    {DCGM_FI_DEV_UUID, "gpu_uuid"}};
 
-// Mapping of attribution environment variable name to scuba column name
-std::unordered_map<std::string, std::string> attributionEnvVarsToScubaColumns{
-    {"SLURM_JOB_ID", "job_id"},
-    {"USER", "username"},
-    {"SLURM_JOB_ACCOUNT", "slurm_account"},
-    {"SLURM_JOB_PARTITION", "slurm_partition"}};
+// Mapping of attribution environment variable name to scuba column name.
+// Loaded once on first use:
+//   - From --env_attribution_mappings_file CSV, when set
+//   - Otherwise from getDefaultEnvAttributionMap() (Slurm built-in defaults)
+DEFINE_string(
+    env_attribution_mappings_file,
+    "",
+    "Path to a CSV file defining env-var → column-name attribution mappings. "
+    "Each non-empty, non-'#' line is: <env_var_name>,<output_column_name>. "
+    "When empty, the built-in Slurm default mapping is used.");
+
+const std::unordered_map<std::string, std::string>&
+getEnvAttributionMappings() {
+  static const auto mappings = [] {
+    if (!FLAGS_env_attribution_mappings_file.empty()) {
+      return loadEnvAttributionMap(FLAGS_env_attribution_mappings_file);
+    }
+    return getDefaultEnvAttributionMap();
+  }();
+  return mappings;
+}
 
 DEFINE_bool(
     enable_env_var_attribution,
     true,
     "Enable environment variable attribution for GPUs."
     "Currently this support SLURM job scheduler environment variables.");
+
+#ifdef USE_K8S_PODRESOURCES
+DEFINE_bool(
+    enable_pod_resources_attribution,
+    false,
+    "Enable kubelet pod-resources attribution: query the local kubelet's "
+    "pod-resources gRPC socket each cycle and join the (pod_namespace, "
+    "pod_name, container_name) onto each GPU record by GPU UUID. "
+    "Requires DCGM_FI_DEV_UUID (54) in --dcgm_fields.");
+
+DEFINE_string(
+    pod_resources_socket,
+    "/var/lib/kubelet/pod-resources/kubelet.sock",
+    "Path to kubelet pod-resources gRPC unix socket.");
+
+DEFINE_string(
+    pod_resources_gpu_resource,
+    "nvidia.com/gpu",
+    "K8s extended resource name to filter for GPU device assignments.");
+
+namespace {
+::dynolog::k8s::PodResourcesClient* getPodResourcesClient() {
+  static auto client = std::make_unique<::dynolog::k8s::PodResourcesClient>(
+      FLAGS_pod_resources_socket, FLAGS_pod_resources_gpu_resource);
+  return client.get();
+}
+
+::dynolog::k8s::K8sPodCache* getK8sPodCache() {
+  static auto cache = std::make_unique<::dynolog::k8s::K8sPodCache>();
+  return cache.get();
+}
+} // namespace
+#endif // USE_K8S_PODRESOURCES
 
 static inline void printValue(dcgmFieldValue_v1 v) {
   VLOG(1) << "====================================";
@@ -370,11 +425,50 @@ void DcgmGroupInfo::update() {
 
       if (FLAGS_enable_env_var_attribution) {
         std::vector<pid_t> pids = getPidsOnGpu();
+        const auto& env_mappings = getEnvAttributionMappings();
         for (size_t device_id = 0; device_id < pids.size(); device_id++) {
-          envMetadataMapString_[device_id] = getMetadataForPid(
-              pids[device_id], attributionEnvVarsToScubaColumns);
+          envMetadataMapString_[device_id] =
+              getMetadataForPid(pids[device_id], env_mappings);
         }
       }
+
+#ifdef USE_K8S_PODRESOURCES
+      if (FLAGS_enable_pod_resources_attribution) {
+        // Phase 1b: kubelet pod-resources gives universal pod identity per
+        // GPU UUID. Join onto GPU records using DCGM_FI_DEV_UUID, which
+        // lands in metricsMapString_[device_id]["gpu_uuid"].
+        auto gpuPods = getPodResourcesClient()->listGpuPods();
+        const auto& env_mappings = getEnvAttributionMappings();
+        const auto& label_mappings =
+            ::dynolog::k8s::getDefaultLabelAttributionMap();
+        for (auto& [device_id, str_metrics] : metricsMapString_) {
+          auto uuid_it = str_metrics.find("gpu_uuid");
+          if (uuid_it == str_metrics.end() || uuid_it->second.empty()) {
+            continue;
+          }
+          auto pod_it = gpuPods.find(uuid_it->second);
+          if (pod_it == gpuPods.end()) {
+            continue;
+          }
+          auto& env = envMetadataMapString_[device_id];
+          env["pod_namespace"] = pod_it->second.pod_namespace;
+          env["pod_name"] = pod_it->second.pod_name;
+          env["container_name"] = pod_it->second.container_name;
+
+          // Phase 1c: enrich with env vars + labels + ownerRefs from the
+          // K8s pod spec. Cached per pod, refreshed on TTL.
+          auto attrs = getK8sPodCache()->lookupAttribution(
+              pod_it->second.pod_namespace,
+              pod_it->second.pod_name,
+              pod_it->second.container_name,
+              env_mappings,
+              label_mappings);
+          for (auto& [k, v] : attrs) {
+            env[k] = std::move(v);
+          }
+        }
+      }
+#endif // USE_K8S_PODRESOURCES
     }
   }
 

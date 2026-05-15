@@ -58,12 +58,45 @@ if [ "${BUILD_OTEL}" -eq 1 ]; then
   USE_OTEL="ON"
 fi
 
+## Build with K8s pod-resources gRPC + K8s API HTTP attribution if enabled.
+## Requires protoc + grpc_cpp_plugin + grpc++ (C++ headers) + libcurl.
+BUILD_K8S_PODRESOURCES="${BUILD_K8S_PODRESOURCES:-0}"
+USE_K8S_PODRESOURCES="OFF"
+if [ "${BUILD_K8S_PODRESOURCES}" -eq 1 ]; then
+  if ! command -v protoc >/dev/null 2>&1; then
+    echo "Error: protoc not found. Install with:"
+    echo "  apt-get install protobuf-compiler                  # Debian/Ubuntu"
+    echo "  dnf install protobuf-compiler                      # Fedora/RHEL"
+    exit 1
+  fi
+  if ! command -v grpc_cpp_plugin >/dev/null 2>&1; then
+    echo "Error: grpc_cpp_plugin not found. Install with:"
+    echo "  apt-get install protobuf-compiler-grpc             # Debian/Ubuntu"
+    echo "  dnf install grpc-plugins                           # Fedora/RHEL"
+    exit 1
+  fi
+  if ! pkg-config --exists grpc++ 2>/dev/null; then
+    echo "Error: grpc++ not found. Install with:"
+    echo "  apt-get install libgrpc++-dev libprotobuf-dev      # Debian/Ubuntu"
+    echo "  dnf install grpc-devel grpc-cpp protobuf-devel     # Fedora/RHEL"
+    exit 1
+  fi
+  if ! pkg-config --exists libcurl 2>/dev/null; then
+    echo "Error: libcurl not found. Install with:"
+    echo "  apt-get install libcurl4-openssl-dev               # Debian/Ubuntu"
+    echo "  dnf install libcurl-devel                          # Fedora/RHEL"
+    exit 1
+  fi
+  USE_K8S_PODRESOURCES="ON"
+fi
+
 ## Build dynolog
 echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
 cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
+  "-DUSE_K8S_PODRESOURCES=${USE_K8S_PODRESOURCES}" \
   -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
