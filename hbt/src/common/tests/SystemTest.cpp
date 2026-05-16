@@ -287,6 +287,22 @@ TEST(SystemTest, CpuInfoTest) {
   HBT_LOG_INFO() << "CpuInfo = " << cpu_info;
 }
 
+TEST(SystemTest, CpuFeaturesTest) {
+  auto cpu_info = CpuInfo::load();
+  HBT_LOG_INFO() << "CpuFeatures = " << cpu_info.features;
+  if (cpu_info.vendor_id == "AuthenticAMD") {
+    // Verify feature hierarchy: lbr_pmc_freeze => lbr_v2 => perfmon_v2
+    EXPECT_TRUE(
+        !cpu_info.features.amd_lbr_pmc_freeze || cpu_info.features.amd_lbr_v2);
+    EXPECT_TRUE(
+        !cpu_info.features.amd_lbr_v2 || cpu_info.features.amd_perfmon_v2);
+  } else {
+    EXPECT_FALSE(cpu_info.features.amd_perfmon_v2);
+    EXPECT_FALSE(cpu_info.features.amd_lbr_v2);
+    EXPECT_FALSE(cpu_info.features.amd_lbr_pmc_freeze);
+  }
+}
+
 TEST(SystemTest, GetHostNameTest) {
   auto hostname = getHostName();
   EXPECT_GT(hostname.size(), 0);

@@ -296,6 +296,14 @@ struct CpuSet {
 
 std::ostream& operator<<(std::ostream& os, const CpuSet& cpu_set);
 
+struct CpuFeatures {
+  bool amd_perfmon_v2 = false;
+  bool amd_lbr_v2 = false;
+  bool amd_lbr_pmc_freeze = false;
+};
+
+std::ostream& operator<<(std::ostream& os, const CpuFeatures& features);
+
 struct CpuInfo {
   perf_event::CpuFamily cpu_family;
   perf_event::CpuArch cpu_arch;
@@ -306,12 +314,15 @@ struct CpuInfo {
   uint32_t cpu_model_num;
   uint32_t cpu_step_num;
 
+  CpuFeatures features;
+
   CpuInfo(
       std::string vendor_id,
       uint32_t cpu_family_num,
       uint32_t cpu_model_num,
       uint32_t cpu_step_num,
-      uint32_t vendor_id_int = 0)
+      uint32_t vendor_id_int = 0,
+      CpuFeatures features = {})
       : cpu_family(perf_event::makeCpuFamily(cpu_family_num)),
         cpu_arch(
             perf_event::makeCpuArch(
@@ -323,7 +334,8 @@ struct CpuInfo {
         vendor_id(std::move(vendor_id)),
         cpu_family_num(cpu_family_num),
         cpu_model_num(cpu_model_num),
-        cpu_step_num(cpu_step_num) {}
+        cpu_step_num(cpu_step_num),
+        features(features) {}
 
   static CpuInfo load();
 
