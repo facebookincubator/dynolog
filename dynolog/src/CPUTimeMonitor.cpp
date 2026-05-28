@@ -306,6 +306,50 @@ std::optional<double> CPUTimeMonitor::getCpuBreakdownMax(
   return result ? std::optional(result->second) : std::nullopt;
 }
 
+std::optional<std::pair<double, double>> CPUTimeMonitor::getMinMaxCPUCoresUsage(
+    Granularity gran,
+    uint64_t seconds_ago,
+    const std::optional<std::string>& targetId,
+    DataSource dataSource) {
+  TimePoint now = std::chrono::steady_clock::now();
+  std::shared_lock lock(dataLock_);
+
+  const auto* frame = getMetricFrame(gran, dataSource);
+  if (frame == nullptr) {
+    return std::nullopt;
+  }
+  auto slice = frame->slice(now - std::chrono::seconds(seconds_ago), now);
+  if (slice == std::nullopt) {
+    return std::nullopt;
+  }
+  std::string key = targetId.value_or("host");
+  auto series = slice->series<double>(key);
+  if (series == std::nullopt || series->size() == 0) {
+    return std::nullopt;
+  }
+  auto data = series->raw();
+  auto [minIt, maxIt] = std::minmax_element(data.begin(), data.end());
+  return std::make_pair(*minIt, *maxIt);
+}
+
+std::optional<double> CPUTimeMonitor::getMinCPUCoresUsage(
+    Granularity gran,
+    uint64_t seconds_ago,
+    const std::optional<std::string>& targetId,
+    DataSource dataSource) {
+  auto result = getMinMaxCPUCoresUsage(gran, seconds_ago, targetId, dataSource);
+  return result ? std::optional(result->first) : std::nullopt;
+}
+
+std::optional<double> CPUTimeMonitor::getMaxCPUCoresUsage(
+    Granularity gran,
+    uint64_t seconds_ago,
+    const std::optional<std::string>& targetId,
+    DataSource dataSource) {
+  auto result = getMinMaxCPUCoresUsage(gran, seconds_ago, targetId, dataSource);
+  return result ? std::optional(result->second) : std::nullopt;
+}
+
 void CPUTimeMonitor::tick(TMask mask) {
   TimePoint tickTime = std::chrono::steady_clock::now();
   bool readPerCore = false;
