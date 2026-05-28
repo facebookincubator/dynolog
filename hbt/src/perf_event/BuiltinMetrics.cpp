@@ -1644,6 +1644,10 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
           System::Permissions{},
           std::vector<std::string>{"topdown"}));
 
+  if (cpu_info.cpu_family == CpuFamily::ARM) {
+    addArmCoreMetrics(metrics);
+  }
+
   return metrics;
 }
 

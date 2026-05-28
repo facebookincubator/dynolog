@@ -40,6 +40,21 @@ TEST_F(BuiltinMetricsTest, Init) {
   EXPECT_EQ(ipc_desc->event_refs_by_arch.at(std::nullopt).size(), 2);
 }
 
+TEST_F(BuiltinMetricsTest, ArmCpuIncludesArmCoreMetrics) {
+  auto cpuInfo = facebook::hbt::CpuInfo::load();
+  cpuInfo.cpu_family = CpuFamily::ARM;
+  cpuInfo.cpu_arch = CpuArch::NEOVERSE_V2;
+  auto armMetrics = makeAvailableMetricsForCpu(cpuInfo);
+
+  auto llCacheMissDesc = armMetrics->getMetricDesc("HW_CORE_LL_CACHE_MISS_RD");
+  ASSERT_NE(llCacheMissDesc, nullptr);
+
+  auto eventRefs = llCacheMissDesc->getEventRefs(cpuInfo);
+  ASSERT_TRUE(eventRefs.has_value());
+  ASSERT_EQ(eventRefs->size(), 1);
+  EXPECT_EQ(eventRefs->at(0).event_id, "ll_cache_miss_rd");
+}
+
 TEST_F(BuiltinMetricsTest, HwCacheEvents) {
   // -- test for hw cache events
   auto l1_dcache_load_hits = pmu_manager->findEventDef(
