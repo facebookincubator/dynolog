@@ -1,0 +1,28 @@
+# Minimal OTLP collector configuration for integration tests.
+# This file is used as a reference; the test fixture writes
+# the config programmatically to a temp directory.
+#
+# Usage:
+#   docker run -d \
+#     -v $(pwd)/otel-collector-config.yaml:/etc/otelcol/config.yaml:ro \
+#     -v /tmp/otlp-data:/data \
+#     -p 4317:4317 -p 4318:4318 \
+#     otel/opentelemetry-collector:latest
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  file:
+    path: /data/output.json
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [file]

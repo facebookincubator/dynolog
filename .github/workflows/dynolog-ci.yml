@@ -14,6 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest] # TODO: What other OSs should we include here?
+        build_otlp: [0, 1]
+    name: Build (${{ matrix.os }}${{ matrix.build_otlp == 1 && ', OTLP' || '' }})
 
     steps:
     - uses: actions/checkout@v2
@@ -38,13 +40,19 @@ jobs:
         echo GITHUB_REF        = $GITHUB_REF
         c++ --verbose
 
+    - name: Install OTLP dependencies
+      if: matrix.build_otlp == 1
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libcurl4-openssl-dev libssl-dev libprotobuf-dev protobuf-compiler
+
     - name: Download and setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Build dynolog binary
       run: |
         set -e
-        ./scripts/build.sh
+        BUILD_OTLP=${{ matrix.build_otlp }} ./scripts/build.sh
     - name: Run Unit Tests
       run: |
         set -e

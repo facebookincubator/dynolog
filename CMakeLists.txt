@@ -16,14 +16,19 @@ OFF)
 option(USE_PROMETHEUS "Enable logging to prometheus, this requires
 prometheus-cpp to be installed on the system"
 OFF)
+option(USE_OTLP "Enable OTLP metrics export" OFF)
+option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
+libprotobuf-dev and libcurl4-openssl-dev on the system"
+OFF)
 
 if(USE_PROMETHEUS)
   find_package(prometheus-cpp CONFIG REQUIRED)
 endif()
 
-option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
-libprotobuf-dev and libcurl4-openssl-dev on the system"
-OFF)
+if(USE_OTLP)
+  find_package(CURL REQUIRED)
+  include(cmake/OTLPProto.cmake)
+endif()
 
 file(READ "version.txt" DYNOLOG_VERSION)
 string(STRIP ${DYNOLOG_VERSION} DYNOLOG_VERSION)
@@ -77,7 +82,9 @@ target_link_libraries(dynolog_lib PUBLIC gflags::gflags)
 
 # https://github.com/nlohmann/json#cmake
 set(JSON_BuildTests OFF CACHE INTERNAL "")
-add_subdirectory(third_party/json)
+if(NOT TARGET nlohmann_json)
+  add_subdirectory(third_party/json)
+endif()
 target_link_libraries(dynolog_lib PUBLIC nlohmann_json::nlohmann_json)
 
 # OTel add_subdirectory placed after third_party/json so that
@@ -96,6 +103,9 @@ if(USE_OTEL)
 endif()
 
 add_subdirectory(third_party/pfs)
+target_compile_options(
+  pfs PRIVATE
+  $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wno-error=deprecated-enum-enum-conversion>)
 target_include_directories(dynolog_lib PUBLIC third_party/pfs/include)
 target_link_libraries(dynolog_lib PUBLIC pfs)
 

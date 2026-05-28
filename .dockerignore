@@ -1,0 +1,23 @@
+# Exclude build artifacts and large unnecessary files
+build/
+*.o
+*.a
+*.so
+*.so.*
+
+# Exclude git history (saves ~100MB) but keep submodule checkouts
+.git
+
+# Exclude editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude test data and CI artifacts
+Testing/
+*.gcda
+*.gcno
+
+# Keep everything else (source, submodules, CMake files)
