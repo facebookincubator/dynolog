@@ -60,7 +60,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   enum class Granularity { MINUTE, SECOND, HUNDRED_MS };
   enum class DataSource { PROC_STAT, CGROUP_STAT };
-  enum class CpuBreakdown { IDLE, SOFTIRQ, IOWAIT, HARDIRQ };
+  enum class CpuBreakdown { IDLE, SOFTIRQ, IOWAIT, HARDIRQ, NICE };
 
   explicit CPUTimeMonitor(
       std::shared_ptr<TTicker> ticker,
@@ -97,7 +97,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       const std::optional<std::string>& targetId = std::nullopt,
       DataSource dataSource = DataSource::PROC_STAT);
 
-  // Get the average CPU breakdown value (idle, softirq, iowait, hardirq)
+  // Get the average CPU breakdown value (idle, softirq, iowait, hardirq, nice)
   // for a target over the specified time window. Returns raw cores used.
   std::optional<double> getCpuBreakdownAvg(
       Granularity gran,
@@ -105,10 +105,44 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       CpuBreakdown breakdown,
       const std::optional<std::string>& targetId = std::nullopt);
 
+  std::optional<double> getCpuBreakdownMin(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
+  std::optional<double> getCpuBreakdownMax(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
+  // Combined min+max in a single lock+slice+copy pass.
+  std::optional<std::pair<double, double>> getCpuBreakdownMinMax(
+      Granularity gran,
+      uint64_t seconds_ago,
+      CpuBreakdown breakdown,
+      const std::optional<std::string>& targetId = std::nullopt);
+
+  std::optional<double> getMinCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
+  std::optional<double> getMaxCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
+  std::optional<std::pair<double, double>> getMinMaxCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
  private:
-  // Reads CPU time data from /proc/stat
-  // If read_per_core is true, reads per-core data in addition to the
-  // all-core data (first element)
   enum class Statistic { AVG, QUANTILE };
 
   std::vector<::dynolog::CpuTime> readProcStat(bool read_per_core = false);
