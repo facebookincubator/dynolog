@@ -9,6 +9,7 @@
 #include <dynolog/src/metric_frame/MetricFrameTsUnit.h>
 
 #include <algorithm>
+#include <set>
 #include <utility>
 
 enum { IDX_MIN = 0, IDX_SEC = 1, IDX_HUNDRED_MS = 2 };
@@ -360,15 +361,19 @@ void CPUTimeMonitor::tick(TMask mask) {
   std::vector<::dynolog::CpuTime> cpuTimeData = readProcStat(readPerCore);
   TimePoint measureTime = std::chrono::steady_clock::now();
 
-  std::map<std::string, std::tuple<TimePoint, uint64_t>> cgroupCpuStats;
+  std::map<std::string, std::tuple<TimePoint, uint64_t, std::string>>
+      cgroupCpuStats;
   if (readCgroupStat_) {
     std::shared_lock lock(dataLock_);
     for (const auto& [targetId, path] : targetCgroupPaths_) {
       auto usage = readCgroupCpuStat(path);
       if (usage.has_value()) {
+        // Carry the sampled path so processing can drop the sample if the
+        // target's cgroup path changes before the unique lock is acquired.
         cgroupCpuStats.emplace(
             targetId,
-            std::make_tuple(std::chrono::steady_clock::now(), usage.value()));
+            std::make_tuple(
+                std::chrono::steady_clock::now(), usage.value(), path));
       }
     }
   }
@@ -420,33 +425,67 @@ void CPUTimeMonitor::registerTarget(
                      return a + " " + std::to_string(b);
                    })
             << ", path: " << path.value_or("(none)");
-  {
-    std::shared_lock lock(dataLock_);
-    if (targetToCpuSet_.find(targetId) != targetToCpuSet_.end()) {
+  std::unique_lock lock(dataLock_);
+
+  const auto it = targetToCpuSet_.find(targetId);
+  const bool isNew = it == targetToCpuSet_.end();
+  if (!isNew) {
+    const std::set<int64_t> currentCpuSet(it->second.begin(), it->second.end());
+    const std::set<int64_t> newCpuSet(cpuSet.begin(), cpuSet.end());
+    const bool cpuSetChanged = currentCpuSet != newCpuSet;
+    const auto pathIt = targetCgroupPaths_.find(targetId);
+    const bool cgroupPathChanged = path.has_value()
+        ? (pathIt == targetCgroupPaths_.end() || pathIt->second != path.value())
+        : (pathIt != targetCgroupPaths_.end());
+
+    if (!cpuSetChanged && !cgroupPathChanged) {
       LOG(INFO) << "Target is already registered, targetId: " << targetId;
       return;
     }
+
+    LOG(INFO) << "Update target, targetId: " << targetId;
+    // Reset baselines for whatever changed so the next sample reseeds.
+    const auto eraseBaselines = [&targetId](auto& baselines) {
+      for (auto& last : baselines) {
+        last.erase(targetId);
+      }
+    };
+    if (cpuSetChanged) {
+      eraseBaselines(procCpuTimeLast_);
+    }
+    if (cgroupPathChanged) {
+      eraseBaselines(cgroupUsageLast_);
+      eraseBaselines(cgroupTimeLast_);
+    }
   }
-  std::unique_lock lock(dataLock_);
+
+  // Shared write for new and updated targets; erase is a no-op when new.
   targetToCpuSet_[targetId] = cpuSet;
   if (!cpuSet.empty()) {
     targetsNeedPerCore_.insert(targetId);
-  }
-  for (auto& frame : procUsageMetricFrames_) {
-    frame.addSeries(
-        targetId,
-        std::make_shared<MetricSeries<double>>(
-            frame.maxLength(), targetId, ""));
-    addBreakdownSeries(frame, targetId);
-  }
-  for (auto& frame : cgroupUsageMetricFrames_) {
-    frame.addSeries(
-        targetId,
-        std::make_shared<MetricSeries<double>>(
-            frame.maxLength(), targetId, ""));
+  } else {
+    targetsNeedPerCore_.erase(targetId);
   }
   if (path.has_value()) {
     targetCgroupPaths_[targetId] = path.value();
+  } else {
+    targetCgroupPaths_.erase(targetId);
+  }
+
+  if (isNew) {
+    for (auto& frame : procUsageMetricFrames_) {
+      frame.addSeries(
+          targetId,
+          std::make_shared<MetricSeries<double>>(
+              frame.maxLength(), targetId, ""));
+      addBreakdownSeries(frame, targetId);
+    }
+    for (auto& frame : cgroupUsageMetricFrames_) {
+      frame.addSeries(
+          targetId,
+          std::make_shared<MetricSeries<double>>(
+              frame.maxLength(), targetId, ""));
+    }
   }
 }
 
@@ -459,6 +498,9 @@ void CPUTimeMonitor::deRegisterTarget(const std::string& targetId) {
     last.erase(targetId);
   }
   for (auto& last : cgroupUsageLast_) {
+    last.erase(targetId);
+  }
+  for (auto& last : cgroupTimeLast_) {
     last.erase(targetId);
   }
   for (auto& frame : procUsageMetricFrames_) {
@@ -721,7 +763,7 @@ void CPUTimeMonitor::processProcUsage(
 
 void CPUTimeMonitor::processCgroupUsage(
     int level,
-    const std::map<std::string, std::tuple<TimePoint, uint64_t>>&
+    const std::map<std::string, std::tuple<TimePoint, uint64_t, std::string>>&
         cgroupCpuStats,
     TimePoint tickTime,
     TMask mask) {
@@ -735,7 +777,15 @@ void CPUTimeMonitor::processCgroupUsage(
   MapSamplesT line;
 
   for (const auto& [targetId, cpuStat] : cgroupCpuStats) {
-    auto [readTime, newUsage] = cpuStat;
+    const auto& [readTime, newUsage, sampledPath] = cpuStat;
+    // Drop in-flight samples whose cgroup path changed (or whose target was
+    // deregistered) between sampling under the shared lock and processing here.
+    // Reseeding a baseline from a stale-path sample would make the next tick
+    // compute a delta across two different cgroups.
+    auto pathIt = targetCgroupPaths_.find(targetId);
+    if (pathIt == targetCgroupPaths_.end() || pathIt->second != sampledPath) {
+      continue;
+    }
     if (lastUsage.find(targetId) == lastUsage.end() ||
         lastTime.find(targetId) == lastTime.end()) {
       lastUsage[targetId] = newUsage;
