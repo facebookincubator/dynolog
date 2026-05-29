@@ -164,7 +164,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   void processCgroupUsage(
       int level,
-      const std::map<std::string, std::tuple<TimePoint, uint64_t>>&
+      const std::map<std::string, std::tuple<TimePoint, uint64_t, std::string>>&
           cgroupCpuStats,
       TimePoint measure_time_lo,
       TMask mask);

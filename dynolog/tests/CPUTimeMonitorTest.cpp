@@ -49,6 +49,14 @@ class CPUTimeMonitorTest : public ::testing::Test {
   auto readCgroupCpuStat(const std::string& cgroupPath) {
     return monitor->readCgroupCpuStat(cgroupPath);
   }
+  void processCgroupUsage(
+      int level,
+      const std::map<std::string, std::tuple<TimePoint, uint64_t, std::string>>&
+          cgroupCpuStats,
+      TimePoint tickTime,
+      CPUTimeMonitor::TMask mask) {
+    monitor->processCgroupUsage(level, cgroupCpuStats, tickTime, mask);
+  }
   auto& procCPUTimeLast_() const {
     return monitor->procCpuTimeLast_;
   }
@@ -63,6 +71,9 @@ class CPUTimeMonitorTest : public ::testing::Test {
   }
   auto& cgroupTimeLast_() const {
     return monitor->cgroupTimeLast_;
+  }
+  auto& targetCgroupPaths_() const {
+    return monitor->targetCgroupPaths_;
   }
   std::shared_ptr<CPUTimeMonitor> monitor = createTestMonitor();
 };
@@ -697,16 +708,18 @@ TEST_F(CPUTimeMonitorTest, testCgroupUsageProcessing) {
   EXPECT_GT(series1->size(), 0);
   EXPECT_GT(series2->size(), 0);
 
-  // Test deregistration cleans up cgroup data
+  // Test deregistration clears both cgroup baselines (usage and time)
   monitor->deRegisterTarget(target2);
-  EXPECT_FALSE(cgroupUsageLast_()[0].count(target2));
-  EXPECT_FALSE(cgroupUsageLast_()[1].count(target2));
-  EXPECT_FALSE(cgroupUsageLast_()[2].count(target2));
+  for (size_t i = 0; i < cgroupUsageLast_().size(); ++i) {
+    EXPECT_FALSE(cgroupUsageLast_()[i].count(target2));
+    EXPECT_FALSE(cgroupTimeLast_()[i].count(target2));
+  }
 
   // host target should still exist
-  EXPECT_TRUE(cgroupUsageLast_()[0].count(hostTarget));
-  EXPECT_TRUE(cgroupUsageLast_()[1].count(hostTarget));
-  EXPECT_TRUE(cgroupUsageLast_()[2].count(hostTarget));
+  for (size_t i = 0; i < cgroupUsageLast_().size(); ++i) {
+    EXPECT_TRUE(cgroupUsageLast_()[i].count(hostTarget));
+    EXPECT_TRUE(cgroupTimeLast_()[i].count(hostTarget));
+  }
 }
 
 // Test cgroup processing with mixed targets (some with cgroup paths, some
@@ -753,6 +766,109 @@ TEST_F(CPUTimeMonitorTest, testInvalidCgroupPath) {
   EXPECT_FALSE(cgroupUsageLast_()[0].count("invalid_path"));
 
   monitor->deRegisterTarget("invalid_path");
+}
+
+TEST_F(CPUTimeMonitorTest, testRegisterTargetUpdatesCgroupPath) {
+  const std::string target = "moving_cgroup";
+
+  monitor->registerTarget(target, {}, "/old/cgroup/path");
+  ASSERT_EQ(targetCgroupPaths_().at(target), "/old/cgroup/path");
+
+  const auto now = std::chrono::steady_clock::now();
+  for (size_t i = 0; i < cgroupUsageLast_().size(); ++i) {
+    cgroupUsageLast_()[i][target] = 100;
+    cgroupTimeLast_()[i][target] = now;
+  }
+
+  monitor->registerTarget(target, {}, "/new/cgroup/path");
+
+  EXPECT_EQ(targetCgroupPaths_().at(target), "/new/cgroup/path");
+  for (size_t i = 0; i < cgroupUsageLast_().size(); ++i) {
+    EXPECT_FALSE(cgroupUsageLast_()[i].count(target));
+    EXPECT_FALSE(cgroupTimeLast_()[i].count(target));
+  }
+
+  monitor->deRegisterTarget(target);
+}
+
+TEST_F(CPUTimeMonitorTest, testRegisterTargetUpdatesCpuSet) {
+  const std::string target = "moving_cpuset";
+  const std::string path = "/sys/fs/cgroup";
+
+  monitor->registerTarget(target, {0, 1}, path);
+
+  // Seed stale baselines for both data sources.
+  const auto now = std::chrono::steady_clock::now();
+  for (size_t i = 0; i < procCPUTimeLast_().size(); ++i) {
+    procCPUTimeLast_()[i][target] = ::dynolog::CpuTime{};
+    cgroupUsageLast_()[i][target] = 100;
+    cgroupTimeLast_()[i][target] = now;
+  }
+
+  // Re-register with a different cpuSet but the same cgroup path.
+  monitor->registerTarget(target, {2, 3}, path);
+
+  // proc baselines are reset because the cpuSet changed...
+  for (size_t i = 0; i < procCPUTimeLast_().size(); ++i) {
+    EXPECT_FALSE(procCPUTimeLast_()[i].count(target));
+  }
+  // ...but cgroup baselines are untouched because the path did not change.
+  for (size_t i = 0; i < cgroupUsageLast_().size(); ++i) {
+    EXPECT_TRUE(cgroupUsageLast_()[i].count(target));
+    EXPECT_TRUE(cgroupTimeLast_()[i].count(target));
+  }
+
+  monitor->deRegisterTarget(target);
+}
+
+// Re-registering with the same cores in a different order must be treated as
+// unchanged (cpuSet is compared as a set), so the proc baseline is preserved.
+TEST_F(CPUTimeMonitorTest, testRegisterTargetSameCpuSetReorderedKeepsBaseline) {
+  const std::string target = "reordered_cpuset";
+
+  monitor->registerTarget(target, {0, 1, 2, 3});
+  for (size_t i = 0; i < procCPUTimeLast_().size(); ++i) {
+    procCPUTimeLast_()[i][target] = ::dynolog::CpuTime{};
+  }
+
+  monitor->registerTarget(target, {3, 2, 1, 0});
+
+  for (size_t i = 0; i < procCPUTimeLast_().size(); ++i) {
+    EXPECT_TRUE(procCPUTimeLast_()[i].count(target));
+  }
+
+  monitor->deRegisterTarget(target);
+}
+
+// A cgroup sample read from a target's old path (under the shared lock) must be
+// dropped if registerTarget() changed the path before the sample is processed
+// (under the unique lock). Otherwise it would reseed a just-cleared baseline
+// and the next tick would compute a delta across two different cgroups.
+TEST_F(CPUTimeMonitorTest, testProcessCgroupUsageDropsStalePathSample) {
+  using CgroupSample = std::tuple<TimePoint, uint64_t, std::string>;
+  const std::string target = "racing_cgroup";
+  constexpr int kLevel = 2; // 100ms granularity
+
+  monitor->registerTarget(target, {}, "/new/cgroup/path");
+  ASSERT_EQ(targetCgroupPaths_().at(target), "/new/cgroup/path");
+
+  const auto now = std::chrono::steady_clock::now();
+
+  // In-flight sample from the old path must be ignored, not seed a baseline.
+  std::map<std::string, CgroupSample> staleSample;
+  staleSample[target] = CgroupSample{now, 12345u, "/old/cgroup/path"};
+  processCgroupUsage(kLevel, staleSample, now, subminor_tick_100ms);
+  EXPECT_FALSE(cgroupUsageLast_()[kLevel].count(target));
+  EXPECT_FALSE(cgroupTimeLast_()[kLevel].count(target));
+
+  // A sample on the current path seeds the baseline as usual.
+  std::map<std::string, CgroupSample> freshSample;
+  freshSample[target] = CgroupSample{now, 12345u, "/new/cgroup/path"};
+  processCgroupUsage(kLevel, freshSample, now, subminor_tick_100ms);
+  EXPECT_TRUE(cgroupUsageLast_()[kLevel].count(target));
+  EXPECT_TRUE(cgroupTimeLast_()[kLevel].count(target));
+
+  monitor->deRegisterTarget(target);
 }
 
 // Test data source selection functionality
