@@ -153,6 +153,10 @@ struct K8sPodCache::Impl {
     }
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    // Bypass forward proxy for in-cluster K8s API calls (T272296869).
+    // The K8s API server is always cluster-internal; routing through
+    // fwdproxy causes false-positive crawler detection.
+    curl_easy_setopt(curl, CURLOPT_NOPROXY, "*");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWrite);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &body);
