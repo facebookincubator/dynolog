@@ -78,7 +78,7 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
 
   void deRegisterTarget(const std::string& targetId);
 
-  std::optional<double> getAvgCPUCoresUsage(
+  virtual std::optional<double> getAvgCPUCoresUsage(
       Granularity gran,
       uint64_t seconds_ago,
       const std::optional<std::string>& targetId = std::nullopt,
