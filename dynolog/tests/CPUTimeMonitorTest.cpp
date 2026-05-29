@@ -1124,6 +1124,55 @@ TEST_F(CPUTimeMonitorTest, testBreakdownMinMaxCombined) {
   monitor->deRegisterTarget("combined_test");
 }
 
+TEST_F(CPUTimeMonitorTest, testMinMaxCPUCoresUsage) {
+  monitor->registerTarget("cores_test", {0, 1, 2, 3});
+  monitor->tick(major_tick_60s);
+  monitor->tick(major_tick_60s);
+
+  for (const auto& gran :
+       {CPUTimeMonitor::Granularity::MINUTE,
+        CPUTimeMonitor::Granularity::SECOND}) {
+    auto minVal = monitor->getMinCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+    auto maxVal = monitor->getMaxCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+    auto avgVal = monitor->getAvgCPUCoresUsage(
+        gran, 60, "cores_test", CPUTimeMonitor::DataSource::PROC_STAT);
+
+    ASSERT_TRUE(minVal.has_value());
+    ASSERT_TRUE(maxVal.has_value());
+    ASSERT_TRUE(avgVal.has_value());
+    EXPECT_LE(minVal.value(), avgVal.value());
+    EXPECT_LE(avgVal.value(), maxVal.value());
+  }
+
+  monitor->deRegisterTarget("cores_test");
+}
+
+TEST(CPUTimeMonitorFallbackTest, testMinMaxCgroupStatFallback) {
+  // readCgroupStat=false: CGROUP_STAT requests fall back to PROC_STAT data
+  auto ticker = std::make_shared<CPUTimeMonitor::TTicker>();
+  auto mon = std::make_shared<CPUTimeMonitor>(
+      ticker, false, coreCount, getenv("TESTROOT"), true);
+  mon->tick(major_tick_60s);
+  mon->tick(major_tick_60s);
+
+  auto minProc = mon->getMinCPUCoresUsage(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::PROC_STAT);
+  auto minCgroup = mon->getMinCPUCoresUsage(
+      CPUTimeMonitor::Granularity::MINUTE,
+      60,
+      std::nullopt,
+      CPUTimeMonitor::DataSource::CGROUP_STAT);
+
+  ASSERT_TRUE(minProc.has_value());
+  ASSERT_TRUE(minCgroup.has_value());
+  EXPECT_DOUBLE_EQ(minProc.value(), minCgroup.value());
+}
+
 TEST_F(CPUTimeMonitorTest, testBreakdownMinMaxNulloptAfterDeregister) {
   monitor->registerTarget("dereg_test", {0, 1});
   monitor->tick(major_tick_60s);

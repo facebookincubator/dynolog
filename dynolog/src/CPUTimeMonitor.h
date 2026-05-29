@@ -124,6 +124,24 @@ class CPUTimeMonitor : MonitorBase<Ticker<60000, 1000, 10, 3>> {
       CpuBreakdown breakdown,
       const std::optional<std::string>& targetId = std::nullopt);
 
+  std::optional<double> getMinCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
+  std::optional<double> getMaxCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
+  std::optional<std::pair<double, double>> getMinMaxCPUCoresUsage(
+      Granularity gran,
+      uint64_t seconds_ago,
+      const std::optional<std::string>& targetId = std::nullopt,
+      DataSource dataSource = DataSource::PROC_STAT);
+
  private:
   enum class Statistic { AVG, QUANTILE };
 
