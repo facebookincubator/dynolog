@@ -48,7 +48,7 @@ std::vector<ModuleInfo> detail::getFileBackedExecutableModules(
   // inodes.
   for (const auto& region : mem_regions) {
     ino_t inode = region.inode;
-    if (executable_inodes.find(inode) != executable_inodes.end()) {
+    if (executable_inodes.contains(inode)) {
       modules.emplace_back(
           rootPath / std::filesystem::path(region.pathname).relative_path(),
           region.start_address);
