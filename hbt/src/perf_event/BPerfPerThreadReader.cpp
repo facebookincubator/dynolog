@@ -67,7 +67,9 @@ int BPerfPerThreadReader::enable() {
       break;
     }
     close(idx_fd);
+    idx_fd = -1;
     close(data_fd_);
+    data_fd_ = -1;
   }
 
   if (idx_fd < 0 || data_fd_ < 0) {
@@ -91,15 +93,6 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
-  if (::bpf_map_lookup_elem(idx_fd, &tid_fd, &idx) == 0) {
-    // We haven't registered this tid yet. If the tid is already added,
-    // it must be added by a different instance of BPerfPerThreadReader
-    // for the same thread. BPerfPerThreadReader does not support two
-    // instances for the same thread, so we abort this enable().
-    HBT_LOG_ERROR() << "cannot register the same thread twice";
-    goto error;
-  }
-
   mmap_ptr_ = mmap(nullptr, mmap_size_, PROT_READ, MAP_SHARED, data_fd_, 0);
 
   if (mmap_ptr_ == MAP_FAILED) {
@@ -107,6 +100,10 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
+  if (idx_fd < 0) {
+    HBT_LOG_ERROR() << "idx map is missing: " << idx_fd;
+    goto error;
+  }
   err = ::bpf_map_lookup_elem(idx_fd, &tid_fd, &idx);
 
   if (err != 0) {
@@ -123,7 +120,9 @@ int BPerfPerThreadReader::enable() {
   metadata = (struct bperf_thread_metadata*)mmap_ptr_;
 
   ::close(tid_fd);
+  tid_fd = -1;
   ::close(idx_fd);
+  idx_fd = -1;
 
   // Detect whether the leader's layout includes cumulative_sched_delay_ns.
   // metadata->thread_data_size is the leader's sizeof(bperf_thread_data);

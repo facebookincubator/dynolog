@@ -124,6 +124,19 @@ struct bperf_thread_data {
    */
   __u64 cumulative_sched_delay_ns;
 
+  /* Reference count of mmap registrations from the same task.
+   * Bumped by bperf_register_thread on each successful mmap; decremented
+   * by bperf_unregister_thread on each mmap close. The idx slot is
+   * recycled only when this count drops to zero, allowing the same
+   * thread to register itself multiple times (e.g. via multiple
+   * BPerfPerThreadReader instances).
+   *
+   * Only modified by the registering / unregistering thread itself
+   * (mmap / munmap run synchronously in that thread's context), so no
+   * atomic op is needed.
+   */
+  __u32 ref_count;
+
   struct bperf_perf_event_data events[];
 };
 

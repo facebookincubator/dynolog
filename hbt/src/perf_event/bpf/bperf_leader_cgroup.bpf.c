@@ -87,6 +87,7 @@ static __always_inline __u64 event_prev_count(struct perf_event *event) {
 static void bperf_thread_data_init(struct bperf_thread_data *data) {
   int i;
   data->lock = 1;
+  data->ref_count = 1;
   data->runtime_until_offset_update = 0;
   data->cumulative_sched_delay_ns = 0;
   for (i = 0; i < BPERF_MAX_GROUP_SIZE && i < event_cnt; i++) {
@@ -330,9 +331,29 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   task = bpf_get_current_task_btf();
 
   task_idx = bpf_task_storage_get(&per_thread_idx, task, 0, 0);
-  if (task_idx)
-    // this thread has already been registered
+  if (task_idx) {
+    /* This thread has already been registered. Bump the ref count
+     * on the existing per-thread data slot so a later munmap from
+     * one of the registrations does not free a slot still in use
+     * by another. ref_count is only ever modified by the registering
+     * / unregistering thread itself, so no atomic is needed.
+     */
+    int existing_idx = *task_idx;
+    data = bpf_map_lookup_elem(&per_thread_data, &existing_idx);
+    if (!data) {
+      /* Should never happen: a task_idx entry exists but its data
+       * slot does not. Indicates the per_thread_data map is out of
+       * sync with per_thread_idx.
+       */
+      return 0;
+    }
+    if (data->ref_count == (__u32)~0u) {
+      /* About to overflow; reject this registration. */
+      return 0;
+    }
+    data->ref_count += 1;
     return 0;
+  }
 
   bpf_spin_lock(&idx_allocator_lock);
   idx = request_idx();
@@ -372,10 +393,40 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
   if (!idx)
     return 0;
 
+  /* Drop one reference. Only release the idx slot once the last
+   * registration for this task is going away. ref_count is only
+   * touched by the same thread that owns the registration, so a
+   * plain decrement is safe.
+   */
+  int task_idx = *idx;
+  struct bperf_thread_data *data =
+      bpf_map_lookup_elem(&per_thread_data, &task_idx);
+  if (!data) {
+    /* Should never happen: a task_idx entry exists but its data
+     * slot does not.
+     */
+    return 0;
+  }
+
+  if (data->ref_count == 0) {
+    /* Defensive: nothing to release (e.g. a prior register was
+     * rejected due to overflow). Keep the slot allocated so we
+     * don't double-free. Should not be hit unless register/unregister
+     * have gotten out of balance.
+     */
+    return 0;
+  }
+
+  data->ref_count -= 1;
+  if (data->ref_count > 0) {
+    /* Other registrations still hold a reference. */
+    return 0;
+  }
+
   bpf_task_storage_delete(&per_thread_idx, task);
 
   bpf_spin_lock(&idx_allocator_lock);
-  reclaim_idx(*idx);
+  reclaim_idx(task_idx);
   bpf_spin_unlock(&idx_allocator_lock);
 
   return 0;
