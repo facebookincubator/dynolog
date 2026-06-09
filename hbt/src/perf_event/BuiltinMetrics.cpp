@@ -499,7 +499,8 @@ void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
   }
 
   if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
-      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+      cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN6) {
     addAmdEvents(cpu_info, *pmu_manager);
   } else if (cpu_info.cpu_family == CpuFamily::INTEL) {
     //
@@ -538,7 +539,8 @@ void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
       "dtlb_load_misses", std::vector<EventId>({"dTLB-load-misses"}));
 
   if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
-      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+      cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN6) {
     if (cpu_info.cpu_arch != CpuArch::MILAN) {
       pmu_manager->addAliases(
           "l2_fill_l3_resp", std::vector<EventId>({"llc-cache-misses-oncore"}));
@@ -562,7 +564,8 @@ void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
 
   // Alias for AMD
   if (cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
-      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+      cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN6) {
     pmu_manager->addAliases(
         "ex_ret_brn_tkn",
         std::vector<EventId>({"branch-instructions-ret-tkn"}));
@@ -686,7 +689,8 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
             std::vector<std::string>{}));
   } else if (
       cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
-      cpu_info.cpu_family == CpuFamily::AMDZEN5) {
+      cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN6) {
     metrics->add(
         std::make_shared<MetricDesc>(
             "l2_cache_misses",
@@ -1717,6 +1721,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::cpu,
                    "l1_dcache_misses",
                    EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::l1_dcache_misses",
+                   PmuType::cpu,
+                   "zen6::l1_dcache_misses",
+                   EventExtraAttr{},
                    {}}}}},
           100'000'000,
           System::Permissions{},
@@ -1769,6 +1780,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::cpu,
                    "l2_dcache_accesses",
                    EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::l2_dcache_accesses",
+                   PmuType::cpu,
+                   "zen6::l2_dcache_accesses",
+                   EventExtraAttr{},
                    {}}}}},
           100'000'000,
           System::Permissions{},
@@ -1803,6 +1821,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "l2_accesses",
                    PmuType::cpu,
                    "l2_accesses",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::l2_accesses",
+                   PmuType::cpu,
+                   "zen6::l2_accesses",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -2046,6 +2071,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::cpu,
                    "stalled_cycles_back_pressure",
                    EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::stalled_cycles_back_pressure",
+                   PmuType::cpu,
+                   "zen6::stalled_cycles_back_pressure",
+                   EventExtraAttr{},
                    {}}}}},
           100'000'000,
           System::Permissions{},
@@ -2063,6 +2095,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::cpu,
                    "stalled_cycles_idq_empty",
                    EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::stalled_cycles_idq_empty",
+                   PmuType::cpu,
+                   "zen6::stalled_cycles_idq_empty",
+                   EventExtraAttr{},
                    {}}}}},
           100'000'000,
           System::Permissions{},
@@ -2079,6 +2118,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "stalled_cycles_any",
                    PmuType::cpu,
                    "stalled_cycles_any",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::stalled_cycles_any",
+                   PmuType::cpu,
+                   "zen6::stalled_cycles_any",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -2150,6 +2196,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    PmuType::cpu,
                    "ls_mab_alloc_pipes",
                    EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::ls_mab_alloc_pipes",
+                   PmuType::cpu,
+                   "zen6::ls_mab_alloc_pipes",
+                   EventExtraAttr{},
                    {}}}}},
           100'000'000,
           System::Permissions{},
@@ -2166,6 +2219,13 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "ic_mab_request",
                    PmuType::cpu,
                    "ic_mab_request",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::ic_mab_request",
+                   PmuType::cpu,
+                   "zen6::ic_mab_request",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -2321,6 +2381,75 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "smt_contention_stalls",
                    PmuType::cpu,
                    "smt_contention_stalls",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  // Venice-only core metrics.
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_RETIRED_SSE_AVX_FLOPS",
+          "Retired SSE/AVX floating-point operations",
+          "Retired SSE/AVX floating-point operations.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::retired_sse_avx_flops",
+                   PmuType::cpu,
+                   "zen6::retired_sse_avx_flops",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_BAD_SPECULATION",
+          "Bad speculation",
+          "Ops dispatched that did not retire.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::bad_speculation",
+                   PmuType::cpu,
+                   "zen6::bad_speculation",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_SW_PREFETCH_TOTAL",
+          "Software prefetch total",
+          "All software prefetch data cache fills.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::sw_prefetch_total",
+                   PmuType::cpu,
+                   "zen6::sw_prefetch_total",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_INEFFICIENT_SW_PREFETCH",
+          "Inefficient software prefetches",
+          "Inefficient software prefetches.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "zen6::inefficient_sw_prefetch",
+                   PmuType::cpu,
+                   "zen6::inefficient_sw_prefetch",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
