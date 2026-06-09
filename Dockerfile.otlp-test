@@ -1,0 +1,59 @@
+# Build + test dynolog OTLP on Linux
+FROM ubuntu:22.04 AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential cmake ninja-build git ca-certificates curl \
+    libboost-all-dev libnl-3-dev libnl-route-3-dev libelf-dev \
+    libssl-dev libcurl4-openssl-dev pkg-config libcap-dev \
+    libprotobuf-dev protobuf-compiler \
+    libgtest-dev libgmock-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Rust (needed for dyno CLI which is a build dependency)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+COPY . /src/dynolog
+WORKDIR /src/dynolog
+
+# Ensure git repo exists for submodule version detection
+RUN git config --global user.email "build@docker" && git config --global user.name "build" \
+    && git init && git add -A && git commit -m "docker build" --allow-empty
+
+# Configure with USE_OTLP=ON
+RUN cmake -S . -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_TESTING=ON \
+    -DUSE_OTLP=ON
+
+# Build otlp_proto target first to verify proto stub generation
+RUN cmake --build build --target otlp_proto -j$(nproc)
+
+# Verify generated proto headers exist
+RUN ls build/generated/otlp_proto/opentelemetry/proto/common/v1/common.pb.h && \
+    ls build/generated/otlp_proto/opentelemetry/proto/resource/v1/resource.pb.h && \
+    ls build/generated/otlp_proto/opentelemetry/proto/metrics/v1/metrics.pb.h && \
+    ls build/generated/otlp_proto/opentelemetry/proto/collector/metrics/v1/metrics_service.pb.h && \
+    echo "=== All generated proto headers exist ==="
+
+# Build full dynolog binary (links otlp_proto + libcurl)
+RUN cmake --build build --target dynolog -j$(nproc) && echo "=== dynolog built with USE_OTLP=ON ==="
+
+# Build and run OTLPLoggerTest
+RUN cmake --build build --target OTLPLoggerTest -j$(nproc) && echo "=== OTLPLoggerTest built ==="
+RUN ./build/dynolog/tests/OTLPLoggerTest --gtest_print_time=0 2>&1 && echo "=== All OTLPLoggerTest tests passed ==="
+
+# Verify no gRPC or abseil in link chain
+RUN ldd build/dynolog/src/dynolog 2>/dev/null | grep -i "grpc\|absl" && exit 1 || echo "=== No gRPC/abseil in link chain ==="
+
+# Verify USE_OTLP=OFF still works
+RUN cmake -S . -B build_off -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_TESTING=ON \
+    -DUSE_OTLP=OFF \
+    && cmake --build build_off --target dynolog -j$(nproc) \
+    && echo "=== USE_OTLP=OFF build succeeded ==="
+
+RUN echo "=== ALL VERIFICATION PASSED ==="

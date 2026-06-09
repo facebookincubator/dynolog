@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 add_definitions(-DDYNOLOG_VERSION=${DYNOLOG_VERSION} -DDYNOLOG_GIT_REV=${DYNOLOG_GIT_REV})
 
 message("Use Prometheus = ${USE_PROMETHEUS}")
+message("Use OTLP = ${USE_OTLP}")
 message("Use ODS Graph API = ${USE_ODS_GRAPH_API}")
 message("Use K8s pod-resources = ${USE_K8S_PODRESOURCES}")
 
@@ -36,6 +37,12 @@ if(USE_OTEL)
     opentelemetry_sdk
     opentelemetry_exporter_otlp_http_log
     opentelemetry_logs)
+endif()
+
+if(USE_OTLP)
+  target_compile_definitions(dynolog_lib PRIVATE USE_OTLP)
+  target_link_libraries(dynolog_lib PUBLIC otlp_proto)
+  target_link_libraries(dynolog_lib PUBLIC CURL::libcurl)
 endif()
 
 target_link_libraries(dynolog_lib PUBLIC Monitor)

@@ -1,0 +1,89 @@
+# Dockerfile.otlp
+# Builds dynolog with both Prometheus and OTLP metrics export.
+# Uses local source tree as build context (COPY . approach).
+#
+# Build on Linux x86_64 dev host:
+#   docker build -t dynolog:v0.3.0-otlp -f Dockerfile.otlp .
+#
+# Build time: ~5-10 min (protobuf stubs from opentelemetry-proto)
+
+# --- Build stage ---
+FROM ubuntu:22.04 AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    ninja-build \
+    git \
+    ca-certificates \
+    curl \
+    libboost-all-dev \
+    libnl-3-dev \
+    libnl-route-3-dev \
+    libelf-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Rust (needed for the dyno CLI)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Build prometheus-cpp from source (for USE_PROMETHEUS=ON)
+RUN git clone --depth 1 --branch v1.3.0 --recurse-submodules \
+    https://github.com/jupp0r/prometheus-cpp.git /src/prometheus-cpp \
+    && cd /src/prometheus-cpp \
+    && cmake -S . -B build -G Ninja \
+       -DCMAKE_BUILD_TYPE=Release \
+       -DENABLE_TESTING=OFF \
+       -DENABLE_PUSH=OFF \
+       -DBUILD_SHARED_LIBS=ON \
+    && cmake --build build -j$(nproc) \
+    && cmake --install build
+
+# Copy local dynolog source (includes opentelemetry-proto submodule)
+COPY . /src/dynolog
+WORKDIR /src/dynolog
+
+# Build with both Prometheus AND OTLP.
+# OTLP uses protobuf stubs generated from opentelemetry-proto + libcurl.
+RUN cmake -S . -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_TESTING=OFF \
+    -DCPR_ENABLE_SSL=ON \
+    -DUSE_PROMETHEUS=ON \
+    -DUSE_OTLP=ON \
+    && cmake --build build --target dynolog -j$(nproc)
+
+# --- Runtime stage ---
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libboost-program-options1.74.0 \
+    libboost-system1.74.0 \
+    libnl-3-200 \
+    libnl-route-3-200 \
+    libelf1 \
+    libssl3 \
+    libcurl4 \
+    ca-certificates \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy dynolog binary and prometheus-cpp shared libs
+COPY --from=builder /src/dynolog/build/dynolog/src/dynolog /usr/local/bin/dynolog
+COPY --from=builder /usr/local/lib/libprometheus-cpp-*.so* /usr/local/lib/
+RUN ldconfig
+
+EXPOSE 1778
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget -qO- http://localhost:1778/metrics >/dev/null 2>&1 || exit 1
+
+ENTRYPOINT ["dynolog"]
+CMD ["--enable_gpu_monitor=false", "--use_JSON=true"]

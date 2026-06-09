@@ -32,6 +32,10 @@
 #include "dynolog/src/OtlpLogger.h"
 #endif
 
+#ifdef USE_OTLP
+#include "dynolog/src/OtlpMetricsLogger.h"
+#endif
+
 using namespace dynolog;
 using json = nlohmann::json;
 namespace hbt = facebook::hbt;
@@ -40,6 +44,9 @@ DEFINE_int32(port, 1778, "Port for listening RPC requests.");
 DEFINE_bool(use_JSON, false, "Emit metrics to JSON file through JSON logger");
 #ifdef USE_PROMETHEUS
 DEFINE_bool(use_prometheus, false, "Emit metrics to Prometheus");
+#endif
+#ifdef USE_OTLP
+DEFINE_bool(use_otlp, false, "Emit metrics to OTLP endpoint");
 #endif
 DEFINE_bool(use_fbrelay, false, "Emit metrics to FB Relay on Lab machines");
 DEFINE_bool(use_ODS, false, "Emit metrics to ODS through ODS logger");
@@ -77,6 +84,11 @@ std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
 #ifdef USE_PROMETHEUS
   if (FLAGS_use_prometheus) {
     loggers.push_back(std::make_unique<PrometheusLogger>());
+  }
+#endif
+#ifdef USE_OTLP
+  if (FLAGS_use_otlp) {
+    loggers.push_back(std::make_unique<OTLPLogger>());
   }
 #endif
   if (FLAGS_use_fbrelay) {

@@ -11,6 +11,16 @@ if(USE_PROMETHEUS)
   add_definitions(-DUSE_PROMETHEUS)
   dynolog_add_test(PrometheusLoggerTest PrometheusLoggerTest.cpp)
 endif()
+if(USE_OTLP)
+  dynolog_add_test(OTLPLoggerTest OtlpMetricsLoggerTest.cpp)
+  target_compile_definitions(OTLPLoggerTest PRIVATE USE_OTLP)
+  option(OTLP_INTEGRATION_TEST
+    "Enable OTLP integration tests (requires Docker)"
+    OFF)
+  if(OTLP_INTEGRATION_TEST)
+    target_compile_definitions(OTLPLoggerTest PRIVATE OTLP_INTEGRATION_TEST)
+  endif()
+endif()
 
 add_subdirectory(rpc)
 add_subdirectory(tracing)

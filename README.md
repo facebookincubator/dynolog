@@ -20,6 +20,7 @@ Below are some of the key features, which we will explore in more detail later i
 * Dynolog integrates with the [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) and provides **[on-demand remote tracing features](https://pytorch.org/blog/performance-debugging-of-production-pytorch-models-at-meta/).** One can use a single command line tool (dyno CLI) to **simultaneously trace hundreds of GPUs** and examine the collected traces (available from PyTorch v1.13.0 onwards).
 * It incorporates **[GPU performance monitoring](#gpu-monitoring)** for NVIDIA GPUs using [DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html#).
 * Dynolog manages counters for **micro-architecture specific performance events** related to CPU Cache, TLBs etc on **Intel** and **AMD** CPUs. Additionally, it instruments telemetry from the Linux kernel including **CPU, network and IO** resource usage.
+* Dynolog supports **[OTLP (OpenTelemetry Protocol) metrics export](docs/logging_to_otlp.md)**, enabling integration with any OTLP-compatible observability backend (Grafana, Datadog, New Relic, etc.) with automatic mapping to OTEL semantic conventions.
 * We are actively implementing new features, including support for **[Intel Processor Trace](https://engineering.fb.com/2021/04/27/developer-tools/reverse-debugging/)** as well as **memory latency and bandwidth monitoring**.
 
 We focus on Linux platforms as it is leveraged heavily in cloud environments.
@@ -259,7 +260,7 @@ By default dynolog will save monitoring metrics to the standard output -
 I20220721 23:42:34.141104 3632432 Logger.cpp:38] time = 2022-07-21T23:42:34.141Z data = {"cpu_i":"71.342" ...
 ```
 
-Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog support logging to Meta ODS datastore, and Meta Scuba data system, instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md) and [docs/logging_to_scuba.md](docs/logging_to_scuba.md). Dynolog team is happy to support new loggers.
+Dynolog includes an abstract Logger class that can be specialized for different logging destinations. Currently, Dynolog supports logging to Meta ODS datastore, Meta Scuba data system, and OTLP (OpenTelemetry Protocol) endpoints. Instructions can be found in [docs/logging_to_ods.md](docs/logging_to_ods.md), [docs/logging_to_scuba.md](docs/logging_to_scuba.md), and [docs/logging_to_otlp.md](docs/logging_to_otlp.md). Dynolog team is happy to support new loggers.
 
 ## Releases<!-- {#release} -->
 
@@ -271,7 +272,6 @@ In the next and near term release we plan to add
 
 At some future point we would also like to add -
 * Capability to collect CPU traces using Intel Processor Trace.
-* [Open telemetry](https://cloud.google.com/learn/what-is-opentelemetry) support for logging.
 
 ## Contact Us
 

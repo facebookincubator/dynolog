@@ -19,6 +19,7 @@ A metric is generally associated with a scope that describes the space/dimension
 | cpu_util | Fraction of total CPU time spend on user or system mode.| Overall amount of time the CPU was busy. | Ratio | - | 60s |
 | cpu_u, cpu_s | Fraction of total CPU time spent in user and system mode respectively| Activity of the system CPU in user/system mode. | Ratio | - | 60s |
 | cpu_i| Fraction of total CPU time that the CPU was in idle mode.| Overall inactivity of the system CPU. | Ratio | - | 60s |
+| cpu_guest, cpu_guest_nice | Fraction of total CPU time spent running a virtual CPU for guest OS. | Guest/virtualization CPU overhead. | Ratio | - | 60s |
 | cpu_u/s/n/w/x/y_ms| Total CPU time in milliseconds spent in various modes: user, system, nice, iowait etc. For more details please see man page for [/proc/stat](https://man7.org/linux/man-pages/man5/proc.5.html) | Activity of the system CPU in various modes. | Delta | ms | 60s |
 | rx/tx_bytes.`<devname>` | Total bytes transmitted/received over the specific network device.| Network transfer statistics. | Delta | Bytes | 60s |
 | rx/tx_packets.`<devname>` | Total packets transmitted/received over the specific network device.| Network transfer statistics. | Delta | Packets | 60s |
@@ -47,3 +48,97 @@ A metric is generally associated with a scope that describes the space/dimension
 | gpu_device_utilization | GPU Device utilization | The most coarse signal showing the GPU is active | Ratio | - | 10s |
 | gpu_memory_utilization | Memory utilization of the GPU device | Ratio of GPU memory being allocated | Ratio | - | 10s |
 | gpu_power_draw | Power of the device | How much power the GPU is consuming, also reflects how heavy the GPU is used | Power | Watt | 10s |
+| dcgm_error | DCGM hardware error count | Number of DCGM-reported hardware errors for the device | Delta | Count | 10s |
+
+## OTLP Metric Naming
+
+When using the OTLP logger (`--use_otlp`), dynolog preserves its native metric names in the OTLP export while adding OTEL-style attributes and unit normalization. This keeps metric names familiar to dynolog users while enabling attribute-based filtering in OTLP-compatible backends.
+
+### CPU/System Metric Mapping
+| Dynolog Metric | Exported Name | OTEL Unit | OTEL Type | Attributes | Notes |
+| --- | --- | --- | --- | --- | --- |
+| cpu_util | cpu_util | 1 | Gauge | cpu.mode=active | Divided by 100 (% to ratio) |
+| cpu_u | cpu_u | 1 | Gauge | cpu.mode=user | Divided by 100 |
+| cpu_s | cpu_s | 1 | Gauge | cpu.mode=system | Divided by 100 |
+| cpu_i | cpu_i | 1 | Gauge | cpu.mode=idle | Divided by 100 |
+| cpu_guest | cpu_guest | 1 | Gauge | cpu.mode=guest | Divided by 100 |
+| cpu_guest_nice | cpu_guest_nice | 1 | Gauge | cpu.mode=guest_nice | Divided by 100 |
+| cpu_u_node{N} | cpu_u_node{N} | 1 | Gauge | cpu.mode=user, cpu.socket={N} | Divided by 100; per-NUMA-socket |
+| cpu_s_node{N} | cpu_s_node{N} | 1 | Gauge | cpu.mode=system, cpu.socket={N} | Divided by 100; per-NUMA-socket |
+| cpu_i_node{N} | cpu_i_node{N} | 1 | Gauge | cpu.mode=idle, cpu.socket={N} | Divided by 100; per-NUMA-socket |
+| cpu_u_ms | cpu_u_ms | s | Gauge | cpu.mode=user | |
+| cpu_s_ms | cpu_s_ms | s | Gauge | cpu.mode=system | |
+| cpu_n_ms | cpu_n_ms | s | Gauge | cpu.mode=nice | |
+| cpu_w_ms | cpu_w_ms | s | Gauge | cpu.mode=iowait | |
+| cpu_x_ms | cpu_x_ms | s | Gauge | cpu.mode=irq | |
+| cpu_y_ms | cpu_y_ms | s | Gauge | cpu.mode=softirq | |
+| cpu_z_ms | cpu_z_ms | s | Gauge | cpu.mode=steal | |
+| cpu_guest_ms | cpu_guest_ms | s | Gauge | cpu.mode=guest | |
+| cpu_guest_nice_ms | cpu_guest_nice_ms | s | Gauge | cpu.mode=guest_nice | |
+| uptime | uptime | s | Gauge | | |
+| mips | mips | | Gauge | | Passthrough (value is millions of instructions/s) |
+| mega_cycles_per_second | mega_cycles_per_second | | Gauge | | Passthrough (value is millions of cycles/s) |
+
+### Network Metric Mapping
+| Dynolog Metric | Exported Name | OTEL Unit | OTEL Type | Attributes |
+| --- | --- | --- | --- | --- |
+| rx_bytes.{dev} | rx_bytes | By | Gauge | network.io.direction=receive, network.interface.name={dev} |
+| tx_bytes.{dev} | tx_bytes | By | Gauge | network.io.direction=transmit, network.interface.name={dev} |
+| rx_packets.{dev} | rx_packets | {packet} | Gauge | network.io.direction=receive, network.interface.name={dev} |
+| tx_packets.{dev} | tx_packets | {packet} | Gauge | network.io.direction=transmit, network.interface.name={dev} |
+| rx_errors.{dev} | rx_errors | {error} | Gauge | network.io.direction=receive, network.interface.name={dev} |
+| tx_errors.{dev} | tx_errors | {error} | Gauge | network.io.direction=transmit, network.interface.name={dev} |
+| rx_drops.{dev} | rx_drops | {packet} | Gauge | network.io.direction=receive, network.interface.name={dev} |
+| tx_drops.{dev} | tx_drops | {packet} | Gauge | network.io.direction=transmit, network.interface.name={dev} |
+
+### GPU Metric Mapping
+GPU metrics preserve their dynolog names in the OTLP export. The `hw.id` attribute identifies the GPU device.
+
+| Dynolog Metric | Exported Name | OTEL Unit | Additional Attributes | Notes |
+| --- | --- | --- | --- | --- |
+| graphics_engine_active_ratio | graphics_engine_active_ratio | 1 | hw.gpu.task=general | |
+| sm_active_ratio | sm_active_ratio | 1 | | |
+| sm_occupancy | sm_occupancy | 1 | | |
+| gpu_frequency_mhz | gpu_frequency_mhz | MHz | | |
+| fp16_active | fp16_active | 1 | pipe=fp16 | |
+| fp32_active | fp32_active | 1 | pipe=fp32 | |
+| fp64_active | fp64_active | 1 | pipe=fp64 | |
+| tensorcore_active | tensorcore_active | 1 | pipe=tensorcore | |
+| hbm_mem_bw_util | hbm_mem_bw_util | 1 | | |
+| pcie_tx_bytes | pcie_tx_bytes | By/s | direction=transmit | |
+| pcie_rx_bytes | pcie_rx_bytes | By/s | direction=receive | |
+| nvlink_tx_bytes | nvlink_tx_bytes | By/s | direction=transmit | |
+| nvlink_rx_bytes | nvlink_rx_bytes | By/s | direction=receive | |
+| gpu_device_utilization | gpu_device_utilization | 1 | hw.gpu.task=device | Divided by 100 (% to ratio) |
+| gpu_memory_utilization | gpu_memory_utilization | 1 | | Divided by 100 (% to ratio) |
+| gpu_power_draw | gpu_power_draw | W | hw.type=gpu | |
+| dcgm_error | dcgm_error | {error} | hw.type=gpu | |
+
+### ARM Hardware Counter Metric Mapping
+ARM hardware counter metrics preserve their dynolog names in the OTLP export. These metrics use attributes to distinguish TLB levels, operation types, and other hardware event characteristics.
+
+> **Note:** These metrics are only available on ARM Neoverse V2 hosts with hardware performance counter monitoring enabled.
+
+| Dynolog Metric | Exported Name | OTEL Unit | Attributes | Description |
+| --- | --- | --- | --- | --- |
+| l1d_tlb | l1d_tlb | {event} | level=l1d, type=access | L1 data TLB accesses |
+| l1d_tlb_refill | l1d_tlb_refill | {event} | level=l1d, type=miss | L1 data TLB misses |
+| l1i_tlb | l1i_tlb | {event} | level=l1i, type=access | L1 instruction TLB accesses |
+| l1i_tlb_refill | l1i_tlb_refill | {event} | level=l1i, type=miss | L1 instruction TLB misses |
+| l2d_tlb | l2d_tlb | {event} | level=l2, type=access | L2 unified TLB accesses |
+| l2d_tlb_refill | l2d_tlb_refill | {event} | level=l2, type=miss | L2 unified TLB misses |
+| stall_backend_mem | stall_backend_mem | {cycle} | reason=backend_mem | Backend memory stall cycles |
+| ll_cache_miss_rd | ll_cache_miss_rd | {event} | level=ll | Last-level cache read misses |
+| br_mis_pred | br_mis_pred | {event} | — | Branch mispredictions |
+| br_retired | br_retired | {instruction} | — | Branch instructions retired |
+| l1i_cache_refill | l1i_cache_refill | {event} | level=l1i, type=miss | L1 instruction cache refills (misses) |
+| l1d_cache_refill | l1d_cache_refill | {event} | level=l1d, type=miss | L1 data cache refills (misses) |
+| l2d_cache_refill | l2d_cache_refill | {event} | level=l2, type=miss | L2 data cache refills (misses) |
+| l3d_cache_refill | l3d_cache_refill | {event} | level=l3, type=miss | L3 data cache refills (misses) |
+| FP_HP_SPEC | FP_HP_SPEC | {operation} | precision=half | Half-precision floating-point operations (speculative) |
+| FP_SP_SPEC | FP_SP_SPEC | {operation} | precision=single | Single-precision floating-point operations (speculative) |
+| FP_DP_SPEC | FP_DP_SPEC | {operation} | precision=double | Double-precision floating-point operations (speculative) |
+| dtlb_walk | dtlb_walk | {event} | type=data | Data TLB page table walks |
+| itlb_walk | itlb_walk | {event} | type=instruction | Instruction TLB page table walks |
+
+For detailed setup instructions, see [docs/logging_to_otlp.md](logging_to_otlp.md).
