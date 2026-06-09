@@ -12,7 +12,7 @@
 
 namespace facebook::hbt::perf_event {
 
-enum class CpuFamily { AMDZEN3, AMDZEN5, INTEL, ARM, UNKNOWN };
+enum class CpuFamily { AMDZEN3, AMDZEN5, AMDZEN6, INTEL, ARM, UNKNOWN };
 
 inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
   switch (f) {
@@ -20,6 +20,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
       return os << "AMD Zen 3 / Zen 3+ / Zen 4";
     case CpuFamily::AMDZEN5:
       return os << "AMD Zen 5";
+    case CpuFamily::AMDZEN6:
+      return os << "AMD Zen 6";
     case CpuFamily::INTEL:
       return os << "INTEL";
     case CpuFamily::ARM:
@@ -32,9 +34,11 @@ inline std::ostream& operator<<(std::ostream& os, CpuFamily f) {
 // Create CpuFamily enumeration from integer.
 inline CpuFamily makeCpuFamily(
 #if defined(__x86_64__)
-    uint32_t cpu_family
+    uint32_t cpu_family,
+    uint32_t cpu_model_num
 #else
-    uint32_t /* cpu_family */
+    uint32_t /* cpu_family */,
+    uint32_t /* cpu_model_num */
 #endif
 ) {
 #if defined(__x86_64__)
@@ -44,6 +48,12 @@ inline CpuFamily makeCpuFamily(
     case 25:
       return CpuFamily::AMDZEN3;
     case 26:
+      // AMD Family 1Ah (0x1A == 26) covers BOTH Zen 5 (Turin) and Zen 6
+      // (Venice); they are distinguished only by model number, per the AMD
+      // PPR. Venice: Models 50h-57h (A0 = 50h, B0 = 51h). Turin: 00h-1Fh.
+      if (cpu_model_num >= 0x50 && cpu_model_num <= 0x57) {
+        return CpuFamily::AMDZEN6;
+      }
       return CpuFamily::AMDZEN5;
     // Not recognized CPU model.
     default:
