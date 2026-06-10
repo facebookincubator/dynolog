@@ -276,20 +276,6 @@ void BPerfEventsGroup::close() {
   opened_ = false;
 }
 
-std::string BPerfEventsGroup::perThreadArrayMapFileName(const std::string& n) {
-  std::stringstream ss;
-
-  ss << "bperf_per_thread_array_" << n;
-  return ss.str();
-}
-
-std::string BPerfEventsGroup::perThreadIndexMapFileName(const std::string& n) {
-  std::stringstream ss;
-
-  ss << "bperf_per_thread_index_" << n;
-  return ss.str();
-}
-
 bool BPerfEventsGroup::isOpen() const {
   return opened_;
 }
@@ -403,8 +389,7 @@ void BPerfEventsGroup::syncGlobal_() const {
 
 int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
   int err, map_fd;
-  auto path = bpf_pinned_map_dir_ /
-      BPerfEventsGroup::perThreadIndexMapFileName(pin_name_);
+  auto path = bpf_pinned_map_dir_ / perThreadIndexMapFileName(pin_name_);
 
   map_fd = ::bpf_map__fd(skel->maps.per_thread_idx);
   ::unlink(path.c_str());
@@ -420,8 +405,7 @@ int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
     HBT_LOG_WARNING() << "Failed to chmod the map at " << path << ". ";
   }
 
-  path = bpf_pinned_map_dir_ /
-      BPerfEventsGroup::perThreadArrayMapFileName(pin_name_);
+  path = bpf_pinned_map_dir_ / perThreadArrayMapFileName(pin_name_);
   map_fd = ::bpf_map__fd(skel->maps.per_thread_data);
   ::unlink(path.c_str());
   if (err = ::bpf_obj_pin(map_fd, path.c_str()); err) {
@@ -849,8 +833,7 @@ void BPerfEventsGroup::cleanupLinks() {
 void BPerfEventsGroup::disablePerThreadMetadata(
     const std::string& pin_name,
     const std::filesystem::path& bpf_pinned_map_dir) {
-  auto path = bpf_pinned_map_dir /
-      BPerfEventsGroup::perThreadArrayMapFileName(pin_name);
+  auto path = bpf_pinned_map_dir / perThreadArrayMapFileName(pin_name);
   int map_fd = ::bpf_obj_get(path.c_str());
   if (map_fd < 0) {
     return;

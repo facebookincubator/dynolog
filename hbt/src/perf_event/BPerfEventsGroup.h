@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
+#include "hbt/src/perf_event/BPerfPinnedMapNames.h"
 #include "hbt/src/perf_event/Metrics.h"
 #include "hbt/src/perf_event/PerfEventsGroup.h"
 #include "hbt/src/perf_event/PmuDevices.h"
@@ -21,9 +22,6 @@ namespace facebook::hbt::perf_event {
 
 class BPerfEventsGroup {
  public:
-  static std::string perThreadArrayMapFileName(const std::string& n);
-  static std::string perThreadIndexMapFileName(const std::string& n);
-
   using ReadValues = GroupReadValues<mode::Counting>;
   ///
   ///  - confs: Event Confs for group.
