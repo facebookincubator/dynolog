@@ -4,9 +4,18 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/perf_event/BPerfPerThreadReader.h"
+
 #include <bpf/bpf.h>
+#include <fcntl.h>
+#include <linux/perf_event.h>
+#include <sys/mman.h>
+#include <sys/syscall.h>
 #include <time.h>
-#include "hbt/src/perf_event/BPerfEventsGroup.h"
+#include <unistd.h>
+#include <cstddef>
+#include <cstring>
+
+#include "hbt/src/perf_event/BPerfPinnedMapNames.h"
 
 namespace facebook::hbt::perf_event {
 
@@ -54,14 +63,10 @@ int BPerfPerThreadReader::enable() {
 
   // use a list of directories to find if desired per-thread bpf map
   for (const auto& bpf_pinned_map_dir : bpf_pinned_map_dirs_) {
-    idx_fd =
-        ::bpf_obj_get((bpf_pinned_map_dir /
-                       BPerfEventsGroup::perThreadIndexMapFileName(pin_name_))
-                          .c_str());
-    data_fd_ =
-        ::bpf_obj_get((bpf_pinned_map_dir /
-                       BPerfEventsGroup::perThreadArrayMapFileName(pin_name_))
-                          .c_str());
+    idx_fd = ::bpf_obj_get(
+        (bpf_pinned_map_dir / perThreadIndexMapFileName(pin_name_)).c_str());
+    data_fd_ = ::bpf_obj_get(
+        (bpf_pinned_map_dir / perThreadArrayMapFileName(pin_name_)).c_str());
 
     if (idx_fd >= 0 && data_fd_ >= 0) {
       break;
