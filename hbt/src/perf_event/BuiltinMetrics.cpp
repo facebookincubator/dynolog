@@ -2379,6 +2379,54 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
 
   metrics->add(
       std::make_shared<MetricDesc>(
+          "HW_CORE_L1I_CACHE",
+          "L1 instruction cache access",
+          "Counts instruction fetches that access the L1 instruction cache. Denominator for the L1 instruction-cache miss ratio.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1i_cache",
+                   PmuType::armv8_pmuv3,
+                   "l1i_cache",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l1i_cache",
+                   PmuType::armv8_pmuv3,
+                   "l1i_cache",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_L1D_CACHE",
+          "L1 data cache access",
+          "Counts level 1 data cache accesses from any load or store operation. Denominator for the L1 data-cache miss ratio.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "l1d_cache",
+                   PmuType::armv8_pmuv3,
+                   "l1d_cache",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "l1d_cache",
+                   PmuType::armv8_pmuv3,
+                   "l1d_cache",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
           "HW_CORE_L2_CACHE_REFILL",
           "L2 cache refill",
           "Counts any cacheable transaction from L1 which causes data to be read from outside the core. L2 refills caused by stashes into L2 should not be counted.",
