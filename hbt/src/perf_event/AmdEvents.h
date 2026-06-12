@@ -572,6 +572,32 @@ constexpr PmuMsr kDfZen4CxlWriteBeatsCmp3{
         .event_13_8 = 0x3,
     }};
 
+// Venice (Zen 6) core counters.
+// These event encodings changed vs Turin/Zen5; see the AMD Venice PPR. Events
+// that are unchanged (NC) continue to use the common constants above.
+constexpr PmuMsr kVeniceL1DCacheMisses{
+    .amdCore = {.event = 0x41, .unitMask = 0x0f}}; // 0x1f reserved on Venice
+constexpr PmuMsr kVeniceL2DCacheAccesses{
+    .amdCore = {.event = 0x64, .unitMask = 0xf8}}; // adds bit7 LsRdBlkCS
+constexpr PmuMsr kVeniceL2Accesses{
+    .amdCore = {.event = 0x64, .unitMask = 0xff}};
+constexpr PmuMsr kVeniceLsMabAllocPipes{
+    .amdCore = {
+        .event = 0x41,
+        .unitMask = 0x0f}}; // same fix as L1 dcache misses
+constexpr PmuMsr kVeniceStalledCyclesBackPressure{
+    .amdCore = {.event = 0xae, .unitMask = 0x5f}}; // PMCx087 removed on Venice
+constexpr PmuMsr kVeniceStalledCyclesIdqEmpty{
+    .amdCore = {.event = 0xa9}}; // Op Queue Empty; PMCx087 removed
+constexpr PmuMsr kVeniceStalledCyclesAny{
+    .amdCore = {.event = 0xd6, .unitMask = 0x1b}}; // cycles with no retire
+constexpr PmuMsr kVeniceIcMabRequest{
+    // PMCx29C unitmask 0xDF (Any IC Fills by Data Source), per the AMD PPR.
+    // The 12-bit event-select 0x29C, (0x2 << 8) | 0x9C == 0x29C
+    .amdCore = {.event = 0x9c, .unitMask = 0xdf, .event_11_8 = 0x2}};
+constexpr PmuMsr kVeniceBadSpeculation{
+    .amdCore = {.event = 0xaa, .unitMask = 0x03}}; // bits[1:0] only on Venice
+
 } // namespace amd_msr
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager);
