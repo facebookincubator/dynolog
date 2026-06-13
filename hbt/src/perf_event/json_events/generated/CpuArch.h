@@ -22,6 +22,7 @@ enum class CpuArch {
   GENOA,
   BERGAMO,
   TURIN,
+  VENICE,
   // Intel Architectures Sorted by model id.
   BDW,
   BDW_DE,
@@ -65,6 +66,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "BERGAMO";
     case CpuArch::TURIN:
       return os << "TURIN";
+    case CpuArch::VENICE:
+      return os << "VENICE";
     case CpuArch::BDW:
       return os << "BDW";
     case CpuArch::BDW_DE:
@@ -112,7 +115,7 @@ inline CpuArch makeCpuArchX86(
     uint32_t cpu_family_num,
     uint32_t cpu_model_num,
     uint32_t cpu_step_num) {
-  auto cpu_family = makeCpuFamily(cpu_family_num);
+  auto cpu_family = makeCpuFamily(cpu_family_num, cpu_model_num);
   if (cpu_family == CpuFamily::AMDZEN3) {
     switch (cpu_model_num) {
       case 1:
@@ -127,6 +130,15 @@ inline CpuArch makeCpuArchX86(
       case 2:
       case 17:
         return CpuArch::TURIN;
+    }
+  } else if (cpu_family == CpuFamily::AMDZEN6) {
+    switch (cpu_model_num) {
+      // Venice A0 silicon: Family 1Ah Model 50h (0x50 == 80), per
+      // the AMD PPR (PPR Vol 1 for AMD Family 1Ah Model 50h A0).
+      // TODO(venice): update to B0 Model 51h (0x51 == 81) once we
+      // move to B0 hardware.
+      case 80:
+        return CpuArch::VENICE;
     }
   } else if (cpu_family == CpuFamily::INTEL) {
     switch (cpu_model_num) {
