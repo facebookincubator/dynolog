@@ -664,6 +664,22 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           "L2 cache fill from all DRAM or MMIO responses.",
           "L2 cache fill requests that target the same or another NUMA node and return from either DRAM or MMIO from the same or different NUMA node."),
       std::vector<EventId>({"l2-fill-dram-resp"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "l3_cache_access",
+          EventDef::Encoding{.code = amd_msr::kL3CacheAccess.val},
+          "L3 cache accesses.",
+          "All coherent accesses (hit + miss) to L3."),
+      std::vector<EventId>({"amd-l3-cache-access"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "l3_cache_misses",
+          EventDef::Encoding{.code = amd_msr::kL3CacheMisses.val},
+          "L3 cache misses.",
+          "Coherent accesses that miss in L3."),
+      std::vector<EventId>({"amd-l3-cache-misses"}));
 }
 
 void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
@@ -690,10 +706,137 @@ void addZen5UmcEvents(PmuDeviceManager& pmu_manager) {
           EventDef::Encoding{.code = amd_msr::kUmcZen5Cyc.val},
           "Zen5 UMC cycles",
           "Total number of DRAM bus channel cycles."),
-      std::vector<EventId>({"zen5-umc-write-cycles"}));
+      std::vector<EventId>({"zen5-umc-cycles"}));
 }
 
 } // namespace turin
+
+namespace venice {
+
+// Venice unchanged core events come from addCoreEvents()
+void addEvents(PmuDeviceManager& pmu_manager) {
+  // ---- Core events with Venice specific encodings (changed vs Turin) ----
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::l1_dcache_misses",
+          EventDef::Encoding{.code = amd_msr::kVeniceL1DCacheMisses.val},
+          "L1 data cache misses (Venice).",
+          "L1 data cache misses (all allocations)."),
+      std::vector<EventId>({"zen6-l1-dcache-misses"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::l2_dcache_accesses",
+          EventDef::Encoding{.code = amd_msr::kVeniceL2DCacheAccesses.val},
+          "L2 data cache accesses (Venice).",
+          "L2 data cache accesses."),
+      std::vector<EventId>({"zen6-l2-dcache-accesses"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::l2_accesses",
+          EventDef::Encoding{.code = amd_msr::kVeniceL2Accesses.val},
+          "L2 cache accesses (Venice).",
+          "L2 cache accesses including L2 prefetcher."),
+      std::vector<EventId>({"zen6-l2-accesses"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::ls_mab_alloc_pipes",
+          EventDef::Encoding{.code = amd_msr::kVeniceLsMabAllocPipes.val},
+          "Load-store MAB allocated to pipes (Venice).",
+          "Load-store MAB allocated to pipes."),
+      std::vector<EventId>({"zen6-ls-mab-alloc-pipes"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::stalled_cycles_back_pressure",
+          EventDef::Encoding{
+              .code = amd_msr::kVeniceStalledCyclesBackPressure.val},
+          "Stalled cycles due to back pressure (Venice).",
+          "Dynamic tokens dispatch stall cycles due to back pressure."),
+      std::vector<EventId>({"zen6-stalled-cycles-back-pressure"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::stalled_cycles_idq_empty",
+          EventDef::Encoding{.code = amd_msr::kVeniceStalledCyclesIdqEmpty.val},
+          "Stalled cycles due to op queue empty (Venice).",
+          "Op queue (IDQ) empty cycles."),
+      std::vector<EventId>({"zen6-stalled-cycles-idq-empty"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::stalled_cycles_any",
+          EventDef::Encoding{.code = amd_msr::kVeniceStalledCyclesAny.val},
+          "Stalled cycles due to any reason (Venice).",
+          "Cycles with no retire."),
+      std::vector<EventId>({"zen6-stalled-cycles-any"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::ic_mab_request",
+          EventDef::Encoding{.code = amd_msr::kVeniceIcMabRequest.val},
+          "Instruction cache MAB requests (Venice).",
+          "Instruction cache fills from any data source."),
+      std::vector<EventId>({"zen6-ic-mab-request"}));
+
+  // ---- New Venice core metrics ----
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::retired_sse_avx_flops",
+          // Venice (Zen6) uses the Zen4+ SSE/AVX FLOPS unitMask (0x1f),
+          // matching Genoa/Bergamo/Turin
+          EventDef::Encoding{.code = amd_msr::kZen4RetiredSseAvxFlops.val},
+          "Retired SSE/AVX floating-point ops (Venice).",
+          "Retired SSE/AVX floating-point ops."),
+      std::vector<EventId>({"zen6-retired-sse-avx-flops"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::bad_speculation",
+          EventDef::Encoding{.code = amd_msr::kVeniceBadSpeculation.val},
+          "Bad speculation (Venice).",
+          "Ops dispatched that did not retire."),
+      std::vector<EventId>({"zen6-bad-speculation"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::sw_prefetch_total",
+          EventDef::Encoding{.code = amd_msr::kLsSwPfDcFillsAll.val},
+          "Software prefetch total (Venice).",
+          "All software prefetch data cache fills."),
+      std::vector<EventId>({"zen6-sw-prefetch-total"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "zen6::inefficient_sw_prefetch",
+          EventDef::Encoding{.code = amd_msr::kLsInefSwPref.val},
+          "Inefficient software prefetches (Venice).",
+          "Inefficient software prefetches."),
+      std::vector<EventId>({"zen6-inefficient-sw-prefetch"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_fill_rd_resp_cnt",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4FillRdRespCnt.val},
+          "L3 sampled fill read-response latency (aggregate).",
+          "Aggregate sampled latency of L3 fill read responses across all sources."),
+      std::vector<EventId>({"zen4-l3-fill-rd-resp-cnt"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_fill_rd_resp_smpl",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4FillRdRespSmpl.val},
+          "L3 sampled fill read-response requests (aggregate).",
+          "Aggregate count of sampled L3 fill read-response requests across all sources."),
+      std::vector<EventId>({"zen4-l3-fill-rd-resp-smpl"}));
+}
+
+} // namespace venice
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // Add AMD core L1 - common across all architectures
@@ -721,6 +864,17 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
       milan::addEventsFb(pmu_manager);
 #endif
       turin::addEvents(pmu_manager);
+      turin::addZen5UmcEvents(pmu_manager);
+      break;
+    case CpuArch::VENICE:
+      // Reuse Milan & Turin unchanged events
+      milan::addEvents(pmu_manager);
+      turin::addEvents(pmu_manager);
+      // Venice-specific core encoding overrides + new core metrics + L3
+      // access/aggregate-latency events.
+      venice::addEvents(pmu_manager);
+      // UMC bandwidth events (same encodings as Zen5).
+      turin::addZen5UmcEvents(pmu_manager);
       break;
     default:
       HBT_LOG_ERROR()
