@@ -56,6 +56,12 @@ DEFINE_bool(
     use_otel,
     false,
     "Emit metrics via OTLP to an OpenTelemetry collector");
+DEFINE_bool(
+    use_otel_for_kernel_monitor,
+    false,
+    "Include OtlpLogger in the kernel monitor loop. Off by default because "
+    "OtlpLogger emits one record per finalize() and the kernel monitor has "
+    "no per-device key, producing rows with NULL device_id downstream.");
 #endif
 DEFINE_int32(
     kernel_monitor_reporting_interval_s,
@@ -79,7 +85,9 @@ DEFINE_bool(
     "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
 DEFINE_bool(enable_perf_monitor, false, "Enable heartbeat perf monitoring.");
 
-std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
+std::unique_ptr<Logger> getLogger(
+    const std::string& scribe_category = "",
+    bool include_otel = false) {
   std::vector<std::unique_ptr<Logger>> loggers;
 #ifdef USE_PROMETHEUS
   if (FLAGS_use_prometheus) {
@@ -104,7 +112,10 @@ std::unique_ptr<Logger> getLogger(const std::string& scribe_category = "") {
     loggers.push_back(std::make_unique<ScubaLogger>(scribe_category));
   }
 #ifdef USE_OTEL
-  if (FLAGS_use_otel) {
+  // OtlpLogger is per-device (DcgmGroupInfo emits one finalize() per GPU).
+  // Only the GPU loop opts in; including it in the kernel/perf loops would
+  // produce a host-level record with NULL device_id every cycle.
+  if (include_otel && FLAGS_use_otel) {
     loggers.push_back(std::make_unique<OtlpLogger>());
   }
 #endif
@@ -121,8 +132,13 @@ void kernel_monitor_loop() {
   LOG(INFO) << "Running kernel monitor loop : interval = "
             << FLAGS_kernel_monitor_reporting_interval_s << " s.";
 
+  bool include_otel = false;
+#ifdef USE_OTEL
+  include_otel = FLAGS_use_otel_for_kernel_monitor;
+#endif
+
   while (true) {
-    auto logger = getLogger();
+    auto logger = getLogger(/*scribe_category=*/"", include_otel);
     auto wakeup_timepoint =
         next_wakeup(FLAGS_kernel_monitor_reporting_interval_s);
 
@@ -171,7 +187,7 @@ auto setup_server(const std::shared_ptr<ServiceHandler>& handler) {
 
 [[noreturn]] void gpu_monitor_loop(
     const std::shared_ptr<gpumon::DcgmGroupInfo>& dcgm) {
-  auto logger = getLogger(FLAGS_scribe_category);
+  auto logger = getLogger(FLAGS_scribe_category, /*include_otel=*/true);
 
   LOG(INFO) << "Running DCGM loop : interval = "
             << FLAGS_dcgm_reporting_interval_s << " s.";
