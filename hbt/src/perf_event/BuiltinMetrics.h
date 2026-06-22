@@ -20,6 +20,7 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addUncoreMetrics(std::shared_ptr<Metrics>& metrics);
+void addAmdUncoreMetrics(std::shared_ptr<Metrics>& metrics);
 void addArmUncoreMetrics(
     std::shared_ptr<Metrics>& metrics,
     uint32_t cpuSockets = 1);
