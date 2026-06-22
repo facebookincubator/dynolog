@@ -40,7 +40,7 @@ class KernelCollectorBase {
   // TODO discover sockets from /proc/cpuinfo
   size_t numCpuSockets_{1};
   const size_t cpuCoresTotal_;
-  size_t nicDevCount_;
+  size_t nicDevCount_{0};
   bool filterInteraces_;
   std::vector<std::string> nicInterfacePrefixes_;
 
