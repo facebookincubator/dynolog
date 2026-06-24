@@ -3792,6 +3792,66 @@ void addUncoreMetrics([[maybe_unused]] std::shared_ptr<Metrics>& metrics) {
   // TODO: Add x86_64 path in future
 }
 
+void addAmdUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
+  // NOTE: the ORDER of event ids below defines the event index within the
+  // event group (hbt preserves EventRefs order as the read-values index).
+  auto addUncoreGroup = [&](const char* id,
+                            const char* desc,
+                            PmuType pmu_type,
+                            std::initializer_list<const char*> event_ids) {
+    EventRefs refs;
+    for (const auto* eid : event_ids) {
+      refs.push_back(EventRef{eid, pmu_type, eid, EventExtraAttr{}, {}});
+    }
+    std::map<TOptCpuArch, EventRefs> event_refs_by_arch;
+    event_refs_by_arch[CpuArch::VENICE] = refs;
+    event_refs_by_arch[CpuArch::TURIN] = refs;
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            id,
+            desc,
+            desc,
+            std::move(event_refs_by_arch),
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  };
+
+  // L3 cache accesses (idx 0) + misses (idx 1).
+  addUncoreGroup(
+      "L3Cache",
+      "L3 cache accesses (idx 0) and misses (idx 1)",
+      PmuType::amd_l3,
+      {"l3_cache_access", "l3_cache_misses"});
+
+  // L3 sampled DRAM latency: near-lat(0)/near-req(1)/far-lat(2)/far-req(3).
+  addUncoreGroup(
+      "L3DramLat",
+      "L3 sampled DRAM latency near-lat(0)/near-req(1)/far-lat(2)/far-req(3)",
+      PmuType::amd_l3,
+      {"zen4::l3_xi_sampled_dram_latency.near",
+       "zen4::l3_xi_sampled_dram_latency_requests.near",
+       "zen4::l3_xi_sampled_dram_latency.far",
+       "zen4::l3_xi_sampled_dram_latency_requests.far"});
+
+  // L3 sampled CCX latency: near-lat(0)/near-req(1)/far-lat(2)/far-req(3).
+  addUncoreGroup(
+      "L3CcxLat",
+      "L3 sampled CCX latency near-lat(0)/near-req(1)/far-lat(2)/far-req(3)",
+      PmuType::amd_l3,
+      {"zen4::l3_xi_sampled_ccx_latency.near",
+       "zen4::l3_xi_sampled_ccx_latency_requests.near",
+       "zen4::l3_xi_sampled_ccx_latency.far",
+       "zen4::l3_xi_sampled_ccx_latency_requests.far"});
+
+  // UMC bandwidth cycles: read_write_cyc(0)/write_cyc(1)/cyc(2).
+  addUncoreGroup(
+      "UmcZen5",
+      "UMC bus cycles read_write_cyc(0)/write_cyc(1)/cyc(2)",
+      PmuType::amd_umc,
+      {"zen5::umc_read_write_cyc", "zen5::umc_write_cyc", "zen5::umc_cyc"});
+}
+
 void addArmUncoreMetrics(
     std::shared_ptr<Metrics>& metrics,
     uint32_t cpuSockets) {
