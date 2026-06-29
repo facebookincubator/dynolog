@@ -600,6 +600,207 @@ constexpr PmuMsr kVeniceBadSpeculation{
 
 } // namespace amd_msr
 
+// CCM Counters for CXL Bandwidth (Zen 6 / Venice)
+// Read beat = 32 bytes, Write beat = 64 bytes
+// Events use CCM instances (0x41e-0x7de) instead of CS instances
+namespace amd_msr {
+
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm0{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm1{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm2{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm3{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm4{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm5{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm6{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm7{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm8{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm9{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm10{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm11{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm12{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm13{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm14{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlReadBeatsCcm15{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe0,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm0{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm1{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm2{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm3{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x4}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm4{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm5{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm6{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm7{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x5}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm8{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm9{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm10{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm11{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x6}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm12{
+    .amdDfZen4 = {
+        .event = 0x1e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm13{
+    .amdDfZen4 = {
+        .event = 0x5e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm14{
+    .amdDfZen4 = {
+        .event = 0x9e,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm15{
+    .amdDfZen4 = {
+        .event = 0xde,
+        .unitMask = 0xe1,
+        .unitMask_11_8 = 0xf,
+        .event_13_8 = 0x7}};
+
+} // namespace amd_msr
+
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager);
 
 } // namespace facebook::hbt::perf_event
