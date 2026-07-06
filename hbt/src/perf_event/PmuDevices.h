@@ -39,6 +39,14 @@ struct CpuSocket {
 using Scope = std::variant<Host, CpuSocket>;
 } // namespace uncore_scope
 
+/// Parse a /sys/devices PMU directory name into its PmuType and device
+/// enumeration. Handles both the <pmu>_<idx> form and the NVIDIA
+/// per-root-complex form <pmu>_<socket>_rc_<rc> (enumerated as socket * 64 +
+/// rc). Exposed for unit testing; throws std::invalid_argument if the type is
+/// unrecognized.
+std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
+    const std::string& str);
+
 inline std::string toCanonicalEventId(EventId ev_id) {
   transform(ev_id.begin(), ev_id.end(), ev_id.begin(), ::tolower);
   std::replace(ev_id.begin(), ev_id.end(), '-', '_');

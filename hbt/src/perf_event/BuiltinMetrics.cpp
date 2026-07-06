@@ -4008,6 +4008,156 @@ void addArmUncoreMetrics(
           System::Permissions{},
           std::vector<std::string>{}));
 
+  // Vera-Rubin uncore metrics. On Vera the uncore PMU sysfs names
+  // differ from Grace-Hopper (nvidia_ucf_pmu vs nvidia_scf_pmu, a single
+  // nvidia_nvlink_c2c_pmu vs c2c0/c2c1, per-root-complex pcie), so these are
+  // distinct metric ids. They bind on Vera (which maps to NEOVERSE_V2) and are
+  // gracefully skipped on Grace-Hopper where the PMU is absent (the uncore
+  // reader setup catches the missing-event-def and continues).
+  const auto addVeraUncore = [&metrics](
+                                 const MetricId& id,
+                                 const std::string& desc,
+                                 PmuType pmu,
+                                 const EventId& event) {
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            id,
+            desc,
+            desc,
+            std::map<TOptCpuArch, EventRefs>{
+                {CpuArch::NEOVERSE_V2,
+                 EventRefs{EventRef{event, pmu, event, EventExtraAttr{}, {}}}}},
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  };
+  // UCF (SCF + system-level-cache fabric) — memory bandwidth and SLC behavior.
+  addVeraUncore(
+      "HW_UCF_CYCLES",
+      "Cycles on UCF (SCF/SLC) uncore (Vera-Rubin)",
+      PmuType::nvidia_ucf_pmu,
+      "cycles");
+  addVeraUncore(
+      "HW_UCF_MEM_BYTES_RD",
+      "Bytes read from local CPU memory (LPDDR) via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "mem_bytes_rd");
+  addVeraUncore(
+      "HW_UCF_MEM_BYTES_WR",
+      "Bytes written to local CPU memory (LPDDR) via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "mem_bytes_wr");
+  addVeraUncore(
+      "HW_UCF_MEM_ACCESS_RD",
+      "Read accesses to local CPU memory via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "mem_access_rd");
+  addVeraUncore(
+      "HW_UCF_MEM_ACCESS_WR",
+      "Write accesses to local CPU memory via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "mem_access_wr");
+  addVeraUncore(
+      "HW_UCF_SLC_HIT_RD",
+      "System-level cache read hits",
+      PmuType::nvidia_ucf_pmu,
+      "slc_hit_rd");
+  addVeraUncore(
+      "HW_UCF_SLC_REFILL_RD",
+      "System-level cache read refills (misses)",
+      PmuType::nvidia_ucf_pmu,
+      "slc_refill_rd");
+  addVeraUncore(
+      "HW_UCF_LOCAL_SNOOP",
+      "Local snoop requests via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "local_snoop");
+  addVeraUncore(
+      "HW_UCF_EXT_SNP_ACCESS",
+      "External (cross-socket) snoop accesses via UCF",
+      PmuType::nvidia_ucf_pmu,
+      "ext_snp_access");
+  // NVLink-C2C (CPU<->GPU) — Vera-Rubin single PMU with per-socket instances.
+  addVeraUncore(
+      "HW_VC2C_CYCLES",
+      "Cycles on NVLink-C2C uncore (Vera-Rubin)",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "cycles");
+  addVeraUncore(
+      "HW_VC2C_IN_RD_REQ",
+      "NVLink-C2C inbound read requests",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "in_rd_req");
+  addVeraUncore(
+      "HW_VC2C_OUT_RD_REQ",
+      "NVLink-C2C outbound read requests",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "out_rd_req");
+  addVeraUncore(
+      "HW_VC2C_IN_WR_REQ",
+      "NVLink-C2C inbound write requests",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "in_wr_req");
+  addVeraUncore(
+      "HW_VC2C_OUT_WR_REQ",
+      "NVLink-C2C outbound write requests",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "out_wr_req");
+  addVeraUncore(
+      "HW_VC2C_IN_RD_CUM_OUTS",
+      "NVLink-C2C inbound read cumulative outstanding (latency numerator)",
+      PmuType::nvidia_nvlink_c2c_pmu,
+      "in_rd_cum_outs");
+  // CMEM latency — CPU memory (LPDDR) read latency (cum_outs / req / freq).
+  addVeraUncore(
+      "HW_CMEM_CYCLES",
+      "Cycles on CMEM latency PMU (Vera-Rubin)",
+      PmuType::nvidia_cmem_latency_pmu,
+      "cycles");
+  addVeraUncore(
+      "HW_CMEM_RD_REQ",
+      "CPU memory (LPDDR) read requests",
+      PmuType::nvidia_cmem_latency_pmu,
+      "rd_req");
+  addVeraUncore(
+      "HW_CMEM_RD_CUM_OUTS",
+      "CPU memory read cumulative outstanding (latency numerator)",
+      PmuType::nvidia_cmem_latency_pmu,
+      "rd_cum_outs");
+  // PCIe root-complex and target bandwidth (aggregated across all root
+  // complexes under the Host scope).
+  addVeraUncore(
+      "HW_PCIE_RD_BYTES",
+      "PCIe root-complex read bytes (all root complexes)",
+      PmuType::nvidia_pcie_pmu,
+      "rd_bytes");
+  addVeraUncore(
+      "HW_PCIE_WR_BYTES",
+      "PCIe root-complex write bytes (all root complexes)",
+      PmuType::nvidia_pcie_pmu,
+      "wr_bytes");
+  addVeraUncore(
+      "HW_PCIE_TGT_RD_BYTES",
+      "PCIe target read bytes (all root complexes)",
+      PmuType::nvidia_pcie_tgt_pmu,
+      "rd_bytes");
+  addVeraUncore(
+      "HW_PCIE_TGT_WR_BYTES",
+      "PCIe target write bytes (all root complexes)",
+      PmuType::nvidia_pcie_tgt_pmu,
+      "wr_bytes");
+  // NVLink C-link / D-link (NVSwitch-side) traffic.
+  addVeraUncore(
+      "HW_NVCLINK_IN_RD_REQ",
+      "NVLink C-link inbound read requests",
+      PmuType::nvidia_nvclink_pmu,
+      "in_rd_req");
+  addVeraUncore(
+      "HW_NVDLINK_IN_RD_REQ",
+      "NVLink D-link inbound read requests",
+      PmuType::nvidia_nvdlink_pmu,
+      "in_rd_req");
+
   metrics->add(
       std::make_shared<MetricDesc>(
           "HW_C2C0_CYCLES",

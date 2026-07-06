@@ -126,6 +126,20 @@ inline CpuArch makeCpuArchArm(
         default:
           return CpuArch::UNKNOWN;
       }
+    case 0x4E: // NVIDIA Corporation
+      switch (cpu_model_num) {
+        // Vera (VR200 / Vera-Rubin) is an NVIDIA-designed Armv9 core that
+        // reports an NVIDIA MIDR (implementer 0x4E, part 0x010) rather than an
+        // Arm Neoverse part number. It is Neoverse-V2 class for perfmon
+        // purposes, so reuse the NEOVERSE_V2 core-event/metric definitions. Its
+        // uncore PMUs have different sysfs names (nvidia_ucf_pmu,
+        // nvidia_nvlink_c2c_pmu, ...) and are handled in
+        // ArmEvents/BuiltinMetrics.
+        case 0x010:
+          return CpuArch::NEOVERSE_V2;
+        default:
+          return CpuArch::UNKNOWN;
+      }
     case 0xC0: // Ampere Computing
       switch (cpu_model_num) {
         case 0xAC3:

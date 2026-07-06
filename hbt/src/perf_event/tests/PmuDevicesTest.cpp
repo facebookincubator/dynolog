@@ -363,3 +363,63 @@ TEST_F(PmuDevicesTest, LibPfm4Groups) {
   EXPECT_EQ(g1.getDescription(), "desc other group");
   EXPECT_EQ(g1.ev_defs.size(), 1);
 }
+
+// --- Vera-Rubin uncore PMU support ---
+
+TEST_F(PmuDevicesTest, VeraPmuTypeRoundTrip) {
+  const std::vector<std::pair<PmuType, std::string>> expected{
+      {PmuType::nvidia_ucf_pmu, "nvidia_ucf_pmu"},
+      {PmuType::nvidia_nvlink_c2c_pmu, "nvidia_nvlink_c2c_pmu"},
+      {PmuType::nvidia_cmem_latency_pmu, "nvidia_cmem_latency_pmu"},
+      {PmuType::nvidia_nvclink_pmu, "nvidia_nvclink_pmu"},
+      {PmuType::nvidia_nvdlink_pmu, "nvidia_nvdlink_pmu"},
+      {PmuType::nvidia_pcie_tgt_pmu, "nvidia_pcie_tgt_pmu"},
+  };
+  for (const auto& [type, name] : expected) {
+    EXPECT_EQ(PmuTypeToStr(type), name);
+    EXPECT_EQ(PmuTypeFromStr(name), type);
+  }
+}
+
+TEST_F(PmuDevicesTest, ParseVeraDeviceNames) {
+  // Regular single-index devices (per-socket suffix).
+  {
+    auto [type, id] = parseDeviceTypeFromStr("nvidia_ucf_pmu_0");
+    EXPECT_EQ(type, PmuType::nvidia_ucf_pmu);
+    EXPECT_EQ(id, std::optional<uint32_t>(0));
+  }
+  {
+    auto [type, id] = parseDeviceTypeFromStr("nvidia_nvlink_c2c_pmu_1");
+    EXPECT_EQ(type, PmuType::nvidia_nvlink_c2c_pmu);
+    EXPECT_EQ(id, std::optional<uint32_t>(1));
+  }
+  // Per-root-complex devices: <pmu>_<socket>_rc_<rc> -> enum = socket * 64 +
+  // rc.
+  {
+    auto [type, id] = parseDeviceTypeFromStr("nvidia_pcie_pmu_0_rc_0");
+    EXPECT_EQ(type, PmuType::nvidia_pcie_pmu);
+    EXPECT_EQ(id, std::optional<uint32_t>(0));
+  }
+  {
+    auto [type, id] = parseDeviceTypeFromStr("nvidia_pcie_pmu_0_rc_3");
+    EXPECT_EQ(type, PmuType::nvidia_pcie_pmu);
+    EXPECT_EQ(id, std::optional<uint32_t>(3));
+  }
+  {
+    auto [type, id] = parseDeviceTypeFromStr("nvidia_pcie_tgt_pmu_1_rc_5");
+    EXPECT_EQ(type, PmuType::nvidia_pcie_tgt_pmu);
+    EXPECT_EQ(id, std::optional<uint32_t>(1u * 64 + 5));
+  }
+  // Unrecognized PMU type still throws (unchanged behavior).
+  EXPECT_THROW(
+      parseDeviceTypeFromStr("not_a_real_pmu_0_rc_0"), std::invalid_argument);
+}
+
+TEST_F(PmuDevicesTest, VeraCpuArchMapping) {
+  // Vera (VR200 / Vera-Rubin): NVIDIA implementer 0x4E, part 0x010.
+  EXPECT_EQ(makeCpuArchArm(0x4E, 0, 0x010, 0), CpuArch::NEOVERSE_V2);
+  // Unknown NVIDIA part number -> UNKNOWN.
+  EXPECT_EQ(makeCpuArchArm(0x4E, 0, 0x999, 0), CpuArch::UNKNOWN);
+  // Regression: Arm-implemented Neoverse V2 (Grace-Hopper) still maps.
+  EXPECT_EQ(makeCpuArchArm(0x41, 0, 0xD4F, 0), CpuArch::NEOVERSE_V2);
+}
