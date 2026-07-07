@@ -23,10 +23,22 @@ namespace {
 
 std::string getPmuName(const PmuType& pmu_type) {
   auto res = PmuTypeToStr(pmu_type);
-  if (pmu_type != PmuType::cs_etm) {
-    res += "_0";
+  if (pmu_type == PmuType::cs_etm) {
+    return res;
   }
-  return res;
+  // Vera-Rubin PCIe PMUs are enumerated per root complex as
+  // <pmu>_<socket>_rc_<rc> rather than <pmu>_<idx>. Scan socket 0 / root
+  // complex 0 for the (uniform) event set; fall back to <pmu>_0 for the
+  // Grace-Hopper naming.
+  if (pmu_type == PmuType::nvidia_pcie_pmu ||
+      pmu_type == PmuType::nvidia_pcie_tgt_pmu) {
+    const std::string rc0_events =
+        rootDir_ + "/sys/bus/event_source/devices/" + res + "_0_rc_0/events";
+    if (std::filesystem::is_directory(rc0_events)) {
+      return res + "_0_rc_0";
+    }
+  }
+  return res + "_0";
 }
 
 } // namespace
@@ -98,6 +110,15 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c0_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c1_pmu);
   scanPmu(pmu_manager, PmuType::nvidia_pcie_pmu);
+
+  // Nvidia Vera-Rubin uncores. Absent on Grace-Hopper, where scanPmu
+  // simply logs "No events found" and returns.
+  scanPmu(pmu_manager, PmuType::nvidia_ucf_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_nvlink_c2c_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_cmem_latency_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_nvclink_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_nvdlink_pmu);
+  scanPmu(pmu_manager, PmuType::nvidia_pcie_tgt_pmu);
 
   // Add Neoverse v2 PMU events not found in sysfs
   pmu_manager.addEvent(

@@ -82,11 +82,23 @@ enum class PmuType : uint16_t {
   // Arm
   armv8_pmuv3,
 
-  // Nvidia Uncores
+  // Nvidia Uncores (Grace-Hopper)
   nvidia_scf_pmu,
   nvidia_nvlink_c2c0_pmu,
   nvidia_nvlink_c2c1_pmu,
   nvidia_pcie_pmu,
+
+  // Nvidia Uncores (Vera-Rubin / Vera). The sysfs names differ from
+  // Grace-Hopper: nvidia_ucf_pmu replaces nvidia_scf_pmu, a single
+  // nvidia_nvlink_c2c_pmu (per-socket instances) replaces c2c0/c2c1, and
+  // nvidia_pcie{,_tgt}_pmu are enumerated per root complex
+  // (<pmu>_<sock>_rc_<n>).
+  nvidia_ucf_pmu,
+  nvidia_nvlink_c2c_pmu,
+  nvidia_cmem_latency_pmu,
+  nvidia_nvclink_pmu,
+  nvidia_nvdlink_pmu,
+  nvidia_pcie_tgt_pmu,
 
   // AMD L3
   amd_l3,

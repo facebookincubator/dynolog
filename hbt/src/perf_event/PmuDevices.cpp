@@ -94,6 +94,13 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(nvidia_nvlink_c2c1_pmu);
     CASE_PMU_TYPE(nvidia_pcie_pmu);
 
+    CASE_PMU_TYPE(nvidia_ucf_pmu);
+    CASE_PMU_TYPE(nvidia_nvlink_c2c_pmu);
+    CASE_PMU_TYPE(nvidia_cmem_latency_pmu);
+    CASE_PMU_TYPE(nvidia_nvclink_pmu);
+    CASE_PMU_TYPE(nvidia_nvdlink_pmu);
+    CASE_PMU_TYPE(nvidia_pcie_tgt_pmu);
+
     CASE_PMU_TYPE(amd_l3);
 
     CASE_PMU_TYPE(amd_umc);
@@ -155,6 +162,13 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, nvidia_nvlink_c2c0_pmu);
   IF_PMU_TYPE(str, nvidia_nvlink_c2c1_pmu);
   IF_PMU_TYPE(str, nvidia_pcie_pmu);
+
+  IF_PMU_TYPE(str, nvidia_ucf_pmu);
+  IF_PMU_TYPE(str, nvidia_nvlink_c2c_pmu);
+  IF_PMU_TYPE(str, nvidia_cmem_latency_pmu);
+  IF_PMU_TYPE(str, nvidia_nvclink_pmu);
+  IF_PMU_TYPE(str, nvidia_nvdlink_pmu);
+  IF_PMU_TYPE(str, nvidia_pcie_tgt_pmu);
 
   IF_PMU_TYPE(str, amd_l3);
 
@@ -319,6 +333,40 @@ std::optional<cpu_set_t> parseSysFsPmuCpuMask_(fs::directory_entry dentry) {
 /// PmuType and device id.
 std::pair<PmuType, std::optional<uint32_t>> parseDeviceTypeFromStr(
     const std::string& str) {
+  // NVIDIA per-root-complex PMUs (Vera-Rubin) are named
+  // <prefix>_<socket>_rc_<rc>, e.g. nvidia_pcie_pmu_0_rc_3 or
+  // nvidia_pcie_tgt_pmu_1_rc_5. The single-trailing-index parser below would
+  // mis-split these (leaving "..._rc" as the type), so handle them explicitly.
+  // The device enumeration is packed as socket * kMaxRootComplexesPerSocket +
+  // rc (unique per instance).
+  constexpr uint32_t kMaxRootComplexesPerSocket = 64;
+  if (const auto rc_pos = str.rfind("_rc_"); rc_pos != std::string::npos) {
+    const auto before_rc = str.substr(0, rc_pos); // "<prefix>_<socket>"
+    const auto sock_pos = before_rc.find_last_of('_');
+    if (sock_pos != std::string::npos) {
+      std::optional<uint32_t> enum_id;
+      try {
+        const uint32_t socket =
+            static_cast<uint32_t>(std::stoi(before_rc.substr(sock_pos + 1)));
+        const uint32_t rc =
+            static_cast<uint32_t>(std::stoi(str.substr(rc_pos + 4)));
+        // Guard the packing so a socket's root complexes never alias into the
+        // next socket's id range if a future part exposes more than
+        // kMaxRootComplexesPerSocket root complexes.
+        HBT_THROW_ASSERT_IF(rc >= kMaxRootComplexesPerSocket)
+            << "Root complex index " << rc << " in /sys/devices/" << str
+            << " exceeds the packing limit of " << kMaxRootComplexesPerSocket
+            << " root complexes per socket";
+        enum_id = socket * kMaxRootComplexesPerSocket + rc;
+      } catch (const std::invalid_argument&) {
+        // Not the <socket>_rc_<rc> shape; fall through to default handling.
+      }
+      if (enum_id.has_value()) {
+        return std::make_pair(
+            PmuTypeFromStr(before_rc.substr(0, sock_pos)), enum_id);
+      }
+    }
+  }
   const auto pos = str.find_last_of('_');
   if (pos != std::string::npos) {
     std::optional<uint32_t> num_device;

@@ -55,6 +55,36 @@ TEST_F(BuiltinMetricsTest, ArmCpuIncludesArmCoreMetrics) {
   EXPECT_EQ(eventRefs->at(0).event_id, "ll_cache_miss_rd");
 }
 
+TEST_F(BuiltinMetricsTest, VeraUncoreMetricsRegistered) {
+  // addArmUncoreMetrics is arch-neutral C++ (only its call site in
+  // addUncoreMetrics is __aarch64__-gated), so it can be exercised directly on
+  // any host. Registers the Vera-Rubin uncore metrics for NEOVERSE_V2.
+  auto veraMetrics = std::make_shared<Metrics>();
+  addArmUncoreMetrics(veraMetrics, /*cpuSockets=*/2);
+
+  const auto& descs = veraMetrics->getMetricDescs();
+  // A representative metric per Vera uncore PMU family must be registered.
+  for (const auto* id :
+       {"HW_UCF_MEM_BYTES_RD",
+        "HW_UCF_CYCLES",
+        "HW_VC2C_CYCLES",
+        "HW_CMEM_RD_CUM_OUTS",
+        "HW_PCIE_RD_BYTES",
+        "HW_PCIE_TGT_WR_BYTES",
+        "HW_NVCLINK_IN_RD_REQ",
+        "HW_NVDLINK_IN_RD_REQ"}) {
+    EXPECT_EQ(descs.count(id), 1u) << "missing Vera uncore metric " << id;
+  }
+
+  // The event ref must bind the expected PMU + sysfs event for NEOVERSE_V2.
+  auto desc = veraMetrics->getMetricDesc("HW_UCF_MEM_BYTES_RD");
+  auto refs = desc->getEventRefs(CpuArch::NEOVERSE_V2);
+  ASSERT_TRUE(refs.has_value());
+  ASSERT_EQ(refs->size(), 1u);
+  EXPECT_EQ(refs->at(0).pmu_type, PmuType::nvidia_ucf_pmu);
+  EXPECT_EQ(refs->at(0).event_id, "mem_bytes_rd");
+}
+
 TEST_F(BuiltinMetricsTest, HwCacheEvents) {
   // -- test for hw cache events
   auto l1_dcache_load_hits = pmu_manager->findEventDef(
