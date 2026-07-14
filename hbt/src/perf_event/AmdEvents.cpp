@@ -836,6 +836,122 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::vector<EventId>({"zen4-l3-fill-rd-resp-smpl"}));
 }
 
+void addZen6CcmCxlEvents(PmuDeviceManager& pmu_manager) {
+  struct CcmCxlEvent {
+    const char* id;
+    const char* alias;
+    uint64_t code;
+  };
+  static const CcmCxlEvent kCcmCxlEvents[] = {
+      {"zen6::ccm_cxl_read_beats.ccm0",
+       "zen6-ccm-cxl-read-beats-ccm0",
+       amd_msr::kCcmZen6CxlReadBeatsCcm0.val},
+      {"zen6::ccm_cxl_read_beats.ccm1",
+       "zen6-ccm-cxl-read-beats-ccm1",
+       amd_msr::kCcmZen6CxlReadBeatsCcm1.val},
+      {"zen6::ccm_cxl_read_beats.ccm2",
+       "zen6-ccm-cxl-read-beats-ccm2",
+       amd_msr::kCcmZen6CxlReadBeatsCcm2.val},
+      {"zen6::ccm_cxl_read_beats.ccm3",
+       "zen6-ccm-cxl-read-beats-ccm3",
+       amd_msr::kCcmZen6CxlReadBeatsCcm3.val},
+      {"zen6::ccm_cxl_read_beats.ccm4",
+       "zen6-ccm-cxl-read-beats-ccm4",
+       amd_msr::kCcmZen6CxlReadBeatsCcm4.val},
+      {"zen6::ccm_cxl_read_beats.ccm5",
+       "zen6-ccm-cxl-read-beats-ccm5",
+       amd_msr::kCcmZen6CxlReadBeatsCcm5.val},
+      {"zen6::ccm_cxl_read_beats.ccm6",
+       "zen6-ccm-cxl-read-beats-ccm6",
+       amd_msr::kCcmZen6CxlReadBeatsCcm6.val},
+      {"zen6::ccm_cxl_read_beats.ccm7",
+       "zen6-ccm-cxl-read-beats-ccm7",
+       amd_msr::kCcmZen6CxlReadBeatsCcm7.val},
+      {"zen6::ccm_cxl_read_beats.ccm8",
+       "zen6-ccm-cxl-read-beats-ccm8",
+       amd_msr::kCcmZen6CxlReadBeatsCcm8.val},
+      {"zen6::ccm_cxl_read_beats.ccm9",
+       "zen6-ccm-cxl-read-beats-ccm9",
+       amd_msr::kCcmZen6CxlReadBeatsCcm9.val},
+      {"zen6::ccm_cxl_read_beats.ccm10",
+       "zen6-ccm-cxl-read-beats-ccm10",
+       amd_msr::kCcmZen6CxlReadBeatsCcm10.val},
+      {"zen6::ccm_cxl_read_beats.ccm11",
+       "zen6-ccm-cxl-read-beats-ccm11",
+       amd_msr::kCcmZen6CxlReadBeatsCcm11.val},
+      {"zen6::ccm_cxl_read_beats.ccm12",
+       "zen6-ccm-cxl-read-beats-ccm12",
+       amd_msr::kCcmZen6CxlReadBeatsCcm12.val},
+      {"zen6::ccm_cxl_read_beats.ccm13",
+       "zen6-ccm-cxl-read-beats-ccm13",
+       amd_msr::kCcmZen6CxlReadBeatsCcm13.val},
+      {"zen6::ccm_cxl_read_beats.ccm14",
+       "zen6-ccm-cxl-read-beats-ccm14",
+       amd_msr::kCcmZen6CxlReadBeatsCcm14.val},
+      {"zen6::ccm_cxl_read_beats.ccm15",
+       "zen6-ccm-cxl-read-beats-ccm15",
+       amd_msr::kCcmZen6CxlReadBeatsCcm15.val},
+      {"zen6::ccm_cxl_write_beats.ccm0",
+       "zen6-ccm-cxl-write-beats-ccm0",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm0.val},
+      {"zen6::ccm_cxl_write_beats.ccm1",
+       "zen6-ccm-cxl-write-beats-ccm1",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm1.val},
+      {"zen6::ccm_cxl_write_beats.ccm2",
+       "zen6-ccm-cxl-write-beats-ccm2",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm2.val},
+      {"zen6::ccm_cxl_write_beats.ccm3",
+       "zen6-ccm-cxl-write-beats-ccm3",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm3.val},
+      {"zen6::ccm_cxl_write_beats.ccm4",
+       "zen6-ccm-cxl-write-beats-ccm4",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm4.val},
+      {"zen6::ccm_cxl_write_beats.ccm5",
+       "zen6-ccm-cxl-write-beats-ccm5",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm5.val},
+      {"zen6::ccm_cxl_write_beats.ccm6",
+       "zen6-ccm-cxl-write-beats-ccm6",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm6.val},
+      {"zen6::ccm_cxl_write_beats.ccm7",
+       "zen6-ccm-cxl-write-beats-ccm7",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm7.val},
+      {"zen6::ccm_cxl_write_beats.ccm8",
+       "zen6-ccm-cxl-write-beats-ccm8",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm8.val},
+      {"zen6::ccm_cxl_write_beats.ccm9",
+       "zen6-ccm-cxl-write-beats-ccm9",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm9.val},
+      {"zen6::ccm_cxl_write_beats.ccm10",
+       "zen6-ccm-cxl-write-beats-ccm10",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm10.val},
+      {"zen6::ccm_cxl_write_beats.ccm11",
+       "zen6-ccm-cxl-write-beats-ccm11",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm11.val},
+      {"zen6::ccm_cxl_write_beats.ccm12",
+       "zen6-ccm-cxl-write-beats-ccm12",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm12.val},
+      {"zen6::ccm_cxl_write_beats.ccm13",
+       "zen6-ccm-cxl-write-beats-ccm13",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm13.val},
+      {"zen6::ccm_cxl_write_beats.ccm14",
+       "zen6-ccm-cxl-write-beats-ccm14",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm14.val},
+      {"zen6::ccm_cxl_write_beats.ccm15",
+       "zen6-ccm-cxl-write-beats-ccm15",
+       amd_msr::kCcmZen6CxlWriteBeatsCcm15.val},
+  };
+  for (const auto& e : kCcmCxlEvents) {
+    pmu_manager.addEvent(
+        std::make_shared<EventDef>(
+            PmuType::amd_df,
+            e.id,
+            EventDef::Encoding{.code = e.code},
+            "Venice CCM CXL beats (one CCM instance).",
+            "Venice CXL bandwidth beats measured on a single CCM (Coherent Master) instance of the Data Fabric."),
+        std::vector<EventId>({e.alias}));
+  }
+}
+
 } // namespace venice
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
@@ -875,6 +991,8 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
       venice::addEvents(pmu_manager);
       // UMC bandwidth events (same encodings as Zen5).
       turin::addZen5UmcEvents(pmu_manager);
+      // CCM-based CXL bandwidth events (Zen6-only, Data Fabric PMU).
+      venice::addZen6CcmCxlEvents(pmu_manager);
       break;
     default:
       HBT_LOG_ERROR()

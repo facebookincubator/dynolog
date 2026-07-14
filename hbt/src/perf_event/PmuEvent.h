@@ -106,6 +106,9 @@ enum class PmuType : uint16_t {
   // AMD Zen5 UMC
   amd_umc,
 
+  // AMD Data Fabric (used for Zen6/Venice CCM CXL bandwidth counters)
+  amd_df,
+
   // Arm
   cs_etm,
 };

@@ -3850,6 +3850,36 @@ void addAmdUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
       "UMC bus cycles read_write_cyc(0)/write_cyc(1)/cyc(2)",
       PmuType::amd_umc,
       {"zen5::umc_read_write_cyc", "zen5::umc_write_cyc", "zen5::umc_cyc"});
+
+  // CXL bandwidth via the 16 CCM instances (Venice/Zen6-only, Data Fabric PMU).
+  // Each CCM instance is registered as its own single-event metric so the
+  // kernel can time-multiplex them across the limited number of DF hardware
+  // counters
+  auto addVeniceCcmCxlGroup = [&](const std::string& id,
+                                  const std::string& event_id) {
+    EventRefs refs;
+    refs.push_back(
+        EventRef{event_id, PmuType::amd_df, event_id, EventExtraAttr{}, {}});
+    std::map<TOptCpuArch, EventRefs> event_refs_by_arch;
+    event_refs_by_arch[CpuArch::VENICE] = refs;
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            id,
+            id,
+            id,
+            std::move(event_refs_by_arch),
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  };
+  for (int i = 0; i < 16; ++i) {
+    addVeniceCcmCxlGroup(
+        "CxlReadBw" + std::to_string(i),
+        "zen6::ccm_cxl_read_beats.ccm" + std::to_string(i));
+    addVeniceCcmCxlGroup(
+        "CxlWriteBw" + std::to_string(i),
+        "zen6::ccm_cxl_write_beats.ccm" + std::to_string(i));
+  }
 }
 
 void addArmUncoreMetrics(
