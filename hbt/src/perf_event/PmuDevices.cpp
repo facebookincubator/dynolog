@@ -105,6 +105,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
 
     CASE_PMU_TYPE(amd_umc);
 
+    CASE_PMU_TYPE(amd_df);
+
     CASE_PMU_TYPE(cs_etm);
   }
   return "";
@@ -173,6 +175,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, amd_l3);
 
   IF_PMU_TYPE(str, amd_umc);
+
+  IF_PMU_TYPE(str, amd_df);
 
   IF_PMU_TYPE(str, cs_etm);
 
