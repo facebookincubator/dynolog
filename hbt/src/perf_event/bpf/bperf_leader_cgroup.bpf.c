@@ -297,6 +297,35 @@ int idx_list_first_free;
 #define private(name) SEC(".data." #name) __hidden __attribute__((aligned(8)))
 private(A) struct bpf_spin_lock idx_allocator_lock;
 
+/* On kernels that support the resilient spin lock (rqspinlock), prefer
+ * bpf_res_spin_lock over bpf_spin_lock. Tracing programs (e.g. the fentry
+ * progs below) are not allowed to use bpf_spin_lock, but they may use
+ * bpf_res_spin_lock. We detect the kfunc at load time via bpf_ksym_exists()
+ * and fall back to bpf_spin_lock when it is not available.
+ */
+extern int bpf_res_spin_lock(struct bpf_res_spin_lock *lock) __weak __ksym;
+extern void bpf_res_spin_unlock(struct bpf_res_spin_lock *lock) __weak __ksym;
+
+private(B) struct bpf_res_spin_lock idx_allocator_reslock;
+
+/* Wrappers around the idx allocator lock. idx_allocator_lock_acquire()
+ * returns 0 when the lock was taken, non-zero otherwise (only the resilient
+ * lock can fail, e.g. on deadlock/timeout).
+ */
+static int __always_inline idx_allocator_lock_acquire(void) {
+  if (bpf_ksym_exists(bpf_res_spin_lock))
+    return bpf_res_spin_lock(&idx_allocator_reslock);
+  bpf_spin_lock(&idx_allocator_lock);
+  return 0;
+}
+
+static void __always_inline idx_allocator_lock_release(void) {
+  if (bpf_ksym_exists(bpf_res_spin_lock))
+    bpf_res_spin_unlock(&idx_allocator_reslock);
+  else
+    bpf_spin_unlock(&idx_allocator_lock);
+}
+
 static __u32 __always_inline request_idx(void) {
   if (idx_list_first_free > BPERF_MAX_THREAD_READER || idx_list_first_free <= 0) {
     return BPERF_INVALID_THREAD_IDX;
@@ -355,9 +384,10 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
     return 0;
   }
 
-  bpf_spin_lock(&idx_allocator_lock);
+  if (idx_allocator_lock_acquire())
+    return 0;
   idx = request_idx();
-  bpf_spin_unlock(&idx_allocator_lock);
+  idx_allocator_lock_release();
 
   if (idx == BPERF_INVALID_THREAD_IDX)
     return 0;
@@ -425,9 +455,10 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
 
   bpf_task_storage_delete(&per_thread_idx, task);
 
-  bpf_spin_lock(&idx_allocator_lock);
+  if (idx_allocator_lock_acquire())
+    return 0;
   reclaim_idx(task_idx);
-  bpf_spin_unlock(&idx_allocator_lock);
+  idx_allocator_lock_release();
 
   return 0;
 }
