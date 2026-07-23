@@ -17,6 +17,13 @@
 
 #pragma once
 
+// Normalize the ROCm version macro. The buck build defines FB_ROCM_VERSION; the
+// standalone CMake build defines DYNOLOG_ROCM_VERSION directly. Source guards
+// key off DYNOLOG_ROCM_VERSION only.
+#if defined(FB_ROCM_VERSION) && !defined(DYNOLOG_ROCM_VERSION)
+#define DYNOLOG_ROCM_VERSION FB_ROCM_VERSION
+#endif
+
 namespace dynolog {
 namespace gpumon {
 
