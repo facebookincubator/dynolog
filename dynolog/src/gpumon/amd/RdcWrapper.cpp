@@ -32,10 +32,10 @@ const std::set<rdc_field_t> kPartitionSupportedMetrics = {
     RDC_FI_PROF_EVAL_FLOPS_16,
     RDC_FI_PROF_EVAL_FLOPS_32,
     RDC_FI_PROF_EVAL_FLOPS_64,
-#if FB_ROCM_VERSION >= 70000
+#if DYNOLOG_ROCM_VERSION >= 70000
     RDC_FI_KFD_ID,
     RDC_FI_PROF_SIMD_UTILIZATION,
-#elif FB_ROCM_VERSION >= 60402
+#elif DYNOLOG_ROCM_VERSION >= 60402
     RDC_FI_PROF_KFD_ID,
     RDC_FI_PROF_SIMD_UTILIZATION,
 #endif
@@ -135,7 +135,7 @@ RdcMetricsMap RdcWrapper::getRdcMetricsForDevice(uint32_t device) {
   }
   rdc_status_t result;
   for (auto metric : context.data.enabledMetrics_) {
-#if FB_ROCM_VERSION >= 60402
+#if DYNOLOG_ROCM_VERSION >= 60402
     rdc_entity_info_t deviceInfo = rdc_get_info_from_entity_index(device);
     // skip unsupported metrics for partitions
     if (deviceInfo.entity_role == RDC_DEVICE_ROLE_PARTITION_INSTANCE &&
@@ -221,7 +221,7 @@ std::vector<uint32_t> RdcWrapper::listDeviceIds_(RdcRuntimeContext& context) {
 std::vector<uint32_t> RdcWrapper::listPartitionIds_(
     RdcRuntimeContext& context) {
   std::vector<uint32_t> partitionIds;
-#if FB_ROCM_VERSION >= 60402
+#if DYNOLOG_ROCM_VERSION >= 60402
   auto devices = listDeviceIds_(context);
   for (auto dev : devices) {
     uint16_t numPartitions;
@@ -301,7 +301,7 @@ void RdcWrapper::initGpu_(RdcRuntimeContext& context) {
   }
 }
 void RdcWrapper::initPartition_(RdcRuntimeContext& context) {
-#if FB_ROCM_VERSION >= 60402
+#if DYNOLOG_ROCM_VERSION >= 60402
   auto partitionIds = listPartitionIds_(context);
   if (partitionIds.empty()) {
     return;
