@@ -42,7 +42,15 @@ class BPerfPerThreadReader {
   }
 
  protected:
+  // mmap of only the first page of the map. Element 0 holds the
+  // bperf_thread_metadata, so this page is all we need to read the leader's
+  // flags, thread_data_size and event_data_size.
   void* mmap_ptr_ = nullptr;
+  // mmap of only the page(s) that contain this thread's element, rather than
+  // the whole map. The element may straddle a page boundary, so this covers
+  // up to two pages.
+  void* data_mmap_ptr_ = nullptr;
+  int data_mmap_size_ = 0;
   struct bperf_thread_data* data_ = nullptr;
   // For compatibility (newer leader with older reader), we cannot use
   // data_->events directly. Instead use event_data_ which is adjusted

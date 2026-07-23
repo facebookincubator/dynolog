@@ -345,7 +345,8 @@ __u32 per_thread_data_id; /* map id of per_thread_data */
 
 /* Trace mmap of per_thread_data */
 SEC("fentry/array_map_mmap")
-int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
+int BPF_PROG(bperf_register_thread, struct bpf_map *map,
+             struct vm_area_struct *vma) {
   struct bperf_thread_data *data;
   __u32 map_id = map->id;
   __u32 tid;
@@ -355,6 +356,13 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map) {
   idx_t *task_idx;
 
   if (map_id != per_thread_data_id)
+    return 0;
+
+  /* The reader mmaps the metadata page (offset 0) first, then the page(s)
+   * holding its own per-thread data. Only assign an idx on the first mmap
+   * (offset 0); the second mmap must not register the thread again.
+   */
+  if (vma->vm_pgoff != 0)
     return 0;
 
   task = bpf_get_current_task_btf();
@@ -416,6 +424,13 @@ int BPF_PROG(bperf_unregister_thread, struct vm_area_struct *vma) {
   struct task_struct *task;
 
   if (map_id != per_thread_data_id)
+    return 0;
+
+  /* Mirror the registration path: the reader munmaps the data page(s) and
+   * the metadata page (offset 0) separately. Only release the idx on the
+   * close of the offset-0 mapping.
+   */
+  if (vma->vm_pgoff != 0)
     return 0;
 
   task = bpf_get_current_task_btf();
