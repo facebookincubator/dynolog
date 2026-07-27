@@ -42,7 +42,15 @@ class BPerfPerThreadReader {
   }
 
  protected:
+  // mmap of only the first page of the map. Element 0 holds the
+  // bperf_thread_metadata, so this page is all we need to read the leader's
+  // flags, thread_data_size and event_data_size.
   void* mmap_ptr_ = nullptr;
+  // mmap of only the page(s) that contain this thread's element, rather than
+  // the whole map. The element may straddle a page boundary, so this covers
+  // up to two pages.
+  void* data_mmap_ptr_ = nullptr;
+  size_t data_mmap_size_ = 0;
   struct bperf_thread_data* data_ = nullptr;
   // For compatibility (newer leader with older reader), we cannot use
   // data_->events directly. Instead use event_data_ which is adjusted
@@ -53,8 +61,8 @@ class BPerfPerThreadReader {
   const std::vector<std::filesystem::path> bpf_pinned_map_dirs_;
   __s64 initial_clock_drift_ = 0;
   int event_cnt_ = -1;
-  int data_size_ = 0;
-  int mmap_size_ = 0;
+  size_t data_size_ = 0;
+  size_t mmap_size_ = 0;
   int getDataSize_();
   int dummy_pe_fd_ = -1;
   void* dummy_pe_mmap_ = nullptr;
