@@ -56,6 +56,8 @@ int BPerfPerThreadReader::enable() {
   int idx_fd = -1, idx = 0, err, tid_fd = -1;
   struct bperf_thread_metadata* metadata;
   struct BPerfThreadData data;
+  long page_size = 0;
+  __u64 data_byte_offset = 0, page_offset = 0, offset_in_page = 0;
 
   if (enabled_) {
     return 0;
@@ -98,10 +100,15 @@ int BPerfPerThreadReader::enable() {
     goto error;
   }
 
-  mmap_ptr_ = mmap(nullptr, mmap_size_, PROT_READ, MAP_SHARED, data_fd_, 0);
+  // mmap only the first page. Element 0 of the map holds the metadata, so
+  // this page gives us the leader's flags, thread_data_size and
+  // event_data_size without mapping the entire map.
+  page_size = ::getpagesize();
+  mmap_ptr_ = mmap(nullptr, page_size, PROT_READ, MAP_SHARED, data_fd_, 0);
 
   if (mmap_ptr_ == MAP_FAILED) {
-    HBT_LOG_ERROR() << "mmap failed with " << errno;
+    mmap_ptr_ = nullptr;
+    HBT_LOG_ERROR() << "metadata mmap failed with " << errno;
     goto error;
   }
 
@@ -137,14 +144,40 @@ int BPerfPerThreadReader::enable() {
       offsetof(struct bperf_thread_data, cumulative_sched_delay_ns) +
           sizeof(__u64);
 
-  data_ = (struct bperf_thread_data*)((unsigned long long)mmap_ptr_ +
-                                      idx * data_size_);
+  // The per-thread data lives at byte offset idx * data_size_ within the map.
+  // mmap requires a page-aligned file offset, so map only the page(s) that
+  // contain this element (it may straddle a page boundary, hence up to two
+  // pages) instead of the whole map.
+  data_byte_offset = static_cast<__u64>(idx) * data_size_;
+  if (idx < 0 || data_byte_offset > mmap_size_ ||
+      data_size_ > mmap_size_ - data_byte_offset) {
+    HBT_LOG_ERROR() << "idx " << idx << " is out of range";
+    goto error;
+  }
+  page_offset = data_byte_offset & ~((__u64)page_size - 1);
+  offset_in_page = data_byte_offset - page_offset;
+  data_mmap_size_ = offset_in_page + data_size_;
+  data_mmap_ptr_ = mmap(
+      nullptr,
+      data_mmap_size_,
+      PROT_READ,
+      MAP_SHARED,
+      data_fd_,
+      static_cast<off_t>(page_offset));
+
+  if (data_mmap_ptr_ == MAP_FAILED) {
+    data_mmap_ptr_ = nullptr;
+    HBT_LOG_ERROR() << "data mmap failed with " << errno;
+    goto error;
+  }
+
+  data_ = reinterpret_cast<struct bperf_thread_data*>(
+      static_cast<std::byte*>(data_mmap_ptr_) + offset_in_page);
 
   for (int i = 0; i < event_cnt_; i++) {
-    event_data_[i] =
-        (struct bperf_perf_event_data*)((unsigned long long)data_ +
-                                        metadata->thread_data_size +
-                                        i * metadata->event_data_size);
+    event_data_[i] = reinterpret_cast<struct bperf_perf_event_data*>(
+        reinterpret_cast<std::byte*>(data_) + metadata->thread_data_size +
+        i * metadata->event_data_size);
   }
 
   // Create a disabled hardware event. This is needed, otherwise rdpmc
@@ -171,6 +204,7 @@ int BPerfPerThreadReader::enable() {
   dummy_pe_mmap_ =
       ::mmap(nullptr, getpagesize(), PROT_READ, MAP_SHARED, dummy_pe_fd_, 0);
   if (dummy_pe_mmap_ == MAP_FAILED) {
+    dummy_pe_mmap_ = nullptr;
     goto error;
   }
 
@@ -190,17 +224,23 @@ error:
 }
 
 void BPerfPerThreadReader::disable() {
-  if (!enabled_) {
-    return;
+  if (mmap_ptr_) {
+    ::munmap(mmap_ptr_, ::getpagesize());
+    mmap_ptr_ = nullptr;
   }
-  ::munmap(mmap_ptr_, mmap_size_);
-  mmap_ptr_ = nullptr;
+  if (data_mmap_ptr_) {
+    ::munmap(data_mmap_ptr_, data_mmap_size_);
+    data_mmap_ptr_ = nullptr;
+    data_mmap_size_ = 0;
+  }
   data_ = nullptr;
   ::close(data_fd_);
   data_fd_ = -1;
   initial_clock_drift_ = 0LL;
-  ::munmap(dummy_pe_mmap_, getpagesize());
-  dummy_pe_mmap_ = nullptr;
+  if (dummy_pe_mmap_) {
+    ::munmap(dummy_pe_mmap_, getpagesize());
+    dummy_pe_mmap_ = nullptr;
+  }
   ::close(dummy_pe_fd_);
   dummy_pe_fd_ = -1;
   sched_delay_supported_ = false;
