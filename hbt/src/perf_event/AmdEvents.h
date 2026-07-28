@@ -139,6 +139,10 @@ constexpr PmuMsr kLsInefSwPref{.amdCore = {.event = 0x52, .unitMask = 0x3}};
 constexpr PmuMsr kLsHwPfDcFillsDramIoFar{
     .amdCore = {.event = 0x5a, .unitMask = 0x40}};
 
+constexpr PmuMsr kLsBadStatus2StliOther{
+    .amdCore = {.event = 0x24, .unitMask = 0x02}};
+constexpr PmuMsr kLsStlf{.amdCore = {.event = 0x35}};
+
 // L1 iCache
 constexpr PmuMsr kL1ICacheFillMisses{
     .amdCore = {.event = 0x64, .unitMask = 0x7}}; // Same as e=0x60,u=0x10

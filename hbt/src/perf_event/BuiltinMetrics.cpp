@@ -668,6 +668,48 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
           std::vector<std::string>{},
           getRateReducer()));
 
+  if (cpu_info.cpu_family == CpuFamily::INTEL) {
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            "store_forward_blocks",
+            "Loads blocked by failed store-to-load forwarding.",
+            "Number of loads that could not receive their data via "
+            "store-to-load forwarding and had to wait for the older store to "
+            "retire.",
+            std::map<TOptCpuArch, EventRefs>{
+                {std::nullopt,
+                 EventRefs{EventRef{
+                     "store_forward_blocks",
+                     PmuType::cpu,
+                     "LD_BLOCKS.STORE_FORWARD",
+                     EventExtraAttr{},
+                     {}}}}},
+            1'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  } else if (
+      cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
+      cpu_info.cpu_family == CpuFamily::AMDZEN6) {
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            "store_forward_blocks",
+            "Loads blocked by failed store-to-load forwarding.",
+            "Number of loads that could not complete due to a non-forwardable "
+            "conflict with an older store.",
+            std::map<TOptCpuArch, EventRefs>{
+                {std::nullopt,
+                 EventRefs{EventRef{
+                     "store_forward_blocks",
+                     PmuType::cpu,
+                     "ls_bad_status2.stli_other",
+                     EventExtraAttr{},
+                     {}}}}},
+            1'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  }
+
   // l2_cache_misses replaces DynoPerfCounterType::L2CACHE_MISS
   if (cpu_info.cpu_family == CpuFamily::INTEL) {
     metrics->add(

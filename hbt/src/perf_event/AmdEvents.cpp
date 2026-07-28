@@ -282,6 +282,28 @@ void addCoreEvents(PmuDeviceManager& pmu_manager) {
           "Load-store miss address buffer allocated to pipes."),
       std::vector<EventId>({"ls-mab-alloc-pipes"}));
 
+  // Store-to-load forwarding
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_bad_status2.stli_other",
+          EventDef::Encoding{.code = amd_msr::kLsBadStatus2StliOther.val},
+          "Store-to-load conflicts (non-forwardable).",
+          "Store-to-load interlock: a load was unable to complete due to a "
+          "non-forwardable conflict with an older store. AMD equivalent of "
+          "Intel LD_BLOCKS.STORE_FORWARD."),
+      std::vector<EventId>({"ls-bad-status2.stli-other"}));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "ls_stlf",
+          EventDef::Encoding{.code = amd_msr::kLsStlf.val},
+          "Store-to-load forwards (STLF hits).",
+          "Number of successful store-to-load forwards; complement of "
+          "ls_bad_status2.stli_other."),
+      std::vector<EventId>({"ls-stlf"}));
+
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::cpu,
