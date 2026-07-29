@@ -21,6 +21,7 @@
 #include "dynolog/src/gpumon/Entity.h"
 #include "dynolog/src/gpumon/Utils.h"
 #include "dynolog/src/gpumon/dcgm_fields.h"
+#include "dynolog/src/k8s/EnvAttribution.h"
 
 #ifdef USE_K8S_PODRESOURCES
 #include "dynolog/src/k8s/Flags.h"
@@ -73,26 +74,9 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_DEV_UUID, "gpu_uuid"}};
 
 // Mapping of attribution environment variable name to scuba column name.
-// Loaded once on first use:
-//   - From --env_attribution_mappings_file CSV, when set
-//   - Otherwise from getDefaultEnvAttributionMap() (Slurm built-in defaults)
-DEFINE_string(
-    env_attribution_mappings_file,
-    "",
-    "Path to a CSV file defining env-var → column-name attribution mappings. "
-    "Each non-empty, non-'#' line is: <env_var_name>,<output_column_name>. "
-    "When empty, the built-in Slurm default mapping is used.");
-
-const std::unordered_map<std::string, std::string>&
-getEnvAttributionMappings() {
-  static const auto mappings = [] {
-    if (!FLAGS_env_attribution_mappings_file.empty()) {
-      return loadEnvAttributionMap(FLAGS_env_attribution_mappings_file);
-    }
-    return getDefaultEnvAttributionMap();
-  }();
-  return mappings;
-}
+// FLAGS_env_attribution_mappings_file + getEnvAttributionMappings() moved
+// to dynolog/src/k8s/EnvAttribution.{h,cpp} so both gpumon and tpumon can
+// share the same process-wide cached mapping.
 
 DEFINE_bool(
     enable_env_var_attribution,
