@@ -23,6 +23,7 @@
 #include "dynolog/src/gpumon/dcgm_fields.h"
 
 #ifdef USE_K8S_PODRESOURCES
+#include "dynolog/src/k8s/Flags.h"
 #include "dynolog/src/k8s/K8sPodCache.h"
 #include "dynolog/src/k8s/PodResourcesClient.h"
 #endif
@@ -100,23 +101,6 @@ DEFINE_bool(
     "Currently this support SLURM job scheduler environment variables.");
 
 #ifdef USE_K8S_PODRESOURCES
-DEFINE_bool(
-    enable_pod_resources_attribution,
-    false,
-    "Enable kubelet pod-resources attribution: query the local kubelet's "
-    "pod-resources gRPC socket each cycle and join the (pod_namespace, "
-    "pod_name, container_name) onto each GPU record by GPU UUID. "
-    "Requires DCGM_FI_DEV_UUID (54) in --dcgm_fields.");
-
-DEFINE_string(
-    pod_resources_socket,
-    "/var/lib/kubelet/pod-resources/kubelet.sock",
-    "Path to kubelet pod-resources gRPC unix socket.");
-
-DEFINE_string(
-    pod_resources_gpu_resource,
-    "nvidia.com/gpu",
-    "K8s extended resource name to filter for GPU device assignments.");
 
 namespace {
 ::dynolog::k8s::PodResourcesClient* getPodResourcesClient() {

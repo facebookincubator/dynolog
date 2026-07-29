@@ -63,11 +63,13 @@ target_link_libraries(dynolog_kubelet_podresources_lib PUBLIC
 # K8s integration library: PodResourcesClient (gRPC over kubelet socket)
 # and K8sPodCache (HTTP+JSON to the K8s API).
 add_library(dynolog_k8s_lib
+    Flags.cpp              Flags.h
     PodResourcesClient.cpp PodResourcesClient.h
     K8sPodCache.cpp        K8sPodCache.h
 )
 target_include_directories(dynolog_k8s_lib INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_definitions(dynolog_k8s_lib PUBLIC USE_K8S_PODRESOURCES)
 target_link_libraries(dynolog_k8s_lib PUBLIC
     glog::glog
     gflags::gflags
