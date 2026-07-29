@@ -73,11 +73,6 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_DEV_NAME, "gpu_name"},
     {DCGM_FI_DEV_UUID, "gpu_uuid"}};
 
-// Mapping of attribution environment variable name to scuba column name.
-// FLAGS_env_attribution_mappings_file + getEnvAttributionMappings() moved
-// to dynolog/src/k8s/EnvAttribution.{h,cpp} so both gpumon and tpumon can
-// share the same process-wide cached mapping.
-
 DEFINE_bool(
     enable_env_var_attribution,
     true,
