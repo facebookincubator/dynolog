@@ -23,6 +23,9 @@ target_link_libraries(dynolog_dcgm_lib PUBLIC gflags::gflags)
 target_link_libraries(dynolog_dcgm_lib PUBLIC glog::glog)
 target_link_libraries(dynolog_dcgm_lib PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(dynolog_dcgm_lib PUBLIC pfs)
+# libenvattribution is unconditional (used by the SLURM path too) — link
+# it into dcgm_lib regardless of USE_K8S_PODRESOURCES.
+target_link_libraries(dynolog_dcgm_lib PUBLIC dynolog_envattribution_lib)
 
 # Optional: K8s pod-resources / API attribution. The K8s libraries themselves
 # are built (or skipped) by the parent CMakeLists.txt's add_subdirectory(k8s);

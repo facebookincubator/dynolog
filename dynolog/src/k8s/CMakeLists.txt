@@ -3,9 +3,22 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+# libenvattribution: shared env-var attribution helpers. Built
+# unconditionally (unlike the rest of this directory, which is
+# USE_K8S_PODRESOURCES-gated) because the same CSV / default map is
+# also used by the bare-metal Slurm attribution path in DcgmGroupInfo.
+add_library(dynolog_envattribution_lib
+    EnvAttribution.cpp EnvAttribution.h
+)
+target_include_directories(dynolog_envattribution_lib INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(dynolog_envattribution_lib PUBLIC
+    glog::glog
+    gflags::gflags)
+
 # K8s platform-discovery libraries used by dynolog. Built only when
-# USE_K8S_PODRESOURCES=ON; otherwise this directory is empty for the
-# OSS CMake build.
+# USE_K8S_PODRESOURCES=ON; otherwise this directory only ships the
+# unconditional dynolog_envattribution_lib above.
 
 if(NOT USE_K8S_PODRESOURCES)
     return()
