@@ -93,11 +93,11 @@ class TpuGroupInfo {
       metricsMapInt_;
   std::unordered_map<int, std::unordered_map<std::string, std::string>>
       metricsMapString_;
-  // Pod attribution: MAST_* env vars via K8sPodCache, plus namespace/pod/
-  // container from pod-resources. Populated only when the shared
-  // --enable_pod_resources_attribution flag is on (Phase 0). Left empty
-  // in Phase 2/3; the pod-resources integration lands in a follow-up
-  // diff to keep this change reviewable.
+  // Pod attribution: pod_namespace/pod_name/container_name from
+  // kubelet pod-resources, plus operator-configured env vars and pod
+  // labels (via --env_attribution_mappings_file and K8sPodCache's
+  // default label map). Populated by update() when the shared
+  // --enable_pod_resources_attribution flag is on. Empty otherwise.
   std::unordered_map<int, std::unordered_map<std::string, std::string>>
       envMetadataMapString_;
 };

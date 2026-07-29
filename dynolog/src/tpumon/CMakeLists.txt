@@ -21,3 +21,17 @@ target_link_libraries(dynolog_tpu_lib PUBLIC fmt::fmt)
 target_link_libraries(dynolog_tpu_lib PUBLIC gflags::gflags)
 target_link_libraries(dynolog_tpu_lib PUBLIC nlohmann_json::nlohmann_json)
 target_link_libraries(dynolog_tpu_lib PRIVATE CURL::libcurl)
+
+# libenvattribution is unconditional (used regardless of USE_K8S_PODRESOURCES
+# because the shared env-attribution CSV parser lives there).
+target_link_libraries(dynolog_tpu_lib PUBLIC dynolog_envattribution_lib)
+
+# Optional: K8s pod-resources attribution. When USE_K8S_PODRESOURCES=ON,
+# TpuGroupInfo::update() joins chip -> pod via kubelet pod-resources gRPC
+# and enriches per-chip records with operator-configured env vars via
+# K8sPodCache (e.g. MAST_* for Meta's MAST scheduler).
+# Compile flag propagates through dynolog_k8s_lib (defined at Flags level).
+if(USE_K8S_PODRESOURCES)
+    target_compile_definitions(dynolog_tpu_lib PUBLIC USE_K8S_PODRESOURCES)
+    target_link_libraries(dynolog_tpu_lib PUBLIC dynolog_k8s_lib)
+endif()
