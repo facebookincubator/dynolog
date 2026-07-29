@@ -20,6 +20,7 @@ option(USE_OTLP "Enable OTLP metrics export" OFF)
 option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
 libprotobuf-dev and libcurl4-openssl-dev on the system"
 OFF)
+option(USE_TPU "Enable TPU metrics scraping, requires libcurl" OFF)
 
 if(USE_PROMETHEUS)
   find_package(prometheus-cpp CONFIG REQUIRED)

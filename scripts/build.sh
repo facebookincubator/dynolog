@@ -10,8 +10,10 @@
 set -eux -o pipefail
 BUILD_PROMETHEUS="${BUILD_PROMETHEUS:-0}"
 BUILD_OTLP="${BUILD_OTLP:-0}"
+BUILD_TPU="${BUILD_TPU:-0}"
 USE_PROMETHEUS="OFF"
 USE_OTLP="OFF"
+USE_TPU="OFF"
 
 # Check dependencies
 cmake --version || echo "Please install cmake for your platform using dnf/apt-get etc."
@@ -92,6 +94,18 @@ if [ "${BUILD_K8S_PODRESOURCES}" -eq 1 ]; then
   USE_K8S_PODRESOURCES="ON"
 fi
 
+## Build the TPU scraper if enabled.
+## Requires libcurl for scraping tpu-device-plugin's metrics endpoint.
+if [ "${BUILD_TPU}" -eq 1 ]; then
+  if ! pkg-config --exists libcurl 2>/dev/null; then
+    echo "Error: libcurl not found. Install with:"
+    echo "  apt-get install libcurl4-openssl-dev               # Debian/Ubuntu"
+    echo "  dnf install libcurl-devel                          # Fedora/RHEL"
+    exit 1
+  fi
+  USE_TPU="ON"
+fi
+
 ## Initialize opentelemetry-proto submodule if OTLP is enabled
 if [ "${BUILD_OTLP}" -eq 1 ]
 then
@@ -107,7 +121,7 @@ mkdir -p build; cd build;
 # note we can build without ninja if not available on this system
 cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
   "-DUSE_K8S_PODRESOURCES=${USE_K8S_PODRESOURCES}" \
-  "-DUSE_OTLP=${USE_OTLP}" \
+  "-DUSE_OTLP=${USE_OTLP}" "-DUSE_TPU=${USE_TPU}" \
   -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
