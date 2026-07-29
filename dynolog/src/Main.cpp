@@ -25,6 +25,10 @@
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 #include "dynolog/src/tracing/IPCMonitor.h"
 
+#ifdef USE_TPU
+#include "dynolog/src/tpumon/TpuGroupInfo.h"
+#endif
+
 #ifdef USE_PROMETHEUS
 #include "dynolog/src/PrometheusLogger.h"
 #endif
@@ -75,6 +79,22 @@ DEFINE_int32(
     dcgm_reporting_interval_s,
     10,
     "Duration in seconds to read and report metrics for DCGM");
+#ifdef USE_TPU
+DEFINE_bool(
+    enable_tpu_monitor,
+    false,
+    "Enable TPU monitor. Scrapes tpu-device-plugin's Prometheus /metrics "
+    "endpoint on the local node (see --tpu_device_plugin_url) and emits "
+    "one metric record per chip per cycle.");
+DEFINE_int32(
+    tpu_reporting_interval_s,
+    10,
+    "Duration in seconds between TPU scrapes.");
+DEFINE_int32(
+    tpu_scrape_timeout_ms,
+    2000,
+    "Per-scrape HTTP timeout in ms for --tpu_device_plugin_url.");
+#endif
 DEFINE_bool(
     enable_ipc_monitor,
     false,
@@ -204,6 +224,48 @@ auto setup_server(const std::shared_ptr<ServiceHandler>& handler) {
   }
 }
 
+#ifdef USE_TPU
+[[noreturn]] void tpu_monitor_loop(
+    const std::shared_ptr<tpumon::TpuGroupInfo>& tpu) {
+  auto logger = getLogger(FLAGS_scribe_category, /*include_otel=*/true);
+
+  LOG(INFO) << "Running TPU loop : interval = "
+            << FLAGS_tpu_reporting_interval_s
+            << " s, url = " << tpumon::FLAGS_tpu_device_plugin_url;
+
+  while (true) {
+    auto wakeup_timepoint = next_wakeup(FLAGS_tpu_reporting_interval_s);
+
+    tpu->update();
+    tpu->log(*logger);
+
+    /* sleep override */
+    std::this_thread::sleep_until(wakeup_timepoint);
+  }
+}
+
+bool start_tpu_monitor(std::unique_ptr<std::thread>& thread) {
+  if (!FLAGS_enable_tpu_monitor) {
+    return true;
+  }
+
+  auto tpu = tpumon::TpuGroupInfo::factory(
+      tpumon::FLAGS_tpu_device_plugin_url,
+      FLAGS_tpu_scrape_timeout_ms,
+      FLAGS_tpu_reporting_interval_s * 1000);
+  if (!tpu) {
+    LOG(ERROR) << "Failed to initialize TpuGroupInfo";
+    return false;
+  }
+  thread = std::make_unique<std::thread>(tpu_monitor_loop, std::move(tpu));
+  return true;
+}
+#else
+bool start_tpu_monitor(std::unique_ptr<std::thread>&) {
+  return true;
+}
+#endif
+
 int main(int argc, char** argv) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
   FLAGS_logtostderr = true;
@@ -215,7 +277,8 @@ int main(int argc, char** argv) {
   std::shared_ptr<gpumon::DcgmGroupInfo> dcgm;
 
   std::unique_ptr<tracing::IPCMonitor> ipcmon;
-  std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread, pm_thread;
+  std::unique_ptr<std::thread> ipcmon_thread, gpumon_thread, tpumon_thread,
+      pm_thread;
 
   if (FLAGS_enable_ipc_monitor) {
     LOG(INFO) << "Starting IPC Monitor";
@@ -234,6 +297,10 @@ int main(int argc, char** argv) {
       gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
     }
   }
+  if (!start_tpu_monitor(tpumon_thread)) {
+    return 1;
+  }
+
   std::thread km_thread{kernel_monitor_loop};
   if (FLAGS_enable_perf_monitor) {
     pm_thread = std::make_unique<std::thread>(perf_monitor_loop);

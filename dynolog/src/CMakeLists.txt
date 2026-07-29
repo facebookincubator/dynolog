@@ -68,6 +68,7 @@ target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib "-ldl")
 
 if(USE_TPU)
   add_subdirectory(tpumon)
+  target_compile_definitions(dynolog_lib PUBLIC USE_TPU)
   target_link_libraries(dynolog_lib PRIVATE dynolog_tpu_lib)
 endif()
 
