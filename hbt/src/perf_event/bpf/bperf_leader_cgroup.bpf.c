@@ -406,10 +406,17 @@ int BPF_PROG(bperf_register_thread, struct bpf_map *map,
 
   bperf_thread_data_init(data);
 
-  task_idx = bpf_task_storage_get(&per_thread_idx, task, 0, BPF_LOCAL_STORAGE_GET_F_CREATE);
+  /* Publish the index as part of the storage creation. Assigning it after
+   * bpf_task_storage_get() returns leaves a window in which the storage
+   * exists but still holds 0: a PMU hardirq on this CPU runs
+   * _pmu_enable_exit() for this same task, and get_bperf_thread_data()
+   * would resolve to element 0 and let the leader overwrite
+   * bperf_thread_metadata with bperf_thread_data.
+   */
+  idx_t new_idx = idx;
+  task_idx = bpf_task_storage_get(&per_thread_idx, task, &new_idx, BPF_LOCAL_STORAGE_GET_F_CREATE);
   if (!task_idx)
     return 0;
-  *task_idx = idx;
   bperf_leader_prog(task, task);
   return 0;
 }
