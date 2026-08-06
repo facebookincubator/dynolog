@@ -57,7 +57,50 @@ endif ()
 
 if (rdc_FOUND AND amd_smi_FOUND AND LIBCAP_FOUND)
     message(STATUS "RDC package found at ${ROCM_RDC_INCLUDE_DIR}")
+
+    # The RDC metric list compiled into RdcWrapper.cpp and the example is gated
+    # on DYNOLOG_ROCM_VERSION (e.g. 70000 == ROCm 7.0.x). If it is left
+    # undefined, every metric is preprocessed out, leaving an empty metric set
+    # that makes the example abort at runtime ("enabledMetrics is empty"). The
+    # standalone build above sets it explicitly; detect it here for the
+    # integrated build. Pass -DROCM_VERSION=<code> to override the detection.
+    if (NOT DEFINED ROCM_VERSION)
+        # Derive the ROCm root from the RDC package that was actually found so
+        # this honours CMAKE_PREFIX_PATH and versioned paths like
+        # /opt/rocm-10.0.0.
+        get_filename_component(_dynolog_rocm_root "${rdc_DIR}/../../.." ABSOLUTE)
+        set(_dynolog_rocm_version_file "${_dynolog_rocm_root}/.info/version")
+        if (NOT EXISTS "${_dynolog_rocm_version_file}" AND DEFINED ENV{ROCM_PATH})
+            set(_dynolog_rocm_version_file "$ENV{ROCM_PATH}/.info/version")
+        endif ()
+        if (EXISTS "${_dynolog_rocm_version_file}")
+            file(STRINGS "${_dynolog_rocm_version_file}"
+                 _dynolog_rocm_version_raw LIMIT_COUNT 1)
+            string(REGEX MATCHALL "[0-9]+"
+                   _dynolog_rocm_parts "${_dynolog_rocm_version_raw}")
+            list(LENGTH _dynolog_rocm_parts _dynolog_rocm_nparts)
+            if (_dynolog_rocm_nparts GREATER_EQUAL 3)
+                list(GET _dynolog_rocm_parts 0 _dynolog_rocm_major)
+                list(GET _dynolog_rocm_parts 1 _dynolog_rocm_minor)
+                list(GET _dynolog_rocm_parts 2 _dynolog_rocm_patch)
+                math(EXPR ROCM_VERSION
+                     "${_dynolog_rocm_major} * 10000 + ${_dynolog_rocm_minor} * 100 + ${_dynolog_rocm_patch}")
+            endif ()
+        endif ()
+    endif ()
+    if (NOT DEFINED ROCM_VERSION)
+        message(WARNING
+            "dynolog: unable to determine the ROCm version for the RDC "
+            "integration; RDC metrics will be empty. Pass -DROCM_VERSION=<code> "
+            "(e.g. 70000 for ROCm 7.0.x) to set it explicitly.")
+        set(ROCM_VERSION 0)
+    endif ()
+    message(STATUS
+        "dynolog RDC integration using DYNOLOG_ROCM_VERSION=${ROCM_VERSION}")
+
     add_library(dynolog_rdc_lib RdcWrapper.cpp RdcWrapper.h)
+    target_compile_definitions(
+        dynolog_rdc_lib PUBLIC DYNOLOG_ROCM_VERSION=${ROCM_VERSION})
     target_link_libraries(dynolog_rdc_lib rdc glog::glog)
 
     add_library(dynolog_amd_device_lib AmdDeviceTopology.cpp AmdDeviceTopology.h)
