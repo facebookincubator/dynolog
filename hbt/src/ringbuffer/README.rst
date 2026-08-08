@@ -16,7 +16,7 @@ Create a ringbuffer (or per-CPU ringbuffer) by either:
 The resulting ringbuffer can be used to create multiple Producers and Consumers.
 
 Producers can only write data while Consumers can only read data. API for both
-is transactional. A succesful transaction will produce/consume data, while an
+is transactional. A successful transaction will produce/consume data, while an
 unsuccesful will have no effect. Only one producer can have an active write
 transaction at any given time. Similarly, only one consumer can have an active
 read transaction at any given time.
