@@ -325,7 +325,13 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
     data->values[i].enabled += time_after_offset_update;
 
     if (raw_event_data[i].idx) {
-      data->values[i].counter += pmc_val[i] - raw_event_data[i].offset;
+      // The PMC is BPERF_PMC_WIDTH bits wide and the leader records offset
+      // masked to the same width, so the hardware counter can wrap between
+      // the leader's snapshot and rdpmc() below. Mask the difference to the
+      // counter width: a wrap then yields the true delta instead of
+      // underflowing __u64 into a ~2^64 reading.
+      data->values[i].counter +=
+          (pmc_val[i] - raw_event_data[i].offset) & BPERF_PMC_MASK;
       data->values[i].running += time_after_offset_update;
     }
   }
