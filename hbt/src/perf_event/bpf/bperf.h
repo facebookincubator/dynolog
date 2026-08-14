@@ -43,6 +43,34 @@ struct bperf_perf_event_data {
   __u32 idx;
 };
 
+/* Width, in bits, of the hardware PMC that the leader snapshots into
+ * `offset` and the reader samples with rdpmc(). Both sides mask to this
+ * width so a counter wrap yields the true delta instead of underflowing a
+ * __u64, so the two must agree -- hence the shared definition.
+ *
+ * x86: x86_pmu.cntval_bits, fixed at 48 for general-purpose counters
+ * (arch/x86/events/core.c).
+ *
+ * aarch64: 32, NOT 64. PMUv3 event counters only count in the low 32 bits
+ * unless PMCR_EL0.LP is set AND the event is opened with attr.config1:0
+ * ("long"). BPerfEventsGroup leaves config1 at 0, so even on FEAT_PMUv3p5
+ * parts (Neoverse V2/V3) the kernel biases the counter to overflow at 32
+ * bits -- armv8pmu_event_needs_bias() ORs in GENMASK_ULL(63, 32), and
+ * arch_perf_update_userpage() reports pmc_width = 32. Both in
+ * drivers/perf/arm_pmuv3.c. Masking wider than 32 there would leave the
+ * bias bits in the delta.
+ *
+ * TODO @alston64 turning on 64 bits reporting before onboarding to arm hosts
+ */
+#if __x86_64__
+#define BPERF_PMC_WIDTH 48
+#elif __aarch64__
+#define BPERF_PMC_WIDTH 32
+#else
+#error "BPERF_PMC_WIDTH is not defined for this architecture"
+#endif
+#define BPERF_PMC_MASK ((1ULL << BPERF_PMC_WIDTH) - 1)
+
 struct bperf_thread_metadata {
   __u32 metadata_size; /* sizeof(bperf_thread_metadata) */
   __u32 thread_data_size; /* sizeof(bperf_thread_data) */
