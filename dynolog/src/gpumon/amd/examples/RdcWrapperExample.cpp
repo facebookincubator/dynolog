@@ -10,6 +10,7 @@
 #include <gflags/gflags.h>
 #include <unistd.h>
 #include <chrono>
+#include <exception>
 #include <iostream>
 #include <thread>
 #include <variant>
@@ -130,42 +131,51 @@ int main(int argc, char** argv) {
               << ")" << std::endl;
   }
 
-  dynolog::gpumon::RdcWrapper rdcWrapper(
-      kEnabledMetrics,
-      std::chrono::milliseconds(FLAGS_update_interval_ms),
-      std::chrono::seconds(FLAGS_max_keep_age_seconds),
-      FLAGS_max_keep_samples);
+  // RdcWrapper reports fatal setup problems (an empty metric set, an
+  // unsupported field, an RDC error, ...) by throwing. Catch here so the
+  // example exits with a non-zero status instead of letting the exception
+  // escape main() and abort with a core dump.
+  try {
+    dynolog::gpumon::RdcWrapper rdcWrapper(
+        kEnabledMetrics,
+        std::chrono::milliseconds(FLAGS_update_interval_ms),
+        std::chrono::seconds(FLAGS_max_keep_age_seconds),
+        FLAGS_max_keep_samples);
 
-  const auto entities = rdcWrapper.getMonitoredEntities();
-  std::cout << "Monitoring " << entities.size()
-            << " entities (physical GPUs + partitions):" << std::endl;
-  for (const auto entity : entities) {
-    std::cout << "  entity index=" << entity << std::endl;
-  }
+    const auto entities = rdcWrapper.getMonitoredEntities();
+    std::cout << "Monitoring " << entities.size()
+              << " entities (physical GPUs + partitions):" << std::endl;
+    for (const auto entity : entities) {
+      std::cout << "  entity index=" << entity << std::endl;
+    }
 
-  // This example runs until killed (Ctrl-C / SIGTERM): the worker loops
-  // forever polling metrics, so worker.join() below never returns and there is
-  // no clean shutdown path by design.
-  auto worker = std::thread([&]() {
-    while (true) {
-      sleep(1);
-      for (const auto entity : entities) {
-        const auto metricMap = rdcWrapper.getRdcMetricsForDevice(entity);
-        std::cout << "entity " << entity << ": collected " << metricMap.size()
-                  << " metrics" << std::endl;
-        for (const auto& [field, value] : metricMap) {
-          std::visit(
-              [entity, field](auto&& arg) {
-                std::cout << "  entity " << entity << " "
-                          << field_id_string(field) << " (id=" << field
-                          << ")=" << arg << std::endl;
-              },
-              value);
+    // This example runs until killed (Ctrl-C / SIGTERM): the worker loops
+    // forever polling metrics, so worker.join() below never returns and there
+    // is no clean shutdown path by design.
+    auto worker = std::thread([&]() {
+      while (true) {
+        sleep(1);
+        for (const auto entity : entities) {
+          const auto metricMap = rdcWrapper.getRdcMetricsForDevice(entity);
+          std::cout << "entity " << entity << ": collected " << metricMap.size()
+                    << " metrics" << std::endl;
+          for (const auto& [field, value] : metricMap) {
+            std::visit(
+                [entity, field](auto&& arg) {
+                  std::cout << "  entity " << entity << " "
+                            << field_id_string(field) << " (id=" << field
+                            << ")=" << arg << std::endl;
+                },
+                value);
+          }
         }
       }
-    }
-  });
+    });
 
-  worker.join();
+    worker.join();
+  } catch (const std::exception& e) {
+    std::cerr << "RDC example failed: " << e.what() << std::endl;
+    return 1;
+  }
   return 0;
 }
