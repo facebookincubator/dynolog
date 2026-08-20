@@ -342,6 +342,22 @@ class Monitor {
     return rvs;
   }
 
+  // Read counts for the uncore metric given by elem_id, keyed by PMU device
+  // id (PerUncoreCountReader::UncoreDeviceId::toInt()).
+  std::optional<std::map<int, TUncoreCountReader::ReadValues>>
+  readUncoreCountsPerDevice(const ElemId& elem_id) const {
+    std::lock_guard<std::mutex> lock{mutex_};
+
+    if (auto it = uncore_count_readers_.find(elem_id);
+        it != uncore_count_readers_.end()) {
+      HBT_THROW_ASSERT_IF(it->second == nullptr);
+      return it->second->readPerPerfEventsGroupKeyed();
+    }
+    HBT_LOG_WARNING() << fmt::format(
+        "No UncoreCountReader with id {}", elem_id);
+    return std::nullopt;
+  }
+
  private:
   // Helper function that does the CPU reading and returns per-CPU results
   // This is the core implementation that both simple and grouped methods use
