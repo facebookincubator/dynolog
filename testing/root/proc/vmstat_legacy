@@ -1,0 +1,13 @@
+nr_free_pages 1000000
+pgfault 5000000000
+pgmajfault 100000
+pgscan_kswapd 4000000
+pgscan_direct 200000
+pgsteal_kswapd 3800000
+pageoutrun 50000
+compact_migrate_scanned 2000000
+compact_free_scanned 5000000
+compact_isolated 1000000
+compact_stall 3000
+compact_fail 1000
+compact_success 2000
