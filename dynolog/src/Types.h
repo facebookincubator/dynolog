@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #define MAX_CPU_SOCKETS 8
+#define MAX_NUMA_NODES 2
 
 namespace dynolog {
 

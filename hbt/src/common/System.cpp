@@ -129,6 +129,87 @@ std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
   return socketCoreMap;
 }
 
+namespace {
+
+std::optional<uint32_t> readUintFile(const std::filesystem::path& p) {
+  std::ifstream f(p);
+  uint32_t v = 0;
+  if (f.is_open() && (f >> v)) {
+    return v;
+  }
+  return std::nullopt;
+}
+
+// The L3 cache (CCX) id for a CPU: the cache/index* entry whose level is 3.
+std::optional<uint32_t> readCpuL3CacheId(const std::filesystem::path& cpuDir) {
+  const std::filesystem::path cacheDir = cpuDir / "cache";
+  if (!std::filesystem::exists(cacheDir)) {
+    return std::nullopt;
+  }
+  for (const auto& idx : std::filesystem::directory_iterator(cacheDir)) {
+    if (idx.path().filename().string().find("index") != 0) {
+      continue;
+    }
+    // level for L3 cache
+    if (readUintFile(idx.path() / "level") == 3u) {
+      return readUintFile(idx.path() / "id");
+    }
+  }
+  return std::nullopt;
+}
+
+// The NUMA node for a CPU: the node<N> entry under the cpu directory (a symlink
+// on a real host, matched here by name only).
+std::optional<uint32_t> readCpuNumaNode(const std::filesystem::path& cpuDir) {
+  if (!std::filesystem::exists(cpuDir)) {
+    return std::nullopt;
+  }
+  for (const auto& entry : std::filesystem::directory_iterator(cpuDir)) {
+    const std::string name = entry.path().filename().string();
+    if (name.find("node") != 0 || name.length() <= 4) {
+      continue;
+    }
+    const std::string idStr = name.substr(4);
+    if (std::all_of(idStr.begin(), idStr.end(), ::isdigit)) {
+      return static_cast<uint32_t>(std::stoul(idStr));
+    }
+  }
+  return std::nullopt;
+}
+} // namespace
+
+std::vector<AmdL3CcxNumaEntry> getAmdL3CcxToNumaNodeMapFromSysfs(
+    const std::string& rootdir) {
+  std::vector<AmdL3CcxNumaEntry> entries;
+  std::filesystem::path root = rootdir.empty() ? "/" : rootdir;
+
+  // One representative CPU per L3 (CCX) domain.
+  std::ifstream cpumaskFile(
+      root / "sys/bus/event_source/devices/amd_l3/cpumask");
+  std::string cpumask;
+  if (!cpumaskFile.is_open() || !std::getline(cpumaskFile, cpumask)) {
+    // No amd_l3 uncore PMU (non-AMD or unsupported HW).
+    return entries;
+  }
+
+  const std::filesystem::path cpuBase = root / "sys/devices/system/cpu";
+  for (const CpuId cpu : parseCpusListToSet(cpumask)) {
+    const std::filesystem::path cpuDir =
+        cpuBase / ("cpu" + std::to_string(cpu));
+    const auto ccxId = readCpuL3CacheId(cpuDir);
+    const auto numaNode = readCpuNumaNode(cpuDir);
+    if (!ccxId.has_value() || !numaNode.has_value()) {
+      HBT_LOG_WARNING()
+          << "amd_l3 cpu " << cpu
+          << ": missing L3 cache id or NUMA node in sysfs; skipping";
+      continue;
+    }
+    entries.push_back(
+        {static_cast<uint32_t>(cpu), ccxId.value(), numaNode.value()});
+  }
+  return entries;
+}
+
 std::string removeBlanks(std::string s) {
   // Remove blanks.
   s.erase(
