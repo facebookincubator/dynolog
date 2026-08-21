@@ -210,6 +210,18 @@ class PerUncoreCountReader : public PerPerfEventsGroupBase<UncoreCountReader> {
     return rvs;
   }
 
+  // The key is UncoreDeviceId::toInt(), so callers can recover the cpu and
+  // pmu_id of the device that produced each value and attribute it to a
+  // hardware domain (e.g. the CCX behind an amd_l3 device).
+  virtual std::optional<std::map<int, ReadValues>> readPerPerfEventsGroupKeyed()
+      const {
+    std::map<int, ReadValues> res;
+    if (!TBase::readPerPerfEventsGroup(res, getNumEvents())) {
+      return std::nullopt;
+    }
+    return res;
+  }
+
   virtual std::map<int, ReadValues> readPerPerfEventsGroupOnCpu(
       CpuId cpu) const {
     return TBase::readPerPerfEventsGroupOnCpu(cpu);
