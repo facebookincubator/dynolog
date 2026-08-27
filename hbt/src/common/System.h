@@ -613,6 +613,33 @@ inline int readIntFromFile(const std::string& filepath) {
 std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
     const std::string& rootdir = "/");
 
+// Read the CPU -> NUMA node mapping from
+// <rootdir>/sys/devices/system/node/node<N>/cpulist. Memory-only nodes have no
+// CPUs and therefore contribute no entries.
+std::map<CpuId, uint32_t> getCpuToNumaNodeMapFromSysfs(
+    const std::string& rootdir = "/");
+
+// One AMD L3 (CCX) domain's representative CPU, its L3 cache (CCX) id, and the
+// NUMA node it belongs to. Built from sysfs so per-CCX uncore counters can be
+// attributed to the correct NUMA node.
+struct AmdL3CcxNumaEntry {
+  uint32_t cpu;
+  uint32_t ccxId;
+  uint32_t numaNode;
+};
+
+// Discover the CPU -> CCX -> NUMA node topology for AMD L3 uncore domains:
+//   1. Read <rootdir>/sys/bus/event_source/devices/amd_l3/cpumask for one
+//      representative CPU per L3 (CCX) domain.
+//   2. For each representative CPU, read its L3 cache id (the CCX id) from the
+//      <rootdir>/sys/devices/system/cpu/cpu<X>/cache/index* entry whose level
+//      is 3, and look up its NUMA node in getCpuToNumaNodeMapFromSysfs().
+// Returns one entry per representative CPU whose CCX id and NUMA node both
+// resolve. Empty when amd_l3 is absent (non-AMD or unsupported HW) or the
+// topology could not be read.
+std::vector<AmdL3CcxNumaEntry> getAmdL3CcxToNumaNodeMapFromSysfs(
+    const std::string& rootdir = "/");
+
 //
 // System functions
 //
