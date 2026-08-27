@@ -39,6 +39,11 @@ class MockPerUncoreCountReader : public PerUncoreCountReader {
       (),
       (const, override));
   MOCK_METHOD(
+      (std::optional<std::map<int, ReadValues>>),
+      readPerPerfEventsGroupKeyed,
+      (),
+      (const, override));
+  MOCK_METHOD(
       (std::map<int, ReadValues>),
       readPerPerfEventsGroupOnCpu,
       (CpuId),
