@@ -317,3 +317,61 @@ TEST(SystemTest, GetSocketCoreMapFromSysfsTest) {
   EXPECT_THAT(result[1], testing::ElementsAre(8, 9, 10, 11, 12, 13, 14, 15))
       << "Socket 1 should have cores 8-15 in order";
 }
+
+TEST(SystemTest, GetCpuToNumaNodeMapFromSysfsTest) {
+  const char* testRootEnv = getenv("TESTROOT");
+  if (!testRootEnv) {
+    GTEST_SKIP() << "TESTROOT environment variable not set, skipping test";
+  }
+
+  const std::map<CpuId, uint32_t> expectedCpuToNumaNode = {
+      {0, 0},
+      {1, 0},
+      {2, 0},
+      {3, 0},
+      {4, 1},
+      {5, 1},
+      {6, 1},
+      {7, 1},
+      {8, 0},
+      {9, 0},
+      {10, 0},
+      {11, 0},
+      {12, 1},
+      {13, 1},
+      {14, 1},
+      {15, 1},
+  };
+  // The testroot also contains a node name whose numeric suffix overflows
+  // uint32_t; it must be ignored without throwing or mapping its CPU 16.
+  EXPECT_EQ(getCpuToNumaNodeMapFromSysfs(testRootEnv), expectedCpuToNumaNode);
+  EXPECT_TRUE(
+      getCpuToNumaNodeMapFromSysfs("/nonexistent_hbt_test_root").empty());
+}
+
+TEST(SystemTest, GetAmdL3CcxToNumaNodeMapFromSysfsTest) {
+  const char* testRootEnv = getenv("TESTROOT");
+  if (!testRootEnv) {
+    GTEST_SKIP() << "TESTROOT environment variable not set, skipping test";
+  }
+
+  // The mock amd_l3 cpumask lists representative CPUs 0, 4, 8. cpu0 has a
+  // level-1 cache index preceding its level-3 one (exercising the level scan)
+  // and resolves to CCX id 0 / NUMA node 0; cpu4 resolves to CCX id 1 / node 1,
+  // and cpu8 resolves to CCX id 2 / node 0.
+  const auto entries = getAmdL3CcxToNumaNodeMapFromSysfs(testRootEnv);
+  ASSERT_EQ(entries.size(), 3u);
+  EXPECT_EQ(entries[0].cpu, 0u);
+  EXPECT_EQ(entries[0].ccxId, 0u);
+  EXPECT_EQ(entries[0].numaNode, 0u);
+  EXPECT_EQ(entries[1].cpu, 4u);
+  EXPECT_EQ(entries[1].ccxId, 1u);
+  EXPECT_EQ(entries[1].numaNode, 1u);
+  EXPECT_EQ(entries[2].cpu, 8u);
+  EXPECT_EQ(entries[2].ccxId, 2u);
+  EXPECT_EQ(entries[2].numaNode, 0u);
+
+  // No amd_l3 device (non-AMD / unsupported HW) yields an empty result.
+  EXPECT_TRUE(
+      getAmdL3CcxToNumaNodeMapFromSysfs("/nonexistent_hbt_test_root").empty());
+}

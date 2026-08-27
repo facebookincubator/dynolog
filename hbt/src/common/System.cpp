@@ -7,6 +7,7 @@
 
 #include <fcntl.h>
 #include <sys/types.h>
+#include <charconv>
 #include <cinttypes>
 #include <cstdio>
 
@@ -127,6 +128,122 @@ std::vector<std::vector<uint32_t>> getSocketCoreMapFromSysfs(
     }
   }
   return socketCoreMap;
+}
+
+namespace {
+
+std::optional<uint32_t> readUintFile(const std::filesystem::path& p) {
+  std::ifstream f(p);
+  uint32_t v = 0;
+  if (f.is_open() && (f >> v)) {
+    return v;
+  }
+  return std::nullopt;
+}
+
+std::optional<uint32_t> parseUint32(const std::string& value) {
+  uint32_t parsed = 0;
+  const char* const begin = value.data();
+  const char* const end = begin + value.size();
+  const auto [ptr, ec] = std::from_chars(begin, end, parsed);
+  if (ec != std::errc{} || ptr != end) {
+    return std::nullopt;
+  }
+  return parsed;
+}
+
+std::filesystem::path makeRootPath(const std::string& rootdir) {
+  std::filesystem::path root{"/"};
+  if (!rootdir.empty()) {
+    root = rootdir;
+  }
+  return root;
+}
+
+// The L3 cache (CCX) id for a CPU: the cache/index* entry whose level is 3.
+std::optional<uint32_t> readCpuL3CacheId(const std::filesystem::path& cpuDir) {
+  const std::filesystem::path cacheDir = cpuDir / "cache";
+  if (!std::filesystem::exists(cacheDir)) {
+    return std::nullopt;
+  }
+  for (const auto& idx : std::filesystem::directory_iterator(cacheDir)) {
+    if (idx.path().filename().string().find("index") != 0) {
+      continue;
+    }
+    // level for L3 cache
+    if (readUintFile(idx.path() / "level") == 3u) {
+      return readUintFile(idx.path() / "id");
+    }
+  }
+  return std::nullopt;
+}
+
+} // namespace
+
+std::map<CpuId, uint32_t> getCpuToNumaNodeMapFromSysfs(
+    const std::string& rootdir) {
+  std::map<CpuId, uint32_t> cpuToNumaNode;
+  const auto root = makeRootPath(rootdir);
+  const std::filesystem::path nodeBase = root / "sys/devices/system/node";
+  if (!std::filesystem::exists(nodeBase)) {
+    return cpuToNumaNode;
+  }
+
+  for (const auto& entry : std::filesystem::directory_iterator(nodeBase)) {
+    const std::string name = entry.path().filename().string();
+    if (name.find("node") != 0 || name.length() <= 4) {
+      continue;
+    }
+    const auto numaNode = parseUint32(name.substr(4));
+    if (!numaNode.has_value()) {
+      continue;
+    }
+
+    std::ifstream cpulistFile(entry.path() / "cpulist");
+    std::string cpulist;
+    if (!cpulistFile.is_open() || !std::getline(cpulistFile, cpulist) ||
+        cpulist.empty()) {
+      continue;
+    }
+
+    for (const CpuId cpu : parseCpusListToSet(cpulist)) {
+      cpuToNumaNode.emplace(cpu, numaNode.value());
+    }
+  }
+  return cpuToNumaNode;
+}
+
+std::vector<AmdL3CcxNumaEntry> getAmdL3CcxToNumaNodeMapFromSysfs(
+    const std::string& rootdir) {
+  std::vector<AmdL3CcxNumaEntry> entries;
+  const auto root = makeRootPath(rootdir);
+  const auto cpuToNumaNode = getCpuToNumaNodeMapFromSysfs(rootdir);
+
+  // One representative CPU per L3 (CCX) domain.
+  std::ifstream cpumaskFile(
+      root / "sys/bus/event_source/devices/amd_l3/cpumask");
+  std::string cpumask;
+  if (!cpumaskFile.is_open() || !std::getline(cpumaskFile, cpumask)) {
+    // No amd_l3 uncore PMU (non-AMD or unsupported HW).
+    return entries;
+  }
+
+  const std::filesystem::path cpuBase = root / "sys/devices/system/cpu";
+  for (const CpuId cpu : parseCpusListToSet(cpumask)) {
+    const std::filesystem::path cpuDir =
+        cpuBase / ("cpu" + std::to_string(cpu));
+    const auto ccxId = readCpuL3CacheId(cpuDir);
+    const auto numaNodeIt = cpuToNumaNode.find(cpu);
+    if (!ccxId.has_value() || numaNodeIt == cpuToNumaNode.end()) {
+      HBT_LOG_WARNING()
+          << "amd_l3 cpu " << cpu
+          << ": missing L3 cache id or NUMA node in sysfs; skipping";
+      continue;
+    }
+    entries.push_back(
+        {static_cast<uint32_t>(cpu), ccxId.value(), numaNodeIt->second});
+  }
+  return entries;
 }
 
 std::string removeBlanks(std::string s) {

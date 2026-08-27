@@ -342,6 +342,12 @@ class PmuDeviceManager {
         rootDir_(rootDir),
         cpuSocketToCores_(getSocketCoreMapFromSysfs(rootDir)) {}
 
+  // Root of the sysfs tree this manager reads from. Tests override it with a
+  // fixture tree.
+  const std::string& getRootDir() const noexcept {
+    return rootDir_;
+  }
+
   // Sync PMUs exposed in /sys/devices with those in pmu_groups_.
   void loadSysFsPmus();
 
