@@ -515,22 +515,6 @@ void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
                       << e.what() << "\"";
     }
 #endif // USE_JSON_GENERATED_PERF_EVENTS
-    if (cpu_info.cpu_arch == CpuArch::SRF) {
-      pmu_manager->addEvent(
-          std::make_shared<EventDef>(
-              PmuType::cpu,
-              "L1D.REPLACEMENT",
-              EventDef::Encoding{.code = 0x51, .umask = 0x01},
-              "L1 data cache line replacements.",
-              "Counts cache lines replaced in the L1 data cache on Sierra Forest."));
-      pmu_manager->addEvent(
-          std::make_shared<EventDef>(
-              PmuType::cpu,
-              "L2_LINES_IN.ALL",
-              EventDef::Encoding{.code = 0x25, .umask = 0x1e},
-              "L2 cache lines entering the E, F, M, or S state.",
-              "Counts L2 cache lines entering the E, F, M, or S state on Sierra Forest."));
-    }
   } else if (cpu_info.cpu_family == CpuFamily::ARM) {
     addArmEvents(cpu_info, *pmu_manager);
   } else {
@@ -586,49 +570,6 @@ void populatePmuDeviceManager(std::shared_ptr<PmuDeviceManager>& pmu_manager) {
         "ex_ret_brn_tkn",
         std::vector<EventId>({"branch-instructions-ret-tkn"}));
   }
-}
-
-static void addAmdL1CacheMissMetrics(std::shared_ptr<Metrics>& metrics) {
-  metrics->add(
-      std::make_shared<MetricDesc>(
-          "CORE_L1_ICACHE_FILL_MISSES",
-          "L1 instruction cache fill misses",
-          "Counts any instruction fill misses in the cache.",
-          std::map<TOptCpuArch, EventRefs>{
-              {std::nullopt,
-               EventRefs{EventRef{
-                   "l1_icache_fill_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
-
-  metrics->add(
-      std::make_shared<MetricDesc>(
-          "CORE_L1_DCACHE_MISSES",
-          "L1 data cache misses",
-          "L1 data cache misses.",
-          std::map<TOptCpuArch, EventRefs>{
-              {std::nullopt,
-               EventRefs{EventRef{
-                   "l1_dcache_misses",
-                   PmuType::cpu,
-                   "l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::VENICE,
-               EventRefs{EventRef{
-                   "l1_dcache_misses",
-                   PmuType::cpu,
-                   "zen6::l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
 }
 
 /// Add Builtin-Metrics, other metrics can be added dynamically.
@@ -769,147 +710,6 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
             std::vector<std::string>{}));
   }
 
-  metrics->add(
-      std::make_shared<MetricDesc>(
-          "l1d_cache_misses",
-          "L1 data cache misses.",
-          "Counts L1 data cache replacements on Intel, L1 data cache misses "
-          "on AMD, and L1 data cache refills on ARM.",
-          std::map<TOptCpuArch, EventRefs>{
-              {std::nullopt,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "L1D.REPLACEMENT",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::MILAN,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::GENOA,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::BERGAMO,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::TURIN,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::VENICE,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::cpu,
-                   "zen6::l1_dcache_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::NEOVERSE_V2,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::armv8_pmuv3,
-                   "l1d_cache_refill",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::NEOVERSE_V3,
-               EventRefs{EventRef{
-                   "l1d_cache_misses",
-                   PmuType::armv8_pmuv3,
-                   "l1d_cache_refill",
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
-
-  metrics->add(
-      std::make_shared<MetricDesc>(
-          "l1i_cache_misses",
-          "L1 instruction cache misses.",
-          "Counts L2 code requests on Intel, L1 instruction cache fill "
-          "misses on AMD, and L1 instruction cache refills on ARM.",
-          std::map<TOptCpuArch, EventRefs>{
-              {std::nullopt,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "L2_RQSTS.ALL_CODE_RD",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::SRF,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "ICACHE.MISSES",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::MILAN,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::GENOA,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::BERGAMO,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::TURIN,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::VENICE,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::cpu,
-                   "l1_icache_fill_misses",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::NEOVERSE_V2,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::armv8_pmuv3,
-                   "l1i_cache_refill",
-                   EventExtraAttr{},
-                   {}}}},
-              {CpuArch::NEOVERSE_V3,
-               EventRefs{EventRef{
-                   "l1i_cache_misses",
-                   PmuType::armv8_pmuv3,
-                   "l1i_cache_refill",
-                   EventExtraAttr{},
-                   {}}}}},
-          100'000'000,
-          System::Permissions{},
-          std::vector<std::string>{}));
-
   // l2_cache_misses replaces DynoPerfCounterType::L2CACHE_MISS
   if (cpu_info.cpu_family == CpuFamily::INTEL) {
     metrics->add(
@@ -925,13 +725,6 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
                      PmuType::cpu,
                      "l2_cache_misses",
                      EventExtraAttr{},
-                     {}}}},
-                {CpuArch::SRF,
-                 EventRefs{EventRef{
-                     "l2_cache_misses",
-                     PmuType::cpu,
-                     "L2_LINES_IN.ALL",
-                     EventExtraAttr{},
                      {}}}}},
             100'000'000,
             System::Permissions{},
@@ -940,7 +733,6 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
       cpu_info.cpu_family == CpuFamily::AMDZEN3 ||
       cpu_info.cpu_family == CpuFamily::AMDZEN5 ||
       cpu_info.cpu_family == CpuFamily::AMDZEN6) {
-    addAmdL1CacheMissMetrics(metrics);
     metrics->add(
         std::make_shared<MetricDesc>(
             "l2_cache_misses",
@@ -1900,21 +1692,30 @@ std::shared_ptr<Metrics> makeAvailableMetricsForCpu(const CpuInfo& cpu_info) {
 
   if (cpu_info.cpu_family == CpuFamily::ARM) {
     addArmCoreMetrics(metrics);
-  } else if (cpu_info.cpu_family == CpuFamily::INTEL) {
-    // The config-events catalog exposes Intel L1 cache metrics under these
-    // existing host IDs. Include the same definitions in the compiled task
-    // snapshot so task-key resolution is identical with or without config
-    // events. SPR and SRF also reuse the host IDs for L2 and L3.
-    addIntelCoreMetrics(metrics);
   }
 
   return metrics;
 }
 
 void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
-  addAmdL1CacheMissMetrics(metrics);
-
   // L1 Instruction Cache Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_ICACHE_FILL_MISSES",
+          "L1 instruction cache fill misses",
+          "Counts any instruction fill misses in the cache.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_icache_fill_misses",
+                   PmuType::cpu,
+                   "l1_icache_fill_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
   metrics->add(
       std::make_shared<MetricDesc>(
           "CORE_L1_ICACHE_INSTR_FETCHES",
@@ -1950,6 +1751,30 @@ void addAmdCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           std::vector<std::string>{}));
 
   // L1 Data Cache Metrics
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "CORE_L1_DCACHE_MISSES",
+          "L1 data cache misses",
+          "L1 data cache misses.",
+          std::map<TOptCpuArch, EventRefs>{
+              {std::nullopt,
+               EventRefs{EventRef{
+                   "l1_dcache_misses",
+                   PmuType::cpu,
+                   "l1_dcache_misses",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::VENICE,
+               EventRefs{EventRef{
+                   "l1_dcache_misses",
+                   PmuType::cpu,
+                   "zen6::l1_dcache_misses",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
   metrics->add(
       std::make_shared<MetricDesc>(
           "CORE_L1_DCACHE_ACCESSES",
