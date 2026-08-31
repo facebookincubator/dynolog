@@ -1,0 +1,57 @@
+name: Release Packages
+
+# Builds the Debian and RPM packages when a release is published and attaches
+# them to the release. This automates the manual packaging steps in RELEASE.md
+# so every release ships both a .deb and a .rpm.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  debian:
+    runs-on: ubuntu-latest
+    name: Build and upload Debian package
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Build package in Ubuntu image
+      run: |
+        set -eux
+        docker build . -f dynolog.dockerfile -t dyno_build:ubuntu_x86 --target ubuntu_x86
+        cid=$(docker run -d dyno_build:ubuntu_x86 tail -f /dev/null)
+        docker exec "$cid" ./scripts/debian/make_deb.sh
+        deb=$(docker exec "$cid" bash -c 'ls /workspace/dynolog/dynolog_*-0-amd64.deb')
+        mkdir -p packages
+        docker cp "$cid:$deb" packages/
+        docker rm -f "$cid"
+    - name: Upload package to release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: packages/*.deb
+
+  rpm:
+    runs-on: ubuntu-latest
+    name: Build and upload RPM package
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Build package in Rocky Linux image
+      run: |
+        set -eux
+        docker build . -f dynolog.dockerfile -t dyno_build:rocky9_x86 --target rocky9_x86
+        cid=$(docker run -d dyno_build:rocky9_x86 tail -f /dev/null)
+        docker exec "$cid" ./scripts/rpm/make_rpm.sh
+        rpm=$(docker exec "$cid" bash -c 'ls /root/rpmbuild/RPMS/x86_64/dynolog-*.rpm')
+        mkdir -p packages
+        docker cp "$cid:$rpm" packages/
+        docker rm -f "$cid"
+    - name: Upload package to release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: packages/*.rpm

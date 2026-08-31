@@ -8,6 +8,12 @@
    [branch_name]`
 7. Create a new release on [this
   page](https://github.com/facebookincubator/dynolog/releases) on Github.
+
+Publishing the release triggers the `Release Packages` GitHub Actions workflow
+(`.github/workflows/release.yml`), which builds the rpm and debian packages and
+attaches them to the release automatically. The manual steps below are kept for
+reference and for building packages locally.
+
 8. Build rpm and debian packages. You can use Docker for this, details provided below.
 9. Upload the rpm and debian packages to the [release page](https://github.com/facebookincubator/dynolog/releases) or by running [gh cli](https://cli.github.com/manual/gh_release_upload)
 
