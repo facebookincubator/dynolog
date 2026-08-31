@@ -88,6 +88,8 @@ std::string PmuTypeToStr(PmuType pmu_type) {
     CASE_PMU_TYPE(uncore_mchbm);
 
     CASE_PMU_TYPE(armv8_pmuv3);
+    CASE_PMU_TYPE(arm_cspmu_mc);
+    CASE_PMU_TYPE(arm_cmn);
 
     CASE_PMU_TYPE(nvidia_scf_pmu);
     CASE_PMU_TYPE(nvidia_nvlink_c2c0_pmu);
@@ -159,6 +161,8 @@ PmuType PmuTypeFromStr(const std::string& str) {
   IF_PMU_TYPE(str, uncore_mchbm);
 
   IF_PMU_TYPE(str, armv8_pmuv3);
+  IF_PMU_TYPE(str, arm_cspmu_mc);
+  IF_PMU_TYPE(str, arm_cmn);
 
   IF_PMU_TYPE(str, nvidia_scf_pmu);
   IF_PMU_TYPE(str, nvidia_nvlink_c2c0_pmu);

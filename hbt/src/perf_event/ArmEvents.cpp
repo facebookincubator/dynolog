@@ -146,16 +146,57 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 } // namespace neoverse_v2
 
+namespace {
+
+void addNeoverseV3Events(PmuDeviceManager& pmu_manager) {
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::arm_cspmu_mc,
+          "total_data_beats",
+          EventDef::Encoding{.code = 0},
+          "DDR data beats transferred by the memory controller",
+          "Counts DDR data beats transferred by the memory controller. Each count represents 32 bytes.",
+          std::nullopt,
+          EventDef::ScaleData{
+              .scale_factor = 32, .scale_unit = ScaleUnit::Bytes}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::arm_cmn,
+          "hns_mc_reqs_local_sn",
+          EventDef::Encoding{.code = 0x080D0200},
+          "Local HN-S requests sent to the memory controller",
+          "Counts local HN-S requests sent to the memory controller. Each request estimates 64 bytes of memory traffic.",
+          std::nullopt,
+          EventDef::ScaleData{
+              .scale_factor = 64, .scale_unit = ScaleUnit::Bytes}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::arm_cmn,
+          "hns_mc_reqs_remote_sn",
+          EventDef::Encoding{.code = 0x083B0200},
+          "Remote HN-S requests sent to the memory controller",
+          "Counts remote HN-S requests sent to the memory controller. Each request estimates 64 bytes of cross-die memory traffic.",
+          std::nullopt,
+          EventDef::ScaleData{
+              .scale_factor = 64, .scale_unit = ScaleUnit::Bytes}));
+}
+
+} // namespace
+
 void addArmEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
   // When multiple families/models are in the fleet, add a switch stmt similar
   // to addEvents in json_events/generated/intel/JsonEvents.h
   switch (cpu_info.cpu_arch) {
     case CpuArch::NEOVERSE_V2:
-    case CpuArch::NEOVERSE_V3:
-      // With ARM, multiple CPUs can use the same CPU Core, but have different
-      // uncores
-      // TODO: Provide SoC breakdown in addition to CPU model
       neoverse_v2::addEvents(pmu_manager);
+      break;
+    case CpuArch::NEOVERSE_V3:
+      neoverse_v2::addEvents(pmu_manager);
+      // Neoverse V3 is shared by multiple SoCs. The Phoenix DMC PMU is the
+      // platform discriminator for these uncore encodings.
+      if (pmu_manager.getPmuGroupSize(PmuType::arm_cspmu_mc) > 0) {
+        addNeoverseV3Events(pmu_manager);
+      }
       break;
     default:
       HBT_LOG_ERROR()

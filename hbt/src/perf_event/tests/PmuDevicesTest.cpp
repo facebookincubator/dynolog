@@ -364,6 +364,59 @@ TEST_F(PmuDevicesTest, LibPfm4Groups) {
   EXPECT_EQ(g1.ev_defs.size(), 1);
 }
 
+TEST_F(PmuDevicesTest, NeoverseV3UncorePmuTypeRoundTrip) {
+  const std::vector<std::pair<PmuType, std::string>> expected{
+      {PmuType::arm_cspmu_mc, "arm_cspmu_mc"},
+      {PmuType::arm_cmn, "arm_cmn"},
+  };
+  for (const auto& [type, name] : expected) {
+    EXPECT_EQ(PmuTypeToStr(type), name);
+    EXPECT_EQ(PmuTypeFromStr(name), type);
+  }
+}
+
+TEST_F(PmuDevicesTest, ParseNeoverseV3UncoreDeviceNames) {
+  const std::vector<std::tuple<std::string, PmuType, std::optional<uint32_t>>>
+      expected{
+          {"arm_cspmu_mc_0", PmuType::arm_cspmu_mc, 0},
+          {"arm_cspmu_mc_3", PmuType::arm_cspmu_mc, 3},
+          {"arm_cmn_0", PmuType::arm_cmn, 0},
+          {"arm_cmn_1", PmuType::arm_cmn, 1},
+      };
+  for (const auto& [name, expectedType, expectedIndex] : expected) {
+    const auto [type, index] = parseDeviceTypeFromStr(name);
+    EXPECT_EQ(type, expectedType);
+    EXPECT_EQ(index, expectedIndex);
+  }
+}
+
+TEST_F(PmuDevicesTest, LoadNeoverseV3UncorePmusFromSysFs) {
+  const char* testRoot = getenv("testroot");
+  ASSERT_NE(testRoot, nullptr);
+
+  auto cpuInfo = CpuInfo::load();
+  PmuDeviceManager pmuManager(cpuInfo, testRoot);
+  pmuManager.loadSysFsPmus();
+
+  auto dmc = pmuManager.findPmuDeviceByName("arm_cspmu_mc_0");
+  ASSERT_NE(dmc, nullptr);
+  EXPECT_EQ(dmc->getPmuType(), PmuType::arm_cspmu_mc);
+  EXPECT_EQ(dmc->getPmuDevEnumeration(), 0);
+  const auto dmcCpuMask = dmc->getCpuMask();
+  ASSERT_TRUE(dmcCpuMask.has_value());
+  EXPECT_TRUE(CPU_ISSET(0, &dmcCpuMask.value()));
+  EXPECT_TRUE(dmc->format.contains("event"));
+
+  auto cmn = pmuManager.findPmuDeviceByName("arm_cmn_0");
+  ASSERT_NE(cmn, nullptr);
+  EXPECT_EQ(cmn->getPmuType(), PmuType::arm_cmn);
+  EXPECT_EQ(cmn->getPmuDevEnumeration(), 0);
+  const auto cmnCpuMask = cmn->getCpuMask();
+  ASSERT_TRUE(cmnCpuMask.has_value());
+  EXPECT_TRUE(CPU_ISSET(0, &cmnCpuMask.value()));
+  EXPECT_TRUE(cmn->format.contains("eventid"));
+}
+
 // --- Vera-Rubin uncore PMU support ---
 
 TEST_F(PmuDevicesTest, VeraPmuTypeRoundTrip) {
@@ -415,11 +468,14 @@ TEST_F(PmuDevicesTest, ParseVeraDeviceNames) {
       parseDeviceTypeFromStr("not_a_real_pmu_0_rc_0"), std::invalid_argument);
 }
 
-TEST_F(PmuDevicesTest, VeraCpuArchMapping) {
+TEST_F(PmuDevicesTest, ArmCpuArchMapping) {
+  // Phoenix reports the Neoverse V3AE part number.
+  EXPECT_EQ(makeCpuArchArm(0x41, 0, 0xD83, 0), CpuArch::NEOVERSE_V3);
+  EXPECT_EQ(makeCpuArchArm(0x41, 0, 0xD84, 0), CpuArch::NEOVERSE_V3);
+  // Regression: Arm-implemented Neoverse V2 (Grace-Hopper) still maps.
+  EXPECT_EQ(makeCpuArchArm(0x41, 0, 0xD4F, 0), CpuArch::NEOVERSE_V2);
   // Vera (VR200 / Vera-Rubin): NVIDIA implementer 0x4E, part 0x010.
   EXPECT_EQ(makeCpuArchArm(0x4E, 0, 0x010, 0), CpuArch::NEOVERSE_V2);
   // Unknown NVIDIA part number -> UNKNOWN.
   EXPECT_EQ(makeCpuArchArm(0x4E, 0, 0x999, 0), CpuArch::UNKNOWN);
-  // Regression: Arm-implemented Neoverse V2 (Grace-Hopper) still maps.
-  EXPECT_EQ(makeCpuArchArm(0x41, 0, 0xD4F, 0), CpuArch::NEOVERSE_V2);
 }

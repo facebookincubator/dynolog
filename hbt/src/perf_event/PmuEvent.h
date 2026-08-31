@@ -111,6 +111,10 @@ enum class PmuType : uint16_t {
 
   // Arm
   cs_etm,
+
+  // Arm uncores
+  arm_cspmu_mc,
+  arm_cmn,
 };
 
 std::string PmuTypeToStr(PmuType /*pmu_type*/);

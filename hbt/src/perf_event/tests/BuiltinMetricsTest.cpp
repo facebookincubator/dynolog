@@ -55,6 +55,33 @@ TEST_F(BuiltinMetricsTest, ArmCpuIncludesArmCoreMetrics) {
   EXPECT_EQ(eventRefs->at(0).event_id, "ll_cache_miss_rd");
 }
 
+TEST_F(BuiltinMetricsTest, NeoverseV3UncoreMetricsRegistered) {
+  auto v3Metrics = std::make_shared<Metrics>();
+  addArmUncoreMetrics(v3Metrics);
+
+  struct ExpectedMetric {
+    const char* id;
+    PmuType pmuType;
+    const char* eventId;
+  };
+  const std::vector<ExpectedMetric> expected{
+      {"HW_DMC_MEM_BYTES", PmuType::arm_cspmu_mc, "total_data_beats"},
+      {"HW_CMN_MC_REQ_LOCAL", PmuType::arm_cmn, "hns_mc_reqs_local_sn"},
+      {"HW_CMN_MC_REQ_REMOTE", PmuType::arm_cmn, "hns_mc_reqs_remote_sn"},
+  };
+
+  for (const auto& metric : expected) {
+    const auto desc = v3Metrics->getMetricDesc(metric.id);
+    const auto refs = desc->getEventRefs(CpuArch::NEOVERSE_V3);
+    ASSERT_TRUE(refs.has_value()) << metric.id;
+    ASSERT_EQ(refs->size(), 1u) << metric.id;
+    EXPECT_EQ(refs->at(0).pmu_type, metric.pmuType) << metric.id;
+    EXPECT_EQ(refs->at(0).event_id, metric.eventId) << metric.id;
+    EXPECT_FALSE(desc->getEventRefs(CpuArch::NEOVERSE_V2).has_value())
+        << metric.id;
+  }
+}
+
 TEST_F(BuiltinMetricsTest, VeraUncoreMetricsRegistered) {
   // addArmUncoreMetrics is arch-neutral C++ (only its call site in
   // addUncoreMetrics is __aarch64__-gated), so it can be exercised directly on
