@@ -85,7 +85,7 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       std::nullopt // Errata
       ));
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+  // Event LD_BLOCKS.STORE_FORWARD is allowlisted
   pmu_manager.addEvent(std::make_shared<EventDef>(
       PmuType::cpu,
       "LD_BLOCKS.STORE_FORWARD",
@@ -98,7 +98,6 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       EventDef::IntelFeatures{},
       std::nullopt // Errata
       ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
   pmu_manager.addEvent(std::make_shared<EventDef>(
