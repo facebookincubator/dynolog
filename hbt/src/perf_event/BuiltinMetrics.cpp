@@ -4080,6 +4080,39 @@ void addArmUncoreMetrics(
           System::Permissions{},
           std::vector<std::string>{}));
 
+  const auto addNeoverseV3Uncore = [&metrics](
+                                       const MetricId& id,
+                                       const std::string& desc,
+                                       PmuType pmu,
+                                       const EventId& event) {
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            id,
+            desc,
+            desc,
+            std::map<TOptCpuArch, EventRefs>{
+                {CpuArch::NEOVERSE_V3,
+                 EventRefs{EventRef{event, pmu, event, EventExtraAttr{}, {}}}}},
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  };
+  addNeoverseV3Uncore(
+      "HW_DMC_MEM_BYTES",
+      "Total DRAM traffic in bytes from the Phoenix DMC",
+      PmuType::arm_cspmu_mc,
+      "total_data_beats");
+  addNeoverseV3Uncore(
+      "HW_CMN_MC_REQ_LOCAL",
+      "Estimated local memory-controller request traffic in bytes",
+      PmuType::arm_cmn,
+      "hns_mc_reqs_local_sn");
+  addNeoverseV3Uncore(
+      "HW_CMN_MC_REQ_REMOTE",
+      "Estimated cross-die memory-controller request traffic in bytes",
+      PmuType::arm_cmn,
+      "hns_mc_reqs_remote_sn");
+
   // Vera-Rubin uncore metrics. On Vera the uncore PMU sysfs names
   // differ from Grace-Hopper (nvidia_ucf_pmu vs nvidia_scf_pmu, a single
   // nvidia_nvlink_c2c_pmu vs c2c0/c2c1, per-root-complex pcie), so these are
