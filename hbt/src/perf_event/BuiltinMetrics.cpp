@@ -3876,6 +3876,17 @@ void addAmdUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
        "zen4::l3_xi_sampled_dram_latency.far",
        "zen4::l3_xi_sampled_dram_latency_requests.far"});
 
+  // L3 sampled CXL extension-memory latency:
+  // near-lat(0)/near-req(1)/far-lat(2)/far-req(3).
+  addUncoreGroup(
+      "L3ExtMemLat",
+      "L3 sampled CXL extension-memory latency near-lat(0)/near-req(1)/far-lat(2)/far-req(3)",
+      PmuType::amd_l3,
+      {"zen4::l3_xi_sampled_ext_mem_latency.near",
+       "zen4::l3_xi_sampled_ext_mem_latency_requests.near",
+       "zen4::l3_xi_sampled_ext_mem_latency.far",
+       "zen4::l3_xi_sampled_ext_mem_latency_requests.far"});
+
   // L3 sampled CCX latency: near-lat(0)/near-req(1)/far-lat(2)/far-req(3).
   addUncoreGroup(
       "L3CcxLat",

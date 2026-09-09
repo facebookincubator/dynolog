@@ -355,6 +355,42 @@ constexpr PmuMsr kL3Zen4XiSampledLatReqDRamFar{
         .enAllCores = 0x1,
         .sliceId = 0x3,
         .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatExtMemNear{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x10,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqExtMemNear{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x10,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatExtMemFar{
+    .amdL3 = {
+        .event = 0xAC,
+        .unitMask = 0x20,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
+constexpr PmuMsr kL3Zen4XiSampledLatReqExtMemFar{
+    .amdL3 = {
+        .event = 0xAD,
+        .unitMask = 0x20,
+        .coreId = 0x0,
+        .enAllSlices = 0x1,
+        .enAllCores = 0x1,
+        .sliceId = 0x3,
+        .threadMask = 0x3}};
 constexpr PmuMsr kL3Zen4XiSampledLatCCXNear{
     .amdL3 = {
         .event = 0xAC,

@@ -530,6 +530,43 @@ void addEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ext_mem_latency.near",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatExtMemNear.val},
+          "Sampled latency of requests that target near CXL extension memory.",
+          "ExtMem_Near. Read-write. Sampled latency of requests that target near CXL extension memory."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ext-mem-latency-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ext_mem_latency_requests.near",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatReqExtMemNear.val},
+          "Sampled L3 fill requests sourced from near CXL extension memory.",
+          "ExtMem_Near. Read-write. The number of sampled L3 fill requests sourced from near CXL extension memory."),
+      std::vector<EventId>(
+          {"zen4-l3-xi-sampled-ext-mem-latency-requests-near"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ext_mem_latency.far",
+          EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatExtMemFar.val},
+          "Sampled latency of requests that target far CXL extension memory.",
+          "ExtMem_Far. Read-write. Sampled latency of requests that target far CXL extension memory."),
+      std::vector<EventId>({"zen4-l3-xi-sampled-ext-mem-latency-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
+          "zen4::l3_xi_sampled_ext_mem_latency_requests.far",
+          EventDef::Encoding{
+              .code = amd_msr::kL3Zen4XiSampledLatReqExtMemFar.val},
+          "Sampled L3 fill requests sourced from far CXL extension memory.",
+          "ExtMem_Far. Read-write. The number of sampled L3 fill requests sourced from far CXL extension memory."),
+      std::vector<EventId>(
+          {"zen4-l3-xi-sampled-ext-mem-latency-requests-far"}));
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::amd_l3,
           "zen4::l3_xi_sampled_ccx_latency.near",
           EventDef::Encoding{.code = amd_msr::kL3Zen4XiSampledLatCCXNear.val},
           "Sampled latency of requests that target the same NUMA node and return from another CCX's cache.",
