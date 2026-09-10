@@ -8,8 +8,92 @@
 
 #include <gtest/gtest.h>
 
+#include <array>
+#include <future>
+
 using namespace facebook::hbt;
 using namespace facebook::hbt::perf_event;
+
+namespace {
+
+constexpr std::array<StaticEventDef, 3> kStaticSoftwareEvents{{
+    {
+        .pmu_type = PmuType::software,
+        .id = "STATIC-ALPHA",
+        .encoding = {.code = 0x11},
+        .brief_desc = "static alpha",
+        .full_desc = "static alpha full",
+    },
+    {
+        .pmu_type = PmuType::software,
+        .id = "STATIC_BRAVO",
+        .encoding = {.code = 0x22, .msr_values = uint64_t{0x1234}},
+        .brief_desc = "static bravo",
+        .full_desc = "static bravo full",
+    },
+    {
+        .pmu_type = PmuType::software,
+        .id = "static.charlie",
+        .encoding =
+            {
+                .code = 0x33,
+                .msr_values = std::array<uint64_t, 2>{0x5678, 0x9abc},
+            },
+        .brief_desc = "static charlie",
+        .full_desc = "static charlie full",
+    },
+}};
+
+constexpr std::array<StaticEventDef, 2> kMixedStaticEvents{{
+    {
+        .pmu_type = PmuType::software,
+        .id = "mixed_software",
+        .encoding = {.code = 0x44},
+        .brief_desc = "mixed software",
+        .full_desc = "mixed software full",
+    },
+    {
+        .pmu_type = PmuType::cpu,
+        .id = "mixed_cpu",
+        .encoding = {.code = 0x55},
+        .brief_desc = "mixed cpu",
+        .full_desc = "mixed cpu full",
+    },
+}};
+
+constexpr std::array<StaticEventDef, 1> kAdditionalStaticEvents{{
+    {
+        .pmu_type = PmuType::software,
+        .id = "static_delta",
+        .encoding = {.code = 0x66},
+        .brief_desc = "static delta",
+        .full_desc = "static delta full",
+    },
+}};
+
+static_assert(isStaticEventDefTableSorted(kStaticSoftwareEvents));
+static_assert(isStaticEventDefTableSorted(kMixedStaticEvents));
+static_assert(isStaticEventDefTableSorted(kAdditionalStaticEvents));
+
+std::shared_ptr<PmuDevice> makePmu(
+    std::string name,
+    PmuType type,
+    std::optional<unsigned> enumeration,
+    uint32_t perf_pmu_id) {
+  return std::make_shared<PmuDevice>(
+      std::move(name),
+      type,
+      enumeration,
+      perf_pmu_id,
+      "A Dummy PMU device",
+      false);
+}
+
+std::shared_ptr<PmuDeviceManager> makePmuManager() {
+  return std::make_shared<PmuDeviceManager>(CpuInfo::load());
+}
+
+} // namespace
 
 class PmuDevicesTest : public ::testing::Test {};
 
@@ -139,6 +223,283 @@ TEST_F(PmuDevicesTest, Aliases) {
   auto ev_def_alias2 = pmu_manager->findEventDef("alias-2", std::nullopt);
   EXPECT_TRUE(ev_def_alias2 != nullptr);
   EXPECT_EQ(ev_def_alias1->id, ev_def_alias2->id);
+}
+
+TEST_F(PmuDevicesTest, StaticMakeConfDoesNotRequireMaterialization) {
+  auto pmu_manager = makePmuManager();
+  auto pmu =
+      makePmu("dummy_pmu", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(pmu);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+
+  const EventConf noMsr =
+      pmu->makeConf("static_alpha", EventExtraAttr{}, EventValueTransforms{});
+  EXPECT_EQ(noMsr.id, "static_alpha");
+  EXPECT_EQ(noMsr.configs.type, PERF_TYPE_SOFTWARE);
+  EXPECT_EQ(noMsr.configs.config, 0x11);
+  EXPECT_EQ(noMsr.configs.config1, 0);
+  EXPECT_EQ(noMsr.configs.config2, 0);
+
+  const EventConf oneMsr =
+      pmu->makeConf("STATIC_BRAVO", EventExtraAttr{}, EventValueTransforms{});
+  EXPECT_EQ(oneMsr.configs.config, 0x22);
+  EXPECT_EQ(oneMsr.configs.config1, 0x1234);
+  EXPECT_EQ(oneMsr.configs.config2, 0);
+
+  const EventConf twoMsrs =
+      pmu->makeConf("static.charlie", EventExtraAttr{}, EventValueTransforms{});
+  EXPECT_EQ(twoMsrs.configs.config, 0x33);
+  EXPECT_EQ(twoMsrs.configs.config1, 0x5678);
+  EXPECT_EQ(twoMsrs.configs.config2, 0x9abc);
+}
+
+TEST_F(PmuDevicesTest, StaticLookupSharesLazyMaterializationAcrossDevices) {
+  auto pmu_manager = makePmuManager();
+  auto pmu0 = makePmu("software_0", PmuType::software, 0, 101);
+  auto pmu1 = makePmu("software_1", PmuType::software, 1, 102);
+  pmu_manager->addPmu(pmu0);
+  pmu_manager->addPmu(pmu1);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+
+  auto primary = pmu0->findEventDef("STATIC-ALPHA");
+  auto alias = pmu0->findEventDef("static_alpha");
+  auto other_device = pmu1->findEventDef("STATIC-ALPHA");
+  ASSERT_NE(primary, nullptr);
+  EXPECT_EQ(primary, alias);
+  EXPECT_EQ(primary, other_device);
+  EXPECT_EQ(primary->id, "STATIC-ALPHA");
+}
+
+TEST_F(PmuDevicesTest, StaticConcurrentFirstLookupSharesOnePointer) {
+  auto pmu_manager = makePmuManager();
+  auto pmu0 = makePmu("software_0", PmuType::software, 0, 101);
+  auto pmu1 = makePmu("software_1", PmuType::software, 1, 102);
+  pmu_manager->addPmu(pmu0);
+  pmu_manager->addPmu(pmu1);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+
+  constexpr size_t kNumLookups = 16;
+  std::array<std::future<std::shared_ptr<EventDef>>, kNumLookups> futures;
+  for (size_t i = 0; i < futures.size(); ++i) {
+    const auto& pmu = i % 2 == 0 ? pmu0 : pmu1;
+    futures[i] = std::async(std::launch::async, [pmu, i] {
+      return pmu->findEventDef(i % 3 == 0 ? "static_alpha" : "STATIC-ALPHA");
+    });
+  }
+
+  const auto expected = futures[0].get();
+  ASSERT_NE(expected, nullptr);
+  for (size_t i = 1; i < futures.size(); ++i) {
+    EXPECT_EQ(futures[i].get(), expected);
+  }
+}
+
+TEST_F(PmuDevicesTest, StaticRegistrationSupportsMultipleSpansAndPmuTypes) {
+  auto pmu_manager = makePmuManager();
+  auto software =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  auto cpu = makePmu("cpu", PmuType::cpu, std::nullopt, PERF_TYPE_RAW);
+  pmu_manager->addPmu(software);
+  pmu_manager->addPmu(cpu);
+
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kAdditionalStaticEvents), 0);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kMixedStaticEvents), 0);
+
+  EXPECT_NE(software->findEventDef("static_delta"), nullptr);
+  EXPECT_NE(software->findEventDef("mixed_software"), nullptr);
+  EXPECT_EQ(software->findEventDef("mixed_cpu"), nullptr);
+  EXPECT_NE(cpu->findEventDef("mixed_cpu"), nullptr);
+  EXPECT_EQ(cpu->findEventDef("mixed_software"), nullptr);
+}
+
+TEST_F(PmuDevicesTest, StaticAndOwningEventsCoexistAndEnumerate) {
+  auto pmu_manager = makePmuManager();
+  auto pmu =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(pmu);
+  auto owning = std::make_shared<EventDef>(
+      PmuType::software,
+      "owning.event",
+      EventDef::Encoding{.code = 0x77},
+      "owning",
+      "owning full");
+  ASSERT_EQ(pmu_manager->addEvent(owning), 0);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+
+  const auto& event_defs = pmu->getEventDefs();
+  EXPECT_EQ(event_defs.size(), 4);
+  EXPECT_EQ(event_defs.at("owning.event"), owning);
+  const auto static_event = event_defs.at("static.charlie");
+  EXPECT_EQ(static_event, pmu->findEventDef("static.charlie"));
+  EXPECT_EQ(&pmu->getEventDefs(), &event_defs);
+  EXPECT_EQ(pmu->getEventDefs().at("static.charlie"), static_event);
+
+  const auto groups = pmu->makeLibPfm4Groups();
+  EXPECT_EQ(groups->size(), 4);
+  EXPECT_EQ(groups->at("static").ev_defs.size(), 1);
+}
+
+TEST_F(PmuDevicesTest, AddsExplicitAliasesWithoutMaterializingStaticEvent) {
+  auto pmu_manager = makePmuManager();
+  auto pmu =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(pmu);
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+
+  EXPECT_EQ(
+      pmu_manager->addAliases(
+          "static_alpha", {"explicit_alias", "explicit_alias"}),
+      0);
+  const EventConf conf =
+      pmu->makeConf("explicit_alias", EventExtraAttr{}, EventValueTransforms{});
+  EXPECT_EQ(conf.id, "explicit_alias");
+  EXPECT_EQ(conf.configs.config, 0x11);
+  EXPECT_EQ(
+      pmu->findEventDef("explicit_alias"), pmu->findEventDef("STATIC-ALPHA"));
+}
+
+TEST_F(PmuDevicesTest, RejectsInvalidStaticTablesWithoutPartialRegistration) {
+  auto pmu_manager = makePmuManager();
+  auto software =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  auto cpu = makePmu("cpu", PmuType::cpu, std::nullopt, PERF_TYPE_RAW);
+  pmu_manager->addPmu(software);
+  pmu_manager->addPmu(cpu);
+  cpu->addEvent(
+      std::make_shared<EventDef>(
+          PmuType::cpu,
+          "mixed_cpu",
+          EventDef::Encoding{.code = 0x99},
+          "collision",
+          "collision full"));
+
+  constexpr std::array<StaticEventDef, 2> unsorted{{
+      kMixedStaticEvents[1],
+      kMixedStaticEvents[0],
+  }};
+  EXPECT_THROW(
+      pmu_manager->addStaticEventDefs(unsorted), std::invalid_argument);
+  EXPECT_EQ(software->findEventDef("mixed_software"), nullptr);
+
+  EXPECT_THROW(
+      pmu_manager->addStaticEventDefs(kMixedStaticEvents),
+      std::invalid_argument);
+  EXPECT_EQ(software->findEventDef("mixed_software"), nullptr);
+  EXPECT_EQ(cpu->findEventDef("mixed_cpu")->encoding.code, 0x99);
+
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kStaticSoftwareEvents), 0);
+  EXPECT_THROW(
+      pmu_manager->addStaticEventDefs(kStaticSoftwareEvents),
+      std::invalid_argument);
+  EXPECT_THROW(
+      software->addEvent(
+          std::make_shared<EventDef>(
+              PmuType::software,
+              "STATIC-ALPHA",
+              EventDef::Encoding{.code = 0xaa},
+              "primary collision",
+              "primary collision full")),
+      std::invalid_argument);
+  EXPECT_THROW(
+      software->addEvent(
+          std::make_shared<EventDef>(
+              PmuType::software,
+              "owning_with_alias",
+              EventDef::Encoding{.code = 0xab},
+              "explicit alias collision",
+              "explicit alias collision full"),
+          std::vector<EventId>{"STATIC_BRAVO"}),
+      std::invalid_argument);
+  EXPECT_THROW(
+      software->addEvent(
+          std::make_shared<EventDef>(
+              PmuType::software,
+              "STATIC-BRAVO",
+              EventDef::Encoding{.code = 0xac},
+              "canonical alias collision",
+              "canonical alias collision full")),
+      std::invalid_argument);
+  EXPECT_EQ(software->getEventDefs().size(), kStaticSoftwareEvents.size());
+}
+
+TEST_F(PmuDevicesTest, RejectsStaticPrimaryAndCanonicalAliasCollisions) {
+  auto pmu_manager = makePmuManager();
+  auto software =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(software);
+  software->addEvent(
+      std::make_shared<EventDef>(
+          PmuType::software,
+          "owning_event",
+          EventDef::Encoding{.code = 0x88},
+          "owning",
+          "owning full"),
+      std::vector<EventId>{"existing_alias"});
+
+  constexpr std::array<StaticEventDef, 1> primaryAliasCollision{{
+      {
+          .pmu_type = PmuType::software,
+          .id = "existing_alias",
+          .encoding = {.code = 0x89},
+          .brief_desc = "primary alias collision",
+          .full_desc = "primary alias collision full",
+      },
+  }};
+  EXPECT_THROW(
+      pmu_manager->addStaticEventDefs(primaryAliasCollision),
+      std::invalid_argument);
+
+  constexpr std::array<StaticEventDef, 1> canonicalPrimaryCollision{{
+      {
+          .pmu_type = PmuType::software,
+          .id = "OWNING-EVENT",
+          .encoding = {.code = 0x8a},
+          .brief_desc = "canonical primary collision",
+          .full_desc = "canonical primary collision full",
+      },
+  }};
+  EXPECT_THROW(
+      pmu_manager->addStaticEventDefs(canonicalPrimaryCollision),
+      std::invalid_argument);
+  EXPECT_EQ(software->getEventDefs().size(), 1);
+}
+
+TEST_F(PmuDevicesTest, SkipsUnavailablePmuTypes) {
+  auto pmu_manager = makePmuManager();
+  auto software =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(software);
+
+  ASSERT_EQ(pmu_manager->addStaticEventDefs(kMixedStaticEvents), 0);
+  EXPECT_NE(software->findEventDef("mixed_software"), nullptr);
+  EXPECT_EQ(software->findEventDef("mixed_cpu"), nullptr);
+
+  constexpr std::array<StaticEventDef, 1> unavailable{{
+      kMixedStaticEvents[1],
+  }};
+  EXPECT_EQ(pmu_manager->addStaticEventDefs(unavailable), -ENXIO);
+  EXPECT_EQ(software->getEventDefs().count("mixed_cpu"), 0);
+  EXPECT_EQ(pmu_manager->addStaticEventDefs({}), 0);
+}
+
+TEST_F(PmuDevicesTest, RejectsStaticDefinitionsThatCannotMaterialize) {
+  auto pmu_manager = makePmuManager();
+  auto software =
+      makePmu("software", PmuType::software, std::nullopt, PERF_TYPE_SOFTWARE);
+  pmu_manager->addPmu(software);
+
+  constexpr std::array<StaticEventDef, 1> invalid{{
+      {
+          .pmu_type = PmuType::software,
+          .id = "invalid event",
+          .encoding = {.code = 0x77},
+          .brief_desc = "invalid",
+          .full_desc = "invalid full",
+      },
+  }};
+  EXPECT_THROW(pmu_manager->addStaticEventDefs(invalid), std::invalid_argument);
+  EXPECT_EQ(software->findEventDef("invalid event"), nullptr);
 }
 
 TEST_F(PmuDevicesTest, PerfEventAttr) {

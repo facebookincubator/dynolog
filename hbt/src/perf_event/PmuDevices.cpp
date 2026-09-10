@@ -9,16 +9,242 @@
 #include <string>
 
 #include <filesystem>
+#include <map>
+#include <mutex>
+#include <set>
+#include <string_view>
 
 namespace fs = std::filesystem;
 namespace facebook::hbt::perf_event {
+
+class StaticEventDefTableState {
+ public:
+  explicit StaticEventDefTableState(std::span<const StaticEventDef> events)
+      : events_{events} {}
+
+  std::span<const StaticEventDef> events() const noexcept {
+    return events_;
+  }
+
+  std::shared_ptr<EventDef> materialize(const StaticEventDef& event) {
+    std::lock_guard lock{mutex_};
+    if (const auto it = materialized_.find(&event); it != materialized_.end()) {
+      return it->second;
+    }
+
+    auto materialized = std::make_shared<EventDef>(materializeEventDef(event));
+    materialized_.emplace(&event, materialized);
+    return materialized;
+  }
+
+ private:
+  const std::span<const StaticEventDef> events_;
+  std::mutex mutex_;
+  std::map<const StaticEventDef*, std::shared_ptr<EventDef>> materialized_;
+};
+
+std::optional<EventId> PmuDevice::findEventIdByAlias_(
+    const EventId& ev_id) const {
+  const auto it = aliases_.find(ev_id);
+  if (it == aliases_.end()) {
+    return std::nullopt;
+  }
+  return it->second;
+}
+
+const StaticEventDef* PmuDevice::findStaticEventDef_(
+    const EventId& ev_id) const {
+  for (const auto& state : static_event_defs_) {
+    if (const auto* event = perf_event::findStaticEventDef(
+            state->events(), getPmuType(), ev_id)) {
+      return event;
+    }
+  }
+  return nullptr;
+}
+
+bool PmuDevice::hasPrimaryEventId_(std::string_view ev_id) const {
+  const EventId id{ev_id};
+  return event_defs_.count(id) != 0 || findStaticEventDef_(id) != nullptr;
+}
+
+std::optional<EventId> PmuDevice::findPrimaryEventId_(
+    const EventId& ev_id) const {
+  if (hasPrimaryEventId_(ev_id)) {
+    return ev_id;
+  }
+  auto primary = findEventIdByAlias_(ev_id);
+  if (primary.has_value() && hasPrimaryEventId_(*primary)) {
+    return primary;
+  }
+  return std::nullopt;
+}
+
+std::shared_ptr<EventDef> PmuDevice::materializeStaticEventDef_(
+    const StaticEventDef& ev_def) const {
+  for (const auto& state : static_event_defs_) {
+    const auto* event = perf_event::findStaticEventDef(
+        state->events(), getPmuType(), ev_def.id);
+    if (event == &ev_def) {
+      return state->materialize(ev_def);
+    }
+  }
+  HBT_THROW_ASSERT_IF(true)
+      << "Static event definition is not registered with PMU " << getFullName();
+  __builtin_unreachable();
+}
+
+std::shared_ptr<EventDef> PmuDevice::findEventDef(const EventId& ev_id) const {
+  const auto primary = findPrimaryEventId_(ev_id);
+  if (!primary.has_value()) {
+    return nullptr;
+  }
+
+  if (const auto it = event_defs_.find(*primary); it != event_defs_.end()) {
+    HBT_ARG_CHECK_EQ(it->first, *primary);
+    return it->second;
+  }
+  return materializeStaticEventDef_(*findStaticEventDef_(*primary));
+}
+
+const std::map<EventId, std::shared_ptr<EventDef>>& PmuDevice::getEventDefs()
+    const {
+  for (const auto& state : static_event_defs_) {
+    for (const StaticEventDef& event : state->events()) {
+      event_defs_.try_emplace(EventId{event.id}, state->materialize(event));
+    }
+  }
+  return event_defs_;
+}
+
+void PmuDevice::validateStaticEventDefs_(
+    const std::shared_ptr<StaticEventDefTableState>& state) const {
+  std::set<EventId> incoming_primary_ids;
+  std::set<EventId> incoming_aliases;
+  for (const StaticEventDef& event : state->events()) {
+    HBT_ARG_CHECK(event.pmu_type == getPmuType());
+    HBT_ARG_CHECK(!event.id.empty());
+    HBT_ARG_CHECK(
+        std::none_of(
+            event.id.begin(),
+            event.id.end(),
+            [](unsigned char c) { return std::isblank(c); }))
+        << "Spaces not allowed in event_id \"" << event.id << "\"";
+    HBT_ARG_CHECK(!event.brief_desc.empty())
+        << "event_id: " << event.id << " missing brief description";
+    HBT_ARG_CHECK(!event.full_desc.empty())
+        << "event_id: " << event.id << " missing full description";
+    HBT_ARG_CHECK(!event.errata.has_value() || !event.errata->empty());
+
+    const EventId id{event.id};
+    HBT_ARG_CHECK(!hasPrimaryEventId_(id))
+        << "An event with id \"" << id << "\" already exists in PMU with id: \""
+        << getPmuId() << "\" and name: \"" << getFullName() << "\"";
+    HBT_ARG_CHECK_EQ(aliases_.count(id), 0)
+        << "Event ID \"" << id << "\" collides with an existing alias in PMU "
+        << getFullName();
+    HBT_ARG_CHECK(incoming_primary_ids.insert(id).second);
+
+    const EventId canonical_id = toCanonicalEventId(id);
+    if (canonical_id != id) {
+      HBT_ARG_CHECK(!hasPrimaryEventId_(canonical_id))
+          << "Canonical alias \"" << canonical_id
+          << "\" collides with an existing event in PMU " << getFullName();
+      HBT_ARG_CHECK_EQ(aliases_.count(canonical_id), 0)
+          << "Canonical alias \"" << canonical_id << "\" already exists in PMU "
+          << getFullName();
+      HBT_ARG_CHECK(incoming_aliases.insert(canonical_id).second)
+          << "Duplicate canonical alias \"" << canonical_id << "\"";
+    }
+  }
+
+  for (const auto& alias : incoming_aliases) {
+    HBT_ARG_CHECK_EQ(incoming_primary_ids.count(alias), 0)
+        << "Canonical alias \"" << alias
+        << "\" collides with an event in the same static table";
+  }
+}
+
+void PmuDevice::addStaticEventDefs_(
+    std::shared_ptr<StaticEventDefTableState> state) {
+  for (const StaticEventDef& event : state->events()) {
+    const EventId id{event.id};
+    const EventId canonical_id = toCanonicalEventId(id);
+    if (canonical_id != id) {
+      aliases_.emplace(canonical_id, id);
+    }
+  }
+  static_event_defs_.push_back(std::move(state));
+}
+
+void PmuDevice::addEvent(
+    std::shared_ptr<EventDef> ev_def,
+    std::optional<std::vector<EventId>> aliases) {
+  HBT_ARG_CHECK(!hasPrimaryEventId_(ev_def->id))
+      << "An event with id \"" << ev_def->id
+      << "\" already exists in PMU with id: \"" << getPmuId()
+      << "\" and name: \"" << getFullName() << "\"";
+  HBT_ARG_CHECK_EQ(aliases_.count(ev_def->id), 0)
+      << "Event ID \"" << ev_def->id
+      << "\" collides with an existing alias in PMU with id: \"" << getPmuId()
+      << "\" and name: \"" << getFullName() << "\"";
+
+  const bool has_dashes = ev_def->id.find('-') != std::string::npos;
+  const bool has_upper =
+      std::any_of(ev_def->id.begin(), ev_def->id.end(), ::isupper);
+  if (has_dashes || has_upper) {
+    aliases = std::vector<EventId>{toCanonicalEventId(ev_def->id)};
+  }
+
+  if (aliases.has_value()) {
+    for (const auto& alias : *aliases) {
+      HBT_ARG_CHECK(ev_def->id != alias && !hasPrimaryEventId_(alias))
+          << "Tried to register an alias equal to an already existing event id. "
+          << "Event ID: \"" << alias << "\" "
+          << "already exists in PMU with id: \"" << getPmuId() << "\""
+          << " and name: \"" << getFullName() << "\"";
+      HBT_ARG_CHECK_EQ(aliases_.count(alias), 0)
+          << "Alias \"" << alias << "\" already exists in PMU with id: \""
+          << getPmuId() << "\" and name: \"" << getFullName() << "\"";
+    }
+  }
+
+  auto [_, added] = event_defs_.emplace(ev_def->id, ev_def);
+  HBT_DCHECK(added);
+  if (aliases.has_value()) {
+    addAliases(ev_def->id, *aliases);
+  }
+}
+
+EventConf PmuDevice::makeConf(
+    const EventId& ev_id,
+    EventExtraAttr extra_attr,
+    EventValueTransforms transforms) const {
+  const auto primary = findPrimaryEventId_(ev_id);
+  HBT_ARG_CHECK(primary.has_value())
+      << "No event with ev_id \"" << ev_id
+      << "\" in PMU with id:  " << getPmuId() << " and name: \""
+      << getFullName() << "\"";
+
+  EventConfigs configs{};
+  if (const auto it = event_defs_.find(*primary); it != event_defs_.end()) {
+    configs = it->second->makeConfigs(getPmuId());
+  } else {
+    configs = makeEventConfigs(*findStaticEventDef_(*primary), getPmuId());
+  }
+  return {
+      .id = ev_id,
+      .configs = configs,
+      .extra_attr = extra_attr,
+      .transforms = transforms};
+}
 
 /// Get EventDefs grouped by preffix of event_id until first dot.
 /// If no dot, then take the full name.
 std::unique_ptr<LibPfm4EventGroups> PmuDevice::makeLibPfm4Groups() const {
   auto groups = std::make_unique<LibPfm4EventGroups>();
 
-  for (const auto& [ev_id, ev_def] : event_defs_) {
+  for (const auto& [ev_id, ev_def] : getEventDefs()) {
     HBT_THROW_ASSERT_IF(ev_def == nullptr);
     uint64_t code = ev_def->encoding.code;
     auto gkey = LibPfm4EventGroup::groupKeyFromEventId(ev_id);
@@ -516,15 +742,76 @@ int PmuDeviceManager::addEvent(
   return 0;
 }
 
+int PmuDeviceManager::addStaticEventDefs(
+    std::span<const StaticEventDef> events) {
+  if (events.empty()) {
+    return 0;
+  }
+  HBT_ARG_CHECK(isStaticEventDefTableSorted(events))
+      << "Static event definitions must be unique and sorted by PMU type and ID";
+
+  struct ApplicablePartition {
+    std::shared_ptr<StaticEventDefTableState> state;
+    TPmuGroup* devices;
+  };
+  std::vector<ApplicablePartition> applicable;
+
+  size_t begin = 0;
+  while (begin < events.size()) {
+    size_t end = begin + 1;
+    while (end < events.size() &&
+           events[end].pmu_type == events[begin].pmu_type) {
+      ++end;
+    }
+
+    if (auto it = pmu_groups_.find(events[begin].pmu_type);
+        it != pmu_groups_.end()) {
+      auto state = std::make_shared<StaticEventDefTableState>(
+          events.subspan(begin, end - begin));
+      applicable.push_back(
+          ApplicablePartition{
+              .state = std::move(state), .devices = &it->second});
+    }
+    begin = end;
+  }
+
+  if (applicable.empty()) {
+    return -ENXIO;
+  }
+
+  for (const auto& partition : applicable) {
+    for (const auto& [_, device] : *partition.devices) {
+      device->validateStaticEventDefs_(partition.state);
+    }
+  }
+  for (auto& partition : applicable) {
+    for (auto& [_, device] : *partition.devices) {
+      device->addStaticEventDefs_(partition.state);
+    }
+  }
+  return 0;
+}
+
 int PmuDeviceManager::addAliases(
     const EventId& ev_id,
     const std::vector<EventId>& aliases) {
-  auto ev = findEventDef(ev_id, std::nullopt);
-  if (!ev) {
-    return -EINVAL;
+  const EventId canonical_id = toCanonicalEventId(ev_id);
+  for (auto& [_, pmu_devices] : pmu_groups_) {
+    for (const auto& [__, device] : pmu_devices) {
+      auto primary = device->findPrimaryEventId_(ev_id);
+      if (!primary.has_value()) {
+        primary = device->findPrimaryEventId_(canonical_id);
+      }
+      if (!primary.has_value()) {
+        continue;
+      }
+      for (auto& [___, target] : pmu_devices) {
+        target->addAliases(*primary, aliases);
+      }
+      return 0;
+    }
   }
-
-  return addAliases(ev, aliases);
+  return -EINVAL;
 }
 
 int PmuDeviceManager::addAliases(

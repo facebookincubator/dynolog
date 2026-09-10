@@ -17,6 +17,9 @@ target_link_libraries(CpuArch PUBLIC CpuArchGen)
 add_library(PmuEvent PmuEvent.h PmuEvent.cpp)
 target_link_libraries(PmuEvent PUBLIC System)
 
+add_library(StaticEventDef StaticEventDef.h StaticEventDef.cpp)
+target_link_libraries(StaticEventDef PUBLIC PmuEvent)
+
 add_library(AmdEvents AmdEvents.h AmdEvents.cpp)
 target_link_libraries(AmdEvents PUBLIC PmuDevices)
 
@@ -31,6 +34,7 @@ add_library(PmuDevices PmuDevices.h PmuDevices.cpp)
 target_link_libraries(PmuDevices PUBLIC PerfEventsGroup)
 target_link_libraries(PmuDevices PUBLIC stdc++fs)
 target_link_libraries(PmuDevices PUBLIC PmuEvent)
+target_link_libraries(PmuDevices PUBLIC StaticEventDef)
 target_link_libraries(PmuDevices PUBLIC CpuArch)
 
 add_library(Metrics Metrics.h Metrics.cpp)

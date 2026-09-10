@@ -7,16 +7,20 @@
 
 #include "hbt/src/perf_event/CpuArch.h"
 #include "hbt/src/perf_event/PmuEvent.h"
+#include "hbt/src/perf_event/StaticEventDef.h"
 
 #include <cstdint>
 #include <map>
 #include <memory>
 #include <numeric>
+#include <span>
 #include <utility>
 #include <variant>
 #include <vector>
 
 namespace facebook::hbt::perf_event {
+
+class StaticEventDefTableState;
 
 namespace uncore_scope {
 struct Host {
@@ -153,9 +157,7 @@ class PmuDevice {
     return cpu_mask_;
   }
 
-  const auto& getEventDefs() const noexcept {
-    return event_defs_;
-  }
+  const std::map<EventId, std::shared_ptr<EventDef>>& getEventDefs() const;
 
   // perf_event_attr config fields.
   enum class ConfigType {
@@ -187,19 +189,7 @@ class PmuDevice {
   /// If no dot, then take the full name.
   std::unique_ptr<LibPfm4EventGroups> makeLibPfm4Groups() const;
 
-  std::shared_ptr<EventDef> findEventDef(const EventId& ev_id) const {
-    auto it = event_defs_.find(ev_id);
-    if (it == event_defs_.end()) {
-      auto opt_ev_id = findEventIdByAlias_(ev_id);
-      if (opt_ev_id.has_value()) {
-        return findEventDef(*opt_ev_id);
-      } else {
-        return nullptr;
-      }
-    }
-    HBT_ARG_CHECK_EQ(it->first, ev_id);
-    return it->second;
-  }
+  std::shared_ptr<EventDef> findEventDef(const EventId& ev_id) const;
 
   /// If aliases is nullopt, add default aliases.
   /// Default aliases are non-empty iff the event id contains a '-' or a '_'.
@@ -208,46 +198,7 @@ class PmuDevice {
   ///  - A version of event_id with all '_' as '-' (if distinct to event id).
   void addEvent(
       std::shared_ptr<EventDef> ev_def,
-      std::optional<std::vector<EventId>> aliases = std::nullopt) {
-    // Validate before adding so there is no need to rollback in error.
-    HBT_ARG_CHECK(event_defs_.count(ev_def->id) == 0)
-        << "An event with id \"" << ev_def->id
-        << "\" already exists in PMU with id: \"" << getPmuId()
-        << "\" and name: \"" << getFullName() << "\"";
-
-    if (aliases.has_value()) {
-      for (const auto& alias : *aliases) {
-        HBT_ARG_CHECK(ev_def->id != alias && event_defs_.count(alias) == 0)
-            << "Tried to register an alias equal to an already existing event id. "
-            << "Event ID: \"" << alias << "\" "
-            << "already exists in PMU with id: \"" << getPmuId() << "\""
-            << " and name: \"" << getFullName() << "\"";
-
-        HBT_ARG_CHECK_EQ(aliases_.count(alias), 0)
-            << "Alias \"" << alias << "\" already exists in PMU with "
-            << "id: \"" << getPmuId() << "\" and name: \"" << getFullName()
-            << "\"";
-      }
-    }
-
-    bool has_dashes = ev_def->id.find('-') != std::string::npos;
-    bool has_upper =
-        std::any_of(ev_def->id.begin(), ev_def->id.end(), ::isupper);
-    if (has_dashes || has_upper) {
-      aliases = std::vector<EventId>();
-      // Make a copy to hold replaced values.
-      auto s = toCanonicalEventId(ev_def->id);
-      HBT_DCHECK_NE(s, ev_def->id);
-      aliases->push_back(s);
-    }
-
-    // Now add, validation already happened so there should be no errors.
-    auto [_, added] = event_defs_.emplace(ev_def->id, ev_def);
-    HBT_DCHECK(added);
-    if (aliases.has_value()) {
-      addAliases(ev_def->id, *aliases);
-    }
-  }
+      std::optional<std::vector<EventId>> aliases = std::nullopt);
 
   void addAliases(const EventId& ev_id, const std::vector<EventId>& aliases);
 
@@ -256,18 +207,7 @@ class PmuDevice {
   EventConf makeConf(
       const EventId& ev_id,
       EventExtraAttr extra_attr,
-      EventValueTransforms transforms) const {
-    auto evdef = this->findEventDef(ev_id);
-    HBT_ARG_CHECK(evdef != nullptr) << "No event with ev_id \"" << ev_id
-                                    << "\" in PMU with id:  " << getPmuId()
-                                    << " and name: \"" << getFullName() << "\"";
-    auto configs = evdef->makeConfigs(getPmuId());
-    return {
-        .id = ev_id,
-        .configs = configs,
-        .extra_attr = extra_attr,
-        .transforms = transforms};
-  }
+      EventValueTransforms transforms) const;
 
  protected:
   const std::string pmu_name_;
@@ -292,21 +232,26 @@ class PmuDevice {
   bool in_sysfs_;
 
   // Alias as key, original event ID as value.
-  std::map<EventId, std::shared_ptr<EventDef>> event_defs_;
+  mutable std::map<EventId, std::shared_ptr<EventDef>> event_defs_;
   std::map<EventId, EventId> aliases_;
+  std::vector<std::shared_ptr<StaticEventDefTableState>> static_event_defs_;
 
   // PMUs that are not per-core can be opened for any
   // CPU within a CPU group. In uncore PMUs, this is
   // equivalent to the cpu_mask attr in its sys fs entry.
   std::optional<cpu_set_t> cpu_mask_ = std::nullopt;
 
-  std::optional<EventId> findEventIdByAlias_(const EventId& ev_id) const {
-    auto it = aliases_.find(ev_id);
-    if (it == aliases_.end()) {
-      return std::nullopt;
-    }
-    return it->second;
-  }
+  std::optional<EventId> findEventIdByAlias_(const EventId& ev_id) const;
+  std::optional<EventId> findPrimaryEventId_(const EventId& ev_id) const;
+  const StaticEventDef* findStaticEventDef_(const EventId& ev_id) const;
+  std::shared_ptr<EventDef> materializeStaticEventDef_(
+      const StaticEventDef& ev_def) const;
+  bool hasPrimaryEventId_(std::string_view ev_id) const;
+  void validateStaticEventDefs_(
+      const std::shared_ptr<StaticEventDefTableState>& state) const;
+  void addStaticEventDefs_(std::shared_ptr<StaticEventDefTableState> state);
+
+  friend class PmuDeviceManager;
 };
 
 /// CpuId and PmuDevice info can uniquely identify a PMU device in perf.
@@ -358,6 +303,12 @@ class PmuDeviceManager {
   int addEvent(
       std::shared_ptr<EventDef> ev,
       std::optional<std::vector<EventId>> aliases = std::nullopt);
+
+  /// Register a sorted static catalog with every existing PMU of each matching
+  /// type. The span and all strings referenced by its entries must remain valid
+  /// for the lifetime of the PMU devices and are expected to have static
+  /// storage.
+  int addStaticEventDefs(std::span<const StaticEventDef> events);
 
   /// List all static tracepoint categories defined
   /// in /sys/kernel/debug/tracing/events.
