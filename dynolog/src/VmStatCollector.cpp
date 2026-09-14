@@ -26,9 +26,10 @@ namespace {
 
 using VmStatField = std::pair<std::string_view, uint64_t VmStats::*>;
 
-constexpr std::array<VmStatField, 14> kVmStatFields = {{
+constexpr std::array<VmStatField, 26> kVmStatFields = {{
     {"pgscan_direct", &VmStats::pgscanDirect},
     {"pgscan_kswapd", &VmStats::pgscanKswapd},
+    {"pgscan_proactive", &VmStats::pgscanProactive},
     {"pgsteal_kswapd", &VmStats::pgstealKswapd},
     {"pageoutrun", &VmStats::pageoutrun},
     {"compact_stall", &VmStats::compactStall},
@@ -37,10 +38,21 @@ constexpr std::array<VmStatField, 14> kVmStatFields = {{
     {"compact_free_scanned", &VmStats::compactFreeScanned},
     {"compact_migrate_scanned", &VmStats::compactMigrateScanned},
     {"compact_isolated", &VmStats::compactIsolated},
+    {"pgfault", &VmStats::pgfault},
     {"pgmajfault", &VmStats::pgmajfault},
     {"workingset_refault_anon", &VmStats::workingsetRefaultAnon},
     {"workingset_refault_file", &VmStats::workingsetRefaultFile},
+    {"workingset_activate_anon", &VmStats::workingsetActivateAnon},
+    {"workingset_activate_file", &VmStats::workingsetActivateFile},
     {"pgpromote_candidate", &VmStats::pgpromoteCandidate},
+    {"pgpgin", &VmStats::pgpgin},
+    {"pgpgout", &VmStats::pgpgout},
+    {"pswpin", &VmStats::pswpin},
+    {"pswpout", &VmStats::pswpout},
+    {"zswpin", &VmStats::zswpin},
+    {"zswpout", &VmStats::zswpout},
+    {"pgalloc_normal", &VmStats::pgallocNormal},
+    {"pgfree", &VmStats::pgfree},
 }};
 
 // Counters are monotonic, so cur >= prev normally. The comparison avoids
@@ -52,27 +64,13 @@ uint64_t clampDelta(uint64_t cur, uint64_t prev) {
 } // namespace
 
 VmStats VmStats::operator-(const VmStats& prev) const {
-  return VmStats{
-      .pgscanDirect = clampDelta(pgscanDirect, prev.pgscanDirect),
-      .pgscanKswapd = clampDelta(pgscanKswapd, prev.pgscanKswapd),
-      .pgstealKswapd = clampDelta(pgstealKswapd, prev.pgstealKswapd),
-      .pageoutrun = clampDelta(pageoutrun, prev.pageoutrun),
-      .compactStall = clampDelta(compactStall, prev.compactStall),
-      .compactFail = clampDelta(compactFail, prev.compactFail),
-      .compactSuccess = clampDelta(compactSuccess, prev.compactSuccess),
-      .compactFreeScanned =
-          clampDelta(compactFreeScanned, prev.compactFreeScanned),
-      .compactMigrateScanned =
-          clampDelta(compactMigrateScanned, prev.compactMigrateScanned),
-      .compactIsolated = clampDelta(compactIsolated, prev.compactIsolated),
-      .pgmajfault = clampDelta(pgmajfault, prev.pgmajfault),
-      .workingsetRefaultAnon =
-          clampDelta(workingsetRefaultAnon, prev.workingsetRefaultAnon),
-      .workingsetRefaultFile =
-          clampDelta(workingsetRefaultFile, prev.workingsetRefaultFile),
-      .pgpromoteCandidate =
-          clampDelta(pgpromoteCandidate, prev.pgpromoteCandidate),
-  };
+  // Driven off kVmStatFields so a field cannot be parsed but then silently
+  // left out of the delta.
+  VmStats delta;
+  for (const auto& [_, member] : kVmStatFields) {
+    delta.*member = clampDelta(this->*member, prev.*member);
+  }
+  return delta;
 }
 
 VmStatCollector::VmStatCollector(const std::string& vmStatPath)
