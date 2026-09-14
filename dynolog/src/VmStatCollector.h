@@ -20,9 +20,11 @@ namespace dynolog {
  * deltas over their reporting interval to obtain the total increase.
  */
 struct VmStats {
-  // Reclaim
+  // Reclaim. pgscan_proactive does not exist before kernel 6.15, where the
+  // same work is counted under pgscan_direct.
   uint64_t pgscanDirect = 0;
   uint64_t pgscanKswapd = 0;
+  uint64_t pgscanProactive = 0;
   uint64_t pgstealKswapd = 0;
   uint64_t pageoutrun = 0;
 
@@ -35,10 +37,21 @@ struct VmStats {
   uint64_t compactIsolated = 0;
 
   // Faults / working set / NUMA promotion
+  uint64_t pgfault = 0;
   uint64_t pgmajfault = 0;
   uint64_t workingsetRefaultAnon = 0;
   uint64_t workingsetRefaultFile = 0;
+  uint64_t workingsetActivateAnon = 0;
+  uint64_t workingsetActivateFile = 0;
   uint64_t pgpromoteCandidate = 0;
+  uint64_t pgpgin = 0;
+  uint64_t pgpgout = 0;
+  uint64_t pswpin = 0;
+  uint64_t pswpout = 0;
+  uint64_t zswpin = 0;
+  uint64_t zswpout = 0;
+  uint64_t pgallocNormal = 0;
+  uint64_t pgfree = 0;
 
   // Delta between two readings. A counter reset (cur < prev), or a field that
   // appeared/disappeared across kernels, yields 0 rather than underflowing.
