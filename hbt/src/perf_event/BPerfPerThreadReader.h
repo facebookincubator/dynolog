@@ -73,9 +73,17 @@ class BPerfPerThreadReader {
   // counter in the old layout, so reading it would return a misaligned
   // PMC value. In that case read() returns schedDelay = 0.
   bool sched_delay_supported_ = false;
-  // Previous reading of event 0, used to detect when the lead exits
-  __u64 prev_counter_zero_;
-  bool leadExited(__u64 counter_zero);
+  // Leader's time_enabled for event 0 as last seen in the bpf map, and the
+  // monoTime of the read where it last changed. A value of 0 for the timestamp
+  // means the stall timer is unarmed. Used only to detect a lead program that
+  // died without clearing BPERF_FLAG_ENABLED.
+  __u64 prev_lead_enabled_time_ = 0;
+  __u64 lead_enabled_time_changed_at_ = 0;
+  // How long the leader's time_enabled must stay frozen before the lead is
+  // presumed dead. The leader only advances it when the thread is scheduled,
+  // so keep this generous.
+  static constexpr __u64 kLeadExitedTimeoutNs = 60ULL * 1000000000ULL;
+  bool leadExited(__u64 lead_enabled_time, __u64 mono_time);
   // Checks whether the bpf program supporting per-thread bperf is still
   // running. If `version_out` is non-null, the 8-bit version stored in
   // bits 0-7 of the metadata flags is written to it from the SAME

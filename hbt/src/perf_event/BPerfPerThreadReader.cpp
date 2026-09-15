@@ -214,6 +214,10 @@ int BPerfPerThreadReader::enable() {
   enabled_ = true;
   read(&data);
   initial_clock_drift_ = getRefMonoTime() - data.monoTime;
+  // The read above ran before initial_clock_drift_ was known, so its monoTime
+  // is on a different offset than every later one. Drop the stall timestamp it
+  // armed; the next read re-arms it on the corrected clock.
+  lead_enabled_time_changed_at_ = 0;
   return 0;
 
 error:
@@ -237,6 +241,7 @@ void BPerfPerThreadReader::disable() {
   ::close(data_fd_);
   data_fd_ = -1;
   initial_clock_drift_ = 0LL;
+  lead_enabled_time_changed_at_ = 0;
   if (dummy_pe_mmap_) {
     ::munmap(dummy_pe_mmap_, getpagesize());
     dummy_pe_mmap_ = nullptr;
@@ -335,24 +340,37 @@ int BPerfPerThreadReader::read(struct BPerfThreadData* data) {
       data->values[i].running += time_after_offset_update;
     }
   }
-  if (leadExited(data->values[0].counter)) {
+  if (leadExited(raw_event_data[0].output_value.enabled, data->monoTime)) {
     disable();
     return -1;
   }
   return 0;
 }
 
-// Heuristic to check whether the lead program has exited.
-bool BPerfPerThreadReader::leadExited(__u64 counter_zero) {
-  bool ret;
-
+// Safety net for a lead program that terminates without clearing
+// BPERF_FLAG_ENABLED, which isLeaderRunning_() would otherwise catch. This
+// takes the leader's time_enabled straight from the bpf map rather than
+// BPerfThreadData::values[].enabled, which has a locally computed term added
+// and therefore keeps growing even after the map goes stale. The leader only
+// advances it when the thread is scheduled, so a short stall is normal and the
+// lead is presumed dead only after kLeadExitedTimeoutNs.
+bool BPerfPerThreadReader::leadExited(
+    __u64 lead_enabled_time,
+    __u64 mono_time) {
   if (!enabled_) {
     return true;
   }
 
-  ret = counter_zero == prev_counter_zero_;
-  prev_counter_zero_ = counter_zero;
-  return ret;
+  // lead_enabled_time_changed_at_ is zeroed whenever monoTime's clock drift
+  // correction changes, so re-arm rather than compare across the two.
+  if (lead_enabled_time != prev_lead_enabled_time_ ||
+      lead_enabled_time_changed_at_ == 0) {
+    prev_lead_enabled_time_ = lead_enabled_time;
+    lead_enabled_time_changed_at_ = mono_time;
+    return false;
+  }
+
+  return mono_time - lead_enabled_time_changed_at_ > kLeadExitedTimeoutNs;
 }
 
 bool BPerfPerThreadReader::isLeaderRunning_(__u32* version_out) {
