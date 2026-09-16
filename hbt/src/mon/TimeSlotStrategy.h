@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <optional>
 #include <set>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -95,7 +96,10 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
 
     if (g.empty()) {
       mux_groups_.erase(mux_group_id);
-      schedule_configs_.erase(mux_group_id);
+      // schedule_configs_ deliberately outlives the group. Membership churns
+      // as owners come and go, and dropping the configured rate here would
+      // silently reset the group to kDefaultEnablesPerCycle the next time it
+      // refills, with nothing to restore it.
       needs_rebuild_ = true;
     }
 
@@ -172,15 +176,18 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
       return os;
     }
 
+    const auto allocated = countAllocatedSlots_();
     os << "  Groups:\n";
     for (const auto& [group_id, group] : mux_groups_) {
       auto config_it = schedule_configs_.find(group_id);
       uint32_t enables = config_it != schedule_configs_.end()
           ? config_it->second.enablesPerCycle
           : 1;
+      auto allocated_it = allocated.find(group_id);
       os << "    - " << (group_id.has_value() ? group_id.value() : "<None>")
-         << ": " << enables << " enables/cycle, " << group.size()
-         << " elements\n";
+         << ": " << enables << " enables/cycle requested, "
+         << (allocated_it == allocated.end() ? size_t{0} : allocated_it->second)
+         << " slots allocated, " << group.size() << " elements\n";
     }
 
     // Show current schedule slots (abbreviated)
@@ -265,6 +272,13 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
         }
       }
     }
+
+    // An oversubscribed cycle short-changes whichever groups are assigned last,
+    // and nothing else surfaces that. Logging each rebuild keeps the slots a
+    // group actually received recoverable from host logs.
+    std::ostringstream os;
+    printStatus(os);
+    HBT_LOG_INFO() << os.str();
   }
 
   /// Find available slots for a group, distributing them evenly
@@ -332,6 +346,20 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
     }
 
     return result;
+  }
+
+  /// Slots the last rebuild actually handed each group. Falls short of the
+  /// requested enablesPerCycle when the cycle is oversubscribed, because
+  /// rebuildSchedule_() assigns largest-first and the groups it reaches last
+  /// take whatever is left.
+  std::unordered_map<MuxGroupId, size_t> countAllocatedSlots_() const {
+    std::unordered_map<MuxGroupId, size_t> counts;
+    for (const auto& slot : schedule_) {
+      if (slot.groupId.has_value()) {
+        ++counts[slot.groupId.value()];
+      }
+    }
+    return counts;
   }
 
   /// Mapping from MuxGroupId to MuxGroup

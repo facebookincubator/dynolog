@@ -5,6 +5,7 @@
 
 #include "hbt/src/mon/TimeSlotStrategy.h"
 #include <gtest/gtest.h>
+#include <sstream>
 
 namespace facebook::hbt::mon {
 namespace {
@@ -214,6 +215,65 @@ TEST_F(TimeSlotStrategyTest, AdvanceWrapsAroundCycle) {
 
   // Should wrap around - current index should be 100 % 60 = 40
   EXPECT_EQ(strategy_.getCurrentSlotIndex(), 40);
+}
+
+TEST_F(TimeSlotStrategyTest, ConfiguredScheduleSurvivesLastElementRemoval) {
+  strategy_.addEntry("cache_misses", "task1", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 12;
+  strategy_.configureSchedule("cache_misses", config);
+  strategy_.rebuildSchedule();
+
+  // A single-element group empties and refills whenever its one owner is
+  // retired and re-tracked. The configured rate has to outlive that.
+  ASSERT_TRUE(strategy_.removeEntry("cache_misses", "task1"));
+  strategy_.addEntry("cache_misses", "task1", std::nullopt);
+  strategy_.rebuildSchedule();
+
+  size_t enables = 0;
+  for (size_t i = 0; i < 60; ++i) {
+    if (strategy_.getEnabledGroupIds().count("cache_misses")) {
+      ++enables;
+    }
+    strategy_.advance();
+  }
+  EXPECT_EQ(enables, 12);
+}
+
+TEST_F(TimeSlotStrategyTest, PrintStatusReportsAllocatedSlots) {
+  strategy_.addEntry("cache_misses", "elem1", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 30;
+  strategy_.configureSchedule("cache_misses", config);
+  strategy_.rebuildSchedule();
+
+  std::ostringstream os;
+  strategy_.printStatus(os);
+
+  EXPECT_NE(
+      os.str().find("30 enables/cycle requested, 30 slots allocated"),
+      std::string::npos)
+      << os.str();
+}
+
+TEST_F(TimeSlotStrategyTest, PrintStatusReportsShortfallWhenOversubscribed) {
+  // 40 + 40 slots requested into a 60 slot cycle. The group assigned first
+  // gets all 40; the other is silently capped at the 20 left over.
+  strategy_.addEntry("big", "elem1", std::nullopt);
+  strategy_.addEntry("small", "elem2", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 40;
+  strategy_.configureSchedule("big", config);
+  strategy_.configureSchedule("small", config);
+  strategy_.rebuildSchedule();
+
+  std::ostringstream os;
+  strategy_.printStatus(os);
+
+  EXPECT_NE(
+      os.str().find("40 enables/cycle requested, 20 slots allocated"),
+      std::string::npos)
+      << os.str();
 }
 
 } // namespace
