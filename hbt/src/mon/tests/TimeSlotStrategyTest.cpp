@@ -217,6 +217,29 @@ TEST_F(TimeSlotStrategyTest, AdvanceWrapsAroundCycle) {
   EXPECT_EQ(strategy_.getCurrentSlotIndex(), 40);
 }
 
+TEST_F(TimeSlotStrategyTest, ConfiguredScheduleSurvivesLastElementRemoval) {
+  strategy_.addEntry("cache_misses", "task1", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 12;
+  strategy_.configureSchedule("cache_misses", config);
+  strategy_.rebuildSchedule();
+
+  // A single-element group empties and refills whenever its one owner is
+  // retired and re-tracked. The configured rate has to outlive that.
+  ASSERT_TRUE(strategy_.removeEntry("cache_misses", "task1"));
+  strategy_.addEntry("cache_misses", "task1", std::nullopt);
+  strategy_.rebuildSchedule();
+
+  size_t enables = 0;
+  for (size_t i = 0; i < 60; ++i) {
+    if (strategy_.getEnabledGroupIds().count("cache_misses")) {
+      ++enables;
+    }
+    strategy_.advance();
+  }
+  EXPECT_EQ(enables, 12);
+}
+
 TEST_F(TimeSlotStrategyTest, PrintStatusReportsAllocatedSlots) {
   strategy_.addEntry("cache_misses", "elem1", std::nullopt);
   ScheduleConfig config;
