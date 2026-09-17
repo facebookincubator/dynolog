@@ -5,6 +5,7 @@
 
 #include "hbt/src/mon/TimeSlotStrategy.h"
 #include <gtest/gtest.h>
+#include <sstream>
 
 namespace facebook::hbt::mon {
 namespace {
@@ -214,6 +215,99 @@ TEST_F(TimeSlotStrategyTest, AdvanceWrapsAroundCycle) {
 
   // Should wrap around - current index should be 100 % 60 = 40
   EXPECT_EQ(strategy_.getCurrentSlotIndex(), 40);
+}
+
+TEST_F(TimeSlotStrategyTest, PrintStatusReportsAllocatedSlots) {
+  strategy_.addEntry("cache_misses", "elem1", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 30;
+  strategy_.configureSchedule("cache_misses", config);
+  strategy_.rebuildSchedule();
+
+  std::ostringstream os;
+  strategy_.printStatus(os);
+
+  EXPECT_NE(
+      os.str().find("30 enables/cycle requested, 30 slots allocated"),
+      std::string::npos)
+      << os.str();
+}
+
+TEST_F(TimeSlotStrategyTest, StarvedGroupIsLoggedWithZeroSlots) {
+  ScheduleConfig hog;
+  hog.enablesPerCycle = 60; // claims the entire cycle
+  strategy_.addEntry("hog", "elem1", std::nullopt);
+  strategy_.configureSchedule("hog", hog);
+  strategy_.rebuildSchedule();
+
+  // A group added to a full cycle receives nothing. Complete starvation is the
+  // case most worth reporting, so it has to register as a change rather than
+  // being absent from the comparison.
+  testing::internal::CaptureStderr();
+  strategy_.addEntry("starved", "elem2", std::nullopt);
+  strategy_.rebuildSchedule();
+  const std::string logged = testing::internal::GetCapturedStderr();
+
+  EXPECT_NE(
+      logged.find("starved: 2 enables/cycle requested, 0 slots allocated"),
+      std::string::npos)
+      << logged;
+}
+
+TEST_F(TimeSlotStrategyTest, RebuildWithUnchangedAllocationIsNotLogged) {
+  strategy_.addEntry("group1", "elem1", std::nullopt);
+  strategy_.addEntry("group1", "elem2", std::nullopt);
+  strategy_.rebuildSchedule();
+
+  // One of two elements leaves. The group survives with the same slot count, so
+  // the log, being a change journal, has nothing to report.
+  testing::internal::CaptureStderr();
+  strategy_.removeEntry("group1", "elem1");
+  strategy_.rebuildSchedule();
+  const std::string logged = testing::internal::GetCapturedStderr();
+
+  EXPECT_EQ(logged.find("TimeSlotStrategy"), std::string::npos) << logged;
+}
+
+TEST_F(TimeSlotStrategyTest, PrintStatusClampsRequestedToCycleLength) {
+  strategy_.addEntry("greedy", "elem1", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 120; // more than a 60 slot cycle can hold
+  strategy_.configureSchedule("greedy", config);
+  strategy_.rebuildSchedule();
+
+  std::ostringstream os;
+  strategy_.printStatus(os);
+
+  // The allocator clamps the request to the cycle length, so the reported
+  // request has to be clamped too. Printing the raw 120 would make a clamp
+  // indistinguishable from a genuine 60 slot shortfall.
+  EXPECT_NE(
+      os.str().find("60 enables/cycle requested, 60 slots allocated"),
+      std::string::npos)
+      << os.str();
+}
+
+TEST_F(TimeSlotStrategyTest, PrintStatusReportsShortfallWhenOversubscribed) {
+  // 40 + 40 slots requested into a 60 slot cycle. One group is served in full
+  // and the other is capped at the 20 left over. Which one wins is
+  // unspecified -- std::sort is not stable and unordered_map iteration order is
+  // undefined -- so assert only that some group reports the shortfall.
+  strategy_.addEntry("group_a", "elem1", std::nullopt);
+  strategy_.addEntry("group_b", "elem2", std::nullopt);
+  ScheduleConfig config;
+  config.enablesPerCycle = 40;
+  strategy_.configureSchedule("group_a", config);
+  strategy_.configureSchedule("group_b", config);
+  strategy_.rebuildSchedule();
+
+  std::ostringstream os;
+  strategy_.printStatus(os);
+
+  EXPECT_NE(
+      os.str().find("40 enables/cycle requested, 20 slots allocated"),
+      std::string::npos)
+      << os.str();
 }
 
 } // namespace
