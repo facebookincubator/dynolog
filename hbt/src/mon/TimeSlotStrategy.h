@@ -96,7 +96,10 @@ class TimeSlotStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
 
     if (g.empty()) {
       mux_groups_.erase(mux_group_id);
-      schedule_configs_.erase(mux_group_id);
+      // schedule_configs_ deliberately outlives the group. Membership churns
+      // as owners come and go, and dropping the configured rate here would
+      // silently reset the group to kDefaultEnablesPerCycle the next time it
+      // refills, with nothing to restore it.
       needs_rebuild_ = true;
     }
 
