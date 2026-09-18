@@ -97,6 +97,7 @@ struct K8sPodCache::Entry {
   std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
       env_by_container;
   std::unordered_map<std::string, std::string> labels;
+  std::string service_account;
   std::string controller_kind;
   std::string controller_name;
 };
@@ -187,6 +188,7 @@ struct K8sPodCache::Impl {
       const auto& spec = pod.at("spec");
 
       std::string podUid = meta.value("uid", "");
+      out.service_account = spec.value("serviceAccountName", "");
 
       if (auto it = meta.find("labels"); it != meta.end() && it->is_object()) {
         for (auto label = it->begin(); label != it->end(); ++label) {
@@ -317,6 +319,9 @@ struct K8sPodCache::Impl {
           result[column] = eit->second;
         }
       }
+    }
+    if (!entry.service_account.empty()) {
+      result["service_account"] = entry.service_account;
     }
     // labels.
     for (const auto& [label_key, column] : labelMap) {

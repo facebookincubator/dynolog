@@ -36,7 +36,9 @@ class OtlpLoggerTest : public ::testing::Test {
     f << "sm_active_ratio,compute_unit_utilization,100.0\n";
     f << "gpu_power_draw,accelerator_power_usage_w,1.0\n";
     f << "device,device_id,1.0\n";
+    f << "pod_namespace,k8s_attributes[namespace]\n";
     f << "gpu_name,accelerator_model\n";
+    f << "gpu_uuid,accelerator_serial_number\n";
     f.close();
     FLAGS_otel_metric_mappings_file = tmpFile_;
   }
@@ -74,10 +76,24 @@ TEST_F(OtlpLoggerTest, NumericMappingsLoadedFromFile) {
 TEST_F(OtlpLoggerTest, StringMappingsLoadedFromFile) {
   const auto& mappings = getStringMappings();
 
-  EXPECT_EQ(mappings.size(), 1u);
+  EXPECT_EQ(mappings.size(), 2u);
   auto it = mappings.find("gpu_name");
   ASSERT_NE(it, mappings.end());
   EXPECT_EQ(it->second, "accelerator_model");
+
+  it = mappings.find("gpu_uuid");
+  ASSERT_NE(it, mappings.end());
+  EXPECT_EQ(it->second, "accelerator_serial_number");
+}
+
+TEST_F(OtlpLoggerTest, MapMappingsLoadedFromFile) {
+  const auto& mappings = getMapMappings();
+
+  EXPECT_EQ(mappings.size(), 1u);
+  auto it = mappings.find("pod_namespace");
+  ASSERT_NE(it, mappings.end());
+  EXPECT_EQ(it->second.map_column, "k8s_attributes");
+  EXPECT_EQ(it->second.map_subkey, "namespace");
 }
 
 TEST_F(OtlpLoggerTest, ScaleTransformBuffering) {
