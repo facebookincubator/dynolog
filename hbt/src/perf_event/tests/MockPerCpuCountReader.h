@@ -58,7 +58,7 @@ class MockPerCpuCountReaderFactory : public PerCpuCountReaderFactory {
     auto mockReader = std::make_unique<MockPerCpuCountReader>(
         mon_cpus, metric_desc, pmu_manager, cgroup_fd_wrapper);
     mockReaders_[element_id] = mockReader.get();
-    if (expectations_.find(element_id) != expectations_.end()) {
+    if (expectations_.contains(element_id)) {
       expectations_[element_id](mockReader.get());
     }
     return std::move(mockReader);
