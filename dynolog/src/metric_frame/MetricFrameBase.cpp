@@ -123,4 +123,133 @@ MetricFrameSlice::MetricFrameSlice(
     MetricFrameRange range)
     : frame_{frame}, range_{range} {}
 
+// validation rule constructor and methods
+ValidationRule::ValidationRule(Type type, double targetValue)
+    : type_(type), targetValue_(targetValue) {}
+
+ValidationRule ValidationRule::greaterEqualThan(double minValue) {
+  return ValidationRule(Type::GREATER_EQUAL_THAN, minValue);
+}
+
+ValidationRule ValidationRule::lessEqualThan(double maxValue) {
+  return ValidationRule(Type::LESS_EQUAL_THAN, maxValue);
+}
+
+ValidationRule ValidationRule::greaterThan(double targetValue) {
+  return ValidationRule(Type::GREATER_THAN, targetValue);
+}
+
+ValidationRule ValidationRule::lessThan(double targetValue) {
+  return ValidationRule(Type::LESS_THAN, targetValue);
+}
+
+bool ValidationRule::validate(double value, ValidationRule validationRule)
+    const {
+  auto& type = this->type_;
+  auto& targetValue = this->targetValue_;
+  switch (type) {
+    case Type::GREATER_EQUAL_THAN:
+      return value >= targetValue;
+
+    case Type::LESS_EQUAL_THAN:
+      return value <= targetValue;
+
+    case Type::LESS_THAN:
+      return value < targetValue;
+
+    case Type::GREATER_THAN:
+      return value > targetValue;
+
+    default:
+      return false;
+  }
+}
+
+// MetricInfo constructor and methods
+MetricInfo::MetricInfo(
+    MFBMetricName metricName,
+    std::vector<MFBGranularity> granularities,
+    std::vector<MFBAggregation> aggregations,
+    MFBAggregation defaultAggregation,
+    MFBHandlerFunc handler,
+    std::vector<ValidationRule> validationRules,
+    std::map<Category, std::vector<std::string>> inclusion,
+    std::map<Category, std::vector<std::string>> exclusion,
+    Criticality criticality)
+    : metricName_(metricName),
+      granularities_(std::move(granularities)),
+      aggregations_(std::move(aggregations)),
+      defaultAggregation_(defaultAggregation),
+      handler_(std::move(handler)),
+      validationRules_(std::move(validationRules)),
+      inclusion_(std::move(inclusion)),
+      exclusion_(std::move(exclusion)),
+      criticality_(criticality) {}
+
+const MFBMetricName& MetricInfo::metricName() const {
+  return metricName_;
+}
+
+const std::vector<MFBGranularity>& MetricInfo::granularities() const {
+  return granularities_;
+}
+
+const std::vector<MFBAggregation>& MetricInfo::aggregations() const {
+  return aggregations_;
+}
+
+const MFBAggregation& MetricInfo::defaultAggregation() const {
+  return defaultAggregation_;
+}
+
+MFBHandlerFunc MetricInfo::handler() const {
+  return handler_;
+}
+
+const std::vector<ValidationRule>& MetricInfo::validationRules() const {
+  return validationRules_;
+}
+
+const std::map<Category, std::vector<std::string>>& MetricInfo::inclusion()
+    const {
+  return inclusion_;
+}
+
+const std::map<Category, std::vector<std::string>>& MetricInfo::exclusion()
+    const {
+  return exclusion_;
+}
+
+Criticality MetricInfo::criticality() const {
+  return criticality_;
+}
+
+// MetricInfoMap constructor and methods
+MetricInfoMap::MetricInfoMap(std::map<MFBMetricName, MetricInfo> metricInfoMap)
+    : metricInfoMap_(std::move(metricInfoMap)) {}
+
+std::optional<MetricInfo> MetricInfoMap::getMetricInfo(
+    MFBMetricName metricName) const {
+  auto it = metricInfoMap_.find(metricName);
+  if (it != metricInfoMap_.end()) {
+    return it->second;
+  }
+  return std::nullopt;
+}
+
+bool MetricInfoMap::contains(MFBMetricName metricName) const {
+  return metricInfoMap_.find(metricName) != metricInfoMap_.end();
+}
+
+const std::map<MFBMetricName, MetricInfo>& MetricInfoMap::getMetricInfoMap()
+    const {
+  return metricInfoMap_;
+}
+
+void MetricInfoMap::add(
+    MFBMetricName metricName,
+    const MetricInfo& metricInfo) {
+  metricInfoMap_.insert_or_assign(metricName, std::move(metricInfo));
+}
+
 } // namespace facebook::dynolog
