@@ -50,6 +50,10 @@ class RecordingLogger : public Logger {
   const std::vector<CapturedRecord>& records() const {
     return records_;
   }
+  void clear() {
+    current_ = {};
+    records_.clear();
+  }
 
  private:
   CapturedRecord current_;
@@ -89,13 +93,38 @@ const CapturedRecord& recordByDevice(
   throw std::runtime_error("record not found");
 }
 
+TpuPodIdentity metricPodIdentity() {
+  return {
+      .podNamespace = "test-namespace",
+      .podName = "test-workload-pod",
+      .containerName = "vllm-worker",
+  };
+}
+
+void expectNoPodIdentity(const CapturedRecord& record) {
+  EXPECT_EQ(record.strings.count("pod_namespace"), 0u);
+  EXPECT_EQ(record.strings.count("pod_name"), 0u);
+  EXPECT_EQ(record.strings.count("container_name"), 0u);
+}
+
 // Fixture: parse the real exposition once, then drive TpuGroupInfo via
 // the testing seam (skips HTTP because buck2's sandbox blocks loopback).
 class TpuGroupInfoTest : public ::testing::Test {
  protected:
   void SetUp() override {
     // URL not used — the seam bypasses TpuScraper::scrape().
-    info_ = TpuGroupInfo::factory("http://unused", 100, 10000);
+    info_ = TpuGroupInfo::factoryForTesting(
+        "http://unused",
+        100,
+        10000,
+        {
+            .listCurrentOwners = [this] { return currentOwners_; },
+            .lookupAttributes =
+                [this](const TpuPodIdentity& identity) {
+                  lookedUpIdentities_.push_back(identity);
+                  return lookupAttributes_;
+                },
+        });
     ASSERT_NE(info_, nullptr);
   }
 
@@ -105,6 +134,9 @@ class TpuGroupInfoTest : public ::testing::Test {
     info_->log(logger_);
   }
 
+  std::vector<TpuPodIdentity> currentOwners_;
+  std::unordered_map<std::string, std::string> lookupAttributes_;
+  std::vector<TpuPodIdentity> lookedUpIdentities_;
   std::shared_ptr<TpuGroupInfo> info_;
   RecordingLogger logger_;
 };
@@ -168,6 +200,127 @@ TEST_F(TpuGroupInfoTest, HostAggregateOnlyMetricsNotEmitted) {
     EXPECT_EQ(r.floats.count("mem_bw_util"), 0u)
         << "mem_bw_util must not appear on TPU rows (plan §5a)";
   }
+}
+
+TEST_F(TpuGroupInfoTest, EmitsPodIdentityOnlyForCurrentOwner) {
+  const auto identity = metricPodIdentity();
+  currentOwners_ = {identity};
+  lookupAttributes_ = {
+      {"service_account", "test-service-account"},
+      {"pod_namespace", "unverified-namespace"},
+      {"pod_name", "unverified-pod"},
+      {"container_name", "unverified-container"},
+  };
+
+  updateFromExposition(kProbeOutputTpu7x);
+
+  for (const int64_t device : {4, 5}) {
+    const auto& record = recordByDevice(logger_.records(), device);
+    EXPECT_EQ(record.strings.at("pod_namespace"), identity.podNamespace);
+    EXPECT_EQ(record.strings.at("pod_name"), identity.podName);
+    EXPECT_EQ(record.strings.at("container_name"), identity.containerName);
+    EXPECT_EQ(record.strings.at("service_account"), "test-service-account");
+  }
+  expectNoPodIdentity(recordByDevice(logger_.records(), 0));
+  const std::vector<TpuPodIdentity> expectedLookups = {identity, identity};
+  EXPECT_EQ(lookedUpIdentities_, expectedLookups);
+}
+
+TEST_F(TpuGroupInfoTest, RejectsStaleRawIdentityWithoutCurrentOwner) {
+  updateFromExposition(kProbeOutputTpu7x);
+
+  expectNoPodIdentity(recordByDevice(logger_.records(), 4));
+  expectNoPodIdentity(recordByDevice(logger_.records(), 5));
+  EXPECT_TRUE(lookedUpIdentities_.empty());
+  EXPECT_DOUBLE_EQ(
+      recordByDevice(logger_.records(), 4).floats.at("accelerator_utilization"),
+      42.0);
+}
+
+TEST_F(TpuGroupInfoTest, RejectsAnyDifferentCurrentOwnerField) {
+  const std::vector<TpuPodIdentity> mismatchedOwners = {
+      {
+          .podNamespace = "different-namespace",
+          .podName = "test-workload-pod",
+          .containerName = "vllm-worker",
+      },
+      {
+          .podNamespace = "test-namespace",
+          .podName = "different-pod",
+          .containerName = "vllm-worker",
+      },
+      {
+          .podNamespace = "test-namespace",
+          .podName = "test-workload-pod",
+          .containerName = "different-container",
+      },
+  };
+
+  for (const auto& owner : mismatchedOwners) {
+    currentOwners_ = {owner};
+    logger_.clear();
+    lookedUpIdentities_.clear();
+    updateFromExposition(kProbeOutputTpu7x);
+
+    expectNoPodIdentity(recordByDevice(logger_.records(), 4));
+    expectNoPodIdentity(recordByDevice(logger_.records(), 5));
+    EXPECT_TRUE(lookedUpIdentities_.empty());
+  }
+}
+
+TEST_F(TpuGroupInfoTest, RejectsPartialRawIdentity) {
+  currentOwners_ = {metricPodIdentity()};
+  constexpr const char* exposition =
+      R"PROM(duty_cycle{accelerator_id="1234567890123456789-4",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 42
+)PROM";
+
+  updateFromExposition(exposition);
+
+  const auto& record = recordByDevice(logger_.records(), 4);
+  expectNoPodIdentity(record);
+  EXPECT_DOUBLE_EQ(record.floats.at("accelerator_utilization"), 42.0);
+  EXPECT_TRUE(lookedUpIdentities_.empty());
+}
+
+TEST_F(TpuGroupInfoTest, RejectsConflictingRawIdentitiesForOneDevice) {
+  const auto identity = metricPodIdentity();
+  const TpuPodIdentity conflictingIdentity{
+      .podNamespace = "other-namespace",
+      .podName = "other-pod",
+      .containerName = "other-container",
+  };
+  currentOwners_ = {identity, conflictingIdentity};
+  const std::string exposition = std::string(kProbeOutputTpu7x) +
+      R"PROM(duty_cycle{accelerator_id="1234567890123456789-4",container="other-container",make="cloud-tpu",model="tpu7x",namespace="other-namespace",pod="other-pod",tpu_topology="2x2x2"} 42
+)PROM";
+
+  updateFromExposition(exposition);
+
+  expectNoPodIdentity(recordByDevice(logger_.records(), 4));
+  const auto& record5 = recordByDevice(logger_.records(), 5);
+  EXPECT_EQ(record5.strings.at("pod_namespace"), identity.podNamespace);
+  EXPECT_DOUBLE_EQ(
+      recordByDevice(logger_.records(), 4).floats.at("accelerator_utilization"),
+      42.0);
+  const std::vector<TpuPodIdentity> expectedLookups = {identity};
+  EXPECT_EQ(lookedUpIdentities_, expectedLookups);
+}
+
+TEST_F(TpuGroupInfoTest, ClearsPodIdentityWhenOwnerDisappears) {
+  currentOwners_ = {metricPodIdentity()};
+  updateFromExposition(kProbeOutputTpu7x);
+  EXPECT_EQ(
+      recordByDevice(logger_.records(), 4).strings.at("pod_name"),
+      "test-workload-pod");
+
+  currentOwners_.clear();
+  lookedUpIdentities_.clear();
+  logger_.clear();
+  updateFromExposition(kProbeOutputTpu7x);
+
+  expectNoPodIdentity(recordByDevice(logger_.records(), 4));
+  expectNoPodIdentity(recordByDevice(logger_.records(), 5));
+  EXPECT_TRUE(lookedUpIdentities_.empty());
 }
 
 } // namespace

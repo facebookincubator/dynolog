@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -21,6 +22,24 @@ namespace dynolog::tpumon {
 DECLARE_string(tpu_device_plugin_url);
 
 class TpuScraper;
+
+struct TpuPodIdentity {
+  std::string podNamespace;
+  std::string podName;
+  std::string containerName;
+
+  bool operator==(const TpuPodIdentity& other) const {
+    return podNamespace == other.podNamespace && podName == other.podName &&
+        containerName == other.containerName;
+  }
+};
+
+struct TpuPodAttributionProviders {
+  std::function<std::vector<TpuPodIdentity>()> listCurrentOwners;
+  std::function<std::unordered_map<std::string, std::string>(
+      const TpuPodIdentity&)>
+      lookupAttributes;
+};
 
 // TPU counterpart to gpumon::DcgmGroupInfo. Owns the periodic
 // scrape-and-emit for TPU chips on the local node:
@@ -54,6 +73,14 @@ class TpuGroupInfo {
       int scrape_timeout_ms,
       int updateIntervalMs);
 
+  // Test-only factory that injects current TPU owners and pod-attribute lookup.
+  // This keeps unit tests independent of the kubelet gRPC socket and K8s API.
+  static std::shared_ptr<TpuGroupInfo> factoryForTesting(
+      std::string device_plugin_url,
+      int scrape_timeout_ms,
+      int updateIntervalMs,
+      TpuPodAttributionProviders podAttributionProviders);
+
   // Scrape once and pivot into per-chip metric maps.
   void update();
 
@@ -78,10 +105,14 @@ class TpuGroupInfo {
   TpuGroupInfo(
       std::string device_plugin_url,
       int scrape_timeout_ms,
-      int updateIntervalMs);
+      int updateIntervalMs,
+      TpuPodAttributionProviders podAttributionProviders,
+      bool forcePodAttribution);
 
   std::unique_ptr<TpuScraper> scraper_;
   [[maybe_unused]] const int updateIntervalMs_;
+  TpuPodAttributionProviders podAttributionProviders_;
+  const bool forcePodAttribution_;
   bool failing_ = false;
 
   // Keyed by per-host chip index (0..N-1). N is not known ahead of
@@ -93,11 +124,11 @@ class TpuGroupInfo {
       metricsMapInt_;
   std::unordered_map<int, std::unordered_map<std::string, std::string>>
       metricsMapString_;
-  // Pod attribution: pod_namespace/pod_name/container_name from
-  // kubelet pod-resources, plus operator-configured env vars and pod
-  // labels (via --env_attribution_mappings_file and K8sPodCache's
-  // default label map). Populated by update() when the shared
-  // --enable_pod_resources_attribution flag is on. Empty otherwise.
+  // Pod attribution: a raw metric namespace/pod/container identity that
+  // exactly matches a current kubelet pod-resources TPU owner, plus
+  // operator-configured env vars and pod labels (via
+  // --env_attribution_mappings_file and K8sPodCache's default label map).
+  // Populated by update() when attribution is enabled. Empty otherwise.
   std::unordered_map<int, std::unordered_map<std::string, std::string>>
       envMetadataMapString_;
 };

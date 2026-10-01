@@ -11,6 +11,7 @@
 #include <gflags/gflags.h>
 #include <glog/logging.h>
 
+#include <algorithm>
 #include <chrono>
 #include <cstdlib>
 #include <string_view>
@@ -54,6 +55,35 @@ namespace {
 ::dynolog::k8s::K8sPodCache* getK8sPodCache() {
   static auto cache = std::make_unique<::dynolog::k8s::K8sPodCache>();
   return cache.get();
+}
+
+TpuPodAttributionProviders makeProductionPodAttributionProviders() {
+  return {
+      .listCurrentOwners =
+          [] {
+            const auto tpuPods = getPodResourcesClient()->listGpuPods();
+            std::vector<TpuPodIdentity> owners;
+            owners.reserve(tpuPods.size());
+            for (const auto& deviceAndPod : tpuPods) {
+              const auto& pod = deviceAndPod.second;
+              owners.push_back({
+                  .podNamespace = pod.pod_namespace,
+                  .podName = pod.pod_name,
+                  .containerName = pod.container_name,
+              });
+            }
+            return owners;
+          },
+      .lookupAttributes =
+          [](const TpuPodIdentity& identity) {
+            return getK8sPodCache()->lookupAttribution(
+                identity.podNamespace,
+                identity.podName,
+                identity.containerName,
+                ::dynolog::getEnvAttributionMappings(),
+                ::dynolog::k8s::getDefaultLabelAttributionMap());
+          },
+  };
 }
 } // namespace
 #endif // USE_K8S_PODRESOURCES
@@ -107,6 +137,47 @@ bool sampleHasPodLabels(const TpuSample& s) {
       s.labels.find("pod") != s.labels.end();
 }
 
+struct RawPodIdentityState {
+  std::vector<TpuPodIdentity> identities;
+  bool invalid = false;
+};
+
+void collectRawPodIdentity(
+    const TpuSample& sample,
+    RawPodIdentityState& state) {
+  const auto namespaceIt = sample.labels.find("namespace");
+  const auto podIt = sample.labels.find("pod");
+  const auto containerIt = sample.labels.find("container");
+  const bool hasAnyIdentityLabel = namespaceIt != sample.labels.end() ||
+      podIt != sample.labels.end() || containerIt != sample.labels.end();
+  if (!hasAnyIdentityLabel) {
+    return;
+  }
+  if (namespaceIt == sample.labels.end() || podIt == sample.labels.end() ||
+      containerIt == sample.labels.end() || namespaceIt->second.empty() ||
+      podIt->second.empty() || containerIt->second.empty()) {
+    state.invalid = true;
+    return;
+  }
+
+  TpuPodIdentity identity{
+      .podNamespace = namespaceIt->second,
+      .podName = podIt->second,
+      .containerName = containerIt->second,
+  };
+  if (std::find(state.identities.begin(), state.identities.end(), identity) ==
+      state.identities.end()) {
+    state.identities.push_back(std::move(identity));
+  }
+}
+
+bool isCurrentOwner(
+    const TpuPodIdentity& identity,
+    const std::vector<TpuPodIdentity>& currentOwners) {
+  return std::find(currentOwners.begin(), currentOwners.end(), identity) !=
+      currentOwners.end();
+}
+
 } // namespace
 
 std::shared_ptr<TpuGroupInfo> TpuGroupInfo::factory(
@@ -115,18 +186,44 @@ std::shared_ptr<TpuGroupInfo> TpuGroupInfo::factory(
     int updateIntervalMs) {
   LOG(INFO) << "Creating TpuGroupInfo scraping " << device_plugin_url
             << " every " << updateIntervalMs << " ms";
+#ifdef USE_K8S_PODRESOURCES
+  auto providers = makeProductionPodAttributionProviders();
+#else
+  TpuPodAttributionProviders providers;
+#endif
   return std::shared_ptr<TpuGroupInfo>(new TpuGroupInfo(
-      std::move(device_plugin_url), scrape_timeout_ms, updateIntervalMs));
+      std::move(device_plugin_url),
+      scrape_timeout_ms,
+      updateIntervalMs,
+      std::move(providers),
+      /*forcePodAttribution=*/false));
+}
+
+std::shared_ptr<TpuGroupInfo> TpuGroupInfo::factoryForTesting(
+    std::string device_plugin_url,
+    int scrape_timeout_ms,
+    int updateIntervalMs,
+    TpuPodAttributionProviders podAttributionProviders) {
+  return std::shared_ptr<TpuGroupInfo>(new TpuGroupInfo(
+      std::move(device_plugin_url),
+      scrape_timeout_ms,
+      updateIntervalMs,
+      std::move(podAttributionProviders),
+      /*forcePodAttribution=*/true));
 }
 
 TpuGroupInfo::TpuGroupInfo(
     std::string device_plugin_url,
     int scrape_timeout_ms,
-    int updateIntervalMs)
+    int updateIntervalMs,
+    TpuPodAttributionProviders podAttributionProviders,
+    bool forcePodAttribution)
     : scraper_{std::make_unique<TpuScraper>(
           std::move(device_plugin_url),
           scrape_timeout_ms)},
-      updateIntervalMs_{updateIntervalMs} {}
+      updateIntervalMs_{updateIntervalMs},
+      podAttributionProviders_{std::move(podAttributionProviders)},
+      forcePodAttribution_{forcePodAttribution} {}
 
 TpuGroupInfo::~TpuGroupInfo() = default;
 
@@ -164,10 +261,10 @@ void TpuGroupInfo::updateFromSamples(
   // memory_bandwidth_utilization_node are intentionally NOT emitted at
   // per-chip granularity (host-aggregate only — see plan §5a).
   //
-  // chipAcceleratorIds is a local map (chip_index -> full "<uuid>-<idx>"
-  // string) used only for the pod-resources join below; not persisted
-  // as a member because it isn't emitted downstream.
-  std::unordered_map<int, std::string> chipAcceleratorIds;
+  // Raw pod labels are reconciled by identity tuple against current
+  // PodResources owners below. PodResources device IDs are intentionally
+  // ignored because GKE exposes PCI BDFs there and serial-index IDs here.
+  std::unordered_map<int, RawPodIdentityState> rawPodIdentities;
   for (const auto& s : samples) {
     const auto id_it = s.labels.find("accelerator_id");
     if (id_it == s.labels.end()) {
@@ -179,9 +276,7 @@ void TpuGroupInfo::updateFromSamples(
           << "TpuGroupInfo: unparseable accelerator_id: " << id_it->second;
       continue;
     }
-    if (chipAcceleratorIds.count(chip.index) == 0) {
-      chipAcceleratorIds[chip.index] = id_it->second;
-    }
+    collectRawPodIdentity(s, rawPodIdentities[chip.index]);
     auto& str_map = metricsMapString_[chip.index];
     if (str_map.count("accelerator_serial_number") == 0) {
       str_map["accelerator_serial_number"] = chip.serial;
@@ -258,54 +353,40 @@ void TpuGroupInfo::updateFromSamples(
         (used_it->second / total) * 100.0;
   }
 
+  // Validate raw metric identity against current TPU owners from the latest
+  // PodResources List response. Raw labels may outlive a deleted pod, while
+  // PodResources device IDs use a different namespace from accelerator_id,
+  // so only exact namespace/pod/container membership is authoritative.
+  bool podAttributionEnabled = forcePodAttribution_;
 #ifdef USE_K8S_PODRESOURCES
-  // K8s pod-resources join: talk to the local kubelet's pod-resources
-  // gRPC socket, get the {device_id -> PodInfo} map for chips claimed
-  // via the google.com/tpu extended resource, and enrich each per-chip
-  // row with:
-  //   - pod_namespace / pod_name / container_name (raw from pod-resources)
-  //   - env vars named in env-attribution.csv (e.g. `MAST_*` for
-  //     Meta's MAST scheduler; the mechanism itself is scheduler-agnostic)
-  //   - labels named in K8sPodCache's default label map
-  //
-  // Attribution keys go into envMetadataMapString_[chip_index], which
-  // log() emits as logger.logStr(k, v). OtlpLogger passes unmapped keys
-  // through unchanged; pod_namespace / pod_name / container_name therefore
-  // reach the downstream sink under those names. If the sink's schema
-  // doesn't include such columns they are dropped; add a rename row to
-  // metric-mappings-tpu.csv (e.g. pod_namespace,k8s_namespace) to route
-  // them into an existing column instead.
-  //
-  // Skipped when the shared --enable_pod_resources_attribution flag is
-  // off (default). The scrape-failure early return above means we never
-  // reach here with the sentinel error row.
-  if (FLAGS_enable_pod_resources_attribution) {
-    auto tpuPods = getPodResourcesClient()->listGpuPods();
-    const auto& env_mappings = ::dynolog::getEnvAttributionMappings();
-    const auto& label_mappings =
-        ::dynolog::k8s::getDefaultLabelAttributionMap();
-    for (const auto& [chip_index, accel_id] : chipAcceleratorIds) {
-      auto pod_it = tpuPods.find(accel_id);
-      if (pod_it == tpuPods.end()) {
+  podAttributionEnabled =
+      podAttributionEnabled || FLAGS_enable_pod_resources_attribution;
+#endif
+  if (podAttributionEnabled && podAttributionProviders_.listCurrentOwners) {
+    const auto currentOwners = podAttributionProviders_.listCurrentOwners();
+    for (const auto& [chipIndex, state] : rawPodIdentities) {
+      if (state.invalid || state.identities.size() != 1) {
         continue;
       }
-      auto& env = envMetadataMapString_[chip_index];
-      env["pod_namespace"] = pod_it->second.pod_namespace;
-      env["pod_name"] = pod_it->second.pod_name;
-      env["container_name"] = pod_it->second.container_name;
-
-      auto attrs = getK8sPodCache()->lookupAttribution(
-          pod_it->second.pod_namespace,
-          pod_it->second.pod_name,
-          pod_it->second.container_name,
-          env_mappings,
-          label_mappings);
-      for (auto& [k, v] : attrs) {
-        env[k] = std::move(v);
+      const auto& identity = state.identities.front();
+      if (!isCurrentOwner(identity, currentOwners)) {
+        continue;
       }
+
+      auto& env = envMetadataMapString_[chipIndex];
+      if (podAttributionProviders_.lookupAttributes) {
+        auto attrs = podAttributionProviders_.lookupAttributes(identity);
+        for (auto& [key, value] : attrs) {
+          env[key] = std::move(value);
+        }
+      }
+      // Write verified identity last so configurable enrichment cannot
+      // overwrite these reserved fields.
+      env["pod_namespace"] = identity.podNamespace;
+      env["pod_name"] = identity.podName;
+      env["container_name"] = identity.containerName;
     }
   }
-#endif // USE_K8S_PODRESOURCES
 }
 
 void TpuGroupInfo::log(Logger& logger) {
