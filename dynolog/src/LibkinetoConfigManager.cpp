@@ -27,6 +27,26 @@ namespace {
 
 constexpr std::chrono::seconds kKeepAliveTimeSecs(60);
 constexpr char kConfigFile[] = "/etc/libkineto.conf";
+const std::string kUndefinedJobId = "undefined";
+
+const std::string& normalizeJobId(const std::string& jobId) {
+  return jobId.empty() || jobId == "0" ? kUndefinedJobId : jobId;
+}
+
+bool containsJobId(const std::string& jobIdMetadata, const std::string& jobId) {
+  size_t begin = 0;
+  while ((begin = jobIdMetadata.find('=', begin)) != std::string::npos) {
+    const auto end = jobIdMetadata.find(", ", ++begin);
+    if (jobIdMetadata.compare(begin, end - begin, jobId) == 0) {
+      return true;
+    }
+    if (end == std::string::npos) {
+      break;
+    }
+    begin = end + 2;
+  }
+  return false;
+}
 
 inline void setThreadName(const std::string& name) {
 #ifdef __linux__
@@ -199,10 +219,12 @@ int32_t LibkinetoConfigManager::registerLibkinetoContext(
     const std::string& jobId,
     int32_t pid,
     int32_t gpu) {
+  const auto& normalizedJobId = normalizeJobId(jobId);
   std::lock_guard<std::mutex> guard(mutex_);
-  auto& instances = jobInstancesPerGpu_[jobId][gpu];
+  auto& instances = jobInstancesPerGpu_[normalizedJobId][gpu];
   instances.insert(pid);
-  LOG(INFO) << fmt::format("Registered process ({}) for job {}.", pid, jobId);
+  LOG(INFO) << fmt::format(
+      "Registered process ({}) for job {}.", pid, normalizedJobId);
   return instances.size();
 }
 
@@ -216,10 +238,12 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
     const std::string& jobId,
     const std::vector<int32_t>& pids,
     int32_t configType,
-    std::optional<uint64_t> pidNamespaceId) {
+    std::optional<uint64_t> pidNamespaceId,
+    const std::string& jobIdMetadata) {
+  const auto& normalizedJobId = normalizeJobId(jobId);
   VLOG(2) << fmt::format(
       "obtainOnDemandConfig({}, ({}), {})",
-      jobId,
+      normalizedJobId,
       fmt::join(pids, ","),
       configType);
 
@@ -229,7 +253,8 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
   std::lock_guard<std::mutex> guard(registry->getMutex());
 
   auto [process, newProcess] =
-      registry->registerOrUpdateProcess(jobId, pids_set, pids);
+      registry->registerOrUpdateProcess(normalizedJobId, pids_set, pids);
+  process.jobIdMetadata = jobIdMetadata;
 
   if (newProcess) {
     // First time - intialize!
@@ -238,7 +263,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
     LOG(INFO) << fmt::format(
         "Registered process ({}) for job '{}'. Leaf PID: {}",
         fmt::join(pids, ", "),
-        jobId,
+        normalizedJobId,
         process.pid);
 
     // Store namespace ID if provided
@@ -248,7 +273,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
           "Stored namespace ID {} for process {} in job '{}'",
           *pidNamespaceId,
           process.pid,
-          jobId);
+          normalizedJobId);
     }
 
     onRegisterProcess(pids_set);
@@ -262,7 +287,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
       LOG(INFO) << fmt::format(
           "Returning event profiler config for process ({}) in job '{}'",
           fmt::join(pids, ", "),
-          jobId);
+          normalizedJobId);
       ret += process.eventProfilerConfig + "\n";
       process.eventProfilerConfig.clear();
     }
@@ -273,7 +298,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
       LOG(INFO) << fmt::format(
           "Returning activity profiler config for process ({}) in job '{}'",
           fmt::join(pids, ", "),
-          jobId);
+          normalizedJobId);
       ret += process.activityProfilerConfig + "\n";
       process.activityProfilerConfig.clear();
     }
@@ -336,9 +361,10 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
     const std::string& config,
     int32_t configType /* LibkinetoConfigType */,
     int32_t limit) {
+  const auto& normalizedJobId = normalizeJobId(jobId);
   LOG(INFO) << fmt::format(
       "Initiating on-demand GPU profiling for job ID {}, pids [{}]",
-      jobId,
+      normalizedJobId,
       fmt::join(pids, ","));
 
   GpuProfilerResult res;
@@ -373,13 +399,18 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
       }
     }
 
-    if (auto it = jobs.find(jobId); it != jobs.end()) {
-      auto& processes = it->second;
+    for (auto& [registeredJobId, processes] : jobs) {
       for (auto& pair : processes) {
+        auto& process = pair.second;
+        const bool jobMatches = jobId.empty() || process.jobIdMetadata.empty()
+            ? registeredJobId == normalizedJobId
+            : containsJobId(process.jobIdMetadata, jobId);
+        if (!jobMatches) {
+          continue;
+        }
         for (const auto& pid : pair.first) {
           // Trace the process if we find a match or target pids is empty.
           if (traceAllPids || pids.find(pid) != pids.end()) {
-            auto& process = pair.second;
             setOnDemandConfigForProcess(
                 res, process, config, configType, limit);
             // the user could provide multiple pids that belong to the same the
@@ -389,9 +420,9 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
           }
         }
       }
-      if (!res.activityProfilersTriggered.empty()) {
-        onSetOnDemandConfig(pids);
-      }
+    }
+    if (!res.activityProfilersTriggered.empty()) {
+      onSetOnDemandConfig(pids);
     }
   }
 
@@ -411,9 +442,10 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
 }
 
 int LibkinetoConfigManager::processCount(const std::string& jobId) const {
+  const auto& normalizedJobId = normalizeJobId(jobId);
   auto registry = LibkinetoJobRegistry::getInstance();
-  int count = static_cast<int>(registry->getProcessCount(jobId));
-  LOG(INFO) << "Process count for job ID " << jobId << ": " << count;
+  int count = static_cast<int>(registry->getProcessCount(normalizedJobId));
+  LOG(INFO) << "Process count for job ID " << normalizedJobId << ": " << count;
   return count;
 }
 

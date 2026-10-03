@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <cstdint>
 #include <cstring>
+#include <optional>
 #include <ostream>
 #include <stdexcept>
 #include <string>
@@ -78,9 +79,14 @@ void IPCMonitor::getLibkinetoOnDemandRequest(
     return;
   }
   std::vector<int32_t> pids(req->pids, req->pids + req->n);
+  const auto jobId = std::to_string(req->jobid);
   try {
     ret_config = LibkinetoConfigManager::getInstance()->obtainOnDemandConfig(
-        std::to_string(req->jobid), pids, req->type);
+        jobId,
+        pids,
+        req->type,
+        std::nullopt,
+        req->jobid == 0 ? "" : "SLURM_JOB_ID=" + jobId);
     VLOG(0) << "getLibkinetoOnDemandRequest() : job id " << req->jobid
             << " pids = " << pids[0];
   } catch (const std::runtime_error& ex) {

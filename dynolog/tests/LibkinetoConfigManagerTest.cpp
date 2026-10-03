@@ -93,6 +93,103 @@ TEST_F(LibkinetoConfigManagerTest, ObtainOnDemandConfigWithoutNamespaceId) {
   }
 }
 
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsUseUndefinedRegistryEntry) {
+  const std::vector<int32_t> emptyJobPids = {12345};
+  const std::vector<int32_t> zeroJobPids = {67890};
+
+  configManager_->obtainOnDemandConfig(
+      "", emptyJobPids, int(LibkinetoConfigType::EVENTS));
+  configManager_->obtainOnDemandConfig(
+      "0", zeroJobPids, int(LibkinetoConfigType::EVENTS));
+
+  std::lock_guard<std::mutex> guard(registry_->getMutex());
+  const auto& jobs = registry_->getAllJobs();
+  ASSERT_EQ(jobs.size(), 1);
+  EXPECT_EQ(jobs.count("undefined"), 1);
+  EXPECT_EQ(jobs.at("undefined").size(), 2);
+}
+
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsShareRegisteredInstances) {
+  constexpr int32_t kGpu = 12345;
+
+  EXPECT_EQ(configManager_->registerLibkinetoContext("", 12345, kGpu), 1);
+  EXPECT_EQ(configManager_->registerLibkinetoContext("0", 67890, kGpu), 2);
+  EXPECT_EQ(
+      configManager_->registerLibkinetoContext("undefined", 11111, kGpu), 3);
+}
+
+TEST_F(LibkinetoConfigManagerTest, EmptyPollClearsJobIdMetadata) {
+  const std::vector<int32_t> pids = {12345};
+  configManager_->obtainOnDemandConfig(
+      "test_job",
+      pids,
+      int(LibkinetoConfigType::EVENTS),
+      std::nullopt,
+      "MAST=1");
+  configManager_->obtainOnDemandConfig(
+      "test_job", pids, int(LibkinetoConfigType::EVENTS), std::nullopt, "");
+
+  std::lock_guard<std::mutex> guard(registry_->getMutex());
+  EXPECT_TRUE(registry_->getAllJobs()
+                  .at("test_job")
+                  .begin()
+                  ->second.jobIdMetadata.empty());
+}
+
+TEST_F(LibkinetoConfigManagerTest, JobIdMetadataValuesAreTargetable) {
+  const std::vector<int32_t> mastOnePids = {12345};
+  const std::vector<int32_t> mastTwoPids = {67890};
+
+  configManager_->obtainOnDemandConfig(
+      "opaque_registry_key",
+      mastOnePids,
+      int(LibkinetoConfigType::EVENTS),
+      std::nullopt,
+      "CHRONOS_JOB_INSTANCE_ID=chronos_job, MAST_HPC_JOB_NAME=mast_one");
+  configManager_->obtainOnDemandConfig(
+      "opaque_registry_key",
+      mastTwoPids,
+      int(LibkinetoConfigType::EVENTS),
+      std::nullopt,
+      "CHRONOS_JOB_INSTANCE_ID=chronos_job, MAST_HPC_JOB_NAME=mast_two");
+
+  const auto mastResult = configManager_->setOnDemandConfig(
+      "mast_one", {}, "MAST_CONFIG", int(LibkinetoConfigType::EVENTS), 2);
+  EXPECT_EQ(mastResult.eventProfilersTriggered, mastOnePids);
+
+  const auto chronosResult = configManager_->setOnDemandConfig(
+      "chronos_job",
+      {},
+      "CHRONOS_CONFIG",
+      int(LibkinetoConfigType::ACTIVITIES),
+      2);
+  const std::vector<int32_t> bothPids = {12345, 67890};
+  EXPECT_EQ(chronosResult.activityProfilersTriggered, bothPids);
+}
+
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsMatchInterchangeably) {
+  const std::vector<int32_t> pids = {12345};
+  const std::vector<int32_t> otherPids = {67890};
+  const std::string config = "TEST_CONFIG";
+
+  configManager_->obtainOnDemandConfig(
+      "", pids, int(LibkinetoConfigType::EVENTS));
+  configManager_->obtainOnDemandConfig(
+      "other_job", otherPids, int(LibkinetoConfigType::EVENTS));
+  const auto result = configManager_->setOnDemandConfig(
+      "0", {}, config, int(LibkinetoConfigType::EVENTS), 1);
+
+  EXPECT_EQ(result.processesMatched, std::vector<int32_t>({12345}));
+  EXPECT_EQ(result.eventProfilersTriggered, std::vector<int32_t>({12345}));
+  EXPECT_EQ(
+      configManager_->obtainOnDemandConfig(
+          "undefined", pids, int(LibkinetoConfigType::EVENTS)),
+      config + "\n");
+  EXPECT_EQ(configManager_->processCount(""), 1);
+  EXPECT_EQ(configManager_->processCount("0"), 1);
+  EXPECT_EQ(configManager_->processCount("undefined"), 1);
+}
+
 // Test that namespace ID is unable to be updated on subsequent calls
 TEST_F(LibkinetoConfigManagerTest, NamespaceIdUnableToUpdate) {
   const std::string jobId = "test_job_789";
