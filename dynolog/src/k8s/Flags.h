@@ -11,10 +11,17 @@
 
 #include <gflags/gflags.h>
 
+namespace dynolog::k8s {
+
+bool isK8sPodWatchEnabled();
+
+} // namespace dynolog::k8s
+
 // Shared kubelet pod-resources attribution flags. Defined once in Flags.cpp
 // so both gpumon (DcgmGroupInfo) and tpumon (TpuGroupInfo) can reference
 // the same FLAGS_* symbols without producing duplicate-symbol link errors.
 DECLARE_bool(enable_pod_resources_attribution);
+DECLARE_bool(enable_k8s_pod_watch);
 DECLARE_string(pod_resources_socket);
 DECLARE_string(pod_resources_gpu_resource);
 DECLARE_string(pod_resources_tpu_resource);

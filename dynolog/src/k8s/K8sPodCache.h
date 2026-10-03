@@ -8,33 +8,40 @@
 #pragma once
 
 #include <chrono>
+#include <cstddef>
+#include <functional>
 #include <memory>
-#include <mutex>
 #include <string>
+#include <string_view>
 #include <unordered_map>
-#include <unordered_set>
 
 namespace dynolog::k8s {
 
 // Caches enrichment data fetched from the K8s API for pods running on the
-// local node. Each entry corresponds to one pod (key: "<ns>/<name>"), and
-// stores a flat map of attribution columns (env vars + labels + owner refs)
-// already resolved per-container.
+// local node. When watch mode is enabled, a paginated node-scoped LIST builds
+// the initial snapshot and WATCH keeps it current. Cache misses retain the
+// bounded per-Pod GET fallback.
 //
-// Phase 1b's PodResourcesClient gives us (namespace, name, container) per
-// GPU. K8sPodCache then turns that into the actual attribution attributes
-// (mast_job, mast_owner, controller_kind, etc.) that land in the Scuba
-// row.
-//
-// Network access uses libcurl + the in-pod ServiceAccount bearer token and
-// CA cert at /var/run/secrets/kubernetes.io/serviceaccount/{token,ca.crt}.
-//
-// Cache semantics: per-pod TTL. A miss triggers a single GET; subsequent
-// lookups within ttl reuse the cached attributes. Stale entries are
-// re-fetched on next access. Failed lookups are negatively cached for a
-// short window to avoid hammering the API for pods that have been deleted.
+// Each entry corresponds to one Pod (key: "<ns>/<name>") and stores its UID,
+// phase, labels, owner reference, service account, and resolved per-container
+// environment attribution. UID-aware updates prevent a delayed deletion for an
+// old Pod from removing a same-name replacement.
 class K8sPodCache {
  public:
+  struct HttpResult {
+    bool transportOk = false;
+    long statusCode = 0;
+  };
+
+  using ChunkCallback = std::function<bool(std::string_view)>;
+  using StopCallback = std::function<bool()>;
+  using HttpRequest = std::function<HttpResult(
+      const std::string& url,
+      const std::string& bearerToken,
+      bool streaming,
+      const ChunkCallback& onChunk,
+      const StopCallback& shouldStop)>;
+
   struct Options {
     // K8s API base URL. Inside a pod, kubernetes.default.svc resolves to
     // the in-cluster API server.
@@ -42,11 +49,25 @@ class K8sPodCache {
     std::string tokenPath =
         "/var/run/secrets/kubernetes.io/serviceaccount/token";
     std::string caPath = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt";
-    // Per-pod cache TTL (seconds). Pod specs are immutable for the
-    // attributes we care about, so a long TTL is safe.
+    // Per-pod cache TTL for fallback GETs. Entries populated by LIST/WATCH
+    // remain valid until a later watch event or atomic LIST reconciliation.
     std::chrono::seconds ttl{300};
     std::chrono::seconds negativeTtl{30};
     long httpTimeoutMs = 2000;
+
+    // When enabled, maintain a node-scoped cache using the Kubernetes Pod
+    // LIST/WATCH protocol. nodeName defaults to K8S_NODE_NAME when empty.
+    bool enableWatch = false;
+    std::string nodeName;
+    size_t listPageSize = 500;
+    long watchTimeoutSeconds = 300;
+    size_t maxWatchEventBytes = 1024 * 1024;
+    std::chrono::milliseconds reconnectDelay{1000};
+
+    // Optional deterministic seams for tests. Production callers leave these
+    // empty and use libcurl without fallback-wait notifications.
+    HttpRequest httpRequest;
+    std::function<void()> onFallbackWait;
   };
 
   // Map: env-var name (as it appears in pod spec) -> output column name.
@@ -65,14 +86,8 @@ class K8sPodCache {
   K8sPodCache(K8sPodCache&&) = delete;
   K8sPodCache& operator=(K8sPodCache&&) = delete;
 
-  // Returns attribution attributes for (ns, name, container).
-  // - Looks up env vars whose names appear in envMap, resolving them
-  //   from spec.containers[<container>].env (literal values + downward-API
-  //   fieldRefs we can resolve locally).
-  // - Looks up labels whose keys appear in labelMap.
-  // - Adds controller_kind + controller_name from
-  //   metadata.ownerReferences[0] when present.
-  // Returns empty map on cache miss / fetch failure.
+  // Returns attribution attributes for (ns, name, container), including
+  // pod_uid and the raw Kubernetes pod_phase when present.
   std::unordered_map<std::string, std::string> lookupAttribution(
       const std::string& podNamespace,
       const std::string& podName,

@@ -167,7 +167,7 @@ DcgmGroupInfo::DcgmGroupInfo(
     const std::vector<unsigned short>& fields,
     const std::vector<unsigned short>& prof_fields,
     int updateIntervalMs)
-    : updateIntervalMs_(updateIntervalMs) {
+    : cleanupDcgmOnDestruction_(true), updateIntervalMs_(updateIntervalMs) {
   init();
   createGroups();
   createFieldGroups(fields);
@@ -322,6 +322,13 @@ void DcgmGroupInfo::watchProfFields(
   }
 }
 
+void DcgmGroupInfo::clearMetricCachesForSuccessfulRefresh() {
+  metricsMapDouble_.clear();
+  metricsMapInt_.clear();
+  metricsMapString_.clear();
+  envMetadataMapString_.clear();
+}
+
 // Metrics are updated automatically by operation mode
 // This function reads latest metrics from DCGM and update to metric cache
 void DcgmGroupInfo::update() {
@@ -338,9 +345,7 @@ void DcgmGroupInfo::update() {
     } else {
       // iterate over each GPU
       LOG(INFO) << "Got " << dcgmValues.size() << " GPU records";
-      metricsMapDouble_.clear();
-      metricsMapInt_.clear();
-      metricsMapString_.clear();
+      clearMetricCachesForSuccessfulRefresh();
       for (auto& [entity, readValues] : dcgmValues) {
         LOG(INFO) << "Got " << readValues.size()
                   << " values for entity: " << entity;
@@ -505,6 +510,10 @@ bool DcgmGroupInfo::resumeProfiling() {
 DcgmGroupInfo::~DcgmGroupInfo() {
   dcgmProfUnwatchFields_t unwatchFields;
   memset(&unwatchFields, 0, sizeof(unwatchFields));
+  if (!cleanupDcgmOnDestruction_) {
+    return;
+  }
+
   unwatchFields.version = dcgmProfUnwatchFields_version;
   unwatchFields.groupId = groupId_;
   if (retCode_ = dcgmProfUnwatchFields_stub(dcgmHandle_, &unwatchFields);

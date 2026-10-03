@@ -11,12 +11,20 @@
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
 
+#include <atomic>
+#include <condition_variable>
+#include <cstdint>
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <mutex>
 #include <sstream>
+#include <thread>
+#include <unordered_set>
 #include <utility>
+
+#include "dynolog/src/k8s/Flags.h"
 
 namespace dynolog::k8s {
 
@@ -35,22 +43,30 @@ std::string readFile(const std::string& path) {
 }
 
 std::string trim(const std::string& s) {
-  size_t b = s.find_first_not_of(" \t\r\n");
+  const size_t b = s.find_first_not_of(" \t\r\n");
   if (b == std::string::npos) {
     return {};
   }
-  size_t e = s.find_last_not_of(" \t\r\n");
+  const size_t e = s.find_last_not_of(" \t\r\n");
   return s.substr(b, e - b + 1);
 }
 
-size_t curlWrite(char* ptr, size_t size, size_t nmemb, void* userdata) {
-  auto* out = static_cast<std::string*>(userdata);
-  out->append(ptr, size * nmemb);
-  return size * nmemb;
+std::string urlEncode(std::string_view input) {
+  std::ostringstream encoded;
+  encoded << std::uppercase << std::hex;
+  for (const unsigned char c : input) {
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+        (c >= '0' && c <= '9') || c == '-' || c == '_' || c == '.' ||
+        c == '~') {
+      encoded << static_cast<char>(c);
+    } else {
+      encoded << '%' << std::setw(2) << std::setfill('0')
+              << static_cast<unsigned int>(c);
+    }
+  }
+  return encoded.str();
 }
 
-// Resolve K8s Downward-API fieldRefs we can answer from data we already
-// have, without making additional API calls.
 std::string resolveFieldRef(
     const std::string& fieldPath,
     const std::string& podNamespace,
@@ -66,20 +82,25 @@ std::string resolveFieldRef(
     return podUid;
   }
   if (fieldPath == "spec.nodeName") {
-    if (const char* n = std::getenv("K8S_NODE_NAME"); n) {
-      return n;
+    if (const char* nodeName = std::getenv("K8S_NODE_NAME"); nodeName) {
+      return nodeName;
     }
   }
-  // status.podIP and status.hostIP could be resolved from the pod-spec
-  // response itself, but we don't currently extract them. Skip.
   return {};
+}
+
+K8sPodCache::Options defaultOptions() {
+  K8sPodCache::Options opts;
+  opts.enableWatch = isK8sPodWatchEnabled();
+  if (const char* nodeName = std::getenv("K8S_NODE_NAME"); nodeName) {
+    opts.nodeName = nodeName;
+  }
+  return opts;
 }
 
 } // namespace
 
 const K8sPodCache::LabelKeyMap& getDefaultLabelAttributionMap() {
-  // Selected K8s labels that are useful for GPU job attribution on CKS.
-  // Adding more is cheap — they all come from the same pod GET response.
   static const K8sPodCache::LabelKeyMap kLabels = {
       {"mkube.meta.com/workload-name", "mkube_workload_name"},
       {"kueue.x-k8s.io/queue-name", "kueue_queue_name"},
@@ -91,160 +112,613 @@ const K8sPodCache::LabelKeyMap& getDefaultLabelAttributionMap() {
 
 struct K8sPodCache::Entry {
   using Clock = std::chrono::steady_clock;
-  Clock::time_point fetched_at;
+
+  Clock::time_point fetchedAt;
   bool ok = false;
-  // Resolved per-container env vars: container_name -> (env_name -> value).
+  bool watchOwned = false;
+  std::string uid;
+  std::string resourceVersion;
+  std::string phase;
   std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
-      env_by_container;
+      envByContainer;
   std::unordered_map<std::string, std::string> labels;
-  std::string service_account;
-  std::string controller_kind;
-  std::string controller_name;
+  std::string serviceAccount;
+  std::string controllerKind;
+  std::string controllerName;
 };
 
 struct K8sPodCache::Impl {
+  enum class ListOutcome { kSuccess, kRetry };
+  enum class WatchOutcome { kReconnect, kRetry, kRelist };
+  enum class EventOutcome { kContinue, kRelist };
+
+  struct CurlWriteContext {
+    const ChunkCallback* callback;
+  };
+
+  struct CurlProgressContext {
+    const StopCallback* shouldStop;
+  };
+
   explicit Impl(Options opts) : opts_(std::move(opts)) {
+    if (opts_.nodeName.empty()) {
+      if (const char* nodeName = std::getenv("K8S_NODE_NAME"); nodeName) {
+        opts_.nodeName = nodeName;
+      }
+    }
     if (!std::filesystem::exists(opts_.tokenPath)) {
       LOG(WARNING) << "K8sPodCache: serviceaccount token not present at "
                    << opts_.tokenPath
-                   << "; pod-spec fetches will fail until it appears.";
+                   << "; Kubernetes API requests will fail until it appears.";
+    }
+    watchEnabled_ = opts_.enableWatch && !opts_.nodeName.empty();
+    if (opts_.enableWatch && opts_.nodeName.empty()) {
+      LOG(WARNING) << "K8sPodCache: watch requested without K8S_NODE_NAME; "
+                      "using fallback Pod GETs only";
     }
   }
 
-  // Re-read the projected ServiceAccount token from disk on every fetch.
-  // K8s rotates these tokens (typically every ~hour); caching the value
-  // would cause silent 401s after rotation. The file lives on tmpfs so
-  // the cost is negligible.
-  std::string readToken() {
+  Impl(const Impl&) = delete;
+  Impl& operator=(const Impl&) = delete;
+  Impl(Impl&&) = delete;
+  Impl& operator=(Impl&&) = delete;
+
+  ~Impl() {
+    {
+      std::lock_guard<std::mutex> lock(mu_);
+      stopping_.store(true, std::memory_order_relaxed);
+    }
+    cv_.notify_all();
+    if (watchThread_.joinable()) {
+      watchThread_.join();
+    }
+  }
+
+  void start() {
+    if (watchEnabled_) {
+      watchThread_ = std::thread([this] { watchLoop(); });
+    }
+  }
+
+  std::string readToken() const {
     return trim(readFile(opts_.tokenPath));
   }
 
-  // Fetch + parse pod spec; populate entry. Returns true on success.
-  bool fetchPod(const std::string& ns, const std::string& name, Entry& out) {
-    std::string url =
-        opts_.apiBase + "/api/v1/namespaces/" + ns + "/pods/" + name;
+  static size_t
+  curlWrite(char* ptr, size_t size, size_t nmemb, void* userdata) {
+    const size_t bytes = size * nmemb;
+    auto* context = static_cast<CurlWriteContext*>(userdata);
+    if (!context || !context->callback) {
+      return 0;
+    }
+    return (*context->callback)(std::string_view(ptr, bytes)) ? bytes : 0;
+  }
 
-    std::string body;
-    long httpCode = 0;
+  static int
+  curlProgress(void* userdata, curl_off_t, curl_off_t, curl_off_t, curl_off_t) {
+    auto* context = static_cast<CurlProgressContext*>(userdata);
+    if (!context || !context->shouldStop) {
+      return 1;
+    }
+    return (*context->shouldStop)() ? 1 : 0;
+  }
 
+  HttpResult curlRequest(
+      const std::string& url,
+      const std::string& token,
+      bool streaming,
+      const ChunkCallback& onChunk,
+      const StopCallback& shouldStop) const {
     CURL* curl = curl_easy_init();
     if (!curl) {
       LOG(ERROR) << "K8sPodCache: curl_easy_init failed";
-      return false;
+      return {};
     }
 
-    std::string token = readToken();
-    if (token.empty()) {
-      LOG(WARNING) << "K8sPodCache: empty serviceaccount token at "
-                   << opts_.tokenPath << "; skipping fetch for " << ns << "/"
-                   << name;
+    const std::string authHeader = "Authorization: Bearer " + token;
+    struct curl_slist* headers = curl_slist_append(nullptr, authHeader.c_str());
+    if (!headers) {
+      LOG(WARNING) << "K8sPodCache: curl_slist_append failed for " << url;
       curl_easy_cleanup(curl);
-      return false;
+      return {};
     }
-
-    struct curl_slist* headers = nullptr;
-    std::string authHeader = "Authorization: Bearer " + token;
-    headers = curl_slist_append(headers, authHeader.c_str());
-    headers = curl_slist_append(headers, "Accept: application/json");
-    if (headers == nullptr) {
-      LOG(WARNING) << "K8sPodCache: curl_slist_append failed for " << ns << "/"
-                   << name;
+    struct curl_slist* completeHeaders =
+        curl_slist_append(headers, "Accept: application/json");
+    if (!completeHeaders) {
+      LOG(WARNING) << "K8sPodCache: curl_slist_append failed for " << url;
+      curl_slist_free_all(headers);
       curl_easy_cleanup(curl);
-      return false;
+      return {};
     }
+    headers = completeHeaders;
 
+    CurlWriteContext writeContext{&onChunk};
+    CurlProgressContext progressContext{&shouldStop};
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    // Bypass forward proxy for in-cluster K8s API calls (T272296869).
-    // The K8s API server is always cluster-internal; routing through
-    // fwdproxy causes false-positive crawler detection.
     curl_easy_setopt(curl, CURLOPT_NOPROXY, "*");
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWrite);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &body);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, opts_.httpTimeoutMs);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &Impl::curlWrite);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &writeContext);
+    curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+    curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT_MS, opts_.httpTimeoutMs);
+    if (streaming) {
+      curl_easy_setopt(
+          curl,
+          CURLOPT_TIMEOUT_MS,
+          opts_.watchTimeoutSeconds * 1000 + opts_.httpTimeoutMs);
+    } else {
+      curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, opts_.httpTimeoutMs);
+    }
+    curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+    curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, &Impl::curlProgress);
+    curl_easy_setopt(curl, CURLOPT_XFERINFODATA, &progressContext);
     if (!opts_.caPath.empty()) {
       curl_easy_setopt(curl, CURLOPT_CAINFO, opts_.caPath.c_str());
     }
 
-    auto rc = curl_easy_perform(curl);
-    if (rc == CURLE_OK) {
-      curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
-    } else {
-      LOG(WARNING) << "K8sPodCache: curl_easy_perform failed for " << ns << "/"
-                   << name << ": " << curl_easy_strerror(rc);
+    const CURLcode rc = curl_easy_perform(curl);
+    long statusCode = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
+    if (rc != CURLE_OK && rc != CURLE_WRITE_ERROR &&
+        !(rc == CURLE_ABORTED_BY_CALLBACK && shouldStop())) {
+      LOG(WARNING) << "K8sPodCache: request failed for " << url << ": "
+                   << curl_easy_strerror(rc);
     }
     curl_slist_free_all(headers);
     curl_easy_cleanup(curl);
+    return {rc == CURLE_OK, statusCode};
+  }
 
-    if (rc != CURLE_OK || httpCode < 200 || httpCode >= 300) {
-      LOG(WARNING) << "K8sPodCache: GET " << url
-                   << " returned http=" << httpCode;
-      return false;
+  HttpResult request(
+      const std::string& url,
+      bool streaming,
+      const ChunkCallback& onChunk) const {
+    const std::string token = readToken();
+    if (token.empty()) {
+      LOG(WARNING) << "K8sPodCache: empty serviceaccount token at "
+                   << opts_.tokenPath << "; skipping request to " << url;
+      return {};
     }
+    const StopCallback shouldStop = [this] {
+      return stopping_.load(std::memory_order_relaxed);
+    };
+    if (opts_.httpRequest) {
+      return opts_.httpRequest(url, token, streaming, onChunk, shouldStop);
+    }
+    return curlRequest(url, token, streaming, onChunk, shouldStop);
+  }
 
+  static bool
+  parsePod(const json& pod, Entry& out, std::string* key = nullptr) {
     try {
-      auto pod = json::parse(body);
-      const auto& meta = pod.at("metadata");
+      const auto& metadata = pod.at("metadata");
       const auto& spec = pod.at("spec");
+      const std::string podNamespace = metadata.value("namespace", "");
+      const std::string podName = metadata.value("name", "");
+      const std::string podUid = metadata.value("uid", "");
+      if (podNamespace.empty() || podName.empty() || podUid.empty()) {
+        return false;
+      }
 
-      std::string podUid = meta.value("uid", "");
-      out.service_account = spec.value("serviceAccountName", "");
+      Entry parsed;
+      parsed.ok = true;
+      parsed.uid = podUid;
+      parsed.resourceVersion = metadata.value("resourceVersion", "");
+      parsed.serviceAccount = spec.value("serviceAccountName", "");
+      if (const auto status = pod.find("status");
+          status != pod.end() && status->is_object()) {
+        parsed.phase = status->value("phase", "");
+      }
 
-      if (auto it = meta.find("labels"); it != meta.end() && it->is_object()) {
-        for (auto label = it->begin(); label != it->end(); ++label) {
+      if (const auto labels = metadata.find("labels");
+          labels != metadata.end() && labels->is_object()) {
+        for (auto label = labels->begin(); label != labels->end(); ++label) {
           if (label->is_string()) {
-            out.labels[label.key()] = label->get<std::string>();
+            parsed.labels[label.key()] = label->get<std::string>();
           }
         }
       }
-      if (auto refs = meta.find("ownerReferences");
-          refs != meta.end() && refs->is_array() && !refs->empty()) {
+      if (const auto refs = metadata.find("ownerReferences");
+          refs != metadata.end() && refs->is_array() && !refs->empty()) {
         const auto& first = refs->at(0);
-        out.controller_kind = first.value("kind", "");
-        out.controller_name = first.value("name", "");
+        parsed.controllerKind = first.value("kind", "");
+        parsed.controllerName = first.value("name", "");
       }
 
-      if (auto containers = spec.find("containers");
+      if (const auto containers = spec.find("containers");
           containers != spec.end() && containers->is_array()) {
-        for (const auto& c : *containers) {
-          std::string cname = c.value("name", "");
-          if (cname.empty()) {
+        for (const auto& container : *containers) {
+          const std::string containerName = container.value("name", "");
+          if (containerName.empty()) {
             continue;
           }
-          auto& env_map = out.env_by_container[cname];
-          if (auto envIt = c.find("env");
-              envIt != c.end() && envIt->is_array()) {
-            for (const auto& e : *envIt) {
-              std::string ename = e.value("name", "");
-              if (ename.empty()) {
+          auto& envMap = parsed.envByContainer[containerName];
+          if (const auto env = container.find("env");
+              env != container.end() && env->is_array()) {
+            for (const auto& variable : *env) {
+              const std::string name = variable.value("name", "");
+              if (name.empty()) {
                 continue;
               }
-              if (auto v = e.find("value"); v != e.end() && v->is_string()) {
-                env_map[ename] = v->get<std::string>();
+              if (const auto value = variable.find("value");
+                  value != variable.end() && value->is_string()) {
+                envMap[name] = value->get<std::string>();
                 continue;
               }
-              if (auto vf = e.find("valueFrom");
-                  vf != e.end() && vf->is_object()) {
-                if (auto fr = vf->find("fieldRef");
-                    fr != vf->end() && fr->is_object()) {
-                  std::string fp = fr->value("fieldPath", "");
-                  std::string resolved = resolveFieldRef(fp, ns, name, podUid);
+              if (const auto valueFrom = variable.find("valueFrom");
+                  valueFrom != variable.end() && valueFrom->is_object()) {
+                if (const auto fieldRef = valueFrom->find("fieldRef");
+                    fieldRef != valueFrom->end() && fieldRef->is_object()) {
+                  const std::string resolved = resolveFieldRef(
+                      fieldRef->value("fieldPath", ""),
+                      podNamespace,
+                      podName,
+                      podUid);
                   if (!resolved.empty()) {
-                    env_map[ename] = std::move(resolved);
+                    envMap[name] = resolved;
                   }
                 }
-                // configMapKeyRef / secretKeyRef intentionally skipped.
               }
             }
           }
         }
       }
-      out.ok = true;
+
+      parsed.fetchedAt = Entry::Clock::now();
+      out = std::move(parsed);
+      if (key) {
+        *key = podNamespace + "/" + podName;
+      }
       return true;
     } catch (const std::exception& e) {
-      LOG(WARNING) << "K8sPodCache: failed to parse pod spec for " << ns << "/"
-                   << name << ": " << e.what();
+      LOG(WARNING) << "K8sPodCache: failed to parse Pod: " << e.what();
       return false;
+    }
+  }
+
+  bool fetchPod(const std::string& ns, const std::string& name, Entry& out) {
+    const std::string url = opts_.apiBase + "/api/v1/namespaces/" +
+        urlEncode(ns) + "/pods/" + urlEncode(name);
+    std::string body;
+    const HttpResult response =
+        request(url, false, [&body](std::string_view chunk) {
+          body.append(chunk.data(), chunk.size());
+          return true;
+        });
+    if (!response.transportOk || response.statusCode < 200 ||
+        response.statusCode >= 300) {
+      LOG(WARNING) << "K8sPodCache: GET " << url
+                   << " returned http=" << response.statusCode;
+      return false;
+    }
+
+    try {
+      if (!parsePod(json::parse(body), out)) {
+        LOG(WARNING) << "K8sPodCache: incomplete Pod response for " << ns << "/"
+                     << name;
+        return false;
+      }
+      return true;
+    } catch (const std::exception& e) {
+      LOG(WARNING) << "K8sPodCache: failed to parse Pod response for " << ns
+                   << "/" << name << ": " << e.what();
+      return false;
+    }
+  }
+
+  std::string listUrl(const std::string& continueToken) const {
+    std::string url = opts_.apiBase + "/api/v1/pods?fieldSelector=" +
+        urlEncode("spec.nodeName=" + opts_.nodeName) +
+        "&limit=" + std::to_string(opts_.listPageSize);
+    if (!continueToken.empty()) {
+      url += "&continue=" + urlEncode(continueToken);
+    }
+    return url;
+  }
+
+  std::string watchUrl(const std::string& resourceVersion) const {
+    return opts_.apiBase +
+        "/api/v1/pods?watch=true&allowWatchBookmarks=true&fieldSelector=" +
+        urlEncode("spec.nodeName=" + opts_.nodeName) +
+        "&resourceVersion=" + urlEncode(resourceVersion) +
+        "&timeoutSeconds=" + std::to_string(opts_.watchTimeoutSeconds);
+  }
+
+  ListOutcome listPods(std::string& resourceVersion) {
+    std::unordered_map<std::string, Entry> snapshot;
+    std::string continueToken;
+    std::string listResourceVersion;
+
+    do {
+      std::string body;
+      const HttpResult response = request(
+          listUrl(continueToken), false, [&body](std::string_view chunk) {
+            body.append(chunk.data(), chunk.size());
+            return true;
+          });
+      if (!response.transportOk || response.statusCode < 200 ||
+          response.statusCode >= 300) {
+        LOG(WARNING) << "K8sPodCache: Pod LIST returned http="
+                     << response.statusCode;
+        return ListOutcome::kRetry;
+      }
+
+      try {
+        const auto page = json::parse(body);
+        const auto& metadata = page.at("metadata");
+        const std::string pageResourceVersion =
+            metadata.value("resourceVersion", "");
+        if (pageResourceVersion.empty()) {
+          LOG(WARNING) << "K8sPodCache: Pod LIST omitted resourceVersion";
+          return ListOutcome::kRetry;
+        }
+        if (listResourceVersion.empty()) {
+          listResourceVersion = pageResourceVersion;
+        } else if (listResourceVersion != pageResourceVersion) {
+          LOG(WARNING) << "K8sPodCache: Pod LIST resourceVersion changed "
+                          "during pagination";
+          return ListOutcome::kRetry;
+        }
+
+        for (const auto& pod : page.at("items")) {
+          Entry entry;
+          std::string key;
+          if (!parsePod(pod, entry, &key)) {
+            LOG(WARNING) << "K8sPodCache: Pod LIST contained invalid item";
+            return ListOutcome::kRetry;
+          }
+          entry.watchOwned = true;
+          snapshot.insert_or_assign(std::move(key), std::move(entry));
+        }
+        continueToken = metadata.value("continue", "");
+      } catch (const std::exception& e) {
+        LOG(WARNING) << "K8sPodCache: failed to parse Pod LIST: " << e.what();
+        return ListOutcome::kRetry;
+      }
+    } while (!continueToken.empty() &&
+             !stopping_.load(std::memory_order_relaxed));
+
+    if (stopping_.load(std::memory_order_relaxed)) {
+      return ListOutcome::kRetry;
+    }
+
+    {
+      std::lock_guard<std::mutex> lock(mu_);
+      std::unordered_set<std::string> affected;
+      affected.reserve(
+          cache_.size() + snapshot.size() + fetchesInFlight_.size());
+      for (const auto& [key, _] : cache_) {
+        affected.insert(key);
+      }
+      for (const auto& [key, _] : snapshot) {
+        affected.insert(key);
+      }
+      affected.insert(fetchesInFlight_.begin(), fetchesInFlight_.end());
+      for (const auto& key : affected) {
+        ++generations_[key];
+      }
+
+      for (const auto& key : fetchesInFlight_) {
+        if (snapshot.count(key) == 0) {
+          Entry tombstone;
+          tombstone.fetchedAt = Entry::Clock::now();
+          snapshot.emplace(key, std::move(tombstone));
+        }
+      }
+      cache_ = std::move(snapshot);
+
+      for (auto it = generations_.begin(); it != generations_.end();) {
+        if (cache_.count(it->first) == 0 &&
+            fetchesInFlight_.count(it->first) == 0) {
+          it = generations_.erase(it);
+        } else {
+          ++it;
+        }
+      }
+    }
+
+    resourceVersion = std::move(listResourceVersion);
+    cv_.notify_all();
+    return ListOutcome::kSuccess;
+  }
+
+  EventOutcome handleWatchEvent(
+      const std::string& line,
+      std::string& resourceVersion) {
+    try {
+      const auto event = json::parse(line);
+      const std::string type = event.value("type", "");
+      const auto& object = event.at("object");
+      if (type == "ERROR") {
+        if (object.value("code", 0) == 410 ||
+            object.value("reason", "") == "Expired") {
+          return EventOutcome::kRelist;
+        }
+        LOG(WARNING) << "K8sPodCache: Pod WATCH error event: " << object.dump();
+        return EventOutcome::kContinue;
+      }
+
+      const auto& metadata = object.at("metadata");
+      const std::string eventResourceVersion =
+          metadata.value("resourceVersion", "");
+      if (type == "BOOKMARK") {
+        if (!eventResourceVersion.empty()) {
+          resourceVersion = eventResourceVersion;
+        }
+        return EventOutcome::kContinue;
+      }
+
+      if (type != "ADDED" && type != "MODIFIED" && type != "DELETED") {
+        LOG(WARNING) << "K8sPodCache: unexpected Pod WATCH event type: "
+                     << type;
+        return EventOutcome::kRelist;
+      }
+
+      Entry entry;
+      std::string key;
+      if (!parsePod(object, entry, &key)) {
+        LOG(WARNING) << "K8sPodCache: invalid Pod WATCH object";
+        return EventOutcome::kRelist;
+      }
+
+      bool changed = false;
+      {
+        std::lock_guard<std::mutex> lock(mu_);
+        if (type == "ADDED" || type == "MODIFIED") {
+          ++generations_[key];
+          entry.watchOwned = true;
+          cache_.insert_or_assign(key, std::move(entry));
+          changed = true;
+        } else {
+          const auto cached = cache_.find(key);
+          if (cached == cache_.end() || cached->second.uid == entry.uid) {
+            ++generations_[key];
+            if (fetchesInFlight_.count(key) != 0) {
+              Entry tombstone;
+              tombstone.fetchedAt = Entry::Clock::now();
+              cache_.insert_or_assign(key, std::move(tombstone));
+            } else {
+              cache_.erase(key);
+              generations_.erase(key);
+            }
+            changed = true;
+          }
+        }
+      }
+      if (changed) {
+        cv_.notify_all();
+      }
+      if (!eventResourceVersion.empty()) {
+        resourceVersion = eventResourceVersion;
+      }
+      return EventOutcome::kContinue;
+    } catch (const std::exception& e) {
+      LOG(WARNING) << "K8sPodCache: failed to parse Pod WATCH event: "
+                   << e.what();
+      return EventOutcome::kRelist;
+    }
+  }
+
+  WatchOutcome watchPods(std::string& resourceVersion) {
+    std::string pending;
+    bool relist = false;
+    bool oversized = false;
+    const HttpResult response =
+        request(watchUrl(resourceVersion), true, [&](std::string_view chunk) {
+          while (!chunk.empty()) {
+            const size_t newline = chunk.find('\n');
+            const size_t partSize =
+                newline == std::string_view::npos ? chunk.size() : newline;
+            if (partSize > opts_.maxWatchEventBytes ||
+                pending.size() > opts_.maxWatchEventBytes - partSize) {
+              oversized = true;
+              return false;
+            }
+            pending.append(chunk.data(), partSize);
+            if (newline == std::string_view::npos) {
+              break;
+            }
+
+            const std::string line = trim(pending);
+            pending.clear();
+            chunk.remove_prefix(newline + 1);
+            if (!line.empty() &&
+                handleWatchEvent(line, resourceVersion) ==
+                    EventOutcome::kRelist) {
+              relist = true;
+              return false;
+            }
+          }
+          return !stopping_.load(std::memory_order_relaxed);
+        });
+
+    if (oversized) {
+      LOG(WARNING) << "K8sPodCache: Pod WATCH event exceeded "
+                   << opts_.maxWatchEventBytes << " bytes";
+      return WatchOutcome::kRelist;
+    }
+    if (response.statusCode == 410 || relist) {
+      return WatchOutcome::kRelist;
+    }
+    if (response.transportOk &&
+        (response.statusCode < 200 || response.statusCode >= 300)) {
+      LOG(WARNING) << "K8sPodCache: Pod WATCH returned http="
+                   << response.statusCode;
+      return WatchOutcome::kRelist;
+    }
+    if (!response.transportOk) {
+      if (!stopping_.load(std::memory_order_relaxed)) {
+        LOG(WARNING) << "K8sPodCache: Pod WATCH disconnected, http="
+                     << response.statusCode;
+      }
+      return WatchOutcome::kRetry;
+    }
+    return WatchOutcome::kReconnect;
+  }
+
+  void waitForRetry() {
+    std::unique_lock<std::mutex> lock(mu_);
+    cv_.wait_for(lock, opts_.reconnectDelay, [this] {
+      return stopping_.load(std::memory_order_relaxed);
+    });
+  }
+
+  void watchLoop() {
+    std::string resourceVersion;
+    while (!stopping_.load(std::memory_order_relaxed)) {
+      if (listPods(resourceVersion) != ListOutcome::kSuccess) {
+        waitForRetry();
+        continue;
+      }
+
+      while (!stopping_.load(std::memory_order_relaxed)) {
+        const WatchOutcome outcome = watchPods(resourceVersion);
+        if (outcome == WatchOutcome::kRelist) {
+          waitForRetry();
+          break;
+        }
+        if (outcome == WatchOutcome::kRetry) {
+          waitForRetry();
+        }
+      }
+    }
+  }
+
+  static void copyAttribution(
+      const Entry& entry,
+      const std::string& container,
+      const EnvKeyMap& envMap,
+      const LabelKeyMap& labelMap,
+      std::unordered_map<std::string, std::string>& result) {
+    if (const auto containerIt = entry.envByContainer.find(container);
+        containerIt != entry.envByContainer.end()) {
+      for (const auto& [envKey, column] : envMap) {
+        const auto envIt = containerIt->second.find(envKey);
+        if (envIt != containerIt->second.end() && !envIt->second.empty()) {
+          result[column] = envIt->second;
+        }
+      }
+    }
+    if (!entry.uid.empty()) {
+      result["pod_uid"] = entry.uid;
+    }
+    if (!entry.phase.empty()) {
+      result["pod_phase"] = entry.phase;
+    }
+    if (!entry.serviceAccount.empty()) {
+      result["service_account"] = entry.serviceAccount;
+    }
+    for (const auto& [labelKey, column] : labelMap) {
+      const auto labelIt = entry.labels.find(labelKey);
+      if (labelIt != entry.labels.end() && !labelIt->second.empty()) {
+        result[column] = labelIt->second;
+      }
+    }
+    if (!entry.controllerKind.empty()) {
+      result["controller_kind"] = entry.controllerKind;
+    }
+    if (!entry.controllerName.empty()) {
+      result["controller_name"] = entry.controllerName;
     }
   }
 
@@ -254,100 +728,77 @@ struct K8sPodCache::Impl {
       const std::string& container,
       const EnvKeyMap& envMap,
       const LabelKeyMap& labelMap) {
-    std::unordered_map<std::string, std::string> result;
-    std::string key = ns + "/" + name;
+    const std::string key = ns + "/" + name;
+    uint64_t fetchGeneration = 0;
 
-    bool needs_fetch = false;
-    {
-      std::lock_guard<std::mutex> lk(mu_);
-      auto it = cache_.find(key);
-      if (it == cache_.end()) {
-        needs_fetch = true;
-      } else {
-        auto age = Entry::Clock::now() - it->second.fetched_at;
-        auto ttl = it->second.ok ? opts_.ttl : opts_.negativeTtl;
-        if (age >= ttl) {
-          needs_fetch = true;
+    for (;;) {
+      std::unique_lock<std::mutex> lock(mu_);
+      const auto cached = cache_.find(key);
+      if (cached != cache_.end()) {
+        const auto ttl = cached->second.ok ? opts_.ttl : opts_.negativeTtl;
+        const bool fresh = cached->second.watchOwned && cached->second.ok
+            ? true
+            : Entry::Clock::now() - cached->second.fetchedAt < ttl;
+        if (fresh) {
+          std::unordered_map<std::string, std::string> result;
+          if (cached->second.ok) {
+            copyAttribution(
+                cached->second, container, envMap, labelMap, result);
+          }
+          return result;
         }
       }
-    }
 
-    if (needs_fetch) {
-      // Fetch outside the lock; concurrent fetches for the same key are
-      // tolerated (rare, and idempotent).
-      Entry fresh;
-      fresh.ok = fetchPod(ns, name, fresh);
-      // Stamp fetched_at AFTER the network call returns so the entry's
-      // recorded age reflects when the data was actually fresh, not when
-      // we started the (potentially slow) HTTP request.
-      fresh.fetched_at = Entry::Clock::now();
-      std::lock_guard<std::mutex> lk(mu_);
-      // insert_or_assign returns the iterator; reuse it so we don't
-      // re-find under the same lock.
-      auto [it, _] = cache_.insert_or_assign(key, std::move(fresh));
-      if (!it->second.ok) {
-        return result;
+      if (fetchesInFlight_.count(key) != 0) {
+        if (opts_.onFallbackWait) {
+          opts_.onFallbackWait();
+        }
+        cv_.wait(lock, [&] { return fetchesInFlight_.count(key) == 0; });
+        continue;
       }
-      copyAttribution(it->second, container, envMap, labelMap, result);
-      return result;
+
+      fetchesInFlight_.insert(key);
+      fetchGeneration = generations_[key];
+      break;
     }
 
-    std::lock_guard<std::mutex> lk(mu_);
-    auto it = cache_.find(key);
-    if (it == cache_.end() || !it->second.ok) {
-      return result;
+    Entry fresh;
+    fresh.ok = fetchPod(ns, name, fresh);
+    fresh.fetchedAt = Entry::Clock::now();
+
+    std::unordered_map<std::string, std::string> result;
+    {
+      std::lock_guard<std::mutex> lock(mu_);
+      if (generations_[key] == fetchGeneration) {
+        cache_.insert_or_assign(key, std::move(fresh));
+      }
+      fetchesInFlight_.erase(key);
+      const auto cached = cache_.find(key);
+      if (cached != cache_.end() && cached->second.ok) {
+        copyAttribution(cached->second, container, envMap, labelMap, result);
+      }
     }
-    copyAttribution(it->second, container, envMap, labelMap, result);
+    cv_.notify_all();
     return result;
   }
 
-  // Common projection from a cached Entry into the flat attribution map
-  // returned to the caller. Caller must already hold mu_ (if reading from
-  // cache_) or own the Entry (if just-inserted).
-  static void copyAttribution(
-      const Entry& entry,
-      const std::string& container,
-      const EnvKeyMap& envMap,
-      const LabelKeyMap& labelMap,
-      std::unordered_map<std::string, std::string>& result) {
-    // env vars: look up requested keys in this container's env map.
-    if (auto cit = entry.env_by_container.find(container);
-        cit != entry.env_by_container.end()) {
-      for (const auto& [env_key, column] : envMap) {
-        auto eit = cit->second.find(env_key);
-        if (eit != cit->second.end() && !eit->second.empty()) {
-          result[column] = eit->second;
-        }
-      }
-    }
-    if (!entry.service_account.empty()) {
-      result["service_account"] = entry.service_account;
-    }
-    // labels.
-    for (const auto& [label_key, column] : labelMap) {
-      auto lit = entry.labels.find(label_key);
-      if (lit != entry.labels.end() && !lit->second.empty()) {
-        result[column] = lit->second;
-      }
-    }
-    // owner refs.
-    if (!entry.controller_kind.empty()) {
-      result["controller_kind"] = entry.controller_kind;
-    }
-    if (!entry.controller_name.empty()) {
-      result["controller_name"] = entry.controller_name;
-    }
-  }
-
   Options opts_;
+  std::atomic<bool> stopping_{false};
+  bool watchEnabled_ = false;
+  std::thread watchThread_;
   std::mutex mu_;
+  std::condition_variable cv_;
   std::unordered_map<std::string, Entry> cache_;
+  std::unordered_map<std::string, uint64_t> generations_;
+  std::unordered_set<std::string> fetchesInFlight_;
 };
 
-K8sPodCache::K8sPodCache() : K8sPodCache(Options{}) {}
+K8sPodCache::K8sPodCache() : K8sPodCache(defaultOptions()) {}
 
 K8sPodCache::K8sPodCache(Options opts)
-    : impl_(std::make_unique<Impl>(std::move(opts))) {}
+    : impl_(std::make_unique<Impl>(std::move(opts))) {
+  impl_->start();
+}
 
 K8sPodCache::~K8sPodCache() = default;
 
