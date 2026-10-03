@@ -33,6 +33,21 @@ const std::string& normalizeJobId(const std::string& jobId) {
   return jobId.empty() || jobId == "0" ? kUndefinedJobId : jobId;
 }
 
+bool containsJobId(const std::string& jobIdMetadata, const std::string& jobId) {
+  size_t begin = 0;
+  while ((begin = jobIdMetadata.find('=', begin)) != std::string::npos) {
+    const auto end = jobIdMetadata.find(", ", ++begin);
+    if (jobIdMetadata.compare(begin, end - begin, jobId) == 0) {
+      return true;
+    }
+    if (end == std::string::npos) {
+      break;
+    }
+    begin = end + 2;
+  }
+  return false;
+}
+
 inline void setThreadName(const std::string& name) {
 #ifdef __linux__
   constexpr size_t kMaxBuff = 16;
@@ -223,7 +238,8 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
     const std::string& jobId,
     const std::vector<int32_t>& pids,
     int32_t configType,
-    std::optional<uint64_t> pidNamespaceId) {
+    std::optional<uint64_t> pidNamespaceId,
+    const std::string& jobIdMetadata) {
   const auto& normalizedJobId = normalizeJobId(jobId);
   VLOG(2) << fmt::format(
       "obtainOnDemandConfig({}, ({}), {})",
@@ -238,6 +254,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
 
   auto [process, newProcess] =
       registry->registerOrUpdateProcess(normalizedJobId, pids_set, pids);
+  process.jobIdMetadata = jobIdMetadata;
 
   if (newProcess) {
     // First time - intialize!
@@ -382,13 +399,18 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
       }
     }
 
-    if (auto it = jobs.find(normalizedJobId); it != jobs.end()) {
-      auto& processes = it->second;
+    for (auto& [registeredJobId, processes] : jobs) {
       for (auto& pair : processes) {
+        auto& process = pair.second;
+        const bool jobMatches = jobId.empty() || process.jobIdMetadata.empty()
+            ? registeredJobId == normalizedJobId
+            : containsJobId(process.jobIdMetadata, jobId);
+        if (!jobMatches) {
+          continue;
+        }
         for (const auto& pid : pair.first) {
           // Trace the process if we find a match or target pids is empty.
           if (traceAllPids || pids.find(pid) != pids.end()) {
-            auto& process = pair.second;
             setOnDemandConfigForProcess(
                 res, process, config, configType, limit);
             // the user could provide multiple pids that belong to the same the
@@ -398,9 +420,9 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
           }
         }
       }
-      if (!res.activityProfilersTriggered.empty()) {
-        onSetOnDemandConfig(pids);
-      }
+    }
+    if (!res.activityProfilersTriggered.empty()) {
+      onSetOnDemandConfig(pids);
     }
   }
 
