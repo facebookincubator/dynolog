@@ -93,6 +93,52 @@ TEST_F(LibkinetoConfigManagerTest, ObtainOnDemandConfigWithoutNamespaceId) {
   }
 }
 
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsUseUndefinedRegistryEntry) {
+  const std::vector<int32_t> emptyJobPids = {12345};
+  const std::vector<int32_t> zeroJobPids = {67890};
+
+  configManager_->obtainOnDemandConfig(
+      "", emptyJobPids, int(LibkinetoConfigType::EVENTS));
+  configManager_->obtainOnDemandConfig(
+      "0", zeroJobPids, int(LibkinetoConfigType::EVENTS));
+
+  std::lock_guard<std::mutex> guard(registry_->getMutex());
+  const auto& jobs = registry_->getAllJobs();
+  ASSERT_EQ(jobs.size(), 1);
+  EXPECT_EQ(jobs.count("undefined"), 1);
+  EXPECT_EQ(jobs.at("undefined").size(), 2);
+}
+
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsShareRegisteredInstances) {
+  constexpr int32_t kGpu = 12345;
+
+  EXPECT_EQ(configManager_->registerLibkinetoContext("", 12345, kGpu), 1);
+  EXPECT_EQ(configManager_->registerLibkinetoContext("0", 67890, kGpu), 2);
+  EXPECT_EQ(
+      configManager_->registerLibkinetoContext("undefined", 11111, kGpu), 3);
+}
+
+TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsMatchInterchangeably) {
+  const std::vector<int32_t> pids = {12345};
+  const std::set<int32_t> targetPids = {12345};
+  const std::string config = "TEST_CONFIG";
+
+  configManager_->obtainOnDemandConfig(
+      "", pids, int(LibkinetoConfigType::EVENTS));
+  const auto result = configManager_->setOnDemandConfig(
+      "0", targetPids, config, int(LibkinetoConfigType::EVENTS), 1);
+
+  EXPECT_EQ(result.processesMatched, std::vector<int32_t>({12345}));
+  EXPECT_EQ(result.eventProfilersTriggered, std::vector<int32_t>({12345}));
+  EXPECT_EQ(
+      configManager_->obtainOnDemandConfig(
+          "undefined", pids, int(LibkinetoConfigType::EVENTS)),
+      config + "\n");
+  EXPECT_EQ(configManager_->processCount(""), 1);
+  EXPECT_EQ(configManager_->processCount("0"), 1);
+  EXPECT_EQ(configManager_->processCount("undefined"), 1);
+}
+
 // Test that namespace ID is unable to be updated on subsequent calls
 TEST_F(LibkinetoConfigManagerTest, NamespaceIdUnableToUpdate) {
   const std::string jobId = "test_job_789";
