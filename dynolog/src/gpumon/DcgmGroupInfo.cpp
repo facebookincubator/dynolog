@@ -57,6 +57,7 @@ std::unordered_map<unsigned short, std::string> FieldIdToName{
     {DCGM_FI_PROF_SM_ACTIVE, "sm_active_ratio"},
     {DCGM_FI_PROF_SM_OCCUPANCY, "sm_occupancy"},
     {DCGM_FI_DEV_SM_CLOCK, "gpu_frequency_mhz"},
+    {DCGM_FI_DEV_CLOCK_THROTTLE_REASONS, "clocks_throttle_reasons"},
     {DCGM_FI_PROF_PIPE_FP16_ACTIVE, "fp16_active"},
     {DCGM_FI_PROF_PIPE_FP32_ACTIVE, "fp32_active"},
     {DCGM_FI_PROF_PIPE_FP64_ACTIVE, "fp64_active"},
