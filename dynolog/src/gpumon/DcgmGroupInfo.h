@@ -17,6 +17,8 @@
 
 namespace dynolog::gpumon {
 
+class DcgmGroupInfoTestPeer;
+
 DECLARE_string(dcgm_fields);
 
 constexpr char kDcgmDefaultFieldIds[] =
@@ -46,6 +48,9 @@ class DcgmGroupInfo {
   }
 
  private:
+  friend class DcgmGroupInfoTestPeer;
+
+  DcgmGroupInfo() = default;
   DcgmGroupInfo(
       const std::vector<unsigned short>& fields,
       const std::vector<unsigned short>& prof_fields,
@@ -55,6 +60,7 @@ class DcgmGroupInfo {
   void createFieldGroups(const std::vector<unsigned short>& fields);
   void watchFields();
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
+  void clearMetricCachesForSuccessfulRefresh();
 
   std::vector<unsigned int> gpuIdList_;
   int rpcStatus_ =
@@ -62,11 +68,12 @@ class DcgmGroupInfo {
   int deviceCount_ = 0;
   bool profEnabled_ = false;
   bool standaloneMode_ = false;
-  int updateIntervalMs_;
+  bool cleanupDcgmOnDestruction_ = false;
+  int updateIntervalMs_ = 0;
   dcgmReturn_t errorCode_{DCGM_ST_OK};
   dcgmReturn_t retCode_{DCGM_ST_OK};
-  dcgmHandle_t dcgmHandle_;
-  dcgmGpuGrp_t groupId_;
+  dcgmHandle_t dcgmHandle_{};
+  dcgmGpuGrp_t groupId_{};
   std::unordered_map<int, std::unordered_map<std::string, double>>
       metricsMapDouble_;
   std::unordered_map<int, std::unordered_map<std::string, int64_t>>
@@ -80,7 +87,7 @@ class DcgmGroupInfo {
       metricsMapString_;
   std::vector<dcgmFieldGrp_t> fieldGroupIds_;
   std::mutex profLock_;
-  std::chrono::seconds profPauseTimer_;
+  std::chrono::seconds profPauseTimer_{};
 };
 
 } // namespace dynolog::gpumon
