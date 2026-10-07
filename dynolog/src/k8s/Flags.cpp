@@ -21,6 +21,21 @@ DEFINE_bool(
     "filtered to a specific accelerator resource via "
     "--pod_resources_gpu_resource / --pod_resources_tpu_resource.");
 
+DEFINE_bool(
+    enable_k8s_pod_watch,
+    false,
+    "Maintain a node-scoped Kubernetes Pod LIST/WATCH cache for attribution. "
+    "Requires K8S_NODE_NAME and pods list/watch RBAC. Cache misses retain the "
+    "existing per-Pod GET fallback.");
+
+namespace dynolog::k8s {
+
+bool isK8sPodWatchEnabled() {
+  return FLAGS_enable_k8s_pod_watch;
+}
+
+} // namespace dynolog::k8s
+
 DEFINE_string(
     pod_resources_socket,
     "/var/lib/kubelet/pod-resources/kubelet.sock",
