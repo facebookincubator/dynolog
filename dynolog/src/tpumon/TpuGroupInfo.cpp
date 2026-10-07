@@ -99,6 +99,13 @@ constexpr std::string_view kMemoryTotal = "memory_total";
 constexpr std::string_view kMemoryTotalNode = "memory_total_node";
 constexpr std::string_view kMemoryUsed = "memory_used";
 constexpr std::string_view kMemoryUsedNode = "memory_used_node";
+constexpr std::string_view kTensorcoreUtilization = "tensorcore_utilization";
+constexpr std::string_view kTensorcoreUtilizationNode =
+    "tensorcore_utilization_node";
+constexpr std::string_view kMemoryBandwidthUtilization =
+    "memory_bandwidth_utilization";
+constexpr std::string_view kMemoryBandwidthUtilizationNode =
+    "memory_bandwidth_utilization_node";
 
 struct ChipId {
   std::string serial; // uuid prefix, shared across all chips on this node
@@ -256,10 +263,8 @@ void TpuGroupInfo::updateFromSamples(
   // samples for the same chip).
   //
   // Two-pass structure keeps the container-vs-node fallback simple:
-  // container samples "win" for duty_cycle / memory_*, node samples are
-  // fallbacks. tensorcore_utilization_node and
-  // memory_bandwidth_utilization_node are intentionally NOT emitted at
-  // per-chip granularity (host-aggregate only — see plan §5a).
+  // container samples "win" for each metric family and node samples are
+  // fallbacks.
   //
   // Raw pod labels are reconciled by identity tuple against current
   // PodResources owners below. PodResources device IDs are intentionally
@@ -302,6 +307,8 @@ void TpuGroupInfo::updateFromSamples(
   std::unordered_map<int, bool> has_container_dc;
   std::unordered_map<int, bool> has_container_mem_total;
   std::unordered_map<int, bool> has_container_mem_used;
+  std::unordered_map<int, bool> has_container_tensorcore;
+  std::unordered_map<int, bool> has_container_mem_bw;
   std::unordered_map<int, double> mem_total;
   std::unordered_map<int, double> mem_used;
 
@@ -338,9 +345,21 @@ void TpuGroupInfo::updateFromSamples(
       if (!has_container_mem_used[chip.index]) {
         mem_used[chip.index] = s.value;
       }
+    } else if (s.name == kTensorcoreUtilization && has_pod) {
+      dbl["tensorcore_utilization"] = s.value;
+      has_container_tensorcore[chip.index] = true;
+    } else if (s.name == kTensorcoreUtilizationNode) {
+      if (!has_container_tensorcore[chip.index]) {
+        dbl["tensorcore_utilization"] = s.value;
+      }
+    } else if (s.name == kMemoryBandwidthUtilization && has_pod) {
+      dbl["memory_bandwidth_utilization"] = s.value;
+      has_container_mem_bw[chip.index] = true;
+    } else if (s.name == kMemoryBandwidthUtilizationNode) {
+      if (!has_container_mem_bw[chip.index]) {
+        dbl["memory_bandwidth_utilization"] = s.value;
+      }
     }
-    // tensorcore_utilization_node and memory_bandwidth_utilization_node
-    // are intentionally dropped for per-chip rows (see plan §5a).
   }
 
   // Compose memory_utilization from the two capacity gauges.

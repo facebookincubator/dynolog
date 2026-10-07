@@ -68,8 +68,12 @@ constexpr const char* kProbeOutputTpu7x =
 duty_cycle{accelerator_id="1234567890123456789-5",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 43
 duty_cycle_node{accelerator_id="1234567890123456789-0",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 0
 duty_cycle_node{accelerator_id="1234567890123456789-4",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 99
+tensorcore_utilization_node{accelerator_id="1234567890123456789-4",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 11
+tensorcore_utilization{accelerator_id="1234567890123456789-4",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 66
 memory_total{accelerator_id="1234567890123456789-4",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 2.03465670656e+11
 memory_used{accelerator_id="1234567890123456789-4",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 1.017328353e+11
+memory_bandwidth_utilization{accelerator_id="1234567890123456789-4",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 55
+memory_bandwidth_utilization_node{accelerator_id="1234567890123456789-4",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 22
 memory_total_node{accelerator_id="1234567890123456789-0",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 2.03465670656e+11
 memory_used_node{accelerator_id="1234567890123456789-0",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 0
 tensorcore_utilization_node{accelerator_id="1234567890123456789-0",make="cloud-tpu",model="tpu7x",tpu_topology="2x2x2"} 88
@@ -188,18 +192,19 @@ TEST_F(TpuGroupInfoTest, ScrapeFailureEmitsErrorRow) {
   EXPECT_EQ(r.ints.at("device"), 0);
 }
 
-TEST_F(TpuGroupInfoTest, HostAggregateOnlyMetricsNotEmitted) {
+TEST_F(TpuGroupInfoTest, PopulatesTensorcoreAndMemoryBandwidthMetrics) {
   updateFromExposition(kProbeOutputTpu7x);
 
-  // tensorcore_utilization_node and memory_bandwidth_utilization_node
-  // are host-aggregate only — per plan §5a they MUST NOT be stuffed
-  // into per-chip rows.
-  for (const auto& r : logger_.records()) {
-    EXPECT_EQ(r.floats.count("tensorcore_active"), 0u)
-        << "tensorcore_active must not appear on TPU rows (plan §5a)";
-    EXPECT_EQ(r.floats.count("mem_bw_util"), 0u)
-        << "mem_bw_util must not appear on TPU rows (plan §5a)";
-  }
+  // Chip -0 only has node-scoped samples, so they provide the fallback values.
+  const auto& r0 = recordByDevice(logger_.records(), 0);
+  EXPECT_DOUBLE_EQ(r0.floats.at("tensorcore_utilization"), 88.0);
+  EXPECT_DOUBLE_EQ(r0.floats.at("memory_bandwidth_utilization"), 77.0);
+
+  // Chip -4 has both scopes. Container values win whether the node sample was
+  // encountered before or after the container sample.
+  const auto& r4 = recordByDevice(logger_.records(), 4);
+  EXPECT_DOUBLE_EQ(r4.floats.at("tensorcore_utilization"), 66.0);
+  EXPECT_DOUBLE_EQ(r4.floats.at("memory_bandwidth_utilization"), 55.0);
 }
 
 TEST_F(TpuGroupInfoTest, EmitsPodIdentityOnlyForCurrentOwner) {
