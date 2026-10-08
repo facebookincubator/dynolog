@@ -41,6 +41,10 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         dynolog_rdc_lib PUBLIC DYNOLOG_ROCM_VERSION=${ROCM_VERSION})
     target_link_libraries(dynolog_rdc_lib PUBLIC rdc ${GLOG_LIBRARY})
 
+    add_library(dynolog_amdsmi_lib STATIC AmdSmiWrapper.cpp AmdSmiWrapper.h)
+    target_include_directories(dynolog_amdsmi_lib PUBLIC "${DYNOLOG_REPO_ROOT}")
+    target_link_libraries(dynolog_amdsmi_lib PUBLIC amd_smi)
+
     add_subdirectory(examples)
     return()
 endif ()
@@ -102,6 +106,9 @@ if (rdc_FOUND AND amd_smi_FOUND AND LIBCAP_FOUND)
     target_compile_definitions(
         dynolog_rdc_lib PUBLIC DYNOLOG_ROCM_VERSION=${ROCM_VERSION})
     target_link_libraries(dynolog_rdc_lib rdc glog::glog)
+
+    add_library(dynolog_amdsmi_lib AmdSmiWrapper.cpp AmdSmiWrapper.h)
+    target_link_libraries(dynolog_amdsmi_lib PUBLIC amd_smi)
 
     add_library(dynolog_amd_device_lib AmdDeviceTopology.cpp AmdDeviceTopology.h)
     target_link_libraries(dynolog_amd_device_lib glog::glog)
