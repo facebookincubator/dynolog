@@ -27,6 +27,19 @@ struct AmdSmiMetrics {
   uint32_t partition_id = std::numeric_limits<uint32_t>::max();
   uint32_t node_id = std::numeric_limits<uint32_t>::max();
   int gpu_util_percent = -1;
+
+  // Physical-device metrics, copied to every partition. -1 when amd-smi
+  // cannot report them.
+  int64_t vram_total_bytes = -1;
+  int64_t vram_used_bytes = -1;
+  int64_t current_socket_power_watt = -1;
+  int64_t power_limit_watt = -1;
+  // rx + tx
+  int64_t pcie_bandwidth_megabits_per_sec = -1;
+  int64_t pcie_max_link_speed_mts = -1;
+  int64_t pcie_max_link_width = -1;
+  int64_t gpu_frequency_mhz = -1;
+  int64_t temperature_hotspot_c = -1;
 };
 
 // Thread-safe wrapper around the AMD SMI library. All methods throw
