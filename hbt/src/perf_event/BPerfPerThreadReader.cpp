@@ -55,7 +55,7 @@ int BPerfPerThreadReader::enable() {
   struct perf_event_attr attr;
   int idx_fd = -1, idx = 0, err, tid_fd = -1;
   struct bperf_thread_metadata* metadata;
-  struct BPerfThreadData data;
+  struct BPerfThreadData data = {};
   long page_size = 0;
   __u64 data_byte_offset = 0, page_offset = 0, offset_in_page = 0;
 
