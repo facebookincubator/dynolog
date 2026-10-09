@@ -65,7 +65,7 @@ TEST_F(BuiltinMetricsTest, NeoverseV3UncoreMetricsRegistered) {
     const char* eventId;
   };
   const std::vector<ExpectedMetric> expected{
-      {"HW_DMC_MEM_BYTES", PmuType::arm_cspmu_mc, "total_data_beats"},
+      {"HW_DMC_MEM_BEATS", PmuType::arm_cspmu_mc, "total_data_beats"},
       {"HW_CMN_MC_REQ_LOCAL", PmuType::arm_cmn, "hns_mc_reqs_local_sn"},
       {"HW_CMN_MC_REQ_REMOTE", PmuType::arm_cmn, "hns_mc_reqs_remote_sn"},
   };
