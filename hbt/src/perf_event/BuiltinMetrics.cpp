@@ -2900,6 +2900,40 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
 
   metrics->add(
       std::make_shared<MetricDesc>(
+          "HW_CORE_FP_SCALE_OPS_SPEC",
+          "Scalable floating-point operations speculatively executed",
+          "Counts speculatively executed scalable floating-point operations on Neoverse V3.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "FP_SCALE_OPS_SPEC_V3",
+                   PmuType::armv8_pmuv3,
+                   "FP_SCALE_OPS_SPEC_V3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_FP_FIXED_OPS_SPEC",
+          "Fixed-width floating-point operations speculatively executed",
+          "Counts speculatively executed fixed-width floating-point operations on Neoverse V3.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "FP_FIXED_OPS_SPEC_V3",
+                   PmuType::armv8_pmuv3,
+                   "FP_FIXED_OPS_SPEC_V3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
           "HW_CORE_LL_CACHE_MISS_RD",
           "Last level cache miss read",
           "Counts the number of read transactions that a processor core requests from memory but are not found in the Last-Level cache (L3 cache).",
@@ -3147,6 +3181,23 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
 
   metrics->add(
       std::make_shared<MetricDesc>(
+          "HW_CORE_BR_MIS_PRED_RETIRED",
+          "Mispredicted branch retired",
+          "Counts architecturally executed mispredicted branch instructions on Neoverse V3. This is event 0x22.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "BR_MIS_PRED_RETIRED_V3",
+                   PmuType::armv8_pmuv3,
+                   "BR_MIS_PRED_RETIRED_V3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
           "HW_CORE_BR_RETIRED",
           "Branch retired",
           "Counts architecturally executed branch instructions. This is event 0x21.",
@@ -3156,6 +3207,13 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    "br_retired",
                    PmuType::armv8_pmuv3,
                    "br_retired",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "BR_RETIRED_V3",
+                   PmuType::armv8_pmuv3,
+                   "BR_RETIRED_V3",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -3244,6 +3302,40 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
   // ARM TopDown Level 1 slot-based events
   metrics->add(
       std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_SLOT",
+          "Stalled dispatch slots",
+          "Counts dispatch slots that did not retire an operation on Neoverse V3. This is event 0x3F.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "STALL_SLOT_V3",
+                   PmuType::armv8_pmuv3,
+                   "STALL_SLOT_V3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_STALL_FRONTEND_FLUSH",
+          "Frontend stalls caused by pipeline flushes",
+          "Counts frontend stall cycles caused by pipeline flushes on Neoverse V3. This is event 0x8162.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "STALL_FRONTEND_FLUSH_V3",
+                   PmuType::armv8_pmuv3,
+                   "STALL_FRONTEND_FLUSH_V3",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
+  metrics->add(
+      std::make_shared<MetricDesc>(
           "HW_CORE_OP_RETIRED",
           "Operations architecturally executed",
           "Counts micro-operations that are architecturally executed. "
@@ -3258,9 +3350,9 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    {}}}},
               {CpuArch::NEOVERSE_V3,
                EventRefs{EventRef{
-                   "op_retired",
+                   "OP_RETIRED_V3",
                    PmuType::armv8_pmuv3,
-                   "op_retired",
+                   "OP_RETIRED_V3",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -3283,9 +3375,9 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    {}}}},
               {CpuArch::NEOVERSE_V3,
                EventRefs{EventRef{
-                   "op_spec",
+                   "OP_SPEC_V3",
                    PmuType::armv8_pmuv3,
-                   "op_spec",
+                   "OP_SPEC_V3",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -3308,9 +3400,9 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    {}}}},
               {CpuArch::NEOVERSE_V3,
                EventRefs{EventRef{
-                   "stall_slot_frontend",
+                   "STALL_SLOT_FRONTEND_V3",
                    PmuType::armv8_pmuv3,
-                   "stall_slot_frontend",
+                   "STALL_SLOT_FRONTEND_V3",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,
@@ -3333,9 +3425,9 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    {}}}},
               {CpuArch::NEOVERSE_V3,
                EventRefs{EventRef{
-                   "stall_slot_backend",
+                   "STALL_SLOT_BACKEND_V3",
                    PmuType::armv8_pmuv3,
-                   "stall_slot_backend",
+                   "STALL_SLOT_BACKEND_V3",
                    EventExtraAttr{},
                    {}}}}},
           100'000'000,

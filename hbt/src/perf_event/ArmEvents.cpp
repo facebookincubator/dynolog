@@ -4,6 +4,7 @@
 // LICENSE file in the root directory of this source tree.
 
 #include "hbt/src/perf_event/ArmEvents.h"
+#include <array>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
@@ -148,7 +149,71 @@ void addEvents(PmuDeviceManager& pmu_manager) {
 
 namespace {
 
-void addNeoverseV3Events(PmuDeviceManager& pmu_manager) {
+// Linux does not consistently expose implementation-defined Neoverse V3
+// events through sysfs. Use V3-specific IDs so the raw encodings never collide
+// with aliases discovered by scanPmu().
+void addNeoverseV3CoreEvents(PmuDeviceManager& pmu_manager) {
+  struct CoreEvent {
+    const char* id;
+    uint64_t code;
+    const char* briefDesc;
+    const char* fullDesc;
+  };
+  constexpr std::array<CoreEvent, 10> kCoreEvents{{
+      {"BR_RETIRED_V3",
+       0x21,
+       "Branch retired",
+       "Counts architecturally executed branch instructions."},
+      {"BR_MIS_PRED_RETIRED_V3",
+       0x22,
+       "Mispredicted branch retired",
+       "Counts architecturally executed mispredicted branch instructions."},
+      {"OP_RETIRED_V3",
+       0x3A,
+       "Operations retired",
+       "Counts architecturally executed operations."},
+      {"OP_SPEC_V3",
+       0x3B,
+       "Operations speculatively executed",
+       "Counts speculatively executed operations."},
+      {"STALL_SLOT_BACKEND_V3",
+       0x3D,
+       "Backend-stalled dispatch slots",
+       "Counts dispatch slots unused because the backend could not accept an operation."},
+      {"STALL_SLOT_FRONTEND_V3",
+       0x3E,
+       "Frontend-stalled dispatch slots",
+       "Counts dispatch slots unused because the frontend could not deliver an operation."},
+      {"STALL_SLOT_V3",
+       0x3F,
+       "Stalled dispatch slots",
+       "Counts dispatch slots that did not retire an operation."},
+      {"FP_SCALE_OPS_SPEC_V3",
+       0x80C0,
+       "Scalable floating-point operations speculatively executed",
+       "Counts speculatively executed scalable floating-point operations."},
+      {"FP_FIXED_OPS_SPEC_V3",
+       0x80C1,
+       "Fixed-width floating-point operations speculatively executed",
+       "Counts speculatively executed fixed-width floating-point operations."},
+      {"STALL_FRONTEND_FLUSH_V3",
+       0x8162,
+       "Frontend stalls caused by pipeline flushes",
+       "Counts frontend stall cycles caused by pipeline flushes."},
+  }};
+
+  for (const auto& event : kCoreEvents) {
+    pmu_manager.addEvent(
+        std::make_shared<EventDef>(
+            PmuType::armv8_pmuv3,
+            event.id,
+            EventDef::Encoding{.code = event.code},
+            event.briefDesc,
+            event.fullDesc));
+  }
+}
+
+void addPhoenixUncoreEvents(PmuDeviceManager& pmu_manager) {
   pmu_manager.addEvent(
       std::make_shared<EventDef>(
           PmuType::arm_cspmu_mc,
@@ -192,10 +257,11 @@ void addArmEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
       break;
     case CpuArch::NEOVERSE_V3:
       neoverse_v2::addEvents(pmu_manager);
+      addNeoverseV3CoreEvents(pmu_manager);
       // Neoverse V3 is shared by multiple SoCs. The Phoenix DMC PMU is the
       // platform discriminator for these uncore encodings.
       if (pmu_manager.getPmuGroupSize(PmuType::arm_cspmu_mc) > 0) {
-        addNeoverseV3Events(pmu_manager);
+        addPhoenixUncoreEvents(pmu_manager);
       }
       break;
     default:

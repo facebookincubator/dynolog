@@ -5,6 +5,7 @@
 
 #include "hbt/src/perf_event/ArmEvents.h"
 #include <cstdlib>
+#include <map>
 #include "hbt/src/perf_event/PmuDevices.h"
 
 #include <gtest/gtest.h>
@@ -93,6 +94,35 @@ TEST(ArmEventsTest, AddArmEvents) {
 
   auto pmu = pmu_manager.getPmuGroups().at(PmuType::armv8_pmuv3);
   EXPECT_EQ(pmu.at(kDeviceEnum)->getEventDefs().size(), 0);
+}
+
+TEST(ArmEventsTest, AddNeoverseV3CoreEvents) {
+  neoverse_v2::setTestRootDir(getenv(kTestRootEnvKey.c_str()));
+
+  auto cpu_info = CpuInfo::load();
+  cpu_info.cpu_arch = CpuArch::NEOVERSE_V3;
+  auto pmu_manager = default_pmu_manager(cpu_info);
+
+  addArmEvents(cpu_info, pmu_manager);
+
+  const std::map<std::string, uint64_t> expected{
+      {"BR_RETIRED_V3", 0x21},
+      {"BR_MIS_PRED_RETIRED_V3", 0x22},
+      {"OP_RETIRED_V3", 0x3A},
+      {"OP_SPEC_V3", 0x3B},
+      {"STALL_SLOT_BACKEND_V3", 0x3D},
+      {"STALL_SLOT_FRONTEND_V3", 0x3E},
+      {"STALL_SLOT_V3", 0x3F},
+      {"FP_SCALE_OPS_SPEC_V3", 0x80C0},
+      {"FP_FIXED_OPS_SPEC_V3", 0x80C1},
+      {"STALL_FRONTEND_FLUSH_V3", 0x8162},
+  };
+  for (const auto& [id, code] : expected) {
+    const auto event = pmu_manager.findEventDef(id);
+    ASSERT_NE(event, nullptr) << id;
+    EXPECT_EQ(event->pmu_type, PmuType::armv8_pmuv3) << id;
+    EXPECT_EQ(event->encoding.code, code) << id;
+  }
 }
 
 TEST(ArmEventsTest, AddNeoverseV3MemoryEvents) {
