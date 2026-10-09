@@ -302,6 +302,11 @@ TEST_F(BuiltinMetricsTest, SierraForestL2CacheMissesUseLinesIn) {
   ASSERT_NE(eventDef, nullptr);
   EXPECT_EQ(eventDef->encoding.code, 0x25u);
   EXPECT_EQ(eventDef->encoding.umask, 0x1eu);
+
+  eventDef = pmuManager->findEventDef("L1D.REPLACEMENT");
+  ASSERT_NE(eventDef, nullptr);
+  EXPECT_EQ(eventDef->encoding.code, 0x51u);
+  EXPECT_EQ(eventDef->encoding.umask, 0x01u);
 }
 
 TEST_F(BuiltinMetricsTest, VendorCoreMetricCatalogsRemainAvailable) {
