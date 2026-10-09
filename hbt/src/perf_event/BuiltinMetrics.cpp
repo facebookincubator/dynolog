@@ -4284,18 +4284,18 @@ void addArmUncoreMetrics(
             std::vector<std::string>{}));
   };
   addNeoverseV3Uncore(
-      "HW_DMC_MEM_BYTES",
-      "Total DRAM traffic in bytes from the Phoenix DMC",
+      "HW_DMC_MEM_BEATS",
+      "Total DRAM data beats from the Phoenix DMC",
       PmuType::arm_cspmu_mc,
       "total_data_beats");
   addNeoverseV3Uncore(
       "HW_CMN_MC_REQ_LOCAL",
-      "Estimated local memory-controller request traffic in bytes",
+      "Estimated local memory-controller request count",
       PmuType::arm_cmn,
       "hns_mc_reqs_local_sn");
   addNeoverseV3Uncore(
       "HW_CMN_MC_REQ_REMOTE",
-      "Estimated cross-die memory-controller request traffic in bytes",
+      "Estimated cross-die memory-controller request count",
       PmuType::arm_cmn,
       "hns_mc_reqs_remote_sn");
 
