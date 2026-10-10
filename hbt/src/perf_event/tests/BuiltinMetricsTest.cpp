@@ -8,6 +8,7 @@
 
 #include <fmt/ostream.h>
 #include <gtest/gtest.h>
+#include <map>
 
 using namespace facebook::hbt::perf_event;
 
@@ -319,6 +320,44 @@ TEST_F(BuiltinMetricsTest, VendorCoreMetricCatalogsRemainAvailable) {
   addArmCoreMetrics(armMetrics);
   EXPECT_NE(armMetrics->getMetricDesc("HW_CORE_L1_DCACHE_REFILL"), nullptr);
   EXPECT_NE(armMetrics->getMetricDesc("HW_CORE_L1_ICACHE_REFILL"), nullptr);
+}
+
+TEST_F(BuiltinMetricsTest, NeoverseV3CoreMetricsBindV3Events) {
+  auto armMetrics = std::make_shared<Metrics>();
+  addArmCoreMetrics(armMetrics);
+
+  const std::map<std::string, std::string> neoverseV3Events{
+      {"HW_CORE_BR_MIS_PRED_RETIRED", "BR_MIS_PRED_RETIRED_V3"},
+      {"HW_CORE_BR_RETIRED", "BR_RETIRED_V3"},
+      {"HW_CORE_FP_SCALE_OPS_SPEC", "FP_SCALE_OPS_SPEC_V3"},
+      {"HW_CORE_FP_FIXED_OPS_SPEC", "FP_FIXED_OPS_SPEC_V3"},
+      {"HW_CORE_OP_RETIRED", "OP_RETIRED_V3"},
+      {"HW_CORE_OP_SPEC", "OP_SPEC_V3"},
+      {"HW_CORE_STALL_SLOT_BACKEND", "STALL_SLOT_BACKEND_V3"},
+      {"HW_CORE_STALL_SLOT_FRONTEND", "STALL_SLOT_FRONTEND_V3"},
+      {"HW_CORE_STALL_SLOT", "STALL_SLOT_V3"},
+      {"HW_CORE_STALL_FRONTEND_FLUSH", "STALL_FRONTEND_FLUSH_V3"},
+  };
+  for (const auto& [metricId, eventId] : neoverseV3Events) {
+    const auto metric = armMetrics->getMetricDesc(metricId);
+    ASSERT_NE(metric, nullptr) << metricId;
+    const auto refs = metric->getEventRefs(CpuArch::NEOVERSE_V3);
+    ASSERT_TRUE(refs.has_value()) << metricId;
+    ASSERT_EQ(refs->size(), 1u) << metricId;
+    EXPECT_EQ(refs->at(0).event_id, eventId) << metricId;
+  }
+
+  for (const auto* metricId :
+       {"HW_CORE_BR_MIS_PRED_RETIRED",
+        "HW_CORE_FP_SCALE_OPS_SPEC",
+        "HW_CORE_FP_FIXED_OPS_SPEC",
+        "HW_CORE_STALL_SLOT",
+        "HW_CORE_STALL_FRONTEND_FLUSH"}) {
+    const auto metric = armMetrics->getMetricDesc(metricId);
+    ASSERT_NE(metric, nullptr) << metricId;
+    EXPECT_FALSE(metric->getEventRefs(CpuArch::NEOVERSE_V2).has_value())
+        << metricId;
+  }
 }
 
 TEST_F(BuiltinMetricsTest, VeraUncoreMetricsRegistered) {
