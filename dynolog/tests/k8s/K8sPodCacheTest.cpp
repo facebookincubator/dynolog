@@ -66,31 +66,56 @@ void waitFor(
   ASSERT_TRUE(cv.wait_for(lock, 5s, std::move(predicate)));
 }
 
+json makePodMetadata(
+    std::string uid,
+    std::string resourceVersion,
+    std::string name) {
+  json metadata;
+  metadata["namespace"] = "test-ns";
+  metadata["name"] = std::move(name);
+  metadata["uid"] = std::move(uid);
+  metadata["resourceVersion"] = std::move(resourceVersion);
+  metadata["labels"]["app.kubernetes.io/component"] = "trainer";
+
+  json owner;
+  owner["kind"] = "Job";
+  owner["name"] = "train-job";
+  metadata["ownerReferences"] = json::array({std::move(owner)});
+  return metadata;
+}
+
+json makePodSpec() {
+  json literalEnv;
+  literalEnv["name"] = "LITERAL";
+  literalEnv["value"] = "value";
+
+  json downwardEnv;
+  downwardEnv["name"] = "POD_UID";
+  downwardEnv["valueFrom"]["fieldRef"]["fieldPath"] = "metadata.uid";
+
+  json container;
+  container["name"] = "worker";
+  container["env"] =
+      json::array({std::move(literalEnv), std::move(downwardEnv)});
+
+  json spec;
+  spec["nodeName"] = "node-a";
+  spec["serviceAccountName"] = "trainer-sa";
+  spec["containers"] = json::array({std::move(container)});
+  return spec;
+}
+
 json makePod(
     std::string uid,
     std::string phase,
     std::string resourceVersion,
     std::string name = "pod-a") {
-  return {
-      {"metadata",
-       {{"namespace", "test-ns"},
-        {"name", std::move(name)},
-        {"uid", std::move(uid)},
-        {"resourceVersion", std::move(resourceVersion)},
-        {"labels", {{"app.kubernetes.io/component", "trainer"}}},
-        {"ownerReferences", {{{"kind", "Job"}, {"name", "train-job"}}}}}},
-      {"spec",
-       {{"nodeName", "node-a"},
-        {"serviceAccountName", "trainer-sa"},
-        {"containers",
-         {{{"name", "worker"},
-           {"env",
-            {{{"name", "LITERAL"}, {"value", "value"}},
-             {{"name", "POD_UID"},
-              {"valueFrom",
-               {{"fieldRef", {{"fieldPath", "metadata.uid"}}}}}}}}}}}}},
-      {"status", {{"phase", std::move(phase)}}},
-  };
+  json pod;
+  pod["metadata"] = makePodMetadata(
+      std::move(uid), std::move(resourceVersion), std::move(name));
+  pod["spec"] = makePodSpec();
+  pod["status"]["phase"] = std::move(phase);
+  return pod;
 }
 
 std::string listResponse(
