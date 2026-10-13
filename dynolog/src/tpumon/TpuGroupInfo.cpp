@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
+#include <iterator>
+#include <set>
 #include <string_view>
 #include <utility>
 
@@ -183,6 +185,41 @@ bool isCurrentOwner(
     const std::vector<TpuPodIdentity>& currentOwners) {
   return std::find(currentOwners.begin(), currentOwners.end(), identity) !=
       currentOwners.end();
+}
+
+// The runtime reports duty cycle per chip but memory per runtime device,
+// and on multi-core chips (tpu7x) a device is a single core whose id is
+// chip_id * cores_per_chip + core. Returns cores_per_chip when the memory
+// ids pair up exactly with the duty-cycle chip ids that way, so memory can
+// be folded onto the duty-cycle rows; returns 1 (no folding) otherwise.
+int memoryIdsPerDutyCycleId(const std::vector<TpuSample>& samples) {
+  std::set<int> dutyCycleIds;
+  std::set<int> memoryIds;
+  for (const auto& s : samples) {
+    const auto id_it = s.labels.find("accelerator_id");
+    ChipId chip;
+    if (id_it == s.labels.end() || !parseAcceleratorId(id_it->second, chip)) {
+      continue;
+    }
+    if (s.name == kDutyCycle || s.name == kDutyCycleNode) {
+      dutyCycleIds.insert(chip.index);
+    } else if (
+        s.name == kMemoryTotal || s.name == kMemoryTotalNode ||
+        s.name == kMemoryUsed || s.name == kMemoryUsedNode) {
+      memoryIds.insert(chip.index);
+    }
+  }
+  if (dutyCycleIds.empty() || memoryIds.size() <= dutyCycleIds.size() ||
+      memoryIds.size() % dutyCycleIds.size() != 0) {
+    return 1;
+  }
+  const int factor = static_cast<int>(memoryIds.size() / dutyCycleIds.size());
+  for (const int id : memoryIds) {
+    if (dutyCycleIds.count(id / factor) == 0) {
+      return 1;
+    }
+  }
+  return factor;
 }
 
 } // namespace
@@ -362,14 +399,32 @@ void TpuGroupInfo::updateFromSamples(
     }
   }
 
-  // Compose memory_utilization from the two capacity gauges.
+  // Compose memory_utilization from the two capacity gauges, summing
+  // per-core capacity onto its chip when memory is reported per core.
+  const int memoryFold = memoryIdsPerDutyCycleId(samples);
+  std::unordered_map<int, double> chip_mem_total;
+  std::unordered_map<int, double> chip_mem_used;
+  std::unordered_map<int, int> chip_paired_cores;
   for (const auto& [idx, total] : mem_total) {
     const auto used_it = mem_used.find(idx);
-    if (used_it == mem_used.end() || total <= 0.0) {
+    if (used_it == mem_used.end()) {
+      continue;
+    }
+    chip_mem_total[idx / memoryFold] += total;
+    chip_mem_used[idx / memoryFold] += used_it->second;
+    ++chip_paired_cores[idx / memoryFold];
+  }
+  for (const auto& [idx, total] : chip_mem_total) {
+    // A ratio over only some of a chip's cores would misstate the chip.
+    if (total <= 0.0 || chip_paired_cores[idx] != memoryFold) {
       continue;
     }
     metricsMapDouble_[idx]["memory_utilization"] =
-        (used_it->second / total) * 100.0;
+        (chip_mem_used[idx] / total) * 100.0;
+  }
+
+  for (auto it = metricsMapDouble_.begin(); it != metricsMapDouble_.end();) {
+    it = it->second.empty() ? metricsMapDouble_.erase(it) : std::next(it);
   }
 
   // Validate raw metric identity against current TPU owners from the latest
@@ -436,8 +491,8 @@ void TpuGroupInfo::log(Logger& logger) {
     logger.logInt("device", index);
     logger.finalize();
   }
-  // Emit the sentinel error row when no chips were discovered.
-  if (metricsMapDouble_.empty()) {
+  // Emit the sentinel error row when the scrape failed.
+  if (failing_) {
     const auto int_it = metricsMapInt_.find(0);
     if (int_it != metricsMapInt_.end()) {
       for (const auto& [k, v] : int_it->second) {
