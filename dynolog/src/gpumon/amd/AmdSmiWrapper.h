@@ -46,14 +46,15 @@ struct AmdSmiMetrics {
 // std::runtime_error on failure.
 class AmdSmiWrapper {
  public:
+  virtual ~AmdSmiWrapper() = default;
   // Idempotent; subsequent calls after a successful init are no-ops.
-  void init();
-  bool isInitialized() const;
+  virtual void init();
+  virtual bool isInitialized() const;
   // Model name of the first GPU found; all GPUs on a host are assumed to be
   // the same model.
-  std::string getModelName();
+  virtual std::string getModelName();
   // Metrics for every logical device (partition), keyed by KFD node id.
-  std::map<AmdSmiNodeId, AmdSmiMetrics> getMetrics();
+  virtual std::map<AmdSmiNodeId, AmdSmiMetrics> getMetrics();
 
  protected:
   std::vector<amdsmi_socket_handle> getSocketHandles_();

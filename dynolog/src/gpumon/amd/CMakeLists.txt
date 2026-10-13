@@ -22,7 +22,7 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-    # ROCm version code, e.g. 70000 == ROCm 7.0.x. Compiled in as
+    # ROCm version code, e.g. 70000 == ROCm 7.0.x.
     set(ROCM_VERSION 70000 CACHE STRING "ROCm version, e.g. 70000 for 7.0.x")
 
     # Repo-rooted includes like "dynolog/src/gpumon/amd/RdcWrapper.h" resolve
@@ -39,7 +39,10 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     target_include_directories(dynolog_rdc_lib PUBLIC "${DYNOLOG_REPO_ROOT}")
     target_compile_definitions(
         dynolog_rdc_lib PUBLIC DYNOLOG_ROCM_VERSION=${ROCM_VERSION})
-    target_link_libraries(dynolog_rdc_lib PUBLIC rdc ${GLOG_LIBRARY})
+    # Link the bootstrap library, as the Buck build does: it loads librdc.so
+    # only when RDC is started, while librdc.so runs amdsmi_init() from a static
+    # initializer and aborts the process on hosts without AMD GPUs.
+    target_link_libraries(dynolog_rdc_lib PUBLIC rdc_bootstrap ${GLOG_LIBRARY})
 
     add_library(dynolog_amdsmi_lib STATIC AmdSmiWrapper.cpp AmdSmiWrapper.h)
     target_include_directories(dynolog_amdsmi_lib PUBLIC "${DYNOLOG_REPO_ROOT}")
@@ -51,23 +54,39 @@ endif ()
 
 # --- Integrated build (add_subdirectory() from the top-level dynolog build) ---
 
-find_package(rdc PATHS /opt/rocm)
-find_package(amd_smi PATHS /opt/rocm)
 find_package(PkgConfig)
-
 if (PkgConfig_FOUND)
     pkg_check_modules(LIBCAP libcap)
+endif ()
+
+# AMD GPU monitoring always builds in all of its sources: KFD/PCI sysfs,
+# amd-smi and RDC (which also needs libcap). RDC is still only started at
+# runtime with --enable_amd_rdc.
+if (USE_AMD_GPU)
+    find_package(amd_smi PATHS /opt/rocm REQUIRED)
+    find_package(rdc PATHS /opt/rocm REQUIRED)
+    if (NOT LIBCAP_FOUND)
+        message(FATAL_ERROR "USE_AMD_GPU requires libcap, which ROCm RDC needs")
+    endif ()
+else ()
+    find_package(amd_smi PATHS /opt/rocm)
+    find_package(rdc PATHS /opt/rocm)
+endif ()
+
+if (amd_smi_FOUND)
+    add_library(dynolog_amdsmi_lib AmdSmiWrapper.cpp AmdSmiWrapper.h)
+    target_link_libraries(dynolog_amdsmi_lib PUBLIC amd_smi)
+
+    add_library(dynolog_amd_device_lib AmdDeviceTopology.cpp AmdDeviceTopology.h)
+    target_link_libraries(dynolog_amd_device_lib glog::glog)
 endif ()
 
 if (rdc_FOUND AND amd_smi_FOUND AND LIBCAP_FOUND)
     message(STATUS "RDC package found at ${ROCM_RDC_INCLUDE_DIR}")
 
-    # The RDC metric list compiled into RdcWrapper.cpp and the example is gated
-    # on DYNOLOG_ROCM_VERSION (e.g. 70000 == ROCm 7.0.x). If it is left
-    # undefined, every metric is preprocessed out, leaving an empty metric set
-    # that makes the example abort at runtime ("enabledMetrics is empty"). The
-    # standalone build above sets it explicitly; detect it here for the
-    # integrated build. Pass -DROCM_VERSION=<code> to override the detection.
+    # RdcWrapper.h needs DYNOLOG_ROCM_VERSION. The standalone build above sets
+    # it explicitly; detect it here for the integrated build. Pass
+    # -DROCM_VERSION=<code> to override the detection.
     if (NOT DEFINED ROCM_VERSION)
         # Derive the ROCm root from the RDC package that was actually found so
         # this honours CMAKE_PREFIX_PATH and versioned paths like
@@ -93,11 +112,9 @@ if (rdc_FOUND AND amd_smi_FOUND AND LIBCAP_FOUND)
         endif ()
     endif ()
     if (NOT DEFINED ROCM_VERSION)
-        message(WARNING
-            "dynolog: unable to determine the ROCm version for the RDC "
-            "integration; RDC metrics will be empty. Pass -DROCM_VERSION=<code> "
-            "(e.g. 70000 for ROCm 7.0.x) to set it explicitly.")
-        set(ROCM_VERSION 0)
+        message(FATAL_ERROR
+            "dynolog: unable to determine the ROCm version. Pass "
+            "-DROCM_VERSION=<code> (e.g. 70000 for ROCm 7.0.x) to set it.")
     endif ()
     message(STATUS
         "dynolog RDC integration using DYNOLOG_ROCM_VERSION=${ROCM_VERSION}")
@@ -105,15 +122,29 @@ if (rdc_FOUND AND amd_smi_FOUND AND LIBCAP_FOUND)
     add_library(dynolog_rdc_lib RdcWrapper.cpp RdcWrapper.h)
     target_compile_definitions(
         dynolog_rdc_lib PUBLIC DYNOLOG_ROCM_VERSION=${ROCM_VERSION})
-    target_link_libraries(dynolog_rdc_lib rdc glog::glog)
+    # rdc_bootstrap, not rdc: see the standalone section above.
+    target_link_libraries(dynolog_rdc_lib rdc_bootstrap glog::glog)
 
-    add_library(dynolog_amdsmi_lib AmdSmiWrapper.cpp AmdSmiWrapper.h)
-    target_link_libraries(dynolog_amdsmi_lib PUBLIC amd_smi)
-
-    add_library(dynolog_amd_device_lib AmdDeviceTopology.cpp AmdDeviceTopology.h)
-    target_link_libraries(dynolog_amd_device_lib glog::glog)
+    add_library(dynolog_amd_rdc_lib AmdRdcCollector.cpp AmdRdcCollector.h)
+    target_link_libraries(dynolog_amd_rdc_lib PUBLIC
+        dynolog_rdc_lib
+        dynolog_amd_device_lib
+        glog::glog
+        ${CMAKE_DL_LIBS})
 
     add_subdirectory(examples)
 else ()
-    message(STATUS "RDC package not found. Ignore AMD GPU targets")
+    message(STATUS "RDC package not found. Ignore AMD RDC targets")
+endif ()
+
+# The AMD GPU monitor orchestrates the sources above.
+if (USE_AMD_GPU)
+    add_library(dynolog_amd_gpu_monitor_lib AmdGpuMonitor.cpp AmdGpuMonitor.h)
+    target_link_libraries(dynolog_amd_gpu_monitor_lib PUBLIC
+        dynolog_amdsmi_lib
+        dynolog_amd_device_lib
+        dynolog_amd_rdc_lib
+        gflags::gflags
+        glog::glog
+        nlohmann_json::nlohmann_json)
 endif ()
