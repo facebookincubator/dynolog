@@ -6,13 +6,15 @@
 // Auto generated for hbt. Do not manually edit.
 // @generated
 
-#include <stdexcept>
+#include <array>
+#include <cstdint>
+#include "hbt/src/perf_event/StaticEventDef.h"
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
 namespace icelake_uncore {
+namespace {
 
-void addEvents(PmuDeviceManager& pmu_manager) {
 /*
   Events from icelake_uncore.json (3 events).
 
@@ -20,46 +22,59 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       - Arch: x86, Model: ICL id: 125
       - Arch: x86, Model: ICL id: 126
 */
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_REQUESTS.ALL",
-      EventDef::Encoding{.code = 0x81, .umask = 0x01, .cmask = 0},
-      R"(Total number of all outgoing entries allocated. Accounts for Coherent and non-coherent traffic.)",
-      R"(Total number of all outgoing entries allocated. Accounts for Coherent and non-coherent traffic.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
+constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_COH_TRK_REQUESTS.ALL",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .cmask = 0},
-      R"(Number of entries allocated. Account for Any type: e.g. Snoop,  etc.)",
-      R"(Number of entries allocated. Account for Any type: e.g. Snoop,  etc.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+constexpr std::array<StaticEventDef, 3> kFullOnlyEvents{{
+    {
+        .pmu_type = PmuType::uncore_ncu,
+        .id = "UNC_CLOCK.SOCKET",
+        .encoding =
+            {
+                .code = 0x0ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "This 48-bit fixed counter counts the UCLK cycles.",
+        .full_desc = "This 48-bit fixed counter counts the UCLK cycles.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_COH_TRK_REQUESTS.ALL",
+        .encoding =
+            {
+                .code = 0x84ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of entries allocated. Account for Any type: e.g. Snoop,  etc.",
+        .full_desc =
+            "Number of entries allocated. Account for Any type: e.g. Snoop,  etc.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_REQUESTS.ALL",
+        .encoding =
+            {
+                .code = 0x81ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Total number of all outgoing entries allocated. Accounts for Coherent and non-coherent traffic.",
+        .full_desc =
+            "Total number of all outgoing entries allocated. Accounts for Coherent and non-coherent traffic.",
+    },
+}};
+static_assert(isStaticEventDefTableSorted(kFullOnlyEvents));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
+} // namespace
+
+void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ncu,
-      "UNC_CLOCK.SOCKET",
-      EventDef::Encoding{.code = 0x00, .umask = 0x01, .cmask = 0},
-      R"(This 48-bit fixed counter counts the UCLK cycles.)",
-      R"(This 48-bit fixed counter counts the UCLK cycles.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+  pmu_manager.addStaticEventDefs(kFullOnlyEvents);
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 

@@ -310,6 +310,25 @@ TEST_F(BuiltinMetricsTest, SierraForestL2CacheMissesUseLinesIn) {
   EXPECT_EQ(eventDef->encoding.umask, 0x01u);
 }
 
+TEST_F(BuiltinMetricsTest, LegacyIntelCatalogsPreserveDramAccessOverlay) {
+  const std::vector<std::pair<uint32_t, CpuArch>> architectures{
+      {61, CpuArch::BDW},
+      {79, CpuArch::BDX},
+      {86, CpuArch::BDW_DE},
+      {78, CpuArch::SKL},
+  };
+
+  for (const auto& [model, arch] : architectures) {
+    const facebook::hbt::CpuInfo cpuInfo("Intel", 6, model, 0);
+    ASSERT_EQ(cpuInfo.cpu_arch, arch) << model;
+    auto pmuManager = std::make_shared<PmuDeviceManager>(cpuInfo);
+    populatePmuDeviceManager(pmuManager);
+    EXPECT_NE(
+        pmuManager->findEventDef("DynoPerfCounter::DRAM_ACCESS_READS"), nullptr)
+        << arch;
+  }
+}
+
 TEST_F(BuiltinMetricsTest, VendorCoreMetricCatalogsRemainAvailable) {
   auto intelMetrics = std::make_shared<Metrics>();
   addIntelCoreMetrics(intelMetrics);

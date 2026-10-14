@@ -6,13 +6,15 @@
 // Auto generated for hbt. Do not manually edit.
 // @generated
 
-#include <stdexcept>
+#include <array>
+#include <cstdint>
+#include "hbt/src/perf_event/StaticEventDef.h"
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
 namespace skylake_uncore {
+namespace {
 
-void addEvents(PmuDeviceManager& pmu_manager) {
 /*
   Events from skylake_uncore.json (23 events).
 
@@ -24,326 +26,338 @@ void addEvents(PmuDeviceManager& pmu_manager) {
       - Arch: x86, Model: SKL id: 165
       - Arch: x86, Model: SKL id: 166
 */
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_XSNP_RESPONSE.MISS_XCORE",
-      EventDef::Encoding{.code = 0x22, .umask = 0x41, .cmask = 0},
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which misses in some processor core.)",
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which misses in some processor core.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
+constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_XSNP_RESPONSE.MISS_EVICTION",
-      EventDef::Encoding{.code = 0x22, .umask = 0x81, .cmask = 0},
-      R"(A cross-core snoop resulted from L3 Eviction which misses in some processor core.)",
-      R"(A cross-core snoop resulted from L3 Eviction which misses in some processor core.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+constexpr std::array<StaticEventDef, 23> kFullOnlyEvents{{
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.ANY_ES",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x86ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup any request that access cache and found line in E or S-state",
+        .full_desc =
+            "L3 Lookup any request that access cache and found line in E or S-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.ANY_I",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x88ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup any request that access cache and found line in I-state",
+        .full_desc =
+            "L3 Lookup any request that access cache and found line in I-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.ANY_M",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x81ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup any request that access cache and found line in M-state",
+        .full_desc =
+            "L3 Lookup any request that access cache and found line in M-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.ANY_MESI",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x8FULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup any request that access cache and found line in MESI-state",
+        .full_desc =
+            "L3 Lookup any request that access cache and found line in MESI-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.READ_ES",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x16ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup read request that access cache and found line in E or S-state",
+        .full_desc =
+            "L3 Lookup read request that access cache and found line in E or S-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.READ_I",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x18ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup read request that access cache and found line in I-state",
+        .full_desc =
+            "L3 Lookup read request that access cache and found line in I-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.READ_MESI",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x1FULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup read request that access cache and found line in any MESI-state",
+        .full_desc =
+            "L3 Lookup read request that access cache and found line in any MESI-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.WRITE_ES",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x26ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup write request that access cache and found line in E or S-state",
+        .full_desc =
+            "L3 Lookup write request that access cache and found line in E or S-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.WRITE_M",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x21ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup write request that access cache and found line in M-state",
+        .full_desc =
+            "L3 Lookup write request that access cache and found line in M-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_CACHE_LOOKUP.WRITE_MESI",
+        .encoding =
+            {
+                .code = 0x34ULL,
+                .umask = 0x2FULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "L3 Lookup write request that access cache and found line in MESI-state",
+        .full_desc =
+            "L3 Lookup write request that access cache and found line in MESI-state.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_XSNP_RESPONSE.HITM_XCORE",
+        .encoding =
+            {
+                .code = 0x22ULL,
+                .umask = 0x48ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which hits a modified line in some processor core.",
+        .full_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which hits a modified line in some processor core.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_XSNP_RESPONSE.HIT_XCORE",
+        .encoding =
+            {
+                .code = 0x22ULL,
+                .umask = 0x44ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which hits a non-modified line in some processor core.",
+        .full_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which hits a non-modified line in some processor core.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_XSNP_RESPONSE.MISS_EVICTION",
+        .encoding =
+            {
+                .code = 0x22ULL,
+                .umask = 0x81ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "A cross-core snoop resulted from L3 Eviction which misses in some processor core.",
+        .full_desc =
+            "A cross-core snoop resulted from L3 Eviction which misses in some processor core.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cbox,
+        .id = "UNC_CBO_XSNP_RESPONSE.MISS_XCORE",
+        .encoding =
+            {
+                .code = 0x22ULL,
+                .umask = 0x41ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which misses in some processor core.",
+        .full_desc =
+            "A cross-core snoop initiated by this Cbox due to processor core memory request which misses in some processor core.",
+    },
+    {
+        .pmu_type = PmuType::uncore_ncu,
+        .id = "UNC_CLOCK.SOCKET",
+        .encoding =
+            {
+                .code = 0x0ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "This 48-bit fixed counter counts the UCLK cycles",
+        .full_desc = "This 48-bit fixed counter counts the UCLK cycles.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_COH_TRK_REQUESTS.ALL",
+        .encoding =
+            {
+                .code = 0x84ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of entries allocated. Account for Any type: e.g. Snoop, Core aperture, etc.",
+        .full_desc =
+            "Number of entries allocated. Account for Any type: e.g. Snoop, Core aperture, etc.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_OCCUPANCY.ALL",
+        .encoding =
+            {
+                .code = 0x80ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of all Core entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk. Accounts for Coherent and non-coherent traffic.",
+        .full_desc =
+            "Number of all Core entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk. Accounts for Coherent and non-coherent traffic.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_OCCUPANCY.CYCLES_WITH_ANY_REQUEST",
+        .encoding =
+            {
+                .code = 0x80ULL,
+                .umask = 0x1ULL,
+                .cmask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.",
+        .full_desc =
+            "Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_OCCUPANCY.DATA_READ",
+        .encoding =
+            {
+                .code = 0x80ULL,
+                .umask = 0x2ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of Core Data Read entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk.",
+        .full_desc =
+            "Number of Core Data Read entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_REQUESTS.ALL",
+        .encoding =
+            {
+                .code = 0x81ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "UNC_ARB_TRK_REQUESTS.ALL",
+        .full_desc = "UNC_ARB_TRK_REQUESTS.ALL",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_REQUESTS.DATA_READ",
+        .encoding =
+            {
+                .code = 0x81ULL,
+                .umask = 0x2ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.",
+        .full_desc =
+            "Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_REQUESTS.DRD_DIRECT",
+        .encoding =
+            {
+                .code = 0x81ULL,
+                .umask = 0x2ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.",
+        .full_desc =
+            "Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.",
+    },
+    {
+        .pmu_type = PmuType::uncore_arb,
+        .id = "UNC_ARB_TRK_REQUESTS.WRITES",
+        .encoding =
+            {
+                .code = 0x81ULL,
+                .umask = 0x20ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Number of Writes allocated - any write transactions: full/partials writes and evictions.",
+        .full_desc =
+            "Number of Writes allocated - any write transactions: full/partials writes and evictions.",
+    },
+}};
+static_assert(isStaticEventDefTableSorted(kFullOnlyEvents));
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_XSNP_RESPONSE.HIT_XCORE",
-      EventDef::Encoding{.code = 0x22, .umask = 0x44, .cmask = 0},
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which hits a non-modified line in some processor core.)",
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which hits a non-modified line in some processor core.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
+} // namespace
 
+void addEvents(PmuDeviceManager& pmu_manager) {
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_XSNP_RESPONSE.HITM_XCORE",
-      EventDef::Encoding{.code = 0x22, .umask = 0x48, .cmask = 0},
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which hits a modified line in some processor core.)",
-      R"(A cross-core snoop initiated by this Cbox due to processor core memory request which hits a modified line in some processor core.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.WRITE_M",
-      EventDef::Encoding{.code = 0x34, .umask = 0x21, .cmask = 0},
-      R"(L3 Lookup write request that access cache and found line in M-state)",
-      R"(L3 Lookup write request that access cache and found line in M-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.ANY_M",
-      EventDef::Encoding{.code = 0x34, .umask = 0x81, .cmask = 0},
-      R"(L3 Lookup any request that access cache and found line in M-state)",
-      R"(L3 Lookup any request that access cache and found line in M-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.READ_I",
-      EventDef::Encoding{.code = 0x34, .umask = 0x18, .cmask = 0},
-      R"(L3 Lookup read request that access cache and found line in I-state)",
-      R"(L3 Lookup read request that access cache and found line in I-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.ANY_I",
-      EventDef::Encoding{.code = 0x34, .umask = 0x88, .cmask = 0},
-      R"(L3 Lookup any request that access cache and found line in I-state)",
-      R"(L3 Lookup any request that access cache and found line in I-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.READ_MESI",
-      EventDef::Encoding{.code = 0x34, .umask = 0x1f, .cmask = 0},
-      R"(L3 Lookup read request that access cache and found line in any MESI-state)",
-      R"(L3 Lookup read request that access cache and found line in any MESI-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.WRITE_MESI",
-      EventDef::Encoding{.code = 0x34, .umask = 0x2f, .cmask = 0},
-      R"(L3 Lookup write request that access cache and found line in MESI-state)",
-      R"(L3 Lookup write request that access cache and found line in MESI-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.ANY_MESI",
-      EventDef::Encoding{.code = 0x34, .umask = 0x8f, .cmask = 0},
-      R"(L3 Lookup any request that access cache and found line in MESI-state)",
-      R"(L3 Lookup any request that access cache and found line in MESI-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.ANY_ES",
-      EventDef::Encoding{.code = 0x34, .umask = 0x86, .cmask = 0},
-      R"(L3 Lookup any request that access cache and found line in E or S-state)",
-      R"(L3 Lookup any request that access cache and found line in E or S-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.READ_ES",
-      EventDef::Encoding{.code = 0x34, .umask = 0x16, .cmask = 0},
-      R"(L3 Lookup read request that access cache and found line in E or S-state)",
-      R"(L3 Lookup read request that access cache and found line in E or S-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cbox,
-      "UNC_CBO_CACHE_LOOKUP.WRITE_ES",
-      EventDef::Encoding{.code = 0x34, .umask = 0x26, .cmask = 0},
-      R"(L3 Lookup write request that access cache and found line in E or S-state)",
-      R"(L3 Lookup write request that access cache and found line in E or S-state.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_OCCUPANCY.ALL",
-      EventDef::Encoding{.code = 0x80, .umask = 0x01, .cmask = 0},
-      R"(Number of all Core entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk. Accounts for Coherent and non-coherent traffic.)",
-      R"(Number of all Core entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk. Accounts for Coherent and non-coherent traffic.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_REQUESTS.ALL",
-      EventDef::Encoding{.code = 0x81, .umask = 0x01, .cmask = 0},
-      R"(UNC_ARB_TRK_REQUESTS.ALL)",
-      R"(UNC_ARB_TRK_REQUESTS.ALL)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_REQUESTS.DRD_DIRECT",
-      EventDef::Encoding{.code = 0x81, .umask = 0x02, .cmask = 0},
-      R"(Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.)",
-      R"(Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_REQUESTS.WRITES",
-      EventDef::Encoding{.code = 0x81, .umask = 0x20, .cmask = 0},
-      R"(Number of Writes allocated - any write transactions: full/partials writes and evictions.)",
-      R"(Number of Writes allocated - any write transactions: full/partials writes and evictions.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_COH_TRK_REQUESTS.ALL",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .cmask = 0},
-      R"(Number of entries allocated. Account for Any type: e.g. Snoop, Core aperture, etc.)",
-      R"(Number of entries allocated. Account for Any type: e.g. Snoop, Core aperture, etc.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_OCCUPANCY.CYCLES_WITH_ANY_REQUEST",
-      EventDef::Encoding{.code = 0x80, .umask = 0x01, .cmask = 1},
-      R"(Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.)",
-      R"(Cycles with at least one request outstanding is waiting for data return from memory controller. Account for coherent and non-coherent requests initiated by IA Cores, Processor Graphics Unit, or LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_ncu,
-      "UNC_CLOCK.SOCKET",
-      EventDef::Encoding{.code = 0x0, .umask = 0x01, .cmask = 0},
-      R"(This 48-bit fixed counter counts the UCLK cycles)",
-      R"(This 48-bit fixed counter counts the UCLK cycles.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_OCCUPANCY.DATA_READ",
-      EventDef::Encoding{.code = 0x80, .umask = 0x02, .cmask = 0},
-      R"(Number of Core Data Read entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk.)",
-      R"(Number of Core Data Read entries outstanding for the memory controller. The outstanding interval starts after LLC miss till return of first data chunk.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_arb,
-      "UNC_ARB_TRK_REQUESTS.DATA_READ",
-      EventDef::Encoding{.code = 0x81, .umask = 0x02, .cmask = 0},
-      R"(Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.)",
-      R"(Number of Core coherent Data Read requests sent to memory controller whose data is returned directly to requesting agent.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+  pmu_manager.addStaticEventDefs(kFullOnlyEvents);
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
