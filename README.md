@@ -18,7 +18,7 @@ Dynolog is a lightweight monitoring daemon for heterogeneous CPU-GPU systems. It
 
 Below are some of the key features, which we will explore in more detail later in this Readme.
 * Dynolog integrates with the [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html) and provides **[on-demand remote tracing features](https://pytorch.org/blog/performance-debugging-of-production-pytorch-models-at-meta/).** One can use a single command line tool (dyno CLI) to **simultaneously trace hundreds of GPUs** and examine the collected traces (available from PyTorch v1.13.0 onwards).
-* It incorporates **[GPU performance monitoring](#gpu-monitoring)** for NVIDIA GPUs using [DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html#).
+* It incorporates **[GPU performance monitoring](#gpu-monitoring)** for NVIDIA GPUs using [DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html#) and for AMD GPUs using [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest/).
 * Dynolog manages counters for **micro-architecture specific performance events** related to CPU Cache, TLBs etc on **Intel** and **AMD** CPUs. Additionally, it instruments telemetry from the Linux kernel including **CPU, network and IO** resource usage.
 * Dynolog supports **[OTLP (OpenTelemetry Protocol) metrics export](docs/logging_to_otlp.md)**, enabling integration with any OTLP-compatible observability backend (Grafana, Datadog, New Relic, etc.) with automatic mapping to OTEL semantic conventions.
 * We are actively implementing new features, including support for **[Intel Processor Trace](https://engineering.fb.com/2021/04/27/developer-tools/reverse-debugging/)** as well as **memory latency and bandwidth monitoring**.
@@ -40,7 +40,7 @@ Dynolog’s always-on or continuous monitoring supports the following class of m
 
 1. System/kernel metrics.
 2. CPU Performance Monitoring Unit (PMU) metrics using linux perf_event.
-3. NVIDIA GPU metrics from DCGM if enabled.
+3. NVIDIA GPU metrics from DCGM, or AMD GPU metrics from AMD SMI, if enabled.
 
 Detailed list of covered metrics are provided in [docs/Metrics.md](docs/Metrics.md).
 
@@ -49,7 +49,7 @@ Detailed list of covered metrics are provided in [docs/Metrics.md](docs/Metrics.
 ### Installation<!-- {#install-rpm-deb} -->
 
 Dynolog can be installed using the package manager of your choice with either RPM for CentoOS or Debian for Ubuntu like distros. We do not support non-Linux platforms.
-There are no required dependencies except for DCGM if you need to monitor GPUs, please see the section on [GPU monitoring](#gpu-monitoring) below.
+There are no required dependencies except for DCGM (NVIDIA) or ROCm AMD SMI (AMD) if you need to monitor GPUs, please see the section on [GPU monitoring](#gpu-monitoring) below.
 
 Obtain the latest dynolog release or pick up one of the releases [here](https://github.com/facebookincubator/dynolog/releases)
 ```bash
@@ -153,6 +153,31 @@ echo "--enable_gpu_monitor" | sudo tee -a /etc/dynolog.gflags
 sudo systemctl restart dynolog
 ```
 
+#### AMD GPUs
+
+Dynolog monitors AMD Instinct GPUs (e.g. MI300X, MI350X) with the same `--enable_gpu_monitor` flag: at startup dynolog looks for AMD GPUs in the KFD topology (`/sys/class/kfd`). If it finds any, it uses AMD GPU monitoring; otherwise it uses DCGM as described above. `--dcgm_reporting_interval_s` sets the collection interval for both.
+
+AMD GPU monitoring combines three sources, set up in this order:
+1. KFD and PCI sysfs, for the device list and ids. Always used.
+2. [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest/), for utilization, power, clock, memory, temperature and PCIe.
+3. [ROCm RDC](https://rocm.docs.amd.com/projects/rdc/en/latest/), for profiling metrics (occupancy, FLOPs, HBM and XGMI bandwidth), only with `--enable_amd_rdc`. RDC runs embedded in dynolog, so the `rdcd` service is not needed. RDC profiling has a small, constant overhead on the GPUs.
+
+A library that fails to initialize is skipped with a warning, except that with `--enable_amd_rdc`, dynolog aborts at startup if RDC can't initialize AMD SMI. Dynolog exits only if AMD GPUs are present but neither library starts.
+
+**Prerequisite:** install ROCm 7.0 or newer, including AMD SMI, RDC and libcap (`/opt/rocm` by default), and build dynolog with AMD support:
+
+```bash
+BUILD_AMD_GPU=1 ./scripts/build.sh
+# ROCm installed elsewhere:
+BUILD_AMD_GPU=1 ./scripts/build.sh -DCMAKE_PREFIX_PATH=/opt/rocm-7.0.2
+```
+
+* `--enable_amd_rdc` (default=false): also collect RDC profiling metrics.
+* `--amd_rdc_update_interval_ms` (default=10000): RDC sampling interval.
+* `ROCM_PATH` (environment, default `/opt/rocm`): ROCm install used to load RDC's plugins.
+
+Partitioned GPUs emit one record per partition. See the AMD section of [docs/Metrics.md](docs/Metrics.md) for the metric list and which source each metric comes from.
+
 ### CPU Performance Events<!-- {#cpu-performance-events} -->
 Dynolog also supports collection of CPU hardware performance events. We added CPU instructions and cycles as the first set of counters; referred to as `mips` (millions of instructions per second) and `mega_instructions_per_second`. See [docs/Metrics.md](docs/Metrics.md) for more details.
 
@@ -239,7 +264,7 @@ conda install -c conda-forge "rust=1.64.0"
 
 **GPU Monitoring**
 
-For NVIDIA GPUs (currently the only ones supported) you can install DCGM as described in [GPU monitoring](#gpu-monitoring) section.
+For NVIDIA GPUs you can install DCGM as described in [GPU monitoring](#gpu-monitoring) section. For AMD GPUs install ROCm 7.0 or newer, with AMD SMI, RDC and libcap, and build with `BUILD_AMD_GPU=1`.
 
 ### Building<!-- {#building} -->
 

@@ -21,6 +21,9 @@ option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
 libprotobuf-dev and libcurl4-openssl-dev on the system"
 OFF)
 option(USE_TPU "Enable TPU metrics scraping, requires libcurl" OFF)
+option(USE_AMD_GPU "Enable AMD GPU monitoring, requires ROCm 7.0+ (amd-smi and
+RDC) and libcap"
+OFF)
 
 if(USE_PROMETHEUS)
   find_package(prometheus-cpp CONFIG REQUIRED)

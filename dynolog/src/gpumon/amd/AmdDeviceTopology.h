@@ -27,6 +27,10 @@ class LogicalDevice {
   int getMinorId() const {
     return minorId_;
   }
+  // KFD gpu_id; 0 if the node has no gpu_id file.
+  uint64_t getKfdGpuId() const {
+    return kfdGpuId_;
+  }
 
   /**
    * parse AMD GPU topology information from sysfs.
@@ -41,13 +45,21 @@ class LogicalDevice {
   static std::vector<std::shared_ptr<LogicalDevice>> parseTopologyNodes(
       const std::filesystem::path& root = "/sys/class/kfd");
 
-  LogicalDevice(uint32_t kfdNodeId, uint64_t uniqueId, int minorId)
-      : kfdNodeId_(kfdNodeId), uniqueId_(uniqueId), minorId_(minorId) {}
+  LogicalDevice(
+      uint32_t kfdNodeId,
+      uint64_t uniqueId,
+      int minorId,
+      uint64_t kfdGpuId = 0)
+      : kfdNodeId_(kfdNodeId),
+        uniqueId_(uniqueId),
+        minorId_(minorId),
+        kfdGpuId_(kfdGpuId) {}
 
  protected:
   uint32_t kfdNodeId_;
   uint64_t uniqueId_;
   int minorId_;
+  uint64_t kfdGpuId_;
 };
 
 class PhysicalDevice {
