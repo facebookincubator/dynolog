@@ -60,7 +60,7 @@ namespace {
 }
 
 TpuPodAttributionProviders makeProductionPodAttributionProviders() {
-  return {
+  TpuPodAttributionProviders providers{
       .listCurrentOwners =
           [] {
             const auto tpuPods = getPodResourcesClient()->listGpuPods();
@@ -86,6 +86,14 @@ TpuPodAttributionProviders makeProductionPodAttributionProviders() {
                 ::dynolog::k8s::getDefaultLabelAttributionMap());
           },
   };
+  if (FLAGS_enable_node_label_attribution) {
+    providers.lookupNodeLabels = [] {
+      return getK8sPodCache()->lookupNodeLabels();
+    };
+    providers.nodeLabelAttributionMap =
+        ::dynolog::getNodeLabelAttributionMappings();
+  }
+  return providers;
 }
 } // namespace
 #endif // USE_K8S_PODRESOURCES
@@ -220,6 +228,46 @@ int memoryIdsPerDutyCycleId(const std::vector<TpuSample>& samples) {
     }
   }
   return factor;
+}
+
+using Attributes = std::unordered_map<std::string, std::string>;
+
+std::string valueOrEmpty(const Attributes& attributes, const std::string& key) {
+  const auto it = attributes.find(key);
+  return it == attributes.end() ? std::string() : it->second;
+}
+
+// Pod-derived attributes already on the record take precedence.
+void addNodeLabelAttributes(
+    const Attributes& nodeLabels,
+    const Attributes& labelToKey,
+    Attributes& env) {
+  for (const auto& [label, key] : labelToKey) {
+    auto value = valueOrEmpty(nodeLabels, label);
+    if (!value.empty()) {
+      env.emplace(key, std::move(value));
+    }
+  }
+}
+
+// GKE labels each TPU node with the id and state of every partition shape
+// the node can belong to. Report the partition for the slice the record's
+// workload runs on (pod attribution's `tpu_topology`, e.g. mapped from the
+// TPU_TOPOLOGY env var), falling back to the node's current slice shape.
+void addTpuPartitionAttributes(const Attributes& nodeLabels, Attributes& env) {
+  std::string shape = valueOrEmpty(env, "tpu_topology");
+  if (shape.empty()) {
+    shape = valueOrEmpty(nodeLabels, "cloud.google.com/gke-tpu-topology");
+  }
+  if (shape.empty()) {
+    return;
+  }
+  const std::string prefix = "cloud.google.com/gke-tpu-partition-" + shape;
+  addNodeLabelAttributes(
+      nodeLabels,
+      {{prefix + "-id", "tpu_partition_id"},
+       {prefix + "-state", "tpu_partition_state"}},
+      env);
 }
 
 } // namespace
@@ -459,6 +507,16 @@ void TpuGroupInfo::updateFromSamples(
       env["pod_namespace"] = identity.podNamespace;
       env["pod_name"] = identity.podName;
       env["container_name"] = identity.containerName;
+    }
+  }
+
+  if (podAttributionProviders_.lookupNodeLabels) {
+    const auto nodeLabels = podAttributionProviders_.lookupNodeLabels();
+    for (const auto& [chipIndex, metrics] : metricsMapDouble_) {
+      auto& env = envMetadataMapString_[chipIndex];
+      addNodeLabelAttributes(
+          nodeLabels, podAttributionProviders_.nodeLabelAttributionMap, env);
+      addTpuPartitionAttributes(nodeLabels, env);
     }
   }
 }
