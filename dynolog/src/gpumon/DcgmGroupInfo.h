@@ -22,7 +22,7 @@ class DcgmGroupInfoTestPeer;
 DECLARE_string(dcgm_fields);
 
 constexpr char kDcgmDefaultFieldIds[] =
-    "50,100,155,204,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012";
+    "50,100,112,155,204,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012";
 class DcgmGroupInfo {
  public:
   ~DcgmGroupInfo();
