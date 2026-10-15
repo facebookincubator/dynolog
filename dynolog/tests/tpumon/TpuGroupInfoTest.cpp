@@ -128,6 +128,10 @@ class TpuGroupInfoTest : public ::testing::Test {
                   lookedUpIdentities_.push_back(identity);
                   return lookupAttributes_;
                 },
+            .lookupNodeLabels = [this] { return nodeLabels_; },
+            .nodeLabelAttributionMap =
+                {{"cloud.google.com/reservation-project",
+                  "reservation_project"}},
         });
     ASSERT_NE(info_, nullptr);
   }
@@ -140,6 +144,7 @@ class TpuGroupInfoTest : public ::testing::Test {
 
   std::vector<TpuPodIdentity> currentOwners_;
   std::unordered_map<std::string, std::string> lookupAttributes_;
+  std::unordered_map<std::string, std::string> nodeLabels_;
   std::vector<TpuPodIdentity> lookedUpIdentities_;
   std::shared_ptr<TpuGroupInfo> info_;
   RecordingLogger logger_;
@@ -411,6 +416,43 @@ TEST_F(TpuGroupInfoTest, DropsRowsWithoutMetrics) {
 
   const std::set<int64_t> expected = {4};
   EXPECT_EQ(deviceIds(logger_.records()), expected);
+}
+
+TEST_F(TpuGroupInfoTest, AddsMappedNodeLabelsToEveryRow) {
+  nodeLabels_ = {
+      {"cloud.google.com/reservation-project", "test-reservation-project"},
+      {"unmapped.example.com/label", "ignored"},
+  };
+
+  updateFromExposition(kProbeOutputTpu7x);
+
+  for (const auto& record : logger_.records()) {
+    EXPECT_EQ(
+        record.strings.at("reservation_project"), "test-reservation-project");
+    EXPECT_EQ(record.strings.count("unmapped.example.com/label"), 0u);
+  }
+}
+
+TEST_F(TpuGroupInfoTest, ReportsPartitionForWorkloadSliceShape) {
+  // The workload on chips 4-5 runs on a 2x2x2 slice while the node is
+  // labelled with a 2x2x1 slice; unattributed chip 0 uses the node's shape.
+  currentOwners_ = {metricPodIdentity()};
+  lookupAttributes_ = {{"tpu_topology", "2x2x2"}};
+  nodeLabels_ = {
+      {"cloud.google.com/gke-tpu-topology", "2x2x1"},
+      {"cloud.google.com/gke-tpu-partition-2x2x1-id", "partition-221"},
+      {"cloud.google.com/gke-tpu-partition-2x2x2-id", "partition-222"},
+      {"cloud.google.com/gke-tpu-partition-2x2x2-state", "HEALTHY"},
+  };
+
+  updateFromExposition(kProbeOutputTpu7x);
+
+  const auto& attributed = recordByDevice(logger_.records(), 4);
+  EXPECT_EQ(attributed.strings.at("tpu_partition_id"), "partition-222");
+  EXPECT_EQ(attributed.strings.at("tpu_partition_state"), "HEALTHY");
+  const auto& unattributed = recordByDevice(logger_.records(), 0);
+  EXPECT_EQ(unattributed.strings.at("tpu_partition_id"), "partition-221");
+  EXPECT_EQ(unattributed.strings.count("tpu_partition_state"), 0u);
 }
 
 TEST_F(TpuGroupInfoTest, ClearsPodIdentityWhenOwnerDisappears) {

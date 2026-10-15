@@ -54,6 +54,8 @@ class K8sPodCache {
     // later watch event or atomic LIST reconciliation.
     std::chrono::seconds ttl{300};
     std::chrono::seconds negativeTtl{30};
+    // How long lookupNodeLabels() reuses the last successful node GET.
+    std::chrono::seconds nodeLabelsTtl{60};
     long httpTimeoutMs = 2000;
 
     // When enabled, maintain a node-scoped cache using the Kubernetes Pod
@@ -99,6 +101,12 @@ class K8sPodCache {
       const std::string& containerName,
       const EnvKeyMap& envMap,
       const LabelKeyMap& labelMap);
+
+  // Returns the labels of the local node (Options::nodeName). A successful
+  // GET is reused for nodeLabelsTtl; after a failed GET the last known labels
+  // are returned and the GET is retried after negativeTtl. Empty when the
+  // node name is unknown or no GET has succeeded yet.
+  std::unordered_map<std::string, std::string> lookupNodeLabels();
 
  private:
   struct Entry; // PIMPL-style; defined in .cpp
