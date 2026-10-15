@@ -6,4165 +6,4292 @@
 // Auto generated for hbt. Do not manually edit.
 // @generated
 
-#include <stdexcept>
+#include <array>
+#include <cstdint>
+#include "hbt/src/perf_event/StaticEventDef.h"
 #include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 namespace facebook::hbt::perf_event::generated {
 namespace sierraforest_uncore {
+namespace {
+
+/*
+  Events from sierraforest_uncore.json (327 events).
+
+  Supported SKUs:
+      - Arch: x86, Model: SRF id: 175
+*/
+constexpr std::array<StaticEventDef, 11> kAllowlistedEvents{{
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_CLOCKTICKS",
+        .encoding =
+            {
+                .code = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "Number of CHA clock cycles while the event is enabled",
+        .full_desc = "Clockticks of the uncore caching and home agent (CHA)",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_REQUESTS.READS_LOCAL",
+        .encoding =
+            {
+                .code = 0x50ULL,
+                .umask = 0x1ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+        .full_desc =
+            "Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_REQUESTS.READS_REMOTE",
+        .encoding =
+            {
+                .code = 0x50ULL,
+                .umask = 0x2ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+        .full_desc =
+            "Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_REQUESTS.WRITES_LOCAL",
+        .encoding =
+            {
+                .code = 0x50ULL,
+                .umask = 0x4ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.",
+        .full_desc =
+            "Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_REQUESTS.WRITES_REMOTE",
+        .encoding =
+            {
+                .code = 0x50ULL,
+                .umask = 0x8ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).",
+        .full_desc =
+            "Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
+        .encoding =
+            {
+                .code = 0x35ULL,
+                .umask = 0x1ULL,
+                .umask_ext = 0xC827FEULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "Data read opt from local IA that miss the cache",
+        .full_desc =
+            "TOR Inserts : DRd_Opt issued by iA Cores that missed the LLC",
+    },
+    {
+        .pmu_type = PmuType::uncore_cha,
+        .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
+        .encoding =
+            {
+                .code = 0x36ULL,
+                .umask = 0x1ULL,
+                .umask_ext = 0xC827FEULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc =
+            "TOR Occupancy for Data read opt from local IA that miss the cache",
+        .full_desc =
+            "TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC",
+    },
+    {
+        .pmu_type = PmuType::uncore_imc,
+        .id = "UNC_M_CAS_COUNT_SCH0.RD",
+        .encoding =
+            {
+                .code = 0x5ULL,
+                .umask = 0xCFULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "CAS count for SubChannel 0, all reads",
+        .full_desc = "CAS count for SubChannel 0, all reads",
+    },
+    {
+        .pmu_type = PmuType::uncore_imc,
+        .id = "UNC_M_CAS_COUNT_SCH0.WR",
+        .encoding =
+            {
+                .code = 0x5ULL,
+                .umask = 0xF0ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "CAS count for SubChannel 0, all writes",
+        .full_desc = "CAS count for SubChannel 0, all writes",
+    },
+    {
+        .pmu_type = PmuType::uncore_imc,
+        .id = "UNC_M_CAS_COUNT_SCH1.RD",
+        .encoding =
+            {
+                .code = 0x6ULL,
+                .umask = 0xCFULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "CAS count for SubChannel 1, all reads",
+        .full_desc = "CAS count for SubChannel 1, all reads",
+    },
+    {
+        .pmu_type = PmuType::uncore_imc,
+        .id = "UNC_M_CAS_COUNT_SCH1.WR",
+        .encoding =
+            {
+                .code = 0x6ULL,
+                .umask = 0xF0ULL,
+            },
+        .features = StaticEventDef::IntelFeatures{},
+        .brief_desc = "CAS count for SubChannel 1, all writes",
+        .full_desc = "CAS count for SubChannel 1, all writes",
+    },
+}};
+static_assert(isStaticEventDefTableSorted(kAllowlistedEvents));
+
+#ifdef HBT_ADD_ALL_GENERATED_EVENTS
+constexpr std::array<StaticEventDef, 286>
+    kFullOnlyEvents{
+        {
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_DISTRESS_ASSERTED.DPT_ANY",
+                .encoding =
+                    {
+                        .code = 0x59ULL,
+                        .umask = 0x3ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR or IRQ (immediate cause for triggering).",
+                .full_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR or IRQ (immediate cause for triggering).",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_DISTRESS_ASSERTED.DPT_IRQ",
+                .encoding =
+                    {
+                        .code = 0x59ULL,
+                        .umask = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in IRQ (immediate cause for triggering).",
+                .full_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in IRQ (immediate cause for triggering).",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_DISTRESS_ASSERTED.DPT_TOR",
+                .encoding =
+                    {
+                        .code = 0x59ULL,
+                        .umask = 0x2ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR (immediate cause for triggering).",
+                .full_desc =
+                    "Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR (immediate cause for triggering).",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_MISC.RFO_HIT_S",
+                .encoding =
+                    {
+                        .code = 0x39ULL,
+                        .umask = 0x8ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts when a RFO (the Read for Ownership issued before a  write) request hit a cacheline in the S (Shared) state.",
+                .full_desc = "Cbo Misc : RFO HitS",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_OSB.RFO_HITS_SNP_BCAST",
+                .encoding =
+                    {
+                        .code = 0x55ULL,
+                        .umask = 0x10ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "OSB Snoop Broadcast : RFO HitS Snoop Broadcast : Count of OSB snoop broadcasts. Counts by 1 per request causing OSB snoops to be broadcast. Does not count all the snoops generated by OSB.",
+                .full_desc = "OSB Snoop Broadcast : RFO HitS Snoop Broadcast",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REMOTE_SF.MISS",
+                .encoding =
+                    {
+                        .code = 0x69ULL,
+                        .umask = 0x4ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "UNC_CHA_REMOTE_SF.MISS",
+                .full_desc = "UNC_CHA_REMOTE_SF.MISS",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REQUESTS.INVITOE",
+                .encoding =
+                    {
+                        .code = 0x50ULL,
+                        .umask = 0x30ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.",
+                .full_desc = "HA Read and Write Requests : InvalItoE",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REQUESTS.INVITOE_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x50ULL,
+                        .umask = 0x10ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.",
+                .full_desc =
+                    "Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REQUESTS.INVITOE_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x50ULL,
+                        .umask = 0x20ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts the total number of requests coming from a remote socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.",
+                .full_desc =
+                    "Counts the total number of requests coming from a remote socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REQUESTS.READS",
+                .encoding =
+                    {
+                        .code = 0x50ULL,
+                        .umask = 0x3ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts read requests made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write) .",
+                .full_desc = "HA Read and Write Requests : Reads",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_REQUESTS.WRITES",
+                .encoding =
+                    {
+                        .code = 0x50ULL,
+                        .umask = 0xCULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts write requests made into the CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.",
+                .full_desc = "HA Read and Write Requests : Writes",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_CLFLUSH",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8C7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CLFlush events that are initiated from the Core",
+                .full_desc = "TOR Inserts : CLFlushes issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_CLFLUSHOPT",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8D7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "CLFlushOpt events that are initiated from the Core",
+                .full_desc = "TOR Inserts : CLFlushOpts issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_CRD",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Code read from local IA",
+                .full_desc = "TOR Inserts : CRDs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Code read prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts; Code read prefetch from local IA that misses in the snoop filter",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_DRD_OPT",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC827FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Data read opt from local IA",
+                .full_desc = "TOR Inserts : DRd_Opts issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_DRD_OPT_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Data read opt prefetch from local IA",
+                .full_desc = "TOR Inserts : DRd_Opt_Prefs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_CRD",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Code read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : CRds issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Code read prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : CRd_Prefs issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C00181ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.",
+                .full_desc =
+                    "All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC827FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Data read opt from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : DRd_Opts issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data read opt prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : DRd_Opt_Prefs issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoM requests from local IA cores that hit the cache",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by iA Cores that Hit LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch code read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefCode issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch data read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefData issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch read for ownership from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_HIT_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Inserts : RFO_Prefs issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "ItoM events that are initiated from the Core",
+                .full_desc = "TOR Inserts : ItoMs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCD47FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "ItoMCacheNear requests from local IA cores",
+                .full_desc = "TOR Inserts : ItoMCacheNears issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch code read from local IA.",
+                .full_desc = "TOR Inserts : LLCPrefCode issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch data read from local IA.",
+                .full_desc = "TOR Inserts : LLCPrefData issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch read for ownership from local IA that miss the cache",
+                .full_desc = "TOR Inserts : LLCPrefRFO issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC001FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "All locally initiated requests from IA Cores which miss the cache",
+                .full_desc =
+                    "TOR Inserts : All requests from iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Code read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : CRds issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80EFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "CRDs from local IA cores to locally homed memory",
+                .full_desc =
+                    "TOR Inserts : CRd issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Code read prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88EFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "CRD Prefetches from local IA cores to locally homed memory",
+                .full_desc =
+                    "TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88F7EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "CRD Prefetches from local IA cores to remotely homed memory",
+                .full_desc =
+                    "TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80F7EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "CRDs from local IA cores to remotely homed memory",
+                .full_desc =
+                    "TOR Inserts : CRd issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C00182ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.",
+                .full_desc =
+                    "All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C81782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.",
+                .full_desc =
+                    "DRds issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC826FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRd_Opt, and which target local memory",
+                .full_desc =
+                    "TOR Inserts : DRd_Opt issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data read opt prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A6FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target local memory",
+                .full_desc =
+                    "TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting local memory",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A77EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target remote memory",
+                .full_desc =
+                    "TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting remote memory",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8277EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRd_Opt, and target remote memory",
+                .full_desc =
+                    "TOR Inserts : Data read opt from local iA that missed the LLC targeting remote memory",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C89782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoM requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch code read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefCode issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch data read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefData issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10CCD782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Last level cache prefetch read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C88782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86686ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCILF requests from local IA cores to locally homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86E86ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCIL requests from local IA cores to locally homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86706ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCILF requests from local IA cores to remotely homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86F06ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCIL requests from local IA cores to remotely homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C80782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC806FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership from local IA that miss the LLC targeting local memory",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10CCC782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC886FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership prefetch from local IA that miss the LLC targeting local memory",
+                .full_desc =
+                    "TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8877EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership prefetch from local IA that miss the LLC targeting remote memory",
+                .full_desc =
+                    "TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8077EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read for ownership from local IA that miss the LLC targeting remote memory",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_UCRDF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC877DEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "UCRDF requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Inserts : UCRdFs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCIL requests from a local IA core that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC867FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCILF requests from local IA core that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLF issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86786ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCILF requests from local IA cores to DDR homed addresses which miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86F86ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WCIL requests from local IA cores to DDR homed addresses which miss the cache",
+                .full_desc =
+                    "TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_MISS_WIL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC87FDEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WIL requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Inserts : WiLs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Read for ownership from local IA",
+                .full_desc = "TOR Inserts : RFOs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Read for ownership prefetch from local IA",
+                .full_desc = "TOR Inserts : RFO_Prefs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_SPECITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC57FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "SpecItoM events that are initiated from the Core",
+                .full_desc = "TOR Inserts : SpecItoMs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WBEFTOE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC3FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WbEFtoEs issued by iA Cores.  (Non Modified Write Backs)",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WBEFTOI",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC37FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WbEFtoIs issued by iA Cores .  (Non Modified Write Backs)",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WBMTOE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC2FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WbMtoEs issued by iA Cores .  (Modified Write Backs)",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WBMTOI",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC27FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "WbMtoI requests from local IA cores",
+                .full_desc = "TOR Inserts : WbMtoIs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WBSTOI",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC67FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "WbStoIs issued by iA Cores .  (Non Modified Write Backs)",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WCIL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "WCIL requests from a local IA core",
+                .full_desc = "TOR Inserts : WCiLs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IA_WCILF",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC867FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "WCILF requests from local IA core",
+                .full_desc = "TOR Inserts : WCiLF issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_CLFLUSH",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8C3FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CLFlush requests from IO devices",
+                .full_desc = "TOR Inserts : CLFlushes issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_HIT_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "ItoMs from local IO devices which hit the cache",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_HIT_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC",
+                .full_desc =
+                    "TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_HIT_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "PCIRDCURs issued by IO devices which hit the LLC",
+                .full_desc =
+                    "TOR Inserts : PCIRdCurs issued by IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_HIT_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "RFOs from local IO devices which hit the cache",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "All TOR ItoM inserts from local IO devices",
+                .full_desc = "TOR Inserts : ItoMs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoMCacheNears, indicating a partial write request, from IO Devices",
+                .full_desc =
+                    "TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD42FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoMCacheNear (partial write) transactions from an IO device that addresses memory on the local socket",
+                .full_desc =
+                    "TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on the local socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD437FULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoMCacheNear (partial write) transactions from an IO device that addresses memory on a remote socket",
+                .full_desc =
+                    "TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on a remote socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOM_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC42FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoM (write) transactions from an IO device that addresses memory on the local socket",
+                .full_desc =
+                    "TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on the local socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_ITOM_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC437FULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoM (write) transactions from an IO device that addresses memory on a remote socket",
+                .full_desc =
+                    "TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on a remote socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "All TOR ItoM inserts from local IO devices which miss the cache",
+                .full_desc =
+                    "TOR Inserts : ItoMs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_MISS_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC",
+                .full_desc =
+                    "TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_MISS_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "PCIRDCURs issued by IO devices which miss the LLC",
+                .full_desc =
+                    "TOR Inserts : PCIRdCurs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_MISS_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "All TOR RFO inserts from local IO devices which miss the cache",
+                .full_desc =
+                    "TOR Inserts : RFOs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "PCIRDCURs issued by IO devices",
+                .full_desc = "TOR Inserts : PCIRdCurs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F2FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "PCIRDCUR (read) transactions from an IO device that addresses memory on the local socket",
+                .full_desc =
+                    "TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on the local socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F37FULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "PCIRDCUR (read) transactions from an IO device that addresses memory on a remote socket",
+                .full_desc =
+                    "TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on a remote socket",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_RFO",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "RFOs from local IO devices",
+                .full_desc = "TOR Inserts : RFOs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.IO_WBMTOI",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC23FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "WBMtoI requests from IO devices",
+                .full_desc = "TOR Inserts : WbMtoIs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_INSERTS.LLC_OR_SF_EVICTIONS",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                        .umask = 0x2ULL,
+                        .umask_ext = 0xC001FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "TOR Inserts for SF or LLC Evictions",
+                .full_desc =
+                    "TOR allocation occurred as a result of SF/LLC evictions (came from the ISMQ)",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSH",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8C7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CLFlush events that are initiated from the Core",
+                .full_desc = "TOR Occupancy : CLFlushes issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSHOPT",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8D7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CLFlushOpt events that are initiated from the Core",
+                .full_desc = "TOR Occupancy : CLFlushOpts issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_CRD",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read from local IA that miss the cache",
+                .full_desc = "TOR Occupancy : CRDs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy; Code read prefetch from local IA that misses in the snoop filter",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : CRds issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : CRd_Prefs issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C00181ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.",
+                .full_desc =
+                    "TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC827FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Data read opt from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Data read opt prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoM requests from local IA cores that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : ItoMs issued by iA Cores that Hit LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch code read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefCode issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch data read from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefData issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch read for ownership from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefRFO issued by iA Cores that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership prefetch from local IA that hit the cache",
+                .full_desc =
+                    "TOR Occupancy : RFO_Prefs issued by iA Cores that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoM events that are initiated from the Core",
+                .full_desc = "TOR Occupancy : ItoMs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCD47FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoMCacheNear requests from local IA cores",
+                .full_desc =
+                    "TOR Occupancy : ItoMCacheNears issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch code read from local IA.",
+                .full_desc = "TOR Occupancy : LLCPrefCode issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch data read from local IA.",
+                .full_desc = "TOR Occupancy : LLCPrefData issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch read for ownership from local IA that miss the cache",
+                .full_desc = "TOR Occupancy : LLCPrefRFO issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : CRds issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80EFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CRDs from local IA cores to locally homed memory",
+                .full_desc =
+                    "TOR Occupancy : CRd issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Code read prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88EFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CRD Prefetches from local IA cores to locally homed memory",
+                .full_desc =
+                    "TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC88F7EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CRD Prefetches from local IA cores to remotely homed memory",
+                .full_desc =
+                    "TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC80F7EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CRDs from local IA cores to remotely homed memory",
+                .full_desc =
+                    "TOR Occupancy : CRd issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C00182ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.",
+                .full_desc =
+                    "TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C81782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.",
+                .full_desc =
+                    "TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8A7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Data read opt prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C89782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC47FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoM requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : ItoMs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFCODE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCCFFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch code read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefCode issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCD7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch data read from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefData issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10CCD782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCCC7FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Last level cache prefetch read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : LLCPrefRFO issued by iA Cores that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C88782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86686ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCILF requests from local IA cores to locally homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86E86ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCIL requests from local IA cores to locally homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86706ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCILF requests from local IA cores to remotely homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86F06ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCIL requests from local IA cores to remotely homed DDR addresses that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10C80782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC806FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x10CCC782ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+                .full_desc =
+                    "TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_LOCAL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC886FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8877EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership prefetch from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_REMOTE",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC8077EULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership from local IA that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by iA Cores that Missed the LLC - HOMed remotely",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_UCRDF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC877DEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for UCRDF requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : UCRdFs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86FFEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCIL requests from a local IA core that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLs issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC867FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCILF requests from local IA core that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLF issued by iA Cores that Missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86786ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCILF requests from local IA cores to DDR homed addresses which miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL_DDR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86F86ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCIL requests from local IA cores to DDR homed addresses which miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WIL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC87FDEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WIL requests from local IA cores that miss the cache",
+                .full_desc =
+                    "TOR Occupancy : WiLs issued by iA Cores that Missed LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC807FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership from local IA that miss the cache",
+                .full_desc = "TOR Occupancy : RFOs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_RFO_PREF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC887FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for Read for ownership prefetch from local IA that miss the cache",
+                .full_desc = "TOR Occupancy : RFO_Prefs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_SPECITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC57FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for SpecItoM events that are initiated from the Core",
+                .full_desc = "TOR Occupancy : SpecItoMs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_WBMTOI",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xCC27FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WbMtoI requests from local IA cores",
+                .full_desc = "TOR Occupancy : WbMtoIs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_WCIL",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC86FFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCIL requests from a local IA core",
+                .full_desc = "TOR Occupancy : WCiLs issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IA_WCILF",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0xC867FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WCILF requests from local IA core",
+                .full_desc = "TOR Occupancy : WCiLF issued by iA Cores",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_CLFLUSH",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8C3FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for CLFlush requests from IO devices",
+                .full_desc = "TOR Occupancy : CLFlushes issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoMs from local IO devices which hit the cache",
+                .full_desc =
+                    "TOR Occupancy : ItoMs issued by IO Devices that Hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC",
+                .full_desc =
+                    "TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_HIT_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for PCIRDCURs issued by IO devices which hit the LLC",
+                .full_desc =
+                    "TOR Occupancy : PCIRdCurs issued by IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_HIT_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for RFOs from local IO devices which hit the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by IO Devices that hit the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for All TOR ItoM inserts from local IO devices",
+                .full_desc = "TOR Occupancy : ItoMs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices",
+                .full_desc =
+                    "TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOM",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC43FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for All TOR ItoM inserts from local IO devices which miss the cache",
+                .full_desc =
+                    "TOR Occupancy : ItoMs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOMCACHENEAR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCD43FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC",
+                .full_desc =
+                    "TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_MISS_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for PCIRDCURs issued by IO devices which miss the LLC",
+                .full_desc =
+                    "TOR Occupancy : PCIRdCurs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FEULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for All TOR RFO inserts from local IO devices which miss the cache",
+                .full_desc =
+                    "TOR Occupancy : RFOs issued by IO Devices that missed the LLC",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_PCIRDCUR",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC8F3FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for PCIRDCURs issued by IO devices",
+                .full_desc = "TOR Occupancy : PCIRdCurs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_RFO",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xC803FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "TOR Occupancy for RFOs from local IO devices",
+                .full_desc = "TOR Occupancy : RFOs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_cha,
+                .id = "UNC_CHA_TOR_OCCUPANCY.IO_WBMTOI",
+                .encoding =
+                    {
+                        .code = 0x36ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0xCC23FFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "TOR Occupancy for WBMtoI requests from IO devices",
+                .full_desc = "TOR Occupancy : WbMtoIs issued by IO Devices",
+            },
+            {
+                .pmu_type = PmuType::uncore_chacms,
+                .id = "UNC_CHACMS_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Clockticks for CMS units attached to CHA",
+                .full_desc = "UNC_CHACMS_CLOCKTICKS",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_ACT_COUNT.ALL",
+                .encoding =
+                    {
+                        .code = 0x2ULL,
+                        .umask = 0xF7ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "DRAM Activate Count : Counts the number of DRAM Activate commands sent on this channel.  Activate commands are issued to open up a page on the DRAM devices so that it can be read or written to with a CAS.  One can calculate the number of Page Misses by subtracting the number of Page Miss precharges from the number of Activates.",
+                .full_desc = "DRAM Activate Count",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH0.ALL",
+                .encoding =
+                    {
+                        .code = 0x5ULL,
+                        .umask = 0xFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 0, all CAS operations",
+                .full_desc = "CAS count for SubChannel 0, all CAS operations",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH0.RD_REG",
+                .encoding =
+                    {
+                        .code = 0x5ULL,
+                        .umask = 0xC1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 0 regular reads",
+                .full_desc = "CAS count for SubChannel 0 regular reads",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH0.RD_UNDERFILL",
+                .encoding =
+                    {
+                        .code = 0x5ULL,
+                        .umask = 0xC4ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 0 underfill reads",
+                .full_desc = "CAS count for SubChannel 0 underfill reads",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH1.ALL",
+                .encoding =
+                    {
+                        .code = 0x6ULL,
+                        .umask = 0xFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 1, all CAS operations",
+                .full_desc = "CAS count for SubChannel 1, all CAS operations",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH1.RD_REG",
+                .encoding =
+                    {
+                        .code = 0x6ULL,
+                        .umask = 0xC1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 1 regular reads",
+                .full_desc = "CAS count for SubChannel 1 regular reads",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CAS_COUNT_SCH1.RD_UNDERFILL",
+                .encoding =
+                    {
+                        .code = 0x6ULL,
+                        .umask = 0xC4ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "CAS count for SubChannel 1 underfill reads",
+                .full_desc = "CAS count for SubChannel 1 underfill reads",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                        .umask = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number of DRAM DCLK clock cycles while the event is enabled.  DCLK is 1/4 of DRAM data rate.",
+                .full_desc = "DRAM Clockticks",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_PRE_COUNT.ALL",
+                .encoding =
+                    {
+                        .code = 0x3ULL,
+                        .umask = 0xFFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "DRAM Precharge commands. : Counts the number of DRAM Precharge commands sent on this channel.",
+                .full_desc = "DRAM Precharge commands.",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_PRE_COUNT.PGT",
+                .encoding =
+                    {
+                        .code = 0x3ULL,
+                        .umask = 0xF8ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "DRAM Precharge commands. : Precharge due to (?) : Counts the number of DRAM Precharge commands sent on this channel.",
+                .full_desc = "DRAM Precharge commands.",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RDB_OCCUPANCY_SCH0",
+                .encoding =
+                    {
+                        .code = 0x1AULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Read buffer occupancy on subchannel 0",
+                .full_desc = "Read buffer occupancy on subchannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RDB_OCCUPANCY_SCH1",
+                .encoding =
+                    {
+                        .code = 0x1BULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Read buffer occupancy on subchannel 1",
+                .full_desc = "Read buffer occupancy on subchannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_INSERTS.SCH0_PCH0",
+                .encoding =
+                    {
+                        .code = 0x10ULL,
+                        .umask = 0x10ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read Pending Queue inserts for subchannel 0, pseudochannel 0",
+                .full_desc =
+                    "Read Pending Queue inserts for subchannel 0, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_INSERTS.SCH0_PCH1",
+                .encoding =
+                    {
+                        .code = 0x10ULL,
+                        .umask = 0x20ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read Pending Queue inserts for subchannel 0, pseudochannel 1",
+                .full_desc =
+                    "Read Pending Queue inserts for subchannel 0, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_INSERTS.SCH1_PCH0",
+                .encoding =
+                    {
+                        .code = 0x10ULL,
+                        .umask = 0x40ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read Pending Queue inserts for subchannel 1, pseudochannel 0",
+                .full_desc =
+                    "Read Pending Queue inserts for subchannel 1, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_INSERTS.SCH1_PCH1",
+                .encoding =
+                    {
+                        .code = 0x10ULL,
+                        .umask = 0x80ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read Pending Queue inserts for subchannel 1, pseudochannel 1",
+                .full_desc =
+                    "Read Pending Queue inserts for subchannel 1, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_OCCUPANCY_SCH0_PCH0",
+                .encoding =
+                    {
+                        .code = 0x80ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read pending queue occupancy for subchannel 0, pseudochannel 0",
+                .full_desc =
+                    "Read pending queue occupancy for subchannel 0, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_OCCUPANCY_SCH0_PCH1",
+                .encoding =
+                    {
+                        .code = 0x81ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read pending queue occupancy for subchannel 0, pseudochannel 1",
+                .full_desc =
+                    "Read pending queue occupancy for subchannel 0, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_OCCUPANCY_SCH1_PCH0",
+                .encoding =
+                    {
+                        .code = 0x82ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read pending queue occupancy for subchannel 1, pseudochannel 0",
+                .full_desc =
+                    "Read pending queue occupancy for subchannel 1, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_RPQ_OCCUPANCY_SCH1_PCH1",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Read pending queue occupancy for subchannel 1, pseudochannel 1",
+                .full_desc =
+                    "Read pending queue occupancy for subchannel 1, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_INSERTS.SCH0_PCH0",
+                .encoding =
+                    {
+                        .code = 0x22ULL,
+                        .umask = 0x10ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write Pending Queue inserts for subchannel 0, pseudochannel 0",
+                .full_desc =
+                    "Write Pending Queue inserts for subchannel 0, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_INSERTS.SCH0_PCH1",
+                .encoding =
+                    {
+                        .code = 0x22ULL,
+                        .umask = 0x20ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write Pending Queue inserts for subchannel 0, pseudochannel 1",
+                .full_desc =
+                    "Write Pending Queue inserts for subchannel 0, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_INSERTS.SCH1_PCH0",
+                .encoding =
+                    {
+                        .code = 0x22ULL,
+                        .umask = 0x40ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write Pending Queue inserts for subchannel 1, pseudochannel 0",
+                .full_desc =
+                    "Write Pending Queue inserts for subchannel 1, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_INSERTS.SCH1_PCH1",
+                .encoding =
+                    {
+                        .code = 0x22ULL,
+                        .umask = 0x80ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write Pending Queue inserts for subchannel 1, pseudochannel 1",
+                .full_desc =
+                    "Write Pending Queue inserts for subchannel 1, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_OCCUPANCY_SCH0_PCH0",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write pending queue occupancy for subchannel 0, pseudochannel 0",
+                .full_desc =
+                    "Write pending queue occupancy for subchannel 0, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_OCCUPANCY_SCH0_PCH1",
+                .encoding =
+                    {
+                        .code = 0x85ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write pending queue occupancy for subchannel 0, pseudochannel 1",
+                .full_desc =
+                    "Write pending queue occupancy for subchannel 0, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_OCCUPANCY_SCH1_PCH0",
+                .encoding =
+                    {
+                        .code = 0x86ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write pending queue occupancy for subchannel 1, pseudochannel 0",
+                .full_desc =
+                    "Write pending queue occupancy for subchannel 1, pseudochannel 0",
+            },
+            {
+                .pmu_type = PmuType::uncore_imc,
+                .id = "UNC_M_WPQ_OCCUPANCY_SCH1_PCH1",
+                .encoding =
+                    {
+                        .code = 0x87ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Write pending queue occupancy for subchannel 1, pseudochannel 1",
+                .full_desc =
+                    "Write pending queue occupancy for subchannel 1, pseudochannel 1",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "IIO Clockticks",
+                .full_desc = "IIO Clockticks",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART0",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART1",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART2",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART3",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART4",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART5",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART6",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART7",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Data requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x8ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Another card (different IIO stack) reading from this card.",
+                .full_desc =
+                    "Data requested by the CPU : Another card (different IIO stack) reading from this card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC0ULL,
+                        .umask = 0x2ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Data requested by the CPU : Another card (different IIO stack) writing to this card.",
+                .full_desc =
+                    "Data requested by the CPU : Another card (different IIO stack) writing to this card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts once for every 4 bytes read from this card to memory.  This event does include reads to IO.",
+                .full_desc =
+                    "Counts once for every 4 bytes read from this card to memory.  This event does include reads to IO.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART0",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART1",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART2",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART3",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART4",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART5",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART6",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART7",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Counts once for every 4 bytes written from this card to memory.  This event does include writes to IO.",
+                .full_desc =
+                    "Counts once for every 4 bytes written from this card to memory.  This event does include writes to IO.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART0",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART1",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART2",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART3",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART4",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART5",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART6",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART7",
+                .encoding =
+                    {
+                        .code = 0x83ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Four byte data request of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART0",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART1",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART2",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART3",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART4",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART5",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART6",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART7",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core reading from Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART0",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART1",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART2",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART3",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART4",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART5",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART6",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART7",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Core writing to Cards MMIO space",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.PEER_READ.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x8ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Another card (different IIO stack) reading from this card.",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Another card (different IIO stack) reading from this card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.ALL_PARTS",
+                .encoding =
+                    {
+                        .code = 0xC1ULL,
+                        .umask = 0x2ULL,
+                        .umask_ext = 0x70FF0ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested by the CPU : Another card (different IIO stack) writing to this card.",
+                .full_desc =
+                    "Number Transactions requested by the CPU : Another card (different IIO stack) writing to this card.",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART0",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART1",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART2",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART3",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART4",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART5",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART6",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART7",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x4ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card reading from DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART0",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70010ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART1",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70020ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART2",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70040ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART3",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70080ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART4",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70100ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART5",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70200ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART6",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70400ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_iio,
+                .id = "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART7",
+                .encoding =
+                    {
+                        .code = 0x84ULL,
+                        .umask = 0x1ULL,
+                        .umask_ext = 0x70800ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+                .full_desc =
+                    "Number Transactions requested of the CPU : Card writing to DRAM",
+            },
+            {
+                .pmu_type = PmuType::uncore_irp,
+                .id = "UNC_I_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "IRP Clockticks",
+                .full_desc = "IRP Clockticks",
+            },
+            {
+                .pmu_type = PmuType::uncore_irp,
+                .id = "UNC_I_FAF_INSERTS",
+                .encoding =
+                    {
+                        .code = 0x18ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inbound read requests received by the IRP and inserted into the FAF queue",
+                .full_desc =
+                    "Inbound read requests received by the IRP and inserted into the FAF queue",
+            },
+            {
+                .pmu_type = PmuType::uncore_irp,
+                .id = "UNC_I_TRANSACTIONS.WR_PREF",
+                .encoding =
+                    {
+                        .code = 0x11ULL,
+                        .umask = 0x8ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Inbound write (fast path) requests to coherent memory, received by the IRP resulting in write ownership requests issued by IRP to the mesh.",
+                .full_desc =
+                    "Inbound write (fast path) requests to coherent memory, received by the IRP resulting in write ownership requests issued by IRP to the mesh.",
+            },
+            {
+                .pmu_type = PmuType::uncore_pcu,
+                .id = "UNC_P_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "PCU Clockticks",
+                .full_desc =
+                    "PCU Clockticks:  The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.",
+            },
+            {
+                .pmu_type = PmuType::uncore_pcu,
+                .id = "UNC_P_POWER_STATE_OCCUPANCY_CORES_C0",
+                .encoding =
+                    {
+                        .code = 0x35ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Number of cores in C0",
+                .full_desc =
+                    "Number of cores in C0 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.",
+            },
+            {
+                .pmu_type = PmuType::uncore_pcu,
+                .id = "UNC_P_POWER_STATE_OCCUPANCY_CORES_C6",
+                .encoding =
+                    {
+                        .code = 0x37ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Number of cores in C6",
+                .full_desc =
+                    "Number of cores in C6 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_CLOCKTICKS",
+                .encoding =
+                    {
+                        .code = 0x1ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Number of UPI LL clock cycles while the event is enabled",
+                .full_desc = "Number of kfclks",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ",
+                .encoding =
+                    {
+                        .code = 0x5ULL,
+                        .umask = 0x8ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "Matches on Receive path of a UPI Port : Request",
+                .full_desc = "Matches on Receive path of a UPI Port : Request",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_RxL_BASIC_HDR_MATCH.WB",
+                .encoding =
+                    {
+                        .code = 0x5ULL,
+                        .umask = 0xDULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Matches on Receive path of a UPI Port : Writeback",
+                .full_desc =
+                    "Matches on Receive path of a UPI Port : Writeback",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_RxL_FLITS.ALL_DATA",
+                .encoding =
+                    {
+                        .code = 0x3ULL,
+                        .umask = 0xFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Valid Flits Received : All Data : Shows legal flit time (hides impact of L0p and L0c).",
+                .full_desc = "Valid Flits Received : All Data",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_RxL_FLITS.NON_DATA",
+                .encoding =
+                    {
+                        .code = 0x3ULL,
+                        .umask = 0x97ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Valid Flits Received : All Non Data : Shows legal flit time (hides impact of L0p and L0c).",
+                .full_desc = "Valid Flits Received : All Non Data",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_TxL_FLITS.ALL_DATA",
+                .encoding =
+                    {
+                        .code = 0x2ULL,
+                        .umask = 0xFULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Valid Flits Sent : All Data : Counts number of data flits across this UPI link.",
+                .full_desc = "Valid Flits Sent : All Data",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_TxL_FLITS.ALL_NULL",
+                .encoding =
+                    {
+                        .code = 0x2ULL,
+                        .umask = 0x27ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc = "All Null Flits",
+                .full_desc = "Valid Flits Sent : Idle",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_TxL_FLITS.IDLE",
+                .encoding =
+                    {
+                        .code = 0x2ULL,
+                        .umask = 0x47ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Valid Flits Sent : Idle : Shows legal flit time (hides impact of L0p and L0c).",
+                .full_desc = "Valid Flits Sent",
+            },
+            {
+                .pmu_type = PmuType::uncore_upi,
+                .id = "UNC_UPI_TxL_FLITS.NON_DATA",
+                .encoding =
+                    {
+                        .code = 0x2ULL,
+                        .umask = 0x97ULL,
+                    },
+                .features = StaticEventDef::IntelFeatures{},
+                .brief_desc =
+                    "Valid Flits Sent : All Non Data : Shows legal flit time (hides impact of L0p and L0c).",
+                .full_desc =
+                    "Valid Flits Sent : Null FLITs transmitted to any slot",
+            },
+        }};
+static_assert(isStaticEventDefTableSorted(kFullOnlyEvents));
+#endif // HBT_ADD_ALL_GENERATED_EVENTS
+
+} // namespace
 
 void addEvents(PmuDeviceManager& pmu_manager) {
-  /*
-    Events from sierraforest_uncore.json (327 events).
-
-    Supported SKUs:
-        - Arch: x86, Model: SRF id: 175
-  */
-
-  // Event UNC_CHA_CLOCKTICKS is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Number of CHA clock cycles while the event is enabled)",
-      R"(Clockticks of the uncore caching and home agent (CHA))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
+  pmu_manager.addStaticEventDefs(kAllowlistedEvents);
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_CRD",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80FFD},
-      R"(Code read from local IA that hit the cache)",
-      R"(TOR Inserts : CRds issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCC7FD},
-      R"(Last level cache prefetch read for ownership from local IA that hit the cache)",
-      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C807FD},
-      R"(Read for ownership from local IA that hit the cache)",
-      R"(TOR Inserts : RFOs issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C001FE},
-      R"(All locally initiated requests from IA Cores which miss the cache)",
-      R"(TOR Inserts : All requests from iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80FFE},
-      R"(Code read from local IA that miss the cache)",
-      R"(TOR Inserts : CRds issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCC7FE},
-      R"(Last level cache prefetch read for ownership from local IA that miss the cache)",
-      R"(TOR Inserts : LLCPrefRFO issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C807FE},
-      R"(Read for ownership from local IA that miss the cache)",
-      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC43FE},
-      R"(All TOR ItoM inserts from local IO devices which miss the cache)",
-      R"(TOR Inserts : ItoMs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C803FE},
-      R"(All TOR RFO inserts from local IO devices which miss the cache)",
-      R"(TOR Inserts : RFOs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_CRD_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C88FFD},
-      R"(Code read prefetch from local IA that hit the cache)",
-      R"(TOR Inserts : CRd_Prefs issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C827FD},
-      R"(Data read opt from local IA that hit the cache)",
-      R"(TOR Inserts : DRd_Opts issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A7FD},
-      R"(Data read opt prefetch from local IA that hit the cache)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_RFO_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C887FD},
-      R"(Read for ownership prefetch from local IA that hit the cache)",
-      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C88FFE},
-      R"(Code read prefetch from local IA that miss the cache)",
-      R"(TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C827FE},
-      R"(Data read opt from local IA that miss the cache)",
-      R"(TOR Inserts : DRd_Opt issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A7FE},
-      R"(Data read opt prefetch from local IA that miss the cache)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C887FE},
-      R"(Read for ownership prefetch from local IA that miss the cache)",
-      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_HIT_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC43FD},
-      R"(ItoMs from local IO devices which hit the cache)",
-      R"(TOR Inserts : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_HIT_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C803FD},
-      R"(RFOs from local IO devices which hit the cache)",
-      R"(TOR Inserts : RFOs issued by IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C803FF},
-      R"(RFOs from local IO devices)",
-      R"(TOR Inserts : RFOs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC43FF},
-      R"(All TOR ItoM inserts from local IO devices)",
-      R"(TOR Inserts : ItoMs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_RFO_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C887FF},
-      R"(Read for ownership prefetch from local IA)",
-      R"(TOR Inserts : RFO_Prefs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_RFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C807FF},
-      R"(Read for ownership from local IA)",
-      R"(TOR Inserts : RFOs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCC7FF},
-      R"(Last level cache prefetch read for ownership from local IA that miss the cache)",
-      R"(TOR Inserts : LLCPrefRFO issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_DRD_OPT",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C827FF},
-      R"(Data read opt from local IA)",
-      R"(TOR Inserts : DRd_Opts issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A7FF},
-      R"(Data read opt prefetch from local IA)",
-      R"(TOR Inserts : DRd_Opt_Prefs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_CRD_PREF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C88FFF},
-      R"(Code read prefetch from local IA that miss the cache)",
-      R"(TOR Inserts; Code read prefetch from local IA that misses in the snoop filter)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_CRD",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80FFF},
-      R"(Code read from local IA)",
-      R"(TOR Inserts : CRDs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C806FE},
-      R"(Read for ownership from local IA that miss the LLC targeting local memory)",
-      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8077E},
-      R"(Read for ownership from local IA that miss the LLC targeting remote memory)",
-      R"(TOR Inserts : RFOs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C886FE},
-      R"(Read for ownership prefetch from local IA that miss the LLC targeting local memory)",
-      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8877E},
-      R"(Read for ownership prefetch from local IA that miss the LLC targeting remote memory)",
-      R"(TOR Inserts : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_CLFLUSH",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8C7FF},
-      R"(CLFlush events that are initiated from the Core)",
-      R"(TOR Inserts : CLFlushes issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_CLFLUSHOPT",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8D7FF},
-      R"(CLFlushOpt events that are initiated from the Core)",
-      R"(TOR Inserts : CLFlushOpts issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC47FF},
-      R"(ItoM events that are initiated from the Core)",
-      R"(TOR Inserts : ItoMs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_SPECITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC57FF},
-      R"(SpecItoM events that are initiated from the Core)",
-      R"(TOR Inserts : SpecItoMs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_HIT_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD43FD},
-      R"(ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD43FE},
-      R"(ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WBEFTOE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC3FFF},
-      R"(WbEFtoEs issued by iA Cores.  (Non Modified Write Backs))",
-      R"(TOR Inserts : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_HIT_PCIRDCUR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F3FD},
-      R"(PCIRDCURs issued by IO devices which hit the LLC)",
-      R"(TOR Inserts : PCIRdCurs issued by IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_MISS_PCIRDCUR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F3FE},
-      R"(PCIRDCURs issued by IO devices which miss the LLC)",
-      R"(TOR Inserts : PCIRdCurs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F3FF},
-      R"(PCIRDCURs issued by IO devices)",
-      R"(TOR Inserts : PCIRdCurs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCCFFD},
-      R"(Last level cache prefetch code read from local IA that hit the cache)",
-      R"(TOR Inserts : LLCPrefCode issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCD7FD},
-      R"(Last level cache prefetch data read from local IA that hit the cache)",
-      R"(TOR Inserts : LLCPrefData issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCD7FF},
-      R"(Last level cache prefetch data read from local IA.)",
-      R"(TOR Inserts : LLCPrefData issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCCFFE},
-      R"(Last level cache prefetch code read from local IA that miss the cache)",
-      R"(TOR Inserts : LLCPrefCode issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCD7FE},
-      R"(Last level cache prefetch data read from local IA that miss the cache)",
-      R"(TOR Inserts : LLCPrefData issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CCCFFF},
-      R"(Last level cache prefetch code read from local IA.)",
-      R"(TOR Inserts : LLCPrefCode issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD43FF},
-      R"(ItoMCacheNears, indicating a partial write request, from IO Devices)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80EFE},
-      R"(CRDs from local IA cores to locally homed memory)",
-      R"(TOR Inserts : CRd issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C80F7E},
-      R"(CRDs from local IA cores to remotely homed memory)",
-      R"(TOR Inserts : CRd issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C88EFE},
-      R"(CRD Prefetches from local IA cores to locally homed memory)",
-      R"(TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CRD_PREF_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C88F7E},
-      R"(CRD Prefetches from local IA cores to remotely homed memory)",
-      R"(TOR Inserts : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CD47FF},
-      R"(ItoMCacheNear requests from local IA cores)",
-      R"(TOR Inserts : ItoMCacheNears issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WBMTOI",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC27FF},
-      R"(WbMtoI requests from local IA cores)",
-      R"(TOR Inserts : WbMtoIs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC47FD},
-      R"(ItoM requests from local IA cores that hit the cache)",
-      R"(TOR Inserts : ItoMs issued by iA Cores that Hit LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_ITOM",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC47FE},
-      R"(ItoM requests from local IA cores that miss the cache)",
-      R"(TOR Inserts : ItoMs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_UCRDF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C877DE},
-      R"(UCRDF requests from local IA cores that miss the cache)",
-      R"(TOR Inserts : UCRdFs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WIL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C87FDE},
-      R"(WIL requests from local IA cores that miss the cache)",
-      R"(TOR Inserts : WiLs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WCILF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C867FF},
-      R"(WCILF requests from local IA core)",
-      R"(TOR Inserts : WCiLF issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C867FE},
-      R"(WCILF requests from local IA core that miss the cache)",
-      R"(TOR Inserts : WCiLF issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCILF_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86786},
-      R"(WCILF requests from local IA cores to DDR homed addresses which miss the cache)",
-      R"(TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCILF_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86686},
-      R"(WCILF requests from local IA cores to locally homed DDR addresses that miss the cache)",
-      R"(TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCILF_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86706},
-      R"(WCILF requests from local IA cores to remotely homed DDR addresses that miss the cache)",
-      R"(TOR Inserts : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WCIL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86FFF},
-      R"(WCIL requests from a local IA core)",
-      R"(TOR Inserts : WCiLs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86FFE},
-      R"(WCIL requests from a local IA core that miss the cache)",
-      R"(TOR Inserts : WCiLs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_WCIL_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86F86},
-      R"(WCIL requests from local IA cores to DDR homed addresses which miss the cache)",
-      R"(TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LOCAL_WCIL_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86E86},
-      R"(WCIL requests from local IA cores to locally homed DDR addresses that miss the cache)",
-      R"(TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_REMOTE_WCIL_DDR",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C86F06},
-      R"(WCIL requests from local IA cores to remotely homed DDR addresses that miss the cache)",
-      R"(TOR Inserts : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_WBMTOI",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC23FF},
-      R"(WBMtoI requests from IO devices)",
-      R"(TOR Inserts : WbMtoIs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_CLFLUSH",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8C3FF},
-      R"(CLFlush requests from IO devices)",
-      R"(TOR Inserts : CLFlushes issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WBMTOE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC2FFF},
-      R"(WbMtoEs issued by iA Cores .  (Modified Write Backs))",
-      R"(TOR Inserts : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WBEFTOI",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC37FF},
-      R"(WbEFtoIs issued by iA Cores .  (Non Modified Write Backs))",
-      R"(TOR Inserts : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_WBSTOI",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00CC67FF},
-      R"(WbStoIs issued by iA Cores .  (Non Modified Write Backs))",
-      R"(TOR Inserts : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C81782},
-      R"(DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
-      R"(DRds issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C80782},
-      R"(RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFRFO_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C88782},
-      R"(L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_RFO_PREF_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10CCC782},
-      R"(LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_PREF_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C89782},
-      R"(L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_LLCPREFDATA_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10CCD782},
-      R"(LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C00182},
-      R"(All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
-      R"(All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_HIT_CXL_ACC",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x10C00181},
-      R"(All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
-      R"(All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C80FFD},
-      R"(TOR Occupancy for Code read from local IA that hit the cache)",
-      R"(TOR Occupancy : CRds issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCC7FD},
-      R"(TOR Occupancy for Last level cache prefetch read for ownership from local IA that hit the cache)",
-      R"(TOR Occupancy : LLCPrefRFO issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C807FD},
-      R"(TOR Occupancy for Read for ownership from local IA that hit the cache)",
-      R"(TOR Occupancy : RFOs issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C80FFE},
-      R"(TOR Occupancy for Code read from local IA that miss the cache)",
-      R"(TOR Occupancy : CRds issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCC7FE},
-      R"(TOR Occupancy for Last level cache prefetch read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : LLCPrefRFO issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C807FE},
-      R"(TOR Occupancy for Read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : RFOs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C803FE},
-      R"(TOR Occupancy for All TOR RFO inserts from local IO devices which miss the cache)",
-      R"(TOR Occupancy : RFOs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CC43FE},
-      R"(TOR Occupancy for All TOR ItoM inserts from local IO devices which miss the cache)",
-      R"(TOR Occupancy : ItoMs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CRD_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88FFD},
-      R"(TOR Occupancy for Code read prefetch from local IA that hit the cache)",
-      R"(TOR Occupancy : CRd_Prefs issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FD},
-      R"(TOR Occupancy for Data read opt from local IA that hit the cache)",
-      R"(TOR Occupancy : DRd_Opts issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FD},
-      R"(TOR Occupancy for Data read opt prefetch from local IA that hit the cache)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_RFO_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C887FD},
-      R"(TOR Occupancy for Read for ownership prefetch from local IA that hit the cache)",
-      R"(TOR Occupancy : RFO_Prefs issued by iA Cores that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88FFE},
-      R"(TOR Occupancy for Code read prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C827FE},
-      R"(TOR Occupancy for Data read opt from local IA that miss the cache)",
-      R"(TOR Occupancy : DRd_Opt issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_OPT_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8A7FE},
-      R"(TOR Occupancy for Data read opt prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : DRd_Opt_Prefs issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C887FE},
-      R"(TOR Occupancy for Read for ownership prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CC43FD},
-      R"(TOR Occupancy for ItoMs from local IO devices which hit the cache)",
-      R"(TOR Occupancy : ItoMs issued by IO Devices that Hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_HIT_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C803FD},
-      R"(TOR Occupancy for RFOs from local IO devices which hit the cache)",
-      R"(TOR Occupancy : RFOs issued by IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C803FF},
-      R"(TOR Occupancy for RFOs from local IO devices)",
-      R"(TOR Occupancy : RFOs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CC43FF},
-      R"(TOR Occupancy for All TOR ItoM inserts from local IO devices)",
-      R"(TOR Occupancy : ItoMs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_RFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C807FF},
-      R"(TOR Occupancy for Read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : RFOs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_RFO_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C887FF},
-      R"(TOR Occupancy for Read for ownership prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : RFO_Prefs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFRFO",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCC7FF},
-      R"(TOR Occupancy for Last level cache prefetch read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : LLCPrefRFO issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_CRD",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C80FFF},
-      R"(TOR Occupancy for Code read from local IA that miss the cache)",
-      R"(TOR Occupancy : CRDs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_CRD_PREF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88FFF},
-      R"(TOR Occupancy for Code read prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy; Code read prefetch from local IA that misses in the snoop filter)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_LOCAL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C806FE},
-      R"(TOR Occupancy for Read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : RFOs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_REMOTE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8077E},
-      R"(TOR Occupancy for Read for ownership from local IA that miss the cache)",
-      R"(TOR Occupancy : RFOs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_LOCAL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C886FE},
-      R"(TOR Occupancy for Read for ownership prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_REMOTE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8877E},
-      R"(TOR Occupancy for Read for ownership prefetch from local IA that miss the cache)",
-      R"(TOR Occupancy : RFO_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_HIT_PCIRDCUR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C8F3FD},
-      R"(TOR Occupancy for PCIRDCURs issued by IO devices which hit the LLC)",
-      R"(TOR Occupancy : PCIRdCurs issued by IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_PCIRDCUR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C8F3FE},
-      R"(TOR Occupancy for PCIRDCURs issued by IO devices which miss the LLC)",
-      R"(TOR Occupancy : PCIRdCurs issued by IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_PCIRDCUR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C8F3FF},
-      R"(TOR Occupancy for PCIRDCURs issued by IO devices)",
-      R"(TOR Occupancy : PCIRdCurs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCCFFD},
-      R"(TOR Occupancy for Last level cache prefetch code read from local IA that hit the cache)",
-      R"(TOR Occupancy : LLCPrefCode issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCD7FD},
-      R"(TOR Occupancy for Last level cache prefetch data read from local IA that hit the cache)",
-      R"(TOR Occupancy : LLCPrefData issued by iA Cores that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCD7FF},
-      R"(TOR Occupancy for Last level cache prefetch data read from local IA.)",
-      R"(TOR Occupancy : LLCPrefData issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCCFFE},
-      R"(TOR Occupancy for Last level cache prefetch code read from local IA that miss the cache)",
-      R"(TOR Occupancy : LLCPrefCode issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCD7FE},
-      R"(TOR Occupancy for Last level cache prefetch data read from local IA that miss the cache)",
-      R"(TOR Occupancy : LLCPrefData issued by iA Cores that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_LLCPREFCODE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CCCFFF},
-      R"(TOR Occupancy for Last level cache prefetch code read from local IA.)",
-      R"(TOR Occupancy : LLCPrefCode issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_LOCAL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C80EFE},
-      R"(TOR Occupancy for CRDs from local IA cores to locally homed memory)",
-      R"(TOR Occupancy : CRd issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_REMOTE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C80F7E},
-      R"(TOR Occupancy for CRDs from local IA cores to remotely homed memory)",
-      R"(TOR Occupancy : CRd issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_LOCAL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88EFE},
-      R"(TOR Occupancy for CRD Prefetches from local IA cores to locally homed memory)",
-      R"(TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CRD_PREF_REMOTE",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C88F7E},
-      R"(TOR Occupancy for CRD Prefetches from local IA cores to remotely homed memory)",
-      R"(TOR Occupancy : CRd_Prefs issued by iA Cores that Missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSH",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8C7FF},
-      R"(TOR Occupancy for CLFlush events that are initiated from the Core)",
-      R"(TOR Occupancy : CLFlushes issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_CLFLUSHOPT",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C8D7FF},
-      R"(TOR Occupancy for CLFlushOpt events that are initiated from the Core)",
-      R"(TOR Occupancy : CLFlushOpts issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CD47FF},
-      R"(TOR Occupancy for ItoMCacheNear requests from local IA cores)",
-      R"(TOR Occupancy : ItoMCacheNears issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_SPECITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CC57FF},
-      R"(TOR Occupancy for SpecItoM events that are initiated from the Core)",
-      R"(TOR Occupancy : SpecItoMs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_WBMTOI",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CC27FF},
-      R"(TOR Occupancy for WbMtoI requests from local IA cores)",
-      R"(TOR Occupancy : WbMtoIs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CC47FF},
-      R"(TOR Occupancy for ItoM events that are initiated from the Core)",
-      R"(TOR Occupancy : ItoMs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CC47FD},
-      R"(TOR Occupancy for ItoM requests from local IA cores that hit the cache)",
-      R"(TOR Occupancy : ItoMs issued by iA Cores that Hit LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_ITOM",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00CC47FE},
-      R"(TOR Occupancy for ItoM requests from local IA cores that miss the cache)",
-      R"(TOR Occupancy : ItoMs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_UCRDF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C877DE},
-      R"(TOR Occupancy for UCRDF requests from local IA cores that miss the cache)",
-      R"(TOR Occupancy : UCRdFs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WIL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C87FDE},
-      R"(TOR Occupancy for WIL requests from local IA cores that miss the cache)",
-      R"(TOR Occupancy : WiLs issued by iA Cores that Missed LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_WCILF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C867FF},
-      R"(TOR Occupancy for WCILF requests from local IA core)",
-      R"(TOR Occupancy : WCiLF issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C867FE},
-      R"(TOR Occupancy for WCILF requests from local IA core that miss the cache)",
-      R"(TOR Occupancy : WCiLF issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCILF_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86786},
-      R"(TOR Occupancy for WCILF requests from local IA cores to DDR homed addresses which miss the cache)",
-      R"(TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCILF_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86686},
-      R"(TOR Occupancy for WCILF requests from local IA cores to locally homed DDR addresses that miss the cache)",
-      R"(TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCILF_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86706},
-      R"(TOR Occupancy for WCILF requests from local IA cores to remotely homed DDR addresses that miss the cache)",
-      R"(TOR Occupancy : WCiLFs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_WCIL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86FFF},
-      R"(TOR Occupancy for WCIL requests from a local IA core)",
-      R"(TOR Occupancy : WCiLs issued by iA Cores)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86FFE},
-      R"(TOR Occupancy for WCIL requests from a local IA core that miss the cache)",
-      R"(TOR Occupancy : WCiLs issued by iA Cores that Missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_WCIL_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86F86},
-      R"(TOR Occupancy for WCIL requests from local IA cores to DDR homed addresses which miss the cache)",
-      R"(TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LOCAL_WCIL_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86E86},
-      R"(TOR Occupancy for WCIL requests from local IA cores to locally homed DDR addresses that miss the cache)",
-      R"(TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_REMOTE_WCIL_DDR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x00C86F06},
-      R"(TOR Occupancy for WCIL requests from local IA cores to remotely homed DDR addresses that miss the cache)",
-      R"(TOR Occupancy : WCiLs issued by iA Cores targeting DDR that missed the LLC - HOMed remotely)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_WBMTOI",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CC23FF},
-      R"(TOR Occupancy for WBMtoI requests from IO devices)",
-      R"(TOR Occupancy : WbMtoIs issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_CLFLUSH",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00C8C3FF},
-      R"(TOR Occupancy for CLFlush requests from IO devices)",
-      R"(TOR Occupancy : CLFlushes issued by IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_HIT_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CD43FD},
-      R"(TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC)",
-      R"(TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices that hit the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_MISS_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CD43FE},
-      R"(TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
-      R"(TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices that missed the LLC)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IO_ITOMCACHENEAR",
-      EventDef::Encoding{.code = 0x36, .umask = 0x04, .umaskExt = 0x00CD43FF},
-      R"(TOR Occupancy for ItoMCacheNears, indicating a partial write request, from IO Devices)",
-      R"(TOR Occupancy : ItoMCacheNears, indicating a partial write request, from IO Devices)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C80782},
-      R"(TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(TOR Occupancy for RFOs issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C81782},
-      R"(TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
-      R"(TOR Occupancy for DRds and equivalent opcodes issued from an IA core which miss the L3 and target memory in a CXL type 2 memory expander card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_PREF_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C89782},
-      R"(TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(TOR Occupancy for L2 data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFDATA_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10CCD782},
-      R"(TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(TOR Occupancy for LLC data prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_LLCPREFRFO_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C88782},
-      R"(TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(TOR Occupancy for L2 RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_RFO_PREF_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10CCC782},
-      R"(TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      R"(TOR Occupancy for LLC RFO prefetches issued from an IA core which miss the L3 and target memory in a CXL type 2 accelerator.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_MISS_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C00182},
-      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
-      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that miss the LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_OCCUPANCY.IA_HIT_CXL_ACC",
-      EventDef::Encoding{.code = 0x36, .umask = 0x01, .umaskExt = 0x10C00181},
-      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
-      R"(TOR Occupancy for All requests issued from IA cores to CXL accelerator memory regions that hit the LLC.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_MISC.RFO_HIT_S",
-      EventDef::Encoding{.code = 0x39, .umask = 0x08, .umaskExt = 0x00000000},
-      R"(Counts when a RFO (the Read for Ownership issued before a  write) request hit a cacheline in the S (Shared) state.)",
-      R"(Cbo Misc : RFO HitS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_CHA_REQUESTS.READS_LOCAL is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.READS_LOCAL",
-      EventDef::Encoding{.code = 0x50, .umask = 0x01, .umaskExt = 0x00000000},
-      R"(Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
-      R"(Counts read requests coming from a unit on this socket made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  // Event UNC_CHA_REQUESTS.READS_REMOTE is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.READS_REMOTE",
-      EventDef::Encoding{.code = 0x50, .umask = 0x02, .umaskExt = 0x00000000},
-      R"(Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
-      R"(Counts read requests coming from a remote socket made into the CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  // Event UNC_CHA_REQUESTS.WRITES_LOCAL is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.WRITES_LOCAL",
-      EventDef::Encoding{.code = 0x50, .umask = 0x04, .umaskExt = 0x00000000},
-      R"(Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.)",
-      R"(Counts  write requests coming from a unit on this socket made into this CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  // Event UNC_CHA_REQUESTS.WRITES_REMOTE is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.WRITES_REMOTE",
-      EventDef::Encoding{.code = 0x50, .umask = 0x08, .umaskExt = 0x00000000},
-      R"(Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).)",
-      R"(Counts the total number of read requests made into the Home Agent. Reads include all read opcodes (including RFO).  Writes include all writes (streaming, evictions, HitM, etc).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.INVITOE_LOCAL",
-      EventDef::Encoding{.code = 0x50, .umask = 0x10, .umaskExt = 0x00000000},
-      R"(Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
-      R"(Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.INVITOE_REMOTE",
-      EventDef::Encoding{.code = 0x50, .umask = 0x20, .umaskExt = 0x00000000},
-      R"(Counts the total number of requests coming from a remote socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
-      R"(Counts the total number of requests coming from a remote socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.INVITOE",
-      EventDef::Encoding{.code = 0x50, .umask = 0x30, .umaskExt = 0x00000000},
-      R"(Counts the total number of requests coming from a unit on this socket for exclusive ownership of a cache line without receiving data (INVITOE) to the CHA.)",
-      R"(HA Read and Write Requests : InvalItoE)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.READS",
-      EventDef::Encoding{.code = 0x50, .umask = 0x03, .umaskExt = 0x00000000},
-      R"(Counts read requests made into this CHA. Reads include all read opcodes (including RFO: the Read for Ownership issued before a  write) .)",
-      R"(HA Read and Write Requests : Reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REQUESTS.WRITES",
-      EventDef::Encoding{.code = 0x50, .umask = 0x0C, .umaskExt = 0x00000000},
-      R"(Counts write requests made into the CHA, including streaming, evictions, HitM (Reads from another core to a Modified cacheline), etc.)",
-      R"(HA Read and Write Requests : Writes)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_OSB.RFO_HITS_SNP_BCAST",
-      EventDef::Encoding{.code = 0x55, .umask = 0x10, .umaskExt = 0x00000000},
-      R"(OSB Snoop Broadcast : RFO HitS Snoop Broadcast : Count of OSB snoop broadcasts. Counts by 1 per request causing OSB snoops to be broadcast. Does not count all the snoops generated by OSB.)",
-      R"(OSB Snoop Broadcast : RFO HitS Snoop Broadcast)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x01, .umaskExt = 0x00000000},
-      R"(Number of DRAM DCLK clock cycles while the event is enabled.  DCLK is 1/4 of DRAM data rate.)",
-      R"(DRAM Clockticks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_ACT_COUNT.ALL",
-      EventDef::Encoding{.code = 0x02, .umask = 0xF7, .umaskExt = 0x00000000},
-      R"(DRAM Activate Count : Counts the number of DRAM Activate commands sent on this channel.  Activate commands are issued to open up a page on the DRAM devices so that it can be read or written to with a CAS.  One can calculate the number of Page Misses by subtracting the number of Page Miss precharges from the number of Activates.)",
-      R"(DRAM Activate Count)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PRE_COUNT.PGT",
-      EventDef::Encoding{.code = 0x03, .umask = 0xF8, .umaskExt = 0x00000000},
-      R"(DRAM Precharge commands. : Precharge due to (?) : Counts the number of DRAM Precharge commands sent on this channel.)",
-      R"(DRAM Precharge commands.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH0.RD_REG",
-      EventDef::Encoding{.code = 0x05, .umask = 0xC1, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 0 regular reads)",
-      R"(CAS count for SubChannel 0 regular reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH0.RD_UNDERFILL",
-      EventDef::Encoding{.code = 0x05, .umask = 0xC4, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 0 underfill reads)",
-      R"(CAS count for SubChannel 0 underfill reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_M_CAS_COUNT_SCH0.RD is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH0.RD",
-      EventDef::Encoding{.code = 0x05, .umask = 0xCF, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 0, all reads)",
-      R"(CAS count for SubChannel 0, all reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  // Event UNC_M_CAS_COUNT_SCH0.WR is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH0.WR",
-      EventDef::Encoding{.code = 0x05, .umask = 0xF0, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 0, all writes)",
-      R"(CAS count for SubChannel 0, all writes)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH0.ALL",
-      EventDef::Encoding{.code = 0x05, .umask = 0xFF, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 0, all CAS operations)",
-      R"(CAS count for SubChannel 0, all CAS operations)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH1.RD_REG",
-      EventDef::Encoding{.code = 0x06, .umask = 0xC1, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 1 regular reads)",
-      R"(CAS count for SubChannel 1 regular reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH1.RD_UNDERFILL",
-      EventDef::Encoding{.code = 0x06, .umask = 0xC4, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 1 underfill reads)",
-      R"(CAS count for SubChannel 1 underfill reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-  // Event UNC_M_CAS_COUNT_SCH1.RD is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH1.RD",
-      EventDef::Encoding{.code = 0x06, .umask = 0xCF, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 1, all reads)",
-      R"(CAS count for SubChannel 1, all reads)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-  // Event UNC_M_CAS_COUNT_SCH1.WR is allowlisted
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH1.WR",
-      EventDef::Encoding{.code = 0x06, .umask = 0xF0, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 1, all writes)",
-      R"(CAS count for SubChannel 1, all writes)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_CAS_COUNT_SCH1.ALL",
-      EventDef::Encoding{.code = 0x06, .umask = 0xFF, .umaskExt = 0x00000000},
-      R"(CAS count for SubChannel 1, all CAS operations)",
-      R"(CAS count for SubChannel 1, all CAS operations)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RDB_OCCUPANCY_SCH0",
-      EventDef::Encoding{.code = 0x1a, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read buffer occupancy on subchannel 0)",
-      R"(Read buffer occupancy on subchannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RDB_OCCUPANCY_SCH1",
-      EventDef::Encoding{.code = 0x1b, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read buffer occupancy on subchannel 1)",
-      R"(Read buffer occupancy on subchannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_OCCUPANCY_SCH0_PCH0",
-      EventDef::Encoding{.code = 0x80, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read pending queue occupancy for subchannel 0, pseudochannel 0)",
-      R"(Read pending queue occupancy for subchannel 0, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_OCCUPANCY_SCH0_PCH1",
-      EventDef::Encoding{.code = 0x81, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read pending queue occupancy for subchannel 0, pseudochannel 1)",
-      R"(Read pending queue occupancy for subchannel 0, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_OCCUPANCY_SCH1_PCH0",
-      EventDef::Encoding{.code = 0x82, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read pending queue occupancy for subchannel 1, pseudochannel 0)",
-      R"(Read pending queue occupancy for subchannel 1, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_OCCUPANCY_SCH1_PCH1",
-      EventDef::Encoding{.code = 0x83, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Read pending queue occupancy for subchannel 1, pseudochannel 1)",
-      R"(Read pending queue occupancy for subchannel 1, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_OCCUPANCY_SCH0_PCH0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Write pending queue occupancy for subchannel 0, pseudochannel 0)",
-      R"(Write pending queue occupancy for subchannel 0, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_OCCUPANCY_SCH0_PCH1",
-      EventDef::Encoding{.code = 0x85, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Write pending queue occupancy for subchannel 0, pseudochannel 1)",
-      R"(Write pending queue occupancy for subchannel 0, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_OCCUPANCY_SCH1_PCH0",
-      EventDef::Encoding{.code = 0x86, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Write pending queue occupancy for subchannel 1, pseudochannel 0)",
-      R"(Write pending queue occupancy for subchannel 1, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_OCCUPANCY_SCH1_PCH1",
-      EventDef::Encoding{.code = 0x87, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Write pending queue occupancy for subchannel 1, pseudochannel 1)",
-      R"(Write pending queue occupancy for subchannel 1, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(IIO Clockticks)",
-      R"(IIO Clockticks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART0",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070010},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART0",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070010},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.ALL_PARTS",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070FF0},
-      R"(Counts once for every 4 bytes read from this card to memory.  This event does include reads to IO.)",
-      R"(Counts once for every 4 bytes read from this card to memory.  This event does include reads to IO.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.ALL_PARTS",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070FF0},
-      R"(Counts once for every 4 bytes written from this card to memory.  This event does include writes to IO.)",
-      R"(Counts once for every 4 bytes written from this card to memory.  This event does include writes to IO.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070010},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART0",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070010},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART0",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070010},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART0",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070010},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART0",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070010},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(IRP Clockticks)",
-      R"(IRP Clockticks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_TRANSACTIONS.WR_PREF",
-      EventDef::Encoding{.code = 0x11, .umask = 0x08, .umaskExt = 0x00000000},
-      R"(Inbound write (fast path) requests to coherent memory, received by the IRP resulting in write ownership requests issued by IRP to the mesh.)",
-      R"(Inbound write (fast path) requests to coherent memory, received by the IRP resulting in write ownership requests issued by IRP to the mesh.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_irp,
-      "UNC_I_FAF_INSERTS",
-      EventDef::Encoding{.code = 0x18, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Inbound read requests received by the IRP and inserted into the FAF queue)",
-      R"(Inbound read requests received by the IRP and inserted into the FAF queue)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Number of UPI LL clock cycles while the event is enabled)",
-      R"(Number of kfclks)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.ALL_DATA",
-      EventDef::Encoding{.code = 0x02, .umask = 0x0F, .umaskExt = 0x00000000},
-      R"(Valid Flits Sent : All Data : Counts number of data flits across this UPI link.)",
-      R"(Valid Flits Sent : All Data)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.ALL_NULL",
-      EventDef::Encoding{.code = 0x02, .umask = 0x27, .umaskExt = 0x00000000},
-      R"(All Null Flits)",
-      R"(Valid Flits Sent : Idle)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.IDLE",
-      EventDef::Encoding{.code = 0x02, .umask = 0x47, .umaskExt = 0x00000000},
-      R"(Valid Flits Sent : Idle : Shows legal flit time (hides impact of L0p and L0c).)",
-      R"(Valid Flits Sent)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_TxL_FLITS.NON_DATA",
-      EventDef::Encoding{.code = 0x02, .umask = 0x97, .umaskExt = 0x00000000},
-      R"(Valid Flits Sent : All Non Data : Shows legal flit time (hides impact of L0p and L0c).)",
-      R"(Valid Flits Sent : Null FLITs transmitted to any slot)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.ALL_DATA",
-      EventDef::Encoding{.code = 0x03, .umask = 0x0F, .umaskExt = 0x00000000},
-      R"(Valid Flits Received : All Data : Shows legal flit time (hides impact of L0p and L0c).)",
-      R"(Valid Flits Received : All Data)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_FLITS.NON_DATA",
-      EventDef::Encoding{.code = 0x03, .umask = 0x97, .umaskExt = 0x00000000},
-      R"(Valid Flits Received : All Non Data : Shows legal flit time (hides impact of L0p and L0c).)",
-      R"(Valid Flits Received : All Non Data)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.REQ",
-      EventDef::Encoding{.code = 0x05, .umask = 0x08, .umaskExt = 0x00000000},
-      R"(Matches on Receive path of a UPI Port : Request)",
-      R"(Matches on Receive path of a UPI Port : Request)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_upi,
-      "UNC_UPI_RxL_BASIC_HDR_MATCH.WB",
-      EventDef::Encoding{.code = 0x05, .umask = 0x0D, .umaskExt = 0x00000000},
-      R"(Matches on Receive path of a UPI Port : Writeback)",
-      R"(Matches on Receive path of a UPI Port : Writeback)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(PCU Clockticks)",
-      R"(PCU Clockticks:  The PCU runs off a fixed 1 GHz clock.  This event counts the number of pclk cycles measured while the counter was enabled.  The pclk, like the Memory Controller's dclk, counts at a constant rate making it a good measure of actual wall time.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_POWER_STATE_OCCUPANCY_CORES_C0",
-      EventDef::Encoding{.code = 0x35, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Number of cores in C0)",
-      R"(Number of cores in C0 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_pcu,
-      "UNC_P_POWER_STATE_OCCUPANCY_CORES_C6",
-      EventDef::Encoding{.code = 0x37, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Number of cores in C6)",
-      R"(Number of cores in C6 : This is an occupancy event that tracks the number of cores that are in the chosen C-State.  It can be used by itself to get the average number of cores in that C-state with thresholding to generate histograms, or with other PCU events and occupancy triggering to capture other details.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_PRE_COUNT.ALL",
-      EventDef::Encoding{.code = 0x03, .umask = 0xFF, .umaskExt = 0x00000000},
-      R"(DRAM Precharge commands. : Counts the number of DRAM Precharge commands sent on this channel.)",
-      R"(DRAM Precharge commands.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART1",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070020},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART2",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070040},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART3",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070080},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART4",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070100},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART5",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070200},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART6",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070400},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_WRITE.PART7",
-      EventDef::Encoding{.code = 0x83, .umask = 0x01, .umaskExt = 0x00070800},
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      R"(Four byte data request of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART1",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070020},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART2",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070040},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART3",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070080},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART4",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070100},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART5",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070200},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART6",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070400},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_OF_CPU.MEM_READ.PART7",
-      EventDef::Encoding{.code = 0x83, .umask = 0x04, .umaskExt = 0x00070800},
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      R"(Four byte data request of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_DISTRESS_ASSERTED.DPT_IRQ",
-      EventDef::Encoding{.code = 0x59, .umask = 0x01, .umaskExt = 0x00000000},
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in IRQ (immediate cause for triggering).)",
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in IRQ (immediate cause for triggering).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_DISTRESS_ASSERTED.DPT_TOR",
-      EventDef::Encoding{.code = 0x59, .umask = 0x02, .umaskExt = 0x00000000},
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR (immediate cause for triggering).)",
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR (immediate cause for triggering).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_DISTRESS_ASSERTED.DPT_ANY",
-      EventDef::Encoding{.code = 0x59, .umask = 0x03, .umaskExt = 0x00000000},
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR or IRQ (immediate cause for triggering).)",
-      R"(Distress signal assertion for dynamic prefetch throttle (DPT).  Threshold for distress signal assertion reached in TOR or IRQ (immediate cause for triggering).)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_chacms,
-      "UNC_CHACMS_CLOCKTICKS",
-      EventDef::Encoding{.code = 0x01, .umask = 0x00, .umaskExt = 0x00000000},
-      R"(Clockticks for CMS units attached to CHA)",
-      R"(UNC_CHACMS_CLOCKTICKS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070020},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART1",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070020},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070040},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART2",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070040},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070080},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART3",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070080},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART4",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070100},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART4",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070100},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART5",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070200},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART5",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070200},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART6",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070400},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART6",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070400},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_WRITE.PART7",
-      EventDef::Encoding{.code = 0x84, .umask = 0x01, .umaskExt = 0x00070800},
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      R"(Number Transactions requested of the CPU : Card writing to DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_OF_CPU.MEM_READ.PART7",
-      EventDef::Encoding{.code = 0x84, .umask = 0x04, .umaskExt = 0x00070800},
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      R"(Number Transactions requested of the CPU : Card reading from DRAM)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART1",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070020},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART2",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070040},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART3",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070080},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART4",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070100},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART5",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070200},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART6",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070400},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.MEM_WRITE.PART7",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x01, .umaskExt = 0x00070800},
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Data requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.PEER_WRITE.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x02, .umaskExt = 0x00070FF0},
-      R"(Data requested by the CPU : Another card (different IIO stack) writing to this card.)",
-      R"(Data requested by the CPU : Another card (different IIO stack) writing to this card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_DATA_REQ_BY_CPU.PEER_READ.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC0, .umask = 0x08, .umaskExt = 0x00070FF0},
-      R"(Data requested by the CPU : Another card (different IIO stack) reading from this card.)",
-      R"(Data requested by the CPU : Another card (different IIO stack) reading from this card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART1",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070020},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART1",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070020},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART2",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070040},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART2",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070040},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART3",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070080},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART3",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070080},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART4",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070100},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART4",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070100},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART5",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070200},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART5",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070200},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART6",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070400},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART6",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070400},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.PART7",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070800},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.PART7",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070800},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_WRITE.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x01, .umaskExt = 0x00070FF0},
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core writing to Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.PEER_WRITE.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x02, .umaskExt = 0x00070FF0},
-      R"(Number Transactions requested by the CPU : Another card (different IIO stack) writing to this card.)",
-      R"(Number Transactions requested by the CPU : Another card (different IIO stack) writing to this card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.MEM_READ.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x04, .umaskExt = 0x00070FF0},
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      R"(Number Transactions requested by the CPU : Core reading from Cards MMIO space)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_iio,
-      "UNC_IIO_TXN_REQ_BY_CPU.PEER_READ.ALL_PARTS",
-      EventDef::Encoding{.code = 0xC1, .umask = 0x08, .umaskExt = 0x00070FF0},
-      R"(Number Transactions requested by the CPU : Another card (different IIO stack) reading from this card.)",
-      R"(Number Transactions requested by the CPU : Another card (different IIO stack) reading from this card.)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_INSERTS.SCH0_PCH0",
-      EventDef::Encoding{.code = 0x10, .umask = 0x10, .umaskExt = 0x00000000},
-      R"(Read Pending Queue inserts for subchannel 0, pseudochannel 0)",
-      R"(Read Pending Queue inserts for subchannel 0, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_INSERTS.SCH0_PCH1",
-      EventDef::Encoding{.code = 0x10, .umask = 0x20, .umaskExt = 0x00000000},
-      R"(Read Pending Queue inserts for subchannel 0, pseudochannel 1)",
-      R"(Read Pending Queue inserts for subchannel 0, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_INSERTS.SCH1_PCH0",
-      EventDef::Encoding{.code = 0x10, .umask = 0x40, .umaskExt = 0x00000000},
-      R"(Read Pending Queue inserts for subchannel 1, pseudochannel 0)",
-      R"(Read Pending Queue inserts for subchannel 1, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_RPQ_INSERTS.SCH1_PCH1",
-      EventDef::Encoding{.code = 0x10, .umask = 0x80, .umaskExt = 0x00000000},
-      R"(Read Pending Queue inserts for subchannel 1, pseudochannel 1)",
-      R"(Read Pending Queue inserts for subchannel 1, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_INSERTS.SCH0_PCH0",
-      EventDef::Encoding{.code = 0x22, .umask = 0x10, .umaskExt = 0x00000000},
-      R"(Write Pending Queue inserts for subchannel 0, pseudochannel 0)",
-      R"(Write Pending Queue inserts for subchannel 0, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_INSERTS.SCH0_PCH1",
-      EventDef::Encoding{.code = 0x22, .umask = 0x20, .umaskExt = 0x00000000},
-      R"(Write Pending Queue inserts for subchannel 0, pseudochannel 1)",
-      R"(Write Pending Queue inserts for subchannel 0, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_INSERTS.SCH1_PCH0",
-      EventDef::Encoding{.code = 0x22, .umask = 0x40, .umaskExt = 0x00000000},
-      R"(Write Pending Queue inserts for subchannel 1, pseudochannel 0)",
-      R"(Write Pending Queue inserts for subchannel 1, pseudochannel 0)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_imc,
-      "UNC_M_WPQ_INSERTS.SCH1_PCH1",
-      EventDef::Encoding{.code = 0x22, .umask = 0x80, .umaskExt = 0x00000000},
-      R"(Write Pending Queue inserts for subchannel 1, pseudochannel 1)",
-      R"(Write Pending Queue inserts for subchannel 1, pseudochannel 1)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.LLC_OR_SF_EVICTIONS",
-      EventDef::Encoding{.code = 0x35, .umask = 0x02, .umaskExt = 0x00C001FF},
-      R"(TOR Inserts for SF or LLC Evictions)",
-      R"(TOR allocation occurred as a result of SF/LLC evictions (came from the ISMQ))",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_REMOTE_SF.MISS",
-      EventDef::Encoding{.code = 0x69, .umask = 0x04, .umaskExt = 0x00000000},
-      R"(UNC_CHA_REMOTE_SF.MISS)",
-      R"(UNC_CHA_REMOTE_SF.MISS)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C826FE},
-      R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRd_Opt, and which target local memory)",
-      R"(TOR Inserts : DRd_Opt issued by iA Cores that Missed the LLC - HOMed locally)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A6FE},
-      R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target local memory)",
-      R"(TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting local memory)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8277E},
-      R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRd_Opt, and target remote memory)",
-      R"(TOR Inserts : Data read opt from local iA that missed the LLC targeting remote memory)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_OPT_PREF_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x01, .umaskExt = 0x00C8A77E},
-      R"(Inserts into the TOR from local IA cores which miss the LLC and snoop filter with the opcode DRD_PREF_OPT, and target remote memory)",
-      R"(TOR Inserts : Data read opt prefetch from local iA that missed the LLC targeting remote memory)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD42FF},
-      R"(ItoMCacheNear (partial write) transactions from an IO device that addresses memory on the local socket)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on the local socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOMCACHENEAR_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CD437F},
-      R"(ItoMCacheNear (partial write) transactions from an IO device that addresses memory on a remote socket)",
-      R"(TOR Inserts : ItoMCacheNears, indicating a partial write request, from IO Devices that address memory on a remote socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOM_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC42FF},
-      R"(ItoM (write) transactions from an IO device that addresses memory on the local socket)",
-      R"(TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on the local socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_ITOM_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00CC437F},
-      R"(ItoM (write) transactions from an IO device that addresses memory on a remote socket)",
-      R"(TOR Inserts : ItoM, indicating a write request, from IO Devices that address memory on a remote socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_LOCAL",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F2FF},
-      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on the local socket)",
-      R"(TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on the local socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
-#endif // HBT_ADD_ALL_GENERATED_EVENTS
-
-#ifdef HBT_ADD_ALL_GENERATED_EVENTS
-  pmu_manager.addEvent(std::make_shared<EventDef>(
-      PmuType::uncore_cha,
-      "UNC_CHA_TOR_INSERTS.IO_PCIRDCUR_REMOTE",
-      EventDef::Encoding{.code = 0x35, .umask = 0x04, .umaskExt = 0x00C8F37F},
-      R"(PCIRDCUR (read) transactions from an IO device that addresses memory on a remote socket)",
-      R"(TOR Inserts : PCIRdCurs issued by IO Devices that addresses memory on a remote socket)",
-      std::nullopt,
-      std::nullopt, // ScaleUnit
-      EventDef::IntelFeatures{},
-      std::nullopt // Errata
-      ));
+  pmu_manager.addStaticEventDefs(kFullOnlyEvents);
 #endif // HBT_ADD_ALL_GENERATED_EVENTS
 }
 
