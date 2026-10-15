@@ -311,6 +311,108 @@ TEST_F(TpuGroupInfoTest, RejectsConflictingRawIdentitiesForOneDevice) {
   EXPECT_EQ(lookedUpIdentities_, expectedLookups);
 }
 
+std::string promLine(const std::string& name, int id, double value) {
+  return name + R"({accelerator_id="1234567890123456789-)" +
+      std::to_string(id) +
+      R"(",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology=""} )" +
+      std::to_string(value) + "\n";
+}
+
+std::set<int64_t> deviceIds(const std::vector<CapturedRecord>& records) {
+  std::set<int64_t> ids;
+  for (const auto& r : records) {
+    ids.insert(r.ints.at("device"));
+  }
+  return ids;
+}
+
+TEST_F(TpuGroupInfoTest, FoldsPerCoreMemoryOntoDutyCycleChips) {
+  // Second host of a 2x2x2 slice on a 2-core chip: duty cycle uses global
+  // chip ids 4-7, memory uses global core ids 8-15, and host-side metrics
+  // use local ids 0-3.
+  std::string exposition;
+  for (int chip = 4; chip < 8; ++chip) {
+    exposition += promLine("duty_cycle", chip, 10.0 * chip);
+    exposition += promLine("memory_total", 2 * chip, 100.0);
+    exposition += promLine("memory_total", 2 * chip + 1, 100.0);
+    exposition += promLine("memory_used", 2 * chip, 30.0);
+    exposition += promLine("memory_used", 2 * chip + 1, 10.0);
+  }
+  for (int local = 0; local < 4; ++local) {
+    exposition += promLine("tensorcore_utilization", local, 1.0);
+    exposition += promLine("memory_bandwidth_utilization", local, 2.0);
+  }
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {0, 1, 2, 3, 4, 5, 6, 7};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+  const auto& chip4 = recordByDevice(logger_.records(), 4);
+  EXPECT_DOUBLE_EQ(chip4.floats.at("accelerator_utilization"), 40.0);
+  // (30 + 10) / (100 + 100) across the chip's two cores.
+  EXPECT_NEAR(chip4.floats.at("memory_utilization"), 20.0, 0.01);
+}
+
+TEST_F(TpuGroupInfoTest, OmitsChipMemoryUtilizationWhenACoreIsUnpaired) {
+  // Core 9 reports capacity but no usage, so chip 4's ratio would cover
+  // only one of its two cores.
+  const std::string exposition = promLine("duty_cycle", 4, 50.0) +
+      promLine("memory_total", 8, 100.0) + promLine("memory_used", 8, 30.0) +
+      promLine("memory_total", 9, 100.0);
+
+  updateFromExposition(exposition);
+
+  const auto& chip4 = recordByDevice(logger_.records(), 4);
+  EXPECT_DOUBLE_EQ(chip4.floats.at("accelerator_utilization"), 50.0);
+  EXPECT_EQ(chip4.floats.count("memory_utilization"), 0u);
+}
+
+TEST_F(TpuGroupInfoTest, KeepsMemoryOnDutyCycleIdsWhenReportedPerChip) {
+  // Runtime reporting one device per chip: duty cycle and memory share the
+  // same global chip ids.
+  std::string exposition;
+  for (const int chip : {250, 251, 254, 255}) {
+    exposition += promLine("duty_cycle", chip, 50.0);
+    exposition += promLine("memory_total", chip, 100.0);
+    exposition += promLine("memory_used", chip, 25.0);
+  }
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {250, 251, 254, 255};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+  EXPECT_NEAR(
+      recordByDevice(logger_.records(), 254).floats.at("memory_utilization"),
+      25.0,
+      0.01);
+}
+
+TEST_F(TpuGroupInfoTest, DoesNotFoldMemoryIdsThatDoNotPairWithDutyCycleIds) {
+  std::string exposition;
+  for (const int chip : {4, 5}) {
+    exposition += promLine("duty_cycle", chip, 50.0);
+  }
+  for (const int core : {8, 9, 12, 13}) {
+    exposition += promLine("memory_total", core, 100.0);
+    exposition += promLine("memory_used", core, 25.0);
+  }
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {4, 5, 8, 9, 12, 13};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+}
+
+TEST_F(TpuGroupInfoTest, DropsRowsWithoutMetrics) {
+  const std::string exposition =
+      promLine("duty_cycle", 4, 50.0) + promLine("memory_total", 3, 100.0);
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {4};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+}
+
 TEST_F(TpuGroupInfoTest, ClearsPodIdentityWhenOwnerDisappears) {
   currentOwners_ = {metricPodIdentity()};
   updateFromExposition(kProbeOutputTpu7x);
