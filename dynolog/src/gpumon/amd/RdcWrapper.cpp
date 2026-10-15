@@ -222,21 +222,38 @@ std::vector<uint32_t> RdcWrapper::listPartitionIds_(
     RdcRuntimeContext& context) {
   std::vector<uint32_t> partitionIds;
 #if DYNOLOG_ROCM_VERSION >= 60402
-  auto devices = listDeviceIds_(context);
-  for (auto dev : devices) {
-    uint16_t numPartitions;
+  // A partition entity is addressed by (socket, index within socket), not by
+  // the flat device id rdc_device_get_all() returns: a split GPU contributes
+  // one flat id per partition, so those ids run past the last socket and
+  // rdc_group_gpu_add() rejects them. RDC offers no flat id -> socket mapping,
+  // so rebuild it by consuming the flat list one socket at a time, in the
+  // order RDC lists it.
+  const auto devices = listDeviceIds_(context);
+  uint32_t socket = 0;
+  for (size_t i = 0; i < devices.size(); socket++) {
+    uint16_t partitions = 0;
     auto result =
-        rdc_get_num_partition(context.rdcHandle_, dev, &numPartitions);
+        rdc_get_num_partition(context.rdcHandle_, devices[i], &partitions);
     if (result != RDC_ST_OK) {
-      LOG(ERROR) << "rdc_get_num_partition() failed with error: " << result;
-    } else if (numPartitions > 8) {
+      LOG(ERROR) << "rdc_get_num_partition() failed for device " << devices[i]
+                 << " with error: " << result << "; stopping discovery";
+      break;
+    }
+    if (partitions == UINT16_MAX) {
+      // how older RDC reports a non-partitionable GPU
+      partitions = 1;
+    }
+    if (partitions == 0 || partitions > 8) {
       // likely the driver is too old to properly support partitions
-      continue;
-    } else if (numPartitions > 1) {
-      for (uint32_t partition = 0; partition < numPartitions; partition++) {
+      LOG(ERROR) << "device " << devices[i] << " reports " << partitions
+                 << " partitions; stopping discovery";
+      break;
+    }
+    for (uint16_t p = 0; p < partitions && i < devices.size(); p++, i++) {
+      if (partitions > 1) {
         rdc_entity_info_t partitionEntity{
-            .device_index = dev,
-            .instance_index = partition,
+            .device_index = socket,
+            .instance_index = p,
             .entity_role = RDC_DEVICE_ROLE_PARTITION_INSTANCE,
             .device_type = RDC_DEVICE_TYPE_GPU};
         partitionIds.push_back(rdc_get_entity_index_from_info(partitionEntity));
