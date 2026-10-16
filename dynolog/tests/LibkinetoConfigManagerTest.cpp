@@ -213,39 +213,22 @@ TEST_F(LibkinetoConfigManagerTest, DefaultJobIdsMatchInterchangeably) {
   EXPECT_EQ(configManager_->processCount("undefined"), 1);
 }
 
-// Test that namespace ID is unable to be updated on subsequent calls
-TEST_F(LibkinetoConfigManagerTest, NamespaceIdUnableToUpdate) {
+TEST_F(LibkinetoConfigManagerTest, PidNamespacesRegisterSeparately) {
   const std::string jobId = "test_job_789";
   const std::vector<int32_t> pids = {11111};
   const uint64_t namespaceId1 = 4026531836;
   const uint64_t namespaceId2 = 4026532000;
 
-  // First call with namespace ID 1
   configManager_->obtainOnDemandConfig(
       jobId, pids, int(LibkinetoConfigType::EVENTS), namespaceId1);
-
-  // Verify first namespace ID
-  {
-    std::lock_guard<std::mutex> guard(registry_->getMutex());
-    auto& jobs = registry_->getAllJobs();
-    auto& process = jobs[jobId].begin()->second;
-    EXPECT_EQ(process.pidNamespaceId.value(), namespaceId1);
-  }
-
-  // Second call with namespace ID 2 (simulating namespace change)
   configManager_->obtainOnDemandConfig(
       jobId, pids, int(LibkinetoConfigType::EVENTS), namespaceId2);
 
-  // Note: In the current implementation, namespace ID is only set for NEW
-  // processes This is expected behavior since we set it during process
-  // registration
-  {
-    std::lock_guard<std::mutex> guard(registry_->getMutex());
-    auto& jobs = registry_->getAllJobs();
-    auto& process = jobs[jobId].begin()->second;
-    // Should still have the first namespace ID since process already existed
-    EXPECT_EQ(process.pidNamespaceId.value(), namespaceId1);
-  }
+  std::lock_guard<std::mutex> guard(registry_->getMutex());
+  const auto& processes = registry_->getAllJobs().at(jobId);
+  ASSERT_EQ(processes.size(), 2);
+  EXPECT_EQ(processes.begin()->second.pidNamespaceId, namespaceId1);
+  EXPECT_EQ(std::next(processes.begin())->second.pidNamespaceId, namespaceId2);
 }
 
 // Test process with multiple PIDs (ancestry chain)
