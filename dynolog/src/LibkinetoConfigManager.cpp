@@ -404,9 +404,9 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
     for (auto& [registeredJobId, processes] : jobs) {
       for (auto& pair : processes) {
         auto& process = pair.second;
-        const bool jobMatches = jobId.empty() || process.jobIdMetadata.empty()
-            ? registeredJobId == normalizedJobId
-            : containsJobId(process.jobIdMetadata, jobId);
+        const bool jobMatches =
+            (!jobId.empty() && containsJobId(process.jobIdMetadata, jobId)) ||
+            registeredJobId == normalizedJobId;
         if (!jobMatches) {
           continue;
         }
