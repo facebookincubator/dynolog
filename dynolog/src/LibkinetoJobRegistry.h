@@ -24,6 +24,7 @@ struct LibkinetoProcess {
   std::vector<int32_t> pids; // Ordered PID ancestry (leaf at index 0)
   std::optional<uint64_t> pidNamespaceId; // PID namespace ID
   std::string jobIdMetadata;
+  std::optional<int32_t> rank; // Global worker rank from the latest poll
   std::string eventProfilerConfig;
   std::string activityProfilerConfig;
   std::chrono::time_point<std::chrono::system_clock> lastRequestTime;
