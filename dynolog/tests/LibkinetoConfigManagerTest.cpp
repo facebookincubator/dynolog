@@ -136,6 +136,29 @@ TEST_F(LibkinetoConfigManagerTest, EmptyPollClearsJobIdMetadata) {
                   ->second.jobIdMetadata.empty());
 }
 
+TEST_F(LibkinetoConfigManagerTest, RegisteredProcessKeepsLatestValidRank) {
+  const std::vector<int32_t> pids = {12345};
+  const auto pollRank = [&](std::optional<int32_t> rank) {
+    configManager_->obtainOnDemandConfig(
+        "test_job",
+        pids,
+        int(LibkinetoConfigType::EVENTS),
+        std::nullopt,
+        "",
+        rank);
+    std::lock_guard<std::mutex> guard(registry_->getMutex());
+    const auto& processes = registry_->getAllJobs().at("test_job");
+    EXPECT_EQ(processes.size(), 1);
+    return processes.begin()->second.rank;
+  };
+
+  EXPECT_EQ(pollRank(std::nullopt), std::nullopt);
+  EXPECT_EQ(pollRank(3), 3);
+  EXPECT_EQ(pollRank(std::nullopt), std::nullopt);
+  EXPECT_EQ(pollRank(0), 0);
+  EXPECT_EQ(pollRank(-1), std::nullopt);
+}
+
 TEST_F(LibkinetoConfigManagerTest, JobIdMetadataValuesAreTargetable) {
   const std::vector<int32_t> mastOnePids = {12345};
   const std::vector<int32_t> mastTwoPids = {67890};

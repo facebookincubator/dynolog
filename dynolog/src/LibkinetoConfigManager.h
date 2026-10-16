@@ -43,7 +43,8 @@ class LibkinetoConfigManager {
       const std::vector<int32_t>& pids,
       int32_t configType,
       std::optional<uint64_t> pidNamespaceId = std::nullopt,
-      const std::string& jobIdMetadata = "");
+      const std::string& jobIdMetadata = "",
+      std::optional<int32_t> rank = std::nullopt);
 
   GpuProfilerResult setOnDemandConfig(
       const std::string& jobId,

@@ -239,7 +239,8 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
     const std::vector<int32_t>& pids,
     int32_t configType,
     std::optional<uint64_t> pidNamespaceId,
-    const std::string& jobIdMetadata) {
+    const std::string& jobIdMetadata,
+    std::optional<int32_t> rank) {
   const auto& normalizedJobId = normalizeJobId(jobId);
   VLOG(2) << fmt::format(
       "obtainOnDemandConfig({}, ({}), {})",
@@ -255,6 +256,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
   auto [process, newProcess] =
       registry->registerOrUpdateProcess(normalizedJobId, pids_set, pids);
   process.jobIdMetadata = jobIdMetadata;
+  process.rank = rank.has_value() && *rank >= 0 ? rank : std::nullopt;
 
   if (newProcess) {
     // First time - intialize!
