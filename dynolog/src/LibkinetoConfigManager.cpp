@@ -253,8 +253,8 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
   auto registry = LibkinetoJobRegistry::getInstance();
   std::lock_guard<std::mutex> guard(registry->getMutex());
 
-  auto [process, newProcess] =
-      registry->registerOrUpdateProcess(normalizedJobId, pids_set, pids);
+  auto [process, newProcess] = registry->registerOrUpdateProcess(
+      normalizedJobId, pids_set, pids, pidNamespaceId);
   process.jobIdMetadata = jobIdMetadata;
   process.rank = rank.has_value() && *rank >= 0 ? rank : std::nullopt;
 
@@ -268,9 +268,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
         normalizedJobId,
         process.pid);
 
-    // Store namespace ID if provided
     if (pidNamespaceId) {
-      process.pidNamespaceId = *pidNamespaceId;
       LOG(INFO) << fmt::format(
           "Stored namespace ID {} for process {} in job '{}'",
           *pidNamespaceId,

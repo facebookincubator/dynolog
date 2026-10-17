@@ -44,10 +44,11 @@ class LibkinetoJobRegistry {
   std::pair<LibkinetoProcess&, bool> registerOrUpdateProcess(
       const std::string& jobId,
       const std::set<int32_t>& pids_set,
-      const std::vector<int32_t>& pids);
+      const std::vector<int32_t>& pids,
+      std::optional<uint64_t> pidNamespaceId);
 
   // Get all jobs (for iteration)
-  std::map<std::string, std::map<std::set<int32_t>, LibkinetoProcess>>&
+  std::map<std::string, std::multimap<std::set<int32_t>, LibkinetoProcess>>&
   getAllJobs();
 
   // Get count of process groups for a job
@@ -62,8 +63,9 @@ class LibkinetoJobRegistry {
   LibkinetoJobRegistry() = default;
 
   mutable std::mutex mutex_;
-  // Map: jobId -> (pids -> LibkinetoProcess)
-  std::map<std::string, std::map<std::set<int32_t>, LibkinetoProcess>> jobs_;
+  // Map: jobId -> (pids -> LibkinetoProcess, one per PID namespace)
+  std::map<std::string, std::multimap<std::set<int32_t>, LibkinetoProcess>>
+      jobs_;
 };
 
 } // namespace dynolog

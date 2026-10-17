@@ -20,18 +20,26 @@ std::pair<LibkinetoProcess&, bool>
 LibkinetoJobRegistry::registerOrUpdateProcess(
     const std::string& jobId,
     const std::set<int32_t>& pids_set,
-    const std::vector<int32_t>& pids) {
+    const std::vector<int32_t>& pids,
+    std::optional<uint64_t> pidNamespaceId) {
   // Caller must hold mutex_, ie acquire it separately via getMutex()
-  auto result = jobs_[jobId].emplace(pids_set, LibkinetoProcess{});
-  if (result.second) {
-    // New process - store the ordered PID ancestry
-    result.first->second.pids = pids;
-    result.first->second.pid = pids[0]; // Leaf PID
+  auto& processes = jobs_[jobId];
+  auto [it, end] = processes.equal_range(pids_set);
+  while (it != end && it->second.pidNamespaceId != pidNamespaceId) {
+    ++it;
   }
-  return {result.first->second, result.second};
+  const bool newProcess = it == end;
+  if (newProcess) {
+    // New process - store the ordered PID ancestry
+    it = processes.emplace(pids_set, LibkinetoProcess{});
+    it->second.pids = pids;
+    it->second.pid = pids[0]; // Leaf PID
+    it->second.pidNamespaceId = pidNamespaceId;
+  }
+  return {it->second, newProcess};
 }
 
-std::map<std::string, std::map<std::set<int32_t>, LibkinetoProcess>>&
+std::map<std::string, std::multimap<std::set<int32_t>, LibkinetoProcess>>&
 LibkinetoJobRegistry::getAllJobs() {
   // Caller must hold mutex_, ie acquire it separately via getMutex()
   return jobs_;
