@@ -10,13 +10,14 @@
 #include <fmt/format.h>
 #include <fmt/ranges.h>
 #include <glog/logging.h>
+#include <algorithm>
 #include <exception>
 #include <fstream>
 #include <iterator>
+#include <random>
 #include <thread>
 #include <utility>
 #include "dynolog/src/LibkinetoJobRegistry.h"
-#include "hbt/src/common/System.h"
 #ifdef __linux__
 #include <sys/prctl.h>
 #endif
@@ -73,13 +74,9 @@ static std::string addTraceIdToConfigString(
       trace_id);
 }
 
-static std::string generateTraceId(int32_t pid) {
-  // Hostname + PID + timestamp should be a unique trace id in the context
-  // of this code's execution
-  std::string str_trace_id = fmt::format(
-      "{}:{}:{}", facebook::hbt::getHostName(), pid, std::time(nullptr));
-  std::size_t hashed_trace_id = std::hash<std::string>{}(str_trace_id);
-  return std::to_string(hashed_trace_id);
+static std::string generateTraceId() {
+  std::random_device rd;
+  return std::to_string((uint64_t{rd()} << 32) | rd());
 }
 
 LibkinetoConfigManager::LibkinetoConfigManager() {
@@ -182,7 +179,9 @@ void LibkinetoConfigManager::runGc() {
             job_it->first,
             time_since_last_request.count(),
             kKeepAliveTimeSecs.count());
-        onProcessCleanup(proc_it->first);
+        if (procs.count(proc_it->first) == 1) {
+          onProcessCleanup(proc_it->first);
+        }
         proc_it = procs.erase(proc_it);
         processes_removed++;
       } else {
@@ -253,8 +252,8 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
   auto registry = LibkinetoJobRegistry::getInstance();
   std::lock_guard<std::mutex> guard(registry->getMutex());
 
-  auto [process, newProcess] =
-      registry->registerOrUpdateProcess(normalizedJobId, pids_set, pids);
+  auto [process, newProcess] = registry->registerOrUpdateProcess(
+      normalizedJobId, pids_set, pids, pidNamespaceId);
   process.jobIdMetadata = jobIdMetadata;
   process.rank = rank.has_value() && *rank >= 0 ? rank : std::nullopt;
 
@@ -268,9 +267,7 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
         normalizedJobId,
         process.pid);
 
-    // Store namespace ID if provided
     if (pidNamespaceId) {
-      process.pidNamespaceId = *pidNamespaceId;
       LOG(INFO) << fmt::format(
           "Stored namespace ID {} for process {} in job '{}'",
           *pidNamespaceId,
@@ -278,7 +275,10 @@ std::string LibkinetoConfigManager::obtainOnDemandConfig(
           normalizedJobId);
     }
 
-    onRegisterProcess(pids_set);
+    // Hooks are per PID set, which repeats across PID namespaces
+    if (registry->getAllJobs()[normalizedJobId].count(pids_set) == 1) {
+      onRegisterProcess(pids_set);
+    }
   }
 
   bool hasEventConfig = !process.eventProfilerConfig.empty();
@@ -335,10 +335,24 @@ void LibkinetoConfigManager::setOnDemandConfigForProcess(
     if (process.activityProfilerConfig.empty()) {
       preCheckOnDemandConfig(process);
 
-      std::string trace_id = generateTraceId(process.pid);
+      std::string trace_id = generateTraceId();
       std::string updatedConfig = addTraceIdToConfigString(trace_id, config);
+      std::string traceFile;
+      // Rename only a PID this request already traced, so callers that expect
+      // Kineto's default name still find every other trace
+      if (std::ranges::find(res.activityProfilersTriggered, process.pid) !=
+          res.activityProfilersTriggered.end()) {
+        traceFile = fmt::format(
+            "libkineto_activities_{}00{}.json",
+            process.pidNamespaceId.value_or(0),
+            process.pid);
+        // Kineto names the upload when it parses ACTIVITIES_MANIFOLD_PATH
+        updatedConfig = fmt::format(
+            "ACTIVITIES_LOG_FILE=/tmp/{}\n{}", traceFile, updatedConfig);
+      }
 
       res.activityProfilersTriggered.push_back(process.pid);
+      res.activityTraceFiles.push_back(traceFile);
       process.activityProfilerConfig = updatedConfig;
       res.traceIds.push_back(trace_id);
 
@@ -381,6 +395,7 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
   // As older versions of the CLI are phased out, 2) will no longer need to be
   // accounted for.
   bool traceAllPids = nPids == 0 || (nPids == 1 && *pids.begin() == 0);
+  const bool targetPidsOnly = traceTargetPidsOnly();
   {
     auto registry = LibkinetoJobRegistry::getInstance();
     std::lock_guard<std::mutex> guard(registry->getMutex());
@@ -412,7 +427,8 @@ GpuProfilerResult LibkinetoConfigManager::setOnDemandConfig(
         }
         for (const auto& pid : pair.first) {
           // Trace the process if we find a match or target pids is empty.
-          if (traceAllPids || pids.find(pid) != pids.end()) {
+          if (traceAllPids ||
+              pids.contains(targetPidsOnly ? process.pid : pid)) {
             setOnDemandConfigForProcess(
                 res, process, config, configType, limit);
             // the user could provide multiple pids that belong to the same the

@@ -67,6 +67,10 @@ class LibkinetoConfigManager {
 
   virtual void onProcessCleanup(const std::set<int32_t>& /*pids*/) {}
 
+  virtual bool traceTargetPidsOnly() const {
+    return false;
+  }
+
   // Map of gpu id -> pids
   using InstancesPerGpuMap = std::map<int32_t, std::set<int32_t>>;
   // Job id -> InstancesPerGpu
