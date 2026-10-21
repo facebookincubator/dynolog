@@ -732,5 +732,39 @@ TEST(K8sPodCacheTest, DestructorCancelsAndJoinsIdleWatch) {
   EXPECT_TRUE(watchExited.load());
 }
 
+TEST(K8sPodCacheTest, NodeLabelsAreReusedWithinTtl) {
+  TempToken token;
+  std::vector<std::string> requestedUrls;
+  json node;
+  node["metadata"]["name"] = "node-a";
+  node["metadata"]["labels"]["cloud.google.com/gke-tpu-topology"] = "2x2x2";
+
+  K8sPodCache::Options opts;
+  opts.apiBase = "https://kubernetes.test";
+  opts.tokenPath = token.path();
+  opts.caPath.clear();
+  opts.nodeName = "node-a";
+  opts.httpRequest = [&](const std::string& url,
+                         const std::string&,
+                         bool,
+                         const K8sPodCache::ChunkCallback& onChunk,
+                         const K8sPodCache::StopCallback&) {
+    requestedUrls.push_back(url);
+    return emit(onChunk, node.dump());
+  };
+  K8sPodCache cache(std::move(opts));
+
+  const auto first = cache.lookupNodeLabels();
+  const auto second = cache.lookupNodeLabels();
+
+  const std::unordered_map<std::string, std::string> expectedLabels = {
+      {"cloud.google.com/gke-tpu-topology", "2x2x2"}};
+  EXPECT_EQ(first, expectedLabels);
+  EXPECT_EQ(second, expectedLabels);
+  const std::vector<std::string> expectedUrls = {
+      "https://kubernetes.test/api/v1/nodes/node-a"};
+  EXPECT_EQ(requestedUrls, expectedUrls);
+}
+
 } // namespace
 } // namespace dynolog::k8s

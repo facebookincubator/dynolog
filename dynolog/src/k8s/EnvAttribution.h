@@ -23,6 +23,7 @@
 // legacy consumer.
 
 DECLARE_string(env_attribution_mappings_file);
+DECLARE_string(node_label_attribution_mappings_file);
 
 namespace dynolog {
 
@@ -44,5 +45,17 @@ std::unordered_map<std::string, std::string> loadEnvAttributionMap(
 // empty. Both gpumon and tpumon use this so the mapping loads exactly
 // once per process regardless of which module first invokes it.
 const std::unordered_map<std::string, std::string>& getEnvAttributionMappings();
+
+// Loads a 2-column CSV of <node_label_key>,<output_column_name> rows, in
+// the same format as the env-attribution CSV. Returns an empty map (and
+// logs a warning) if the file can't be opened.
+std::unordered_map<std::string, std::string> loadNodeLabelAttributionMap(
+    const std::string& path);
+
+// Returns the process-wide node-label attribution map, read from
+// FLAGS_node_label_attribution_mappings_file on first call. Empty when the
+// flag is empty.
+const std::unordered_map<std::string, std::string>&
+getNodeLabelAttributionMappings();
 
 } // namespace dynolog

@@ -22,6 +22,7 @@ bool isK8sPodWatchEnabled();
 // the same FLAGS_* symbols without producing duplicate-symbol link errors.
 DECLARE_bool(enable_pod_resources_attribution);
 DECLARE_bool(enable_k8s_pod_watch);
+DECLARE_bool(enable_node_label_attribution);
 DECLARE_string(pod_resources_socket);
 DECLARE_string(pod_resources_gpu_resource);
 DECLARE_string(pod_resources_tpu_resource);

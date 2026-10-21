@@ -28,6 +28,14 @@ DEFINE_bool(
     "Requires K8S_NODE_NAME and pods list/watch RBAC. Cache misses retain the "
     "existing per-Pod GET fallback.");
 
+DEFINE_bool(
+    enable_node_label_attribution,
+    false,
+    "Read the local node's labels from the Kubernetes API (requires "
+    "K8S_NODE_NAME and nodes get RBAC) and attach them to accelerator "
+    "records: labels listed in --node_label_attribution_mappings_file, plus "
+    "TPU partition id/state for the slice shape on TPU nodes.");
+
 namespace dynolog::k8s {
 
 bool isK8sPodWatchEnabled() {
