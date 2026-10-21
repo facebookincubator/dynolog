@@ -9,6 +9,7 @@
 
 #include <gtest/gtest.h>
 
+#include <chrono>
 #include <set>
 #include <stdexcept>
 #include <string>
@@ -26,6 +27,7 @@ struct CapturedRecord {
   std::unordered_map<std::string, double> floats;
   std::unordered_map<std::string, int64_t> ints;
   std::unordered_map<std::string, std::string> strings;
+  Logger::Timestamp timestamp;
 };
 
 class RecordingLogger : public Logger {
@@ -42,8 +44,11 @@ class RecordingLogger : public Logger {
   void logStr(const std::string& key, const std::string& value) override {
     current_.strings[key] = value;
   }
-  void setTimestamp(Logger::Timestamp) override {}
+  void setTimestamp(Logger::Timestamp ts) override {
+    timestamp_ = ts;
+  }
   void finalize() override {
+    current_.timestamp = timestamp_;
     records_.push_back(std::move(current_));
     current_ = {};
   }
@@ -57,6 +62,7 @@ class RecordingLogger : public Logger {
 
  private:
   CapturedRecord current_;
+  Logger::Timestamp timestamp_;
   std::vector<CapturedRecord> records_;
 };
 
@@ -518,6 +524,40 @@ TEST_F(TpuGroupInfoTest, ClearsPodIdentityWhenOwnerDisappears) {
   expectNoPodIdentity(recordByDevice(logger_.records(), 4));
   expectNoPodIdentity(recordByDevice(logger_.records(), 5));
   EXPECT_TRUE(lookedUpIdentities_.empty());
+}
+
+TEST(TpuNextAlignedTickTest, RoundsUpToTheNextIntervalBoundary) {
+  using std::chrono::seconds;
+  using std::chrono::system_clock;
+  const system_clock::time_point midInterval{
+      seconds(1003) + std::chrono::milliseconds(300)};
+  const system_clock::time_point onBoundary{seconds(1010)};
+
+  EXPECT_EQ(
+      nextAlignedTick(midInterval, seconds(10)),
+      system_clock::time_point{seconds(1010)});
+  EXPECT_EQ(
+      nextAlignedTick(onBoundary, seconds(10)),
+      system_clock::time_point{seconds(1020)});
+}
+
+TEST(TpuNextAlignedTickTest, ReturnsNowForNonPositiveInterval) {
+  const std::chrono::system_clock::time_point now{std::chrono::seconds(1003)};
+
+  EXPECT_EQ(nextAlignedTick(now, std::chrono::seconds(0)), now);
+}
+
+TEST_F(TpuGroupInfoTest, LogStampsEveryRecordWithTheSampleTime) {
+  const Logger::Timestamp sampleTime{std::chrono::seconds(1792000000)};
+
+  info_->updateFromSamples(
+      parsePrometheusText(kProbeOutputTpu7x), /*scrape_failed=*/false);
+  info_->log(logger_, sampleTime);
+
+  ASSERT_FALSE(logger_.records().empty());
+  for (const auto& record : logger_.records()) {
+    EXPECT_EQ(record.timestamp, sampleTime);
+  }
 }
 
 } // namespace
