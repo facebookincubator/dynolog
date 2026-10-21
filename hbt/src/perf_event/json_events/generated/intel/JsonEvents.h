@@ -196,12 +196,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(42, 0x7): // fall-through
     case toCpuKey(42, 0x8): // fall-through
     case toCpuKey(42, 0x9): // fall-through
-    case toCpuKey(42, 0x10): // fall-through
-    case toCpuKey(42, 0x11): // fall-through
-    case toCpuKey(42, 0x12): // fall-through
-    case toCpuKey(42, 0x13): // fall-through
-    case toCpuKey(42, 0x14): // fall-through
-    case toCpuKey(42, 0x15): // fall-through
+    case toCpuKey(42, 0xa): // fall-through
+    case toCpuKey(42, 0xb): // fall-through
+    case toCpuKey(42, 0xc): // fall-through
+    case toCpuKey(42, 0xd): // fall-through
+    case toCpuKey(42, 0xe): // fall-through
+    case toCpuKey(42, 0xf): // fall-through
       // from sandybridge_core.json
       sandybridge_core::addEvents(pmu_manager);
       // from sandybridge_uncore.json
@@ -218,12 +218,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(46, 0x7): // fall-through
     case toCpuKey(46, 0x8): // fall-through
     case toCpuKey(46, 0x9): // fall-through
-    case toCpuKey(46, 0x10): // fall-through
-    case toCpuKey(46, 0x11): // fall-through
-    case toCpuKey(46, 0x12): // fall-through
-    case toCpuKey(46, 0x13): // fall-through
-    case toCpuKey(46, 0x14): // fall-through
-    case toCpuKey(46, 0x15): // fall-through
+    case toCpuKey(46, 0xa): // fall-through
+    case toCpuKey(46, 0xb): // fall-through
+    case toCpuKey(46, 0xc): // fall-through
+    case toCpuKey(46, 0xd): // fall-through
+    case toCpuKey(46, 0xe): // fall-through
+    case toCpuKey(46, 0xf): // fall-through
       // from NehalemEX_core.json
       nehalemex_core::addEvents(pmu_manager);
       break;
@@ -238,12 +238,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(58, 0x7): // fall-through
     case toCpuKey(58, 0x8): // fall-through
     case toCpuKey(58, 0x9): // fall-through
-    case toCpuKey(58, 0x10): // fall-through
-    case toCpuKey(58, 0x11): // fall-through
-    case toCpuKey(58, 0x12): // fall-through
-    case toCpuKey(58, 0x13): // fall-through
-    case toCpuKey(58, 0x14): // fall-through
-    case toCpuKey(58, 0x15): // fall-through
+    case toCpuKey(58, 0xa): // fall-through
+    case toCpuKey(58, 0xb): // fall-through
+    case toCpuKey(58, 0xc): // fall-through
+    case toCpuKey(58, 0xd): // fall-through
+    case toCpuKey(58, 0xe): // fall-through
+    case toCpuKey(58, 0xf): // fall-through
       // from ivybridge_core.json
       ivybridge_core::addEvents(pmu_manager);
       // from ivybridge_uncore.json
@@ -260,12 +260,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(61, 0x7): // fall-through
     case toCpuKey(61, 0x8): // fall-through
     case toCpuKey(61, 0x9): // fall-through
-    case toCpuKey(61, 0x10): // fall-through
-    case toCpuKey(61, 0x11): // fall-through
-    case toCpuKey(61, 0x12): // fall-through
-    case toCpuKey(61, 0x13): // fall-through
-    case toCpuKey(61, 0x14): // fall-through
-    case toCpuKey(61, 0x15): // fall-through
+    case toCpuKey(61, 0xa): // fall-through
+    case toCpuKey(61, 0xb): // fall-through
+    case toCpuKey(61, 0xc): // fall-through
+    case toCpuKey(61, 0xd): // fall-through
+    case toCpuKey(61, 0xe): // fall-through
+    case toCpuKey(61, 0xf): // fall-through
       // from broadwell_core.json
       broadwell_core::addEvents(pmu_manager);
       // from broadwell_uncore.json
@@ -282,12 +282,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(63, 0x7): // fall-through
     case toCpuKey(63, 0x8): // fall-through
     case toCpuKey(63, 0x9): // fall-through
-    case toCpuKey(63, 0x10): // fall-through
-    case toCpuKey(63, 0x11): // fall-through
-    case toCpuKey(63, 0x12): // fall-through
-    case toCpuKey(63, 0x13): // fall-through
-    case toCpuKey(63, 0x14): // fall-through
-    case toCpuKey(63, 0x15): // fall-through
+    case toCpuKey(63, 0xa): // fall-through
+    case toCpuKey(63, 0xb): // fall-through
+    case toCpuKey(63, 0xc): // fall-through
+    case toCpuKey(63, 0xd): // fall-through
+    case toCpuKey(63, 0xe): // fall-through
+    case toCpuKey(63, 0xf): // fall-through
       // from haswellx_core.json
       haswellx_core::addEvents(pmu_manager);
       // from haswellx_uncore.json
@@ -304,12 +304,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(71, 0x7): // fall-through
     case toCpuKey(71, 0x8): // fall-through
     case toCpuKey(71, 0x9): // fall-through
-    case toCpuKey(71, 0x10): // fall-through
-    case toCpuKey(71, 0x11): // fall-through
-    case toCpuKey(71, 0x12): // fall-through
-    case toCpuKey(71, 0x13): // fall-through
-    case toCpuKey(71, 0x14): // fall-through
-    case toCpuKey(71, 0x15): // fall-through
+    case toCpuKey(71, 0xa): // fall-through
+    case toCpuKey(71, 0xb): // fall-through
+    case toCpuKey(71, 0xc): // fall-through
+    case toCpuKey(71, 0xd): // fall-through
+    case toCpuKey(71, 0xe): // fall-through
+    case toCpuKey(71, 0xf): // fall-through
       // from broadwell_core.json
       broadwell_core::addEvents(pmu_manager);
       // from broadwell_uncore.json
@@ -326,12 +326,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(78, 0x7): // fall-through
     case toCpuKey(78, 0x8): // fall-through
     case toCpuKey(78, 0x9): // fall-through
-    case toCpuKey(78, 0x10): // fall-through
-    case toCpuKey(78, 0x11): // fall-through
-    case toCpuKey(78, 0x12): // fall-through
-    case toCpuKey(78, 0x13): // fall-through
-    case toCpuKey(78, 0x14): // fall-through
-    case toCpuKey(78, 0x15): // fall-through
+    case toCpuKey(78, 0xa): // fall-through
+    case toCpuKey(78, 0xb): // fall-through
+    case toCpuKey(78, 0xc): // fall-through
+    case toCpuKey(78, 0xd): // fall-through
+    case toCpuKey(78, 0xe): // fall-through
+    case toCpuKey(78, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -348,12 +348,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(79, 0x7): // fall-through
     case toCpuKey(79, 0x8): // fall-through
     case toCpuKey(79, 0x9): // fall-through
-    case toCpuKey(79, 0x10): // fall-through
-    case toCpuKey(79, 0x11): // fall-through
-    case toCpuKey(79, 0x12): // fall-through
-    case toCpuKey(79, 0x13): // fall-through
-    case toCpuKey(79, 0x14): // fall-through
-    case toCpuKey(79, 0x15): // fall-through
+    case toCpuKey(79, 0xa): // fall-through
+    case toCpuKey(79, 0xb): // fall-through
+    case toCpuKey(79, 0xc): // fall-through
+    case toCpuKey(79, 0xd): // fall-through
+    case toCpuKey(79, 0xe): // fall-through
+    case toCpuKey(79, 0xf): // fall-through
       // from broadwellx_core.json
       broadwellx_core::addEvents(pmu_manager);
       // from broadwellx_uncore.json
@@ -402,12 +402,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(86, 0x7): // fall-through
     case toCpuKey(86, 0x8): // fall-through
     case toCpuKey(86, 0x9): // fall-through
-    case toCpuKey(86, 0x10): // fall-through
-    case toCpuKey(86, 0x11): // fall-through
-    case toCpuKey(86, 0x12): // fall-through
-    case toCpuKey(86, 0x13): // fall-through
-    case toCpuKey(86, 0x14): // fall-through
-    case toCpuKey(86, 0x15): // fall-through
+    case toCpuKey(86, 0xa): // fall-through
+    case toCpuKey(86, 0xb): // fall-through
+    case toCpuKey(86, 0xc): // fall-through
+    case toCpuKey(86, 0xd): // fall-through
+    case toCpuKey(86, 0xe): // fall-through
+    case toCpuKey(86, 0xf): // fall-through
       // from broadwellde_core.json
       broadwellde_core::addEvents(pmu_manager);
       // from broadwellde_uncore.json
@@ -424,12 +424,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(87, 0x7): // fall-through
     case toCpuKey(87, 0x8): // fall-through
     case toCpuKey(87, 0x9): // fall-through
-    case toCpuKey(87, 0x10): // fall-through
-    case toCpuKey(87, 0x11): // fall-through
-    case toCpuKey(87, 0x12): // fall-through
-    case toCpuKey(87, 0x13): // fall-through
-    case toCpuKey(87, 0x14): // fall-through
-    case toCpuKey(87, 0x15): // fall-through
+    case toCpuKey(87, 0xa): // fall-through
+    case toCpuKey(87, 0xb): // fall-through
+    case toCpuKey(87, 0xc): // fall-through
+    case toCpuKey(87, 0xd): // fall-through
+    case toCpuKey(87, 0xe): // fall-through
+    case toCpuKey(87, 0xf): // fall-through
       // from knightslanding_core.json
       knightslanding_core::addEvents(pmu_manager);
       // from knightslanding_uncore.json
@@ -446,12 +446,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(92, 0x7): // fall-through
     case toCpuKey(92, 0x8): // fall-through
     case toCpuKey(92, 0x9): // fall-through
-    case toCpuKey(92, 0x10): // fall-through
-    case toCpuKey(92, 0x11): // fall-through
-    case toCpuKey(92, 0x12): // fall-through
-    case toCpuKey(92, 0x13): // fall-through
-    case toCpuKey(92, 0x14): // fall-through
-    case toCpuKey(92, 0x15): // fall-through
+    case toCpuKey(92, 0xa): // fall-through
+    case toCpuKey(92, 0xb): // fall-through
+    case toCpuKey(92, 0xc): // fall-through
+    case toCpuKey(92, 0xd): // fall-through
+    case toCpuKey(92, 0xe): // fall-through
+    case toCpuKey(92, 0xf): // fall-through
       // from goldmont_core.json
       goldmont_core::addEvents(pmu_manager);
       break;
@@ -466,12 +466,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(94, 0x7): // fall-through
     case toCpuKey(94, 0x8): // fall-through
     case toCpuKey(94, 0x9): // fall-through
-    case toCpuKey(94, 0x10): // fall-through
-    case toCpuKey(94, 0x11): // fall-through
-    case toCpuKey(94, 0x12): // fall-through
-    case toCpuKey(94, 0x13): // fall-through
-    case toCpuKey(94, 0x14): // fall-through
-    case toCpuKey(94, 0x15): // fall-through
+    case toCpuKey(94, 0xa): // fall-through
+    case toCpuKey(94, 0xb): // fall-through
+    case toCpuKey(94, 0xc): // fall-through
+    case toCpuKey(94, 0xd): // fall-through
+    case toCpuKey(94, 0xe): // fall-through
+    case toCpuKey(94, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -488,12 +488,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(95, 0x7): // fall-through
     case toCpuKey(95, 0x8): // fall-through
     case toCpuKey(95, 0x9): // fall-through
-    case toCpuKey(95, 0x10): // fall-through
-    case toCpuKey(95, 0x11): // fall-through
-    case toCpuKey(95, 0x12): // fall-through
-    case toCpuKey(95, 0x13): // fall-through
-    case toCpuKey(95, 0x14): // fall-through
-    case toCpuKey(95, 0x15): // fall-through
+    case toCpuKey(95, 0xa): // fall-through
+    case toCpuKey(95, 0xb): // fall-through
+    case toCpuKey(95, 0xc): // fall-through
+    case toCpuKey(95, 0xd): // fall-through
+    case toCpuKey(95, 0xe): // fall-through
+    case toCpuKey(95, 0xf): // fall-through
       // from goldmont_core.json
       goldmont_core::addEvents(pmu_manager);
       break;
@@ -508,12 +508,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(106, 0x7): // fall-through
     case toCpuKey(106, 0x8): // fall-through
     case toCpuKey(106, 0x9): // fall-through
-    case toCpuKey(106, 0x10): // fall-through
-    case toCpuKey(106, 0x11): // fall-through
-    case toCpuKey(106, 0x12): // fall-through
-    case toCpuKey(106, 0x13): // fall-through
-    case toCpuKey(106, 0x14): // fall-through
-    case toCpuKey(106, 0x15): // fall-through
+    case toCpuKey(106, 0xa): // fall-through
+    case toCpuKey(106, 0xb): // fall-through
+    case toCpuKey(106, 0xc): // fall-through
+    case toCpuKey(106, 0xd): // fall-through
+    case toCpuKey(106, 0xe): // fall-through
+    case toCpuKey(106, 0xf): // fall-through
       // from icelakex_core.json
       icelakex_core::addEvents(pmu_manager);
       // from icelakex_uncore.json
@@ -532,12 +532,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(108, 0x7): // fall-through
     case toCpuKey(108, 0x8): // fall-through
     case toCpuKey(108, 0x9): // fall-through
-    case toCpuKey(108, 0x10): // fall-through
-    case toCpuKey(108, 0x11): // fall-through
-    case toCpuKey(108, 0x12): // fall-through
-    case toCpuKey(108, 0x13): // fall-through
-    case toCpuKey(108, 0x14): // fall-through
-    case toCpuKey(108, 0x15): // fall-through
+    case toCpuKey(108, 0xa): // fall-through
+    case toCpuKey(108, 0xb): // fall-through
+    case toCpuKey(108, 0xc): // fall-through
+    case toCpuKey(108, 0xd): // fall-through
+    case toCpuKey(108, 0xe): // fall-through
+    case toCpuKey(108, 0xf): // fall-through
       // from icelakex_core.json
       icelakex_core::addEvents(pmu_manager);
       // from icelakex_uncore.json
@@ -556,12 +556,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(125, 0x7): // fall-through
     case toCpuKey(125, 0x8): // fall-through
     case toCpuKey(125, 0x9): // fall-through
-    case toCpuKey(125, 0x10): // fall-through
-    case toCpuKey(125, 0x11): // fall-through
-    case toCpuKey(125, 0x12): // fall-through
-    case toCpuKey(125, 0x13): // fall-through
-    case toCpuKey(125, 0x14): // fall-through
-    case toCpuKey(125, 0x15): // fall-through
+    case toCpuKey(125, 0xa): // fall-through
+    case toCpuKey(125, 0xb): // fall-through
+    case toCpuKey(125, 0xc): // fall-through
+    case toCpuKey(125, 0xd): // fall-through
+    case toCpuKey(125, 0xe): // fall-through
+    case toCpuKey(125, 0xf): // fall-through
       // from icelake_core.json
       icelake_core::addEvents(pmu_manager);
       // from icelake_uncore.json
@@ -578,12 +578,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(126, 0x7): // fall-through
     case toCpuKey(126, 0x8): // fall-through
     case toCpuKey(126, 0x9): // fall-through
-    case toCpuKey(126, 0x10): // fall-through
-    case toCpuKey(126, 0x11): // fall-through
-    case toCpuKey(126, 0x12): // fall-through
-    case toCpuKey(126, 0x13): // fall-through
-    case toCpuKey(126, 0x14): // fall-through
-    case toCpuKey(126, 0x15): // fall-through
+    case toCpuKey(126, 0xa): // fall-through
+    case toCpuKey(126, 0xb): // fall-through
+    case toCpuKey(126, 0xc): // fall-through
+    case toCpuKey(126, 0xd): // fall-through
+    case toCpuKey(126, 0xe): // fall-through
+    case toCpuKey(126, 0xf): // fall-through
       // from icelake_core.json
       icelake_core::addEvents(pmu_manager);
       // from icelake_uncore.json
@@ -600,12 +600,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(133, 0x7): // fall-through
     case toCpuKey(133, 0x8): // fall-through
     case toCpuKey(133, 0x9): // fall-through
-    case toCpuKey(133, 0x10): // fall-through
-    case toCpuKey(133, 0x11): // fall-through
-    case toCpuKey(133, 0x12): // fall-through
-    case toCpuKey(133, 0x13): // fall-through
-    case toCpuKey(133, 0x14): // fall-through
-    case toCpuKey(133, 0x15): // fall-through
+    case toCpuKey(133, 0xa): // fall-through
+    case toCpuKey(133, 0xb): // fall-through
+    case toCpuKey(133, 0xc): // fall-through
+    case toCpuKey(133, 0xd): // fall-through
+    case toCpuKey(133, 0xe): // fall-through
+    case toCpuKey(133, 0xf): // fall-through
       // from knightslanding_core.json
       knightslanding_core::addEvents(pmu_manager);
       // from knightslanding_uncore.json
@@ -622,12 +622,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(134, 0x7): // fall-through
     case toCpuKey(134, 0x8): // fall-through
     case toCpuKey(134, 0x9): // fall-through
-    case toCpuKey(134, 0x10): // fall-through
-    case toCpuKey(134, 0x11): // fall-through
-    case toCpuKey(134, 0x12): // fall-through
-    case toCpuKey(134, 0x13): // fall-through
-    case toCpuKey(134, 0x14): // fall-through
-    case toCpuKey(134, 0x15): // fall-through
+    case toCpuKey(134, 0xa): // fall-through
+    case toCpuKey(134, 0xb): // fall-through
+    case toCpuKey(134, 0xc): // fall-through
+    case toCpuKey(134, 0xd): // fall-through
+    case toCpuKey(134, 0xe): // fall-through
+    case toCpuKey(134, 0xf): // fall-through
       // from snowridgex_core.json
       snowridgex_core::addEvents(pmu_manager);
       // from snowridgex_uncore.json
@@ -646,12 +646,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(142, 0x7): // fall-through
     case toCpuKey(142, 0x8): // fall-through
     case toCpuKey(142, 0x9): // fall-through
-    case toCpuKey(142, 0x10): // fall-through
-    case toCpuKey(142, 0x11): // fall-through
-    case toCpuKey(142, 0x12): // fall-through
-    case toCpuKey(142, 0x13): // fall-through
-    case toCpuKey(142, 0x14): // fall-through
-    case toCpuKey(142, 0x15): // fall-through
+    case toCpuKey(142, 0xa): // fall-through
+    case toCpuKey(142, 0xb): // fall-through
+    case toCpuKey(142, 0xc): // fall-through
+    case toCpuKey(142, 0xd): // fall-through
+    case toCpuKey(142, 0xe): // fall-through
+    case toCpuKey(142, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -668,12 +668,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(143, 0x7): // fall-through
     case toCpuKey(143, 0x8): // fall-through
     case toCpuKey(143, 0x9): // fall-through
-    case toCpuKey(143, 0x10): // fall-through
-    case toCpuKey(143, 0x11): // fall-through
-    case toCpuKey(143, 0x12): // fall-through
-    case toCpuKey(143, 0x13): // fall-through
-    case toCpuKey(143, 0x14): // fall-through
-    case toCpuKey(143, 0x15): // fall-through
+    case toCpuKey(143, 0xa): // fall-through
+    case toCpuKey(143, 0xb): // fall-through
+    case toCpuKey(143, 0xc): // fall-through
+    case toCpuKey(143, 0xd): // fall-through
+    case toCpuKey(143, 0xe): // fall-through
+    case toCpuKey(143, 0xf): // fall-through
       // from sapphirerapids_core.json
       sapphirerapids_core::addEvents(pmu_manager);
       // from sapphirerapids_uncore.json
@@ -692,12 +692,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(158, 0x7): // fall-through
     case toCpuKey(158, 0x8): // fall-through
     case toCpuKey(158, 0x9): // fall-through
-    case toCpuKey(158, 0x10): // fall-through
-    case toCpuKey(158, 0x11): // fall-through
-    case toCpuKey(158, 0x12): // fall-through
-    case toCpuKey(158, 0x13): // fall-through
-    case toCpuKey(158, 0x14): // fall-through
-    case toCpuKey(158, 0x15): // fall-through
+    case toCpuKey(158, 0xa): // fall-through
+    case toCpuKey(158, 0xb): // fall-through
+    case toCpuKey(158, 0xc): // fall-through
+    case toCpuKey(158, 0xd): // fall-through
+    case toCpuKey(158, 0xe): // fall-through
+    case toCpuKey(158, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -714,12 +714,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(165, 0x7): // fall-through
     case toCpuKey(165, 0x8): // fall-through
     case toCpuKey(165, 0x9): // fall-through
-    case toCpuKey(165, 0x10): // fall-through
-    case toCpuKey(165, 0x11): // fall-through
-    case toCpuKey(165, 0x12): // fall-through
-    case toCpuKey(165, 0x13): // fall-through
-    case toCpuKey(165, 0x14): // fall-through
-    case toCpuKey(165, 0x15): // fall-through
+    case toCpuKey(165, 0xa): // fall-through
+    case toCpuKey(165, 0xb): // fall-through
+    case toCpuKey(165, 0xc): // fall-through
+    case toCpuKey(165, 0xd): // fall-through
+    case toCpuKey(165, 0xe): // fall-through
+    case toCpuKey(165, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -736,12 +736,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(166, 0x7): // fall-through
     case toCpuKey(166, 0x8): // fall-through
     case toCpuKey(166, 0x9): // fall-through
-    case toCpuKey(166, 0x10): // fall-through
-    case toCpuKey(166, 0x11): // fall-through
-    case toCpuKey(166, 0x12): // fall-through
-    case toCpuKey(166, 0x13): // fall-through
-    case toCpuKey(166, 0x14): // fall-through
-    case toCpuKey(166, 0x15): // fall-through
+    case toCpuKey(166, 0xa): // fall-through
+    case toCpuKey(166, 0xb): // fall-through
+    case toCpuKey(166, 0xc): // fall-through
+    case toCpuKey(166, 0xd): // fall-through
+    case toCpuKey(166, 0xe): // fall-through
+    case toCpuKey(166, 0xf): // fall-through
       // from skylake_core.json
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
@@ -758,12 +758,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(175, 0x7): // fall-through
     case toCpuKey(175, 0x8): // fall-through
     case toCpuKey(175, 0x9): // fall-through
-    case toCpuKey(175, 0x10): // fall-through
-    case toCpuKey(175, 0x11): // fall-through
-    case toCpuKey(175, 0x12): // fall-through
-    case toCpuKey(175, 0x13): // fall-through
-    case toCpuKey(175, 0x14): // fall-through
-    case toCpuKey(175, 0x15): // fall-through
+    case toCpuKey(175, 0xa): // fall-through
+    case toCpuKey(175, 0xb): // fall-through
+    case toCpuKey(175, 0xc): // fall-through
+    case toCpuKey(175, 0xd): // fall-through
+    case toCpuKey(175, 0xe): // fall-through
+    case toCpuKey(175, 0xf): // fall-through
       // from sierraforest_core.json
       sierraforest_core::addEvents(pmu_manager);
       // from sierraforest_uncore.json
@@ -782,12 +782,12 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
     case toCpuKey(207, 0x7): // fall-through
     case toCpuKey(207, 0x8): // fall-through
     case toCpuKey(207, 0x9): // fall-through
-    case toCpuKey(207, 0x10): // fall-through
-    case toCpuKey(207, 0x11): // fall-through
-    case toCpuKey(207, 0x12): // fall-through
-    case toCpuKey(207, 0x13): // fall-through
-    case toCpuKey(207, 0x14): // fall-through
-    case toCpuKey(207, 0x15): // fall-through
+    case toCpuKey(207, 0xa): // fall-through
+    case toCpuKey(207, 0xb): // fall-through
+    case toCpuKey(207, 0xc): // fall-through
+    case toCpuKey(207, 0xd): // fall-through
+    case toCpuKey(207, 0xe): // fall-through
+    case toCpuKey(207, 0xf): // fall-through
       // from emeraldrapids_core.json
       emeraldrapids_core::addEvents(pmu_manager);
       // from emeraldrapids_uncore.json
