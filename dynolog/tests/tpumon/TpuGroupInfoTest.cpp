@@ -111,6 +111,17 @@ void expectNoPodIdentity(const CapturedRecord& record) {
   EXPECT_EQ(record.strings.count("container_name"), 0u);
 }
 
+// tpu_pod_label_rejected reason codes; 0 means the record carries none.
+constexpr int64_t kNoRejection = 0;
+constexpr int64_t kNotCurrentOwner = 1;
+constexpr int64_t kConflictingPods = 2;
+constexpr int64_t kIncompleteLabels = 3;
+
+int64_t podLabelRejection(const CapturedRecord& record) {
+  const auto it = record.ints.find("tpu_pod_label_rejected");
+  return it == record.ints.end() ? kNoRejection : it->second;
+}
+
 // Fixture: parse the real exposition once, then drive TpuGroupInfo via
 // the testing seam (skips HTTP because buck2's sandbox blocks loopback).
 class TpuGroupInfoTest : public ::testing::Test {
@@ -230,8 +241,12 @@ TEST_F(TpuGroupInfoTest, EmitsPodIdentityOnlyForCurrentOwner) {
     EXPECT_EQ(record.strings.at("pod_name"), identity.podName);
     EXPECT_EQ(record.strings.at("container_name"), identity.containerName);
     EXPECT_EQ(record.strings.at("service_account"), "test-service-account");
+    EXPECT_EQ(podLabelRejection(record), kNoRejection);
   }
   expectNoPodIdentity(recordByDevice(logger_.records(), 0));
+  // Chip 0 has no pod labels at all, so there is nothing to reject.
+  EXPECT_EQ(
+      podLabelRejection(recordByDevice(logger_.records(), 0)), kNoRejection);
   const std::vector<TpuPodIdentity> expectedLookups = {identity, identity};
   EXPECT_EQ(lookedUpIdentities_, expectedLookups);
 }
@@ -245,6 +260,10 @@ TEST_F(TpuGroupInfoTest, RejectsStaleRawIdentityWithoutCurrentOwner) {
   EXPECT_DOUBLE_EQ(
       recordByDevice(logger_.records(), 4).floats.at("accelerator_utilization"),
       42.0);
+  // No current owners at all may mean PodResources failed, so nothing is
+  // flagged.
+  EXPECT_EQ(
+      podLabelRejection(recordByDevice(logger_.records(), 4)), kNoRejection);
 }
 
 TEST_F(TpuGroupInfoTest, RejectsAnyDifferentCurrentOwnerField) {
@@ -275,6 +294,11 @@ TEST_F(TpuGroupInfoTest, RejectsAnyDifferentCurrentOwnerField) {
     expectNoPodIdentity(recordByDevice(logger_.records(), 4));
     expectNoPodIdentity(recordByDevice(logger_.records(), 5));
     EXPECT_TRUE(lookedUpIdentities_.empty());
+    for (const int64_t device : {4, 5}) {
+      EXPECT_EQ(
+          podLabelRejection(recordByDevice(logger_.records(), device)),
+          kNotCurrentOwner);
+    }
   }
 }
 
@@ -290,6 +314,26 @@ TEST_F(TpuGroupInfoTest, RejectsPartialRawIdentity) {
   expectNoPodIdentity(record);
   EXPECT_DOUBLE_EQ(record.floats.at("accelerator_utilization"), 42.0);
   EXPECT_TRUE(lookedUpIdentities_.empty());
+  EXPECT_EQ(podLabelRejection(record), kIncompleteLabels);
+}
+
+TEST_F(TpuGroupInfoTest, FlagsLabelProblemsThatDoNotDependOnOwners) {
+  // No current owners: chip 4 has labels from two pods and chip 5 has
+  // incomplete labels, both wrong whatever PodResources returns.
+  constexpr const char* exposition =
+      R"PROM(duty_cycle{accelerator_id="1234567890123456789-4",container="vllm-worker",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 42
+tensorcore_utilization{accelerator_id="1234567890123456789-4",container="other-container",make="cloud-tpu",model="tpu7x",namespace="other-namespace",pod="other-pod",tpu_topology="2x2x2"} 10
+duty_cycle{accelerator_id="1234567890123456789-5",make="cloud-tpu",model="tpu7x",namespace="test-namespace",pod="test-workload-pod",tpu_topology="2x2x2"} 43
+)PROM";
+
+  updateFromExposition(exposition);
+
+  EXPECT_EQ(
+      podLabelRejection(recordByDevice(logger_.records(), 4)),
+      kConflictingPods);
+  EXPECT_EQ(
+      podLabelRejection(recordByDevice(logger_.records(), 5)),
+      kIncompleteLabels);
 }
 
 TEST_F(TpuGroupInfoTest, RejectsConflictingRawIdentitiesForOneDevice) {
@@ -307,8 +351,12 @@ TEST_F(TpuGroupInfoTest, RejectsConflictingRawIdentitiesForOneDevice) {
   updateFromExposition(exposition);
 
   expectNoPodIdentity(recordByDevice(logger_.records(), 4));
+  EXPECT_EQ(
+      podLabelRejection(recordByDevice(logger_.records(), 4)),
+      kConflictingPods);
   const auto& record5 = recordByDevice(logger_.records(), 5);
   EXPECT_EQ(record5.strings.at("pod_namespace"), identity.podNamespace);
+  EXPECT_EQ(podLabelRejection(record5), kNoRejection);
   EXPECT_DOUBLE_EQ(
       recordByDevice(logger_.records(), 4).floats.at("accelerator_utilization"),
       42.0);
