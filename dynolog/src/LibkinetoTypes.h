@@ -23,6 +23,8 @@ struct GpuProfilerResult {
   std::vector<int32_t> processesMatched;
   std::vector<int32_t> eventProfilersTriggered;
   std::vector<int32_t> activityProfilersTriggered;
+  // Parallel to activityProfilersTriggered; empty means Kineto's default name
+  std::vector<std::string> activityTraceFiles;
   int32_t eventProfilersBusy;
   int32_t activityProfilersBusy;
 };
