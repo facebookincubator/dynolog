@@ -9,6 +9,7 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <algorithm>
 #include <chrono>
 #include <cstdlib>
 #include <thread>
@@ -233,14 +234,30 @@ auto setup_server(const std::shared_ptr<ServiceHandler>& handler) {
             << FLAGS_tpu_reporting_interval_s
             << " s, url = " << tpumon::FLAGS_tpu_device_plugin_url;
 
+  const auto interval =
+      std::chrono::seconds(std::max(1, FLAGS_tpu_reporting_interval_s));
+  auto lastTick = std::chrono::system_clock::time_point::min();
   while (true) {
-    auto wakeup_timepoint = next_wakeup(FLAGS_tpu_reporting_interval_s);
+    // Stamp with the scheduled tick rather than the time the scrape finished,
+    // so scrape latency can't put two samples in one interval-wide bucket.
+    const auto now = std::chrono::system_clock::now();
+    const auto tick = tpumon::nextAlignedTick(now, interval);
+    // sleep_for runs on the monotonic clock, so a wall-clock step during the
+    // wait delays at most one interval.
+    /* sleep override */
+    std::this_thread::sleep_for(tick - now);
+    // After the wall clock steps back, skip ticks already emitted rather
+    // than stamping a newer sample with an older or duplicate time.
+    if (tick <= lastTick) {
+      LOG_EVERY_N(WARNING, 6)
+          << "Wall clock moved backwards; skipping TPU sample for tick "
+          << std::chrono::system_clock::to_time_t(tick);
+      continue;
+    }
+    lastTick = tick;
 
     tpu->update();
-    tpu->log(*logger);
-
-    /* sleep override */
-    std::this_thread::sleep_until(wakeup_timepoint);
+    tpu->log(*logger, tick);
   }
 }
 

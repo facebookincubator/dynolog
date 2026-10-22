@@ -565,9 +565,20 @@ void TpuGroupInfo::updateFromSamples(
   }
 }
 
-void TpuGroupInfo::log(Logger& logger) {
-  const auto t = std::chrono::system_clock::now();
-  logger.setTimestamp(t);
+std::chrono::system_clock::time_point nextAlignedTick(
+    std::chrono::system_clock::time_point now,
+    std::chrono::seconds interval) {
+  if (interval <= std::chrono::seconds::zero()) {
+    return now;
+  }
+  const auto elapsedIntervals = now.time_since_epoch() / interval;
+  return std::chrono::system_clock::time_point(
+      std::chrono::duration_cast<std::chrono::system_clock::duration>(
+          (elapsedIntervals + 1) * interval));
+}
+
+void TpuGroupInfo::log(Logger& logger, Logger::Timestamp sampleTime) {
+  logger.setTimestamp(sampleTime);
   for (const auto& [index, dbl_map] : metricsMapDouble_) {
     for (const auto& [k, v] : dbl_map) {
       logger.logFloat(k, v);

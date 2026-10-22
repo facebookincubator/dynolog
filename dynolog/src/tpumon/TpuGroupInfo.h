@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <functional>
 #include <memory>
@@ -45,6 +46,14 @@ struct TpuPodAttributionProviders {
       lookupNodeLabels;
   std::unordered_map<std::string, std::string> nodeLabelAttributionMap;
 };
+
+// First multiple of `interval` since the system clock epoch that is strictly
+// after `now`. Used to schedule and timestamp TPU samples on fixed wall-clock
+// boundaries, so each sample falls in exactly one interval-wide time bucket.
+// Returns `now` for a non-positive interval.
+std::chrono::system_clock::time_point nextAlignedTick(
+    std::chrono::system_clock::time_point now,
+    std::chrono::seconds interval);
 
 // TPU counterpart to gpumon::DcgmGroupInfo. Owns the periodic
 // scrape-and-emit for TPU chips on the local node:
@@ -96,8 +105,12 @@ class TpuGroupInfo {
       const std::vector<TpuSample>& samples,
       bool scrape_failed);
 
-  // Emit one OTLP record per chip. See class doc for shape.
-  void log(Logger& logger);
+  // Emit one OTLP record per chip, stamped with `sampleTime`. See class doc
+  // for shape.
+  void log(Logger& logger, Logger::Timestamp sampleTime);
+  void log(Logger& logger) {
+    log(logger, std::chrono::system_clock::now());
+  }
 
   bool isFailing() const {
     return failing_;
