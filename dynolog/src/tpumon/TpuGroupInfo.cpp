@@ -195,6 +195,34 @@ bool isCurrentOwner(
       currentOwners.end();
 }
 
+// Why a chip's raw pod labels were not used for attribution, emitted as
+// `tpu_pod_label_rejected`.
+enum class PodLabelRejection : int64_t {
+  kNone = 0,
+  // Includes runtime series of a pod that has left the node. GKE
+  // tpu-device-plugin before 1.35.13-gke.9 (GKE 1.35.8-gke.1796000) keeps
+  // serving those indefinitely; later versions drop them after about 60s.
+  kNotCurrentOwner = 1,
+  kConflictingPods = 2,
+  kIncompleteLabels = 3,
+};
+
+PodLabelRejection podLabelRejection(
+    const RawPodIdentityState& state,
+    const std::vector<TpuPodIdentity>& currentOwners) {
+  if (state.invalid) {
+    return PodLabelRejection::kIncompleteLabels;
+  }
+  if (state.identities.size() > 1) {
+    return PodLabelRejection::kConflictingPods;
+  }
+  if (state.identities.size() == 1 &&
+      !isCurrentOwner(state.identities.front(), currentOwners)) {
+    return PodLabelRejection::kNotCurrentOwner;
+  }
+  return PodLabelRejection::kNone;
+}
+
 // The runtime reports duty cycle per chip but memory per runtime device,
 // and on multi-core chips (tpu7x) a device is a single core whose id is
 // chip_id * cores_per_chip + core. Returns cores_per_chip when the memory
@@ -487,13 +515,29 @@ void TpuGroupInfo::updateFromSamples(
   if (podAttributionEnabled && podAttributionProviders_.listCurrentOwners) {
     const auto currentOwners = podAttributionProviders_.listCurrentOwners();
     for (const auto& [chipIndex, state] : rawPodIdentities) {
-      if (state.invalid || state.identities.size() != 1) {
+      const auto rejection = podLabelRejection(state, currentOwners);
+      if (rejection != PodLabelRejection::kNone) {
+        // An empty owner list may be a failed PodResources call rather than
+        // an idle node, so it is not evidence that a labelled pod is gone.
+        if (rejection != PodLabelRejection::kNotCurrentOwner ||
+            !currentOwners.empty()) {
+          metricsMapInt_[chipIndex]["tpu_pod_label_rejected"] =
+              static_cast<int64_t>(rejection);
+          LOG_EVERY_N(WARNING, 60)
+              << "TpuGroupInfo: pod labels on chip " << chipIndex
+              << " rejected (reason " << static_cast<int64_t>(rejection)
+              << "), first labelled pod: "
+              << (state.identities.empty()
+                      ? std::string("<incomplete>")
+                      : state.identities.front().podNamespace + "/" +
+                          state.identities.front().podName);
+        }
+        continue;
+      }
+      if (state.identities.empty()) {
         continue;
       }
       const auto& identity = state.identities.front();
-      if (!isCurrentOwner(identity, currentOwners)) {
-        continue;
-      }
 
       auto& env = envMetadataMapString_[chipIndex];
       if (podAttributionProviders_.lookupAttributes) {
