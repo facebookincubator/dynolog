@@ -27,32 +27,7 @@ struct AmdSmiMetrics {
   uint32_t partition_id = std::numeric_limits<uint32_t>::max();
   uint32_t node_id = std::numeric_limits<uint32_t>::max();
   int gpu_util_percent = -1;
-
-  // Physical-device metrics, copied to every partition. -1 when amd-smi
-  // cannot report them.
-  int64_t vram_total_bytes = -1;
-  int64_t vram_used_bytes = -1;
-  int64_t current_socket_power_watt = -1;
-  int64_t power_limit_watt = -1;
-  // rx + tx, averaged since the previous getMetrics() call
-  int64_t pcie_bandwidth_megabits_per_sec = -1;
-  int64_t pcie_max_link_speed_mts = -1;
-  int64_t pcie_max_link_width = -1;
-  int64_t gpu_frequency_mhz = -1;
-  int64_t temperature_hotspot_c = -1;
 };
-
-// PCIe accumulator snapshot from amdsmi_gpu_metrics_t.
-struct PcieBandwidthAccSample {
-  uint64_t bandwidth_acc;
-  uint64_t accumulation_counter;
-};
-
-// Average rx + tx PCIe bandwidth in Mb/s between two accumulator samples, or
-// -1 when either sample is unavailable or the counter did not advance.
-int64_t averagePcieBandwidthMegabitsPerSec(
-    const PcieBandwidthAccSample& prev,
-    const PcieBandwidthAccSample& cur);
 
 // Thread-safe wrapper around the AMD SMI library. All methods throw
 // std::runtime_error on failure.
@@ -74,15 +49,10 @@ class AmdSmiWrapper {
   std::map<AmdSmiNodeId, AmdSmiMetrics> getMetricsFromSocket_(
       amdsmi_socket_handle socketHandle);
   std::string getModelNameFromSocket_(amdsmi_socket_handle socketHandle);
-  int64_t updatePcieBandwidth_(
-      uint32_t oamId,
-      const amdsmi_gpu_metrics_t& gpuMetrics);
 
   bool initialized_ = false;
   // amdsmi calls are serialized through this lock
   mutable std::mutex amdsmiMutex_;
-  // keyed by OAM id, guarded by amdsmiMutex_
-  std::map<uint32_t, PcieBandwidthAccSample> prevPcieAcc_;
 };
 
 } // namespace gpumon
