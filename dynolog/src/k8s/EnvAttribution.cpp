@@ -19,43 +19,40 @@ DEFINE_string(
     "Each non-empty, non-'#' line is: <env_var_name>,<output_column_name>. "
     "When empty, the built-in Slurm default mapping is used.");
 
+DEFINE_string(
+    node_label_attribution_mappings_file,
+    "",
+    "Path to a CSV file defining node-label → column-name attribution "
+    "mappings. Each non-empty, non-'#' line is: "
+    "<node_label_key>,<output_column_name>. Node labels are only read when "
+    "--enable_node_label_attribution is set.");
+
 namespace dynolog {
 
-const std::unordered_map<std::string, std::string>&
-getDefaultEnvAttributionMap() {
-  // Used on bare-metal Slurm hosts when no --env_attribution_mappings_file
-  // is provided. Mirrors the historical hardcoded mapping in
-  // DcgmGroupInfo.cpp so non-K8s deployments behave identically.
-  static const std::unordered_map<std::string, std::string> kDefault = {
-      {"SLURM_JOB_ID", "job_id"},
-      {"USER", "username"},
-      {"SLURM_JOB_ACCOUNT", "slurm_account"},
-      {"SLURM_JOB_PARTITION", "slurm_partition"},
-  };
-  return kDefault;
-}
+namespace {
 
-std::unordered_map<std::string, std::string> loadEnvAttributionMap(
-    const std::string& path) {
-  std::unordered_map<std::string, std::string> result;
+// Reads <key>,<value> rows into `out`. Returns false if the file can't be
+// opened.
+bool parseMappingFile(
+    const std::string& path,
+    std::unordered_map<std::string, std::string>& out) {
   std::ifstream file(path);
   if (!file.is_open()) {
-    LOG(WARNING) << "Could not open env_attribution_mappings_file: " << path
-                 << "; falling back to built-in default map";
-    return getDefaultEnvAttributionMap();
+    return false;
   }
   std::string line;
   while (std::getline(file, line)) {
     if (line.empty() || line[0] == '#') {
       continue;
     }
-    // Split on first comma: env_var_name,output_column_name
+    // Split on first comma: key,output_column_name
     auto pos = line.find(',');
     if (pos == std::string::npos || pos == 0 || pos + 1 >= line.size()) {
-      LOG(WARNING) << "Skipping malformed env-attribution line: " << line;
+      LOG(WARNING) << "Skipping malformed attribution mapping line in " << path
+                   << ": " << line;
       continue;
     }
-    std::string env_key = line.substr(0, pos);
+    std::string key = line.substr(0, pos);
     std::string column = line.substr(pos + 1);
     // Trim leading + trailing whitespace/CR (handles CRLF input and
     // tolerates user-friendly spacing around the comma separator).
@@ -74,16 +71,68 @@ std::unordered_map<std::string, std::string> loadEnvAttributionMap(
         s.erase(0, i);
       }
     };
-    trim(env_key);
+    trim(key);
     trim(column);
-    if (env_key.empty() || column.empty()) {
+    if (key.empty() || column.empty()) {
       continue;
     }
-    result[env_key] = column;
+    out[key] = column;
+  }
+  return true;
+}
+
+} // namespace
+
+const std::unordered_map<std::string, std::string>&
+getDefaultEnvAttributionMap() {
+  // Used on bare-metal Slurm hosts when no --env_attribution_mappings_file
+  // is provided. Mirrors the historical hardcoded mapping in
+  // DcgmGroupInfo.cpp so non-K8s deployments behave identically.
+  static const std::unordered_map<std::string, std::string> kDefault = {
+      {"SLURM_JOB_ID", "job_id"},
+      {"USER", "username"},
+      {"SLURM_JOB_ACCOUNT", "slurm_account"},
+      {"SLURM_JOB_PARTITION", "slurm_partition"},
+  };
+  return kDefault;
+}
+
+std::unordered_map<std::string, std::string> loadEnvAttributionMap(
+    const std::string& path) {
+  std::unordered_map<std::string, std::string> result;
+  if (!parseMappingFile(path, result)) {
+    LOG(WARNING) << "Could not open env_attribution_mappings_file: " << path
+                 << "; falling back to built-in default map";
+    return getDefaultEnvAttributionMap();
   }
   LOG(INFO) << "Loaded " << result.size() << " env-attribution mappings from "
             << path;
   return result;
+}
+
+std::unordered_map<std::string, std::string> loadNodeLabelAttributionMap(
+    const std::string& path) {
+  std::unordered_map<std::string, std::string> result;
+  if (!parseMappingFile(path, result)) {
+    LOG(WARNING) << "Could not open node_label_attribution_mappings_file: "
+                 << path << "; no node labels will be mapped";
+    return {};
+  }
+  LOG(INFO) << "Loaded " << result.size()
+            << " node-label attribution mappings from " << path;
+  return result;
+}
+
+const std::unordered_map<std::string, std::string>&
+getNodeLabelAttributionMappings() {
+  static const auto mappings = [] {
+    if (FLAGS_node_label_attribution_mappings_file.empty()) {
+      return std::unordered_map<std::string, std::string>{};
+    }
+    return loadNodeLabelAttributionMap(
+        FLAGS_node_label_attribution_mappings_file);
+  }();
+  return mappings;
 }
 
 const std::unordered_map<std::string, std::string>&

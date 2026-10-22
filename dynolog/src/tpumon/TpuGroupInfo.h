@@ -39,6 +39,11 @@ struct TpuPodAttributionProviders {
   std::function<std::unordered_map<std::string, std::string>(
       const TpuPodIdentity&)>
       lookupAttributes;
+  // Labels of the local node, and the <node label> -> <output key> map
+  // applied to them on every record. Node labels are skipped when unset.
+  std::function<std::unordered_map<std::string, std::string>()>
+      lookupNodeLabels;
+  std::unordered_map<std::string, std::string> nodeLabelAttributionMap;
 };
 
 // TPU counterpart to gpumon::DcgmGroupInfo. Owns the periodic
