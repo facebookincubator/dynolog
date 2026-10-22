@@ -793,6 +793,64 @@ struct K8sPodCache::Impl {
     return result;
   }
 
+  bool fetchNodeLabels(std::unordered_map<std::string, std::string>& out) {
+    const std::string url =
+        opts_.apiBase + "/api/v1/nodes/" + urlEncode(opts_.nodeName);
+    std::string body;
+    const HttpResult response =
+        request(url, false, [&body](std::string_view chunk) {
+          body.append(chunk.data(), chunk.size());
+          return true;
+        });
+    if (!response.transportOk || response.statusCode < 200 ||
+        response.statusCode >= 300) {
+      LOG(WARNING) << "K8sPodCache: GET " << url
+                   << " returned http=" << response.statusCode;
+      return false;
+    }
+    try {
+      const auto node = json::parse(body);
+      const auto& metadata = node.at("metadata");
+      if (const auto labels = metadata.find("labels");
+          labels != metadata.end() && labels->is_object()) {
+        for (auto label = labels->begin(); label != labels->end(); ++label) {
+          if (label->is_string()) {
+            out[label.key()] = label->get<std::string>();
+          }
+        }
+      }
+      return true;
+    } catch (const std::exception& e) {
+      LOG(WARNING) << "K8sPodCache: failed to parse Node response for "
+                   << opts_.nodeName << ": " << e.what();
+      return false;
+    }
+  }
+
+  std::unordered_map<std::string, std::string> lookupNodeLabels() {
+    if (opts_.nodeName.empty()) {
+      return {};
+    }
+    {
+      std::lock_guard<std::mutex> lock(mu_);
+      const auto ttl = nodeLabelsOk_ ? opts_.nodeLabelsTtl : opts_.negativeTtl;
+      if (nodeLabelsFetched_ &&
+          Entry::Clock::now() - nodeLabelsFetchedAt_ < ttl) {
+        return nodeLabels_;
+      }
+    }
+    std::unordered_map<std::string, std::string> labels;
+    const bool ok = fetchNodeLabels(labels);
+    std::lock_guard<std::mutex> lock(mu_);
+    nodeLabelsFetched_ = true;
+    nodeLabelsFetchedAt_ = Entry::Clock::now();
+    nodeLabelsOk_ = ok;
+    if (ok) {
+      nodeLabels_ = std::move(labels);
+    }
+    return nodeLabels_;
+  }
+
   Options opts_;
   std::atomic<bool> stopping_{false};
   bool watchEnabled_ = false;
@@ -803,6 +861,10 @@ struct K8sPodCache::Impl {
   std::unordered_map<std::string, uint64_t> generations_;
   std::unordered_set<std::string> fetchesInFlight_;
   Entry::Clock::time_point lastWatchSyncAt_{};
+  std::unordered_map<std::string, std::string> nodeLabels_;
+  bool nodeLabelsFetched_ = false;
+  bool nodeLabelsOk_ = false;
+  Entry::Clock::time_point nodeLabelsFetchedAt_{};
 };
 
 K8sPodCache::K8sPodCache() : K8sPodCache(defaultOptions()) {}
@@ -822,6 +884,10 @@ std::unordered_map<std::string, std::string> K8sPodCache::lookupAttribution(
     const LabelKeyMap& labelMap) {
   return impl_->lookupAttribution(
       podNamespace, podName, containerName, envMap, labelMap);
+}
+
+std::unordered_map<std::string, std::string> K8sPodCache::lookupNodeLabels() {
+  return impl_->lookupNodeLabels();
 }
 
 } // namespace dynolog::k8s
