@@ -24,8 +24,25 @@
 #define DYNOLOG_ROCM_VERSION FB_ROCM_VERSION
 #endif
 
+#if !defined(DYNOLOG_ROCM_VERSION) || DYNOLOG_ROCM_VERSION < 70000
+#error "dynolog AMD GPU support requires ROCm 7.0 or newer"
+#endif
+
 namespace dynolog {
 namespace gpumon {
+
+// The RDC field carrying the KFD id: RDC_FI_PROF_KFD_ID in upstream ROCm 7.0.2,
+// RDC_FI_KFD_ID in Meta's ROCm 7.0 build and later releases. They're
+// enumerators, not macros, so pick whichever rdc.h declares at compile time.
+template <typename Field = rdc_field_t>
+constexpr Field rdcKfdIdField() {
+  if constexpr (requires { Field::RDC_FI_KFD_ID; }) {
+    return Field::RDC_FI_KFD_ID;
+  } else {
+    return Field::RDC_FI_PROF_KFD_ID;
+  }
+}
+inline constexpr rdc_field_t kRdcKfdIdField = rdcKfdIdField();
 
 using RdcMetricsValue = std::variant<double, int64_t>;
 using RdcMetricsMap = std::unordered_map<rdc_field_t, RdcMetricsValue>;
@@ -89,14 +106,23 @@ class RdcWrapper {
       std::chrono::milliseconds updateInterval,
       std::chrono::seconds maxKeepAge,
       int maxKeepSamples);
-  ~RdcWrapper();
+  virtual ~RdcWrapper();
+  RdcWrapper(const RdcWrapper&) = delete;
+  RdcWrapper& operator=(const RdcWrapper&) = delete;
+  RdcWrapper(RdcWrapper&&) = delete;
+  RdcWrapper& operator=(RdcWrapper&&) = delete;
   void init(std::vector<rdc_field_t> enabledMetrics);
   void clean();
-  RdcMetricsMap getRdcMetricsForDevice(uint32_t device);
+  virtual RdcMetricsMap getRdcMetricsForDevice(uint32_t device);
   std::vector<uint32_t> getMonitoredEntities();
-  std::vector<uint32_t> getMonitoredPartitionsEntities();
+  // Whole-GPU entities only, without partitions.
+  virtual std::vector<uint32_t> getMonitoredDeviceEntities();
+  virtual std::vector<uint32_t> getMonitoredPartitionsEntities();
 
  protected:
+  // For test fakes: doesn't start or shut down RDC.
+  RdcWrapper();
+
   void init_(
       std::vector<rdc_field_t> enabledMetrics,
       RdcRuntimeContextWithWLock& context);
@@ -114,6 +140,7 @@ class RdcWrapper {
   const std::chrono::milliseconds updateInterval_;
   const std::chrono::seconds maxKeepAge_;
   const int maxKeepSamples_;
+  const bool startedRdc_ = true;
 };
 
 } // namespace gpumon
