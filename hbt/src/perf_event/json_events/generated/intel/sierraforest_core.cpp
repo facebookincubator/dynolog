@@ -16,12 +16,12 @@ namespace sierraforest_core {
 namespace {
 
 /*
-  Events from sierraforest_core.json (160 events).
+  Events from sierraforest_core.json (161 events).
 
   Supported SKUs:
       - Arch: x86, Model: SRF id: 175
 */
-constexpr std::array<StaticEventDef, 19>
+constexpr std::array<StaticEventDef, 20>
     kAllowlistedEvents{
         {
             {
@@ -38,6 +38,26 @@ constexpr std::array<StaticEventDef, 19>
                 .full_desc =
                     "Counts the total number of instructions in which the instruction pointer (IP) of the processor is resteered due to a branch instruction and the branch instruction successfully retires.  All branch type instructions are accounted for.",
                 .default_sampling_period = 0x30D43ULL,
+            },
+            {
+                .pmu_type = PmuType::cpu,
+                .id = "BR_INST_RETIRED.NEAR_TAKEN",
+                .encoding =
+                    {
+                        .code = 0xC4ULL,
+                        .umask = 0xC0ULL,
+                        .msr_values = uint64_t{0x0ULL},
+                    },
+                .features =
+                    StaticEventDef::IntelFeatures{
+                        .pebs = 1,
+                    },
+                .brief_desc =
+                    "Counts the number of near taken branch instructions retired.",
+                .full_desc =
+                    "Counts the number of near taken branch instructions retired.",
+                .default_sampling_period = 0x30D43ULL,
+                .errata = "SRF7",
             },
             {
                 .pmu_type = PmuType::cpu,

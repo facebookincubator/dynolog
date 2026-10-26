@@ -282,6 +282,28 @@ TEST_F(BuiltinMetricsTest, SrfTaskCacheMetricsReuseIntelCoreCatalog) {
   }
 }
 
+TEST_F(BuiltinMetricsTest, SierraForestTakenBranchAliasResolves) {
+  auto pmuManager = std::make_shared<PmuDeviceManager>(
+      facebook::hbt::CpuInfo("Intel", 6, 175, 0));
+  populatePmuDeviceManager(pmuManager);
+
+  const auto eventDef =
+      pmuManager->findEventDef("BR_INST_RETIRED.NEAR_TAKEN", PmuType::cpu);
+  ASSERT_NE(eventDef, nullptr);
+  EXPECT_EQ(eventDef->encoding.code, 0xc4u);
+  EXPECT_EQ(eventDef->encoding.umask, 0xc0u);
+  ASSERT_TRUE(eventDef->features.has_value());
+  EXPECT_EQ(eventDef->features->pebs, 1u);
+  EXPECT_EQ(eventDef->isPrecise(), true);
+  EXPECT_EQ(eventDef->errata, "SRF7");
+  EXPECT_EQ(
+      pmuManager->findEventDef("branch-instructions-ret-tkn", PmuType::cpu),
+      eventDef);
+  EXPECT_EQ(
+      pmuManager->findEventDef("br_inst_retired.near_taken", PmuType::cpu),
+      eventDef);
+}
+
 TEST_F(BuiltinMetricsTest, SierraForestL2CacheMissesUseLinesIn) {
   auto cpuInfo = facebook::hbt::CpuInfo::load();
   cpuInfo.cpu_family = CpuFamily::INTEL;
