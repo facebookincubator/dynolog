@@ -589,7 +589,7 @@ struct TagStackIdBinner {
                 bin_key,
                 bid,
                 i,
-                s);
+                fmt::streamed(s));
             continue;
           }
           row_dur += s.duration;
