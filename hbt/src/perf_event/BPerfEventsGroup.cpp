@@ -317,9 +317,9 @@ int BPerfEventsGroup::syncCpu_(__u32 cpu, int leader_fd) {
       opts,
       .ctx_in = nullptr,
       .ctx_size_in = 0,
+      .retval = 0,
       .flags = BPF_F_TEST_RUN_ON_CPU,
-      .cpu = cpu,
-      .retval = 0, );
+      .cpu = cpu, );
   return ::bpf_prog_test_run_opts(leader_fd, &opts);
 }
 
