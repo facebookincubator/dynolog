@@ -258,6 +258,113 @@ int memoryIdsPerDutyCycleId(const std::vector<TpuSample>& samples) {
   return factor;
 }
 
+bool isDutyCycleMetric(std::string_view name) {
+  return name == kDutyCycle || name == kDutyCycleNode;
+}
+
+bool isMemoryMetric(std::string_view name) {
+  return name == kMemoryTotal || name == kMemoryTotalNode ||
+      name == kMemoryUsed || name == kMemoryUsedNode;
+}
+
+bool isHostMetric(std::string_view name) {
+  return name == kTensorcoreUtilization || name == kTensorcoreUtilizationNode ||
+      name == kMemoryBandwidthUtilization ||
+      name == kMemoryBandwidthUtilizationNode;
+}
+
+bool parseSampleChip(const TpuSample& s, ChipId& chip) {
+  const auto id_it = s.labels.find("accelerator_id");
+  return id_it != s.labels.end() && parseAcceleratorId(id_it->second, chip);
+}
+
+// Assigns each sample to the record of its chip. Runtime metrics (duty cycle,
+// memory) carry slice-global libtpu ids while host metrics (tensorcore, memory
+// bandwidth) carry host-local ids, so on any host but the first of a
+// multi-host slice one chip would otherwise produce two records (for example
+// duty cycle on 4-7 and tensorcore on 0-3). When both families report the
+// same number of chips, runtime chip ids are mapped onto the host ids in
+// sorted order. The plugin does not document which runtime chip matches which
+// host id, so a merged record pairs the two families by order only; the chip
+// count and host-level totals are exact.
+class ChipRows {
+ public:
+  explicit ChipRows(const std::vector<TpuSample>& samples)
+      : memoryFold_{memoryIdsPerDutyCycleId(samples)} {
+    mapRuntimeChipsOntoHostChips(samples);
+  }
+
+  int forSample(std::string_view name, int index) const {
+    if (isDutyCycleMetric(name)) {
+      return forRuntimeChip(index);
+    }
+    if (isMemoryMetric(name)) {
+      return forMemoryId(index);
+    }
+    return index;
+  }
+
+  int forMemoryId(int index) const {
+    return forRuntimeChip(index / memoryFold_);
+  }
+
+  int memoryFold() const {
+    return memoryFold_;
+  }
+
+ private:
+  int forRuntimeChip(int index) const {
+    const auto it = runtimeToHost_.find(index);
+    return it == runtimeToHost_.end() ? index : it->second;
+  }
+
+  void mapRuntimeChipsOntoHostChips(const std::vector<TpuSample>& samples) {
+    std::set<int> runtimeChips;
+    std::set<int> memoryChips;
+    std::set<int> hostChips;
+    for (const auto& s : samples) {
+      ChipId chip;
+      if (!parseSampleChip(s, chip)) {
+        continue;
+      }
+      if (isDutyCycleMetric(s.name)) {
+        runtimeChips.insert(chip.index);
+      } else if (isMemoryMetric(s.name)) {
+        memoryChips.insert(chip.index / memoryFold_);
+      } else if (isHostMetric(s.name)) {
+        hostChips.insert(chip.index);
+      }
+    }
+    if (hostChips.empty() ||
+        std::includes(
+            hostChips.begin(),
+            hostChips.end(),
+            runtimeChips.begin(),
+            runtimeChips.end())) {
+      return;
+    }
+    const bool memoryOnRuntimeChips = std::includes(
+        runtimeChips.begin(),
+        runtimeChips.end(),
+        memoryChips.begin(),
+        memoryChips.end());
+    if (runtimeChips.size() != hostChips.size() || !memoryOnRuntimeChips) {
+      LOG_EVERY_N(WARNING, 60)
+          << "TpuGroupInfo: " << runtimeChips.size()
+          << " runtime chip ids do not line up with " << hostChips.size()
+          << " host chip ids; their records are not merged";
+      return;
+    }
+    auto host = hostChips.begin();
+    for (const int runtime : runtimeChips) {
+      runtimeToHost_.emplace(runtime, *host++);
+    }
+  }
+
+  int memoryFold_;
+  std::unordered_map<int, int> runtimeToHost_;
+};
+
 using Attributes = std::unordered_map<std::string, std::string>;
 
 std::string valueOrEmpty(const Attributes& attributes, const std::string& key) {
@@ -382,6 +489,7 @@ void TpuGroupInfo::updateFromSamples(
   // Raw pod labels are reconciled by identity tuple against current
   // PodResources owners below. PodResources device IDs are intentionally
   // ignored because GKE exposes PCI BDFs there and serial-index IDs here.
+  const ChipRows rows(samples);
   std::unordered_map<int, RawPodIdentityState> rawPodIdentities;
   for (const auto& s : samples) {
     const auto id_it = s.labels.find("accelerator_id");
@@ -394,8 +502,9 @@ void TpuGroupInfo::updateFromSamples(
           << "TpuGroupInfo: unparseable accelerator_id: " << id_it->second;
       continue;
     }
-    collectRawPodIdentity(s, rawPodIdentities[chip.index]);
-    auto& str_map = metricsMapString_[chip.index];
+    const int row = rows.forSample(s.name, chip.index);
+    collectRawPodIdentity(s, rawPodIdentities[row]);
+    auto& str_map = metricsMapString_[row];
     if (str_map.count("accelerator_serial_number") == 0) {
       str_map["accelerator_serial_number"] = chip.serial;
     }
@@ -407,9 +516,14 @@ void TpuGroupInfo::updateFromSamples(
     if (make_it != s.labels.end() && str_map.count("accelerator_vendor") == 0) {
       str_map["accelerator_vendor"] = make_it->second;
     }
+    auto& int_map = metricsMapInt_[row];
     // Ensure error column is populated (0 = healthy scrape).
-    if (metricsMapInt_[chip.index].count("tpu_error") == 0) {
-      metricsMapInt_[chip.index]["tpu_error"] = 0;
+    if (int_map.count("tpu_error") == 0) {
+      int_map["tpu_error"] = 0;
+    }
+    // Keep the slice-global id of a merged chip for later exact mapping.
+    if (isDutyCycleMetric(s.name) && row != chip.index) {
+      int_map["tpu_runtime_chip_id"] = chip.index;
     }
   }
 
@@ -435,13 +549,14 @@ void TpuGroupInfo::updateFromSamples(
       continue;
     }
     const bool has_pod = sampleHasPodLabels(s);
-    auto& dbl = metricsMapDouble_[chip.index];
+    const int row = rows.forSample(s.name, chip.index);
+    auto& dbl = metricsMapDouble_[row];
 
     if (s.name == kDutyCycle && has_pod) {
       dbl["accelerator_utilization"] = s.value;
-      has_container_dc[chip.index] = true;
+      has_container_dc[row] = true;
     } else if (s.name == kDutyCycleNode) {
-      if (!has_container_dc[chip.index]) {
+      if (!has_container_dc[row]) {
         dbl["accelerator_utilization"] = s.value;
       }
     } else if (s.name == kMemoryTotal && has_pod) {
@@ -460,16 +575,16 @@ void TpuGroupInfo::updateFromSamples(
       }
     } else if (s.name == kTensorcoreUtilization && has_pod) {
       dbl["tensorcore_utilization"] = s.value;
-      has_container_tensorcore[chip.index] = true;
+      has_container_tensorcore[row] = true;
     } else if (s.name == kTensorcoreUtilizationNode) {
-      if (!has_container_tensorcore[chip.index]) {
+      if (!has_container_tensorcore[row]) {
         dbl["tensorcore_utilization"] = s.value;
       }
     } else if (s.name == kMemoryBandwidthUtilization && has_pod) {
       dbl["memory_bandwidth_utilization"] = s.value;
-      has_container_mem_bw[chip.index] = true;
+      has_container_mem_bw[row] = true;
     } else if (s.name == kMemoryBandwidthUtilizationNode) {
-      if (!has_container_mem_bw[chip.index]) {
+      if (!has_container_mem_bw[row]) {
         dbl["memory_bandwidth_utilization"] = s.value;
       }
     }
@@ -477,7 +592,6 @@ void TpuGroupInfo::updateFromSamples(
 
   // Compose memory_utilization from the two capacity gauges, summing
   // per-core capacity onto its chip when memory is reported per core.
-  const int memoryFold = memoryIdsPerDutyCycleId(samples);
   std::unordered_map<int, double> chip_mem_total;
   std::unordered_map<int, double> chip_mem_used;
   std::unordered_map<int, int> chip_paired_cores;
@@ -486,13 +600,14 @@ void TpuGroupInfo::updateFromSamples(
     if (used_it == mem_used.end()) {
       continue;
     }
-    chip_mem_total[idx / memoryFold] += total;
-    chip_mem_used[idx / memoryFold] += used_it->second;
-    ++chip_paired_cores[idx / memoryFold];
+    const int row = rows.forMemoryId(idx);
+    chip_mem_total[row] += total;
+    chip_mem_used[row] += used_it->second;
+    ++chip_paired_cores[row];
   }
   for (const auto& [idx, total] : chip_mem_total) {
     // A ratio over only some of a chip's cores would misstate the chip.
-    if (total <= 0.0 || chip_paired_cores[idx] != memoryFold) {
+    if (total <= 0.0 || chip_paired_cores[idx] != rows.memoryFold()) {
       continue;
     }
     metricsMapDouble_[idx]["memory_utilization"] =

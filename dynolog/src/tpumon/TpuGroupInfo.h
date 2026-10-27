@@ -133,9 +133,9 @@ class TpuGroupInfo {
   const bool forcePodAttribution_;
   bool failing_ = false;
 
-  // Keyed by per-host chip index (0..N-1). N is not known ahead of
-  // time; it's the count of unique accelerator_id suffixes observed on
-  // the last successful scrape.
+  // Keyed by chip record index: the accelerator_id suffix, except that
+  // runtime chip ids (slice-global) are merged onto the host-local ids when
+  // both report the same number of chips (see ChipRows in the .cpp).
   std::unordered_map<int, std::unordered_map<std::string, double>>
       metricsMapDouble_;
   std::unordered_map<int, std::unordered_map<std::string, int64_t>>
