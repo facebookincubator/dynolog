@@ -5,10 +5,13 @@
 
 #include "hbt/src/perf_event/BuiltinMetrics.h"
 #include "hbt/src/perf_event/PerCpuCountSampleGenerator.h"
+#include "hbt/src/perf_event/json_events/generated/intel/JsonEvents.h"
 
 #include <fmt/ostream.h>
 #include <gtest/gtest.h>
 #include <map>
+#include <tuple>
+#include <vector>
 
 using namespace facebook::hbt::perf_event;
 
@@ -348,6 +351,37 @@ TEST_F(BuiltinMetricsTest, LegacyIntelCatalogsPreserveDramAccessOverlay) {
     EXPECT_NE(
         pmuManager->findEventDef("DynoPerfCounter::DRAM_ACCESS_READS"), nullptr)
         << arch;
+  }
+}
+
+TEST_F(BuiltinMetricsTest, SprAndEmrCatalogsSupportEveryStepping) {
+  const std::vector<std::pair<uint32_t, CpuArch>> architectures{
+      {143, CpuArch::SPR},
+      {207, CpuArch::EMR},
+  };
+  const std::vector<std::tuple<const char*, uint64_t, uint64_t>> events{
+      {"UNC_M_CAS_COUNT.RD", 0x05, 0xcf},
+      {"UNC_M_CAS_COUNT.WR", 0x05, 0xf0},
+  };
+
+  for (const auto& [model, arch] : architectures) {
+    for (uint32_t stepping = 0; stepping < 16; ++stepping) {
+      SCOPED_TRACE(fmt::format("{} stepping {}", arch, stepping));
+      const facebook::hbt::CpuInfo cpuInfo("Intel", 6, model, stepping);
+      ASSERT_EQ(cpuInfo.cpu_arch, arch);
+      auto pmuManager = std::make_shared<PmuDeviceManager>(cpuInfo);
+      pmuManager->addPmu(
+          std::make_shared<PmuDevice>(
+              "uncore_imc", PmuType::uncore_imc, 0, 0, "Test IMC PMU", true));
+      ASSERT_NO_THROW(generated::addEvents(model, stepping, *pmuManager));
+
+      for (const auto& [eventId, code, umask] : events) {
+        const auto event = pmuManager->findEventDef(eventId);
+        ASSERT_NE(event, nullptr) << eventId;
+        EXPECT_EQ(event->encoding.code, code) << eventId;
+        EXPECT_EQ(event->encoding.umask, umask) << eventId;
+      }
+    }
   }
 }
 
