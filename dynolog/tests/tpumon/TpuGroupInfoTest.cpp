@@ -385,10 +385,11 @@ std::set<int64_t> deviceIds(const std::vector<CapturedRecord>& records) {
   return ids;
 }
 
-TEST_F(TpuGroupInfoTest, FoldsPerCoreMemoryOntoDutyCycleChips) {
-  // Second host of a 2x2x2 slice on a 2-core chip: duty cycle uses global
-  // chip ids 4-7, memory uses global core ids 8-15, and host-side metrics
-  // use local ids 0-3.
+// Second host of a 2x2x2 slice on a 2-core chip: duty cycle uses global
+// chip ids 4-7, memory uses global core ids 8-15, and host-side metrics use
+// local ids 0-3. Duty cycle is 10x the global chip id and tensorcore is
+// 1 + the local id, so a merged record shows which ids it paired.
+std::string secondHostOfSliceExposition() {
   std::string exposition;
   for (int chip = 4; chip < 8; ++chip) {
     exposition += promLine("duty_cycle", chip, 10.0 * chip);
@@ -398,18 +399,97 @@ TEST_F(TpuGroupInfoTest, FoldsPerCoreMemoryOntoDutyCycleChips) {
     exposition += promLine("memory_used", 2 * chip + 1, 10.0);
   }
   for (int local = 0; local < 4; ++local) {
-    exposition += promLine("tensorcore_utilization", local, 1.0);
+    exposition += promLine("tensorcore_utilization", local, 1.0 + local);
     exposition += promLine("memory_bandwidth_utilization", local, 2.0);
+  }
+  return exposition;
+}
+
+TEST_F(TpuGroupInfoTest, MergesSecondHostOfSliceIntoOneRecordPerChip) {
+  updateFromExposition(secondHostOfSliceExposition());
+
+  const std::set<int64_t> expected = {0, 1, 2, 3};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+  for (int local = 0; local < 4; ++local) {
+    const auto& record = recordByDevice(logger_.records(), local);
+    EXPECT_DOUBLE_EQ(
+        record.floats.at("accelerator_utilization"), 10.0 * (local + 4));
+    EXPECT_DOUBLE_EQ(record.floats.at("tensorcore_utilization"), 1.0 + local);
+    // (30 + 10) / (100 + 100) across the chip's two cores.
+    EXPECT_NEAR(record.floats.at("memory_utilization"), 20.0, 0.01);
+    EXPECT_EQ(record.ints.at("tpu_runtime_chip_id"), local + 4);
+  }
+}
+
+TEST_F(TpuGroupInfoTest, MergesNonContiguousRuntimeChipIdsInSortedOrder) {
+  // A host of a larger slice whose runtime reports memory per chip on the
+  // duty-cycle ids.
+  std::string exposition;
+  for (const int chip : {58, 59, 62, 63}) {
+    exposition += promLine("duty_cycle", chip, chip);
+    exposition += promLine("memory_total", chip, 100.0);
+    exposition += promLine("memory_used", chip, 25.0);
+  }
+  for (int local = 0; local < 4; ++local) {
+    exposition += promLine("tensorcore_utilization", local, 1.0);
   }
 
   updateFromExposition(exposition);
 
-  const std::set<int64_t> expected = {0, 1, 2, 3, 4, 5, 6, 7};
+  const std::set<int64_t> expected = {0, 1, 2, 3};
   EXPECT_EQ(deviceIds(logger_.records()), expected);
-  const auto& chip4 = recordByDevice(logger_.records(), 4);
-  EXPECT_DOUBLE_EQ(chip4.floats.at("accelerator_utilization"), 40.0);
-  // (30 + 10) / (100 + 100) across the chip's two cores.
-  EXPECT_NEAR(chip4.floats.at("memory_utilization"), 20.0, 0.01);
+  const auto& third = recordByDevice(logger_.records(), 2);
+  EXPECT_DOUBLE_EQ(third.floats.at("accelerator_utilization"), 62.0);
+  EXPECT_NEAR(third.floats.at("memory_utilization"), 25.0, 0.01);
+  EXPECT_EQ(third.ints.at("tpu_runtime_chip_id"), 62);
+}
+
+TEST_F(TpuGroupInfoTest, KeepsRecordsSeparateWhenChipCountsDiffer) {
+  // Eight runtime chip ids against four host ids, for example stale series
+  // from a previous slice next to the current ones: no one-to-one mapping.
+  std::string exposition;
+  for (int chip = 4; chip < 12; ++chip) {
+    exposition += promLine("duty_cycle", chip, 50.0);
+  }
+  for (int local = 0; local < 4; ++local) {
+    exposition += promLine("tensorcore_utilization", local, 1.0);
+  }
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+  EXPECT_EQ(
+      recordByDevice(logger_.records(), 4).ints.count("tpu_runtime_chip_id"),
+      0u);
+}
+
+TEST_F(TpuGroupInfoTest, LeavesRuntimeChipIdsThatAreAlreadyHostIds) {
+  // A host whose runtime exposes duty cycle for chip 0 only.
+  std::string exposition = promLine("duty_cycle", 0, 95.0);
+  for (int local = 0; local < 4; ++local) {
+    exposition += promLine("tensorcore_utilization", local, 1.0);
+  }
+
+  updateFromExposition(exposition);
+
+  const std::set<int64_t> expected = {0, 1, 2, 3};
+  EXPECT_EQ(deviceIds(logger_.records()), expected);
+  const auto& first = recordByDevice(logger_.records(), 0);
+  EXPECT_DOUBLE_EQ(first.floats.at("accelerator_utilization"), 95.0);
+  EXPECT_EQ(first.ints.count("tpu_runtime_chip_id"), 0u);
+}
+
+TEST_F(TpuGroupInfoTest, AttributesMergedRecordsToTheCurrentOwner) {
+  currentOwners_ = {metricPodIdentity()};
+
+  updateFromExposition(secondHostOfSliceExposition());
+
+  for (const int64_t device : {0, 1, 2, 3}) {
+    const auto& record = recordByDevice(logger_.records(), device);
+    EXPECT_EQ(record.strings.at("pod_name"), metricPodIdentity().podName);
+    EXPECT_EQ(podLabelRejection(record), kNoRejection);
+  }
 }
 
 TEST_F(TpuGroupInfoTest, OmitsChipMemoryUtilizationWhenACoreIsUnpaired) {
