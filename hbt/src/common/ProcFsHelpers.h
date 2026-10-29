@@ -17,7 +17,14 @@ inline std::optional<std::string> readProcFsCmdLine(pid_t tid) noexcept {
   pfs::procfs pfs;
   try {
     auto vec = pfs.get_task(tid).get_cmdline();
-    return fmt::format("{}", fmt::join(vec, " "));
+    std::string cmdline;
+    for (size_t i = 0; i < vec.size(); ++i) {
+      if (i > 0) {
+        cmdline += ' ';
+      }
+      cmdline += vec[i];
+    }
+    return cmdline;
   } catch (const std::system_error&) {
     return std::nullopt;
   }
