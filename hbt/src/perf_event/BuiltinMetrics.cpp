@@ -3008,6 +3008,30 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           System::Permissions{},
           std::vector<std::string>{}));
 
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_CODE_SPARSITY",
+          "Code sparsity",
+          "Counts code sparsity events.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               EventRefs{EventRef{
+                   "code_sparsity",
+                   PmuType::armv8_pmuv3,
+                   "CODE_SPARSITY",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::NEOVERSE_V3,
+               EventRefs{EventRef{
+                   "code_sparsity",
+                   PmuType::armv8_pmuv3,
+                   "CODE_SPARSITY",
+                   EventExtraAttr{},
+                   {}}}}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
   // L1 Data TLB events
   metrics->add(
       std::make_shared<MetricDesc>(
