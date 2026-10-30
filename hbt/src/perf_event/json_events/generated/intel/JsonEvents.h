@@ -175,6 +175,18 @@ namespace sierraforest_uncore_experimental {
 void addEvents(PmuDeviceManager& pmu_manager);
 } // namespace sierraforest_uncore_experimental
 
+namespace graniterapids_core {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace graniterapids_core
+
+namespace graniterapids_uncore {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace graniterapids_uncore
+
+namespace graniterapids_uncore_experimental {
+void addEvents(PmuDeviceManager& pmu_manager);
+} // namespace graniterapids_uncore_experimental
+
 // Make a key by combining cpu_model ond cpu_step
 constexpr uint64_t toCpuKey(uint32_t cpu_model, uint32_t cpu_step) {
   uint64_t r = cpu_model;
@@ -746,6 +758,54 @@ addEvents(uint32_t cpu_model, uint32_t step, PmuDeviceManager& pmu_manager) {
       skylake_core::addEvents(pmu_manager);
       // from skylake_uncore.json
       skylake_uncore::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(173, 0x0): // fall-through
+    case toCpuKey(173, 0x1): // fall-through
+    case toCpuKey(173, 0x2): // fall-through
+    case toCpuKey(173, 0x3): // fall-through
+    case toCpuKey(173, 0x4): // fall-through
+    case toCpuKey(173, 0x5): // fall-through
+    case toCpuKey(173, 0x6): // fall-through
+    case toCpuKey(173, 0x7): // fall-through
+    case toCpuKey(173, 0x8): // fall-through
+    case toCpuKey(173, 0x9): // fall-through
+    case toCpuKey(173, 0x10): // fall-through
+    case toCpuKey(173, 0x11): // fall-through
+    case toCpuKey(173, 0x12): // fall-through
+    case toCpuKey(173, 0x13): // fall-through
+    case toCpuKey(173, 0x14): // fall-through
+    case toCpuKey(173, 0x15): // fall-through
+      // from graniterapids_core.json
+      graniterapids_core::addEvents(pmu_manager);
+      // from graniterapids_uncore.json
+      graniterapids_uncore::addEvents(pmu_manager);
+      // from graniterapids_uncore_experimental.json
+      graniterapids_uncore_experimental::addEvents(pmu_manager);
+      break;
+
+    case toCpuKey(174, 0x0): // fall-through
+    case toCpuKey(174, 0x1): // fall-through
+    case toCpuKey(174, 0x2): // fall-through
+    case toCpuKey(174, 0x3): // fall-through
+    case toCpuKey(174, 0x4): // fall-through
+    case toCpuKey(174, 0x5): // fall-through
+    case toCpuKey(174, 0x6): // fall-through
+    case toCpuKey(174, 0x7): // fall-through
+    case toCpuKey(174, 0x8): // fall-through
+    case toCpuKey(174, 0x9): // fall-through
+    case toCpuKey(174, 0x10): // fall-through
+    case toCpuKey(174, 0x11): // fall-through
+    case toCpuKey(174, 0x12): // fall-through
+    case toCpuKey(174, 0x13): // fall-through
+    case toCpuKey(174, 0x14): // fall-through
+    case toCpuKey(174, 0x15): // fall-through
+      // from graniterapids_core.json
+      graniterapids_core::addEvents(pmu_manager);
+      // from graniterapids_uncore.json
+      graniterapids_uncore::addEvents(pmu_manager);
+      // from graniterapids_uncore_experimental.json
+      graniterapids_uncore_experimental::addEvents(pmu_manager);
       break;
 
     case toCpuKey(175, 0x0): // fall-through

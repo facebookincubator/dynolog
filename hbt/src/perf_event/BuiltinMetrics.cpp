@@ -3941,7 +3941,7 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           System::Permissions{},
           std::vector<std::string>{}));
 
-  // Intel TOPDOWN fixed counters (SPR/EMR only)
+  // Intel TOPDOWN fixed counters (SPR/EMR/GNR only)
   metrics->add(
       std::make_shared<MetricDesc>(
           "HW_CORE_TOPDOWN_SLOTS",
@@ -3957,6 +3957,13 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
               {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::GNR,
                EventRefs{EventRef{
                    "topdown_slots",
                    PmuType::cpu,
@@ -3982,6 +3989,13 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
               {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_backend_bound_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BACKEND_BOUND_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::GNR,
                EventRefs{EventRef{
                    "topdown_backend_bound_slots",
                    PmuType::cpu,
@@ -4014,6 +4028,13 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
               {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "topdown_bad_spec_slots",
+                   PmuType::cpu,
+                   "TOPDOWN.BAD_SPEC_SLOTS",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::GNR,
                EventRefs{EventRef{
                    "topdown_bad_spec_slots",
                    PmuType::cpu,
@@ -4067,7 +4088,7 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           System::Permissions{},
           std::vector<std::string>{}));
 
-  // Intel software prefetch counter (SPR/EMR)
+  // Intel software prefetch counter (SPR/EMR/GNR)
   metrics->add(
       std::make_shared<MetricDesc>(
           "HW_CORE_SW_PREFETCH_ACCESS_ANY",
@@ -4083,6 +4104,13 @@ void addIntelCoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
               {CpuArch::EMR,
+               EventRefs{EventRef{
+                   "sw_prefetch_access_any",
+                   PmuType::cpu,
+                   "SW_PREFETCH_ACCESS.ANY",
+                   EventExtraAttr{},
+                   {}}}},
+              {CpuArch::GNR,
                EventRefs{EventRef{
                    "sw_prefetch_access_any",
                    PmuType::cpu,
@@ -4842,6 +4870,22 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                        EventExtraAttr{},
                        {},
                    }}},
+              {CpuArch::GNR,
+               EventRefs{
+                   EventRef{
+                       "uncore_cas_count_sch_0_read",
+                       PmuType::uncore_imc,
+                       "UNC_M_CAS_COUNT_SCH0.RD",
+                       EventExtraAttr{},
+                       {},
+                   },
+                   EventRef{
+                       "uncore_cas_count_sch_1_read",
+                       PmuType::uncore_imc,
+                       "UNC_M_CAS_COUNT_SCH1.RD",
+                       EventExtraAttr{},
+                       {},
+                   }}},
           },
           100'000'000,
           System::Permissions{},
@@ -4875,6 +4919,22 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                    EventExtraAttr{},
                    {}}}},
               {CpuArch::SRF,
+               EventRefs{
+                   EventRef{
+                       "uncore_cas_count_sch_0_write",
+                       PmuType::uncore_imc,
+                       "UNC_M_CAS_COUNT_SCH0.WR",
+                       EventExtraAttr{},
+                       {},
+                   },
+                   EventRef{
+                       "uncore_cas_count_sch_1_write",
+                       PmuType::uncore_imc,
+                       "UNC_M_CAS_COUNT_SCH1.WR",
+                       EventExtraAttr{},
+                       {},
+                   }}},
+              {CpuArch::GNR,
                EventRefs{
                    EventRef{
                        "uncore_cas_count_sch_0_write",
@@ -5047,6 +5107,26 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                        "UNC_CHA_CLOCKTICKS",
                        EventExtraAttr{},
                        {}}}},
+              {CpuArch::GNR,
+               EventRefs{
+                   EventRef{
+                       "uncore_cha_tor_occupancy.ia_miss_drd_local",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_LOCAL",
+                       EventExtraAttr{},
+                       {}},
+                   EventRef{
+                       "uncore_cha_tor_inserts.ia_miss_drd_local",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_LOCAL",
+                       EventExtraAttr{},
+                       {}},
+                   EventRef{
+                       "uncore_cha_clocktics",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_CLOCKTICKS",
+                       EventExtraAttr{},
+                       {}}}},
           },
           100'000'000,
           System::Permissions{},
@@ -5099,6 +5179,26 @@ void addIntelUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
                        EventExtraAttr{},
                        {}}}},
               {CpuArch::EMR,
+               EventRefs{
+                   EventRef{
+                       "uncore_cha_tor_occupancy.ia_miss_drd_remote",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_TOR_OCCUPANCY.IA_MISS_DRD_REMOTE",
+                       EventExtraAttr{},
+                       {}},
+                   EventRef{
+                       "uncore_cha_tor_inserts.ia_miss_drd_remote",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_TOR_INSERTS.IA_MISS_DRD_REMOTE",
+                       EventExtraAttr{},
+                       {}},
+                   EventRef{
+                       "uncore_cha_clocktics",
+                       PmuType::uncore_cha,
+                       "UNC_CHA_CLOCKTICKS",
+                       EventExtraAttr{},
+                       {}}}},
+              {CpuArch::GNR,
                EventRefs{
                    EventRef{
                        "uncore_cha_tor_occupancy.ia_miss_drd_remote",

@@ -30,6 +30,7 @@ enum class CpuArch {
   CLX,
   EMR,
   GLM,
+  GNR,
   HSX,
   ICL,
   ICX,
@@ -80,6 +81,8 @@ inline std::ostream& operator<<(std::ostream& os, CpuArch ev) {
       return os << "EMR";
     case CpuArch::GLM:
       return os << "GLM";
+    case CpuArch::GNR:
+      return os << "GNR";
     case CpuArch::HSX:
       return os << "HSX";
     case CpuArch::ICL:
@@ -226,6 +229,10 @@ inline CpuArch makeCpuArchX86(
         return CpuArch::SKL;
       case 166:
         return CpuArch::SKL;
+      case 173:
+        return CpuArch::GNR;
+      case 174:
+        return CpuArch::GNR;
       case 175:
         return CpuArch::SRF;
       case 207:
