@@ -11,6 +11,7 @@ message("Use OTLP = ${USE_OTLP}")
 message("Use ODS Graph API = ${USE_ODS_GRAPH_API}")
 message("Use K8s pod-resources = ${USE_K8S_PODRESOURCES}")
 message("Use TPU = ${USE_TPU}")
+message("Use AMD GPU = ${USE_AMD_GPU}")
 
 # our build script will first create a src/ dir where all source code will exist
 file(GLOB dynolog_src "*.h" "*.cpp")
@@ -65,6 +66,11 @@ add_subdirectory(k8s)
 
 add_subdirectory(gpumon)
 target_link_libraries(dynolog_lib PUBLIC dynolog_dcgm_lib "-ldl")
+
+if(USE_AMD_GPU)
+  target_compile_definitions(dynolog_lib PUBLIC USE_AMD_GPU)
+  target_link_libraries(dynolog_lib PUBLIC dynolog_amd_gpu_monitor_lib)
+endif()
 
 if(USE_TPU)
   add_subdirectory(tpumon)

@@ -39,16 +39,19 @@ TEST_F(AmdDeviceTopologyTest, ParseKfdNodes) {
   EXPECT_EQ(devices[0]->getKfdNodeId(), 1);
   EXPECT_EQ(devices[0]->getMinorId(), 177);
   EXPECT_EQ(devices[0]->getUniqueId(), 9847564688237960509ULL);
+  EXPECT_EQ(devices[0]->getKfdGpuId(), 49015);
 
   // Check second GPU node
   EXPECT_EQ(devices[1]->getKfdNodeId(), 2);
   EXPECT_EQ(devices[1]->getMinorId(), 178);
   EXPECT_EQ(devices[1]->getUniqueId(), 9847564688237960510ULL);
+  EXPECT_EQ(devices[1]->getKfdGpuId(), 26478);
 
   // Check second GPU node
   EXPECT_EQ(devices[2]->getKfdNodeId(), 3);
   EXPECT_EQ(devices[2]->getMinorId(), 179);
   EXPECT_EQ(devices[2]->getUniqueId(), 9847564688237960510ULL);
+  EXPECT_EQ(devices[2]->getKfdGpuId(), 36726);
 }
 
 TEST_F(AmdDeviceTopologyTest, ParsePci) {

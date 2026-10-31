@@ -32,13 +32,8 @@ const std::set<rdc_field_t> kPartitionSupportedMetrics = {
     RDC_FI_PROF_EVAL_FLOPS_16,
     RDC_FI_PROF_EVAL_FLOPS_32,
     RDC_FI_PROF_EVAL_FLOPS_64,
-#if DYNOLOG_ROCM_VERSION >= 70000
-    RDC_FI_KFD_ID,
     RDC_FI_PROF_SIMD_UTILIZATION,
-#elif DYNOLOG_ROCM_VERSION >= 60402
-    RDC_FI_PROF_KFD_ID,
-    RDC_FI_PROF_SIMD_UTILIZATION,
-#endif
+    kRdcKfdIdField,
 };
 
 // check the RDC API reference
@@ -57,8 +52,16 @@ RdcWrapper::RdcWrapper(
   init_(std::move(enabledMetrics), contextWlocked);
 }
 
+RdcWrapper::RdcWrapper()
+    : updateInterval_{0},
+      maxKeepAge_{0},
+      maxKeepSamples_{0},
+      startedRdc_{false} {}
+
 RdcWrapper::~RdcWrapper() {
-  clean();
+  if (startedRdc_) {
+    clean();
+  }
 }
 
 void RdcWrapper::init(std::vector<rdc_field_t> enabledMetrics) {
@@ -135,14 +138,12 @@ RdcMetricsMap RdcWrapper::getRdcMetricsForDevice(uint32_t device) {
   }
   rdc_status_t result;
   for (auto metric : context.data.enabledMetrics_) {
-#if DYNOLOG_ROCM_VERSION >= 60402
     rdc_entity_info_t deviceInfo = rdc_get_info_from_entity_index(device);
     // skip unsupported metrics for partitions
     if (deviceInfo.entity_role == RDC_DEVICE_ROLE_PARTITION_INSTANCE &&
         !kPartitionSupportedMetrics.count(metric)) {
       continue;
     }
-#endif
     rdc_field_value value = {};
     result = rdc_field_get_latest_value(
         context.data.rdcHandle_, device, metric, &value);
@@ -174,6 +175,11 @@ RdcMetricsMap RdcWrapper::getRdcMetricsForDevice(uint32_t device) {
 std::vector<uint32_t> RdcWrapper::getMonitoredEntities() {
   auto contextRlocked = context_.rlock();
   return getMonitoredEntities_(contextRlocked.data);
+}
+
+std::vector<uint32_t> RdcWrapper::getMonitoredDeviceEntities() {
+  auto contextRlocked = context_.rlock();
+  return contextRlocked.data.monitoredDeviceEntities_;
 }
 
 std::vector<uint32_t> RdcWrapper::getMonitoredPartitionsEntities() {
@@ -221,7 +227,6 @@ std::vector<uint32_t> RdcWrapper::listDeviceIds_(RdcRuntimeContext& context) {
 std::vector<uint32_t> RdcWrapper::listPartitionIds_(
     RdcRuntimeContext& context) {
   std::vector<uint32_t> partitionIds;
-#if DYNOLOG_ROCM_VERSION >= 60402
   auto devices = listDeviceIds_(context);
   for (auto dev : devices) {
     uint16_t numPartitions;
@@ -243,7 +248,6 @@ std::vector<uint32_t> RdcWrapper::listPartitionIds_(
       }
     }
   }
-#endif
   return partitionIds;
 }
 
@@ -301,7 +305,6 @@ void RdcWrapper::initGpu_(RdcRuntimeContext& context) {
   }
 }
 void RdcWrapper::initPartition_(RdcRuntimeContext& context) {
-#if DYNOLOG_ROCM_VERSION >= 60402
   auto partitionIds = listPartitionIds_(context);
   if (partitionIds.empty()) {
     return;
@@ -362,7 +365,6 @@ void RdcWrapper::initPartition_(RdcRuntimeContext& context) {
         "rdc_field_watch() failed on partition group with error code: " +
         std::to_string(result));
   }
-#endif
 }
 
 } // namespace gpumon

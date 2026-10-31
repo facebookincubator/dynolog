@@ -30,6 +30,11 @@
 #include "dynolog/src/tpumon/TpuGroupInfo.h"
 #endif
 
+#ifdef USE_AMD_GPU
+// x86_64-only dependency, added through select() in BUCK.
+#include "dynolog/src/gpumon/amd/AmdGpuMonitor.h" // @manual
+#endif
+
 #ifdef USE_PROMETHEUS
 #include "dynolog/src/PrometheusLogger.h"
 #endif
@@ -79,7 +84,8 @@ DEFINE_int32(
 DEFINE_int32(
     dcgm_reporting_interval_s,
     10,
-    "Duration in seconds to read and report metrics for DCGM");
+    "Duration in seconds to read and report metrics for GPU monitoring "
+    "(DCGM or AMD)");
 #ifdef USE_TPU
 DEFINE_bool(
     enable_tpu_monitor,
@@ -103,7 +109,9 @@ DEFINE_bool(
 DEFINE_bool(
     enable_gpu_monitor,
     false,
-    "Enabled GPU monitorng, currently supports NVIDIA GPUs.");
+    "Enable GPU monitoring. Uses AMD GPU monitoring (KFD sysfs, amd-smi, "
+    "RDC) if AMD GPUs are found on the host and dynolog was built with "
+    "USE_AMD_GPU, otherwise NVIDIA DCGM.");
 DEFINE_bool(enable_perf_monitor, false, "Enable heartbeat perf monitoring.");
 
 std::unique_ptr<Logger> getLogger(
@@ -305,13 +313,28 @@ int main(int argc, char** argv) {
   }
 
   if (FLAGS_enable_gpu_monitor) {
-    dcgm = gpumon::DcgmGroupInfo::factory(
-        gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
-    if (!dcgm) {
-      LOG(ERROR) << "Failed to initialize DCGM";
-      return 1;
-    } else {
-      gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
+#ifdef USE_AMD_GPU
+    if (gpumon::AmdGpuMonitor::hostHasAmdGpus()) {
+      auto amd = gpumon::AmdGpuMonitor::factory();
+      if (!amd) {
+        LOG(ERROR) << "Failed to initialize AMD GPU monitoring";
+        return 1;
+      }
+      gpumon_thread = gpumon::AmdGpuMonitor::startMonitoring(
+          std::move(amd),
+          getLogger(FLAGS_scribe_category, /*include_otel=*/true),
+          std::chrono::seconds(FLAGS_dcgm_reporting_interval_s));
+    }
+#endif
+    if (!gpumon_thread) {
+      dcgm = gpumon::DcgmGroupInfo::factory(
+          gpumon::FLAGS_dcgm_fields, FLAGS_dcgm_reporting_interval_s * 1000);
+      if (!dcgm) {
+        LOG(ERROR) << "Failed to initialize DCGM";
+        return 1;
+      } else {
+        gpumon_thread = std::make_unique<std::thread>(gpu_monitor_loop, dcgm);
+      }
     }
   }
   if (!start_tpu_monitor(tpumon_thread)) {

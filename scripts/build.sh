@@ -11,9 +11,11 @@ set -eux -o pipefail
 BUILD_PROMETHEUS="${BUILD_PROMETHEUS:-0}"
 BUILD_OTLP="${BUILD_OTLP:-0}"
 BUILD_TPU="${BUILD_TPU:-0}"
+BUILD_AMD_GPU="${BUILD_AMD_GPU:-0}"
 USE_PROMETHEUS="OFF"
 USE_OTLP="OFF"
 USE_TPU="OFF"
+USE_AMD_GPU="OFF"
 
 # Check dependencies
 cmake --version || echo "Please install cmake for your platform using dnf/apt-get etc."
@@ -106,6 +108,13 @@ if [ "${BUILD_TPU}" -eq 1 ]; then
   USE_TPU="ON"
 fi
 
+## Build AMD GPU monitoring if enabled.
+## Requires ROCm amd-smi and RDC, plus libcap. ROCm is found under /opt/rocm
+## by default; pass -DCMAKE_PREFIX_PATH=<rocm root> for other locations.
+if [ "${BUILD_AMD_GPU}" -eq 1 ]; then
+  USE_AMD_GPU="ON"
+fi
+
 ## Initialize opentelemetry-proto submodule if OTLP is enabled
 if [ "${BUILD_OTLP}" -eq 1 ]
 then
@@ -122,6 +131,7 @@ mkdir -p build; cd build;
 cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
   "-DUSE_K8S_PODRESOURCES=${USE_K8S_PODRESOURCES}" \
   "-DUSE_OTLP=${USE_OTLP}" "-DUSE_TPU=${USE_TPU}" \
+  "-DUSE_AMD_GPU=${USE_AMD_GPU}" \
   -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 

@@ -214,9 +214,27 @@ static const std::unordered_map<std::string, GPUMetricInfo> kGpuMetrics = {
      {"1", {}, /* skip */ false, /* scale_factor */ 0.01}},
     {"gpu_power_draw", {"W", {{"hw.type", "gpu"}}}},
     {"dcgm_error", {"{error}", {{"hw.type", "gpu"}}}},
+    // AMD GPU metrics (AmdGpuMonitor)
+    {"gpu_power_limit", {"W", {{"hw.type", "gpu"}}}},
+    {"gpu_memory_total_bytes", {"By", {}}},
+    {"gpu_memory_used_bytes", {"By", {}}},
+    {"gpu_temperature_hotspot_c", {"Cel", {}}},
+    {"pcie_total_bytes", {"By/s", {{"direction", "total"}}}},
+    // AMD RDC profiling metrics (AmdRdcCollector)
+    {"simd_utilization", {"1", {}}},
+    {"fp16_flops_per_sec", {"{flop}/s", {{"pipe", "fp16"}}}},
+    {"fp32_flops_per_sec", {"{flop}/s", {{"pipe", "fp32"}}}},
+    {"fp64_flops_per_sec", {"{flop}/s", {{"pipe", "fp64"}}}},
+    {"hbm_read_bytes", {"By/s", {{"direction", "read"}}}},
+    {"hbm_write_bytes", {"By/s", {{"direction", "write"}}}},
+    {"xgmi_rx_bytes", {"By/s", {{"direction", "receive"}}}},
+    {"xgmi_tx_bytes", {"By/s", {{"direction", "transmit"}}}},
     // Metadata keys: skip export
     {"minor_id", {"", {}, /* skip */ true}},
     {"device", {"", {}, /* skip */ true}},
+    {"oam_id", {"", {}, /* skip */ true}},
+    {"partition_id", {"", {}, /* skip */ true}},
+    {"kfd_id", {"", {}, /* skip */ true}},
 };
 
 ParsedMetricKey parseMetricKey(const std::string& key) {

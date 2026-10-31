@@ -16,12 +16,10 @@
 #include <variant>
 #include <vector>
 
-#ifdef DYNOLOG_ROCM_VERSION
 #include <dlfcn.h>
 #include <array>
 #include <cstdlib>
 #include <filesystem>
-#endif
 
 DEFINE_int32(
     update_interval_ms,
@@ -33,23 +31,16 @@ DEFINE_int32(
     "Maximum age in seconds to keep RDC samples");
 DEFINE_int32(max_keep_samples, 100, "Maximum number of samples to keep");
 
-#ifdef DYNOLOG_ROCM_VERSION
 constexpr int kRocmVersion = DYNOLOG_ROCM_VERSION;
-#else
-constexpr int kRocmVersion = 0;
-#endif
 
 namespace {
 
 const std::vector<rdc_field_t> kEnabledMetrics = {
-#if DYNOLOG_ROCM_VERSION >= 60200
     RDC_FI_GPU_UTIL,
     RDC_FI_OAM_ID,
     RDC_FI_PCIE_BANDWIDTH,
     RDC_FI_POWER_USAGE,
     RDC_FI_PROF_OCCUPANCY_PERCENT,
-#endif
-#if DYNOLOG_ROCM_VERSION >= 60201
     RDC_FI_PROF_EVAL_MEM_R_BW,
     RDC_FI_PROF_EVAL_MEM_W_BW,
     RDC_FI_PROF_EVAL_FLOPS_16,
@@ -73,20 +64,12 @@ const std::vector<rdc_field_t> kEnabledMetrics = {
     RDC_FI_XGMI_5_WRITE_KB,
     RDC_FI_XGMI_6_WRITE_KB,
     RDC_FI_XGMI_7_WRITE_KB,
-#endif
-#if DYNOLOG_ROCM_VERSION >= 70000
-    RDC_FI_KFD_ID,
     RDC_FI_PROF_SIMD_UTILIZATION,
-#elif DYNOLOG_ROCM_VERSION >= 60402
-    RDC_FI_PROF_KFD_ID,
-    RDC_FI_PROF_SIMD_UTILIZATION,
-#endif
+    dynolog::gpumon::kRdcKfdIdField,
 };
 
-#ifdef DYNOLOG_ROCM_VERSION
 // Preload the ROCm RDC shared libraries from ROCM_PATH as a workaround for
-// dependency loading issues. Only compiled and run when DYNOLOG_ROCM_VERSION is
-// defined.
+// dependency loading issues.
 void preloadRocmLibs() {
   const char* rocmHome = getenv("ROCM_PATH");
   if (rocmHome == nullptr) {
@@ -107,16 +90,13 @@ void preloadRocmLibs() {
     std::cout << "Loaded " << lib << "\n";
   }
 }
-#endif
 
 } // namespace
 
 int main(int argc, char** argv) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
 
-#ifdef DYNOLOG_ROCM_VERSION
   preloadRocmLibs();
-#endif
 
   std::cout << "Initializing RDC example, ROCM version: " << kRocmVersion
             << std::endl;
