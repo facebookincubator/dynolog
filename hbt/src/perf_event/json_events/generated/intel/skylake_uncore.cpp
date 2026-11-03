@@ -26,7 +26,6 @@ namespace {
       - Arch: x86, Model: SKL id: 165
       - Arch: x86, Model: SKL id: 166
 */
-constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
 constexpr std::array<StaticEventDef, 23> kFullOnlyEvents{{

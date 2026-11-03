@@ -22,7 +22,6 @@ namespace {
       - Arch: x86, Model: BDW id: 61
       - Arch: x86, Model: BDW id: 71
 */
-constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
 constexpr std::array<StaticEventDef, 23> kFullOnlyEvents{{

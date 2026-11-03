@@ -21,7 +21,6 @@ namespace {
   Supported SKUs:
       - Arch: x86, Model: SNR id: 134
 */
-constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
 constexpr std::array<StaticEventDef, 512> kFullOnlyEvents0{

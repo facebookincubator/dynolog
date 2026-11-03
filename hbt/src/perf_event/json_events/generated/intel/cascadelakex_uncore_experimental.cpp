@@ -22,7 +22,6 @@ namespace {
       - Arch: x86, Model: CLX id: 85 Steps: ['5', '6', '7', '8', '9', 'A', 'B',
   'C', 'D', 'E', 'F']
 */
-constexpr std::array<StaticEventDef, 0> kAllowlistedEvents{};
 
 #ifdef HBT_ADD_ALL_GENERATED_EVENTS
 constexpr std::array<StaticEventDef, 512> kFullOnlyEvents0{
