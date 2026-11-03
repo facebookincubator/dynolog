@@ -8,13 +8,13 @@
 
 #define BPERF_MAX_GROUP_SIZE 8
 
-#define BPERF_MAX_THREAD_READER 65535
+#define BPERF_MAX_THREAD_READER ((1 << 18) - 1)
 // index 0 is reserved for metadata, and will never be used for a thread
 #define BPERF_INVALID_THREAD_IDX 0
-typedef __u16 idx_t;
+typedef __u32 idx_t;
 
 _Static_assert(
-    (1 << (sizeof(idx_t) * 8)) > BPERF_MAX_THREAD_READER,
+    (1ULL << (sizeof(idx_t) * 8)) > BPERF_MAX_THREAD_READER,
     "idx_t need to be an unsigned type with the max value >= BPERF_MAX_THREAD_READER");
 
 /* x86
