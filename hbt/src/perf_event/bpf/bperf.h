@@ -63,7 +63,7 @@ struct bperf_perf_event_data {
  * TODO @alston64 turning on 64 bits reporting before onboarding to arm hosts
  */
 #if __x86_64__
-#define BPERF_PMC_WIDTH 48
+#define BPERF_PMC_WIDTH 47
 #elif __aarch64__
 #define BPERF_PMC_WIDTH 32
 #else
