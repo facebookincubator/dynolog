@@ -71,6 +71,19 @@ struct bperf_perf_event_data {
 #endif
 #define BPERF_PMC_MASK ((1ULL << BPERF_PMC_WIDTH) - 1)
 
+/* Build config snapshot the leader exposes as a BPF global (see
+ * BPERF_BUILD_CONFIG_SEC): the BPERF_MAX_THREAD_READER / BPERF_PMC_MASK the
+ * running program was compiled with. A new dynolog reads it back from the
+ * pinned leader link and compares against its own build constants to detect
+ * a BPF program version upgrade.
+ */
+struct bperf_prog_info {
+  __u32 max_thread_reader;
+  __u64 pmc_mask;
+};
+
+#define BPERF_BUILD_CONFIG_SEC ".rodata.config"
+
 struct bperf_thread_metadata {
   __u32 metadata_size; /* sizeof(bperf_thread_metadata) */
   __u32 thread_data_size; /* sizeof(bperf_thread_data) */
