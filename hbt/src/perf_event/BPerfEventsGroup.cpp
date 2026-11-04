@@ -125,6 +125,15 @@ done:
   return result;
 }
 
+// True when a bperf_prog_info snapshot read back from a running leader
+// differs from the local build constants, i.e. the leader was built from a
+// different BPF program version with different BPERF_MAX_THREAD_READER /
+// BPERF_PMC_MASK.
+static bool bperf_info_mismatch(__u32 max_thread_reader, __u64 pmc_mask) {
+  return max_thread_reader != (__u32)BPERF_MAX_THREAD_READER ||
+      pmc_mask != BPERF_PMC_MASK;
+}
+
 /// name: Path of ebpf map
 BPerfEventsGroup::BPerfEventsGroup(
     const EventConfs& confs,
@@ -419,6 +428,7 @@ int BPerfEventsGroup::pinThreadMaps_(bperf_leader_cgroup* skel) {
       err) {
     HBT_LOG_WARNING() << "Failed to chmod the map at " << path << ". ";
   }
+
   return 0;
 }
 
@@ -868,8 +878,47 @@ void BPerfEventsGroup::cleanupPinnedLinks(
   ::unlink((bpf_pinned_map_dir / makePinPath(kTrigger, pin_name)).c_str());
 }
 
-// TODO @alston64: we will need this function to handle version change
+// True when the pinned leader was built with different BPERF_MAX_THREAD_READER
+// / BPERF_PMC_MASK (or predates the snapshot entirely) and must be replaced.
+// Reads the BPF global struct bperf_prog_info from the map backing
+// BPERF_BUILD_CONFIG_SEC, resolving the map from the pinned leader link so
+// we inspect the program that is actually running. Anything unreadable also
+// returns true: on a fresh host the restore fails the same way and a fresh
+// load follows, while a pre-snapshot leader must not be reused.
 bool BPerfEventsGroup::shouldRecreateLinks() {
+  struct bperf_prog_info config = {};
+  struct bpf_link* link = nullptr;
+  int map_fd = -1;
+  int zero = 0;
+  bool ok = false;
+
+  if (!per_thread_) {
+    return false;
+  }
+  link = bpf_link__open(
+      (bpf_pinned_map_dir_ / makePinPath(kContextSwitch, pin_name_)).c_str());
+  if (!link) {
+    HBT_LOG_INFO() << "no pinned bperf leader link, recreating links";
+    return true;
+  }
+  map_fd =
+      bpf_link_get_map_fd_by_name(bpf_link__fd(link), BPERF_BUILD_CONFIG_SEC);
+  if (map_fd >= 0) {
+    ok = ::bpf_map_lookup_elem(map_fd, &zero, &config) == 0;
+    ::close(map_fd);
+  }
+  bpf_link__destroy(link);
+  if (!ok) {
+    HBT_LOG_INFO() << "cannot read running bperf leader build config, "
+                   << "recreating links";
+    return true;
+  }
+  if (bperf_info_mismatch(config.max_thread_reader, config.pmc_mask)) {
+    HBT_LOG_INFO() << "running bperf leader config differs "
+                   << "(max_thread_reader=" << config.max_thread_reader
+                   << ", pmc_mask=" << config.pmc_mask << "), recreating links";
+    return true;
+  }
   return false;
 }
 
@@ -968,6 +1017,14 @@ error:
   unregister_thread_link_ = nullptr;
   bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
+
+  // Stale or partial pins would make pinLinks() fail with EEXIST and keep the
+  // old leader attached. Remove them before the new program is loaded, while
+  // the per-thread map path still points at the old map so its readers are
+  // told to stop.
+  if (pin_links_) {
+    cleanupPinnedLinks(pin_name_, bpf_pinned_map_dir_);
+  }
 
   return false;
 }

@@ -260,6 +260,18 @@ int BPF_PROG(bperf_read_trigger) {
   return bperf_leader_prog(task, task);
 }
 
+/* Snapshot of the build-time constants this program was compiled with,
+ * exposed as a BPF global in its own rodata section (BPERF_BUILD_CONFIG_SEC)
+ * so the section's backing map holds exactly struct bperf_prog_info.
+ * A new dynolog resolves that map from the pinned leader link and reads it
+ * back to detect a BPF program version upgrade. Values come from this build,
+ * so userspace must not overwrite them before load.
+ */
+struct bperf_prog_info bperf_prog_info SEC(BPERF_BUILD_CONFIG_SEC) = {
+    .max_thread_reader = BPERF_MAX_THREAD_READER,
+    .pmc_mask = BPERF_PMC_MASK,
+};
+
 /* bperf per thread monitoring */
 
 /* per_thread_idx and per_thread_data map the channel that lead program,
