@@ -67,7 +67,7 @@ TEST(ArmEventsTest, ScanPmu) {
   addArmEvents(cpu_info, pmu_manager);
 
   auto pmu = pmu_manager.getPmuGroups().at(PmuType::armv8_pmuv3);
-  EXPECT_EQ(pmu.at(kDeviceEnum)->getEventDefs().size(), 4);
+  EXPECT_EQ(pmu.at(kDeviceEnum)->getEventDefs().size(), 5);
 
   auto event1 = pmu_manager.findEventDef("cpu_cycles");
   EXPECT_TRUE(event1 != nullptr);
@@ -106,6 +106,7 @@ TEST(ArmEventsTest, AddNeoverseV3CoreEvents) {
   addArmEvents(cpu_info, pmu_manager);
 
   const std::map<std::string, uint64_t> expected{
+      {"CODE_SPARSITY", 0x11c},
       {"BR_RETIRED_V3", 0x21},
       {"BR_MIS_PRED_RETIRED_V3", 0x22},
       {"OP_RETIRED_V3", 0x3A},

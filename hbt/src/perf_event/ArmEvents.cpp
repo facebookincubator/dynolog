@@ -143,6 +143,14 @@ void addEvents(PmuDeviceManager& pmu_manager) {
           EventDef::Encoding{.code = 0x801C},
           "Floating-point operation speculatively executed, double precision",
           "Counts speculatively executed double precision floating point operations."));
+
+  pmu_manager.addEvent(
+      std::make_shared<EventDef>(
+          PmuType::armv8_pmuv3,
+          "CODE_SPARSITY",
+          EventDef::Encoding{.code = 0x11c},
+          "Code sparsity",
+          "Counts code sparsity events."));
 }
 
 } // namespace neoverse_v2
