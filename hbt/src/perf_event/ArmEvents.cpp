@@ -159,7 +159,8 @@ void addNeoverseV3CoreEvents(PmuDeviceManager& pmu_manager) {
     const char* briefDesc;
     const char* fullDesc;
   };
-  constexpr std::array<CoreEvent, 10> kCoreEvents{{
+  constexpr std::array<CoreEvent, 11> kCoreEvents{{
+      {"CPU_CYCLES_V3", 0x11, "CPU cycles", "Counts processor clock cycles."},
       {"BR_RETIRED_V3",
        0x21,
        "Branch retired",

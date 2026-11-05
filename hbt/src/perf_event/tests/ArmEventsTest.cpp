@@ -106,6 +106,7 @@ TEST(ArmEventsTest, AddNeoverseV3CoreEvents) {
   addArmEvents(cpu_info, pmu_manager);
 
   const std::map<std::string, uint64_t> expected{
+      {"CPU_CYCLES_V3", 0x11},
       {"BR_RETIRED_V3", 0x21},
       {"BR_MIS_PRED_RETIRED_V3", 0x22},
       {"OP_RETIRED_V3", 0x3A},
