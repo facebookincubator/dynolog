@@ -266,6 +266,70 @@ TEST(UncoreCountReader, ReadAllUncoreCounts) {
 
 // Integration tests for Monitor + MuxQueueStrategy
 
+TEST(MonitorSchedulingIntegration, FailedUncoreReaderIsNotScheduled) {
+  auto cpu_info = CpuInfo("Intel", 6, 207, 0);
+  auto cpu_set = CpuSet::makeFromCpusList("0,20");
+  auto pmu_manager = std::make_shared<perf_event::PmuDeviceManager>(cpu_info);
+  pmu_manager->addPmu(
+      std::make_shared<perf_event::PmuDevice>(
+          PmuTypeToStr(perf_event::PmuType::uncore_imc),
+          perf_event::PmuType::uncore_imc,
+          /*pmu_device_enumeration=*/0,
+          /*perf_pmu_id=*/14,
+          "uncore_imc_0",
+          /*in_sysfs=*/true,
+          /*cpu_mask=*/cpu_set.cpu_set));
+  // Only the read event exists, so the write metric's reader can't be built.
+  pmu_manager->addEvent(
+      std::make_shared<perf_event::EventDef>(
+          perf_event::PmuType::uncore_imc,
+          "UNC_M_CAS_COUNT.RD",
+          perf_event::EventDef::Encoding{.code = 0x4, .umask = 0x3},
+          "DRAM reads.",
+          "DRAM reads."));
+  auto metrics = std::make_shared<perf_event::Metrics>();
+  perf_event::addIntelUncoreMetrics(metrics);
+
+  auto uncore_factory =
+      std::make_unique<perf_event::MockPerUncoreCountReaderFactory>();
+  uncore_factory->setExpectation(
+      "HW_UNCORE_MEM_BW_READ",
+      [](perf_event::MockPerUncoreCountReader* reader) {
+        EXPECT_CALL(*reader, isOpen).WillRepeatedly(Return(false));
+        EXPECT_CALL(*reader, isEnabled).WillRepeatedly(Return(false));
+      });
+
+  Monitor mon(
+      std::make_unique<perf_event::MockPerCpuCountReaderFactory>(),
+      std::move(uncore_factory),
+      /*mux_queue_per_pmu_type=*/true,
+      /*reset=*/false);
+  const std::vector<perf_event::uncore_scope::Scope> scopes{
+      perf_event::uncore_scope::Host{}};
+  EXPECT_NE(
+      mon.emplaceUncoreCountReader(
+          "group_read",
+          "HW_UNCORE_MEM_BW_READ",
+          metrics->getMetricDesc("HW_UNCORE_MEM_BW_READ"),
+          pmu_manager,
+          scopes),
+      nullptr);
+  EXPECT_EQ(
+      mon.emplaceUncoreCountReader(
+          "group_write",
+          "HW_UNCORE_MEM_BW_WRITE",
+          metrics->getMetricDesc("HW_UNCORE_MEM_BW_WRITE"),
+          pmu_manager,
+          scopes),
+      nullptr);
+  EXPECT_EQ(mon.numUncoreCountReaders(), 1u);
+
+  std::ostringstream os;
+  mon.printMuxQueueStatus(os);
+  EXPECT_NE(os.str().find("group_read"), std::string::npos);
+  EXPECT_EQ(os.str().find("group_write"), std::string::npos);
+}
+
 TEST(MonitorSchedulingIntegration, PerPmuTypeConstructorPropagatesFlag) {
   auto cpu_factory =
       std::make_unique<perf_event::MockPerCpuCountReaderFactory>();

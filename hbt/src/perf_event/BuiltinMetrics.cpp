@@ -4447,8 +4447,9 @@ void addArmUncoreMetrics(
   // differ from Grace-Hopper (nvidia_ucf_pmu vs nvidia_scf_pmu, a single
   // nvidia_nvlink_c2c_pmu vs c2c0/c2c1, per-root-complex pcie), so these are
   // distinct metric ids. They bind on Vera (which maps to NEOVERSE_V2) and are
-  // gracefully skipped on Grace-Hopper where the PMU is absent (the uncore
-  // reader setup catches the missing-event-def and continues).
+  // gracefully skipped on Grace-Hopper, which lacks these PMUs or, for PCIe,
+  // these event names (the uncore reader setup catches the missing-event-def
+  // and continues).
   const auto addVeraUncore = [&metrics](
                                  const MetricId& id,
                                  const std::string& desc,
@@ -4762,6 +4763,44 @@ void addArmUncoreMetrics(
           100'000'000,
           System::Permissions{},
           std::vector<std::string>{}));
+
+  // Grace PCIe: bytes that PCIe devices (NICs, SSDs) read from and write to
+  // local and remote memory, GPU memory included. Vera's PCIe PMU names its
+  // events differently (HW_PCIE_RD_BYTES above). root_port is left unset:
+  // kernels 6.14 and newer then count all root ports, older kernels none.
+  struct GracePcieMetric {
+    const char* id;
+    const char* event;
+    const char* desc;
+  };
+  for (const auto& m :
+       {GracePcieMetric{
+            "HW_PCIE_RD_BYTES_LOC", "rd_bytes_loc", "PCIe read bytes local"},
+        GracePcieMetric{
+            "HW_PCIE_RD_BYTES_REM", "rd_bytes_rem", "PCIe read bytes remote"},
+        GracePcieMetric{
+            "HW_PCIE_WR_BYTES_LOC", "wr_bytes_loc", "PCIe write bytes local"},
+        GracePcieMetric{
+            "HW_PCIE_WR_BYTES_REM",
+            "wr_bytes_rem",
+            "PCIe write bytes remote"}}) {
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            m.id,
+            m.desc,
+            m.desc,
+            std::map<TOptCpuArch, EventRefs>{
+                {CpuArch::NEOVERSE_V2,
+                 EventRefs{EventRef{
+                     std::string("pcie_") + m.event,
+                     PmuType::nvidia_pcie_pmu,
+                     m.event,
+                     EventExtraAttr{},
+                     {}}}}},
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  }
 
   // Socket-specific metrics for remote socket read latency measurement
   // Only add these metrics when there are multiple sockets (socket count > 1)
