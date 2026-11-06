@@ -9,8 +9,10 @@
 #include <sys/xattr.h>
 #include <unistd.h>
 #include <algorithm>
+#include <cctype>
 #include <memory>
 #include <optional>
+#include <string_view>
 #include "hbt/src/perf_event/bperf_leader_cgroup.skel.h"
 
 namespace facebook::hbt::perf_event {
@@ -21,13 +23,29 @@ const static std::string kPmuEnableExit = "dyno_bperf_pmu_enable";
 const static std::string kContextSwitch = "dyno_bperf_context_switch";
 const static std::string kTrigger = "dyno_bperf_trigger";
 
+// Bump whenever the BPF program changes incompatibly, so a new leader replaces
+// links pinned by an older one instead of reusing them.
+//
+// Assumes at most one leader version is pinned on a host at a time: a build
+// unaware of the current suffix must never start after a newer build pinned
+// its links. The per-thread map pins carry no suffix and always point at the
+// latest loaded leader's map, so if two versions coexist, cleaning up the
+// older one cannot tell its readers to stop.
+constexpr std::string_view kPinVersionSuffix = "v2";
+
+// Joins non-empty parts with "_": <base>[_<pin_name>][_<version>].
 static inline std::string makePinPath(
     const std::string& base,
-    const std::string& pin_name) {
-  if (pin_name.empty()) {
-    return base;
+    const std::string& pin_name,
+    std::string_view version = kPinVersionSuffix) {
+  std::string path = base;
+  if (!pin_name.empty()) {
+    path += fmt::format("_{}", pin_name);
   }
-  return fmt::format("{}_{}", base, pin_name);
+  if (!version.empty()) {
+    path += fmt::format("_{}", version);
+  }
+  return path;
 }
 
 static inline __u32 bpf_link_get_prog_id(int fd) {
@@ -850,27 +868,81 @@ void BPerfEventsGroup::disablePerThreadMetadata(
   ::close(map_fd);
 }
 
+static void cleanupPinnedLinksWithSuffix(
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir,
+    std::string_view suffix) {
+  // unlink register/unregister first to prevent new readers and
+  // avoid other modifiers of the bpf map
+  ::unlink((bpf_pinned_map_dir / makePinPath(kRegisterLink, pin_name, suffix))
+               .c_str());
+  ::unlink((bpf_pinned_map_dir / makePinPath(kUnregisterLink, pin_name, suffix))
+               .c_str());
+
+  // Relies on the single-version assumption (see kPinVersionSuffix): the
+  // unsuffixed per-thread map pin belongs to the leader being cleaned up.
+  BPerfEventsGroup::disablePerThreadMetadata(pin_name, bpf_pinned_map_dir);
+
+  ::unlink((bpf_pinned_map_dir / makePinPath(kPmuEnableExit, pin_name, suffix))
+               .c_str());
+  ::unlink((bpf_pinned_map_dir / makePinPath(kContextSwitch, pin_name, suffix))
+               .c_str());
+  ::unlink(
+      (bpf_pinned_map_dir / makePinPath(kTrigger, pin_name, suffix)).c_str());
+}
+
+static bool isVersion(std::string_view version) {
+  return version.size() > 1 && version.starts_with("v") &&
+      std::all_of(version.begin() + 1, version.end(), [](unsigned char c) {
+           return std::isdigit(c);
+         });
+}
+
+// Version of the pinned leader link: "" for links pinned before versioning
+// was added, "v<N>" otherwise, or nullopt if none is pinned.
+// Relies on the single-version assumption (see kPinVersionSuffix).
+static std::optional<std::string> getPinnedVersionSuffix(
+    const std::string& pin_name,
+    const std::filesystem::path& bpf_pinned_map_dir) {
+  const auto prefix = makePinPath(kContextSwitch, pin_name, "");
+  std::error_code ec;
+  for (auto it = std::filesystem::directory_iterator(bpf_pinned_map_dir, ec);
+       !ec && it != std::filesystem::directory_iterator();
+       it.increment(ec)) {
+    const auto name = it->path().filename().string();
+    if (name == prefix) {
+      return std::string();
+    }
+    if (!name.starts_with(prefix + "_")) {
+      continue;
+    }
+    const auto version = std::string_view(name).substr(prefix.size() + 1);
+    if (isVersion(version)) {
+      return std::string(version);
+    }
+  }
+  if (ec && ec != std::errc::no_such_file_or_directory) {
+    HBT_LOG_ERROR() << "failed to scan " << bpf_pinned_map_dir
+                    << " for pinned bperf links: " << ec.message();
+  }
+  return std::nullopt;
+}
+
+// Removes the pinned links of whichever version is pinned. Falls back to the
+// current version so partially pinned links without a leader are removed too.
 void BPerfEventsGroup::cleanupPinnedLinks(
     const std::string& pin_name,
     const std::filesystem::path& bpf_pinned_map_dir) {
-  // unlink register/unregister first to prevent new readers and
-  // avoid other modifiers of the bpf map
-  ::unlink((bpf_pinned_map_dir / makePinPath(kRegisterLink, pin_name)).c_str());
-  ::unlink(
-      (bpf_pinned_map_dir / makePinPath(kUnregisterLink, pin_name)).c_str());
-
-  disablePerThreadMetadata(pin_name, bpf_pinned_map_dir);
-
-  ::unlink(
-      (bpf_pinned_map_dir / makePinPath(kPmuEnableExit, pin_name)).c_str());
-  ::unlink(
-      (bpf_pinned_map_dir / makePinPath(kContextSwitch, pin_name)).c_str());
-  ::unlink((bpf_pinned_map_dir / makePinPath(kTrigger, pin_name)).c_str());
+  const auto suffix = getPinnedVersionSuffix(pin_name, bpf_pinned_map_dir)
+                          .value_or(std::string(kPinVersionSuffix));
+  HBT_LOG_INFO() << "cleaning up bperf links pinned with version suffix '"
+                 << suffix << "'";
+  cleanupPinnedLinksWithSuffix(pin_name, bpf_pinned_map_dir, suffix);
 }
 
-// TODO @alston64: we will need this function to handle version change
 bool BPerfEventsGroup::shouldRecreateLinks() {
-  return false;
+  const auto suffix = getPinnedVersionSuffix(pin_name_, bpf_pinned_map_dir_);
+  return suffix.has_value() && *suffix != kPinVersionSuffix;
 }
 
 bool BPerfEventsGroup::restoreFromLinks() {
@@ -881,7 +953,8 @@ bool BPerfEventsGroup::restoreFromLinks() {
     return false;
   }
   if (shouldRecreateLinks()) {
-    HBT_LOG_INFO() << "version has changed. Recreating links";
+    HBT_LOG_INFO() << "found bperf links pinned by another version, expected '"
+                   << kPinVersionSuffix << "'. Recreating links";
     goto error;
   }
   register_thread_link_ = bpf_link__open(
@@ -968,6 +1041,12 @@ error:
   unregister_thread_link_ = nullptr;
   bpf_link__destroy(pmu_enable_exit_link_);
   pmu_enable_exit_link_ = nullptr;
+
+  // Stale-version or partial pins would make pinLinks() fail with EEXIST and
+  // keep the old leader attached, so drop every pinned version before reload.
+  if (pin_links_) {
+    cleanupPinnedLinks(pin_name_, bpf_pinned_map_dir_);
+  }
 
   return false;
 }
