@@ -470,6 +470,27 @@ TEST_F(BuiltinMetricsTest, VeraUncoreMetricsRegistered) {
   EXPECT_EQ(refs->at(0).event_id, "mem_bytes_rd");
 }
 
+TEST_F(BuiltinMetricsTest, GracePcieMetricsBindGraceEvents) {
+  auto armMetrics = std::make_shared<Metrics>();
+  addArmUncoreMetrics(armMetrics, /*cpuSockets=*/2);
+
+  const std::map<std::string, std::string> gracePcieEvents{
+      {"HW_PCIE_RD_BYTES_LOC", "rd_bytes_loc"},
+      {"HW_PCIE_RD_BYTES_REM", "rd_bytes_rem"},
+      {"HW_PCIE_WR_BYTES_LOC", "wr_bytes_loc"},
+      {"HW_PCIE_WR_BYTES_REM", "wr_bytes_rem"},
+  };
+  for (const auto& [metricId, eventId] : gracePcieEvents) {
+    const auto metric = armMetrics->getMetricDesc(metricId);
+    ASSERT_NE(metric, nullptr) << metricId;
+    const auto refs = metric->getEventRefs(CpuArch::NEOVERSE_V2);
+    ASSERT_TRUE(refs.has_value()) << metricId;
+    ASSERT_EQ(refs->size(), 1u) << metricId;
+    EXPECT_EQ(refs->at(0).pmu_type, PmuType::nvidia_pcie_pmu) << metricId;
+    EXPECT_EQ(refs->at(0).event_id, eventId) << metricId;
+  }
+}
+
 TEST_F(BuiltinMetricsTest, HwCacheEvents) {
   // -- test for hw cache events
   auto l1_dcache_load_hits = pmu_manager->findEventDef(

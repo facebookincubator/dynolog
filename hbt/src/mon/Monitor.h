@@ -685,11 +685,14 @@ class Monitor {
 
       auto pmu_type = getPmuTypeOfMetric(*metric_desc, *pmu_manager);
 
+      // Create the reader before scheduling it: if this host lacks the
+      // metric's events, make() throws and no empty slot is left in the mux
+      // queue to take turns from the other metrics on the same PMU.
+      auto reader = uncore_count_reader_factory_->make(
+          elem_id, scopes, metric_desc, pmu_manager);
       addMuxEntry_(mux_group_id, elem_id, pmu_type);
-      auto [it, emplaced] = uncore_count_readers_.emplace(
-          elem_id,
-          uncore_count_reader_factory_->make(
-              elem_id, scopes, metric_desc, pmu_manager));
+      auto [it, emplaced] =
+          uncore_count_readers_.emplace(elem_id, std::move(reader));
       for (auto& scope : scopes) {
         // Keep track of element ids for each scope.
         uncore_scope_ids_[scope].insert(elem_id);
