@@ -40,7 +40,9 @@ TEST_F(BuiltinMetricsTest, Init) {
   EXPECT_EQ(ipc_desc->event_refs_by_arch.size(), 1);
   auto cpuInfo = pmu_manager->cpuInfo;
   HBT_LOG_INFO() << fmt::format(
-      "CpuInfo: {} CpuArch: {}", cpuInfo, cpuInfo.cpu_arch);
+      "CpuInfo: {} CpuArch: {}",
+      fmt::streamed(cpuInfo),
+      fmt::streamed(cpuInfo.cpu_arch));
   EXPECT_EQ(ipc_desc->event_refs_by_arch.at(std::nullopt).size(), 2);
 }
 
@@ -366,7 +368,8 @@ TEST_F(BuiltinMetricsTest, SprAndEmrCatalogsSupportEveryStepping) {
 
   for (const auto& [model, arch] : architectures) {
     for (uint32_t stepping = 0; stepping < 16; ++stepping) {
-      SCOPED_TRACE(fmt::format("{} stepping {}", arch, stepping));
+      SCOPED_TRACE(
+          fmt::format("{} stepping {}", fmt::streamed(arch), stepping));
       const facebook::hbt::CpuInfo cpuInfo("Intel", 6, model, stepping);
       ASSERT_EQ(cpuInfo.cpu_arch, arch);
       auto pmuManager = std::make_shared<PmuDeviceManager>(cpuInfo);
