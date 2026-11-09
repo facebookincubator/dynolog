@@ -151,10 +151,17 @@ class MuxQueueStrategy : public SchedulingStrategy<MuxGroupIdType, ElemIdType> {
         } else {
           os << "  ";
         }
+        std::string elems;
+        bool firstElem = true;
+        for (const auto& elem : mux_groups_.at(g_id)) {
+          if (!firstElem) {
+            elems += ", ";
+          }
+          firstElem = false;
+          elems += fmt::format("{}", elem);
+        }
         os << fmt::format(
-            "<{}: {}>",
-            g_id.has_value() ? g_id.value() : "<None>",
-            fmt::join(mux_groups_.at(g_id), ", "));
+            "<{}: {}>", g_id.has_value() ? g_id.value() : "<None>", elems);
         os << "\n";
       }
     }
