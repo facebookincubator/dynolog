@@ -7,6 +7,8 @@
 
 #include "dynolog/src/rdmamon/SysfsCounter.h"
 
+#include <fcntl.h>
+#include <glog/logging.h>
 // @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror
 
 namespace dynolog::rdmamon {

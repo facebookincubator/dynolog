@@ -8,10 +8,15 @@
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
 
 #include <glog/logging.h>
+#include <rdc/rdc.h>
 #include <unistd.h>
+#include <cstdio>
 #include <fstream>
 #include <mutex>
 #include <set>
+#include <stdexcept>
+#include <string>
+#include <utility>
 
 namespace dynolog {
 namespace gpumon {

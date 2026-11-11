@@ -6,10 +6,15 @@
  */
 
 #include "dynolog/src/metric_frame/MetricFrame.h"
+#include "dynolog/src/metric_frame/MetricFrameBase.h"
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 
+#include <algorithm>
+#include <optional>
+#include <ostream>
 #include <stdexcept>
 #include <utility>
+#include <variant>
 
 namespace facebook::dynolog {
 

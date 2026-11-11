@@ -9,8 +9,11 @@
 
 #include <array>
 #include <fstream>
+#include <iterator>
 #include <string_view>
 #include <utility>
+
+#include <folly/logging/LogStreamProcessor.h>
 
 #if __has_include(<folly/logging/xlog.h>)
 #include <folly/logging/xlog.h>

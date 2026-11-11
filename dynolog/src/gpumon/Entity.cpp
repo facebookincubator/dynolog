@@ -7,6 +7,8 @@
 
 #include "dynolog/src/gpumon/Entity.h"
 
+#include "dynolog/src/gpumon/dcgm_fields.h"
+#include "dynolog/src/gpumon/dcgm_structs.h"
 Entity::Entity(const dcgmGroupEntityPair_t& entity)
     : Entity{entity.entityGroupId, entity.entityId} {}
 

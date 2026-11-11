@@ -9,6 +9,8 @@
 
 #include <cstdint>
 #include <ostream>
+#include <stdexcept>
+#include <string>
 
 namespace facebook::dynolog {
 

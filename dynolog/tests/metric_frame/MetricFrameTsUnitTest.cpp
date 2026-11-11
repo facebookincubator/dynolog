@@ -9,6 +9,13 @@
 
 #include "dynolog/src/metric_frame/MetricFrameTsUnit.h"
 
+#include <chrono>
+#include <optional>
+#include <string>
+#include <vector>
+
+#include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
+
 using namespace ::testing;
 using namespace ::facebook::dynolog;
 

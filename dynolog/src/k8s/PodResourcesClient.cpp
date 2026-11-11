@@ -8,16 +8,21 @@
 #include "dynolog/src/k8s/PodResourcesClient.h"
 
 #include <glog/logging.h>
+#include <google/protobuf/repeated_ptr_field.h>
 #include <grpcpp/channel.h>
 #include <grpcpp/client_context.h>
 #include <grpcpp/create_channel.h>
 #include <grpcpp/security/credentials.h>
+#include <grpcpp/support/status.h>
+#include <grpcpp/support/status_code_enum.h>
 
 #include <atomic>
 #include <mutex>
+#include <ostream>
 #include <utility>
 
 #include "dynolog/src/k8s/kubelet_podresources/api.grpc.pb.h"
+#include "dynolog/src/k8s/kubelet_podresources/api.pb.h"
 
 namespace dynolog::k8s {
 

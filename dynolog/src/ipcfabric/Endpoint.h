@@ -8,11 +8,15 @@
 #pragma once
 
 #include <asm/unistd.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <cstdio>
+#include <exception>
 #include <stdexcept>
 
 #include <cstddef>

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <stdint.h>
 #include <chrono>
 #include <map>
 #include <memory>
@@ -14,6 +16,7 @@
 #include <optional>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace dynolog {

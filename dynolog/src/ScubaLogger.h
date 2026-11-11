@@ -7,7 +7,14 @@
 
 #pragma once
 
+#include <stdint.h>
+#include <string>
+
+#include <gflags/gflags_declare.h>
+
 #include "dynolog/src/Logger.h"
+#include "nlohmann/json.hpp"
+#include "nlohmann/json_fwd.hpp"
 
 namespace dynolog {
 

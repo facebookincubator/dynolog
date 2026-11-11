@@ -7,9 +7,18 @@
 
 #pragma once
 
+#include <map>
+#include <memory>
+#include <optional>
+#include <string>
+#include <vector>
+
 #include "dynolog/src/Logger.h"
+#include "hbt/src/common/System.h"
 #include "hbt/src/mon/Monitor.h"
 #include "hbt/src/perf_event/BuiltinMetrics.h"
+#include "hbt/src/perf_event/Metrics.h"
+#include "hbt/src/perf_event/PmuDevices.h"
 
 namespace hbt = facebook::hbt;
 

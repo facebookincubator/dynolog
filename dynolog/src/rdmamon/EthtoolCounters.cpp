@@ -9,6 +9,15 @@
 
 #include "dynolog/src/rdmamon/EthtoolCounters.h"
 
+#include <stddef.h>
+#include <stdint.h>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "dynolog/src/EthtoolStatsReader.h"
+
 namespace dynolog::rdmamon {
 
 bool EthtoolCounters::setupEthtoolCounters() {

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include <gflags/gflags.h>
 #include "dynolog/src/gpumon/dcgm_fields.h"
 #include "dynolog/src/gpumon/dcgm_structs.h"

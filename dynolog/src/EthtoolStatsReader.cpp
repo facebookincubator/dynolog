@@ -7,12 +7,16 @@
 
 #include "dynolog/src/EthtoolStatsReader.h"
 
+#include <errno.h>
 #include <glog/logging.h>
+#include <linux/ethtool.h>
 #include <linux/sockios.h>
 #include <netinet/in.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
 #include <unistd.h>
 #include <cstring>
+#include <ostream>
 #include <system_error>
 
 namespace dynolog {

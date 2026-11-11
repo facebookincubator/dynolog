@@ -14,7 +14,10 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <exception>
+#include <iterator>
 #include <mutex>
+#include <ostream>
 #include <string_view>
 #include <utility>
 

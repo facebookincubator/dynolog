@@ -8,8 +8,13 @@
 #pragma once
 
 #include <glog/logging.h>
+#include <array>
+#include <exception>
 #include <memory>
+#include <ostream>
+#include <string>
 #include <utility>
+#include <vector>
 
 namespace facebook::dynolog {
 

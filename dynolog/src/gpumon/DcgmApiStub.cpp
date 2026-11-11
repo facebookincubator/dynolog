@@ -7,12 +7,17 @@
 
 #include "dynolog/src/gpumon/DcgmApiStub.h"
 #include <dlfcn.h>
+#include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <stddef.h>
 #include <cctype>
 #include <filesystem>
 #include <mutex>
 #include <ostream>
 #include <string>
+
+#include "dynolog/src/gpumon/dcgm_fields.h"
+#include "dynolog/src/gpumon/dcgm_structs.h"
 
 constexpr char kDcgmDefaultLibPath[] = "/lib64/libdcgm.so";
 

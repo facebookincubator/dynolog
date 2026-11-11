@@ -7,8 +7,12 @@
 
 #include "dynolog/src/Logger.h"
 #include <fmt/format.h>
+#include <gflags/gflags.h>
 #include <glog/logging.h>
 #include <ctime>
+#include <ostream>
+
+#include "nlohmann/json.hpp"
 
 using json = nlohmann::json;
 

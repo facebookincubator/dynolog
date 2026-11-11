@@ -7,6 +7,7 @@
 
 #include "dynolog/src/String.h"
 
+#include <stddef.h>
 #include <string>
 #include <string_view>
 #include <vector>

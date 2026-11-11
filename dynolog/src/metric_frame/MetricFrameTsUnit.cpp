@@ -7,8 +7,16 @@
 
 #include "dynolog/src/metric_frame/MetricFrameTsUnit.h"
 
+#include <algorithm>
 #include <cmath>
+#include <compare>
+#include <ratio>
 #include <stdexcept>
+#include <string>
+#include <vector>
+
+#include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
+#include "dynolog/src/metric_frame/MetricSeries.h"
 
 namespace facebook::dynolog {
 

@@ -6,6 +6,10 @@
  */
 
 #define USE_GOOGLE_LOG
+
+#include <memory>
+#include <string>
+
 #include "dynolog/src/ipcfabric/FabricManager.h"
 
 int main() {

@@ -9,9 +9,17 @@
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
+#include <chrono>
 #include <condition_variable>
+#include <memory>
 #include <mutex>
+#include <set>
+#include <thread>
+#include <utility>
+#include <vector>
 #include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/LibkinetoTypes.h"
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 

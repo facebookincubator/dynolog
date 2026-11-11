@@ -7,6 +7,13 @@
 
 #include "dynolog/src/rdmamon/RdmaMonitor.h"
 
+#include <ostream>
+
+#include <glog/logging.h>
+
+#include "dynolog/src/rdmamon/EthtoolCounters.h"
+#include "dynolog/src/rdmamon/RdmaCounters.h"
+
 namespace dynolog::rdmamon {
 
 bool RdmaPortMonitor::setupRdmaPortMonitor() {

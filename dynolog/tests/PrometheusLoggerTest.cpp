@@ -6,6 +6,12 @@
  */
 
 #include "dynolog/src/PrometheusLogger.h"
+
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
 #include <fmt/format.h>
 #include <glog/logging.h>
 #include <gtest/gtest.h>

@@ -7,6 +7,10 @@
 
 #include "dynolog/src/CompositeLogger.h"
 
+#include <utility>
+
+#include "dynolog/src/Logger.h"
+
 namespace dynolog {
 
 CompositeLogger::CompositeLogger(std::vector<std::unique_ptr<Logger>> loggers) {

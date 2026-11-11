@@ -8,16 +8,21 @@
 #include "dynolog/src/k8s/K8sPodCache.h"
 
 #include <curl/curl.h> // @manual=fbsource//third-party/curl:curl
+#include <curl/system.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 
 #include <atomic>
+#include <compare>
 #include <condition_variable>
 #include <cstdint>
 #include <cstdlib>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
+#include <map>
 #include <mutex>
 #include <sstream>
 #include <thread>

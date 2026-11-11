@@ -7,9 +7,11 @@
 
 #pragma once
 
+#include <stdint.h>
 #include <time.h>
 #include <array>
 #include <map>
+#include <string>
 #include <vector>
 #include "dynolog/src/Types.h"
 #include "pfs/procfs.hpp"

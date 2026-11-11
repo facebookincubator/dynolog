@@ -9,10 +9,12 @@
 
 #include <linux/ethtool.h>
 #include <net/if.h>
+#include <stddef.h>
 #include <cstdint>
 #include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace dynolog {

@@ -7,9 +7,11 @@
 
 #pragma once
 
+#include <stdint.h>
 #include <fstream>
 #include <memory>
 #include <shared_mutex>
+#include <string>
 
 #include <gtest/gtest_prod.h>
 

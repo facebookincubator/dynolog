@@ -8,19 +8,23 @@
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <string.h>
 #include <unistd.h>
 #include <cstdint>
 #include <map>
 #include <memory>
 #include <mutex>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <unordered_map>
 #include <utility>
+#include "dynolog/src/Logger.h"
 #include "dynolog/src/gpumon/DcgmApiStub.h"
 #include "dynolog/src/gpumon/Entity.h"
 #include "dynolog/src/gpumon/Utils.h"
 #include "dynolog/src/gpumon/dcgm_fields.h"
+#include "dynolog/src/gpumon/dcgm_structs.h"
 #include "dynolog/src/k8s/EnvAttribution.h"
 
 #ifdef USE_K8S_PODRESOURCES

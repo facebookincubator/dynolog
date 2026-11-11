@@ -9,9 +9,14 @@
 #include <arpa/inet.h>
 #include <fmt/format.h>
 #include <glog/logging.h>
+#include <netinet/in.h>
+#include <stdint.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <array>
 #include <cerrno>
+#include <cstdio>
+#include <ostream>
 
 constexpr int CLIENT_QUEUE_LEN = 50;
 

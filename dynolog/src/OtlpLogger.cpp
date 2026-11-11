@@ -7,6 +7,10 @@
 
 #include "dynolog/src/OtlpLogger.h"
 
+#include <opentelemetry/logs/log_record.h>
+#include <opentelemetry/proto/common/v1/common.pb.h>
+#include <opentelemetry/proto/logs/v1/logs.pb.h>
+#include <opentelemetry/sdk/logs/recordable.h>
 #ifdef USE_OTEL
 
 #include <opentelemetry/exporters/otlp/otlp_http_log_record_exporter_factory.h>

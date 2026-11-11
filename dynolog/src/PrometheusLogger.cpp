@@ -6,6 +6,11 @@
  */
 
 #include "dynolog/src/PrometheusLogger.h"
+
+#include <ostream>
+#include <utility>
+#include <vector>
+
 #include "dynolog/src/Metrics.h"
 #include "hbt/src/common/System.h"
 

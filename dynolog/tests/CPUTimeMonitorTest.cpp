@@ -9,8 +9,26 @@
 
 #include <folly/system/HardwareConcurrency.h>
 #include <gtest/gtest.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <array>
 #include <atomic>
+#include <chrono>
+#include <initializer_list>
+#include <map>
+#include <memory>
+#include <optional>
+#include <string>
 #include <thread>
+#include <tuple>
+#include <utility>
+#include <variant>
+#include <vector>
+
+#include "dynolog/src/Types.h"
+#include "dynolog/src/metric_frame/MetricFrame.h"
+#include "dynolog/src/metric_frame/MetricFrameBase.h"
+#include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 
 using namespace ::testing;
 using namespace std::literals::chrono_literals;

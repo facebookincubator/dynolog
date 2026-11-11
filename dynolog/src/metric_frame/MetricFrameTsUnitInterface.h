@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <stddef.h>
 #include <chrono>
 #include <optional>
 #include <vector>

@@ -6,7 +6,14 @@
  */
 
 #include "dynolog/src/ODSJsonLogger.h"
+
+#include <map>
+#include <ostream>
+
+#include "dynolog/src/Logger.h"
 #include "hbt/src/common/System.h"
+#include "nlohmann/json.hpp"
+#include "nlohmann/json_fwd.hpp"
 
 #ifdef USE_GRAPH_ENDPOINT
 #include <cpr/cpr.h> // @manual

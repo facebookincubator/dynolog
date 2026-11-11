@@ -13,9 +13,11 @@
 #include "dynolog/src/gpumon/amd/AmdDeviceTopology.h"
 
 #include <glog/logging.h>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <optional>
+#include <sstream>
 #include <stdexcept>
 
 namespace dynolog {

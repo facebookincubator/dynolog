@@ -7,7 +7,12 @@
 
 #include <gtest/gtest.h>
 
+#include <stdint.h>
+#include <cstdio>
 #include <filesystem>
+#include <memory>
+#include <optional>
+#include <string>
 #include "dynolog/src/rdmamon/SysfsCounter.h"
 
 using namespace dynolog::rdmamon;

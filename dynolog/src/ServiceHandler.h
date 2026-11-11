@@ -7,10 +7,12 @@
 
 #pragma once
 
+#include <memory>
 #include <set>
 #include <string>
 #include <utility>
 #include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/LibkinetoTypes.h"
 #include "dynolog/src/gpumon/DcgmGroupInfo.h"
 
 namespace dynolog {

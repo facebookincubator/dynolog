@@ -8,7 +8,16 @@
 #include "dynolog/src/PerfMonitor.h"
 #include <glog/logging.h>
 
+#include <stddef.h>
+#include <stdint.h>
+#include <ostream>
 #include <utility>
+
+#include "dynolog/src/Logger.h"
+#include "hbt/src/mon/Monitor.h"
+#include "hbt/src/perf_event/BuiltinMetrics.h"
+#include "hbt/src/perf_event/PerCpuCountReader.h"
+#include "hbt/src/perf_event/PerfEventsGroup.h"
 
 namespace dynolog {
 

@@ -9,7 +9,11 @@
 
 #include <gtest/gtest.h>
 
+#include <stdint.h>
 #include <chrono>
+#include <functional>
+#include <initializer_list>
+#include <memory>
 #include <set>
 #include <stdexcept>
 #include <string>

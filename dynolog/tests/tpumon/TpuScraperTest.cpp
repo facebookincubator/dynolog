@@ -8,8 +8,11 @@
 #include "dynolog/src/tpumon/TpuScraper.h"
 
 #include <gtest/gtest.h>
+#include <iterator>
 #include <stdexcept>
 #include <string>
+#include <unordered_map>
+#include <utility>
 #include <vector>
 
 namespace dynolog::tpumon {

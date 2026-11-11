@@ -7,8 +7,13 @@
 
 #pragma once
 
+#include <stdint.h>
 #include <filesystem>
 #include <map>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
 #include "dynolog/src/rdmamon/EthtoolCounters.h"
 #include "dynolog/src/rdmamon/RdmaCounters.h"
 

@@ -7,10 +7,17 @@
 
 #include <glog/logging.h>
 #include <gtest/gtest.h>
+#include <stdint.h>
 #include <bitset>
+#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <map>
+#include <memory>
+#include <ostream>
+#include <string>
+#include <vector>
 #include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/Ticker.h"
 

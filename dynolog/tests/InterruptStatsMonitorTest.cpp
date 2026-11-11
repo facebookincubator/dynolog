@@ -6,6 +6,10 @@
  */
 
 #include "dynolog/src/procfs/parser/InterruptStatsMonitor.h"
+
+#include <cstdlib>
+#include <string>
+
 #include <gtest/gtest.h>
 
 namespace facebook::dynolog {

@@ -7,8 +7,10 @@
 
 #include "dynolog/src/k8s/EnvAttribution.h"
 
+#include <gflags/gflags.h>
 #include <glog/logging.h>
 
+#include <stddef.h>
 #include <fstream>
 #include <string>
 

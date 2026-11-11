@@ -8,11 +8,14 @@
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
 
 #include <gflags/gflags.h>
+#include <rdc/rdc.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <chrono>
 #include <exception>
 #include <iostream>
 #include <thread>
+#include <utility>
 #include <variant>
 #include <vector>
 

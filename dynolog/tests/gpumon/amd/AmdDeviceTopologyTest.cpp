@@ -10,6 +10,12 @@
 
 #include "dynolog/src/gpumon/amd/AmdDeviceTopology.h"
 
+#include <cstdlib>
+#include <filesystem>
+#include <memory>
+#include <ostream>
+#include <string>
+#include <vector>
 using namespace dynolog::gpumon;
 
 constexpr char kTestRoot[] = "TESTROOT";

@@ -8,13 +8,22 @@
 #pragma once
 
 #include <dynolog/src/metric_frame/MetricFrame.h>
+#include <stdint.h>
+#include <array>
+#include <map>
 #include <memory>
+#include <optional>
 #include <set>
 #include <shared_mutex>
+#include <string>
 #include <thread>
+#include <tuple>
+#include <utility>
+#include <vector>
 #include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/Ticker.h"
 #include "dynolog/src/Types.h"
+#include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 
 namespace facebook::dynolog {
 

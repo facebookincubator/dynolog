@@ -10,6 +10,8 @@
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
 
+#include <stddef.h>
+#include <chrono>
 #include <optional>
 
 namespace facebook::dynolog {

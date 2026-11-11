@@ -7,6 +7,7 @@
 
 #include "dynolog/src/ServiceHandler.h"
 #include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/gpumon/DcgmGroupInfo.h"
 
 namespace dynolog {
 

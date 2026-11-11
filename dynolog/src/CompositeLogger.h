@@ -6,6 +6,12 @@
  */
 
 #pragma once
+
+#include <stdint.h>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "dynolog/src/Logger.h"
 
 namespace dynolog {

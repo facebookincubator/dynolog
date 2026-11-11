@@ -8,12 +8,16 @@
 #include "dynolog/src/gpumon/Utils.h"
 #include <glog/logging.h>
 #include <sys/types.h>
+#include <cctype>
 #include <cstdio>
 #include <fstream>
 #include <optional>
 #include <sstream>
+#include <system_error>
 #include <unordered_set>
+#include <utility>
 #include "pfs/procfs.hpp"
+#include "pfs/task.hpp"
 
 namespace dynolog {
 constexpr char kParsePidCmd[] =

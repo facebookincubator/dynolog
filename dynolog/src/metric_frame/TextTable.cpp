@@ -7,6 +7,8 @@
 
 #include "dynolog/src/metric_frame/TextTable.h"
 
+#include <algorithm>
+#include <utility>
 namespace facebook::dynolog {
 
 TextTable::TextTable(std::vector<std::vector<std::string>>&& data)

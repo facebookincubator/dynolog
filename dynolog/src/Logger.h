@@ -9,6 +9,8 @@
 
 #include <gflags/gflags.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
+#include <stdint.h>
 #include <chrono>
 #include <map>
 #include <string>

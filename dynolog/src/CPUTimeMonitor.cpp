@@ -7,10 +7,26 @@
 
 #include "dynolog/src/CPUTimeMonitor.h"
 #include <dynolog/src/metric_frame/MetricFrameTsUnit.h>
+#include <glog/logging.h>
 
+#include <errno.h>
+#include <stdio.h>
 #include <algorithm>
+#include <chrono>
+#include <initializer_list>
+#include <mutex>
+#include <numeric>
+#include <ostream>
 #include <set>
+#include <tuple>
 #include <utility>
+
+#include "dynolog/src/MonitorBase.h"
+#include "dynolog/src/Ticker.h"
+#include "dynolog/src/Types.h"
+#include "dynolog/src/metric_frame/MetricFrame.h"
+#include "dynolog/src/metric_frame/MetricFrameBase.h"
+#include "dynolog/src/metric_frame/MetricSeries.h"
 
 enum { IDX_MIN = 0, IDX_SEC = 1, IDX_HUNDRED_MS = 2 };
 

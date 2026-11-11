@@ -10,10 +10,15 @@
 #include <fmt/format.h>
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <netinet/in.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 #include <sys/socket.h>
+#include <unistd.h>
 #include <cerrno>
 #include <cstdio>
+#include <map>
+#include <ostream>
 #include "hbt/src/common/System.h"
 
 using json = nlohmann::json;

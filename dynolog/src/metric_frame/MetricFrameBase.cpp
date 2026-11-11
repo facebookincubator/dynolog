@@ -7,6 +7,10 @@
 
 #include "dynolog/src/metric_frame/MetricFrameBase.h"
 
+#include <type_traits>
+
+#include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
+
 namespace facebook::dynolog {
 
 MetricFrameBase::MetricFrameBase(

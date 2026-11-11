@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "dynolog/src/Logger.h"
 
 namespace dynolog {

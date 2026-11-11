@@ -8,6 +8,7 @@
 #pragma once
 
 #include <glog/logging.h>
+#include <stdint.h>
 #include <cstring>
 #include <map>
 #include <string>

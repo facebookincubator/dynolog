@@ -7,15 +7,22 @@
 
 #pragma once
 
+#include <algorithm>
+#include <array>
+#include <chrono>
 #include <cmath>
+#include <compare>
 #include <cstdint>
+#include <cstdlib>
 #include <functional>
 #include <iomanip>
+#include <iterator>
 #include <map>
 #include <memory>
 #include <mutex>
 #include <optional>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <thread>
 #include <utility>

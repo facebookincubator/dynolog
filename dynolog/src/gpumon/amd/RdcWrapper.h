@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#include <chrono>
 #include <cstdint>
 #include <memory>
 #include <mutex>

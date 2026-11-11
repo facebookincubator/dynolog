@@ -9,6 +9,7 @@
 
 #include <fmt/format.h>
 #include <map>
+#include <utility>
 
 namespace dynolog {
 

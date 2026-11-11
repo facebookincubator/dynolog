@@ -11,13 +11,18 @@
 #include <fmt/ranges.h>
 #include <glog/logging.h>
 #include <algorithm>
+#include <chrono>
+#include <compare>
+#include <cstddef>
 #include <exception>
 #include <fstream>
 #include <iterator>
 #include <random>
+#include <ratio>
 #include <thread>
 #include <utility>
 #include "dynolog/src/LibkinetoJobRegistry.h"
+#include "dynolog/src/LibkinetoTypes.h"
 #ifdef __linux__
 #include <sys/prctl.h>
 #endif

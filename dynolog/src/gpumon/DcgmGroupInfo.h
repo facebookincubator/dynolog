@@ -7,11 +7,16 @@
 
 #pragma once
 #include <string.h>
+#include <chrono>
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <unordered_map>
 #include <vector>
+
+#include <gflags/gflags_declare.h>
+
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/gpumon/dcgm_structs.h"
 

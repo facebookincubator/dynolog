@@ -11,6 +11,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <sys/types.h>
+
 namespace dynolog {
 
 // Assume at most one pid running on each gpu device_id

@@ -15,6 +15,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include <gflags/gflags_declare.h>
+
 #include "dynolog/src/Logger.h"
 #include "dynolog/src/tpumon/TpuScraper.h"
 

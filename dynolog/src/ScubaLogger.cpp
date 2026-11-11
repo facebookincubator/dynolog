@@ -6,6 +6,7 @@
  */
 
 #include "dynolog/src/ScubaLogger.h"
+#include <ostream>
 #include <string>
 #include "hbt/src/common/System.h"
 #ifdef USE_GRAPH_ENDPOINT

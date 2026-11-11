@@ -7,11 +7,17 @@
 
 #pragma once
 
+#include <string.h>
 #include <cstddef>
 #include <deque>
 #include <exception>
+#include <memory>
 #include <mutex>
+#include <ostream>
+#include <string>
+#include <type_traits>
 #include <utility>
+#include <vector>
 #include "dynolog/src/ipcfabric/Endpoint.h"
 #include "dynolog/src/ipcfabric/Utils.h"
 

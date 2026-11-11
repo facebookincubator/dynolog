@@ -9,7 +9,9 @@
 
 #include <cstdint>
 #include <filesystem>
+#include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace dynolog {

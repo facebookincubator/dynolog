@@ -7,7 +7,15 @@
 
 #include "dynolog/src/KernelCollector.h"
 #include <fmt/format.h>
+#include <stdint.h>
+#include <array>
 #include <cstdlib>
+#include <map>
+#include <string>
+#include <utility>
+
+#include "dynolog/src/Logger.h"
+#include "dynolog/src/Types.h"
 
 namespace dynolog {
 

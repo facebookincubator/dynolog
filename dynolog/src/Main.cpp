@@ -11,8 +11,13 @@
 #include <glog/logging.h>
 #include <algorithm>
 #include <chrono>
+#include <compare>
 #include <cstdlib>
+#include <ostream>
+#include <system_error>
 #include <thread>
+#include <utility>
+#include <vector>
 #include "dynolog/src/CompositeLogger.h"
 #include "dynolog/src/FBRelayLogger.h"
 #include "dynolog/src/KernelCollector.h"
@@ -25,6 +30,8 @@
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 #include "dynolog/src/rpc/SimpleJsonServerInl.h"
 #include "dynolog/src/tracing/IPCMonitor.h"
+#include "hbt/src/common/System.h"
+#include "nlohmann/json_fwd.hpp"
 
 #ifdef USE_TPU
 #include "dynolog/src/tpumon/TpuGroupInfo.h"

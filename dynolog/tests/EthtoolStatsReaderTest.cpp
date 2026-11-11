@@ -9,7 +9,14 @@
 #include <gtest/gtest.h>
 #include <linux/ethtool.h>
 #include <linux/sockios.h>
+#include <net/if.h>
+#include <stdint.h>
 #include <cstring>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "dynolog/src/EthtoolStatsReader.h"
 

@@ -20,6 +20,9 @@
 #ifndef DCGM_AGENT_H
 #define DCGM_AGENT_H
 
+#include <stdint.h>
+
+#include "dcgm_fields.h"
 #include "dcgm_api_export.h"
 #include "dcgm_structs.h"
 

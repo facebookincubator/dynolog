@@ -10,12 +10,16 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <compare>
 #include <cstdlib>
 #include <iterator>
 #include <numeric>
 #include <optional>
 #include <ratio>
 #include <stdexcept>
+#include <string>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "dynolog/src/metric_frame/ExtraTypes.h"

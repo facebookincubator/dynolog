@@ -17,6 +17,11 @@
 #include <utility>
 #include <vector>
 
+#include "dynolog/src/Types.h"
+#include "pfs/net.hpp"
+#include "pfs/procfs.hpp"
+#include "pfs/types.hpp"
+
 DEFINE_bool(
     filter_nic_interfaces,
     false,
