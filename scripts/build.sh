@@ -119,9 +119,12 @@ echo "Running cmake"
 mkdir -p build; cd build;
 
 # note we can build without ninja if not available on this system
+# CMAKE_POLICY_VERSION_MINIMUM lets CMake 4 configure bundled submodules, such
+# as gflags, that still declare cmake_minimum_required below 3.5.
 cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
   "-DUSE_K8S_PODRESOURCES=${USE_K8S_PODRESOURCES}" \
   "-DUSE_OTLP=${USE_OTLP}" "-DUSE_TPU=${USE_TPU}" \
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
   -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
 cmake --build .
 
