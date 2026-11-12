@@ -831,6 +831,24 @@ constexpr PmuMsr kCcmZen6CxlWriteBeatsCcm15{
         .unitMask_11_8 = 0xf,
         .event_13_8 = 0x7}};
 
+// Zen6 DF CS (Coherent Station) data bandwidth: one event per CS port and
+// request type, each counting 64-byte data requests. The 14-bit event select is
+// 0x01F + 0x40 * port, and the 12-bit unit mask selects the request type. The
+// returned config uses the DFZen4PmuMsrAmd layout: event select in bits 0-7 and
+// 32-37, unit mask in bits 8-15 and 24-27.
+constexpr uint32_t kNumZen6CsPorts = 16;
+constexpr uint32_t kCsZen6DataBwReadLocal = 0x7FE;
+constexpr uint32_t kCsZen6DataBwReadRemote = 0xBFE;
+constexpr uint32_t kCsZen6DataBwWriteLocal = 0x7FF;
+constexpr uint32_t kCsZen6DataBwWriteRemote = 0xBFF;
+
+constexpr uint64_t csZen6DataBwCode(uint32_t port, uint32_t unitMask) {
+  const uint64_t eventSelect = 0x01F + 0x40 * uint64_t{port};
+  const uint64_t mask = unitMask;
+  return (eventSelect & 0xFF) | ((mask & 0xFF) << 8) |
+      (((mask >> 8) & 0xF) << 24) | (((eventSelect >> 8) & 0x3F) << 32);
+}
+
 } // namespace amd_msr
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager);

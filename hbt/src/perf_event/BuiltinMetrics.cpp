@@ -4252,6 +4252,33 @@ void addAmdUncoreMetrics(std::shared_ptr<Metrics>& metrics) {
         "CxlWriteBw" + std::to_string(i),
         "zen6::ccm_cxl_write_beats.ccm" + std::to_string(i));
   }
+
+  // Data Fabric CS data requests on one CS port (Venice/Zen6-only):
+  // rd_local(0)/rd_remote(1)/wr_local(2)/wr_remote(3).
+  for (uint32_t port = 0; port < amd_msr::kNumZen6CsPorts; ++port) {
+    const std::string cs = ".cs" + std::to_string(port);
+    EventRefs refs;
+    for (const char* type :
+         {"rd_local", "rd_remote", "wr_local", "wr_remote"}) {
+      const std::string eventId = std::string("zen6::cs_data_bw.") + type + cs;
+      refs.push_back(
+          EventRef{eventId, PmuType::amd_df, eventId, EventExtraAttr{}, {}});
+    }
+    std::map<TOptCpuArch, EventRefs> event_refs_by_arch;
+    event_refs_by_arch[CpuArch::VENICE] = std::move(refs);
+    const std::string id = "DfCsBw" + std::to_string(port);
+    const std::string desc = "Data Fabric CS port " + std::to_string(port) +
+        " data requests rd_local(0)/rd_remote(1)/wr_local(2)/wr_remote(3)";
+    metrics->add(
+        std::make_shared<MetricDesc>(
+            id,
+            desc,
+            desc,
+            std::move(event_refs_by_arch),
+            100'000'000,
+            System::Permissions{},
+            std::vector<std::string>{}));
+  }
 }
 
 void addArmUncoreMetrics(
