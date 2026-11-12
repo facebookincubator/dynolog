@@ -5,3 +5,6 @@
 
 dynolog_add_test(K8sPodCacheTest K8sPodCacheTest.cpp)
 target_link_libraries(K8sPodCacheTest PRIVATE dynolog_k8s_lib)
+
+dynolog_add_test(PodResourcesClientTest PodResourcesClientTest.cpp)
+target_link_libraries(PodResourcesClientTest PRIVATE dynolog_k8s_lib)

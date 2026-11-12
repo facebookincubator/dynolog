@@ -14,9 +14,8 @@
 
 namespace dynolog::k8s {
 
-// Per-GPU pod attribution returned by the kubelet pod-resources API.
-// Joined to GPU metrics on gpu_uuid (== the K8s device_id, also
-// DCGM_FI_DEV_UUID).
+// Device-to-pod attribution returned by the kubelet pod-resources API.
+// Device IDs are opaque; the GPU monitor joins them to DCGM_FI_DEV_UUID.
 struct PodInfo {
   std::string pod_namespace;
   std::string pod_name;
@@ -28,15 +27,17 @@ struct PodInfo {
 //
 // listGpuPods() issues one List() RPC, walks per-pod/per-container device
 // assignments, and returns a gpu_uuid -> PodInfo map for devices whose
-// resource_name matches the configured GPU resource (default
-// "nvidia.com/gpu"). Returns an empty map on RPC failure (logged).
+// resource_name is in the comma-separated resourceNames allowlist. The
+// default is "nvidia.com/gpu". Empty IDs and incomplete pod identities are
+// ignored; IDs claimed by different pods or containers are omitted.
+// Returns an empty map on RPC failure (logged).
 //
-// Thread-safe: a single mutex serializes RPC calls.
+// Thread-safe: RPCs use a snapshot of the stub under a mutex.
 class PodResourcesClient {
  public:
   explicit PodResourcesClient(
       std::string socketPath,
-      std::string nvidiaResourceName = "nvidia.com/gpu",
+      const std::string& resourceNames = "nvidia.com/gpu",
       std::chrono::milliseconds rpcTimeout = std::chrono::milliseconds(2000));
   ~PodResourcesClient();
 
