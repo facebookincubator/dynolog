@@ -11,6 +11,7 @@
 #include <fmt/core.h>
 #include <fmt/ostream.h>
 #include <limits.h>
+#include <sched.h>
 #include <sys/prctl.h>
 #include <unistd.h>
 #include <algorithm>
