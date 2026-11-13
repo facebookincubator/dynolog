@@ -26,9 +26,12 @@ bool EthtoolCounters::setupEthtoolCounters() {
       "tx_pause_storm_error_events",
   };
 
+  eth_counters_.clear();
+  first_sample_ = true;
   if (!reader_.init(ifname_)) {
     return false;
   }
+  reinitPending_ = false;
 
   for (size_t i = 0; i < reader_.size(); i++) {
     for (const auto& name : counterNames) {
@@ -45,7 +48,17 @@ bool EthtoolCounters::setupEthtoolCounters() {
 
 bool EthtoolCounters::sampleEthtoolCounters(
     std::map<std::string, int64_t>& countersMap) {
+  if (reinitPending_ && !setupEthtoolCounters()) {
+    return false;
+  }
   if (!reader_.sample()) {
+    if (reader_.needsReinit()) {
+      // The driver's stat layout changed (e.g. driver reload): look the
+      // counters up again and start over from a new baseline, retrying on
+      // later samples if that fails (e.g. the device is still reloading).
+      reinitPending_ = true;
+      setupEthtoolCounters();
+    }
     return false;
   }
 
