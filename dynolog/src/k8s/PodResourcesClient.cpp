@@ -15,11 +15,53 @@
 
 #include <atomic>
 #include <mutex>
+#include <set>
+#include <sstream>
 #include <utility>
 
 #include "dynolog/src/k8s/kubelet_podresources/api.grpc.pb.h"
 
 namespace dynolog::k8s {
+namespace {
+
+std::set<std::string> parseResourceNames(const std::string& resourceNames) {
+  std::set<std::string> result;
+  std::istringstream input(resourceNames);
+  for (std::string name; std::getline(input, name, ',');) {
+    const auto first = name.find_first_not_of(" \t\r\n");
+    if (first == std::string::npos) {
+      continue;
+    }
+    const auto last = name.find_last_not_of(" \t\r\n");
+    result.insert(name.substr(first, last - first + 1));
+  }
+  return result;
+}
+
+void addAssignment(
+    const std::string& deviceId,
+    const PodInfo& owner,
+    std::unordered_map<std::string, PodInfo>& result,
+    std::set<std::string>& ambiguousIds) {
+  if (deviceId.empty() || owner.pod_namespace.empty() ||
+      owner.pod_name.empty() || owner.container_name.empty() ||
+      ambiguousIds.count(deviceId) != 0) {
+    return;
+  }
+  const auto [it, inserted] = result.emplace(deviceId, owner);
+  if (inserted ||
+      (it->second.pod_namespace == owner.pod_namespace &&
+       it->second.pod_name == owner.pod_name &&
+       it->second.container_name == owner.container_name)) {
+    return;
+  }
+  result.erase(it);
+  ambiguousIds.insert(deviceId);
+  LOG_EVERY_N(WARNING, 100) << "PodResourcesClient: ambiguous owner for device "
+                            << deviceId << "; skipping attribution";
+}
+
+} // namespace
 
 struct PodResourcesClient::Impl {
   // Build a fresh channel + stub. Pure-local work; safe to call without
@@ -51,11 +93,15 @@ struct PodResourcesClient::Impl {
 
   Impl(
       std::string socketPath,
-      std::string nvidiaResourceName,
+      const std::string& resourceNames,
       std::chrono::milliseconds rpcTimeout)
       : socketPath_(std::move(socketPath)),
-        nvidiaResourceName_(std::move(nvidiaResourceName)),
+        resourceNames_(parseResourceNames(resourceNames)),
         rpcTimeout_(rpcTimeout) {
+    if (resourceNames_.empty()) {
+      LOG(WARNING) << "PodResourcesClient: empty device resource allowlist; "
+                      "pod attribution is disabled";
+    }
     auto [ch, st] = buildChannelAndStub(socketPath_);
     channel_ = std::move(ch);
     stub_ = std::move(st);
@@ -105,34 +151,32 @@ struct PodResourcesClient::Impl {
     }
     consecutive_failures_ = 0;
 
-    int gpu_assignments = 0;
+    std::set<std::string> ambiguousIds;
     for (const auto& pod : resp.pod_resources()) {
       for (const auto& container : pod.containers()) {
+        const PodInfo owner{
+            .pod_namespace = pod.namespace_(),
+            .pod_name = pod.name(),
+            .container_name = container.name(),
+        };
         for (const auto& dev : container.devices()) {
-          if (dev.resource_name() != nvidiaResourceName_) {
+          if (resourceNames_.count(dev.resource_name()) == 0) {
             continue;
           }
-          for (const auto& uuid : dev.device_ids()) {
-            // device_ids for nvidia.com/gpu are the GPU UUIDs
-            // (e.g. "GPU-...."), which join with DCGM_FI_DEV_UUID.
-            result[uuid] = PodInfo{
-                .pod_namespace = pod.namespace_(),
-                .pod_name = pod.name(),
-                .container_name = container.name(),
-            };
-            gpu_assignments++;
+          for (const auto& deviceId : dev.device_ids()) {
+            addAssignment(deviceId, owner, result, ambiguousIds);
           }
         }
       }
     }
     VLOG(1) << "PodResourcesClient: List() returned "
-            << resp.pod_resources_size() << " pods, " << gpu_assignments
-            << " GPU device assignments";
+            << resp.pod_resources_size() << " pods, " << result.size()
+            << " unambiguous device assignments";
     return result;
   }
 
   const std::string socketPath_;
-  const std::string nvidiaResourceName_;
+  const std::set<std::string> resourceNames_;
   const std::chrono::milliseconds rpcTimeout_;
   std::mutex mu_;
   // Reconnect bookkeeping — atomic so it's safe to read/increment outside
@@ -144,12 +188,12 @@ struct PodResourcesClient::Impl {
 
 PodResourcesClient::PodResourcesClient(
     std::string socketPath,
-    std::string nvidiaResourceName,
+    const std::string& resourceNames,
     std::chrono::milliseconds rpcTimeout)
     : impl_(
           std::make_unique<Impl>(
               std::move(socketPath),
-              std::move(nvidiaResourceName),
+              resourceNames,
               rpcTimeout)) {}
 
 PodResourcesClient::~PodResourcesClient() = default;

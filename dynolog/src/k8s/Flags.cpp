@@ -18,7 +18,7 @@ DEFINE_bool(
     "pod-resources gRPC socket each cycle and join the (pod_namespace, "
     "pod_name, container_name) onto each accelerator record by device id. "
     "Used by both GPU (DcgmGroupInfo) and TPU (TpuGroupInfo) modules; "
-    "filtered to a specific accelerator resource via "
+    "filtered to accelerator resources via "
     "--pod_resources_gpu_resource / --pod_resources_tpu_resource.");
 
 DEFINE_bool(
@@ -52,8 +52,9 @@ DEFINE_string(
 DEFINE_string(
     pod_resources_gpu_resource,
     "nvidia.com/gpu",
-    "K8s extended resource name to filter for GPU device assignments. "
-    "DCGM_FI_DEV_UUID values join against this resource's device_ids.");
+    "Comma-separated K8s extended resource names to allow for GPU device "
+    "assignments. A single name retains exact-resource filtering. "
+    "DCGM_FI_DEV_UUID values join against the allowed resources' device_ids.");
 
 DEFINE_string(
     pod_resources_tpu_resource,
