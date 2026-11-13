@@ -34,6 +34,8 @@ class EthtoolCounters {
   std::map<std::string, size_t> eth_counters_;
   std::vector<uint64_t> prevValues_;
   bool first_sample_ = true;
+  // The stat layout changed and setupEthtoolCounters() hasn't succeeded since.
+  bool reinitPending_ = false;
 };
 
 } // namespace dynolog::rdmamon
