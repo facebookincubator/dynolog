@@ -122,7 +122,8 @@ mkdir -p build; cd build;
 cmake "-DUSE_PROMETHEUS=${USE_PROMETHEUS}" "-DUSE_OTEL=${USE_OTEL}" \
   "-DUSE_K8S_PODRESOURCES=${USE_K8S_PODRESOURCES}" \
   "-DUSE_OTLP=${USE_OTLP}" "-DUSE_TPU=${USE_TPU}" \
-  -DCMAKE_BUILD_TYPE=Release -G Ninja "$@" ..
+  -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+  -G Ninja "$@" ..
 cmake --build .
 
 mkdir -p bin
