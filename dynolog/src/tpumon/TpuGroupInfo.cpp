@@ -13,12 +13,16 @@
 
 #include <algorithm>
 #include <chrono>
+#include <compare>
 #include <cstdlib>
 #include <iterator>
+#include <ostream>
+#include <ratio>
 #include <set>
 #include <string_view>
 #include <utility>
 
+#include "dynolog/src/Logger.h"
 #include "dynolog/src/tpumon/TpuScraper.h"
 
 #ifdef USE_K8S_PODRESOURCES

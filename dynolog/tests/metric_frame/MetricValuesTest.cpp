@@ -9,7 +9,11 @@
 
 #include "dynolog/src/metric_frame/MetricValues.h"
 
+#include <stdint.h>
 #include <optional>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace ::testing;
 using namespace ::facebook::dynolog;

@@ -5,10 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#include <stdint.h>
 #include <unistd.h>
 #include <cstdio>
+#include <exception>
 #include <iostream>
 #include <map>
+#include <memory>
+#include <string>
+#include <utility>
 #include "dynolog/src/rdmamon/RdmaMonitor.h"
 
 using namespace dynolog::rdmamon;

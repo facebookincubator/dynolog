@@ -7,11 +7,24 @@
 
 #include "dynolog/src/procfs/parser/InterruptStatsMonitor.h"
 
+#include <ctype.h>
+#include <stddef.h>
+#include <algorithm>
+#include <chrono>
+#include <compare>
+#include <exception>
 #include <filesystem>
+#include <mutex>
+#include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include <glog/logging.h>
+
+#include "dynolog/src/MonitorBase.h"
 #include "dynolog/src/String.h"
+#include "dynolog/src/Ticker.h"
 
 namespace facebook {
 namespace dynolog {

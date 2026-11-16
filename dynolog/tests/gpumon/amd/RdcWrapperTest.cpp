@@ -6,6 +6,11 @@
  */
 
 #include "dynolog/src/gpumon/amd/RdcWrapper.h"
+
+#include <mutex>
+#include <shared_mutex>
+#include <string>
+
 #include <gtest/gtest.h>
 
 using namespace ::testing;

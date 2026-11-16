@@ -7,14 +7,20 @@
 
 #pragma once
 
+#include <errno.h>
 #include <fcntl.h>
 #include <glog/logging.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <charconv>
 #include <cstring>
 #include <map>
 #include <optional>
+#include <ostream>
 #include <string>
+#include <system_error>
 #include <utility>
 
 // @lint-ignore-every CLANGTIDY facebook-hte-BadCall-strerror

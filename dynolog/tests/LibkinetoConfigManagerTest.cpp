@@ -7,8 +7,19 @@
 
 #include "dynolog/src/LibkinetoConfigManager.h"
 #include <gtest/gtest.h>
+#include <stdint.h>
 #include <chrono>
+#include <iterator>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <optional>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
 #include "dynolog/src/LibkinetoJobRegistry.h"
+#include "dynolog/src/LibkinetoTypes.h"
 
 using namespace dynolog;
 

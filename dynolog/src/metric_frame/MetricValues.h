@@ -10,8 +10,10 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <iterator>
 #include <numeric>
 #include <optional>
+#include <utility>
 #include <vector>
 
 namespace facebook::dynolog {

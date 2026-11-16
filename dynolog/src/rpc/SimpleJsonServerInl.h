@@ -5,9 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#include <exception>
+#include <memory>
+#include <ostream>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include <fmt/format.h>
 #include <glog/logging.h>
 #include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
+#include "dynolog/src/ServiceHandler.h"
 #include "dynolog/src/rpc/SimpleJsonServer.h"
 
 namespace dynolog {

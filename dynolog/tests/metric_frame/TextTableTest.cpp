@@ -9,6 +9,11 @@
 
 #include "dynolog/src/metric_frame/TextTable.h"
 
+#include <stddef.h>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 using namespace ::testing;
 using namespace ::facebook::dynolog;
 

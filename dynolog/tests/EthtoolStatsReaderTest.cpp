@@ -9,11 +9,16 @@
 #include <gtest/gtest.h>
 #include <linux/ethtool.h>
 #include <linux/sockios.h>
+#include <net/if.h>
+#include <stdint.h>
+#include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
 #include <cstring>
+#include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "dynolog/src/EthtoolStatsReader.h"
