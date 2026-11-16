@@ -9,7 +9,14 @@
 
 #include "dynolog/src/metric_frame/MetricSeries.h"
 
+#include <chrono>
+#include <cstdlib>
 #include <optional>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "dynolog/src/metric_frame/ExtraTypes.h"
 
 using namespace ::testing;
 using namespace ::facebook::dynolog;

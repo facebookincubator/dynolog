@@ -11,9 +11,13 @@
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
 
+#include <stddef.h>
 #include <cmath>
+#include <iosfwd>
 #include <map>
 #include <memory>
+#include <string>
+#include <utility>
 #include <variant>
 #include <vector>
 

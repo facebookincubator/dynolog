@@ -7,14 +7,21 @@
 
 #pragma once
 
+#include "dynolog/src/metric_frame/ExtraTypes.h"
 #include "dynolog/src/metric_frame/MetricFrameTsUnitInterface.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
 #include "dynolog/src/metric_frame/TextTable.h"
 
+#include <stddef.h>
+#include <stdint.h>
 #include <chrono>
+#include <iosfwd>
 #include <memory>
+#include <optional>
 #include <string>
+#include <utility>
 #include <variant>
+#include <vector>
 
 namespace facebook::dynolog {
 

@@ -7,11 +7,20 @@
 
 #include "dynolog/src/tracing/IPCMonitor.h"
 #include <gtest/gtest.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <chrono>
 #include <iostream>
+#include <memory>
+#include <string>
+#include <thread>
+#include <utility>
+#include <vector>
 #include "dynolog/src/LibkinetoConfigManager.h"
+#include "dynolog/src/LibkinetoTypes.h"
 #include "dynolog/src/ipcfabric/FabricManager.h"
+#include "dynolog/src/ipcfabric/Utils.h"
 
 using namespace dynolog;
 using namespace dynolog::tracing;

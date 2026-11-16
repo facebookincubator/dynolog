@@ -9,6 +9,9 @@
 #include <fmt/format.h>
 #include <cstdint>
 #include <map>
+#include <optional>
+
+#include "dynolog/src/rdmamon/SysfsCounter.h"
 
 namespace dynolog::rdmamon {
 

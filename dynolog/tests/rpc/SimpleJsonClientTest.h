@@ -9,11 +9,16 @@
 
 #include <arpa/inet.h>
 #include <glog/logging.h>
+#include <netinet/in.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <cerrno>
+#include <cstdio>
 #include <optional>
+#include <ostream>
+#include <string>
 
 namespace dynolog {
 

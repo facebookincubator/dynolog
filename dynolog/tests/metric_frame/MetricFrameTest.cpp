@@ -8,8 +8,20 @@
 #include <gtest/gtest.h>
 #include <chrono>
 #include <cstdint>
+#include <iostream>
+#include <memory>
+#include <optional>
+#include <ratio>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <utility>
+#include <variant>
+#include <vector>
 
+#include "dynolog/src/metric_frame/ExtraTypes.h"
 #include "dynolog/src/metric_frame/MetricFrame.h"
+#include "dynolog/src/metric_frame/MetricFrameBase.h"
 #include "dynolog/src/metric_frame/MetricFrameTsUnit.h"
 #include "dynolog/src/metric_frame/MetricSeries.h"
 

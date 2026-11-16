@@ -5,11 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#include <cstdlib>
+#include <map>
+#include <ostream>
+#include <string>
+#include <vector>
+
 #include <glog/logging.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <sys/stat.h>
 #include "dynolog/src/KernelCollectorBase.h"
+#include "dynolog/src/Types.h"
 
 using namespace ::testing;
 

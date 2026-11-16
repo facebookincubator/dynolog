@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 // Use glog for FabricManager.h
 #define USE_GOOGLE_LOG

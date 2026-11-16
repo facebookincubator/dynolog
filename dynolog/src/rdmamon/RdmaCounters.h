@@ -7,10 +7,16 @@
 
 #pragma once
 
+#include <glog/logging.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <filesystem>
+#include <map>
 #include <memory>
+#include <ostream>
 #include <string>
+#include <utility>
+#include <vector>
 #include "dynolog/src/rdmamon/SysfsCounter.h"
 
 namespace dynolog::rdmamon {
