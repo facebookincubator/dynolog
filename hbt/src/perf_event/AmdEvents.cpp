@@ -1011,6 +1011,44 @@ void addZen6CcmCxlEvents(PmuDeviceManager& pmu_manager) {
   }
 }
 
+void addZen6CsDataBwEvents(PmuDeviceManager& pmu_manager) {
+  struct CsDataBwType {
+    const char* id;
+    const char* alias;
+    const char* desc;
+    uint32_t unitMask;
+  };
+  static constexpr CsDataBwType kCsDataBwTypes[] = {
+      {"rd_local", "rd-local", "local read", amd_msr::kCsZen6DataBwReadLocal},
+      {"rd_remote",
+       "rd-remote",
+       "remote read",
+       amd_msr::kCsZen6DataBwReadRemote},
+      {"wr_local", "wr-local", "local write", amd_msr::kCsZen6DataBwWriteLocal},
+      {"wr_remote",
+       "wr-remote",
+       "remote write",
+       amd_msr::kCsZen6DataBwWriteRemote},
+  };
+  for (uint32_t port = 0; port < amd_msr::kNumZen6CsPorts; ++port) {
+    const std::string cs = "cs" + std::to_string(port);
+    for (const auto& type : kCsDataBwTypes) {
+      pmu_manager.addEvent(
+          std::make_shared<EventDef>(
+              PmuType::amd_df,
+              std::string("zen6::cs_data_bw.") + type.id + "." + cs,
+              EventDef::Encoding{
+                  .code = amd_msr::csZen6DataBwCode(port, type.unitMask)},
+              std::string("Venice DF CS ") + type.desc + " data requests.",
+              std::string("Venice ") + type.desc +
+                  " 64-byte data requests on Data Fabric Coherent Station port " +
+                  std::to_string(port) + "."),
+          std::vector<EventId>(
+              {std::string("zen6-cs-data-bw-") + type.alias + "-" + cs}));
+    }
+  }
+}
+
 } // namespace venice
 
 void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
@@ -1052,6 +1090,7 @@ void addAmdEvents(const CpuInfo& cpu_info, PmuDeviceManager& pmu_manager) {
       turin::addZen5UmcEvents(pmu_manager);
       // CCM-based CXL bandwidth events (Zen6-only, Data Fabric PMU).
       venice::addZen6CcmCxlEvents(pmu_manager);
+      venice::addZen6CsDataBwEvents(pmu_manager);
       break;
     default:
       HBT_LOG_ERROR()
