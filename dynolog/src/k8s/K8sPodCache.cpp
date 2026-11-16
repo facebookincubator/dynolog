@@ -410,7 +410,12 @@ struct K8sPodCache::Impl {
     std::string url = opts_.apiBase + "/api/v1/pods?fieldSelector=" +
         urlEncode("spec.nodeName=" + opts_.nodeName) +
         "&limit=" + std::to_string(opts_.listPageSize);
-    if (!continueToken.empty()) {
+    if (continueToken.empty()) {
+      // resourceVersion=0 is served from the API server watch cache. Without
+      // it the LIST can go to etcd, which cannot apply the field selector and
+      // scans every Pod in the cluster.
+      url += "&resourceVersion=0";
+    } else {
       url += "&continue=" + urlEncode(continueToken);
     }
     return url;

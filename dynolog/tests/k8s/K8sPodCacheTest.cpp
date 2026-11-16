@@ -263,8 +263,10 @@ TEST(K8sPodCacheTest, PaginatedListAndUidMatchedWatchDelete) {
     EXPECT_NE(
         state.urls[0].find("fieldSelector=spec.nodeName%3Dnode-a"),
         std::string::npos);
+    EXPECT_NE(state.urls[0].find("&resourceVersion=0"), std::string::npos);
     EXPECT_NE(
         state.urls[1].find("continue=next%2F%2B%20token"), std::string::npos);
+    EXPECT_EQ(state.urls[1].find("resourceVersion="), std::string::npos);
     EXPECT_NE(state.urls[2].find("resourceVersion=10"), std::string::npos);
     state.releaseMatchingDelete = true;
     state.cv.notify_all();
