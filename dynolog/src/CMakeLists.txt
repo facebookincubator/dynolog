@@ -32,8 +32,8 @@ if(USE_PROMETHEUS)
 endif()
 
 if(USE_OTEL)
-  target_compile_definitions(dynolog_lib PRIVATE USE_OTEL)
-  target_link_libraries(dynolog_lib PRIVATE
+  target_compile_definitions(dynolog_lib PUBLIC USE_OTEL)
+  target_link_libraries(dynolog_lib PUBLIC
     opentelemetry_api
     opentelemetry_sdk
     opentelemetry_exporter_otlp_http_log
@@ -41,7 +41,7 @@ if(USE_OTEL)
 endif()
 
 if(USE_OTLP)
-  target_compile_definitions(dynolog_lib PRIVATE USE_OTLP)
+  target_compile_definitions(dynolog_lib PUBLIC USE_OTLP)
   target_link_libraries(dynolog_lib PUBLIC otlp_proto)
   target_link_libraries(dynolog_lib PUBLIC CURL::libcurl)
 endif()

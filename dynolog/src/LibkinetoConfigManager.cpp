@@ -11,6 +11,7 @@
 #include <fmt/ranges.h>
 #include <glog/logging.h>
 #include <algorithm>
+#include <array>
 #include <exception>
 #include <fstream>
 #include <iterator>
