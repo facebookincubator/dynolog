@@ -193,7 +193,7 @@ We have tested dynolog works with the following versions of C++ and Rust toolcha
   <tr>
    <td>C++
    </td>
-   <td>gcc 10+ or clang 10+
+   <td>gcc 11.3+ or clang 16+ (the same floor as PyTorch)
    </td>
   </tr>
   <tr>
