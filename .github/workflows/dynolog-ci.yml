@@ -12,49 +12,90 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest] # TODO: What other OSs should we include here?
-        build_otlp: [0, 1]
-    name: Build (${{ matrix.os }}${{ matrix.build_otlp == 1 && ', OTLP' || '' }})
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+        # TODO: add otel once third_party/opentelemetry-cpp is a real submodule
+        # on GitHub (it is a placeholder file today).
+        exporter: [none, otlp]
+    name: Build and test (${{ matrix.os }}, exporter=${{ matrix.exporter }})
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Checkout submodules
-      shell: bash
-      run: |
-        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-        git submodule sync --recursive
-        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
-    - name: Get env vars
-      run: |
-        echo GITHUB_WORKFLOW   = $GITHUB_WORKFLOW
-        echo HOME              = $HOME
-        echo GITHUB_ACTION     = $GITHUB_ACTION
-        echo GITHUB_ACTIONS    = $GITHUB_ACTIONS
-        echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
-        echo GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME
-        echo GITHUB_EVENT_PATH = $GITHUB_EVENT_PATH
-        echo GITHUB_WORKSPACE  = $GITHUB_WORKSPACE
-        echo GITHUB_SHA        = $GITHUB_SHA
-        echo GITHUB_REF        = $GITHUB_REF
-        c++ --verbose
-
-    - name: Install OTLP dependencies
-      if: matrix.build_otlp == 1
+    - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libcurl4-openssl-dev libssl-dev libprotobuf-dev protobuf-compiler
+        sudo apt-get install -y --no-install-recommends \
+          build-essential cmake ninja-build pkg-config \
+          libssl-dev libcurl4-openssl-dev libprotobuf-dev protobuf-compiler
+        c++ --version
+        cmake --version
 
-    - name: Download and setup Ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
 
-    - name: Build dynolog binary
+    - name: Build dynolog
       run: |
         set -e
-        BUILD_OTLP=${{ matrix.build_otlp }} ./scripts/build.sh
-    - name: Run Unit Tests
+        BUILD_OTLP=${{ matrix.exporter == 'otlp' && 1 || 0 }} ./scripts/build.sh
+
+    - name: Run unit tests
       run: |
         set -e
-        cd $GITHUB_WORKSPACE/build
+        cd "$GITHUB_WORKSPACE/build"
+        ctest --output-on-failure
+
+  # The oldest compilers the build supports (CMakeLists.txt): GCC 11.3 and
+  # Clang 16. Ubuntu 22.04 ships GCC 11.4; Ubuntu 24.04 ships Clang 16.
+  compiler-floor:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: gcc-11
+            container: ubuntu:22.04
+            packages: build-essential
+            cc: gcc
+            cxx: g++
+          - name: clang-16
+            container: ubuntu:24.04
+            packages: build-essential clang-16
+            cc: clang-16
+            cxx: clang++-16
+    container: ${{ matrix.container }}
+    name: Build and test (${{ matrix.name }})
+
+    steps:
+    - name: Install dependencies
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        apt-get update
+        apt-get install -y --no-install-recommends \
+          ca-certificates git cmake ninja-build pkg-config libssl-dev \
+          ${{ matrix.packages }}
+
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Build dynolog
+      env:
+        CC: ${{ matrix.cc }}
+        CXX: ${{ matrix.cxx }}
+      run: |
+        set -e
+        "$CXX" --version
+        cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCARGO=/bin/true
+        cmake --build build
+
+    - name: Run unit tests
+      run: |
+        set -e
+        cd build
         ctest --output-on-failure
