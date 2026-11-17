@@ -7,7 +7,6 @@
 
 #include "dynolog/src/CPUTimeMonitor.h"
 
-#include <folly/system/HardwareConcurrency.h>
 #include <gtest/gtest.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -663,25 +662,20 @@ TEST_F(CPUTimeMonitorTest, testReadProcStatPerCoreFields) {
 }
 
 // Test cgroup CPU usage processing.
-// This test reads real /sys/fs/cgroup/cpu.stat, so it needs the actual host
-// core count to pass the cgroup usage validation (usage <= coreCount).
+// Both targets read the static fixture $TESTROOT/sys/fs/cgroup/cpu.stat, not
+// the real host cgroup. The ticks below run microseconds apart, and a real
+// cgroup's usage_usec advances in scheduler-tick-sized jumps, so a real read
+// can yield usage far above coreCount (e.g. 30ms of CPU in a 200us window),
+// which processCgroupUsage rejects, leaving a frame one sample short.
 TEST_F(CPUTimeMonitorTest, testCgroupUsageProcessing) {
-  // Replace the fixture monitor with one using the real host core count so
-  // cgroup usage validation passes. The default fixture uses coreCount=32
-  // which may be less than the actual host cores, causing valid cgroup usage
-  // to be rejected.
-  uint64_t hostCoreCount = folly::available_concurrency();
-  std::shared_ptr<CPUTimeMonitor::TTicker> cgroupTicker =
-      std::make_shared<CPUTimeMonitor::TTicker>();
-  monitor = std::make_shared<CPUTimeMonitor>(
-      cgroupTicker, true, hostCoreCount, getenv("TESTROOT"), true);
-
   auto now = std::chrono::steady_clock::now();
   auto hostTarget = "host";
   auto target2 = "cgroup_target2";
+  const std::string fixtureCgroupPath =
+      std::string(getenv("TESTROOT")) + "/sys/fs/cgroup";
 
   // Register targets with cgroup paths
-  monitor->registerTarget(target2, {0, 1, 2, 3}, "/sys/fs/cgroup");
+  monitor->registerTarget(target2, {0, 1, 2, 3}, fixtureCgroupPath);
 
   // First tick - should initialize but not generate metrics (need delta)
   monitor->tick(major_tick_60s);

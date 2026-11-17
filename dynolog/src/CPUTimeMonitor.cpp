@@ -128,8 +128,9 @@ CPUTimeMonitor::CPUTimeMonitor(
           std::make_shared<MetricSeries<double>>(
               frame.maxLength(), "host", ""));
     }
-    // Set host cgroup path to system root cgroup
-    targetCgroupPaths_["host"] = kHostCgroupPath;
+    // Set host cgroup path to system root cgroup. rootDir_ is empty in
+    // production; unit tests point it at a fixture root (as for /proc/stat).
+    targetCgroupPaths_["host"] = rootDir_ + kHostCgroupPath;
   }
 }
 
