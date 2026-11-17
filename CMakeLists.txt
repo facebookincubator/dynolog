@@ -7,6 +7,18 @@ cmake_minimum_required(VERSION 3.16)
 
 cmake_policy(SET CMP0079 NEW)
 project(Dynolog VERSION 1.0 LANGUAGES CXX)
+
+# Same compiler floor as PyTorch, which Dynolog's Kineto integration builds
+# against.
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 11.3)
+  message(FATAL_ERROR
+    "GCC 11.3 or newer is required to compile Dynolog, but found ${CMAKE_CXX_COMPILER_VERSION}")
+endif()
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 16)
+  message(FATAL_ERROR
+    "Clang 16 or newer is required to compile Dynolog, but found ${CMAKE_CXX_COMPILER_VERSION}")
+endif()
+
 option(BUILD_TESTS "Build the unit tests" ON)
 option(USE_ODS_GRAPH_API "Enable logger to Meta ODS using public Graph API."
 OFF)
