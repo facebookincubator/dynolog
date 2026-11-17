@@ -88,6 +88,35 @@ TEST_F(BuiltinMetricsTest, NeoverseV3UncoreMetricsRegistered) {
   }
 }
 
+// Dyno reads each DfCsBw group by event index, so the per-port request types
+// must stay in this order, all on amd_df, and exist only on Venice.
+TEST_F(BuiltinMetricsTest, VeniceDfCsBwGroupsBundleFourRequestTypesPerPort) {
+  auto amdMetrics = std::make_shared<Metrics>();
+  addAmdUncoreMetrics(amdMetrics);
+
+  for (int port = 0; port < 16; ++port) {
+    const std::string id = "DfCsBw" + std::to_string(port);
+    const std::string cs = ".cs" + std::to_string(port);
+    const std::vector<std::string> expected{
+        "zen6::cs_data_bw.rd_local" + cs,
+        "zen6::cs_data_bw.rd_remote" + cs,
+        "zen6::cs_data_bw.wr_local" + cs,
+        "zen6::cs_data_bw.wr_remote" + cs,
+    };
+    const auto desc = amdMetrics->getMetricDesc(id);
+    ASSERT_NE(desc, nullptr) << id;
+    const auto refs = desc->getEventRefs(CpuArch::VENICE);
+    ASSERT_TRUE(refs.has_value()) << id;
+    std::vector<std::string> eventIds;
+    for (const auto& ref : *refs) {
+      EXPECT_EQ(ref.pmu_type, PmuType::amd_df) << id;
+      eventIds.push_back(ref.event_id);
+    }
+    EXPECT_EQ(eventIds, expected) << id;
+    EXPECT_FALSE(desc->getEventRefs(CpuArch::TURIN).has_value()) << id;
+  }
+}
+
 TEST_F(BuiltinMetricsTest, CommonL1CacheMissesResolveByArchitecture) {
   struct TestCase {
     CpuFamily family;
