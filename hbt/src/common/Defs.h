@@ -15,6 +15,7 @@
 #include <string>
 #include <system_error>
 #include <utility>
+#include <vector>
 
 #include <sys/types.h>
 #include <unistd.h>
