@@ -329,6 +329,51 @@ void DcgmGroupInfo::clearMetricCachesForSuccessfulRefresh() {
   envMetadataMapString_.clear();
 }
 
+// A sample can be invalid because of a DCGM bug: a field that failed at query
+// stage holds DCGM_*_BLANK. Values in the blank range (BLANK, NOT_FOUND,
+// NOT_SUPPORTED, ...) are status codes, not readings, so they are not stored.
+DcgmGroupInfo::EntityMetrics DcgmGroupInfo::collectEntityMetrics(
+    const std::vector<dcgmFieldValue_v1>& readValues) const {
+  EntityMetrics metrics;
+  for (const auto& v : readValues) {
+    printValue(v);
+    const auto nameIt = FieldIdToName.find(v.fieldId);
+    if (v.status != DCGM_ST_OK) {
+      LOG(ERROR) << "Value invalid status, got: " << v.status;
+      continue;
+    }
+    if (nameIt == FieldIdToName.end()) {
+      LOG(ERROR) << "Field id not supported, got: " << v.fieldId;
+      continue;
+    }
+    // skip prof field reporting if profiling is disabled
+    if (!profEnabled_ && isProfField(v.fieldId)) {
+      continue;
+    }
+    const auto& name = nameIt->second;
+    if (v.fieldType == 'd') {
+      if (v.value.dbl == DCGM_FP64_BLANK) {
+        metrics.hasBlankValue = true;
+      }
+      if (!DCGM_FP64_IS_BLANK(v.value.dbl)) {
+        metrics.doubles[name] = v.value.dbl;
+      }
+    } else if (v.fieldType == 'i') {
+      if (v.value.i64 == DCGM_INT64_BLANK) {
+        metrics.hasBlankValue = true;
+      }
+      if (!DCGM_INT64_IS_BLANK(v.value.i64)) {
+        metrics.ints[name] = v.value.i64;
+      }
+    } else if (v.fieldType == 's') {
+      if (!DCGM_STR_IS_BLANK(v.value.str)) {
+        metrics.strings[name] = v.value.str;
+      }
+    }
+  }
+  return metrics;
+}
+
 // Metrics are updated automatically by operation mode
 // This function reads latest metrics from DCGM and update to metric cache
 void DcgmGroupInfo::update() {
@@ -349,46 +394,12 @@ void DcgmGroupInfo::update() {
       for (auto& [entity, readValues] : dcgmValues) {
         LOG(INFO) << "Got " << readValues.size()
                   << " values for entity: " << entity;
-        std::unordered_map<std::string, double> metricsDouble;
-        std::unordered_map<std::string, int64_t> metricsInt;
-        std::unordered_map<std::string, std::string> metricsString;
-        // sample invalid caused by DCGM bug
-        // field failed at query stage will have DCGM_*_BLANK value
-        bool blank_value_field = false;
-        // iterate over each field for a GPU instance
-        for (auto v : readValues) {
-          printValue(v);
-          if (v.status != DCGM_ST_OK) {
-            LOG(ERROR) << "Value invalid status, got: " << v.status;
-          } else if (FieldIdToName.find(v.fieldId) == FieldIdToName.end()) {
-            LOG(ERROR) << "Field id not supported, got: " << v.fieldId;
-          } else {
-            // skip prof field reporting if profiling is disabled
-            if (!profEnabled_ && isProfField(v.fieldId)) {
-              continue;
-            }
-
-            // Store value
-            if (v.fieldType == 'd') {
-              if (v.value.dbl == DCGM_FP64_BLANK) {
-                blank_value_field = true;
-              }
-              metricsDouble[FieldIdToName[v.fieldId]] = v.value.dbl;
-            } else if (v.fieldType == 'i') {
-              if (v.value.i64 == DCGM_INT64_BLANK) {
-                blank_value_field = true;
-              }
-              metricsInt[FieldIdToName[v.fieldId]] = v.value.i64;
-            } else if (v.fieldType == 's') {
-              metricsString[FieldIdToName[v.fieldId]] = v.value.str;
-            }
-          }
-        }
-        metricsInt["dcgm_error"] = blank_value_field ? 1 : 0;
-        rpcStatus_ = blank_value_field ? 0 : 1;
-        metricsMapDouble_[entity.m_entityId] = metricsDouble;
-        metricsMapInt_[entity.m_entityId] = metricsInt;
-        metricsMapString_[entity.m_entityId] = metricsString;
+        auto metrics = collectEntityMetrics(readValues);
+        metrics.ints["dcgm_error"] = metrics.hasBlankValue ? 1 : 0;
+        rpcStatus_ = metrics.hasBlankValue ? 0 : 1;
+        metricsMapDouble_[entity.m_entityId] = std::move(metrics.doubles);
+        metricsMapInt_[entity.m_entityId] = std::move(metrics.ints);
+        metricsMapString_[entity.m_entityId] = std::move(metrics.strings);
       }
 
       if (FLAGS_enable_env_var_attribution) {
