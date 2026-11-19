@@ -3458,6 +3458,63 @@ void addArmCoreMetrics(std::shared_ptr<Metrics>& metrics) {
           System::Permissions{},
           std::vector<std::string>{}));
 
+  // TMA slot/stall events grouped with CPU_CYCLES so numerator and denominator
+  // are co-scheduled and counted over the same window. Event order:
+  // {cpu_cycles, <stall event>}.
+  const auto cyclesPair = [](const std::string& cyclesEvent,
+                             const std::string& stallEvent) {
+    return EventRefs{
+        EventRef{
+            cyclesEvent,
+            PmuType::armv8_pmuv3,
+            cyclesEvent,
+            EventExtraAttr{},
+            {}},
+        EventRef{
+            stallEvent,
+            PmuType::armv8_pmuv3,
+            stallEvent,
+            EventExtraAttr{},
+            {}}};
+  };
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TMA_FRONTEND_PAIR",
+          "Frontend-stalled slots with CPU cycles",
+          "STALL_SLOT_FRONTEND grouped with CPU_CYCLES.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               cyclesPair("cpu_cycles", "stall_slot_frontend")},
+              {CpuArch::NEOVERSE_V3,
+               cyclesPair("CPU_CYCLES_V3", "STALL_SLOT_FRONTEND_V3")}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TMA_BACKEND_PAIR",
+          "Backend-stalled slots with CPU cycles",
+          "STALL_SLOT_BACKEND grouped with CPU_CYCLES.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V2,
+               cyclesPair("cpu_cycles", "stall_slot_backend")},
+              {CpuArch::NEOVERSE_V3,
+               cyclesPair("CPU_CYCLES_V3", "STALL_SLOT_BACKEND_V3")}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+  metrics->add(
+      std::make_shared<MetricDesc>(
+          "HW_CORE_TMA_FRONTEND_FLUSH_PAIR",
+          "Frontend flush stall cycles with CPU cycles",
+          "STALL_FRONTEND_FLUSH grouped with CPU_CYCLES on Neoverse V3.",
+          std::map<TOptCpuArch, EventRefs>{
+              {CpuArch::NEOVERSE_V3,
+               cyclesPair("CPU_CYCLES_V3", "STALL_FRONTEND_FLUSH_V3")}},
+          100'000'000,
+          System::Permissions{},
+          std::vector<std::string>{}));
+
   // ARM software prefetch events (Neoverse V3 only)
   metrics->add(
       std::make_shared<MetricDesc>(
