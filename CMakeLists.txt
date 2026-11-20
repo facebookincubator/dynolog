@@ -83,15 +83,46 @@ set(BUILD_TEST OFF CACHE BOOL "")
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
 
 set(BUILD_TESTING OFF CACHE BOOL "")
-set(WITH_GFLAGS OFF CACHE BOOL "")
 find_package(Threads REQUIRED)
 target_link_libraries(dynolog_lib PRIVATE Threads::Threads)
-add_subdirectory(third_party/glog)
-target_link_libraries(dynolog_lib PUBLIC glog::glog)
 
+# Add gflags before glog so glog registers its flags (--logtostderr, --v,
+# ...) with gflags. glog looks for gflags with find_package(), which cannot
+# see a sibling subproject, so answer it with a config file that reports the
+# in-tree gflags as found. The namespace is preset because glog's probe for
+# it links a gflags library that is not built yet.
 set(GFLAGS_BUILD_TESTING OFF CACHE BOOL "")
 add_subdirectory(third_party/gflags)
 target_link_libraries(dynolog_lib PUBLIC gflags::gflags)
+
+get_directory_property(_gflags_version
+  DIRECTORY third_party/gflags DEFINITION PACKAGE_VERSION)
+set(_gflags_config_dir "${CMAKE_CURRENT_BINARY_DIR}/gflags-config")
+file(WRITE "${_gflags_config_dir}/gflags-config.cmake"
+  "set(gflags_FOUND TRUE)\n")
+file(WRITE "${_gflags_config_dir}/gflags-config-version.cmake"
+  "set(PACKAGE_VERSION \"${_gflags_version}\")\n"
+  "set(PACKAGE_VERSION_COMPATIBLE TRUE)\n")
+set(gflags_DIR "${_gflags_config_dir}" CACHE PATH "" FORCE)
+set(gflags_NAMESPACE gflags CACHE INTERNAL "")
+set(WITH_GFLAGS ON CACHE BOOL "")
+add_subdirectory(third_party/glog)
+target_link_libraries(dynolog_lib PUBLIC glog::glog)
+
+# glog's export rules reject a link to the in-tree gflags target, which
+# gflags exports twice. Dynolog exports nothing, so link glog's users to the
+# gflags library file instead and give them its generated headers.
+get_target_property(_gflags_target gflags::gflags ALIASED_TARGET)
+get_target_property(_gflags_includes ${_gflags_target}
+  INTERFACE_INCLUDE_DIRECTORIES)
+foreach(_property LINK_LIBRARIES INTERFACE_LINK_LIBRARIES)
+  get_target_property(_glog_links glog ${_property})
+  list(REMOVE_ITEM _glog_links gflags::gflags)
+  set_target_properties(glog PROPERTIES ${_property} "${_glog_links}")
+endforeach()
+target_include_directories(glog PUBLIC ${_gflags_includes})
+target_link_libraries(glog INTERFACE "$<TARGET_FILE:${_gflags_target}>")
+add_dependencies(glog ${_gflags_target})
 
 # https://github.com/nlohmann/json#cmake
 set(JSON_BuildTests OFF CACHE INTERNAL "")
