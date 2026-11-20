@@ -33,6 +33,16 @@ option(USE_OTEL "Enable OTLP export via OpenTelemetry, requires
 libprotobuf-dev and libcurl4-openssl-dev on the system"
 OFF)
 option(USE_TPU "Enable TPU metrics scraping, requires libcurl" OFF)
+option(BUILD_DYNO_CLI "Build the dyno CLI (Rust, requires cargo) with dynolog"
+ON)
+
+# CMake 4 rejects projects whose cmake_minimum_required is below 3.5, which
+# includes some vendored third_party dependencies (e.g. gflags). Let them
+# configure unless the caller chose a minimum explicitly. Older CMake versions
+# ignore this variable.
+if(NOT DEFINED CMAKE_POLICY_VERSION_MINIMUM)
+  set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
+endif()
 
 if(USE_PROMETHEUS)
   find_package(prometheus-cpp CONFIG REQUIRED)
@@ -71,9 +81,11 @@ endif()
 
 include_directories(".")
 add_subdirectory(dynolog)
-add_subdirectory(cli)
-# The following dummy dependency ensures the cli is built
-add_dependencies(dynolog_lib dyno)
+if(BUILD_DYNO_CLI)
+  add_subdirectory(cli)
+  # The following dummy dependency ensures the cli is built
+  add_dependencies(dynolog_lib dyno)
+endif()
 add_subdirectory(hbt)
 
 # Third party deps
