@@ -17,8 +17,11 @@ file(GLOB dynolog_src "*.h" "*.cpp")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options("-Wall")
-# Remove main from library, only needed for exec.
-list(REMOVE_ITEM dynolog_src "${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp")
+# Remove main and the daemon entry point from library; they have their own
+# targets below.
+list(REMOVE_ITEM dynolog_src
+  "${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/Daemon.cpp")
 add_library(dynolog_lib ${dynolog_src})
 
 if(USE_ODS_GRAPH_API)
@@ -77,5 +80,10 @@ target_link_libraries(dynolog_lib PUBLIC dynolog_rdmamon_lib)
 
 add_subdirectory(metric_frame)
 
+# The daemon entry point is a library so that builds with their own main()
+# can call runDynolog() with extra monitors (see Daemon.h).
+add_library(dynolog_daemon Daemon.cpp)
+target_link_libraries(dynolog_daemon PUBLIC dynolog_lib dynolog_rpc_lib)
+
 add_executable(dynolog Main.cpp)
-target_link_libraries(dynolog PRIVATE dynolog_lib dynolog_rpc_lib)
+target_link_libraries(dynolog PRIVATE dynolog_daemon)
