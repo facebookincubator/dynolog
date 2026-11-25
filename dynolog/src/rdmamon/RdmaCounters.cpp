@@ -34,9 +34,10 @@ bool RdmaCounters::setupRdmaCounters() {
       "rx_write_requests",
   };
 
-  return (
-      init_rdma_counters_(rdma_port_counter_path_, rdma_port_counters_) &&
-      init_rdma_counters_(rdma_hw_counter_path_, rdma_hw_counters_));
+  bool ok = init_rdma_counters_(rdma_port_counter_path_, rdma_port_counters_) &&
+      init_rdma_counters_(rdma_hw_counter_path_, rdma_hw_counters_);
+  setup_failure_ = !ok;
+  return ok;
 }
 
 bool RdmaCounters::sampleRdmaCounters(
@@ -45,6 +46,9 @@ bool RdmaCounters::sampleRdmaCounters(
     auto sysfs_counter = std::move(rdma_counter->sysfs_counter);
     uint64_t prev_val = rdma_counter->prev;
     auto val = sysfs_counter->getSysfsCounter();
+    if (!val) {
+      read_failure_ = true;
+    }
     uint64_t cur_val = (val) ? *val : prev_val;
     if (!first_sample_) {
       uint64_t diff = cur_val - prev_val;
