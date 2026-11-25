@@ -30,6 +30,8 @@ namespace dynolog {
 struct MetricMapping {
   std::string output_name;
   double scale_factor{}; // 1.0 = pass-through, 100.0 = percentage conversion
+  // Emit an integer metric as a double even when it is not scaled.
+  bool emit_double{false};
 };
 
 // Routing of a flat input key into a slot of a kvlist OTel attribute.
@@ -104,6 +106,17 @@ class OtlpLogger : public Logger {
   void finalize() override;
 
  private:
+  struct MappedAttributes {
+    std::unordered_map<std::string, double> floats;
+    std::unordered_map<std::string, int64_t> ints;
+    std::unordered_map<std::string, std::string> strings;
+    // Keyed by map_column, then map_subkey -> stringified value.
+    std::
+        unordered_map<std::string, std::unordered_map<std::string, std::string>>
+            maps;
+  };
+  MappedAttributes mapAttributes() const;
+
   Timestamp ts_;
   std::unordered_map<std::string, double> float_kvs_;
   std::unordered_map<std::string, int64_t> int_kvs_;
@@ -115,6 +128,8 @@ class OtlpLogger : public Logger {
   friend class OtlpLoggerTest_UnmappedMetricsPassThrough_Test;
   friend class OtlpLoggerTest_MultipleFinalizeCycles_Test;
   friend class OtlpLoggerTest_IntPreservation_Test;
+  friend class OtlpLoggerTest_ScaledIntBecomesDouble_Test;
+  friend class OtlpLoggerTest_DoubleTypeMappingEmitsDouble_Test;
 };
 
 } // namespace dynolog

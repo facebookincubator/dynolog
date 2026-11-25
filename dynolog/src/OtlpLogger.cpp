@@ -52,6 +52,10 @@ DEFINE_string(
     "",
     "Path to a CSV file defining DCGM metric name mappings. Each line is:\n"
     "  dcgm_name,output_name,scale_factor   (numeric metrics)\n"
+    "  dcgm_name,output_name,scale_factor,double\n"
+    "                                       (numeric, always emitted as a\n"
+    "                                        double, e.g. for an integer\n"
+    "                                        metric with a double column)\n"
     "  dcgm_name,output_name                (string metrics, no scale)\n"
     "  dcgm_name,column[subkey]             (route into map<string,string>\n"
     "                                        column at given subkey, e.g.\n"
@@ -64,7 +68,8 @@ namespace {
 
 // Parse the metric mappings file. Returns true if file was loaded.
 // Populates:
-//   - numeric_mappings: 3-field rows `dcgm,out,scale` (numeric rename + scale)
+//   - numeric_mappings: 3-field rows `dcgm,out,scale` (numeric rename + scale),
+//                       optionally `dcgm,out,scale,double`
 //   - string_mappings:  2-field rows `dcgm,out`        (string rename)
 //   - map_mappings:     2-field rows `dcgm,col[sub]`   (route into kvlist
 //                                                       column at subkey)
@@ -85,20 +90,28 @@ bool loadMappingsFile(
     if (line.empty() || line[0] == '#') {
       continue;
     }
-    // Split on commas: dcgm_name,output_name[,scale_factor]
+    // Split on commas: dcgm_name,output_name[,scale_factor[,double]]
     std::stringstream ss(line);
-    std::string dcgm_name, output_name, scale_str;
+    std::string dcgm_name, output_name, scale_str, type_str;
     if (!std::getline(ss, dcgm_name, ',') ||
         !std::getline(ss, output_name, ',')) {
       continue;
     }
     if (std::getline(ss, scale_str, ',') && !scale_str.empty()) {
+      double scale = 0;
       try {
-        double scale = std::stod(scale_str);
-        numeric_mappings[dcgm_name] = {output_name, scale};
+        scale = std::stod(scale_str);
       } catch (const std::exception&) {
         LOG(WARNING) << "Invalid scale in mappings file: " << line;
+        continue;
       }
+      std::getline(ss, type_str, ',');
+      if (!type_str.empty() && type_str != "double") {
+        LOG(WARNING) << "Unknown type '" << type_str
+                     << "' in mappings file, expected 'double': " << line;
+      }
+      numeric_mappings[dcgm_name] = {
+          output_name, scale, /*emit_double=*/type_str == "double"};
       continue;
     }
     // 2-field row. Detect the `column[subkey]` map syntax. Any output name
@@ -388,15 +401,10 @@ void OtlpLogger::logStr(const std::string& key, const std::string& val) {
   string_kvs_[key] = val;
 }
 
-void OtlpLogger::finalize() {
+OtlpLogger::MappedAttributes OtlpLogger::mapAttributes() const {
   const auto& mappings = getMetricMappings();
   const auto& map_mappings = getMapMappings();
-
-  std::unordered_map<std::string, double> mapped_floats;
-  std::unordered_map<std::string, int64_t> mapped_ints;
-  // Keyed by map_column, then map_subkey -> stringified value.
-  std::unordered_map<std::string, std::unordered_map<std::string, std::string>>
-      map_attrs;
+  MappedAttributes out;
 
   // Helper: if `key` is registered as a map mapping, route the stringified
   // value into the kvlist for the matching map column and return true (so
@@ -407,7 +415,7 @@ void OtlpLogger::finalize() {
     if (it == map_mappings.end()) {
       return false;
     }
-    map_attrs[it->second.map_column][it->second.map_subkey] = value;
+    out.maps[it->second.map_column][it->second.map_subkey] = value;
     return true;
   };
 
@@ -417,9 +425,9 @@ void OtlpLogger::finalize() {
     }
     auto it = mappings.find(key);
     if (it != mappings.end()) {
-      mapped_floats[it->second.output_name] = val * it->second.scale_factor;
+      out.floats[it->second.output_name] = val * it->second.scale_factor;
     } else {
-      mapped_floats[key] = val;
+      out.floats[key] = val;
     }
   }
 
@@ -428,31 +436,37 @@ void OtlpLogger::finalize() {
       continue;
     }
     auto it = mappings.find(key);
-    if (it != mappings.end()) {
-      mapped_ints[it->second.output_name] =
-          static_cast<int64_t>(val * it->second.scale_factor);
+    if (it == mappings.end()) {
+      out.ints[key] = val;
+    } else if (it->second.scale_factor == 1.0 && !it->second.emit_double) {
+      out.ints[it->second.output_name] = val;
     } else {
-      mapped_ints[key] = val;
+      // A scaled integer is usually fractional (bytes/s to GB/s).
+      out.floats[it->second.output_name] =
+          static_cast<double>(val) * it->second.scale_factor;
     }
   }
 
   // Apply string key mappings.
   const auto& str_mappings = getStringMappings();
-  std::unordered_map<std::string, std::string> mapped_strings;
   for (const auto& [key, val] : string_kvs_) {
     if (routeToMap(key, val)) {
       continue;
     }
     auto it = str_mappings.find(key);
     if (it != str_mappings.end()) {
-      mapped_strings[it->second] = val;
+      out.strings[it->second] = val;
     } else {
-      mapped_strings[key] = val;
+      out.strings[key] = val;
     }
   }
+  return out;
+}
 
+void OtlpLogger::finalize() {
+  const auto attrs = mapAttributes();
   OtlpManager::singleton()->emitLog(
-      ts_, mapped_floats, mapped_ints, mapped_strings, map_attrs);
+      ts_, attrs.floats, attrs.ints, attrs.strings, attrs.maps);
 
   float_kvs_.clear();
   int_kvs_.clear();

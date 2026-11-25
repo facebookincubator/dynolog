@@ -38,6 +38,8 @@ class OtlpLoggerTest : public ::testing::Test {
     f << "sm_active_ratio,compute_unit_utilization,100.0\n";
     f << "gpu_power_draw,accelerator_power_usage_w,1.0\n";
     f << "device,device_id,1.0\n";
+    f << "pcie_rx_bytes,pcie_rx_gbps,1e-9\n";
+    f << "gpu_memory_utilization,memory_utilization,1.0,double\n";
     f << "pod_namespace,k8s_attributes[namespace]\n";
     f << "gpu_name,accelerator_model\n";
     f << "gpu_uuid,accelerator_serial_number\n";
@@ -58,7 +60,7 @@ TEST_F(OtlpLoggerTest, NumericMappingsLoadedFromFile) {
   const auto& mappings = getMetricMappings();
 
   // Verify mappings loaded from file.
-  EXPECT_EQ(mappings.size(), 5u);
+  EXPECT_EQ(mappings.size(), 7u);
 
   auto it = mappings.find("gpu_device_utilization");
   ASSERT_NE(it, mappings.end());
@@ -73,6 +75,15 @@ TEST_F(OtlpLoggerTest, NumericMappingsLoadedFromFile) {
   it = mappings.find("device");
   ASSERT_NE(it, mappings.end());
   EXPECT_EQ(it->second.output_name, "device_id");
+
+  it = mappings.find("pcie_rx_bytes");
+  ASSERT_NE(it, mappings.end());
+  EXPECT_DOUBLE_EQ(it->second.scale_factor, 1e-9);
+  EXPECT_FALSE(it->second.emit_double);
+
+  it = mappings.find("gpu_memory_utilization");
+  ASSERT_NE(it, mappings.end());
+  EXPECT_TRUE(it->second.emit_double);
 }
 
 TEST_F(OtlpLoggerTest, StringMappingsLoadedFromFile) {
@@ -170,6 +181,33 @@ TEST_F(OtlpLoggerTest, IntPreservation) {
 
   logger.finalize();
   EXPECT_TRUE(logger.int_kvs_.empty());
+}
+
+TEST_F(OtlpLoggerTest, ScaledIntBecomesDouble) {
+  OtlpLogger logger;
+  logger.logInt("pcie_rx_bytes", 1'500'000'000);
+  logger.logInt("gpu_frequency_mhz", 1500);
+  logger.logInt("device", 3);
+
+  const auto attrs = logger.mapAttributes();
+
+  ASSERT_EQ(attrs.floats.size(), 1u);
+  EXPECT_DOUBLE_EQ(attrs.floats.at("pcie_rx_gbps"), 1.5);
+  const std::unordered_map<std::string, int64_t> expectedInts{
+      {"compute_unit_frequency_mhz", 1500}, {"device_id", 3}};
+  EXPECT_EQ(attrs.ints, expectedInts);
+}
+
+TEST_F(OtlpLoggerTest, DoubleTypeMappingEmitsDouble) {
+  OtlpLogger logger;
+  logger.logInt("gpu_memory_utilization", 98);
+
+  const auto attrs = logger.mapAttributes();
+
+  const std::unordered_map<std::string, double> expectedFloats{
+      {"memory_utilization", 98.0}};
+  EXPECT_EQ(attrs.floats, expectedFloats);
+  EXPECT_TRUE(attrs.ints.empty());
 }
 
 TEST_F(OtlpLoggerTest, CommentsAndBlankLinesIgnored) {

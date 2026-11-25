@@ -62,6 +62,15 @@ class DcgmGroupInfo {
   void watchProfFields(const std::vector<unsigned short>& prof_fields);
   void clearMetricCachesForSuccessfulRefresh();
 
+  struct EntityMetrics {
+    std::unordered_map<std::string, double> doubles;
+    std::unordered_map<std::string, int64_t> ints;
+    std::unordered_map<std::string, std::string> strings;
+    bool hasBlankValue = false;
+  };
+  EntityMetrics collectEntityMetrics(
+      const std::vector<dcgmFieldValue_v1>& readValues) const;
+
   std::vector<unsigned int> gpuIdList_;
   int rpcStatus_ =
       1; // Default to 1, will be set to 0 when DCGM_INT64_BLANK is detected
